@@ -1,0 +1,232 @@
+openapi: 3.0.1
+info:
+  title: Mend Access Management User Profile API
+  description: 'Mend''s enhanced API enables automation of workflows in a REST compliant format. The API features:
+
+    + Access for any user with Mend credentials, via a user key available in the user''s profile page in the Mend Platform.
+
+    + Improved security with a JWT token per organization, which expires every 10 minutes.
+
+    + Added scalability with support for cursor pagination and limiting results size.
+
+    + Broader functionality available programmatically.
+
+    + New standard API documentation for easy navigation and search.
+
+
+    **Note:** To help you get started with the Mend API 3.0, we recommend reviewing our onboarding guide -> [Getting Started with API 3.0](https://docs.mend.io/platform/latest/getting-started-with-mend-api-3-0).
+
+    This resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend API 3.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.'
+  version: '3.0'
+servers:
+- url: https://baseUrl
+  description: Generated server url
+security:
+- bearer-key: []
+tags:
+- name: User Profile
+paths:
+  /api/v2.0/profile/userKeys:
+    get:
+      tags:
+      - User Profile
+      summary: Get All User Keys
+      description: Returns a list of existing user-keys for the current user. These keys are included in all API requests to identify the user
+      operationId: getUserKeys
+      parameters:
+      - name: pageSize
+        in: query
+        description: Enter the number of items to return in each page of the result.
+        allowEmptyValue: true
+        schema:
+          maximum: 10000
+          type: string
+          default: '50'
+      - name: page
+        in: query
+        description: Enter the page number to display in the result. Page numbers start at 0
+        allowEmptyValue: true
+        schema:
+          type: string
+          default: '0'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableCollectionUserKeyDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+    post:
+      tags:
+      - User Profile
+      summary: Generate User Key
+      description: Generates a user-key for the current user. User-keys are included in all api requests to identify the user
+      operationId: generateUserKey
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateUserKeyRequestDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseUserKeyDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v2.0/profile/userKeys/{userKey}:
+    delete:
+      tags:
+      - User Profile
+      summary: Delete User Key
+      description: Deletes a user-key
+      operationId: deleteUserKey
+      parameters:
+      - name: userKey
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseMessageDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+components:
+  schemas:
+    UserKeyDTO:
+      type: object
+      properties:
+        uuid:
+          title: User Key UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        userUuid:
+          title: User UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        userKey:
+          title: User Key
+          type: string
+          example: 8d541c7d782e4b7891ebf61e864f76cb9af75f17d4394b109f1155e88f3e86bd
+        createdAt:
+          title: Time Of Creation
+          type: string
+          format: date-time
+        lastUsedAt:
+          title: Last Token Usage
+          type: string
+          format: date-time
+        description:
+          title: Token Description
+          type: string
+          example: Token A
+        expirationDate:
+          title: Token Expiration Date
+          type: string
+          format: date-time
+    DWRResponseMessageDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/MessageDTO'
+    DWRResponsePageableCollectionUserKeyDTO:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            + **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining.'
+          example:
+            totalItems: '422'
+            isLastPage: 'true'
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserKeyDTO'
+      description: Provides insights into endpoint-supported pagination information
+    GenerateUserKeyRequestDTO:
+      type: object
+      properties:
+        description:
+          title: UserToken Description
+          type: string
+          example: Token A
+    MessageDTO:
+      type: object
+      properties:
+        message:
+          title: message
+          type: string
+          example: Success!
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+    DWRResponseUserKeyDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/UserKeyDTO'
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: JWT token Bearer
+      scheme: bearer
+      bearerFormat: JWT

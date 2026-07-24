@@ -1,0 +1,402 @@
+openapi: 3.0.1
+info:
+  title: Mend Access Management Library - Source Files API
+  description: 'Mend''s enhanced API enables automation of workflows in a REST compliant format. The API features:
+
+    + Access for any user with Mend credentials, via a user key available in the user''s profile page in the Mend Platform.
+
+    + Improved security with a JWT token per organization, which expires every 10 minutes.
+
+    + Added scalability with support for cursor pagination and limiting results size.
+
+    + Broader functionality available programmatically.
+
+    + New standard API documentation for easy navigation and search.
+
+
+    **Note:** To help you get started with the Mend API 3.0, we recommend reviewing our onboarding guide -> [Getting Started with API 3.0](https://docs.mend.io/platform/latest/getting-started-with-mend-api-3-0).
+
+    This resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend API 3.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.'
+  version: '3.0'
+servers:
+- url: https://baseUrl
+  description: Generated server url
+security:
+- bearer-key: []
+tags:
+- name: Library - Source Files
+paths:
+  /api/v2.0/projects/{projectToken}/sourceFiles/inventory:
+    get:
+      tags:
+      - Library - Source Files
+      summary: Get project source files inventory
+      description: Returns an inventory list of the source files associated with each library in a project
+      operationId: getSourceFiles
+      parameters:
+      - name: pageSize
+        in: query
+        description: Enter the number of items to return in each page of the result.
+        allowEmptyValue: true
+        schema:
+          maximum: 10000
+          type: string
+          default: '50'
+      - name: page
+        in: query
+        description: Enter the page number to display in the result. Page numbers start at 0
+        allowEmptyValue: true
+        schema:
+          type: string
+          default: '0'
+      - name: search
+        in: query
+        description: "Filter your search to return items whose property has a specific value.\nUse the syntax: **property:operation:value** where a colon (:) separates between property, operation and value.\n+ Property: the name of the property of the item\n+ Operation:\n    + **between** - true if the value is inside a range. Syntax: lowest value comma (,) highest value. E.g. between:2019-05-01,2019-06-01\n    + **equals** - true if the value is identical to this value.\n    + **like** - true if the property's value is contained within this value\n    + **regex** - true if this regular expression resolves as true.\n        The regex is not case sensitive, and special characters must be escaped with a backslash.\n        Special characters include space, double quote (\"), '<', '>', '#', '%', '{', '}', vertical bar ('|'), backslash, '^'.\n        To pass an escaped character in a URL in Postman, encode it first.\n        E.g. to return all items whose value begins with **a** or **A**, use regex:^a\n+ Value: the value of the property.\n\nTo combine multiple filters, separate each filter with a semicolon with no space. E.g.  property1:operation1:value1;property2:operation2:value2\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ lastModified:between:date1,date2. E.g. between:2019-05-01,2019-06-01\n+ libraryName:[like | equals | regex]:value\n+ license:[like | regex]:value\n+ matchType:equals:value\n+ name:[like | equals | regex]:value\n+ sha1:[like | equals | regex]:value"
+        allowEmptyValue: true
+      - name: sort
+        in: query
+        description: 'Sort search results alphabetically on an item''s property by entering **sort=** followed by the property name.
+
+          E.g. enter **sort=email** to sort alphabetically by their email addresses from a-z ascending.To sort in descending order (z-a), add a minus sign (''-''). E.g. **sort=-email**.
+
+
+          You can sort by the following properties:
+
+          + lastModified
+
+          + libraryName
+
+          + license
+
+          + matchType
+
+          + name
+
+          + sha1'
+        allowEmptyValue: true
+      - name: projectToken
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableCollectionSourceFileInventoryDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v2.0/products/{productToken}/sourceFiles/inventory:
+    get:
+      tags:
+      - Library - Source Files
+      summary: Get product source files inventory
+      description: Returns a list of libraries together with the location of their source files
+      operationId: getSourceFiles_1
+      parameters:
+      - name: pageSize
+        in: query
+        description: Enter the number of items to return in each page of the result.
+        allowEmptyValue: true
+        schema:
+          maximum: 10000
+          type: string
+          default: '50'
+      - name: page
+        in: query
+        description: Enter the page number to display in the result. Page numbers start at 0
+        allowEmptyValue: true
+        schema:
+          type: string
+          default: '0'
+      - name: search
+        in: query
+        description: "Filter your search to return items whose property has a specific value.\nUse the syntax: **property:operation:value** where a colon (:) separates between property, operation and value.\n+ Property: the name of the property of the item\n+ Operation:\n    + **between** - true if the value is inside a range. Syntax: lowest value comma (,) highest value. E.g. between:2019-05-01,2019-06-01\n    + **equals** - true if the value is identical to this value.\n    + **like** - true if the property's value is contained within this value\n    + **regex** - true if this regular expression resolves as true.\n        The regex is not case sensitive, and special characters must be escaped with a backslash.\n        Special characters include space, double quote (\"), '<', '>', '#', '%', '{', '}', vertical bar ('|'), backslash, '^'.\n        To pass an escaped character in a URL in Postman, encode it first.\n        E.g. to return all items whose value begins with **a** or **A**, use regex:^a\n+ Value: the value of the property.\n\nTo combine multiple filters, separate each filter with a semicolon with no space. E.g.  property1:operation1:value1;property2:operation2:value2\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ lastModified:between:date1,date2. E.g. between:2019-05-01,2019-06-01\n+ libraryName:[like | equals | regex]:value\n+ license:[like | regex]:value\n+ matchType:equals:value\n+ name:[like | equals | regex]:value\n+ projectName:[like | equals | regex]:value\n+ sha1:[like | equals | regex]:value"
+        allowEmptyValue: true
+      - name: sort
+        in: query
+        description: 'Sort search results alphabetically on an item''s property by entering **sort=** followed by the property name.
+
+          E.g. enter **sort=email** to sort alphabetically by their email addresses from a-z ascending.To sort in descending order (z-a), add a minus sign (''-''). E.g. **sort=-email**.
+
+
+          You can sort by the following properties:
+
+          + lastModified
+
+          + libraryName
+
+          + license
+
+          + matchType
+
+          + name
+
+          + path
+
+          + projectName
+
+          + sha1'
+        allowEmptyValue: true
+      - name: productToken
+        in: path
+        description: 'product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableCollectionSourceFileInventoryDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+components:
+  schemas:
+    SourceFileLibraryDTO:
+      type: object
+      properties:
+        uuid:
+          title: Source Library UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Source Library Name
+          type: string
+          example: ' actionview-v0.0.1'
+        licenses:
+          type: array
+          items:
+            $ref: '#/components/schemas/LicenseDTO'
+        description:
+          type: string
+    LicenseDTO:
+      required:
+      - name
+      type: object
+      properties:
+        uuid:
+          title: License Uuid
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Licenses
+          type: string
+          example: MIT
+        spdxName:
+          title: Spdx Name
+          type: string
+          example: Glide
+        type:
+          title: Type
+          type: string
+          example: OPEN_SOURCE
+        suspected:
+          title: Suspected License
+          type: boolean
+        osiApproved:
+          title: Approved Osi
+          type: boolean
+        profile:
+          $ref: '#/components/schemas/LicenseProfileDTO'
+    DWRResponsePageableCollectionSourceFileInventoryDTO:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            + **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining.'
+          example:
+            totalItems: '422'
+            isLastPage: 'true'
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          type: array
+          items:
+            $ref: '#/components/schemas/SourceFileInventoryDTO'
+      description: Provides insights into endpoint-supported pagination information
+    DescriptionAndExplanationDTO:
+      type: object
+      properties:
+        explanation:
+          title: Explanation Link
+          type: string
+          example: http://en.wikipedia.org/wiki/Academic_Free_License
+        indicatingText:
+          title: Indicating Text
+          type: string
+          example: 1) Grant of Copyright License...
+        description:
+          title: Description
+          type: string
+          example: Not a CopyLeft license.
+        displayText:
+          title: Display Text
+          type: string
+          example: 'No'
+    LicenseProfileDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+        name:
+          type: string
+        links:
+          uniqueItems: true
+          type: array
+          items:
+            title: Links
+            type: string
+            example: http://www.opensource.org/licenses/AFL-3.0
+        copyrightRiskScore:
+          $ref: '#/components/schemas/RiskScoreExplanationDTO'
+        patentAndRoyaltyRisk:
+          $ref: '#/components/schemas/RiskScoreExplanationDTO'
+        royaltyFree:
+          title: Royalty Free
+          type: string
+          example: Conditional
+        copyleft:
+          $ref: '#/components/schemas/DescriptionAndExplanationDTO'
+        linking:
+          $ref: '#/components/schemas/DescriptionAndExplanationDTO'
+        requiredNotices:
+          type: array
+          items:
+            title: Required Notices
+            type: string
+            example: Must identify specific modifications
+    ProjectDTO:
+      type: object
+      properties:
+        uuid:
+          title: Project UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Project Name
+          type: string
+          example: My Project
+        path:
+          title: Product Name
+          type: string
+          example: My Product
+        productName:
+          title: Product Name
+          type: string
+          example: My Product
+        productUuid:
+          title: Product Uuid
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+    RiskScoreExplanationDTO:
+      type: object
+      properties:
+        explanation:
+          title: Explanation Link
+          type: string
+          example: http://en.wikipedia.org/wiki/Academic_Free_License
+        indicatingText:
+          title: Indicating Text
+          type: string
+          example: 1) Grant of Copyright License...
+        riskScore:
+          title: Risk Score
+          type: integer
+          format: int32
+          example: 39
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+    SourceFileInventoryDTO:
+      type: object
+      properties:
+        uuid:
+          title: Source File UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Source File Name
+          type: string
+          example: common.js
+        matchType:
+          title: Match Type
+          type: string
+          example: MANUAL
+          enum:
+          - MANUAL
+          - AUTOMATIC
+        sha1:
+          title: SourceFileSha1
+          type: string
+          example: e9537a5384f5a7569997e87fe639961e31b38887
+          enum:
+          - MANUAL
+          - AUTOMATIC
+        localPath:
+          title: Local Path
+          type: string
+          example: C:\Users\
+        lastModified:
+          title: Source File Last Modification Date
+          type: string
+          format: date-time
+        library:
+          $ref: '#/components/schemas/SourceFileLibraryDTO'
+        project:
+          $ref: '#/components/schemas/ProjectDTO'
+        comment:
+          title: Source File Comment
+          type: string
+        contextType:
+          title: Context Type
+          type: string
+          example: Organization
+          enum:
+          - SYSTEM
+          - GLOBAL_ACCOUNT
+          - DOMAIN
+          - PRODUCT
+          - PROJECT
+          - SCAN
+          - UNSUPPORTED_TYPE
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: JWT token Bearer
+      scheme: bearer
+      bearerFormat: JWT

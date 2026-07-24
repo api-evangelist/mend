@@ -1,0 +1,1461 @@
+openapi: 3.0.1
+info:
+  title: Mend Access Management Alerts - Product API
+  description: 'Mend''s enhanced API enables automation of workflows in a REST compliant format. The API features:
+
+    + Access for any user with Mend credentials, via a user key available in the user''s profile page in the Mend Platform.
+
+    + Improved security with a JWT token per organization, which expires every 10 minutes.
+
+    + Added scalability with support for cursor pagination and limiting results size.
+
+    + Broader functionality available programmatically.
+
+    + New standard API documentation for easy navigation and search.
+
+
+    **Note:** To help you get started with the Mend API 3.0, we recommend reviewing our onboarding guide -> [Getting Started with API 3.0](https://docs.mend.io/platform/latest/getting-started-with-mend-api-3-0).
+
+    This resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend API 3.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.'
+  version: '3.0'
+servers:
+- url: https://baseUrl
+  description: Generated server url
+security:
+- bearer-key: []
+tags:
+- name: Alerts - Product
+paths:
+  /api/v2.0/products/{productToken}/alerts/security/groupBy/component:
+    get:
+      tags:
+      - Alerts - Product
+      summary: Get Security Alerts By Library
+      description: Returns security alerts for a given product grouped by library
+      operationId: getLibrarySecurityVulnerabilityAlerts_1
+      parameters:
+      - name: pageSize
+        in: query
+        description: Enter the number of items to return in each page of the result.
+        allowEmptyValue: true
+        schema:
+          maximum: 10000
+          type: string
+          default: '50'
+      - name: page
+        in: query
+        description: Enter the page number to display in the result. Page numbers start at 0
+        allowEmptyValue: true
+        schema:
+          type: string
+          default: '0'
+      - name: search
+        in: query
+        description: "Filter your search to return items whose property has a specific value.\nUse the syntax: **property:operation:value** where a colon (:) separates between property, operation and value.\n+ Property: the name of the property of the item\n+ Operation:\n    + **between** - true if the value is inside a range. Syntax: lowest value comma (,) highest value. E.g. between:2019-05-01,2019-06-01\n    + **equals** - true if the value is identical to this value.\n    + **gt** - true if the value is greater than this value.\n    + **in** - true if the value is identical to one of the items in this comma-separated list. E.g. in:value1,value2,value3\n    + **like** - true if the property's value is contained within this value\n    + **regex** - true if this regular expression resolves as true.\n        The regex is not case sensitive, and special characters must be escaped with a backslash.\n        Special characters can be space, double quote (\"), '<', '>', '#', '%', '{', '}', vertical bar ('|'), backslash, '^'.\n        To pass an escaped character in a URL in Postman, encode it first.\n        E.g. to return all items whose value begins with **a** or **A**, use regex:^a\n+ Value: the value of the property.\n\nTo combine multiple filters, separate each filter with a semicolon with no space. E.g.  property1:operation1:value1;property2:operation2:value2\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ comment:[like | equals | regex]:value\n+ commentBy:[like | equals | regex]:value\n+ componentName:[like | equals | regex]:value\n+ criticalNum:gt:value\n+ detectedAt:between:date1,date2. E.g. between:2019-05-01,2019-06-01\n+ directDependency:equals:value\n+ effective:[like | in | equals | regex]:value\n+ hasFix:equals:value\n+ highNum:gt:value\n+ lastCveUpdatedAt:between:date1,date2. E.g. between:2019-05-01,2019-06-01\n+ lowNum:gt:value\n+ mediumNum:gt:value\n+ modifiedAt:between:date1,date2. E.g. between:2019-05-01,2019-06-01\n+ projectName:[like | equals | regex]:value\n+ publishedAt:between:date1,date2. E.g. between:2019-05-01,2019-06-01\n+ score:between:lowvalue,highvalue\n+ scoreType:[like | equals | regex]:value\n+ severity:[like | equals | regex]:value\n+ sourceFileName:[like | equals | regex]:value\n+ status:[in | equals]:value\n+ vulnerabilityName:[like | equals | regex]:value\n+ vulnerabilityType:[equals | in]:value"
+        allowEmptyValue: true
+      - name: sort
+        in: query
+        description: 'Sort search results alphabetically on an item''s property by entering **sort=** followed by the property name.
+
+          E.g. enter **sort=email** to sort alphabetically by their email addresses from a-z ascending.To sort in descending order (z-a), add a minus sign (''-''). E.g. **sort=-email**.
+
+
+          You can sort by the following properties:
+
+          + comment
+
+          + commentUserName
+
+          + componentName
+
+          + detectedAt
+
+          + directDependency
+
+          + effective
+
+          + highNum
+
+          + lastCveUpdatedAt
+
+          + lowNum
+
+          + mediumNum
+
+          + modifiedAt
+
+          + projectName
+
+          + publishedAt
+
+          + score
+
+          + scoreType
+
+          + severity
+
+          + status
+
+          + vulnerabilityName
+
+          + vulnerabilityType
+
+          + weight'
+        allowEmptyValue: true
+      - name: productToken
+        in: path
+        description: 'product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableCollectionSecurityAlertLibraryDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v2.0/products/{productToken}/alerts/security:
+    get:
+      tags:
+      - Alerts - Product
+      summary: Get Product Security Alerts
+      description: Returns all security alerts for a given product
+      operationId: getSecurityVulnerabilityAlerts_1
+      parameters:
+      - name: pageSize
+        in: query
+        description: Enter the number of items to return in each page of the result.
+        allowEmptyValue: true
+        schema:
+          maximum: 10000
+          type: string
+          default: '50'
+      - name: page
+        in: query
+        description: Enter the page number to display in the result. Page numbers start at 0
+        allowEmptyValue: true
+        schema:
+          type: string
+          default: '0'
+      - name: search
+        in: query
+        description: "Filter your search to return items whose property has a specific value.\nUse the syntax: **property:operation:value** where a colon (:) separates between property, operation and value.\n+ Property: the name of the property of the item\n+ Operation:\n    + **between** - true if the value is inside a range. Syntax: lowest value comma (,) highest value. E.g. between:2019-05-01,2019-06-01\n    + **equals** - true if the value is identical to this value.\n    + **gt** - true if the value is greater than this value.\n    + **in** - true if the value is identical to one of the items in this comma-separated list. E.g. in:value1,value2,value3\n    + **like** - true if the property's value is contained within this value\n    + **regex** - true if this regular expression resolves as true.\n        The regex is not case sensitive, and special characters must be escaped with a backslash.\n        Special characters include space, double quote (\"), '<', '>', '#', '%', '{', '}', vertical bar ('|'), backslash, '^'.\n        To pass an escaped character in a URL in Postman, encode it first.\n        E.g. to return all items whose value begins with **a** or **A**, use regex:^a\n+ Value: the value of the property.\n\nTo combine multiple filters, separate each filter with a semicolon with no space. E.g.  property1:operation1:value1;property2:operation2:value2\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ comment:[like | equals | regex]:value\n+ commentUserEmail:[like | equals | regex]:value\n+ componentName:[like | equals | regex]:value\n+ detectedAt:between:date1,date2. E.g. between:2019-05-01,2019-06-01\n+ directDependency:equals:value\n+ effective:[like | equals | regex | in]:value\n+ hasFix:equals:value\n+ lastCveUpdatedAt:between:date1,date2. E.g. between:2019-05-01,2019-06-01\n+ modifiedAt:between:date1,date2. E.g. between:2019-05-01,2019-06-01\n+ projectName:[like | equals | regex]:value\n+ score:between:lowvalue,highvalue\n+ scoreType:[like | equals | regex]:value\n+ severity:[like | equals | regex]:value\n+ sourceFileName:[like | equals | regex]:value\n+ status:[in | equals]:value\n+ vulnerabilityName:[like | equals | regex]:value\n+ vulnerabilityType:[equals | in]:value\n+ libraryType:[equals | in | like | regex]:value"
+        allowEmptyValue: true
+      - name: sort
+        in: query
+        description: 'Sort search results alphabetically on an item''s property by entering **sort=** followed by the property name.
+
+          E.g. enter **sort=email** to sort alphabetically by their email addresses from a-z ascending.To sort in descending order (z-a), add a minus sign (''-''). E.g. **sort=-email**.
+
+
+          You can sort by the following properties:
+
+          + comment
+
+          + commentUserEmail
+
+          + componentName
+
+          + detectedAt
+
+          + directDependency
+
+          + effective
+
+          + hasFix
+
+          + lastCveUpdatedAt
+
+          + modifiedAt
+
+          + projectName
+
+          + score
+
+          + scoreType
+
+          + severity
+
+          + sourceFileName
+
+          + status
+
+          + vulnerabilityName
+
+          + vulnerabilityType
+
+          + libraryType'
+        allowEmptyValue: true
+      - name: optionalColumns
+        in: query
+        description: Used to add alert integration and library location information
+        allowEmptyValue: true
+        schema:
+          type: string
+          enum:
+          - integration
+          - locations
+      - name: productToken
+        in: path
+        description: 'product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableCollectionSecurityAlertDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v2.0/products/{productToken}/alerts/legal:
+    get:
+      tags:
+      - Alerts - Product
+      summary: Get Product Legal And Compliance Alerts
+      description: Returns all legal and compliance alerts for a given product
+      operationId: getLegalAndComplianceAlerts_1
+      parameters:
+      - name: pageSize
+        in: query
+        description: Enter the number of items to return in each page of the result.
+        allowEmptyValue: true
+        schema:
+          maximum: 10000
+          type: string
+          default: '50'
+      - name: page
+        in: query
+        description: Enter the page number to display in the result. Page numbers start at 0
+        allowEmptyValue: true
+        schema:
+          type: string
+          default: '0'
+      - name: search
+        in: query
+        description: "Filter your search to return items whose property has a specific value.\nUse the syntax: **property:operation:value** where a colon (:) separates between property, operation and value.\n+ Property: the name of the property of the item\n+ Operation:\n    + **between** - true if the value is inside a range. Syntax: lowest value comma (,) highest value. E.g. between:2019-05-01,2019-06-01\n    + **equals** - true if the value is identical to this value.\n    + **gt** - true if the value is greater than this value.\n    + **in** - true if the value is identical to one of the items in this comma-separated list. E.g. in:value1,value2,value3\n    + **like** - true if the property's value is contained within this value\n    + **regex** - true if this regular expression resolves as true.\n        The regex is not case sensitive, and special characters must be escaped with a backslash.\n        Special characters include space, double quote (\"), '<', '>', '#', '%', '{', '}', vertical bar ('|'), backslash, '^'.\n        To pass an escaped character in a URL in Postman, encode it first.\n        E.g. to return all items whose value begins with **a** or **A**, use regex:^a\n+ Value: the value of the property.\n\nTo combine multiple filters, separate each filter with a semicolon with no space. E.g.  property1:operation1:value1;property2:operation2:value2\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ availableVersion:equals:value\n+ availableVersionType:[equals | in]:value\n+ comment:[like | equals | regex]:value\n+ commentUserEmail:[like | equals | regex]:value\n+ componentName:[like | equals | regex]:value\n+ componentType:[equals | in]:value\n+ detectedAt:between:date1,date2. E.g. between:2019-05-01,2019-06-01\n+ license:[like | regex ]:value\n+ modifiedAt:between:date1,date2. E.g. between:2019-05-01,2019-06-01\n+ numberOfLicenses:[gt | equals]:value\n+ policyName:[like | equals | regex]:value\n+ projectName:[like | equals | regex]:value\n+ status:[in | equals]:value\n+ type:[equals | in]:value"
+        allowEmptyValue: true
+      - name: sort
+        in: query
+        description: 'Sort search results alphabetically on an item''s property by entering **sort=** followed by the property name.
+
+          E.g. enter **sort=email** to sort alphabetically by their email addresses from a-z ascending.To sort in descending order (z-a), add a minus sign (''-''). E.g. **sort=-email**.
+
+
+          You can sort by the following properties:
+
+          + availableVersionType
+
+          + comment
+
+          + componentName
+
+          + componentType
+
+          + detectedAt
+
+          + modifiedAt
+
+          + numberOfLicenses
+
+          + policyName
+
+          + status
+
+          + type
+
+          + versionType'
+        allowEmptyValue: true
+      - name: productToken
+        in: path
+        description: 'product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableCollectionLegalAndComplianceAlertBaseDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+components:
+  schemas:
+    LibraryLocationDTO:
+      type: object
+      properties:
+        localPath:
+          title: Local Path
+          type: string
+          example: C:\\Users\\user\\.m2\\repository\\commons-io-1.4.jar
+        dependencyFile:
+          title: Dependency File
+          type: string
+          example: C:\\GitHubRepos\\Pipline\\EUA\\plugins-automation\\fsa\\tests\\EUA\\Java\\bigProjectsMaven\\WST_417\\Data\\ksa\\ksa-web-core\\pom.xml
+    EffectiveVulnerabilityInfoDTO:
+      type: object
+      properties:
+        referenceCount:
+          title: Vulnerability Reference Count
+          type: integer
+          format: int32
+        shieldValue:
+          title: Shield Value
+          type: integer
+          description: RED(15), YELLOW(10), GREY(8), NO_SHIELD(6), GREEN(5)
+          format: int32
+    NewVersionAlertDTO:
+      type: object
+      properties:
+        uuid:
+          title: Alert Uuid
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Alert Name
+          type: string
+          description: Identifier of the alert, changes based on alert type
+          example: CVE-2021-42392
+        type:
+          type: string
+          example: NEW_VERSION
+          enum:
+          - NEW_VERSION
+        alertInfo:
+          $ref: '#/components/schemas/AlertInfoDTO'
+        project:
+          $ref: '#/components/schemas/ProjectDTO'
+        product:
+          $ref: '#/components/schemas/ProductDTO'
+        component:
+          $ref: '#/components/schemas/BaseComponentDTO'
+        availableVersion:
+          title: Available Version
+          type: string
+          example: 2.0.0
+        availableVersionType:
+          title: Version Type
+          type: string
+          enum:
+          - MAJOR
+          - MINOR
+    VulnerabilityFixInfoDTO:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: integer
+          format: int32
+          example: 49422
+        vulnerability:
+          title: Vulnerability Name
+          type: string
+          example: CVE-2021-42392
+        type:
+          title: Type
+          type: string
+          example: UPGRADE_VERSION
+          enum:
+          - CHANGE_FILES
+          - PATCH
+          - UPGRADE_VERSION
+        origin:
+          title: Origin
+          type: string
+          example: WHITESOURCE_EXPERT
+        url:
+          title: Url
+          type: string
+          example: https://github.com/codehaus-plexus/plexus-utils/commit/f933e5e78dc2637e485447ed821fe14904f110de
+        fixResolution:
+          title: Fix Resolution
+          type: string
+          example: 3.0.24
+        date:
+          title: Date
+          type: string
+          format: date-time
+        message:
+          title: Message
+          type: string
+          example: Upgrade to version
+        extraData:
+          type: string
+        minimalFixVersionFromExtraData:
+          type: string
+        minimalAffectedVersionFromExtraData:
+          type: string
+    SecurityAlertDTO:
+      type: object
+      properties:
+        uuid:
+          title: Alert Uuid
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Alert Name
+          type: string
+          description: Identifier of the alert, changes based on alert type
+          example: CVE-2021-42392
+        type:
+          type: string
+          example: SECURITY_VULNERABILITY
+          enum:
+          - SECURITY_VULNERABILITY
+        alertInfo:
+          $ref: '#/components/schemas/AlertInfoDTO'
+        project:
+          $ref: '#/components/schemas/ProjectDTO'
+        product:
+          $ref: '#/components/schemas/ProductDTO'
+        component:
+          $ref: '#/components/schemas/BaseLocationComponentDTO'
+        vulnerability:
+          $ref: '#/components/schemas/VulnerabilityProfileDTO'
+        topFix:
+          $ref: '#/components/schemas/VulnerabilityFixInfoDTO'
+        effective:
+          title: Effective Value
+          type: string
+          enum:
+          - RED
+          - YELLOW
+          - GREY
+          - NO_SHIELD
+          - GREEN
+        alertIntegration:
+          $ref: '#/components/schemas/AlertIntegrationDTO'
+        threatAssessment:
+          $ref: '#/components/schemas/ThreatAssessmentDTO'
+        exploitable:
+          title: Is Vulnerability Exploitable
+          type: boolean
+          example: true
+        scoreMetadataVector:
+          type: string
+        malicious:
+          title: Is Vulnerability Malicious
+          type: boolean
+          example: true
+        violations:
+          title: Number Of Violations
+          type: integer
+          format: int32
+          example: 22
+        workflowUuids:
+          type: array
+          items:
+            type: string
+    VulnerabilityScoringDTO:
+      type: object
+      properties:
+        score:
+          title: Vulnerability Score
+          type: number
+          format: float
+          example: 5
+        severity:
+          title: Vulnerability Severity
+          type: string
+          example: MEDIUM
+          enum:
+          - LOW
+          - HIGH
+          - MEDIUM
+        type:
+          title: Vulnerability Score Type
+          type: string
+          example: CVSS_2
+          enum:
+          - CVSS_2
+          - CVSS_3
+        scoreMetadataVector:
+          title: Score Metadata Vector
+          type: string
+          example: CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H
+        extraData:
+          title: Vulnerability Extra Data
+          type: object
+          additionalProperties:
+            title: Vulnerability Extra Data
+            type: string
+    LibraryComponentDTO:
+      type: object
+      properties:
+        uuid:
+          title: Component UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Component Name
+          type: string
+          example: dbus-1.10.24-13.el7_6.x86_64.rpm
+        description:
+          title: Component Description
+          type: string
+          example: Component description
+        componentType:
+          title: Component Type
+          type: string
+          example: Library
+          enum:
+          - Library
+        type:
+          type: string
+        libraryType:
+          title: Library Type
+          type: string
+          example: REDHAT_PACKAGE_MODULE
+        directDependency:
+          title: Direct Dependency
+          type: boolean
+        dependencyType:
+          title: Dependency Type
+          type: string
+          example: Direct / Transitive
+        references:
+          $ref: '#/components/schemas/ComponentReferencesDTO'
+        groupId:
+          title: Component Name
+          type: string
+          example: org.springframework.boot
+        artifactId:
+          title: Component Artifact
+          type: string
+          example: spring-boot
+        version:
+          title: Component Version
+          type: string
+          example: 3.0.5
+        dependencyFile:
+          type: string
+        localPath:
+          type: string
+    AlertIntegrationDTO:
+      type: object
+      properties:
+        status:
+          title: Risk Integration Status
+          type: string
+          example: SUCCESS
+          enum:
+          - SUCCESS
+          - FAILURE
+          - PROCESSING
+        issues:
+          type: array
+          items:
+            $ref: '#/components/schemas/IssueTrackerDTO'
+    VulnerabilityProfileDTO:
+      type: object
+      properties:
+        name:
+          title: Vulnerability Name
+          type: string
+          example: CVE-2021-42392
+        type:
+          title: VulnerabilityType
+          type: string
+          example: WS
+          enum:
+          - CVE
+          - WS
+        description:
+          title: Vulnerability Description
+          type: string
+          example: Security vulnerability found in plexus-utils before 3.0.24. XML injection found in XmlWriterUtil.java
+        score:
+          title: Vulnerability Score
+          type: number
+          format: float
+          example: 5
+        severity:
+          title: Vulnerability Severity
+          type: string
+          example: MEDIUM
+          enum:
+          - HIGH
+          - MEDIUM
+          - LOW
+        publishDate:
+          title: Vulnerability Publish Date
+          type: string
+          format: date-time
+        modifiedDate:
+          title: Vulnerability Modified Date
+          type: string
+          format: date-time
+        vulnerabilityScoring:
+          type: array
+          items:
+            $ref: '#/components/schemas/VulnerabilityScoringDTO'
+        references:
+          type: array
+          items:
+            $ref: '#/components/schemas/VulnerabilityReferenceDTO'
+        effectiveInfo:
+          $ref: '#/components/schemas/EffectiveVulnerabilityInfoDTO'
+        threatAssessment:
+          $ref: '#/components/schemas/ThreatAssessmentDTO'
+    ThreatAssessmentDTO:
+      type: object
+      properties:
+        exploitCodeMaturity:
+          title: Exploit Code Maturity
+          type: string
+          example: HIGH
+          enum:
+          - UNPROVEN
+          - POC_CODE
+          - FUNCTIONAL
+          - HIGH
+          - NOT_DEFINED
+        epssPercentage:
+          title: Epss Percentage
+          type: number
+          format: float
+          example: 0.8
+    DWRResponsePageableCollectionSecurityAlertLibraryDTO:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            + **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining.'
+          example:
+            totalItems: '422'
+            isLastPage: 'true'
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          type: array
+          items:
+            $ref: '#/components/schemas/SecurityAlertLibraryDTO'
+      description: Provides insights into endpoint-supported pagination information
+    DWRResponsePageableCollectionLegalAndComplianceAlertBaseDTO:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            + **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining.'
+          example:
+            totalItems: '422'
+            isLastPage: 'true'
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          type: array
+          items:
+            $ref: '#/components/schemas/LegalAndComplianceAlertBaseDTO'
+      description: Provides insights into endpoint-supported pagination information
+    LibraryLocationComponentDTO:
+      type: object
+      properties:
+        uuid:
+          title: Component UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Component Name
+          type: string
+          example: dbus-1.10.24-13.el7_6.x86_64.rpm
+        description:
+          title: Component Description
+          type: string
+          example: Component description
+        componentType:
+          title: Component Type
+          type: string
+          example: Library
+          enum:
+          - Library
+        type:
+          type: string
+        libraryType:
+          title: Library Type
+          type: string
+          example: REDHAT_PACKAGE_MODULE
+        directDependency:
+          title: Direct Dependency
+          type: boolean
+        dependencyType:
+          title: Dependency Type
+          type: string
+          example: Direct / Transitive
+        references:
+          $ref: '#/components/schemas/ComponentReferencesDTO'
+        groupId:
+          title: Component Name
+          type: string
+          example: org.springframework.boot
+        artifactId:
+          title: Component Artifact
+          type: string
+          example: spring-boot
+        version:
+          title: Component Version
+          type: string
+          example: 3.0.5
+        dependencyFile:
+          type: string
+        localPath:
+          type: string
+        libraryLocations:
+          type: array
+          items:
+            $ref: '#/components/schemas/LibraryLocationDTO'
+    RejectedLibraryInUseAlertDTO:
+      type: object
+      properties:
+        uuid:
+          title: Alert Uuid
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Alert Name
+          type: string
+          description: Identifier of the alert, changes based on alert type
+          example: CVE-2021-42392
+        type:
+          type: string
+          example: REJECTED_LIBRARY_IN_USE
+          enum:
+          - REJECTED_LIBRARY_IN_USE
+        alertInfo:
+          $ref: '#/components/schemas/AlertInfoDTO'
+        project:
+          $ref: '#/components/schemas/ProjectDTO'
+        product:
+          $ref: '#/components/schemas/ProductDTO'
+        component:
+          $ref: '#/components/schemas/BaseComponentDTO'
+        description:
+          title: Description
+          type: string
+          example: My description
+    SourceFileComponentDTO:
+      type: object
+      properties:
+        uuid:
+          title: Component UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Component Name
+          type: string
+          example: dbus-1.10.24-13.el7_6.x86_64.rpm
+        description:
+          title: Component Description
+          type: string
+          example: Component description
+        componentType:
+          title: Component Type
+          type: string
+          example: Source File
+          enum:
+          - Source File
+        type:
+          type: string
+        libraryType:
+          title: Library Type
+          type: string
+          example: REDHAT_PACKAGE_MODULE
+        directDependency:
+          title: Direct Dependency
+          type: boolean
+        dependencyType:
+          title: Dependency Type
+          type: string
+          example: Direct / Transitive
+        references:
+          $ref: '#/components/schemas/ComponentReferencesDTO'
+        groupId:
+          title: Component Name
+          type: string
+          example: org.springframework.boot
+        artifactId:
+          title: Component Artifact
+          type: string
+          example: spring-boot
+        version:
+          title: Component Version
+          type: string
+          example: 3.0.5
+        dependencyFile:
+          type: string
+        localPath:
+          type: string
+    IssueTrackerDTO:
+      type: object
+      properties:
+        issueStatus:
+          title: Issue Status
+          type: string
+          example: Open
+        url:
+          title: Issue URL
+          type: string
+          example: www.jira.com/projectA-22
+        issueTrackerType:
+          title: Issue Integration Type
+          type: string
+          example: Jira-cloud
+        issueIdentifier:
+          title: Issue Identifier
+          type: string
+          example: projectA-22
+    ProductDTO:
+      type: object
+      properties:
+        uuid:
+          title: Product Uuid
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Product Name
+          type: string
+          example: Product A
+    BaseComponentDTO:
+      type: object
+      properties:
+        uuid:
+          title: Component UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Component Name
+          type: string
+          example: dbus-1.10.24-13.el7_6.x86_64.rpm
+        description:
+          title: Component Description
+          type: string
+          example: Component description
+        componentType:
+          type: string
+        type:
+          type: string
+        libraryType:
+          title: Library Type
+          type: string
+          example: REDHAT_PACKAGE_MODULE
+        directDependency:
+          title: Direct Dependency
+          type: boolean
+        dependencyType:
+          title: Dependency Type
+          type: string
+          example: Direct / Transitive
+        references:
+          $ref: '#/components/schemas/ComponentReferencesDTO'
+        groupId:
+          title: Component Name
+          type: string
+          example: org.springframework.boot
+        artifactId:
+          title: Component Artifact
+          type: string
+          example: spring-boot
+        version:
+          title: Component Version
+          type: string
+          example: 3.0.5
+        dependencyFile:
+          type: string
+        localPath:
+          type: string
+      anyOf:
+      - $ref: '#/components/schemas/LibraryComponentDTO'
+      - $ref: '#/components/schemas/SourceFileComponentDTO'
+    MultipleLicensesAlertDTO:
+      type: object
+      properties:
+        uuid:
+          title: Alert Uuid
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Alert Name
+          type: string
+          description: Identifier of the alert, changes based on alert type
+          example: CVE-2021-42392
+        type:
+          type: string
+          example: MULTIPLE_LICENSES
+          enum:
+          - MULTIPLE_LICENSES
+        alertInfo:
+          $ref: '#/components/schemas/AlertInfoDTO'
+        project:
+          $ref: '#/components/schemas/ProjectDTO'
+        product:
+          $ref: '#/components/schemas/ProductDTO'
+        component:
+          $ref: '#/components/schemas/BaseComponentDTO'
+        numberOfLicenses:
+          title: Number Of Licenses
+          type: integer
+          format: int32
+          example: 2
+        licenses:
+          type: array
+          items:
+            title: Licenses
+            type: string
+            example: MIT
+    ProjectDTO:
+      type: object
+      properties:
+        uuid:
+          title: Project UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Project Name
+          type: string
+          example: My Project
+        path:
+          title: Product Name
+          type: string
+          example: My Product
+        productName:
+          title: Product Name
+          type: string
+          example: My Product
+        productUuid:
+          title: Product Uuid
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+    LegalAndComplianceAlertBaseDTO:
+      type: object
+      properties:
+        uuid:
+          title: Alert Uuid
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Alert Name
+          type: string
+          description: Identifier of the alert, changes based on alert type
+          example: CVE-2021-42392
+        type:
+          type: string
+        alertInfo:
+          $ref: '#/components/schemas/AlertInfoDTO'
+        project:
+          $ref: '#/components/schemas/ProjectDTO'
+        product:
+          $ref: '#/components/schemas/ProductDTO'
+        component:
+          $ref: '#/components/schemas/BaseComponentDTO'
+      anyOf:
+      - $ref: '#/components/schemas/PolicyViolationAlertDTO'
+      - $ref: '#/components/schemas/NewVersionAlertDTO'
+      - $ref: '#/components/schemas/RejectedLibraryInUseAlertDTO'
+      - $ref: '#/components/schemas/MultipleLicensesAlertDTO'
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+    PolicyViolationAlertDTO:
+      type: object
+      properties:
+        uuid:
+          title: Alert Uuid
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Alert Name
+          type: string
+          description: Identifier of the alert, changes based on alert type
+          example: CVE-2021-42392
+        type:
+          type: string
+          example: POLICY_VIOLATIONS
+          enum:
+          - POLICY_VIOLATIONS
+        alertInfo:
+          $ref: '#/components/schemas/AlertInfoDTO'
+        project:
+          $ref: '#/components/schemas/ProjectDTO'
+        product:
+          $ref: '#/components/schemas/ProductDTO'
+        component:
+          $ref: '#/components/schemas/BaseComponentDTO'
+        policyName:
+          title: Policy Name
+          type: string
+          example: My Policy
+    VulnerabilityReferenceDTO:
+      type: object
+      properties:
+        value:
+          title: Vulnerability Reference Value
+          type: string
+          example: https://github.com/codehaus-plexus/plexus-utils/commit/f933e5e78dc2637e485447ed821fe14904f110de
+        source:
+          title: vulnerability reference source
+          type: string
+          example: CERT
+        url:
+          title: Vulnerability Reference Url
+          type: string
+          example: https://github.com/codehaus-plexus/plexus-utils/commit/f933e5e78dc2637e485447ed821fe14904f110de
+        signature:
+          title: Vulnerability Reference Signature
+          type: boolean
+        advisory:
+          title: Vulnerability Reference Advisory
+          type: boolean
+        patch:
+          title: Vulnerability Reference Patch
+          type: boolean
+    BaseLocationComponentDTO:
+      type: object
+      properties:
+        uuid:
+          title: Component UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Component Name
+          type: string
+          example: dbus-1.10.24-13.el7_6.x86_64.rpm
+        description:
+          title: Component Description
+          type: string
+          example: Component description
+        componentType:
+          type: string
+        type:
+          type: string
+        libraryType:
+          title: Library Type
+          type: string
+          example: REDHAT_PACKAGE_MODULE
+        directDependency:
+          title: Direct Dependency
+          type: boolean
+        dependencyType:
+          title: Dependency Type
+          type: string
+          example: Direct / Transitive
+        references:
+          $ref: '#/components/schemas/ComponentReferencesDTO'
+        groupId:
+          title: Component Name
+          type: string
+          example: org.springframework.boot
+        artifactId:
+          title: Component Artifact
+          type: string
+          example: spring-boot
+        version:
+          title: Component Version
+          type: string
+          example: 3.0.5
+        dependencyFile:
+          type: string
+        localPath:
+          type: string
+        libraryLocations:
+          type: array
+          items:
+            $ref: '#/components/schemas/LibraryLocationDTO'
+      anyOf:
+      - $ref: '#/components/schemas/LibraryLocationComponentDTO'
+      - $ref: '#/components/schemas/SourceFileLocationComponentDTO'
+    SecurityAlertLibraryDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+        name:
+          type: string
+        component:
+          $ref: '#/components/schemas/LibraryComponentDTO'
+        libraryType:
+          title: Library Type
+          type: string
+          example: BINARY
+          enum:
+          - BINARY, SOURCE
+        severity:
+          type: string
+        criticalNum:
+          title: Number Of Critical Vulnerabilities
+          type: integer
+          format: int32
+          example: 22
+        highNum:
+          title: Number Of High Vulnerabilities
+          type: integer
+          format: int32
+          example: 22
+        mediumNum:
+          title: Number Of MEDIUM Vulnerabilities
+          type: integer
+          format: int32
+          example: 22
+        lowNum:
+          title: Number Of Low Vulnerabilities
+          type: integer
+          format: int32
+          example: 22
+        total:
+          title: Number Of All Vulnerabilities
+          type: integer
+          format: int32
+          example: 22
+        ignoreNum:
+          title: Number Of Ignored Vulnerabilities
+          type: integer
+          format: int32
+          example: 22
+        effective:
+          title: Effective Value
+          type: string
+          enum:
+          - RED
+          - YELLOW
+          - GREY
+          - NO_SHIELD
+          - GREEN
+        detectedAt:
+          title: First Alert Detection Date
+          type: string
+          format: date-time
+        modifiedAt:
+          title: Alert Modified Date
+          type: string
+          format: date-time
+        publishedAt:
+          title: First Vulnerability Published Date
+          type: string
+          format: date-time
+        lastCveUpdatedAt:
+          title: Last Vulnerability Updated Date
+          type: string
+          format: date-time
+        subRowsIds:
+          type: array
+          items:
+            title: Vulnerability Names
+            type: string
+            example: cev-2020-234
+        project:
+          $ref: '#/components/schemas/ProjectDTO'
+        product:
+          $ref: '#/components/schemas/ProductDTO'
+        status:
+          type: string
+          enum:
+          - ACTIVE
+          - IGNORED
+          - LIBRARY_REMOVED
+          - LIBRARY_IN_HOUSE
+          - LIBRARY_WHITELIST
+        comment:
+          title: Comment on suppressed library
+          type: string
+          example: no time to fix
+        directName:
+          type: string
+        lastScan:
+          type: string
+          format: date-time
+        transitiveDependency:
+          title: Transitive Dependency
+          type: boolean
+          example: true
+        exploitCodeMaturity:
+          type: array
+          items:
+            title: Exploit Code Maturity List
+            type: string
+            example: HIGH, POC_CODE
+            enum:
+            - UNPROVEN
+            - POC_CODE
+            - FUNCTIONAL
+            - HIGH
+            - NOT_DEFINED
+        exploitable:
+          title: Is Library Exploitable
+          type: boolean
+          example: true
+        numOfReachable:
+          title: Number Of Reachable Vulnerabilities
+          type: integer
+          format: int32
+          example: 22
+        numOfPotentiallyReachable:
+          type: integer
+          format: int32
+        numOfUnreachable:
+          type: integer
+          format: int32
+        reachability:
+          title: Effective Value
+          type: string
+          example: '15'
+          enum:
+          - RED
+          - YELLOW
+          - GREY
+          - NO_SHIELD
+          - GREEN
+        numOfMalicious:
+          title: Number Of Malicious Vulnerabilities
+          type: integer
+          format: int32
+          example: 22
+        malicious:
+          title: Is Library Malicious
+          type: boolean
+          example: true
+        violations:
+          title: Number Of Violations
+          type: integer
+          format: int32
+          example: 22
+        workflowUuids:
+          title: Number Of Violated Workflows
+          type: array
+          example: 2
+          items:
+            title: Number Of Violated Workflows
+            type: string
+            example: '2'
+        violatingFindings:
+          title: Number Of Violating Findings
+          type: integer
+          format: int32
+          example: 2
+    AlertInfoDTO:
+      type: object
+      properties:
+        status:
+          title: Alert Status
+          type: string
+          enum:
+          - ACTIVE
+          - IGNORED
+          - LIBRARY_REMOVED
+          - LIBRARY_IN_HOUSE
+          - LIBRARY_WHITELIST
+        comment:
+          $ref: '#/components/schemas/UserCommentDTO'
+        detectedAt:
+          title: Alert Detection Date
+          type: string
+          format: date-time
+        modifiedAt:
+          title: Alert Modification Date
+          type: string
+          format: date-time
+    ComponentReferencesDTO:
+      title: Component References
+      type: object
+      properties:
+        url:
+          title: Reference Url
+          type: string
+          example: https://www.gnupg.org/related_software/pinentry/98
+        homePage:
+          title: Reference Home Page
+          type: string
+          example: https://www.gnupg.org/related_software/pinentry/89
+        downloadLink:
+          title: Reference Download Link
+          type: string
+          example: https://www.gnupg.org/related_software/pinentry/09
+        issueUrl:
+          title: Reference Issue Url
+          type: string
+          example: https://www.gnupg.org/related_software/pinentry/87
+        pomUrl:
+          title: Reference Pom Url
+          type: string
+          example: https://www.gnupg.org/related_software/pinentry/76
+        scmUrl:
+          title: Reference Scm Url
+          type: string
+          example: https://www.gnupg.org/related_software/pinentry/65
+        genericPackageIndex:
+          title: Reference Generic Package Index
+          type: string
+          example: '5'
+        nugetGallery:
+          title: Reference Nugget Gallery
+          type: string
+        tags:
+          title: Reference Tags
+          type: string
+          example: Important
+        copyright:
+          title: Reference Copyright
+          type: string
+          example: Copyright 2002-2015 g10 Code GmbH
+        hasNotice:
+          title: Reference Has Notice
+          type: boolean
+          example: false
+    SourceFileLocationComponentDTO:
+      type: object
+      properties:
+        uuid:
+          title: Component UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Component Name
+          type: string
+          example: dbus-1.10.24-13.el7_6.x86_64.rpm
+        description:
+          title: Component Description
+          type: string
+          example: Component description
+        componentType:
+          title: Component Type
+          type: string
+          example: Source File
+          enum:
+          - Source File
+        type:
+          type: string
+        libraryType:
+          title: Library Type
+          type: string
+          example: REDHAT_PACKAGE_MODULE
+        directDependency:
+          title: Direct Dependency
+          type: boolean
+        dependencyType:
+          title: Dependency Type
+          type: string
+          example: Direct / Transitive
+        references:
+          $ref: '#/components/schemas/ComponentReferencesDTO'
+        groupId:
+          title: Component Name
+          type: string
+          example: org.springframework.boot
+        artifactId:
+          title: Component Artifact
+          type: string
+          example: spring-boot
+        version:
+          title: Component Version
+          type: string
+          example: 3.0.5
+        dependencyFile:
+          type: string
+        localPath:
+          type: string
+        libraryLocations:
+          type: array
+          items:
+            $ref: '#/components/schemas/LibraryLocationDTO'
+        sourceFile:
+          title: Source File Name
+          type: string
+          example: DocXMLRPCServer.py
+        sourceFileUuid:
+          title: Source File UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+    DWRResponsePageableCollectionSecurityAlertDTO:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            + **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining.'
+          example:
+            totalItems: '422'
+            isLastPage: 'true'
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          type: array
+          items:
+            $ref: '#/components/schemas/SecurityAlertDTO'
+      description: Provides insights into endpoint-supported pagination information
+    UserCommentDTO:
+      type: object
+      properties:
+        comment:
+          title: Comment
+          type: string
+          example: a comment
+        date:
+          title: comment date
+          type: string
+          format: date-time
+        userEmail:
+          title: User Email
+          type: string
+          example: jon.smith@mail.com
+        username:
+          title: User Email
+          type: string
+          example: jon
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: JWT token Bearer
+      scheme: bearer
+      bearerFormat: JWT

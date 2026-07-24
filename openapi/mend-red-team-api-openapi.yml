@@ -1,0 +1,116 @@
+openapi: 3.0.1
+info:
+  title: Mend Access Management Red Team API
+  description: 'Mend''s enhanced API enables automation of workflows in a REST compliant format. The API features:
+
+    + Access for any user with Mend credentials, via a user key available in the user''s profile page in the Mend Platform.
+
+    + Improved security with a JWT token per organization, which expires every 10 minutes.
+
+    + Added scalability with support for cursor pagination and limiting results size.
+
+    + Broader functionality available programmatically.
+
+    + New standard API documentation for easy navigation and search.
+
+
+    **Note:** To help you get started with the Mend API 3.0, we recommend reviewing our onboarding guide -> [Getting Started with API 3.0](https://docs.mend.io/platform/latest/getting-started-with-mend-api-3-0).
+
+    This resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend API 3.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.'
+  version: '3.0'
+servers:
+- url: https://baseUrl
+  description: Generated server url
+security:
+- bearer-key: []
+tags:
+- name: Red Team
+paths:
+  /api/v3.0/projects/{projectUuid}/ai/redteam/trigger:
+    post:
+      security:
+      - bearer-key: []
+      description: Triggers a test run.
+      tags:
+      - Red Team
+      summary: Trigger test run
+      operationId: triggerTestRun
+      parameters:
+      - description: UUID of the project
+        name: projectUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v3.V3TestRunTriggerRequest'
+        description: Test run trigger configuration
+        required: true
+      responses:
+        '200':
+          description: Test run triggered successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v3.V3BaseResponse-v3_V3TestRunTriggerResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: string
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: string
+components:
+  schemas:
+    v3.V3BaseResponse-v3_V3TestRunTriggerResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/v3.V3TestRunTriggerResponse'
+        supportToken:
+          type: string
+    v3.V3TestRunTriggerRequest:
+      type: object
+      required:
+      - name
+      - targetId
+      - probeIds
+      properties:
+        name:
+          type: string
+          description: Name of the test run
+        targetId:
+          type: integer
+          description: Target ID for the test run
+        probeIds:
+          type: array
+          description: List of probe IDs to run
+          minItems: 1
+          items:
+            type: integer
+    v3.V3TestRunTriggerResponse:
+      type: object
+      properties:
+        testRunId:
+          type: integer
+          description: ID of the triggered test run
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: JWT token Bearer
+      scheme: bearer
+      bearerFormat: JWT

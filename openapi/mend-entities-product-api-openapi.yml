@@ -1,0 +1,369 @@
+openapi: 3.0.1
+info:
+  title: Mend Access Management Entities - Product API
+  description: 'Mend''s enhanced API enables automation of workflows in a REST compliant format. The API features:
+
+    + Access for any user with Mend credentials, via a user key available in the user''s profile page in the Mend Platform.
+
+    + Improved security with a JWT token per organization, which expires every 10 minutes.
+
+    + Added scalability with support for cursor pagination and limiting results size.
+
+    + Broader functionality available programmatically.
+
+    + New standard API documentation for easy navigation and search.
+
+
+    **Note:** To help you get started with the Mend API 3.0, we recommend reviewing our onboarding guide -> [Getting Started with API 3.0](https://docs.mend.io/platform/latest/getting-started-with-mend-api-3-0).
+
+    This resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend API 3.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.'
+  version: '3.0'
+servers:
+- url: https://baseUrl
+  description: Generated server url
+security:
+- bearer-key: []
+tags:
+- name: Entities - Product
+paths:
+  /api/v2.0/products/{productToken}:
+    get:
+      tags:
+      - Entities - Product
+      summary: Get Product
+      description: Returns a product as identified by its token
+      operationId: getEntity_1
+      parameters:
+      - name: productToken
+        in: path
+        description: 'product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseContextEntityDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+    put:
+      tags:
+      - Entities - Product
+      summary: Rename Product
+      description: Renames the product identified by its token
+      operationId: updateProduct
+      parameters:
+      - name: productToken
+        in: path
+        description: 'product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContextEntityRequestDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseProductDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+    delete:
+      tags:
+      - Entities - Product
+      summary: Remove Product
+      description: Deletes a product as identified by its token
+      operationId: removeEntity_1
+      parameters:
+      - name: productToken
+        in: path
+        description: 'product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseMessageDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v2.0/products/{productToken}/projects:
+    get:
+      tags:
+      - Entities - Product
+      summary: Get Product Projects
+      description: Returns a list of the projects and their tokens for a given product
+      operationId: getProjects
+      parameters:
+      - name: pageSize
+        in: query
+        allowEmptyValue: true
+        schema:
+          maximum: 10000
+          type: string
+          default: '50'
+      - name: page
+        in: query
+        allowEmptyValue: true
+        schema:
+          type: string
+          default: '0'
+      - name: productToken
+        in: path
+        description: 'product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableCollectionProjectDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+    post:
+      tags:
+      - Entities - Product
+      summary: Create Project
+      description: Creates a new project within a given product. If the project already exists it returns the existing project.
+      operationId: createProject
+      parameters:
+      - name: productToken
+        in: path
+        description: 'product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProjectByProductRequestDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseCreatedProjectDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+components:
+  schemas:
+    DWRResponseCreatedProjectDTO:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights on creating resources using supported endpoints.
+          type: object
+          description: "+ **created**: Indicates whether the requested project was successfully created or if it already exists. \n When “true”, this signifies the project was successfully created. When “false”, this indicates the project already exists"
+          example:
+            created: 'true'
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/ProjectDTO'
+    ProductDTO:
+      type: object
+      properties:
+        uuid:
+          title: Product Uuid
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Product Name
+          type: string
+          example: Product A
+    DWRResponseProductDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/ProductDTO'
+    DWRResponseContextEntityDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/ContextEntityDTO'
+    ContextEntityDTO:
+      required:
+      - name
+      type: object
+      properties:
+        uuid:
+          title: Context Uuid
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Context Name
+          type: string
+          example: Context A
+    DWRResponseMessageDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/MessageDTO'
+    CreateProjectByProductRequestDTO:
+      required:
+      - projectName
+      type: object
+      properties:
+        projectName:
+          title: Project Name
+          type: string
+          example: Project A
+        projectDescription:
+          title: Project Description
+          type: string
+          example: Description for project
+    ProjectDTO:
+      type: object
+      properties:
+        uuid:
+          title: Project UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Project Name
+          type: string
+          example: My Project
+        path:
+          title: Product Name
+          type: string
+          example: My Product
+        productName:
+          title: Product Name
+          type: string
+          example: My Product
+        productUuid:
+          title: Product Uuid
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+    ContextEntityRequestDTO:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          title: Entity Name
+          type: string
+          example: Entity A
+    MessageDTO:
+      type: object
+      properties:
+        message:
+          title: message
+          type: string
+          example: Success!
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+    DWRResponsePageableCollectionProjectDTO:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            + **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining.'
+          example:
+            totalItems: '422'
+            isLastPage: 'true'
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProjectDTO'
+      description: Provides insights into endpoint-supported pagination information
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: JWT token Bearer
+      scheme: bearer
+      bearerFormat: JWT

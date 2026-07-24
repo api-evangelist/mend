@@ -1,0 +1,1234 @@
+openapi: 3.0.1
+info:
+  title: Mend Access Management Projects API
+  description: 'Mend''s enhanced API enables automation of workflows in a REST compliant format. The API features:
+
+    + Access for any user with Mend credentials, via a user key available in the user''s profile page in the Mend Platform.
+
+    + Improved security with a JWT token per organization, which expires every 10 minutes.
+
+    + Added scalability with support for cursor pagination and limiting results size.
+
+    + Broader functionality available programmatically.
+
+    + New standard API documentation for easy navigation and search.
+
+
+    **Note:** To help you get started with the Mend API 3.0, we recommend reviewing our onboarding guide -> [Getting Started with API 3.0](https://docs.mend.io/platform/latest/getting-started-with-mend-api-3-0).
+
+    This resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend API 3.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.'
+  version: '3.0'
+servers:
+- url: https://baseUrl
+  description: Generated server url
+security:
+- bearer-key: []
+tags:
+- name: Projects
+paths:
+  /api/v3.0/orgs/{orgUuid}/applications/{applicationUuid}/projects:
+    post:
+      tags:
+      - Projects
+      summary: Create Project in Application
+      description: Creates a new Project within the given Application. If the Project already exists it returns the existing Project.
+      operationId: createProjectInApplication
+      parameters:
+      - name: orgUuid
+        in: path
+        description: 'org UUID (from the Mend App: **Administration** General > **Organization UUID**).'
+        required: true
+        schema:
+          type: string
+      - name: applicationUuid
+        in: path
+        description: Application UUID (Administration > Applications)
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProjectInApplicationRequestDTOV3'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3ProjectDTOV3'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v3.0/orgs/{orgUuid}/projects:
+    get:
+      tags:
+      - Projects
+      summary: Get Organization Projects
+      description: Returns a list of all projects accessible to the current user
+      operationId: getOrganizationProjects
+      parameters:
+      - name: cursor
+        in: query
+        description: Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved.
+        allowEmptyValue: true
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Specifies the maximum number of items to be returned in the response.
+        allowEmptyValue: true
+        schema:
+          maximum: 10000
+          type: string
+          default: '50'
+      - name: populateApplications
+        in: query
+        description: Add populateApplications=false to receive a slimmer response containing only the project UUID and name.
+        allowEmptyValue: true
+        schema:
+          type: string
+          default: 'true'
+      - name: excludeInactiveProjects
+        in: query
+        description: Add excludeInactiveProjects=false to retrieve all projects, including inactive ones.
+        allowEmptyValue: true
+        schema:
+          type: string
+          default: 'true'
+      - name: orgUuid
+        in: path
+        description: 'org UUID (from the Mend App: **Administration** General > **Organization UUID**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableV3CollectionProjectDTOV3'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+    post:
+      tags:
+      - Projects
+      summary: Create Project
+      description: Creates a new Project. If applicationName is provided and the Application does not exist, it will be created. If the Project already exists it returns the existing Project.
+      operationId: createProject
+      parameters:
+      - name: orgUuid
+        in: path
+        description: 'org UUID (from the Mend App: **Administration** General > **Organization UUID**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProjectInOrgRequestDTOV3'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3CreateProjectResponseDTOV3'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v3.0/orgs/{orgUuid}/projects/summaries:
+    post:
+      tags:
+      - Projects
+      summary: Get Project Statistics
+      description: Returns the requested statistics for the given projects that match at least one of the given identifiers.
+      operationId: getProjectSummaries
+      parameters:
+      - name: cursor
+        in: query
+        description: Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved.
+        allowEmptyValue: true
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Specifies the maximum number of items to be returned in the response.
+        allowEmptyValue: true
+        schema:
+          maximum: 10000
+          type: string
+          default: '50'
+      - name: orgUuid
+        in: path
+        description: 'org UUID (from the Mend App: **Administration** General > **Organization UUID**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MultiContextRequestDTOV3'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableV3ListProjectSummaryDTOV3'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v3.0/orgs/{orgUuid}/projects/summaries/total/date:
+    get:
+      tags:
+      - Projects
+      summary: Get Project totals grouped by date
+      description: Returns the requested statistics for the given projects that match at least one of the given identifiers.
+      operationId: getProjectSummariesTotalsByDate
+      parameters:
+      - name: fromDate
+        in: query
+        description: Enter the start date for the search. The date format is yyyy-MM-dd
+        required: true
+        schema:
+          type: string
+      - name: toDate
+        in: query
+        description: Enter the end date for the search. The date format is yyyy-MM-dd
+        required: true
+        schema:
+          type: string
+      - name: orgUuid
+        in: path
+        description: 'org UUID (from the Mend App: **Administration** General > **Organization UUID**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3ListProjectTotalsGroupedByDateDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v3.0/orgs/{orgUuid}/projects/summaries/totals:
+    get:
+      tags:
+      - Projects
+      summary: Get Project totals
+      description: Returns the requested statistics for the given projects that match at least one of the given identifiers.
+      operationId: getProjectTotals
+      parameters:
+      - name: fromDate
+        in: query
+        description: Enter the start date for the search. The date format is yyyy-MM-dd
+        required: true
+        schema:
+          type: string
+      - name: toDate
+        in: query
+        description: Enter the end date for the search. The date format is yyyy-MM-dd
+        required: true
+        schema:
+          type: string
+      - name: orgUuid
+        in: path
+        description: 'org UUID (from the Mend App: **Administration** General > **Organization UUID**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3PeriodTotalsDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v3.0/orgs/{orgUuid}/projects/{projectUuid}/labels:
+    get:
+      tags:
+      - Projects
+      summary: Get Project Labels
+      description: Get project labels. A label can be a string or namespace:value pair that provide additional metadata to assist with project management.
+      operationId: getProjectLabels
+      parameters:
+      - name: orgUuid
+        in: path
+        description: 'org UUID (from the Mend App: **Administration** General > **Organization UUID**).'
+        required: true
+        schema:
+          type: string
+      - name: projectUuid
+        in: path
+        description: UUID of the project
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3ListEntityLabelDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+    put:
+      tags:
+      - Projects
+      summary: Add Project Label
+      description: Adds a new label to a project. A label can be a string or namespace:value pair that provide additional metadata to assist with project management.
+      operationId: addProjectLabel
+      parameters:
+      - name: orgUuid
+        in: path
+        description: 'org UUID (from the Mend App: **Administration** General > **Organization UUID**).'
+        required: true
+        schema:
+          type: string
+      - name: projectUuid
+        in: path
+        description: UUID of the project
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LabelRequestDTOV3'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3MessageDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v3.0/orgs/{orgUuid}/projects/{projectUuid}/labels/{labelUuid}:
+    delete:
+      tags:
+      - Projects
+      summary: Remove Project Label
+      description: Removes a label from a project
+      operationId: removeProjectLabel
+      parameters:
+      - name: orgUuid
+        in: path
+        description: 'org UUID (from the Mend App: **Administration** General > **Organization UUID**).'
+        required: true
+        schema:
+          type: string
+      - name: projectUuid
+        in: path
+        description: UUID of the project
+        required: true
+        schema:
+          type: string
+      - name: labelUuid
+        in: path
+        description: Label UUID (Administration > Labels)
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3MessageDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v3.0/orgs/{orgUuid}/projects/{projectUuid}/violations:
+    get:
+      tags:
+      - Projects
+      summary: Get Project Violating Findings
+      description: Returns the violations relates to project
+      operationId: getProjectViolations
+      parameters:
+      - name: cursor
+        in: query
+        description: Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved.
+        allowEmptyValue: true
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Specifies the maximum number of items to be returned in the response.
+        allowEmptyValue: true
+        schema:
+          maximum: 10000
+          type: string
+          default: '50'
+      - name: orgUuid
+        in: path
+        description: 'org UUID (from the Mend App: **Administration** General > **Organization UUID**).'
+        required: true
+        schema:
+          type: string
+      - name: projectUuid
+        in: path
+        description: UUID of the project
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableV3ListProjectViolationDTOV3'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v3.0/orgs/{orgUuid}/projects/{projectUuid}/violations/sla:
+    put:
+      tags:
+      - Projects
+      summary: Update Multiple Violation SLA
+      description: Updates the SLA of Multiple Project Violating Findings
+      operationId: updateMultipleProjectViolationSla
+      parameters:
+      - name: orgUuid
+        in: path
+        description: 'org UUID (from the Mend App: **Administration** General > **Organization UUID**).'
+        required: true
+        schema:
+          type: string
+      - name: projectUuid
+        in: path
+        description: UUID of the project
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateMultipleProjectViolationSlaRequestDTOV3'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3Boolean'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v3.0/projects/{projectUuid}/dependencies/effective:
+    get:
+      tags:
+      - Projects
+      summary: Get project vulnerabilities traces (Dependencies - SCA)
+      description: Returns the traces of a given project. Note that this feature requires that Mend Prioritize be enabled in your Mend account.
+      operationId: getProjectVulnerabilitiesTraces
+      parameters:
+      - name: limit
+        in: query
+        description: Specifies the maximum number of items to be returned in the response.
+        allowEmptyValue: true
+        schema:
+          maximum: 10000
+          type: string
+          default: '50'
+      - name: cursor
+        in: query
+        description: Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved.
+        allowEmptyValue: true
+        schema:
+          type: string
+      - name: projectUuid
+        in: path
+        description: UUID of the project
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableV3ListProjectTraceDTOV3'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v3.0/projects/{projectUuid}/dependencies/importSbom:
+    post:
+      tags:
+      - Projects
+      summary: Update Project with SBOM (Dependencies - SCA)
+      description: 'Upload a single SBOM file to update an existing project. The SBOM scan is queued for asynchronous processing. Supported formats: SPDX (JSON/XML), CycloneDX (JSON/XML).'
+      operationId: updateProjectWithSbom
+      parameters:
+      - name: projectUuid
+        in: path
+        description: UUID of the project
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              required:
+              - sbomFile
+              type: object
+              properties:
+                sbomFile:
+                  type: string
+                  description: The SBOM file to upload (SPDX or CycloneDX). Only one file per request.
+                  format: binary
+      responses:
+        '200':
+          description: SBOM scan successfully queued for project update
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SbomScanResponseDTO'
+        '400':
+          description: Invalid SBOM file format or malformed request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Insufficient permissions to update this project
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '404':
+          description: Project not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3SbomScanResponseDTO'
+components:
+  schemas:
+    DWRResponseV3ProjectDTOV3:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          $ref: '#/components/schemas/ProjectDTOV3'
+    DWRResponsePageableV3ListProjectSummaryDTOV3:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            '
+          example:
+            totalItems: '422'
+            next: http://someUrl?cursor=3
+            cursor: 3
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProjectSummaryDTOV3'
+    ProjectTraceDTOV3:
+      type: object
+      properties:
+        referenceEntityId:
+          title: Reference Entity Id
+          type: string
+          example: org.springframework.util.StringUtils:cleanPath ()
+        projectName:
+          title: Project Name
+          type: string
+          example: Project A
+        orgName:
+          title: Org Name
+          type: string
+          example: Organization A
+        traces:
+          type: array
+          items:
+            $ref: '#/components/schemas/VulnerabilityTraceDTO'
+        shieldValue:
+          type: integer
+          format: int32
+        applicationName:
+          title: Application Name
+          type: string
+          example: Product A
+        vulnerabilityId:
+          title: Vulnerability Id
+          type: string
+          example: CVE-2021-42392
+        libraryUuid:
+          title: Library Uuid
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        projectUuid:
+          title: Project UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+    VulnerabilityTraceDTO:
+      type: object
+      properties:
+        codeInvocations:
+          type: array
+          items:
+            $ref: '#/components/schemas/CodeInvocationDTO'
+    DWRResponsePageableV3ListProjectViolationDTOV3:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            '
+          example:
+            totalItems: '422'
+            next: http://someUrl?cursor=3
+            cursor: 3
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProjectViolationDTOV3'
+    CreateProjectResponseDTOV3:
+      type: object
+      properties:
+        project:
+          $ref: '#/components/schemas/ProjectDTOV3'
+        application:
+          $ref: '#/components/schemas/ApplicationDTOV3'
+    ProjectViolationDTOV3:
+      required:
+      - engine
+      - findingType
+      type: object
+      properties:
+        uuid:
+          type: string
+        name:
+          type: string
+        projectUuid:
+          type: string
+        projectName:
+          type: string
+        engine:
+          type: string
+          description: Type of engine the violation relates to
+          example: SCA
+          enum:
+          - UNIFIED
+          - SCA
+          - SAST
+          - IAC
+          - IMG
+          - AI
+          - DAST
+        findingType:
+          type: string
+          description: Type of finding
+          example: SECURITY
+          enum:
+          - SECURITY
+          - LEGAL
+          - LIBRARY
+        originUuid:
+          type: string
+        originName:
+          type: string
+        risk:
+          type: string
+          description: 'Risk of the violation. Can be one of: LOW, MEDIUM, HIGH, CRITICAL'
+          example: HIGH
+          enum:
+          - LOW
+          - MEDIUM
+          - HIGH
+          - CRITICAL
+        sla:
+          type: string
+        workflowData:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkflowData'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        refId:
+          type: string
+        violationType:
+          type: string
+        isProjectActive:
+          type: boolean
+    ProjectViolationIdentifierDTOV3:
+      type: object
+      properties:
+        findingUuid:
+          type: string
+        originUuid:
+          type: string
+        projectUuid:
+          type: string
+    DWRResponsePageableV3CollectionProjectDTOV3:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            '
+          example:
+            totalItems: '422'
+            next: http://someUrl?cursor=3
+            cursor: 3
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProjectDTOV3'
+    WorkflowData:
+      type: object
+      properties:
+        workflowUuid:
+          type: string
+        workflowName:
+          type: string
+        entityUuid:
+          type: string
+    CodeInvocationDTO:
+      type: object
+      properties:
+        invocationType:
+          type: string
+          enum:
+          - APPLICATION
+          - EXTENSION
+          - NATIVE
+          - FRAMEWORK
+        methodName:
+          title: Method Name
+          type: string
+          example: org.springframework.util.StringUtils:cleanPath
+        order:
+          title: Order
+          type: integer
+          format: int32
+          example: 0
+        lineNumber:
+          title: Line Number
+          type: integer
+          format: int32
+          example: 522
+        fileName:
+          title: File Name
+          type: string
+          example: org\springframework\util\StringUtils.class
+    DWRResponsePageableV3ListProjectTraceDTOV3:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            '
+          example:
+            totalItems: '422'
+            next: http://someUrl?cursor=3
+            cursor: 3
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProjectTraceDTOV3'
+    ProjectTotalsGroupedByDateDTO:
+      type: object
+      properties:
+        creationDate:
+          type: string
+          format: date-time
+        totals:
+          type: integer
+    ProjectSummaryDTOV3:
+      type: object
+      properties:
+        uuid:
+          title: Project UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Project Name
+          type: string
+          example: My Project
+        path:
+          title: Application Name
+          type: string
+          example: My Application
+        applicationName:
+          title: Application Name
+          type: string
+          example: My Application
+        applicationUuid:
+          title: Application Uuid
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        creationDate:
+          type: string
+          format: date-time
+        lastScanned:
+          type: string
+          format: date-time
+          deprecated: true
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/EntityTagDTO'
+        labels:
+          type: array
+          items:
+            $ref: '#/components/schemas/EntityLabelDTOV3'
+        statistics:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: integer
+              format: int64
+    SbomScanResponseDTO:
+      type: object
+      properties:
+        supportToken:
+          type: string
+          description: Support token for tracking
+          example: 1171c60d
+        project:
+          $ref: '#/components/schemas/ProjectDTOV3'
+        scan:
+          $ref: '#/components/schemas/SbomScanInfoDTO'
+        link:
+          $ref: '#/components/schemas/SbomScanLinksDTO'
+    EntityLabelDTOV3:
+      type: object
+      properties:
+        uuid:
+          type: string
+        namespace:
+          type: string
+        value:
+          type: string
+        displayName:
+          type: string
+        scopeType:
+          type: string
+          enum:
+          - organization
+          - application
+          - project
+          - account
+          - unsupported
+        system:
+          type: boolean
+    EntityTagDTO:
+      type: object
+      properties:
+        key:
+          title: Entity Tag Key
+          type: string
+          example: key
+        value:
+          title: Entity Tag value
+          type: string
+          example: value
+    MessageDTO:
+      type: object
+      properties:
+        message:
+          title: message
+          type: string
+          example: Success!
+    CreateProjectInOrgRequestDTOV3:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          title: Project Name
+          type: string
+          example: My Project
+        description:
+          title: Project Description
+          type: string
+          example: Main scanning project for My Application
+        applicationName:
+          title: Application Name
+          type: string
+          example: My Application
+      description: If applicationName is empty a default Application will be used. If applicationName is provided and the Application does not exist, it will be created.
+    CreateProjectInApplicationRequestDTOV3:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          title: Project Name
+          type: string
+          example: My Project
+        description:
+          title: Project Description
+          type: string
+          example: Main scanning project for My Application
+    UpdateMultipleProjectViolationSlaRequestDTOV3:
+      type: object
+      properties:
+        date:
+          title: Date
+          pattern: yyyy-MM-dd
+          type: string
+          example: 2024/12/31
+        identifiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProjectViolationIdentifierDTOV3'
+    SbomScanInfoDTO:
+      type: object
+      properties:
+        scanUuid:
+          type: string
+          description: Scan identifier
+          example: 45e0c7f0-2a64-4a1c-bb2b-22e1c4f02126
+        createdAt:
+          type: string
+          description: Scan creation timestamp
+          example: '2025-10-27T18:50:05Z'
+      description: Scan information
+    DWRResponseV3PeriodTotalsDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          $ref: '#/components/schemas/PeriodTotalsDTO'
+    ProjectDTOV3:
+      type: object
+      properties:
+        uuid:
+          title: Project UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Project Name
+          type: string
+          example: My Project
+        path:
+          title: Application Name
+          type: string
+          example: My Application
+        applicationName:
+          title: Application Name
+          type: string
+          example: My Application
+        applicationUuid:
+          title: Application Uuid
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+      description: Project information
+    EntityLabelDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+        namespace:
+          type: string
+        value:
+          type: string
+        displayName:
+          type: string
+        contextType:
+          type: string
+        system:
+          type: boolean
+    SbomScanLinksDTO:
+      type: object
+      properties:
+        logs:
+          type: string
+          description: Link to scan logs
+          example: /api/v3.0/projects/{projectUuid}/scans/{scanUuid}/dependencies/SBOM/logs
+      description: Log Link
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+    ApplicationDTOV3:
+      type: object
+      properties:
+        uuid:
+          title: Application Uuid
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Application Name
+          type: string
+          example: Application A
+    DWRResponseV3Boolean:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          type: boolean
+    LabelRequestDTOV3:
+      required:
+      - namespace
+      - value
+      type: object
+      properties:
+        namespace:
+          title: Label Namespace
+          type: string
+          example: Label Namespace A
+        value:
+          title: Label Value
+          type: string
+          example: Label Value A
+    DWRResponseV3SbomScanResponseDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          $ref: '#/components/schemas/SbomScanResponseDTO'
+    PeriodTotalsDTO:
+      type: object
+      properties:
+        currentCount:
+          type: integer
+        totalInCurrPeriod:
+          type: integer
+        totalInPrevPeriod:
+          type: integer
+    DWRResponseV3ListEntityLabelDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          type: array
+          items:
+            $ref: '#/components/schemas/EntityLabelDTO'
+    DWRResponseV3CreateProjectResponseDTOV3:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          $ref: '#/components/schemas/CreateProjectResponseDTOV3'
+    DWRResponseV3ListProjectTotalsGroupedByDateDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProjectTotalsGroupedByDateDTO'
+    MultiContextRequestDTOV3:
+      type: object
+      properties:
+        applicationUuids:
+          type: array
+          items:
+            title: Application UUIDs
+            type: string
+            example: 123e4567-e89b-12d3-a456-426655440000
+        projectUuids:
+          type: array
+          items:
+            title: Project UUIDs
+            type: string
+            example: 123e4567-e89b-12d3-a456-426655440000
+      description: If projectUuids and applicationUuids are empty, action will apply to the whole organization, Provides the requested statistics for all projects that match at least one of the given identifiers.
+    DWRResponseV3MessageDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          $ref: '#/components/schemas/MessageDTO'
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: JWT token Bearer
+      scheme: bearer
+      bearerFormat: JWT

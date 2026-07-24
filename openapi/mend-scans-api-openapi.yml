@@ -1,0 +1,690 @@
+openapi: 3.0.1
+info:
+  title: Mend Access Management Scans API
+  description: 'Mend''s enhanced API enables automation of workflows in a REST compliant format. The API features:
+
+    + Access for any user with Mend credentials, via a user key available in the user''s profile page in the Mend Platform.
+
+    + Improved security with a JWT token per organization, which expires every 10 minutes.
+
+    + Added scalability with support for cursor pagination and limiting results size.
+
+    + Broader functionality available programmatically.
+
+    + New standard API documentation for easy navigation and search.
+
+
+    **Note:** To help you get started with the Mend API 3.0, we recommend reviewing our onboarding guide -> [Getting Started with API 3.0](https://docs.mend.io/platform/latest/getting-started-with-mend-api-3-0).
+
+    This resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend API 3.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.'
+  version: '3.0'
+servers:
+- url: https://baseUrl
+  description: Generated server url
+security:
+- bearer-key: []
+tags:
+- name: Scans
+paths:
+  /api/v3.0/orgs/{orgUuid}/projects/{projectUuid}/scans:
+    get:
+      tags:
+      - Scans
+      summary: Get Project Scans
+      description: Returns the project related scans
+      operationId: getScanSummaries
+      parameters:
+      - name: cursor
+        in: query
+        description: Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved.
+        allowEmptyValue: true
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Specifies the maximum number of items to be returned in the response.
+        allowEmptyValue: true
+        schema:
+          maximum: 10000
+          type: string
+          default: '50'
+      - name: orgUuid
+        in: path
+        description: 'org UUID (from the Mend App: **Administration** General > **Organization UUID**).'
+        required: true
+        schema:
+          type: string
+      - name: projectUuid
+        in: path
+        description: UUID of the project
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableV3ListScanSummaryDTOV3'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v3.0/orgs/{orgUuid}/projects/{projectUuid}/scans/{scanUuid}:
+    get:
+      tags:
+      - Scans
+      summary: Get Scan
+      operationId: getScan
+      parameters:
+      - name: orgUuid
+        in: path
+        description: 'org UUID (from the Mend App: **Administration** General > **Organization UUID**).'
+        required: true
+        schema:
+          type: string
+      - name: projectUuid
+        in: path
+        description: UUID of the project
+        required: true
+        schema:
+          type: string
+      - name: scanUuid
+        in: path
+        description: Scan UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3ScanDTOV3'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v3.0/orgs/{orgUuid}/projects/{projectUuid}/scans/{scanUuid}/summary:
+    get:
+      tags:
+      - Scans
+      summary: Get Scan Summary
+      operationId: getSummary
+      parameters:
+      - name: orgUuid
+        in: path
+        description: 'org UUID (from the Mend App: **Administration** General > **Organization UUID**).'
+        required: true
+        schema:
+          type: string
+      - name: projectUuid
+        in: path
+        description: UUID of the project
+        required: true
+        schema:
+          type: string
+      - name: scanUuid
+        in: path
+        description: Scan UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3ScanSummaryDTOV3'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v3.0/orgs/{orgUuid}/projects/{projectUuid}/scans/{scanUuid}/tags:
+    get:
+      tags:
+      - Scans
+      summary: Get Scan Tags
+      operationId: getTags
+      parameters:
+      - name: orgUuid
+        in: path
+        description: 'org UUID (from the Mend App: **Administration** General > **Organization UUID**).'
+        required: true
+        schema:
+          type: string
+      - name: projectUuid
+        in: path
+        description: UUID of the project
+        required: true
+        schema:
+          type: string
+      - name: scanUuid
+        in: path
+        description: Scan UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableV3ListScanTagDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v3.0/orgs/{orgUuid}/scans/compare:
+    get:
+      tags:
+      - Scans
+      summary: Get Scans Comparison
+      description: Compares two scans within an organization and returns a structured diff of findings, including per-finding diff type (ADDED, REMOVED, MODIFIED, UNCHANGED), aggregate stats, and field-level change details for modified findings.
+      operationId: compareScans
+      parameters:
+      - name: orgUuid
+        in: path
+        description: 'org UUID (from the Mend App: **Administration** General > **Organization UUID**).'
+        required: true
+        schema:
+          type: string
+      - name: sourceScanUuid
+        in: query
+        description: UUID of the source (baseline) scan
+        required: true
+        schema:
+          type: string
+      - name: targetScanUuid
+        in: query
+        description: UUID of the target (comparison) scan; defaults to the project's latest scan when omitted
+        required: false
+        schema:
+          type: string
+      - name: type
+        in: query
+        description: Finding category to compare
+        required: true
+        schema:
+          type: string
+          enum:
+          - security
+          - legal
+          - library
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3ScanDiffResponseDTOV3'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v3.0/projects/{projectUuid}/scans/{scanUuid}/dependencies/SBOM/logs:
+    get:
+      tags:
+      - Scans
+      summary: Get SBOM import logs
+      description: Returns processing and validation logs generated during SBOM import for a specific scan.
+      operationId: getScanLogsCsv
+      parameters:
+      - name: projectUuid
+        in: path
+        description: UUID of the project
+        required: true
+        schema:
+          type: string
+      - name: scanUuid
+        in: path
+        description: Scan UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StreamingResponseBody'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+components:
+  schemas:
+    ScanSummaryDTOV3:
+      type: object
+      properties:
+        uuid:
+          type: string
+        name:
+          type: string
+        processUuid:
+          type: string
+        scanTime:
+          type: string
+          format: date-time
+        scanStatus:
+          type: string
+        engine:
+          type: string
+          enum:
+          - UNIFIED
+          - SCA
+          - SAST
+          - IAC
+          - IMG
+          - AI
+          - DAST
+        scanDuration:
+          type: string
+        configurationName:
+          type: string
+        reference:
+          type: string
+        triggeredBy:
+          type: string
+        agentName:
+          type: string
+        agentVersion:
+          type: string
+        supportToken:
+          type: string
+        projectName:
+          type: string
+        projectUuid:
+          type: string
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScanTagDTO'
+        applicationName:
+          type: string
+        applicationUuid:
+          type: string
+        workflowUuids:
+          type: array
+          items:
+            type: string
+        workflowNames:
+          type: array
+          items:
+            type: string
+        statistics:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: integer
+              format: int64
+    ScanAgentInfo:
+      type: object
+      properties:
+        agentName:
+          type: string
+        agentVersion:
+          type: string
+        errorMessage:
+          type: string
+    UnifiedFindingDTOV3:
+      type: object
+      properties:
+        uuid:
+          type: string
+        findingId:
+          type: string
+        findingName:
+          type: string
+        type:
+          type: string
+        severity:
+          type: string
+        score:
+          type: number
+          format: float
+        element:
+          type: string
+        elementId:
+          type: string
+        refId:
+          type: string
+        grouping:
+          type: string
+        status:
+          type: string
+        state:
+          type: string
+        paths:
+          type: array
+          items:
+            type: string
+        sources:
+          type: array
+          items:
+            type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        dynamicFields:
+          type: object
+          additionalProperties:
+            type: object
+        riskFactors:
+          type: array
+          items:
+            type: string
+        riskFactorsJson:
+          type: object
+          additionalProperties:
+            type: object
+        engine:
+          type: string
+          enum:
+          - UNIFIED
+          - SCA
+          - SAST
+          - IAC
+          - IMG
+          - AI
+          - DAST
+        vendor:
+          type: string
+        orgUuid:
+          type: string
+        projectUuid:
+          type: string
+        projectName:
+          type: string
+        branch:
+          type: string
+        scanUuid:
+          type: string
+        firstScanUuid:
+          type: string
+        findingCategory:
+          type: string
+        hasViolation:
+          type: boolean
+        numberOfViolations:
+          type: integer
+          format: int32
+        violationWorkflowUuids:
+          type: array
+          items:
+            type: string
+        applicationUuid:
+          type: string
+        applicationName:
+          type: string
+        isNew:
+          type: boolean
+        isDetectedAtFirstScan:
+          type: boolean
+        isRemediationAvailable:
+          type: boolean
+    DWRResponseV3ScanDiffResponseDTOV3:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          $ref: '#/components/schemas/ScanDiffResponseDTOV3'
+    ScanDiffResponseDTOV3:
+      type: object
+      properties:
+        source:
+          $ref: '#/components/schemas/ScanDTOV3'
+        target:
+          $ref: '#/components/schemas/ScanDTOV3'
+        stats:
+          $ref: '#/components/schemas/ScanDiffStatsDTOV3'
+        findings:
+          type: array
+          items:
+            $ref: '#/components/schemas/DiffUnifiedFindingDTOV3'
+    ScanTagDTO:
+      type: object
+      properties:
+        key:
+          title: Scan Tag Key
+          type: string
+          example: commit
+        value:
+          title: Scan Tag Value
+          type: string
+          example: 123abc
+        displayName:
+          title: Scan Tag Display Name
+          type: string
+          example: commit:123abc
+        createdAt:
+          title: Scan Tag Creation Date
+          type: string
+          format: date-time
+    DWRResponseV3ScanDTOV3:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          $ref: '#/components/schemas/ScanDTOV3'
+    DWRResponsePageableV3ListScanSummaryDTOV3:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            '
+          example:
+            totalItems: '422'
+            next: http://someUrl?cursor=3
+            cursor: 3
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScanSummaryDTOV3'
+    DiffChangeDTOV3:
+      type: object
+      properties:
+        field:
+          type: string
+        before:
+          type: object
+        after:
+          type: object
+    DWRResponseV3ScanSummaryDTOV3:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          $ref: '#/components/schemas/ScanSummaryDTOV3'
+    ScanDTOV3:
+      type: object
+      properties:
+        uuid:
+          type: string
+        name:
+          type: string
+        engine:
+          type: string
+          enum:
+          - UNIFIED
+          - SCA
+          - SAST
+          - IAC
+          - IMG
+          - AI
+          - DAST
+        status:
+          type: string
+          enum:
+          - RUNNING
+          - PARTIAL
+          - PROCESSING
+          - FINISHED
+          - FAILED
+        projectId:
+          type: integer
+          format: int32
+        productId:
+          type: integer
+          format: int32
+        domainId:
+          type: integer
+          format: int32
+        projectUuid:
+          type: string
+        processUuid:
+          type: string
+        hasViolations:
+          type: boolean
+        startTime:
+          type: string
+          format: date-time
+        endTime:
+          type: string
+          format: date-time
+        lastModified:
+          type: string
+          format: date-time
+        configurationName:
+          type: string
+        reference:
+          type: string
+        triggeredBy:
+          type: string
+        agentInfo:
+          $ref: '#/components/schemas/ScanAgentInfo'
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+    DWRResponsePageableV3ListScanTagDTO:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            '
+          example:
+            totalItems: '422'
+            next: http://someUrl?cursor=3
+            cursor: 3
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScanTagDTO'
+    StreamingResponseBody:
+      type: object
+    ScanDiffStatsDTOV3:
+      type: object
+      properties:
+        added:
+          type: integer
+          format: int32
+        removed:
+          type: integer
+          format: int32
+        modified:
+          type: integer
+          format: int32
+        unchanged:
+          type: integer
+          format: int32
+    DiffUnifiedFindingDTOV3:
+      type: object
+      properties:
+        diffType:
+          type: string
+        finding:
+          $ref: '#/components/schemas/UnifiedFindingDTOV3'
+        changes:
+          type: array
+          items:
+            $ref: '#/components/schemas/DiffChangeDTOV3'
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: JWT token Bearer
+      scheme: bearer
+      bearerFormat: JWT

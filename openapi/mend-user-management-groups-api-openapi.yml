@@ -1,0 +1,987 @@
+openapi: 3.0.1
+info:
+  title: Mend Access Management User Management - Groups API
+  description: 'Mend''s enhanced API enables automation of workflows in a REST compliant format. The API features:
+
+    + Access for any user with Mend credentials, via a user key available in the user''s profile page in the Mend Platform.
+
+    + Improved security with a JWT token per organization, which expires every 10 minutes.
+
+    + Added scalability with support for cursor pagination and limiting results size.
+
+    + Broader functionality available programmatically.
+
+    + New standard API documentation for easy navigation and search.
+
+
+    **Note:** To help you get started with the Mend API 3.0, we recommend reviewing our onboarding guide -> [Getting Started with API 3.0](https://docs.mend.io/platform/latest/getting-started-with-mend-api-3-0).
+
+    This resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend API 3.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.'
+  version: '3.0'
+servers:
+- url: https://baseUrl
+  description: Generated server url
+security:
+- bearer-key: []
+tags:
+- name: User Management - Groups
+paths:
+  /api/v2.0/orgs/{orgToken}/groups/{groupUuid}:
+    get:
+      tags:
+      - User Management - Groups
+      summary: Get Group
+      description: Returns the given group of an organization
+      operationId: getGroup
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      - name: groupUuid
+        in: path
+        description: Group UUID (by running User Management - Groups > Get All Groups of Organization).
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseGroupDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+    put:
+      tags:
+      - User Management - Groups
+      summary: Update Group
+      description: Updates the properties of a given group
+      operationId: updateGroup
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      - name: groupUuid
+        in: path
+        description: Group UUID (by running User Management - Groups > Get All Groups of Organization).
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateGroupRequestDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseGroupDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+    delete:
+      tags:
+      - User Management - Groups
+      summary: Delete Group
+      description: Deletes the given group
+      operationId: deleteGroup
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      - name: groupUuid
+        in: path
+        description: Group UUID (by running User Management - Groups > Get All Groups of Organization).
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseMessageDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v2.0/orgs/{orgToken}/groups/{groupUuid}/users:
+    get:
+      tags:
+      - User Management - Groups
+      summary: Get Group Users
+      description: Returns a list of users that belong to given group
+      operationId: getGroupUsers
+      parameters:
+      - name: pageSize
+        in: query
+        description: Enter the number of items to return in each page of the result.
+        allowEmptyValue: true
+        schema:
+          maximum: 10000
+          type: string
+          default: '50'
+      - name: page
+        in: query
+        description: Enter the page number to display in the result. Page numbers start at 0
+        allowEmptyValue: true
+        schema:
+          type: string
+          default: '0'
+      - name: search
+        in: query
+        description: "Filter your search to return items whose property has a specific value.\nUse the syntax: **property:operation:value** where a colon (:) separates between property, operation and value.\n+ Property: the name of the property of the item\n+ Operation:\n    + **equals** - true if the value is identical to this value.\n    + **like** - true if the property's value is contained within this value\n    + **regex** - true if this regular expression resolves as true.\n        The regex is not case sensitive, and special characters must be escaped with a backslash.\n        Special characters include space, double quote (\"), '<', '>', '#', '%', '{', '}', vertical bar ('|'), backslash, '^'.\n        To pass an escaped character in a URL in Postman, encode it first.\n        E.g. to return all items whose value begins with **a** or **A**, use regex:^a\n+ Value: the value of the property.\n\nTo combine multiple filters, separate each filter with a semicolon with no space. E.g.  property1:operation1:value1;property2:operation2:value2\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ accountStatus:[equals|in]:value\n+ email:[like | equals | regex]:value\n+ name:[like | equals | regex]:value\n+ userType:[like | equals]:value\n+ roles:[equals|in]:value"
+        allowEmptyValue: true
+      - name: sort
+        in: query
+        description: 'Sort search results alphabetically on an item''s property by entering **sort=** followed by the property name.
+
+          E.g. enter **sort=email** to sort alphabetically by their email addresses from a-z ascending.To sort in descending order (z-a), add a minus sign (''-''). E.g. **sort=-email**.
+
+
+          You can sort by the following properties:
+
+          + email
+
+          + name
+
+          + userType'
+        allowEmptyValue: true
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      - name: groupUuid
+        in: path
+        description: The group UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableListUserInfoDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+    post:
+      tags:
+      - User Management - Groups
+      summary: Add User To Group
+      description: Adds a user to an organization's group
+      operationId: addUsersToGroup
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      - name: groupUuid
+        in: path
+        description: Group UUID (by running User Management - Groups > Get All Groups of Organization).
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserEmailsRequestDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseMessageDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v2.0/orgs/{orgToken}/groups/{groupUuid}/roles:
+    get:
+      tags:
+      - User Management - Groups
+      summary: Get Group Roles
+      description: Returns the list of roles associated with a given group
+      operationId: getGroupRoles
+      parameters:
+      - name: pageSize
+        in: query
+        description: Enter the number of items to return in each page of the result.
+        allowEmptyValue: true
+        schema:
+          maximum: 10000
+          type: string
+          default: '50'
+      - name: page
+        in: query
+        description: Enter the page number to display in the result. Page numbers start at 0
+        allowEmptyValue: true
+        schema:
+          type: string
+          default: '0'
+      - name: search
+        in: query
+        description: "Filter your search to return items whose property has a specific value.\nUse the syntax: **property:operation:value** where a colon (:) separates between property, operation and value.\n+ Property: the name of the property of the item\n+ Operation:\n    + **equals** - true if the value is identical to this value.\n    + **like** - true if the property's value is contained within this value\n    + **regex** - true if this regular expression resolves as true.\n        The regex is not case sensitive, and special characters must be escaped with a backslash.\n        Special characters include space, double quote (\"), '<', '>', '#', '%', '{', '}', vertical bar ('|'), backslash, '^'.\n        To pass an escaped character in a URL in Postman, encode it first.\n        E.g. to return all items whose value begins with **a** or **A**, use regex:^a\n+ Value: the value of the property.\n\nTo combine multiple filters, separate each filter with a semicolon with no space. E.g.  property1:operation1:value1;property2:operation2:value2\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ contextName:[like | equals | regex]:value\n+ contextType[like | equals]:value\n+ role[like | equals | regex]:value"
+        allowEmptyValue: true
+      - name: sort
+        in: query
+        description: 'Sort search results alphabetically on an item''s property by entering **sort=** followed by the property name.
+
+          E.g. enter **sort=email** to sort alphabetically by their email addresses from a-z ascending.To sort in descending order (z-a), add a minus sign (''-''). E.g. **sort=-email**.
+
+
+          You can sort by the following properties:
+
+          + contextName
+
+          + contextType
+
+          + role'
+        allowEmptyValue: true
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      - name: groupUuid
+        in: path
+        description: The group UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableListMultipleGroupRolesPerContextDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+    post:
+      tags:
+      - User Management - Groups
+      summary: Add Group Role
+      description: Creates a new group role for an organization
+      operationId: addGroupRoles
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      - name: groupUuid
+        in: path
+        description: Group UUID (by running User Management - Groups > Get All Groups of Organization).
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupRoleRequestDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseGroupRoleDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+    delete:
+      tags:
+      - User Management - Groups
+      summary: Remove Group Roles
+      description: Deletes a role from a group
+      operationId: removeGroupRoles
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      - name: groupUuid
+        in: path
+        description: Group UUID (by running User Management - Groups > Get All Groups of Organization).
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupRoleRequestDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseMessageDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v2.0/orgs/{orgToken}/groups:
+    get:
+      tags:
+      - User Management - Groups
+      summary: Get All Groups of organization
+      description: Returns a list of all groups within an organization
+      operationId: getAllOrganizationGroups
+      parameters:
+      - name: pageSize
+        in: query
+        description: Enter the number of items to return in each page of the result.
+        allowEmptyValue: true
+        schema:
+          maximum: 10000
+          type: string
+          default: '50'
+      - name: page
+        in: query
+        description: Enter the page number to display in the result. Page numbers start at 0
+        allowEmptyValue: true
+        schema:
+          type: string
+          default: '0'
+      - name: search
+        in: query
+        description: "Filter your search to return items whose property has a specific value.\nUse the syntax: **property:operation:value** where a colon (:) separates between property, operation and value.\n+ Property: the name of the property of the item\n+ Operation:\n    + **equals** - true if the value is identical to this value.\n    + **in** - true if the value is identical to one of the items in this comma-separated list. E.g. in:value1,value2,value3\n    + **like** - true if the property's value is contained within this value\n    + **regex** - true if this regular expression resolves as true.\n        The regex is not case sensitive, and special characters must be escaped with a backslash.\n        Special characters include space, double quote (\"), '<', '>', '#', '%', '{', '}', vertical bar ('|'), backslash, '^'.\n        To pass an escaped character in a URL in Postman, encode it first.\n        E.g. to return all items whose value begins with **a** or **A**, use regex:^a\n+ Value: the value of the property.\n\nTo combine multiple filters, separate each filter with a semicolon with no space. E.g.  property1:operation1:value1;property2:operation2:value2\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ contextType:equals:value\n+ name:[like | equals | regex]:value\n+ product:in:value1,value2,value-n\n+ roles:in:value1,value2,value-n"
+        allowEmptyValue: true
+      - name: sort
+        in: query
+        description: 'Sort search results alphabetically on an item''s property by entering **sort=** followed by the property name.
+
+          E.g. enter **sort=email** to sort alphabetically by their email addresses from a-z ascending.To sort in descending order (z-a), add a minus sign (''-''). E.g. **sort=-email**.
+
+
+          You can sort by the following properties:
+
+          + accountStatus
+
+          + contextType
+
+          + name
+
+          + product
+
+          + role
+
+          + users'
+        allowEmptyValue: true
+      - name: groupRolesByScope
+        in: query
+        description: 'This query parameter allows you to group the roles assigned to a group by their scope (application/org). When set to true, the response will organize the roles into groups based on their associated application labels. This makes it easier to see which roles are linked to which applications within the group. '
+        allowEmptyValue: true
+      - name: optionalColumns
+        in: query
+        description: Used to add group roles information to the response
+        allowEmptyValue: true
+        schema:
+          type: string
+          default: roles
+          enum:
+          - roles
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableListGroupSummaryDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+    post:
+      tags:
+      - User Management - Groups
+      summary: Create Group
+      description: Creates a new group for an organization
+      operationId: createGroup
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateGroupRequestDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseGroupDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v2.0/orgs/{orgToken}/groups/{groupUuid}/users/{userUuid}:
+    delete:
+      tags:
+      - User Management - Groups
+      summary: Delete User From Group
+      description: Deletes a user from an organization's group
+      operationId: deleteUserFromGroup
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      - name: groupUuid
+        in: path
+        description: Group UUID (by running User Management - Groups > Get All Groups of Organization).
+        required: true
+        schema:
+          type: string
+      - name: userUuid
+        in: path
+        description: User UUID (by running User Management - Users > Get Organization Users).
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseMessageDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+components:
+  schemas:
+    UserEmailsRequestDTO:
+      required:
+      - userEmails
+      type: object
+      properties:
+        userEmails:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+            example: jon.smith@mail.com
+    RolesGroupedByScopeDTO:
+      type: object
+      properties:
+        label:
+          title: Group label
+          type: string
+          example: Application A
+        roles:
+          title: Roles under this label
+          type: array
+          items:
+            type: string
+            enum:
+            - DEFAULT_APPROVER
+            - ADMIN
+            - ALERT_EMAIL_RECEIVER
+            - ALERTS_IGNORER
+            - LICENSE_AND_COPYRIGHT_ASSIGNER
+            - AUDITOR
+            - USER
+            - PRODUCT_INTEGRATOR
+            - SBOM_EXPORTER
+    CreateGroupRequestDTO:
+      required:
+      - description
+      - name
+      type: object
+      properties:
+        name:
+          title: Group Name
+          type: string
+          example: Group A
+        description:
+          title: Group Description
+          type: string
+          example: Group description
+    GroupDTO:
+      type: object
+      properties:
+        uuid:
+          title: Group UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Group Name
+          type: string
+          example: Group A
+        description:
+          title: Group Description
+          type: string
+          example: Group description
+        userCount:
+          title: User Count
+          type: integer
+          format: int32
+          example: 22
+    UpdateGroupRequestDTO:
+      type: object
+      properties:
+        name:
+          title: Group Name
+          type: string
+          example: Group A
+        description:
+          title: Group Description
+          type: string
+          example: Group description
+      description: DTO for updating an existing group
+    DWRResponseMessageDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/MessageDTO'
+    GroupRoleRequestDTO:
+      required:
+      - contextToken
+      - contextType
+      type: object
+      properties:
+        contextToken:
+          type: string
+          description: 'Depending on the value of contextType, this can be:
+
+            + orgToken (org UUID by running Entities - Organization > Get User Organization) or Api Token (from the Mend SCA App: **Integrate** tab > **API Key**).
+
+            + productToken (product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**.
+
+            + projectToken (project UUID by running Entities - Product > Get Product Projects) or project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+          example: 123e4567-e89b-12d3-a456-426655440000
+        contextType:
+          type: string
+          description: Type of entity the role will be associated with
+          example: orgs
+          enum:
+          - orgs
+          - products
+        role:
+          type: string
+          enum:
+          - DEFAULT_APPROVER
+          - ADMIN
+          - ALERT_EMAIL_RECEIVER
+          - ALERTS_IGNORER
+          - LICENSE_AND_COPYRIGHT_ASSIGNER
+          - AUDITOR
+          - USER
+          - PRODUCT_INTEGRATOR
+          - SBOM_EXPORTER
+    DWRResponsePageableListMultipleGroupRolesPerContextDTO:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            + **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining.'
+          example:
+            totalItems: '422'
+            isLastPage: 'true'
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          type: array
+          items:
+            $ref: '#/components/schemas/MultipleGroupRolesPerContextDTO'
+      description: Provides insights into endpoint-supported pagination information
+    DWRResponsePageableListGroupSummaryDTO:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            + **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining.'
+          example:
+            totalItems: '422'
+            isLastPage: 'true'
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupSummaryDTO'
+      description: Provides insights into endpoint-supported pagination information
+    MultipleGroupRolesPerContextDTO:
+      required:
+      - contextToken
+      - contextType
+      type: object
+      properties:
+        contextToken:
+          type: string
+          description: 'Depending on the value of contextType, this can be:
+
+            + orgToken (org UUID by running Entities - Organization > Get User Organization) or Api Token (from the Mend SCA App: **Integrate** tab > **API Key**).
+
+            + productToken (product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**.
+
+            + projectToken (project UUID by running Entities - Product > Get Product Projects) or project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+          example: 123e4567-e89b-12d3-a456-426655440000
+        contextName:
+          title: Context Name
+          type: string
+          example: My Product
+        contextType:
+          type: string
+          description: Type of entity the role will be associated with
+          example: orgs
+          enum:
+          - orgs
+          - products
+          - projects
+        roles:
+          type: array
+          items:
+            title: Role
+            type: string
+            example: ADMIN
+            enum:
+            - DEFAULT_APPROVER
+            - ADMIN
+            - ALERT_EMAIL_RECEIVER
+            - ALERTS_IGNORER
+            - LICENSE_AND_COPYRIGHT_ASSIGNER
+            - AUDITOR
+            - USER
+            - PRODUCT_INTEGRATOR
+            - SBOM_EXPORTER
+    DWRResponseGroupDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/GroupDTO'
+    GroupRoleDTO:
+      title: List of Group Roles
+      type: object
+      properties:
+        contextToken:
+          type: string
+          description: 'Depending on the value of contextType, this can be:
+
+            + orgToken (org UUID by running Entities - Organization > Get User Organization) or Api Token (from the Mend SCA App: **Integrate** tab > **API Key**).
+
+            + productToken (product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**.
+
+            + projectToken (project UUID by running Entities - Product > Get Product Projects) or project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+          example: 123e4567-e89b-12d3-a456-426655440000
+        contextName:
+          title: Context Name
+          type: string
+          example: My Project
+        contextType:
+          type: string
+          description: Type of entity the role will be associated with
+          example: orgs
+          enum:
+          - orgs
+          - products
+        role:
+          type: string
+          enum:
+          - DEFAULT_APPROVER
+          - ADMIN
+          - ALERT_EMAIL_RECEIVER
+          - ALERTS_IGNORER
+          - LICENSE_AND_COPYRIGHT_ASSIGNER
+          - AUDITOR
+          - USER
+          - PRODUCT_INTEGRATOR
+          - SBOM_EXPORTER
+    DWRResponseGroupRoleDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/GroupRoleDTO'
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+    DWRResponsePageableListUserInfoDTO:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            + **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining.'
+          example:
+            totalItems: '422'
+            isLastPage: 'true'
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserInfoDTO'
+      description: Provides insights into endpoint-supported pagination information
+    MessageDTO:
+      type: object
+      properties:
+        message:
+          title: message
+          type: string
+          example: Success!
+    GroupSummaryDTO:
+      type: object
+      properties:
+        uuid:
+          title: Group UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Group Name
+          type: string
+          example: Group A
+        description:
+          title: Group Description
+          type: string
+          example: Group description
+        users:
+          title: User Count
+          type: integer
+          description: The amount of users in that group
+          format: int32
+          example: 22
+        affectedProducts:
+          title: Affected Products
+          type: integer
+          format: int32
+          example: 5
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupRoleDTO'
+        applicationRoles:
+          title: Application roles grouped by application label
+          type: array
+          items:
+            $ref: '#/components/schemas/RolesGroupedByScopeDTO'
+        applicationRolesCount:
+          type: integer
+          format: int32
+        orgRoles:
+          title: Organization roles
+          type: array
+          items:
+            type: string
+            enum:
+            - DEFAULT_APPROVER
+            - ADMIN
+            - ALERT_EMAIL_RECEIVER
+            - ALERTS_IGNORER
+            - LICENSE_AND_COPYRIGHT_ASSIGNER
+            - AUDITOR
+            - USER
+            - PRODUCT_INTEGRATOR
+            - SBOM_EXPORTER
+    UserInfoDTO:
+      required:
+      - uuid
+      type: object
+      properties:
+        uuid:
+          title: User UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: User Name
+          type: string
+          example: Jon Smith
+        email:
+          title: User Email
+          type: string
+          example: jon.smith@mail.com
+        userType:
+          title: Type Of User
+          type: string
+          example: REGULAR
+          enum:
+          - REGULAR
+          - SERVICE
+          - SCAN_SUMMARY_RECEIVER
+        accountStatus:
+          type: string
+          enum:
+          - ACTIVE
+          - INACTIVE
+          - LOCKOUT
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: JWT token Bearer
+      scheme: bearer
+      bearerFormat: JWT

@@ -1,0 +1,931 @@
+openapi: 3.0.1
+info:
+  title: Mend Access Management Findings - Scan API
+  description: 'Mend''s enhanced API enables automation of workflows in a REST compliant format. The API features:
+
+    + Access for any user with Mend credentials, via a user key available in the user''s profile page in the Mend Platform.
+
+    + Improved security with a JWT token per organization, which expires every 10 minutes.
+
+    + Added scalability with support for cursor pagination and limiting results size.
+
+    + Broader functionality available programmatically.
+
+    + New standard API documentation for easy navigation and search.
+
+
+    **Note:** To help you get started with the Mend API 3.0, we recommend reviewing our onboarding guide -> [Getting Started with API 3.0](https://docs.mend.io/platform/latest/getting-started-with-mend-api-3-0).
+
+    This resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend API 3.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.'
+  version: '3.0'
+servers:
+- url: https://baseUrl
+  description: Generated server url
+security:
+- bearer-key: []
+tags:
+- name: Findings - Scan
+paths:
+  /api/v3.0/projects/{projectUuid}/scans/{scanUuid}/code/findings:
+    get:
+      description: 'Get a list of findings for a specified project scan UUID.
+
+        </br>
+
+        This endpoint supports paging using <em>cursor</em> and <em>limit</em> parameters described in <i>Parameters</i> section below.'
+      operationId: listProjectScanFindingsV3.0
+      parameters:
+      - description: UUID of the project
+        in: path
+        name: projectUuid
+        required: true
+        schema:
+          type: string
+      - description: UUID of the project scan for which to get findings
+        in: path
+        name: scanUuid
+        required: true
+        schema:
+          type: string
+      - description: Specifies the maximum number of items to be returned in the response.
+        in: query
+        name: limit
+        schema:
+          type: integer
+      - description: Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved.
+        in: query
+        name: cursor
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dto.MendCursoredResponse-array_dto_FindingV3'
+        '400':
+          description: Invalid query definition
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dto.MendErrorResponse-dto_ErrorResponse'
+        '403':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dto.MendErrorResponse-dto_ErrorResponse'
+        '500':
+          description: Error while processing the request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dto.MendErrorResponse-dto_ErrorResponse'
+      security:
+      - bearer-key: []
+      summary: Get a list of project scan findings (Code - SAST)
+      tags:
+      - Findings - Scan
+  /api/v3.0/projects/{projectUuid}/scans/{scanUuid}/code/findings/{findingUuid}:
+    get:
+      description: 'Get a project finding for a specified project, scan and finding UUID.
+
+        </br>'
+      operationId: getProjectScanFindingV3.0
+      parameters:
+      - description: UUID of the project
+        in: path
+        name: projectUuid
+        required: true
+        schema:
+          type: string
+      - description: UUID of the project for which to get findings
+        in: path
+        name: scanUuid
+        required: true
+        schema:
+          type: string
+      - description: UUID of the finding
+        in: path
+        name: findingUuid
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dto.MendResponse-dto_FindingV3'
+        '400':
+          description: Invalid query definition
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dto.MendErrorResponse-dto_ErrorResponse'
+        '403':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dto.MendErrorResponse-dto_ErrorResponse'
+        '500':
+          description: Error while processing the request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dto.MendErrorResponse-dto_ErrorResponse'
+      security:
+      - bearer-key: []
+      summary: Get a project scan finding (Code - SAST)
+      tags:
+      - Findings - Scan
+  /api/v3.0/projects/{projectuuid}/scans/{scanuuid}/images/findings/secrets:
+    get:
+      security:
+      - bearer-key: []
+      description: List the image scan secrets findings
+      tags:
+      - Findings - Scan
+      summary: List image scan secrets findings
+      operationId: listImgScanSecretsFindings
+      parameters:
+      - description: UUID of the project
+        name: projectuuid
+        in: path
+        required: true
+        schema:
+          type: string
+      - description: scan UUID
+        name: scanuuid
+        in: path
+        required: true
+        schema:
+          type: string
+      - description: Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved.
+        name: cursor
+        in: query
+        schema:
+          type: string
+      - description: Specifies the maximum number of items to be returned in the response.
+        name: limit
+        in: query
+        schema:
+          type: integer
+          default: 1000
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/common.BaseApiResponseV3'
+                - type: object
+                  properties:
+                    response:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/github_com_mend_cloud-native_modules_scanner_model.SecretFinding'
+        '500':
+          description: failed loading image secrets findings
+          content:
+            '*/*':
+              schema:
+                type: object
+                properties:
+                  additionalData:
+                    type: object
+                    properties:
+                      error:
+                        type: string
+                  response:
+                    type: array
+                    items: {}
+                  supportToken:
+                    type: string
+  /api/v3.0/projects/{projectuuid}/scans/{scanuuid}/images/findings/security:
+    get:
+      security:
+      - bearer-key: []
+      description: List the image scan security findings
+      tags:
+      - Findings - Scan
+      summary: List image scan security findings
+      operationId: listImgScanSecurityFindings
+      parameters:
+      - description: UUID of the project
+        name: projectuuid
+        in: path
+        required: true
+        schema:
+          type: string
+      - description: scan UUID
+        name: scanuuid
+        in: path
+        required: true
+        schema:
+          type: string
+      - description: Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved.
+        name: cursor
+        in: query
+        schema:
+          type: string
+      - description: Specifies the maximum number of items to be returned in the response.
+        name: limit
+        in: query
+        schema:
+          type: integer
+          default: 1000
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/common.BaseApiResponseV3'
+                - type: object
+                  properties:
+                    response:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/model.SecurityFindingExternal'
+        '500':
+          description: failed loading image security findings
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  additionalData:
+                    type: object
+                    properties:
+                      error:
+                        type: string
+                  response:
+                    type: array
+                    items: {}
+                  supportToken:
+                    type: string
+  /api/v3.0/projects/{projectuuid}/scans/{scanuuid}/images/packages:
+    get:
+      security:
+      - bearer-key: []
+      description: List the image scan packages
+      tags:
+      - Findings - Scan
+      summary: List image scan packages
+      operationId: listImgScanPackages
+      parameters:
+      - description: UUID of the project
+        name: projectuuid
+        in: path
+        required: true
+        schema:
+          type: string
+      - description: scan UUID
+        name: scanuuid
+        in: path
+        required: true
+        schema:
+          type: string
+      - description: Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved.
+        name: cursor
+        in: query
+        schema:
+          type: string
+      - description: Specifies the maximum number of items to be returned in the response.
+        name: limit
+        in: query
+        schema:
+          type: integer
+          default: 1000
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/common.BaseApiResponseV3'
+                - type: object
+                  properties:
+                    response:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/github_com_mend_cloud-native_modules_scanner_model.Package'
+        '500':
+          description: failed loading image scan packages
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  additionalData:
+                    type: object
+                    properties:
+                      error:
+                        type: string
+                  response:
+                    type: array
+                    items: {}
+                  supportToken:
+                    type: string
+components:
+  schemas:
+    dto.Owasp2021Info:
+      properties:
+        index:
+          type: string
+        title:
+          type: string
+        url:
+          type: string
+      type: object
+    dto.NistInfo:
+      properties:
+        control:
+          type: string
+        priority:
+          type: string
+        title:
+          type: string
+        url:
+          type: string
+      type: object
+    dto.SansTop25Info:
+      properties:
+        rank:
+          type: integer
+        title:
+          type: string
+      type: object
+    dto.DataFlow:
+      properties:
+        ageRating:
+          description: Between 0 and 10
+          type: number
+        confidenceRating:
+          description: Between 0 and 10
+          type: number
+        createdTime:
+          type: string
+        filter:
+          $ref: '#/components/schemas/dto.Filter'
+        functionCalls:
+          items:
+            $ref: '#/components/schemas/dto.CallStackItem'
+          type: array
+        id:
+          type: string
+        inputFlow:
+          items:
+            $ref: '#/components/schemas/dto.CallStackItem'
+          type: array
+        inputKind:
+          type: string
+        inputSource:
+          type: string
+        isNew:
+          type: boolean
+        rating:
+          description: Between 0 and 10
+          type: number
+        sink:
+          type: string
+        sinkFile:
+          type: string
+        sinkKind:
+          type: string
+        sinkLine:
+          type: integer
+        sinkSnippet:
+          type: string
+      type: object
+    dto.OwaspInfo:
+      properties:
+        index:
+          type: string
+        title:
+          type: string
+        url:
+          type: string
+      type: object
+    dto.RiskFactorEndpoint:
+      properties:
+        endpoint:
+          type: string
+        method:
+          type: string
+      type: object
+    model.SecurityFindingExternal:
+      type: object
+      properties:
+        createdAt:
+          type: string
+          example: '2019-12-18 16:15:26.963000'
+        cvss:
+          type: number
+          example: 6.5
+        cvssDetails:
+          type: string
+          example: CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H
+        description:
+          type: string
+          example: A vulnerability in the foo subsystem of bar could allow an unauthenticated, remote attacker to cause a denial of service (DoS) condition on an affected device.
+        detectionDate:
+          type: string
+          example: '2019-12-18 16:15:26.963000'
+        epss:
+          type: number
+          example: 5.1
+        fixVersion:
+          type: string
+          example: 1.2.4
+        hasFix:
+          type: boolean
+          example: true
+        imageName:
+          type: string
+          example: foo:1.2.3
+        lastModifiedDate:
+          type: string
+          example: '2019-12-18 16:15:26.963000'
+        packageName:
+          type: string
+          example: foo
+        packageVersion:
+          type: string
+          example: 1.2.3
+        projectUUID:
+          type: string
+          example: edcd08f7-0688-4a30-932b-541256072846
+        publishedDate:
+          type: string
+        reachabilityConfidence:
+          type: number
+        reachabilityGraph:
+          type: string
+        reachabilityStatus:
+          type: string
+        severity:
+          type: string
+          example: HIGH
+        uuid:
+          type: string
+          example: edcd08f7-0688-4a30-932b-541256072846
+        vulnerabilityID:
+          type: string
+          example: CVE-2019-1234
+    common.Paging:
+      type: object
+      properties:
+        cursor:
+          type: integer
+          example: 5
+        next:
+          type: string
+          example: https://api-saas.mend.io/api/v3.0/projects/<project_uuid>>/images/deployments?cursor=6
+    dto.FindingSharedStep:
+      properties:
+        endLine:
+          type: integer
+        file:
+          type: string
+        kind:
+          type: string
+        line:
+          type: integer
+        lineBlame:
+          $ref: '#/components/schemas/dto.LineBlame'
+        name:
+          type: string
+        snippet:
+          type: string
+        startLine:
+          type: integer
+      type: object
+    github_com_mend_cloud-native_modules_scanner_model.SecretFinding:
+      type: object
+      properties:
+        category:
+          type: string
+          example: AWS
+        createdAt:
+          type: string
+          example: '2020-01-01T00:00:00Z'
+        description:
+          type: string
+          example: AWS Access Key
+        endLine:
+          type: integer
+          example: 35
+        filePath:
+          type: string
+          example: /home/ubuntu/.aws/credentials
+        isFromBaseLayer:
+          type: integer
+          example: 0
+        layerId:
+          type: integer
+          example: 123456
+        layerNumber:
+          type: integer
+          example: 1
+        projectName:
+          type: string
+        ruleId:
+          type: string
+          example: '123456'
+        severity:
+          type: string
+          example: HIGH
+        startLine:
+          type: integer
+          example: 15
+        updatedAt:
+          type: string
+          example: '2020-01-01T00:00:00Z'
+        uuid:
+          type: string
+          example: c4f93b6d-8236-4d0c-a67b-3978def476a3
+    dto.HitrustInfo:
+      properties:
+        control:
+          type: string
+        title:
+          type: string
+      type: object
+    dto.Filter:
+      properties:
+        filterTypes:
+          items:
+            $ref: '#/components/schemas/dto.FilterType'
+          type: array
+        isFiltered:
+          type: boolean
+      type: object
+    github_com_mend_cloud-native_modules_scanner_model.Package:
+      type: object
+      properties:
+        name:
+          type: string
+        reachable:
+          type: boolean
+        type:
+          type: string
+        version:
+          type: string
+    common.BaseApiResponseV3:
+      type: object
+      properties:
+        additionalData:
+          $ref: '#/components/schemas/common.AdditionalData'
+        response: {}
+        supportToken:
+          type: string
+          example: 659C0A4730
+    dto.MendResponse-dto_FindingV3:
+      properties:
+        additionalData:
+          additionalProperties: true
+          type: object
+        response:
+          $ref: '#/components/schemas/dto.FindingV3'
+        supportToken:
+          type: string
+      type: object
+    dto.Workflow:
+      properties:
+        name:
+          type: string
+        uuid:
+          type: string
+      type: object
+    dto.CapecInfo:
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        url:
+          type: string
+      type: object
+    dto.RiskFactors:
+      properties:
+        endpoints:
+          items:
+            $ref: '#/components/schemas/dto.RiskFactorEndpoint'
+          type: array
+        hasEndpoints:
+          type: boolean
+        isExploitable:
+          type: boolean
+        probability:
+          type: string
+      type: object
+    dto.FindingComment:
+      properties:
+        body:
+          type: string
+        createdBy:
+          type: string
+        createdTime:
+          type: string
+      type: object
+    dto.ErrorResponse:
+      properties:
+        message:
+          example: Something went wrong
+          type: string
+        result:
+          example: error
+          type: string
+        success:
+          example: false
+          type: boolean
+      type: object
+    dto.CallStackItem:
+      properties:
+        endLine:
+          type: integer
+        file:
+          type: string
+        kind:
+          type: string
+        line:
+          type: integer
+        name:
+          type: string
+        snippet:
+          type: string
+        startLine:
+          type: integer
+      type: object
+    dto.FilterType:
+      properties:
+        code:
+          type: integer
+        name:
+          type: string
+      type: object
+    common.AdditionalData:
+      type: object
+      properties:
+        error:
+          type: string
+        paging:
+          $ref: '#/components/schemas/common.Paging'
+        totalItems:
+          type: integer
+          example: 100
+    dto.MendCursoredResponse-array_dto_FindingV3:
+      properties:
+        additionalData:
+          properties:
+            cursor:
+              example: 1
+              type: integer
+            next:
+              example: https://domain.com/api/v3.0/resources?cursor=1
+              type: string
+          type: object
+        response:
+          items:
+            $ref: '#/components/schemas/dto.FindingV3'
+          type: array
+        supportToken:
+          type: string
+      type: object
+    dto.LineBlame:
+      properties:
+        commitId:
+          type: string
+        file:
+          type: string
+        line:
+          type: integer
+      type: object
+    dto.VulnerabilityTypeDefinition:
+      properties:
+        capec:
+          $ref: '#/components/schemas/dto.CapecInfo'
+        commonId:
+          type: string
+        cwe:
+          $ref: '#/components/schemas/dto.CweInfo'
+        description:
+          type: string
+        driver:
+          type: string
+        engineId:
+          type: integer
+        hipaa:
+          $ref: '#/components/schemas/dto.HipaaInfo'
+        hitrust:
+          $ref: '#/components/schemas/dto.HitrustInfo'
+        id:
+          type: integer
+        language:
+          type: string
+        name:
+          type: string
+        nist:
+          $ref: '#/components/schemas/dto.NistInfo'
+        order:
+          type: integer
+        owasp:
+          $ref: '#/components/schemas/dto.OwaspInfo'
+        owasp2021:
+          $ref: '#/components/schemas/dto.Owasp2021Info'
+        pcidss:
+          $ref: '#/components/schemas/dto.PcidssInfo'
+        recommendations:
+          items:
+            type: string
+          type: array
+        references:
+          items:
+            type: string
+          type: array
+        sansTop25:
+          $ref: '#/components/schemas/dto.SansTop25Info'
+        sarif:
+          type: string
+        sarifLevel:
+          type: string
+        severity:
+          type: string
+        severityRating:
+          type: number
+      type: object
+    dto.JiraPlatformIssue:
+      properties:
+        createdBy:
+          type: string
+        createdByName:
+          type: string
+        createdTime:
+          type: string
+        errorMessage:
+          type: string
+        internalStatus:
+          type: string
+        issueKey:
+          type: string
+        issueStatus:
+          type: string
+        publicLink:
+          type: string
+      type: object
+    dto.CweInfo:
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        url:
+          type: string
+      type: object
+    dto.MendErrorResponse-dto_ErrorResponse:
+      properties:
+        additionalData:
+          $ref: '#/components/schemas/dto.ErrorResponse'
+        response: {}
+        supportToken:
+          type: string
+      type: object
+    dto.PcidssInfo:
+      properties:
+        section:
+          type: string
+        title:
+          type: string
+      type: object
+    dto.FindingAlmIssues:
+      properties:
+        azure:
+          $ref: '#/components/schemas/dto.AzureDevOpsWorkItem'
+        jira:
+          $ref: '#/components/schemas/dto.JiraIssue'
+        jiraPlatform:
+          $ref: '#/components/schemas/dto.JiraPlatformIssue'
+      type: object
+    dto.JiraIssue:
+      properties:
+        issueId:
+          type: string
+        project:
+          type: string
+      type: object
+    dto.HipaaInfo:
+      properties:
+        control:
+          type: string
+        title:
+          type: string
+      type: object
+    dto.FindingV3:
+      properties:
+        ageRating:
+          description: Between 0 and 10
+          type: number
+        almIssues:
+          $ref: '#/components/schemas/dto.FindingAlmIssues'
+        appId:
+          type: string
+        baseline:
+          type: boolean
+        comments:
+          items:
+            $ref: '#/components/schemas/dto.FindingComment'
+          type: array
+        confidenceRating:
+          description: Between 0 and 10
+          type: number
+        correlatedDastFindingUuids:
+          items:
+            type: string
+          type: array
+        createdTime:
+          type: string
+        dataFlows:
+          items:
+            $ref: '#/components/schemas/dto.DataFlow'
+          type: array
+        description:
+          type: string
+        hasRemediation:
+          type: boolean
+        id:
+          description: Uniquely identifies the finding across multiple scans
+          type: string
+        isNew:
+          type: boolean
+        issueStatus:
+          type: integer
+        projectId:
+          type: string
+        rating:
+          description: Between 0 and 10
+          type: number
+        refId:
+          description: Uniquely identifies the finding across multiple scans
+          type: string
+        reviewed:
+          type: boolean
+        riskFactors:
+          $ref: '#/components/schemas/dto.RiskFactors'
+        scanId:
+          description: Uniquely identifies the scan this finding was loaded from
+          type: string
+        severity:
+          type: string
+        severityRating:
+          description: Between 0 and 10
+          type: number
+        sharedStep:
+          $ref: '#/components/schemas/dto.FindingSharedStep'
+        snapshotId:
+          description: Uniquely identifies the finding within a scan, it's equivalent to the pair of <em>id</em> and <em>scanId</em>
+          type: string
+        suppressed:
+          type: boolean
+        suppressedBy:
+          type: string
+        suppressionMessage:
+          description: Always empty if suppressed is not set
+          type: string
+        suppressionRejected:
+          type: boolean
+        suppressionRequestComment:
+          type: string
+        suppressionRequested:
+          type: boolean
+        suppressionTime:
+          type: string
+        type:
+          $ref: '#/components/schemas/dto.VulnerabilityTypeDefinition'
+        workflowViolations:
+          items:
+            $ref: '#/components/schemas/dto.Workflow'
+          type: array
+        workflowViolationsCount:
+          type: integer
+      type: object
+    dto.AzureDevOpsWorkItem:
+      properties:
+        project:
+          type: string
+        workItemId:
+          type: integer
+      type: object
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: JWT token Bearer
+      scheme: bearer
+      bearerFormat: JWT

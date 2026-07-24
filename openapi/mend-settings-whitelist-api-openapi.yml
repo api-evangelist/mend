@@ -1,0 +1,507 @@
+openapi: 3.0.1
+info:
+  title: Mend Access Management Settings - Whitelist API
+  description: 'Mend''s enhanced API enables automation of workflows in a REST compliant format. The API features:
+
+    + Access for any user with Mend credentials, via a user key available in the user''s profile page in the Mend Platform.
+
+    + Improved security with a JWT token per organization, which expires every 10 minutes.
+
+    + Added scalability with support for cursor pagination and limiting results size.
+
+    + Broader functionality available programmatically.
+
+    + New standard API documentation for easy navigation and search.
+
+
+    **Note:** To help you get started with the Mend API 3.0, we recommend reviewing our onboarding guide -> [Getting Started with API 3.0](https://docs.mend.io/platform/latest/getting-started-with-mend-api-3-0).
+
+    This resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend API 3.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.'
+  version: '3.0'
+servers:
+- url: https://baseUrl
+  description: Generated server url
+security:
+- bearer-key: []
+tags:
+- name: Settings - Whitelist
+paths:
+  /api/v2.0/orgs/{orgToken}/settings/whiteList/{uuid}:
+    put:
+      tags:
+      - Settings - Whitelist
+      summary: Update single Whitelist Rule
+      description: Updates the properties of a single whitelist rule of an organization, including matching libraries, their vulnerability scores and the actions to take
+      operationId: updateOrgWhiteListSettings
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      - name: uuid
+        in: path
+        description: AllowList rule UUID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateWhiteListRuleRequestDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseWhiteListRuleDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+    delete:
+      tags:
+      - Settings - Whitelist
+      summary: Delete Single Whitelist Rule
+      description: Deletes one of the whitelist rules of an organization
+      operationId: deleteOrgWhiteListSettings
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      - name: uuid
+        in: path
+        description: Whitelist rule UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseMessageDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v2.0/orgs/{orgToken}/settings/whiteList/rules:
+    put:
+      tags:
+      - Settings - Whitelist
+      summary: Update Whitelist Rules
+      description: Updates an organization's whitelist rules for vulnerability scores and the actions to take with libraries that appear in the whitelist
+      operationId: updateWhiteListRulesSettings
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/UpdateWhiteListRulesRequestDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseMessageDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+    post:
+      tags:
+      - Settings - Whitelist
+      summary: Add Whitelist Rules
+      description: Creates multiple new whitelist rules for an organization, defining which libraries to match, their vulnerability scores and the actions to take. Whitelisted libraries have been pre-approved by your organization so no policy alerts will be created for them during scans, and they will be ignored by all organizational policies.
+      operationId: addWhiteListRulesSettings
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateWhiteListRulesRequestDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseListWhiteListRuleDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+    delete:
+      tags:
+      - Settings - Whitelist
+      summary: Delete Whitelist Rules
+      description: Deletes all of the whitelist rules of an organization
+      operationId: deleteWhiteListRulesSettings
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/DeleteWhiteListRuleRequestDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseMessageDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v2.0/orgs/{orgToken}/settings/whiteList/apply:
+    put:
+      tags:
+      - Settings - Whitelist
+      summary: Apply Whitelist Rules to Existing Inventory
+      description: Applies the current whitelist rules to an organization's inventory. Whitelisted libraries are pre-approved by the organization so no policy alerts will be created for them, and they will be ignored by all organizational policies.
+      operationId: applyWhiteListRules
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseMessageDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v2.0/orgs/{orgToken}/settings/whiteList:
+    get:
+      tags:
+      - Settings - Whitelist
+      summary: Get All Whitelist Rules
+      description: Retrieves all of the whitelist rules of an organization. Whitelisted libraries are pre-approved by the organization so no policy alerts will be created for them, and they will be ignored by all organizational policies
+      operationId: getOrgWhiteListSettings
+      parameters:
+      - name: pageSize
+        in: query
+        description: Enter the number of items to return in each page of the result.
+        allowEmptyValue: true
+        schema:
+          maximum: 10000
+          type: string
+          default: '50'
+      - name: page
+        in: query
+        allowEmptyValue: true
+        schema:
+          type: string
+          default: '0'
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableListWhiteListRuleDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+    post:
+      tags:
+      - Settings - Whitelist
+      summary: Add Single Whitelist Rule
+      description: Creates a new whitelist rule for an organization, defining which libraries to match along, their vulnerability scores and the actions to take. Whitelisted libraries have been pre-approved by your organization so no policy alerts will be created for them during scans, and they will be ignored by all organizational policies.
+      operationId: addOrgWhiteListSettings
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateWhiteListRuleRequestDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseWhiteListRuleDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+components:
+  schemas:
+    DWRResponseListWhiteListRuleDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          type: array
+          items:
+            $ref: '#/components/schemas/WhiteListRuleDTO'
+    CreateWhiteListRulesRequestDTO:
+      type: object
+      properties:
+        rules:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreateWhiteListRuleRequestDTO'
+    DWRResponsePageableListWhiteListRuleDTO:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            + **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining.'
+          example:
+            totalItems: '422'
+            isLastPage: 'true'
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          type: array
+          items:
+            $ref: '#/components/schemas/WhiteListRuleDTO'
+      description: Provides insights into endpoint-supported pagination information
+    DWRResponseMessageDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/MessageDTO'
+    DWRResponseWhiteListRuleDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/WhiteListRuleDTO'
+    UpdateWhiteListRuleRequestDTO:
+      type: object
+      properties:
+        regex:
+          title: White List Regex Rule
+          type: string
+          example: '*aa*'
+        description:
+          title: White List Description
+          type: string
+          example: description for white list
+    DeleteWhiteListRuleRequestDTO:
+      required:
+      - uuid
+      type: object
+      properties:
+        uuid:
+          title: White List UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+    UpdateWhiteListRulesRequestDTO:
+      title: UpdateWhiteListRuleDTO
+      required:
+      - regex
+      - uuid
+      type: object
+      properties:
+        uuid:
+          title: White List UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        regex:
+          title: White List Regex Rule
+          type: string
+          example: '*aa*'
+        description:
+          title: White List Description
+          type: string
+          example: description for white list
+    MessageDTO:
+      type: object
+      properties:
+        message:
+          title: message
+          type: string
+          example: Success!
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+    CreateWhiteListRuleRequestDTO:
+      required:
+      - regex
+      type: object
+      properties:
+        regex:
+          title: White List Regex Rule
+          type: string
+          example: '*aa*'
+        description:
+          title: White List Description
+          type: string
+          example: description for white list
+    WhiteListRuleDTO:
+      required:
+      - regex
+      type: object
+      properties:
+        uuid:
+          title: White List UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        regexType:
+          title: WhiteList Regex Type
+          type: string
+          enum:
+          - BY_NAME
+          - BY_LIBRARY
+        regex:
+          title: White List Regex Rule
+          type: string
+          example: '*aa*'
+        createdBy:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        description:
+          title: White List Description
+          type: string
+          example: Sample description
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: JWT token Bearer
+      scheme: bearer
+      bearerFormat: JWT

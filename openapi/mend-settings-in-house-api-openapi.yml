@@ -1,0 +1,562 @@
+openapi: 3.0.1
+info:
+  title: Mend Access Management Settings - In-House API
+  description: 'Mend''s enhanced API enables automation of workflows in a REST compliant format. The API features:
+
+    + Access for any user with Mend credentials, via a user key available in the user''s profile page in the Mend Platform.
+
+    + Improved security with a JWT token per organization, which expires every 10 minutes.
+
+    + Added scalability with support for cursor pagination and limiting results size.
+
+    + Broader functionality available programmatically.
+
+    + New standard API documentation for easy navigation and search.
+
+
+    **Note:** To help you get started with the Mend API 3.0, we recommend reviewing our onboarding guide -> [Getting Started with API 3.0](https://docs.mend.io/platform/latest/getting-started-with-mend-api-3-0).
+
+    This resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend API 3.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.'
+  version: '3.0'
+servers:
+- url: https://baseUrl
+  description: Generated server url
+security:
+- bearer-key: []
+tags:
+- name: Settings - In-House
+paths:
+  /api/v2.0/orgs/{orgToken}/settings/inHouse/{ruleUuid}:
+    put:
+      tags:
+      - Settings - In-House
+      summary: Update single InHouse Rule
+      description: Updates a single In-House library rule
+      operationId: updateInHouseRule
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      - name: ruleUuid
+        in: path
+        description: The In-House rule UUID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateInHouseRuleRequestDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseWarningInHouseRuleDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+    delete:
+      tags:
+      - Settings - In-House
+      summary: Delete Single In-House Rule
+      description: Deletes a single In-House library rule
+      operationId: deleteInHouseRule
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      - name: ruleUuid
+        in: path
+        description: The InHouse rule UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseMessageDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v2.0/orgs/{orgToken}/settings/inHouse/rules:
+    put:
+      tags:
+      - Settings - In-House
+      summary: Update Multiple In-House Rules
+      description: Updates the pattern-mat§ching rules of an In-House library rule
+      operationId: updateAllowListRulesSettings
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/UpdateInHouseRulesRequestDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseMessageDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+    post:
+      tags:
+      - Settings - In-House
+      summary: Create Multiple In-House Rules
+      description: Creates one or more in-house library rules
+      operationId: addInHouseRules
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/CreateInHouseRuleRequestDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseWarningListInHouseRuleDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+    delete:
+      tags:
+      - Settings - In-House
+      summary: Delete multiple InhHouse rules
+      description: Deletes one or more in-house library rules
+      operationId: deleteInHouseRules
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/DeleteInHouseRuleRequestDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseMessageDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v2.0/orgs/{orgToken}/settings/inHouse/apply:
+    put:
+      tags:
+      - Settings - In-House
+      summary: Apply In-House Rules
+      description: Applies the current In-House library rules to a given organization. Use this request after creating and/or updating In-House rules
+      operationId: applyWhiteListRules_1
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseMessageDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v2.0/orgs/{orgToken}/settings/inHouse:
+    get:
+      tags:
+      - Settings - In-House
+      summary: Get In-House Settings
+      description: Returns a list of all In-House library rules for a given organization
+      operationId: getOrgProprietaryRules
+      parameters:
+      - name: pageSize
+        in: query
+        description: Enter the number of items to return in each page of the result.
+        allowEmptyValue: true
+        schema:
+          maximum: 10000
+          type: string
+          default: '50'
+      - name: page
+        in: query
+        allowEmptyValue: true
+        schema:
+          type: string
+          default: '0'
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableInHouseSettingsDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+    post:
+      tags:
+      - Settings - In-House
+      summary: Create Single In-House Rule
+      description: Creates a single In-House rule to match libraries by name or maven coordinates (artifact id, group id) and designate these libraries as known, trusted entities
+      operationId: addProprietaryRule
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateInHouseRuleRequestDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseWarningInHouseRuleDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+components:
+  schemas:
+    UpdateInHouseRulesRequestDTO:
+      required:
+      - uuid
+      type: object
+      properties:
+        uuid:
+          title: Proprietary Rule UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        type:
+          title: Proprietary Rule Regex Type
+          type: string
+          example: NAME
+          enum:
+          - NAME
+          - LIBRARY_COORDINATES
+          - ARTIFACT_ID
+        regex:
+          title: Proprietary Regex Rule
+          type: string
+          example: '*aa*'
+        description:
+          title: Proprietary Description
+          type: string
+          example: description for white list
+        empty:
+          type: boolean
+    InHouseRuleDTO:
+      required:
+      - type
+      type: object
+      properties:
+        uuid:
+          type: string
+        type:
+          title: InHouse Rule Regex Type
+          type: string
+          enum:
+          - NAME
+          - LIBRARY_COORDINATES
+          - ARTIFACT_ID
+        regex:
+          title: InHouse Regex Rule
+          type: string
+          example: .*a*
+        description:
+          title: InHouse Rule Description
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        createdBy:
+          title: Created By
+          type: string
+          description: Jon.Snow
+        empty:
+          type: boolean
+    DeleteInHouseRuleRequestDTO:
+      required:
+      - uuid
+      type: object
+      properties:
+        uuid:
+          title: InHouse Rule UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        empty:
+          type: boolean
+    DWRResponseMessageDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/MessageDTO'
+    CreateInHouseRuleRequestDTO:
+      required:
+      - regex
+      - type
+      type: object
+      properties:
+        type:
+          title: InHouse Rule Regex Type
+          type: string
+          example: NAME
+          enum:
+          - NAME
+          - LIBRARY_COORDINATES
+          - ARTIFACT_ID
+        regex:
+          title: InHouse Regex Rule
+          type: string
+          example: '*aa*'
+        description:
+          title: InHouse Description
+          type: string
+          example: description for inHouse rule
+        empty:
+          type: boolean
+    UpdateInHouseRuleRequestDTO:
+      type: object
+      properties:
+        type:
+          title: InHouse Rule Regex Type
+          type: string
+          example: NAME
+          enum:
+          - NAME
+          - LIBRARY_COORDINATES
+          - ARTIFACT_ID
+        regex:
+          title: InHouse Regex Rule
+          type: string
+          example: '*aa*'
+        description:
+          title: InHouse Description
+          type: string
+          example: description for InHouse rule
+        empty:
+          type: boolean
+    DWRResponsePageableInHouseSettingsDTO:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            + **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining.'
+          example:
+            totalItems: '422'
+            isLastPage: 'true'
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/InHouseSettingsDTO'
+      description: Provides insights into endpoint-supported pagination information
+    InHouseSettingsDTO:
+      type: object
+      properties:
+        rules:
+          type: array
+          items:
+            $ref: '#/components/schemas/InHouseRuleDTO'
+        active:
+          type: boolean
+    MessageDTO:
+      type: object
+      properties:
+        message:
+          title: message
+          type: string
+          example: Success!
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+    DWRResponseWarningListInHouseRuleDTO:
+      title: Initiates the update process for an individual In-House library rule
+      type: object
+      properties:
+        additionalData:
+          title: 'Provides warning messages for notifying about conditions related to the '
+          type: object
+          description: '+ **warningMessage**: Serves as an alert to inform you about the status of the rule being updated.
+
+            The warning message will provide information about whether the rule already exists or if some of the rules are already present'
+          example:
+            warningMessage: item already exists
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          type: array
+          items:
+            $ref: '#/components/schemas/InHouseRuleDTO'
+      description: ddsc
+    DWRResponseWarningInHouseRuleDTO:
+      title: Initiates the update process for an individual In-House library rule
+      type: object
+      properties:
+        additionalData:
+          title: 'Provides warning messages for notifying about conditions related to the '
+          type: object
+          description: '+ **warningMessage**: Serves as an alert to inform you about the status of the rule being updated.
+
+            The warning message will provide information about whether the rule already exists or if some of the rules are already present'
+          example:
+            warningMessage: item already exists
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/InHouseRuleDTO'
+      description: ddsc
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: JWT token Bearer
+      scheme: bearer
+      bearerFormat: JWT

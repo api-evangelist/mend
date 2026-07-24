@@ -1,0 +1,980 @@
+openapi: 3.0.1
+info:
+  title: Mend Access Management Policies - Project API
+  description: 'Mend''s enhanced API enables automation of workflows in a REST compliant format. The API features:
+
+    + Access for any user with Mend credentials, via a user key available in the user''s profile page in the Mend Platform.
+
+    + Improved security with a JWT token per organization, which expires every 10 minutes.
+
+    + Added scalability with support for cursor pagination and limiting results size.
+
+    + Broader functionality available programmatically.
+
+    + New standard API documentation for easy navigation and search.
+
+
+    **Note:** To help you get started with the Mend API 3.0, we recommend reviewing our onboarding guide -> [Getting Started with API 3.0](https://docs.mend.io/platform/latest/getting-started-with-mend-api-3-0).
+
+    This resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend API 3.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.'
+  version: '3.0'
+servers:
+- url: https://baseUrl
+  description: Generated server url
+security:
+- bearer-key: []
+tags:
+- name: Policies - Project
+paths:
+  /api/v2.0/projects/{projectToken}/policies/{policyUuid}:
+    get:
+      tags:
+      - Policies - Project
+      summary: Get Project Policy
+      description: Returns a single policy in a given project
+      operationId: getContextPolicy
+      parameters:
+      - name: projectToken
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      - name: policyUuid
+        in: path
+        description: Policy UUID (by running Policies - Organization and run Get Organization Policies, or the equivalent for Product or Project.)
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePolicyDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+    put:
+      tags:
+      - Policies - Project
+      summary: Update Project Policy
+      description: Updates a policy for a given project
+      operationId: updatePolicy
+      parameters:
+      - name: projectToken
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      - name: policyUuid
+        in: path
+        description: Policy UUID (by running Policies - Organization and run Get Organization Policies, or the equivalent for Product or Project.)
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PolicyRequestDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePolicyDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+    delete:
+      tags:
+      - Policies - Project
+      summary: Delete Project Policy
+      description: Deletes a policy for a given project
+      operationId: deletePolicy
+      parameters:
+      - name: projectToken
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      - name: policyUuid
+        in: path
+        description: Policy UUID (by running Policies - Organization and run Get Organization Policies, or the equivalent for Product or Project.)
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseMessageDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v2.0/projects/{projectToken}/policies/priority:
+    put:
+      tags:
+      - Policies - Project
+      summary: Update Project Policy Priorities
+      description: Updates the priority of policies in a given project. Policies are numbered and then evaluated sequentially. The request body should contain a list of policy UUIDs in the desired order, starting from highest priority. The service returns a list or ordered policies.
+      operationId: updatePriorities
+      parameters:
+      - name: projectToken
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePrioritiesRequestDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseCollectionPolicyDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v2.0/projects/{projectToken}/policies/apply:
+    post:
+      tags:
+      - Policies - Project
+      summary: Apply Project Policies on Inventory
+      description: After initiating this call, the process will be performed asynchronously in the background. To check the status of the process and retrieve the final outcome, use the "Get Async Process Status" request.
+      operationId: applyOnInventory
+      parameters:
+      - name: projectToken
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseAsyncProcessStatusV2DTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v2.0/projects/{projectToken}/policies:
+    get:
+      tags:
+      - Policies - Project
+      summary: Get Project Policies
+      description: Returns all of the policies of a given project
+      operationId: getContextPolicies
+      parameters:
+      - name: search
+        in: query
+        description: "Filter your search to return items whose property has a specific value.\nUse the syntax: **property:operation:value** where a colon (:) separates between property, operation and value.\n+ Property: the name of the property of the item\n+ Operation:\n    + **equals** - true if the value is identical to this value.\n+ Value: the value of the property.\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ aggregatePolicies:[equals]:value.  Value can be either **true** or **false**"
+        allowEmptyValue: true
+      - name: projectToken
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseCollectionPolicyDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+    post:
+      tags:
+      - Policies - Project
+      summary: Create Project Policy
+      description: Creates a new policy for a given project
+      operationId: createPolicy
+      parameters:
+      - name: projectToken
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PolicyRequestDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePolicyDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+components:
+  schemas:
+    BasePolicyActionDTO:
+      required:
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+      discriminator:
+        propertyName: type
+    ReferenceNameRequiredException:
+      type: object
+      properties:
+        cause:
+          type: object
+          properties:
+            stackTrace:
+              type: array
+              items:
+                type: object
+                properties:
+                  classLoaderName:
+                    type: string
+                  moduleName:
+                    type: string
+                  moduleVersion:
+                    type: string
+                  methodName:
+                    type: string
+                  fileName:
+                    type: string
+                  lineNumber:
+                    type: integer
+                    format: int32
+                  className:
+                    type: string
+                  nativeMethod:
+                    type: boolean
+            message:
+              type: string
+            suppressed:
+              type: array
+              items:
+                type: object
+                properties:
+                  stackTrace:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        classLoaderName:
+                          type: string
+                        moduleName:
+                          type: string
+                        moduleVersion:
+                          type: string
+                        methodName:
+                          type: string
+                        fileName:
+                          type: string
+                        lineNumber:
+                          type: integer
+                          format: int32
+                        className:
+                          type: string
+                        nativeMethod:
+                          type: boolean
+                  message:
+                    type: string
+                  localizedMessage:
+                    type: string
+            localizedMessage:
+              type: string
+        stackTrace:
+          type: array
+          items:
+            type: object
+            properties:
+              classLoaderName:
+                type: string
+              moduleName:
+                type: string
+              moduleVersion:
+                type: string
+              methodName:
+                type: string
+              fileName:
+                type: string
+              lineNumber:
+                type: integer
+                format: int32
+              className:
+                type: string
+              nativeMethod:
+                type: boolean
+        requestId:
+          type: string
+        errorCode:
+          type: string
+        errorType:
+          type: string
+          enum:
+          - Client
+          - Service
+          - Unknown
+        errorMessage:
+          type: string
+        statusCode:
+          type: integer
+          format: int32
+        serviceName:
+          type: string
+        httpHeaders:
+          type: object
+          additionalProperties:
+            type: string
+        rawResponse:
+          type: array
+          items:
+            type: string
+            format: byte
+        rawResponseContent:
+          type: string
+        message:
+          type: string
+        retryable:
+          type: boolean
+        suppressed:
+          type: array
+          items:
+            type: object
+            properties:
+              stackTrace:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    classLoaderName:
+                      type: string
+                    moduleName:
+                      type: string
+                    moduleVersion:
+                      type: string
+                    methodName:
+                      type: string
+                    fileName:
+                      type: string
+                    lineNumber:
+                      type: integer
+                      format: int32
+                    className:
+                      type: string
+                    nativeMethod:
+                      type: boolean
+              message:
+                type: string
+              localizedMessage:
+                type: string
+        localizedMessage:
+          type: string
+    REJECT:
+      type: object
+      description: 'type: REJECT'
+      allOf:
+      - $ref: '#/components/schemas/BasePolicyActionDTO'
+    PolicyLicenseDTO:
+      required:
+      - name
+      type: object
+      properties:
+        uuid:
+          title: License Uuid
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: License Name
+          type: string
+          example: MIT
+    PolicyContextDTO:
+      type: object
+      properties:
+        uuid:
+          title: Policy Uuid
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Context Name
+          type: string
+          example: Context A
+        contextType:
+          title: ContextType
+          type: string
+          example: orgs
+          enum:
+          - ORGS
+          - PRODUCTS
+          - PROJECTS
+    LIBRARY_STALENESS:
+      required:
+      - monthsBack
+      type: object
+      properties:
+        type:
+          type: string
+        monthsBack:
+          title: Months Back
+          type: integer
+          format: int32
+          example: 36
+      description: 'type: LIBRARY_STALENESS'
+    PRODUCT:
+      required:
+      - productToken
+      type: object
+      properties:
+        type:
+          type: string
+        productToken:
+          title: Product Token
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        productName:
+          title: Product Name
+          type: string
+          description: 'product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**).'
+          example: Product A
+      description: 'type: PRODUCT'
+    BasePolicyFilterDTO:
+      type: object
+      properties:
+        type:
+          type: string
+    MessageDTO:
+      type: object
+      properties:
+        message:
+          title: message
+          type: string
+          example: Success!
+    GAV_REGEX:
+      type: object
+      properties:
+        type:
+          type: string
+        groupIdRegex:
+          title: Group Id Regex
+          type: string
+          example: /**
+        artifactIdRegex:
+          title: Artifact Id Regex
+          type: string
+          example: /**
+        versionRegex:
+          title: Version Regex
+          type: string
+          example: /**
+      description: 'type: GAV_REGEX'
+    PolicyRequestDTO:
+      required:
+      - action
+      - filter
+      - name
+      type: object
+      properties:
+        name:
+          title: Policy Name
+          type: string
+          example: License Policy
+        filter:
+          type: object
+          oneOf:
+          - $ref: '#/components/schemas/GAV_REGEX'
+          - $ref: '#/components/schemas/LIBRARY_REQUEST_HISTORY'
+          - $ref: '#/components/schemas/LIBRARY_STALENESS'
+          - $ref: '#/components/schemas/LICENSE'
+          - $ref: '#/components/schemas/PRIMARY_ATTRIBUTE_VALUE'
+          - $ref: '#/components/schemas/PRODUCT'
+          - $ref: '#/components/schemas/ReferenceNameRequiredException'
+          - $ref: '#/components/schemas/EFFECTIVENESS'
+          - $ref: '#/components/schemas/VULNERABILITY_SCORE'
+        action:
+          oneOf:
+          - $ref: '#/components/schemas/APPROVE'
+          - $ref: '#/components/schemas/CONDITIONS'
+          - $ref: '#/components/schemas/CREATE_ISSUE'
+          - $ref: '#/components/schemas/REASSIGN'
+          - $ref: '#/components/schemas/REJECT'
+        enabled:
+          title: Enabled
+          type: boolean
+          default: true
+    DWRResponsePolicyDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/PolicyDTO'
+    CONDITIONS:
+      type: object
+      description: 'type: CONDITIONS'
+      allOf:
+      - $ref: '#/components/schemas/BasePolicyActionDTO'
+      - type: object
+        properties:
+          approveWhenAllSatisfied:
+            title: Approve When All Satisfied
+            type: boolean
+            default: false
+          rejectWhenOneRejected:
+            title: Reject When One Condition is Rejected
+            type: boolean
+            default: false
+          conditions:
+            type: array
+            items:
+              $ref: '#/components/schemas/ConditionInfo'
+          failPolicyCheck:
+            title: Fail Policy Check
+            type: boolean
+            default: false
+    LICENSE:
+      required:
+      - licenses
+      type: object
+      properties:
+        type:
+          type: string
+        licenses:
+          type: array
+          items:
+            $ref: '#/components/schemas/PolicyLicenseDTO'
+        inclusive:
+          title: Inclusive
+          type: boolean
+          description: Trigger only when ALL licenses of the library are matched
+      description: 'type: LICENSE'
+    EFFECTIVENESS:
+      required:
+      - shieldValue
+      type: object
+      properties:
+        type:
+          type: string
+        shieldValue:
+          title: Effective Value
+          type: string
+          enum:
+          - RED
+          - YELLOW
+          - GREY
+          - NO_SHIELD
+          - GREEN
+      description: 'type: EFFECTIVENESS'
+    APPROVE:
+      type: object
+      description: 'type: APPROVE'
+      allOf:
+      - $ref: '#/components/schemas/BasePolicyActionDTO'
+    PolicyGroupDTO:
+      required:
+      - uuid
+      type: object
+      properties:
+        uuid:
+          title: Group Uuid
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Group Name
+          type: string
+          example: Group A
+    ConditionInfo:
+      required:
+      - conditionText
+      - duePeriod
+      type: object
+      properties:
+        duty:
+          type: string
+          enum:
+          - REQUESTER
+          - APPROVER
+        user:
+          $ref: '#/components/schemas/PolicyUserDTO'
+        group:
+          $ref: '#/components/schemas/PolicyGroupDTO'
+        conditionText:
+          title: Condition Description
+          type: string
+          example: A reason for the condition
+        duePeriod:
+          title: Due Period
+          type: integer
+          format: int32
+          example: 10
+      description: Condition will apply to duty or user or group
+    DWRResponseCollectionPolicyDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          type: array
+          items:
+            $ref: '#/components/schemas/PolicyDTO'
+    PolicyDTO:
+      type: object
+      properties:
+        uuid:
+          title: Policy Uuid
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Policy Name
+          type: string
+          example: A Policy
+        owner:
+          $ref: '#/components/schemas/UserInfoDTO'
+        createdAt:
+          title: Policy Creation Date
+          type: string
+          format: date-time
+        priority:
+          title: Priority
+          type: integer
+          description: 1 is the lowest priority
+          format: int32
+          example: 1
+        filter:
+          $ref: '#/components/schemas/BasePolicyFilterDTO'
+        action:
+          oneOf:
+          - $ref: '#/components/schemas/APPROVE'
+          - $ref: '#/components/schemas/CONDITIONS'
+          - $ref: '#/components/schemas/CREATE_ISSUE'
+          - $ref: '#/components/schemas/REASSIGN'
+          - $ref: '#/components/schemas/REJECT'
+        context:
+          $ref: '#/components/schemas/PolicyContextDTO'
+        enabled:
+          title: Enabled
+          type: boolean
+        modifiedAt:
+          title: Policy Modification Date
+          type: string
+          format: date-time
+        modifiedBy:
+          title: Policy Modified By
+          type: string
+          example: jon.smith@mail.com
+        aggregatedPriority:
+          type: integer
+          format: int32
+      description: Policies are checked by order of priority; note that 1 is the lowest priority
+    DWRResponseAsyncProcessStatusV2DTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/AsyncProcessStatusV2DTO'
+    VULNERABILITY_SCORE:
+      type: object
+      properties:
+        type:
+          type: string
+        from:
+          type: number
+          format: float
+        to:
+          type: number
+          format: float
+      description: 'type: VULNERABILITY_SCORE'
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+    UserInfoDTO:
+      required:
+      - uuid
+      type: object
+      properties:
+        uuid:
+          title: User UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: User Name
+          type: string
+          example: Jon Smith
+        email:
+          title: User Email
+          type: string
+          example: jon.smith@mail.com
+        userType:
+          title: Type Of User
+          type: string
+          example: REGULAR
+          enum:
+          - REGULAR
+          - SERVICE
+          - SCAN_SUMMARY_RECEIVER
+        accountStatus:
+          type: string
+          enum:
+          - ACTIVE
+          - INACTIVE
+          - LOCKOUT
+    AsyncProcessStatusV2DTO:
+      type: object
+      properties:
+        contextUuid:
+          title: contextUuid
+          type: string
+          example: caf69794-9882-4b55-82db-6b6da4fe2a26
+        uuid:
+          title: uuid
+          type: string
+          example: caf69794-9882-4b55-82db-6b6da4fe2a92
+        status:
+          title: status
+          type: string
+          example: PENDING
+          enum:
+          - PENDING
+          - IN_PROGRESS
+          - FAILED
+          - FAILURE
+          - SUCCESS
+        contextType:
+          title: contextType
+          type: string
+          example: DOMAIN
+          enum:
+          - SYSTEM
+          - GLOBAL_ACCOUNT
+          - DOMAIN
+          - PRODUCT
+          - PROJECT
+          - SCAN
+          - UNSUPPORTED_TYPE
+        created:
+          type: string
+          format: date-time
+        modified:
+          type: string
+          format: date-time
+        processType:
+          title: processType
+          type: string
+          example: APPLY_POLICIES
+        messageContentSha1:
+          title: messageContentSha1
+          type: string
+          example: fb4016165697cc32d0b90ccc82e3c2c846eb01b7
+        userMail:
+          type: string
+          writeOnly: true
+        requestToken:
+          title: requestToken
+          type: string
+          example: 2cd6a43b
+        userEmail:
+          title: userMail
+          type: string
+          example: sample@mail.com
+    PolicyUserDTO:
+      required:
+      - uuid
+      type: object
+      properties:
+        uuid:
+          title: User Uuid
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: User Name
+          type: string
+          example: jon.smith
+        email:
+          title: User Name
+          type: string
+          example: jon.smith@mail.com
+    PRIMARY_ATTRIBUTE_VALUE:
+      required:
+      - attributeValue
+      type: object
+      properties:
+        type:
+          type: string
+        attributeValue:
+          title: Attribute Value
+          type: string
+          example: value
+      description: 'type: PRIMARY_ATTRIBUTE_VALUE'
+    DWRResponseMessageDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/MessageDTO'
+    LIBRARY_REQUEST_HISTORY:
+      required:
+      - libraryRequestHistory
+      type: object
+      properties:
+        type:
+          type: string
+        libraryRequestHistory:
+          title: Library Request History
+          type: string
+          enum:
+          - APPROVED_AT_LEAST_ONCE
+          - APPROVED_AT_LEAST_ONCE_OR_PENDING
+          - REJECTED_AT_LEAST_ONCE
+          - REJECTED_AT_LEAST_ONCE_OR_PENDING
+          - PENDING
+      description: 'type: LIBRARY_REQUEST_HISTORY'
+    REASSIGN:
+      type: object
+      description: 'type: REASSIGN'
+      allOf:
+      - $ref: '#/components/schemas/BasePolicyActionDTO'
+      - type: object
+        properties:
+          user:
+            $ref: '#/components/schemas/PolicyUserDTO'
+          group:
+            $ref: '#/components/schemas/PolicyGroupDTO'
+          failPolicyCheck:
+            title: Fail Policy Check
+            type: boolean
+            default: false
+    UpdatePrioritiesRequestDTO:
+      required:
+      - uuids
+      type: object
+      properties:
+        uuids:
+          type: array
+          items:
+            title: Policy Uuid
+            type: string
+            example: 123e4567-e89b-12d3-a456-426655440000
+      description: Must contain all policy uuids
+    CREATE_ISSUE:
+      required:
+      - issueTrackerType
+      type: object
+      description: 'type: CREATE_ISSUE'
+      allOf:
+      - $ref: '#/components/schemas/BasePolicyActionDTO'
+      - type: object
+        properties:
+          failPolicyCheck:
+            title: Fail Policy Check
+            type: boolean
+            default: false
+          issueTrackerType:
+            title: Issue Tracker Type
+            type: string
+            example: COMMON_ISSUE_TRACKER
+            enum:
+            - COMMON_ISSUE_TRACKER
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: JWT token Bearer
+      scheme: bearer
+      bearerFormat: JWT

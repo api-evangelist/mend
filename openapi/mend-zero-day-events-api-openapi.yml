@@ -1,0 +1,276 @@
+openapi: 3.0.1
+info:
+  title: Mend Access Management Zero-Day Events API
+  description: 'Mend''s enhanced API enables automation of workflows in a REST compliant format. The API features:
+
+    + Access for any user with Mend credentials, via a user key available in the user''s profile page in the Mend Platform.
+
+    + Improved security with a JWT token per organization, which expires every 10 minutes.
+
+    + Added scalability with support for cursor pagination and limiting results size.
+
+    + Broader functionality available programmatically.
+
+    + New standard API documentation for easy navigation and search.
+
+
+    **Note:** To help you get started with the Mend API 3.0, we recommend reviewing our onboarding guide -> [Getting Started with API 3.0](https://docs.mend.io/platform/latest/getting-started-with-mend-api-3-0).
+
+    This resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend API 3.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.'
+  version: '3.0'
+servers:
+- url: https://baseUrl
+  description: Generated server url
+security:
+- bearer-key: []
+tags:
+- name: Zero-Day Events
+paths:
+  /api/v3.0/orgs/{orgUuid}/dependencies/events/zeroday:
+    get:
+      tags:
+      - Zero-Day Events
+      summary: Get all Zero-Day Events
+      description: Returns a list of all Zero-Day Events with optional date filters.
+      operationId: getZeroDayEvents
+      parameters:
+      - name: limit
+        in: query
+        description: Specifies the maximum number of items to be returned in the response.
+        allowEmptyValue: true
+        schema:
+          maximum: 10000
+          type: string
+          default: '50'
+      - name: cursor
+        in: query
+        description: Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved.
+        allowEmptyValue: true
+        schema:
+          type: string
+      - name: orgUuid
+        in: path
+        description: 'org UUID (from the Mend App: **Administration** General > **Organization UUID**).'
+        required: true
+        schema:
+          type: string
+      - name: fromDate
+        in: query
+        description: Filter by creation date from (inclusive)
+        required: false
+        schema:
+          type: string
+          format: date-time
+        example: '2024-01-01'
+      - name: toDate
+        in: query
+        description: Filter by creation date to (inclusive)
+        required: false
+        schema:
+          type: string
+          format: date-time
+        example: '2024-12-31'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableV3ListZeroDayEventDTOV3'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v3.0/orgs/{orgUuid}/dependencies/events/zeroday/{eventUuid}/findings:
+    get:
+      tags:
+      - Zero-Day Events
+      summary: Get Affected Libraries for a Zero-Day Event
+      description: 'Returns a paginated list of publicly known affected packages (CVEs and their associated components) for a specific Zero-Day Event.
+
+
+        **Note:** This endpoint returns ecosystem-wide affected package data sourced from public vulnerability databases — it does not reflect findings from your organization''s inventory or installed libraries.'
+      operationId: getZeroDayEventFindings
+      parameters:
+      - name: limit
+        in: query
+        description: Specifies the maximum number of items to be returned in the response.
+        allowEmptyValue: true
+        schema:
+          maximum: 10000
+          type: string
+          default: '50'
+      - name: cursor
+        in: query
+        description: Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved.
+        allowEmptyValue: true
+        schema:
+          type: string
+      - name: orgUuid
+        in: path
+        description: 'org UUID (from the Mend App: **Administration** General > **Organization UUID**).'
+        required: true
+        schema:
+          type: string
+      - name: eventUuid
+        in: path
+        description: Zero-Day Event UUID
+        required: true
+        schema:
+          type: string
+        example: 550e8400-e29b-41d4-a716-446655440000
+      - name: fromDate
+        in: query
+        description: Filter by added at from (inclusive)
+        required: false
+        schema:
+          type: string
+          format: date-time
+        example: '2024-01-01'
+      - name: toDate
+        in: query
+        description: Filter by added at to (inclusive)
+        required: false
+        schema:
+          type: string
+          format: date-time
+        example: '2024-12-31'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableV3ListZeroDayEventFindingDTOV3'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+components:
+  schemas:
+    DWRResponsePageableV3ListZeroDayEventDTOV3:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            '
+          example:
+            totalItems: '422'
+            next: http://someUrl?cursor=3
+            cursor: 3
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          type: array
+          items:
+            $ref: '#/components/schemas/ZeroDayEventDTOV3'
+    ZeroDayEventDTOV3:
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: UUID for external integrations
+          example: 550e8400-e29b-41d4-a716-446655440000
+        name:
+          type: string
+          description: Event name
+          example: Log4Shell
+        description:
+          type: string
+          description: Event description
+        publishedAt:
+          type: string
+          description: Publish date
+          format: date-time
+        updatedAt:
+          type: string
+          description: Updated date
+          format: date-time
+      description: Zero-Day Event
+    Vulnerability:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Vulnerability name (CVE)
+          example: CVE-2021-44228
+      description: Vulnerability details
+    ZeroDayEventFindingDTOV3:
+      type: object
+      properties:
+        component:
+          $ref: '#/components/schemas/Component'
+        vulnerability:
+          $ref: '#/components/schemas/Vulnerability'
+        addedAt:
+          type: string
+          description: Date added to the Zero-Day event
+          format: date-time
+      description: Zero-Day Event Finding
+    Component:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Component name
+          example: abc-v1.2.3.tgz
+        sha1:
+          type: string
+          description: Component SHA1 hash
+          example: 124dgfgtr3545trtgt345g
+      description: Component details
+    DWRResponsePageableV3ListZeroDayEventFindingDTOV3:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            '
+          example:
+            totalItems: '422'
+            next: http://someUrl?cursor=3
+            cursor: 3
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          type: array
+          items:
+            $ref: '#/components/schemas/ZeroDayEventFindingDTOV3'
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: JWT token Bearer
+      scheme: bearer
+      bearerFormat: JWT

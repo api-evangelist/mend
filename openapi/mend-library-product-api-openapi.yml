@@ -1,0 +1,1360 @@
+openapi: 3.0.1
+info:
+  title: Mend Access Management Library - Product API
+  description: 'Mend''s enhanced API enables automation of workflows in a REST compliant format. The API features:
+
+    + Access for any user with Mend credentials, via a user key available in the user''s profile page in the Mend Platform.
+
+    + Improved security with a JWT token per organization, which expires every 10 minutes.
+
+    + Added scalability with support for cursor pagination and limiting results size.
+
+    + Broader functionality available programmatically.
+
+    + New standard API documentation for easy navigation and search.
+
+
+    **Note:** To help you get started with the Mend API 3.0, we recommend reviewing our onboarding guide -> [Getting Started with API 3.0](https://docs.mend.io/platform/latest/getting-started-with-mend-api-3-0).
+
+    This resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend API 3.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.'
+  version: '3.0'
+servers:
+- url: https://baseUrl
+  description: Generated server url
+security:
+- bearer-key: []
+tags:
+- name: Library - Product
+paths:
+  /api/v2.0/products/{productToken}/libraries/byProjects:
+    post:
+      tags:
+      - Library - Product
+      summary: Get Product Libraries by project Ids
+      description: Returns all libraries that are included in a given projects
+      operationId: getLibrariesByProjectIds
+      parameters:
+      - name: pageSize
+        in: query
+        allowEmptyValue: true
+        schema:
+          maximum: 10000
+          type: string
+          default: '50'
+      - name: page
+        in: query
+        allowEmptyValue: true
+        schema:
+          type: string
+          default: '0'
+      - name: search
+        in: query
+        description: "Filter your search to return items whose property has a specific value.\nUse the syntax: **property:operation:value** where a colon (:) separates between property, operation and value.\n+ Property: the name of the property of the item\n+ Operation:\n    + **equals** - true if the value is identical to this value.\n    + **in** - true if the value is identical to one of the items in this comma-separated list. E.g. in:value1,value2,value3\n    + **like** - true if the property's value is contained within this value\n    + **regex** - true if this regular expression resolves as true.\n        The regex is not case sensitive, and special characters must be escaped with a backslash.\n        Special characters include space, double quote (\"), '<', '>', '#', '%', '{', '}', vertical bar ('|'), backslash, '^'.\n        To pass an escaped character in a URL in Postman, encode it first.\n        E.g. to return all items whose value begins with **a** or **A**, use regex:^a\n+ Value: the value of the property.\n\nTo combine multiple filters, separate each filter with a semicolon with no space. E.g.  property1:operation1:value1;property2:operation2:value2\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ description:[like | equals | regex]:value\n+ directDependency:[like | equals | regex]:value\n+ hasNotice:[like | equals | regex]:value\n+ license:[like | equals | regex | in]:value\n+ locations:[like | equals | regex]:value\n+ name:[like | equals | regex]:value\n+ numberOfLicenses:[equals | gt]:value\n+ projectName:[like | equals | regex]:value\n+ type:[like | in | equals | regex]:value"
+        allowEmptyValue: true
+      - name: sort
+        in: query
+        description: 'Sort search results alphabetically on an item''s property by entering **sort=** followed by the property name.
+
+          E.g. enter **sort=email** to sort alphabetically by their email addresses from a-z ascending.To sort in descending order (z-a), add a minus sign (''-''). E.g. **sort=-email**.
+
+
+          You can sort by the following properties:
+
+          + description
+
+          + directDependency
+
+          + hasNotice
+
+          + license
+
+          + locations
+
+          + name
+
+          + numberOfLicenses
+
+          + projectName
+
+          + type'
+        allowEmptyValue: true
+      - name: optionalColumns
+        in: query
+        description: Used to add location information about the library
+        allowEmptyValue: true
+        schema:
+          type: string
+          enum:
+          - locations
+      - name: productToken
+        in: path
+        description: 'product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**).'
+        required: true
+        schema:
+          type: string
+      - name: includeNotices
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: extraInformation
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectListRequestDTO'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseListProjectLibraryDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v2.0/products/{productToken}/libraries/{libraryUuid}/vulnerabilities:
+    get:
+      tags:
+      - Library - Product
+      summary: Get Product Library Vulnerabilities
+      description: Returns a list of the vulnerabilities in the libraries of a given product
+      operationId: getLibraryVulnerabilities_1
+      parameters:
+      - name: pageSize
+        in: query
+        allowEmptyValue: true
+        schema:
+          maximum: 10000
+          type: string
+          default: '50'
+      - name: page
+        in: query
+        allowEmptyValue: true
+        schema:
+          type: string
+          default: '0'
+      - name: productToken
+        in: path
+        description: 'product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**).'
+        required: true
+        schema:
+          type: string
+      - name: libraryUuid
+        in: path
+        description: library UUID (get a project's library by running Library - Project > Get Project Libraries.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableListVulnerabilityProfileDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v2.0/products/{productToken}/libraries/{libraryUuid}/projects:
+    get:
+      tags:
+      - Library - Product
+      summary: Get Library Projects
+      description: 'Returns all of the projects in a particular product that contain a given library '
+      operationId: getLibraryProjects
+      parameters:
+      - name: pageSize
+        in: query
+        allowEmptyValue: true
+        schema:
+          maximum: 10000
+          type: string
+          default: '50'
+      - name: page
+        in: query
+        allowEmptyValue: true
+        schema:
+          type: string
+          default: '0'
+      - name: productToken
+        in: path
+        description: 'product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**).'
+        required: true
+        schema:
+          type: string
+      - name: libraryUuid
+        in: path
+        description: library UUID (get a project's library by running Library - Project > Get Project Libraries.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseCollectionProjectDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v2.0/products/{productToken}/libraries/licenses:
+    get:
+      tags:
+      - Library - Product
+      summary: Get Product Due Diligence Info
+      description: Returns a due diligence report listing the source and license information for all libraries in a product
+      operationId: getDueDiligenceInfoByMultipleContexts_1
+      parameters:
+      - name: pageSize
+        in: query
+        description: Enter the number of items to return in each page of the result.
+        allowEmptyValue: true
+        schema:
+          maximum: 10000
+          type: string
+          default: '50'
+      - name: page
+        in: query
+        description: Enter the page number to display in the result. Page numbers start at 0
+        allowEmptyValue: true
+        schema:
+          type: string
+          default: '0'
+      - name: search
+        in: query
+        description: "Filter your search to return items whose property has a specific value.\nUse the syntax: **property:operation:value** where a colon (:) separates between property, operation and value.\n+ Property: the name of the property of the item\n+ Operation:\n    + **equals** - true if the value is identical to this value.\n    + **in** - true if the value is identical to one of the items in this comma-separated list. E.g. in:value1,value2,value3\n    + **like** - true if the property's value is contained within this value\n    + **regex** - true if this regular expression resolves as true.\n        The regex is not case sensitive, and special characters must be escaped with a backslash.\n        Special characters include space, double quote (\"), '<', '>', '#', '%', '{', '}', vertical bar ('|'), backslash, '^'.\n        To pass an escaped character in a URL in Postman, encode it first.\n        E.g. to return all items whose value begins with **a** or **A**, use regex:^a\n+ Value: the value of the property.\n\nTo combine multiple filters, separate each filter with a semicolon with no space. E.g.  property1:operation1:value1;property2:operation2:value2\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ componentName:[like | equals | regex]:value\n+ copyrights:[like | regex]:value\n+ license:[equals | in]:value\n+ licenseRisk:[equals | in]:value\n+ licenseType:[equals | in]:value\n+ projectName:[like | equals | regex]:value"
+        allowEmptyValue: true
+      - name: sort
+        in: query
+        description: 'Sort search results alphabetically on an item''s property by entering **sort=** followed by the property name.
+
+          E.g. enter **sort=email** to sort alphabetically by their email addresses from a-z ascending.To sort in descending order (z-a), add a minus sign (''-''). E.g. **sort=-email**.
+
+
+          You can sort by the following properties:
+
+          + componentName
+
+          + license
+
+          + licenseType
+
+          + copyrights
+
+          + licenseRisk
+
+          + projectName'
+        allowEmptyValue: true
+      - name: productToken
+        in: path
+        description: 'product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableListDueDiligenceDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v2.0/products/{productToken}/libraries/inHouse:
+    get:
+      tags:
+      - Library - Product
+      summary: Get In-House Libraries
+      description: Returns all libraries in a given product that have been designated as "In-House". They will not trigger any alerts or be included in license analysis. so that they will not trigger any alerts or be included in license analysis.
+      operationId: getProprietaryLibraries_1
+      parameters:
+      - name: pageSize
+        in: query
+        allowEmptyValue: true
+        schema:
+          maximum: 10000
+          type: string
+          default: '50'
+      - name: page
+        in: query
+        allowEmptyValue: true
+        schema:
+          type: string
+          default: '0'
+      - name: search
+        in: query
+        description: "Filter your search to return items whose property has a specific value.\nUse the syntax: **property:operation:value** where a colon (:) separates between property, operation and value.\n+ Property: the name of the property of the item\n+ Operation:\n    + **equals** - true if the value is identical to this value.\n    + **like** - true if the property's value is contained within this value\n    + **regex** - true if this regular expression resolves as true.\n        The regex is not case sensitive, and special characters must be escaped with a backslash.\n        Special characters include space, double quote (\"), '<', '>', '#', '%', '{', '}', vertical bar ('|'), backslash, '^'.\n        To pass an escaped character in a URL in Postman, encode it first.\n        E.g. to return all items whose value begins with **a** or **A**, use regex:^a\n+ Value: the value of the property.\n\nTo combine multiple filters, separate each filter with a semicolon with no space. E.g.  property1:operation1:value1;property2:operation2:value2\n\nThis endpoint supports filtering on this property:\n+ name:[like | equals | regex]:value\n+ type:[like | equals ]:value\n+ comment:[like | equals | regex]:value\n+ markType:[equals]:value\n"
+        allowEmptyValue: true
+      - name: sort
+        in: query
+        description: 'Sort search results alphabetically on an item''s property by entering **sort=** followed by the property name.
+
+          E.g. enter **sort=email** to sort alphabetically by their email addresses from a-z ascending.To sort in descending order (z-a), add a minus sign (''-''). E.g. **sort=-email**.
+
+
+          You can sort by the following properties:
+
+          + name
+
+          + type
+
+          + comment
+
+          + markType
+
+          '
+        allowEmptyValue: true
+      - name: productToken
+        in: path
+        description: 'product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableListLightLibraryDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v2.0/products/{productToken}/libraries:
+    get:
+      tags:
+      - Library - Product
+      summary: Get Product Libraries
+      description: Returns all libraries that are included in a given product
+      operationId: getLibraries_1
+      parameters:
+      - name: pageSize
+        in: query
+        allowEmptyValue: true
+        schema:
+          maximum: 10000
+          type: string
+          default: '50'
+      - name: page
+        in: query
+        allowEmptyValue: true
+        schema:
+          type: string
+          default: '0'
+      - name: search
+        in: query
+        description: "Filter your search to return items whose property has a specific value.\nUse the syntax: **property:operation:value** where a colon (:) separates between property, operation and value.\n+ Property: the name of the property of the item\n+ Operation:\n    + **equals** - true if the value is identical to this value.\n    + **in** - true if the value is identical to one of the items in this comma-separated list. E.g. in:value1,value2,value3\n    + **like** - true if the property's value is contained within this value\n    + **regex** - true if this regular expression resolves as true.\n        The regex is not case sensitive, and special characters must be escaped with a backslash.\n        Special characters include space, double quote (\"), '<', '>', '#', '%', '{', '}', vertical bar ('|'), backslash, '^'.\n        To pass an escaped character in a URL in Postman, encode it first.\n        E.g. to return all items whose value begins with **a** or **A**, use regex:^a\n+ Value: the value of the property.\n\nTo combine multiple filters, separate each filter with a semicolon with no space. E.g.  property1:operation1:value1;property2:operation2:value2\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ description:[like | equals | regex]:value\n+ directDependency:[like | equals | regex]:value\n+ hasNotice:[like | equals | regex]:value\n+ license:[like | equals | regex | in]:value\n+ locations:[like | equals | regex]:value\n+ name:[like | equals | regex]:value\n+ numberOfLicenses:[equals | gt]:value\n+ projectName:[like | equals | regex]:value\n+ type:[like | in | equals | regex]:value"
+        allowEmptyValue: true
+      - name: sort
+        in: query
+        description: 'Sort search results alphabetically on an item''s property by entering **sort=** followed by the property name.
+
+          E.g. enter **sort=email** to sort alphabetically by their email addresses from a-z ascending.To sort in descending order (z-a), add a minus sign (''-''). E.g. **sort=-email**.
+
+
+          You can sort by the following properties:
+
+          + description
+
+          + directDependency
+
+          + hasNotice
+
+          + license
+
+          + locations
+
+          + name
+
+          + numberOfLicenses
+
+          + projectName
+
+          + type'
+        allowEmptyValue: true
+      - name: optionalColumns
+        in: query
+        description: Used to add location information about the library
+        allowEmptyValue: true
+        schema:
+          type: string
+          enum:
+          - locations
+      - name: productToken
+        in: path
+        description: 'product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**).'
+        required: true
+        schema:
+          type: string
+      - name: includeNotices
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: extraInformation
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseListProjectLibraryDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+components:
+  schemas:
+    ResourceAuthorDTO:
+      type: object
+      properties:
+        author:
+          title: Resource Author
+          type: string
+          example: The Apache Software Foundation
+        authorUrl:
+          title: Author URL
+          type: string
+          example: http://www.apache.org/
+    LibraryLocationDTO:
+      type: object
+      properties:
+        localPath:
+          title: Local Path
+          type: string
+          example: C:\\Users\\user\\.m2\\repository\\commons-io-1.4.jar
+        dependencyFile:
+          title: Dependency File
+          type: string
+          example: C:\\GitHubRepos\\Pipline\\EUA\\plugins-automation\\fsa\\tests\\EUA\\Java\\bigProjectsMaven\\WST_417\\Data\\ksa\\ksa-web-core\\pom.xml
+    EffectiveVulnerabilityInfoDTO:
+      type: object
+      properties:
+        referenceCount:
+          title: Vulnerability Reference Count
+          type: integer
+          format: int32
+        shieldValue:
+          title: Shield Value
+          type: integer
+          description: RED(15), YELLOW(10), GREY(8), NO_SHIELD(6), GREEN(5)
+          format: int32
+    RiskScoreExplanationDTO:
+      type: object
+      properties:
+        explanation:
+          title: Explanation Link
+          type: string
+          example: http://en.wikipedia.org/wiki/Academic_Free_License
+        indicatingText:
+          title: Indicating Text
+          type: string
+          example: 1) Grant of Copyright License...
+        riskScore:
+          title: Risk Score
+          type: integer
+          format: int32
+          example: 39
+    LibraryComponentDTO:
+      type: object
+      properties:
+        uuid:
+          title: Component UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Component Name
+          type: string
+          example: dbus-1.10.24-13.el7_6.x86_64.rpm
+        description:
+          title: Component Description
+          type: string
+          example: Component description
+        componentType:
+          title: Component Type
+          type: string
+          example: Library
+          enum:
+          - Library
+        type:
+          type: string
+        libraryType:
+          title: Library Type
+          type: string
+          example: REDHAT_PACKAGE_MODULE
+        directDependency:
+          title: Direct Dependency
+          type: boolean
+        dependencyType:
+          title: Dependency Type
+          type: string
+          example: Direct / Transitive
+        references:
+          $ref: '#/components/schemas/ComponentReferencesDTO'
+        groupId:
+          title: Component Name
+          type: string
+          example: org.springframework.boot
+        artifactId:
+          title: Component Artifact
+          type: string
+          example: spring-boot
+        version:
+          title: Component Version
+          type: string
+          example: 3.0.5
+        dependencyFile:
+          type: string
+        localPath:
+          type: string
+    DWRResponsePageableListDueDiligenceDTO:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            + **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining.'
+          example:
+            totalItems: '422'
+            isLastPage: 'true'
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          type: array
+          items:
+            $ref: '#/components/schemas/DueDiligenceDTO'
+      description: Provides insights into endpoint-supported pagination information
+    TrackedIssueDTO:
+      title: Tracked Issue Information
+      type: object
+      properties:
+        uuid:
+          type: string
+        issueId:
+          type: string
+        origin:
+          type: string
+        issueKey:
+          type: string
+        account:
+          $ref: '#/components/schemas/EntityDTO'
+        domain:
+          $ref: '#/components/schemas/EntityDTO'
+        application:
+          $ref: '#/components/schemas/EntityDTO'
+        project:
+          $ref: '#/components/schemas/EntityDTO'
+        status:
+          type: string
+          enum:
+          - PENDING
+          - IN_PROGRESS
+          - SUCCESS
+          - FAILED
+          - DELETED
+        issueStatus:
+          type: string
+        failureReason:
+          type: string
+        errorMessage:
+          type: string
+        publicLink:
+          type: string
+        creationDate:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        createdBy:
+          $ref: '#/components/schemas/EntityDTO'
+        ticketType:
+          type: string
+          enum:
+          - SECURITY
+          - LEGAL
+    VulnerabilityScoringDTO:
+      type: object
+      properties:
+        score:
+          title: Vulnerability Score
+          type: number
+          format: float
+          example: 5
+        severity:
+          title: Vulnerability Severity
+          type: string
+          example: MEDIUM
+          enum:
+          - LOW
+          - HIGH
+          - MEDIUM
+        type:
+          title: Vulnerability Score Type
+          type: string
+          example: CVSS_2
+          enum:
+          - CVSS_2
+          - CVSS_3
+        scoreMetadataVector:
+          title: Score Metadata Vector
+          type: string
+          example: CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H
+        extraData:
+          title: Vulnerability Extra Data
+          type: object
+          additionalProperties:
+            title: Vulnerability Extra Data
+            type: string
+    VulnerabilityProfileDTO:
+      type: object
+      properties:
+        name:
+          title: Vulnerability Name
+          type: string
+          example: CVE-2021-42392
+        type:
+          title: VulnerabilityType
+          type: string
+          example: WS
+          enum:
+          - CVE
+          - WS
+        description:
+          title: Vulnerability Description
+          type: string
+          example: Security vulnerability found in plexus-utils before 3.0.24. XML injection found in XmlWriterUtil.java
+        score:
+          title: Vulnerability Score
+          type: number
+          format: float
+          example: 5
+        severity:
+          title: Vulnerability Severity
+          type: string
+          example: MEDIUM
+          enum:
+          - HIGH
+          - MEDIUM
+          - LOW
+        publishDate:
+          title: Vulnerability Publish Date
+          type: string
+          format: date-time
+        modifiedDate:
+          title: Vulnerability Modified Date
+          type: string
+          format: date-time
+        vulnerabilityScoring:
+          type: array
+          items:
+            $ref: '#/components/schemas/VulnerabilityScoringDTO'
+        references:
+          type: array
+          items:
+            $ref: '#/components/schemas/VulnerabilityReferenceDTO'
+        effectiveInfo:
+          $ref: '#/components/schemas/EffectiveVulnerabilityInfoDTO'
+        threatAssessment:
+          $ref: '#/components/schemas/ThreatAssessmentDTO'
+    LightLibraryDTO:
+      type: object
+      properties:
+        uuid:
+          title: Library UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Library Name
+          type: string
+          example: dbus-1.10.24-13.el7_6.x86_64.rpm
+        artifactId:
+          title: Artifact Id
+          type: string
+          example: kind-of-6.0.2.tgz
+        groupId:
+          title: Group Id
+          type: string
+          example: kind-of
+        version:
+          type: string
+        architecture:
+          title: Architecture
+          type: string
+        languageVersion:
+          title: Language Version
+          type: string
+        classifier:
+          type: string
+        extension:
+          type: string
+        sha1:
+          title: Sha1
+          type: string
+          example: 01146b36a6218e64e58f3a8d66de5d7fc6f6d051
+        description:
+          title: Description
+          type: string
+          example: Get the native type of a value.
+        type:
+          title: Type
+          type: string
+          example: javascript/Node.js
+        libraryType:
+          type: string
+        directDependency:
+          title: Direct Dependency
+          type: boolean
+        purl:
+          title: Package Url
+          type: string
+          example: pkg:maven/commons-beanutils/commons-beanutils@1.8.0?type=jar
+        extraInfo:
+          type: object
+          additionalProperties:
+            type: string
+        extraInformation:
+          $ref: '#/components/schemas/LibraryExtraInfoDTO'
+        securityRisks:
+          type: array
+          items:
+            $ref: '#/components/schemas/SecurityRiskDTO'
+        noticeReference:
+          $ref: '#/components/schemas/NoticeDTO'
+        proprietaryInfo:
+          $ref: '#/components/schemas/ProprietaryInfoDTO'
+        locations:
+          type: array
+          items:
+            $ref: '#/components/schemas/LibraryLocationDTO'
+        attributionReportSettings:
+          $ref: '#/components/schemas/AttributionReportLibrarySettingRuleDTO'
+        dependencyType:
+          type: string
+        violations:
+          title: Number Of Violations
+          type: integer
+          format: int32
+          example: 22
+        workflowUuids:
+          title: Number Of Violated Workflows
+          type: array
+          example: 2
+          items:
+            title: Number Of Violated Workflows
+            type: string
+            example: '2'
+        violatingFindings:
+          title: Number Of Violating Findings
+          type: integer
+          format: int32
+          example: 2
+        trackedIssue:
+          $ref: '#/components/schemas/TrackedIssueDTO'
+    ThreatAssessmentDTO:
+      type: object
+      properties:
+        exploitCodeMaturity:
+          title: Exploit Code Maturity
+          type: string
+          example: HIGH
+          enum:
+          - UNPROVEN
+          - POC_CODE
+          - FUNCTIONAL
+          - HIGH
+          - NOT_DEFINED
+        epssPercentage:
+          title: Epss Percentage
+          type: number
+          format: float
+          example: 0.8
+    ProjectLibraryDTO:
+      type: object
+      properties:
+        uuid:
+          title: Library UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Library Name
+          type: string
+          example: dbus-1.10.24-13.el7_6.x86_64.rpm
+        artifactId:
+          title: Artifact Id
+          type: string
+          example: kind-of-6.0.2.tgz
+        groupId:
+          title: Group Id
+          type: string
+          example: kind-of
+        version:
+          type: string
+        architecture:
+          title: Architecture
+          type: string
+        languageVersion:
+          title: Language Version
+          type: string
+        classifier:
+          type: string
+        extension:
+          type: string
+        sha1:
+          title: Sha1
+          type: string
+          example: 01146b36a6218e64e58f3a8d66de5d7fc6f6d051
+        description:
+          title: Description
+          type: string
+          example: Get the native type of a value.
+        type:
+          title: Type
+          type: string
+          example: javascript/Node.js
+        libraryType:
+          type: string
+        directDependency:
+          title: Direct Dependency
+          type: boolean
+        purl:
+          title: Package Url
+          type: string
+          example: pkg:maven/commons-beanutils/commons-beanutils@1.8.0?type=jar
+        extraInfo:
+          type: object
+          additionalProperties:
+            type: string
+        extraInformation:
+          $ref: '#/components/schemas/LibraryExtraInfoDTO'
+        licenses:
+          type: array
+          items:
+            $ref: '#/components/schemas/LibraryLicenseDTO'
+        copyrightReferences:
+          type: array
+          items:
+            $ref: '#/components/schemas/CopyrightReferenceDTO'
+        securityRisks:
+          type: array
+          items:
+            $ref: '#/components/schemas/SecurityRiskDTO'
+        noticeReference:
+          $ref: '#/components/schemas/NoticeDTO'
+        proprietaryInfo:
+          $ref: '#/components/schemas/ProprietaryInfoDTO'
+        locations:
+          type: array
+          items:
+            $ref: '#/components/schemas/LibraryLocationDTO'
+        attributionReportSettings:
+          $ref: '#/components/schemas/AttributionReportLibrarySettingRuleDTO'
+        dependencyType:
+          type: string
+        violations:
+          title: Number Of Violations
+          type: integer
+          format: int32
+          example: 22
+        workflowUuids:
+          title: Number Of Violated Workflows
+          type: array
+          example: 2
+          items:
+            title: Number Of Violated Workflows
+            type: string
+            example: '2'
+        violatingFindings:
+          title: Number Of Violating Findings
+          type: integer
+          format: int32
+          example: 2
+        trackedIssue:
+          $ref: '#/components/schemas/TrackedIssueDTO'
+        project:
+          $ref: '#/components/schemas/ProjectDTO'
+    DWRResponsePageableListVulnerabilityProfileDTO:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            + **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining.'
+          example:
+            totalItems: '422'
+            isLastPage: 'true'
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          type: array
+          items:
+            $ref: '#/components/schemas/VulnerabilityProfileDTO'
+      description: Provides insights into endpoint-supported pagination information
+    LibraryLicenseDTO:
+      type: object
+      properties:
+        uuid:
+          title: License UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: License Name
+          type: string
+          example: MIT
+        assignedByUser:
+          title: Assigned By User
+          type: boolean
+        licenseReferences:
+          type: array
+          items:
+            $ref: '#/components/schemas/LicenseReferenceDTO'
+    SecurityRiskDTO:
+      type: object
+      properties:
+        sourceUrl:
+          type: string
+        riskFactor:
+          type: string
+          enum:
+          - NO_FINDINGS
+          - UNCONFIRMED_UNSAFE
+          - CONFIRMED_UNSAFE
+          - KNOWN_FALSE_POSITIVE
+    AttributionReportLibrarySettingRuleDTO:
+      type: object
+      properties:
+        excluded:
+          type: boolean
+    DueDiligenceDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+        name:
+          type: string
+        component:
+          $ref: '#/components/schemas/LibraryComponentDTO'
+        license:
+          $ref: '#/components/schemas/LicenseReferenceDTO'
+        riskScore:
+          $ref: '#/components/schemas/RiskScoreExplanationDTO'
+        copyrights:
+          type: array
+          items:
+            title: Copyright
+            type: string
+            example: Copyright 2010 Cloud Conscious, LLC
+        extraData:
+          $ref: '#/components/schemas/ResourceExtraDataDTO'
+        project:
+          $ref: '#/components/schemas/ProjectDTO'
+        techTags:
+          type: array
+          items:
+            type: string
+        purl:
+          type: string
+    LibraryExtraInfoDTO:
+      type: object
+      properties:
+        distributionUrl:
+          type: string
+        downloadUrl:
+          type: string
+        releaseDate:
+          type: string
+          format: date-time
+        packageManagerRepository:
+          type: string
+        homePage:
+          type: string
+        repositoryUrl:
+          type: string
+        author:
+          type: string
+    EntityDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+        name:
+          type: string
+    ProjectListRequestDTO:
+      required:
+      - projectIdentifiers
+      type: object
+      properties:
+        projectIdentifiers:
+          type: array
+          items:
+            title: Project Identifiers
+            type: string
+            example: 123e4567-e89b-12d3-a456-426655440000
+    ProprietaryInfoDTO:
+      type: object
+      properties:
+        ruleDescription:
+          type: string
+        rulePattern:
+          type: string
+        comment:
+          type: string
+        userInfo:
+          $ref: '#/components/schemas/UserInfoDTO'
+        proprietaryMarkType:
+          type: string
+          enum:
+          - BY_RULE
+          - BY_USER
+    DWRResponsePageableListLightLibraryDTO:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            + **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining.'
+          example:
+            totalItems: '422'
+            isLastPage: 'true'
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          type: array
+          items:
+            $ref: '#/components/schemas/LightLibraryDTO'
+      description: Provides insights into endpoint-supported pagination information
+    ProjectDTO:
+      type: object
+      properties:
+        uuid:
+          title: Project UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Project Name
+          type: string
+          example: My Project
+        path:
+          title: Product Name
+          type: string
+          example: My Product
+        productName:
+          title: Product Name
+          type: string
+          example: My Product
+        productUuid:
+          title: Product Uuid
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+    ResourceExtraDataDTO:
+      type: object
+      properties:
+        homepage:
+          title: Home Page
+          type: string
+          example: https://api.github.com/repos/SR-dude/AvP-Wine/zipball/original
+        authors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceAuthorDTO'
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+    UserInfoDTO:
+      required:
+      - uuid
+      type: object
+      properties:
+        uuid:
+          title: User UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: User Name
+          type: string
+          example: Jon Smith
+        email:
+          title: User Email
+          type: string
+          example: jon.smith@mail.com
+        userType:
+          title: Type Of User
+          type: string
+          example: REGULAR
+          enum:
+          - REGULAR
+          - SERVICE
+          - SCAN_SUMMARY_RECEIVER
+        accountStatus:
+          type: string
+          enum:
+          - ACTIVE
+          - INACTIVE
+          - LOCKOUT
+    DWRResponseCollectionProjectDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProjectDTO'
+    VulnerabilityReferenceDTO:
+      type: object
+      properties:
+        value:
+          title: Vulnerability Reference Value
+          type: string
+          example: https://github.com/codehaus-plexus/plexus-utils/commit/f933e5e78dc2637e485447ed821fe14904f110de
+        source:
+          title: vulnerability reference source
+          type: string
+          example: CERT
+        url:
+          title: Vulnerability Reference Url
+          type: string
+          example: https://github.com/codehaus-plexus/plexus-utils/commit/f933e5e78dc2637e485447ed821fe14904f110de
+        signature:
+          title: Vulnerability Reference Signature
+          type: boolean
+        advisory:
+          title: Vulnerability Reference Advisory
+          type: boolean
+        patch:
+          title: Vulnerability Reference Patch
+          type: boolean
+    NoticeDTO:
+      required:
+      - text
+      type: object
+      properties:
+        text:
+          title: Notice Text
+          type: string
+          example: Developed internally
+        reference:
+          title: Notice REFERENCE
+          type: string
+          example: https://github.com/...
+    DWRResponseListProjectLibraryDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProjectLibraryDTO'
+    CopyrightReferenceDTO:
+      required:
+      - copyright
+      type: object
+      properties:
+        type:
+          title: Copy Reference Type
+          type: string
+          example: PROJECT_HOMEPAGE
+          enum:
+          - TEXT_IN_FILE
+          - ARTIFACT_DESCRIPTOR
+          - PROJECT_HOMEPAGE
+          - USER
+          - UNSPECIFIED
+        copyright:
+          title: Copyright
+          type: string
+          example: Copyright 2021 x greater by the end of
+        customDisclaimer:
+          title: Copyright Custom Disclaimer
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        textUrl:
+          title: Copyright Text Url
+          type: string
+        startYear:
+          title: Copyright Start Year
+          type: string
+          example: '2021'
+        endYear:
+          title: Copyright End Year
+          type: string
+          example: '2022'
+        author:
+          title: Copyright Author
+          type: string
+          example: x greater by the end of
+        referenceInfo:
+          title: Copyright Reference Info
+          type: string
+          example: x greater by the end of
+    LicenseReferenceDTO:
+      type: object
+      properties:
+        uuid:
+          title: License Reference UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        type:
+          title: License Reference Type
+          type: string
+          example: ARTIFACT_DESCRIPTOR
+        liabilityReference:
+          title: License Liability Reference
+          type: string
+          example: https://repo.maven.apache.org/maven2/org/jruby/ext/posix/jna-posix/1.0.3/jna-posix-1.0.3.pom
+        assignedBy:
+          $ref: '#/components/schemas/UserInfoDTO'
+        textUrl:
+          title: License Reference Text URL
+          type: string
+        customDisclaimer:
+          title: License Reference Custom Disclaimer
+          type: string
+        information:
+          title: License Reference information
+          type: string
+          example: distribution=repo&remoteUrl=https://repo.maven.apache.org/maven2/org/jruby/ext/posix/jna-posix/1.0.3/jna-posix-1.0.3.pom
+    ComponentReferencesDTO:
+      title: Component References
+      type: object
+      properties:
+        url:
+          title: Reference Url
+          type: string
+          example: https://www.gnupg.org/related_software/pinentry/98
+        homePage:
+          title: Reference Home Page
+          type: string
+          example: https://www.gnupg.org/related_software/pinentry/89
+        downloadLink:
+          title: Reference Download Link
+          type: string
+          example: https://www.gnupg.org/related_software/pinentry/09
+        issueUrl:
+          title: Reference Issue Url
+          type: string
+          example: https://www.gnupg.org/related_software/pinentry/87
+        pomUrl:
+          title: Reference Pom Url
+          type: string
+          example: https://www.gnupg.org/related_software/pinentry/76
+        scmUrl:
+          title: Reference Scm Url
+          type: string
+          example: https://www.gnupg.org/related_software/pinentry/65
+        genericPackageIndex:
+          title: Reference Generic Package Index
+          type: string
+          example: '5'
+        nugetGallery:
+          title: Reference Nugget Gallery
+          type: string
+        tags:
+          title: Reference Tags
+          type: string
+          example: Important
+        copyright:
+          title: Reference Copyright
+          type: string
+          example: Copyright 2002-2015 g10 Code GmbH
+        hasNotice:
+          title: Reference Has Notice
+          type: boolean
+          example: false
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: JWT token Bearer
+      scheme: bearer
+      bearerFormat: JWT

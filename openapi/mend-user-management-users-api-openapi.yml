@@ -1,0 +1,781 @@
+openapi: 3.0.1
+info:
+  title: Mend Access Management User Management - Users API
+  description: 'Mend''s enhanced API enables automation of workflows in a REST compliant format. The API features:
+
+    + Access for any user with Mend credentials, via a user key available in the user''s profile page in the Mend Platform.
+
+    + Improved security with a JWT token per organization, which expires every 10 minutes.
+
+    + Added scalability with support for cursor pagination and limiting results size.
+
+    + Broader functionality available programmatically.
+
+    + New standard API documentation for easy navigation and search.
+
+
+    **Note:** To help you get started with the Mend API 3.0, we recommend reviewing our onboarding guide -> [Getting Started with API 3.0](https://docs.mend.io/platform/latest/getting-started-with-mend-api-3-0).
+
+    This resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend API 3.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.'
+  version: '3.0'
+servers:
+- url: https://baseUrl
+  description: Generated server url
+security:
+- bearer-key: []
+tags:
+- name: User Management - Users
+paths:
+  /api/v2.0/orgs/{orgToken}/users/service/{userUuid}/regenerateUserKey:
+    post:
+      tags:
+      - User Management - Users
+      summary: Regenerate Service User Key
+      description: Removes current service user's key and creates a new one
+      operationId: regenerateServiceUserKey
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      - name: userUuid
+        in: path
+        description: User UUID (by running User Management - Users > Get Organization Users).
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseUserKeyDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v2.0/orgs/{orgToken}/users/service:
+    post:
+      tags:
+      - User Management - Users
+      summary: Create Service User
+      description: Creates a new service user
+      operationId: createServiceUser
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserEmailRequestDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseServiceUserDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v2.0/orgs/{orgToken}/users/scan-summary-receiver-user:
+    post:
+      tags:
+      - User Management - Users
+      summary: Create Scan summary receiver User
+      description: 'Creates a new scan summary receiver user '
+      operationId: createScanSummaryReceiverUser
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserEmailRequestDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseScanSummaryReceiverUserDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v2.0/orgs/{orgToken}/users/invite:
+    post:
+      tags:
+      - User Management - Users
+      summary: Invite User
+      description: Sends an email invitation to others to join an organization
+      operationId: inviteUser
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InviteUserRequestDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseUserInfoResponseDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v2.0/orgs/{orgToken}/users/info:
+    post:
+      tags:
+      - User Management - Users
+      summary: Get Enriched Organization Users
+      description: Returns detailed information about an organization's users
+      operationId: getEnrichedUserInfo
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserEmailsRequestDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseListEnrichedUserInfoDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v2.0/orgs/{orgToken}/users:
+    get:
+      tags:
+      - User Management - Users
+      summary: Get Organization Users
+      description: Returns a list of all users in an organization (paginated)
+      operationId: getUsersPaginated
+      parameters:
+      - name: pageSize
+        in: query
+        description: Enter the number of items to return in each page of the result.
+        allowEmptyValue: true
+        schema:
+          maximum: 10000
+          type: string
+          default: '50'
+      - name: page
+        in: query
+        description: Enter the page number to display in the result. Page numbers start at 0
+        allowEmptyValue: true
+        schema:
+          type: string
+          default: '0'
+      - name: search
+        in: query
+        description: "Filter your search to return items whose property has a specific value.\nUse the syntax: **property:operation:value** where a colon (:) separates between property, operation and value.\n+ Property: the name of the property of the item\n+ Operation:\n    + **equals** - true if the value is identical to this value.\n    + **like** - true if the property's value is contained within this value\n    + **regex** - true if this regular expression resolves as true.\n        The regex is not case sensitive, and special characters must be escaped with a backslash.\n        Special characters include space, double quote (\"), '<', '>', '#', '%', '{', '}', vertical bar ('|'), backslash, '^'.\n        To pass an escaped character in a URL in Postman, encode it first.\n        E.g. to return all items whose value begins with **a** or **A**, use regex:^a\n+ Value: the value of the property.\n\nTo combine multiple filters, separate each filter with a semicolon with no space. E.g.  property1:operation1:value1;property2:operation2:value2\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ accountStatus:[equals|in]:value\n+ email:[like | equals | regex]:value\n+ name:[like | equals | regex]:value\n+ userType:[like | equals]:value\n+ roles:[equals|in]:value"
+        allowEmptyValue: true
+      - name: sort
+        in: query
+        description: 'Sort search results alphabetically on an item''s property by entering **sort=** followed by the property name.
+
+          E.g. enter **sort=email** to sort alphabetically by their email addresses from a-z ascending.To sort in descending order (z-a), add a minus sign (''-''). E.g. **sort=-email**.
+
+
+          You can sort by the following properties:
+
+          + email
+
+          + name
+
+          + userType'
+        allowEmptyValue: true
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableListUserInfoDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+    post:
+      tags:
+      - User Management - Users
+      summary: Create User
+      description: Creates a new user
+      operationId: createUser
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUserRequestDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseUserInfoDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v2.0/orgs/{orgToken}/users/service/{userUuid}/userKey:
+    get:
+      tags:
+      - User Management - Users
+      summary: Get Service User Key
+      description: Returns service user's key
+      operationId: getServiceUsersKey
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      - name: userUuid
+        in: path
+        description: User UUID (by running User Management - Users > Get Organization Users).
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseUserKeyDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v2.0/orgs/{orgToken}/users/self:
+    get:
+      tags:
+      - User Management - Users
+      summary: Get self information of groups and roles
+      description: Returns information about the currently logged-in user, including group membership and roles
+      operationId: getSelfUserInfo
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseEnrichedUserInfoDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v2.0/orgs/{orgToken}/users/{userUuid}:
+    delete:
+      tags:
+      - User Management - Users
+      summary: Remove User From Organization
+      description: Deletes a user from an organization
+      operationId: removeUser
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      - name: userUuid
+        in: path
+        description: User UUID (by running User Management - Users > Get Organization Users).
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseMessageDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+components:
+  schemas:
+    InviteUserRequestDTO:
+      required:
+      - email
+      type: object
+      properties:
+        email:
+          title: New User Email
+          type: string
+          example: jon.smith@mail.com
+    UserEmailRequestDTO:
+      required:
+      - email
+      type: object
+      properties:
+        email:
+          title: User Email
+          type: string
+          example: jon.smith@mail.com
+    DWRResponseUserKeyDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/UserKeyDTO'
+    DWRResponseScanSummaryReceiverUserDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/ScanSummaryReceiverUserDTO'
+    DWRResponseEnrichedUserInfoDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/EnrichedUserInfoDTO'
+    DWRResponseListEnrichedUserInfoDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnrichedUserInfoDTO'
+    DWRResponsePageableListUserInfoDTO:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            + **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining.'
+          example:
+            totalItems: '422'
+            isLastPage: 'true'
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserInfoDTO'
+      description: Provides insights into endpoint-supported pagination information
+    GroupRoleDTO:
+      title: List of Group Roles
+      type: object
+      properties:
+        contextToken:
+          type: string
+          description: 'Depending on the value of contextType, this can be:
+
+            + orgToken (org UUID by running Entities - Organization > Get User Organization) or Api Token (from the Mend SCA App: **Integrate** tab > **API Key**).
+
+            + productToken (product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**.
+
+            + projectToken (project UUID by running Entities - Product > Get Product Projects) or project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+          example: 123e4567-e89b-12d3-a456-426655440000
+        contextName:
+          title: Context Name
+          type: string
+          example: My Project
+        contextType:
+          type: string
+          description: Type of entity the role will be associated with
+          example: orgs
+          enum:
+          - orgs
+          - products
+        role:
+          type: string
+          enum:
+          - DEFAULT_APPROVER
+          - ADMIN
+          - ALERT_EMAIL_RECEIVER
+          - ALERTS_IGNORER
+          - LICENSE_AND_COPYRIGHT_ASSIGNER
+          - AUDITOR
+          - USER
+          - PRODUCT_INTEGRATOR
+          - SBOM_EXPORTER
+    MessageDTO:
+      type: object
+      properties:
+        message:
+          title: message
+          type: string
+          example: Success!
+    DWRResponseUserInfoDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/UserInfoDTO'
+    EnrichedUserInfoDTO:
+      required:
+      - uuid
+      type: object
+      properties:
+        uuid:
+          title: User UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: User Name
+          type: string
+          example: Jon Smith
+        email:
+          title: User Email
+          type: string
+          example: jon.smith@mail.com
+        userType:
+          title: Type Of User
+          type: string
+          example: REGULAR
+          enum:
+          - REGULAR
+          - SERVICE
+          - SCAN_SUMMARY_RECEIVER
+        accountStatus:
+          type: string
+          enum:
+          - ACTIVE
+          - INACTIVE
+          - LOCKOUT
+        roles:
+          title: List of Group Roles
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupRoleDTO'
+        activationLink:
+          title: Activation Link
+          type: string
+        groupNames:
+          title: Associated Groups
+          type: array
+          items:
+            title: Associated Groups
+            type: string
+    UserEmailsRequestDTO:
+      required:
+      - userEmails
+      type: object
+      properties:
+        userEmails:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+            example: jon.smith@mail.com
+    UserInfoResponseDTO:
+      required:
+      - uuid
+      type: object
+      properties:
+        uuid:
+          title: User UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: User Name
+          type: string
+          example: Jon Smith
+        email:
+          title: User Email
+          type: string
+          example: jon.smith@mail.com
+        userType:
+          title: Type Of User
+          type: string
+          example: REGULAR
+          enum:
+          - REGULAR
+          - SERVICE
+          - SCAN_SUMMARY_RECEIVER
+        existsInOrg:
+          type: boolean
+    CreateUserRequestDTO:
+      required:
+      - email
+      type: object
+      properties:
+        name:
+          title: User Name
+          type: string
+          example: jon
+        email:
+          title: User Email
+          type: string
+          example: jon.smith@mail.com
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+    UserInfoDTO:
+      required:
+      - uuid
+      type: object
+      properties:
+        uuid:
+          title: User UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: User Name
+          type: string
+          example: Jon Smith
+        email:
+          title: User Email
+          type: string
+          example: jon.smith@mail.com
+        userType:
+          title: Type Of User
+          type: string
+          example: REGULAR
+          enum:
+          - REGULAR
+          - SERVICE
+          - SCAN_SUMMARY_RECEIVER
+        accountStatus:
+          type: string
+          enum:
+          - ACTIVE
+          - INACTIVE
+          - LOCKOUT
+    UserKeyDTO:
+      type: object
+      properties:
+        uuid:
+          title: User Key UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        userUuid:
+          title: User UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        userKey:
+          title: User Key
+          type: string
+          example: 8d541c7d782e4b7891ebf61e864f76cb9af75f17d4394b109f1155e88f3e86bd
+        createdAt:
+          title: Time Of Creation
+          type: string
+          format: date-time
+        lastUsedAt:
+          title: Last Token Usage
+          type: string
+          format: date-time
+        description:
+          title: Token Description
+          type: string
+          example: Token A
+        expirationDate:
+          title: Token Expiration Date
+          type: string
+          format: date-time
+    DWRResponseUserInfoResponseDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/UserInfoResponseDTO'
+    DWRResponseMessageDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/MessageDTO'
+    ServiceUserDTO:
+      type: object
+      properties:
+        userKeyDTO:
+          $ref: '#/components/schemas/UserKeyDTO'
+        userInfoDTO:
+          $ref: '#/components/schemas/UserInfoDTO'
+    ScanSummaryReceiverUserDTO:
+      type: object
+      properties:
+        userInfoDTO:
+          $ref: '#/components/schemas/UserInfoDTO'
+    DWRResponseServiceUserDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/ServiceUserDTO'
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: JWT token Bearer
+      scheme: bearer
+      bearerFormat: JWT

@@ -1,0 +1,334 @@
+openapi: 3.0.1
+info:
+  title: Mend Access Management General Info - Vulnerabilities API
+  description: 'Mend''s enhanced API enables automation of workflows in a REST compliant format. The API features:
+
+    + Access for any user with Mend credentials, via a user key available in the user''s profile page in the Mend Platform.
+
+    + Improved security with a JWT token per organization, which expires every 10 minutes.
+
+    + Added scalability with support for cursor pagination and limiting results size.
+
+    + Broader functionality available programmatically.
+
+    + New standard API documentation for easy navigation and search.
+
+
+    **Note:** To help you get started with the Mend API 3.0, we recommend reviewing our onboarding guide -> [Getting Started with API 3.0](https://docs.mend.io/platform/latest/getting-started-with-mend-api-3-0).
+
+    This resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend API 3.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.'
+  version: '3.0'
+servers:
+- url: https://baseUrl
+  description: Generated server url
+security:
+- bearer-key: []
+tags:
+- name: General Info - Vulnerabilities
+paths:
+  /api/v2.0/vulnerabilities/{vulnerabilityId}/remediation:
+    get:
+      tags:
+      - General Info - Vulnerabilities
+      summary: Get Vulnerability Remediation Proposals
+      description: Returns the recommended remediation actions to take for a given vulnerability
+      operationId: getVulnerabilityRemediationProposals
+      parameters:
+      - name: vulnerabilityId
+        in: path
+        description: Vulnerability Name in the form of CVE-xxxx-xxx or WS-xxxx-xxx.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseVulnerabilityFixSummaryInfoDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v2.0/vulnerabilities/{vulnerabilityId}:
+    get:
+      tags:
+      - General Info - Vulnerabilities
+      summary: Get Vulnerability Profile
+      description: Returns a complete vulnerability profile of a given CVE-ID
+      operationId: getVulnerabilityProfile
+      parameters:
+      - name: vulnerabilityId
+        in: path
+        description: Vulnerability Name in the form of CVE-xxxx-xxx or WS-xxxx-xxx.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseVulnerabilityProfileDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+components:
+  schemas:
+    VulnerabilityReferenceDTO:
+      type: object
+      properties:
+        value:
+          title: Vulnerability Reference Value
+          type: string
+          example: https://github.com/codehaus-plexus/plexus-utils/commit/f933e5e78dc2637e485447ed821fe14904f110de
+        source:
+          title: vulnerability reference source
+          type: string
+          example: CERT
+        url:
+          title: Vulnerability Reference Url
+          type: string
+          example: https://github.com/codehaus-plexus/plexus-utils/commit/f933e5e78dc2637e485447ed821fe14904f110de
+        signature:
+          title: Vulnerability Reference Signature
+          type: boolean
+        advisory:
+          title: Vulnerability Reference Advisory
+          type: boolean
+        patch:
+          title: Vulnerability Reference Patch
+          type: boolean
+    EffectiveVulnerabilityInfoDTO:
+      type: object
+      properties:
+        referenceCount:
+          title: Vulnerability Reference Count
+          type: integer
+          format: int32
+        shieldValue:
+          title: Shield Value
+          type: integer
+          description: RED(15), YELLOW(10), GREY(8), NO_SHIELD(6), GREEN(5)
+          format: int32
+    DWRResponseVulnerabilityProfileDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/VulnerabilityProfileDTO'
+    VulnerabilityFixSummaryInfoDTO:
+      type: object
+      properties:
+        vulnerability:
+          type: string
+          description: Vulnerability Name
+          example: CVE-2021-42392
+        topRankedFix:
+          $ref: '#/components/schemas/VulnerabilityFixInfoDTO'
+        allFixes:
+          type: array
+          items:
+            $ref: '#/components/schemas/VulnerabilityFixInfoDTO'
+        totalUpVotes:
+          type: integer
+          description: Total Up Votes
+          format: int32
+          example: 0
+        totalDownVotes:
+          type: integer
+          description: Total Down Votes
+          format: int32
+          example: 0
+    DWRResponseVulnerabilityFixSummaryInfoDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/VulnerabilityFixSummaryInfoDTO'
+    VulnerabilityFixInfoDTO:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: integer
+          format: int32
+          example: 49422
+        vulnerability:
+          title: Vulnerability Name
+          type: string
+          example: CVE-2021-42392
+        type:
+          title: Type
+          type: string
+          example: UPGRADE_VERSION
+          enum:
+          - CHANGE_FILES
+          - PATCH
+          - UPGRADE_VERSION
+        origin:
+          title: Origin
+          type: string
+          example: WHITESOURCE_EXPERT
+        url:
+          title: Url
+          type: string
+          example: https://github.com/codehaus-plexus/plexus-utils/commit/f933e5e78dc2637e485447ed821fe14904f110de
+        fixResolution:
+          title: Fix Resolution
+          type: string
+          example: 3.0.24
+        date:
+          title: Date
+          type: string
+          format: date-time
+        message:
+          title: Message
+          type: string
+          example: Upgrade to version
+        extraData:
+          type: string
+        minimalFixVersionFromExtraData:
+          type: string
+        minimalAffectedVersionFromExtraData:
+          type: string
+    VulnerabilityScoringDTO:
+      type: object
+      properties:
+        score:
+          title: Vulnerability Score
+          type: number
+          format: float
+          example: 5
+        severity:
+          title: Vulnerability Severity
+          type: string
+          example: MEDIUM
+          enum:
+          - LOW
+          - HIGH
+          - MEDIUM
+        type:
+          title: Vulnerability Score Type
+          type: string
+          example: CVSS_2
+          enum:
+          - CVSS_2
+          - CVSS_3
+        scoreMetadataVector:
+          title: Score Metadata Vector
+          type: string
+          example: CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H
+        extraData:
+          title: Vulnerability Extra Data
+          type: object
+          additionalProperties:
+            title: Vulnerability Extra Data
+            type: string
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+    VulnerabilityProfileDTO:
+      type: object
+      properties:
+        name:
+          title: Vulnerability Name
+          type: string
+          example: CVE-2021-42392
+        type:
+          title: VulnerabilityType
+          type: string
+          example: WS
+          enum:
+          - CVE
+          - WS
+        description:
+          title: Vulnerability Description
+          type: string
+          example: Security vulnerability found in plexus-utils before 3.0.24. XML injection found in XmlWriterUtil.java
+        score:
+          title: Vulnerability Score
+          type: number
+          format: float
+          example: 5
+        severity:
+          title: Vulnerability Severity
+          type: string
+          example: MEDIUM
+          enum:
+          - HIGH
+          - MEDIUM
+          - LOW
+        publishDate:
+          title: Vulnerability Publish Date
+          type: string
+          format: date-time
+        modifiedDate:
+          title: Vulnerability Modified Date
+          type: string
+          format: date-time
+        vulnerabilityScoring:
+          type: array
+          items:
+            $ref: '#/components/schemas/VulnerabilityScoringDTO'
+        references:
+          type: array
+          items:
+            $ref: '#/components/schemas/VulnerabilityReferenceDTO'
+        effectiveInfo:
+          $ref: '#/components/schemas/EffectiveVulnerabilityInfoDTO'
+        threatAssessment:
+          $ref: '#/components/schemas/ThreatAssessmentDTO'
+    ThreatAssessmentDTO:
+      type: object
+      properties:
+        exploitCodeMaturity:
+          title: Exploit Code Maturity
+          type: string
+          example: HIGH
+          enum:
+          - UNPROVEN
+          - POC_CODE
+          - FUNCTIONAL
+          - HIGH
+          - NOT_DEFINED
+        epssPercentage:
+          title: Epss Percentage
+          type: number
+          format: float
+          example: 0.8
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: JWT token Bearer
+      scheme: bearer
+      bearerFormat: JWT

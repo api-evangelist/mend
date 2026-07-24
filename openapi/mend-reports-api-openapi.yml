@@ -1,0 +1,2897 @@
+openapi: 3.0.1
+info:
+  title: Mend Access Management Reports API
+  description: 'Mend''s enhanced API enables automation of workflows in a REST compliant format. The API features:
+
+    + Access for any user with Mend credentials, via a user key available in the user''s profile page in the Mend Platform.
+
+    + Improved security with a JWT token per organization, which expires every 10 minutes.
+
+    + Added scalability with support for cursor pagination and limiting results size.
+
+    + Broader functionality available programmatically.
+
+    + New standard API documentation for easy navigation and search.
+
+
+    **Note:** To help you get started with the Mend API 3.0, we recommend reviewing our onboarding guide -> [Getting Started with API 3.0](https://docs.mend.io/platform/latest/getting-started-with-mend-api-3-0).
+
+    This resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend API 3.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.'
+  version: '3.0'
+servers:
+- url: https://baseUrl
+  description: Generated server url
+security:
+- bearer-key: []
+tags:
+- name: Reports
+paths:
+  /api/v3.0/applications/{applicationUuid}/ai/reports/findings:
+    post:
+      tags:
+      - Reports
+      summary: Export AI Application Findings report asynchronously
+      operationId: exportAiFindingsReport_2
+      parameters:
+      - name: applicationUuid
+        in: path
+        description: application UUID.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReportExportProcessDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3ReportExportProcessDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v3.0/applications/{applicationUuid}/ai/reports/inventory:
+    post:
+      tags:
+      - Reports
+      summary: Export AI Application Inventory report asynchronously
+      operationId: exportAiInventoryReport_2
+      parameters:
+      - name: applicationUuid
+        in: path
+        description: application UUID.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReportExportProcessDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3ReportExportProcessDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v3.0/applications/{applicationUuid}/code/reports/compliance:
+    post:
+      tags:
+      - Reports
+      summary: Export Code Application Compliance report asynchronously (Code - SAST)
+      operationId: exportCodeComplianceReport_1
+      parameters:
+      - name: applicationUuid
+        in: path
+        description: Application UUID (Administration > Applications)
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CodeReportExportProcessDTOV3'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3ReportExportProcessDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v3.0/applications/{applicationUuid}/code/reports/findings:
+    post:
+      tags:
+      - Reports
+      summary: Export Code Application Findings report asynchronously (Code - SAST)
+      operationId: exportCodeFindingsReport_1
+      parameters:
+      - name: applicationUuid
+        in: path
+        description: Application UUID (Administration > Applications)
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateReportDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3ReportExportProcessDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v3.0/applications/{applicationUuid}/code/reports/resolved:
+    post:
+      tags:
+      - Reports
+      summary: Export Code Application Resolved Findings report asynchronously (Code - SAST)
+      operationId: exportCodeResolvedReport_1
+      parameters:
+      - name: applicationUuid
+        in: path
+        description: Application UUID (Administration > Applications)
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResolvedReportExportProcessDTOV3'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3ReportExportProcessDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v3.0/applications/{applicationUuid}/code/reports/suppressions:
+    post:
+      tags:
+      - Reports
+      summary: Export Code Application Suppressions report asynchronously (Code - SAST)
+      operationId: exportCodeSuppressionsReport_1
+      parameters:
+      - name: applicationUuid
+        in: path
+        description: Application UUID (Administration > Applications)
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateReportDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3ReportExportProcessDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v3.0/applications/{applicationUuid}/images/reports/SBOM:
+    post:
+      tags:
+      - Reports
+      summary: Export Image Application SBOM report asynchronously
+      operationId: exportImgSbomReport_2
+      parameters:
+      - name: applicationUuid
+        in: path
+        description: application UUID.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReportExportProcessDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3ReportExportProcessDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v3.0/applications/{applicationUuid}/images/reports/attribution:
+    post:
+      tags:
+      - Reports
+      summary: Export IMG Application Attribution report asynchronously
+      operationId: exportImgAttributionReport_2
+      parameters:
+      - name: applicationUuid
+        in: path
+        description: application UUID.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AttributionImgReportExportDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3ReportExportProcessDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v3.0/applications/{applicationUuid}/images/reports/dueDiligence:
+    post:
+      tags:
+      - Reports
+      summary: Export IMG Application Due Diligence report asynchronously
+      operationId: exportImgFindingsReport_2
+      parameters:
+      - name: applicationUuid
+        in: path
+        description: application UUID.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReportExportProcessDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3ReportExportProcessDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v3.0/orgs/{orgUuid}/ai/reports/findings:
+    post:
+      tags:
+      - Reports
+      summary: Export AI Organization Findings report asynchronously
+      operationId: exportAiFindingsReport_1
+      parameters:
+      - name: orgUuid
+        in: path
+        description: 'org UUID (from the Mend App: **Administration** General > **Organization UUID**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReportExportProcessDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3ReportExportProcessDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v3.0/orgs/{orgUuid}/ai/reports/inventory:
+    post:
+      tags:
+      - Reports
+      summary: Export AI Organization Inventory report asynchronously
+      operationId: exportAiInventoryReport_1
+      parameters:
+      - name: orgUuid
+        in: path
+        description: 'org UUID (from the Mend App: **Administration** General > **Organization UUID**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReportExportProcessDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3ReportExportProcessDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v3.0/orgs/{orgUuid}/code/reports/compliance:
+    post:
+      tags:
+      - Reports
+      summary: Export Code Organization Compliance report asynchronously (Code - SAST)
+      operationId: exportSastAnalyticsReport
+      parameters:
+      - name: orgUuid
+        in: path
+        description: 'org UUID (from the Mend App: **Administration** General > **Organization UUID**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CodeReportExportProcessDTOV3'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3ReportExportProcessDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v3.0/orgs/{orgUuid}/images/reports/SBOM:
+    post:
+      tags:
+      - Reports
+      summary: Export Image Organization SBOM report asynchronously
+      operationId: exportImgSbomReport_1
+      parameters:
+      - name: orgUuid
+        in: path
+        description: 'org UUID (from the Mend App: **Administration** General > **Organization UUID**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReportExportProcessDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3ReportExportProcessDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v3.0/orgs/{orgUuid}/images/reports/attribution:
+    post:
+      tags:
+      - Reports
+      summary: Export IMG Organization Attribution report asynchronously
+      operationId: exportImgAttributionReport_1
+      parameters:
+      - name: orgUuid
+        in: path
+        description: 'org UUID (from the Mend App: **Administration** General > **Organization UUID**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AttributionImgReportExportDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3ReportExportProcessDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v3.0/orgs/{orgUuid}/images/reports/dueDiligence:
+    post:
+      tags:
+      - Reports
+      summary: Export IMG Organization Due Diligence report asynchronously
+      operationId: exportImgFindingsReport_1
+      parameters:
+      - name: orgUuid
+        in: path
+        description: 'org UUID (from the Mend App: **Administration** General > **Organization UUID**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReportExportProcessDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3ReportExportProcessDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v3.0/orgs/{orgUuid}/reports:
+    get:
+      tags:
+      - Reports
+      summary: Get Reports
+      operationId: getReportStatusesMultiContext
+      parameters:
+      - name: cursor
+        in: query
+        description: Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved.
+        allowEmptyValue: true
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Specifies the maximum number of items to be returned in the response.
+        allowEmptyValue: true
+        schema:
+          maximum: 10000
+          type: string
+          default: '50'
+      - name: orgUuid
+        in: path
+        description: 'org UUID (from the Mend App: **Administration** General > **Organization UUID**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableV3ListReportExportProcessDTOV3'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v3.0/orgs/{orgUuid}/reports/download/{reportUuid}:
+    get:
+      tags:
+      - Reports
+      summary: Download Report
+      operationId: downloadReport
+      parameters:
+      - name: orgUuid
+        in: path
+        description: 'org UUID (from the Mend App: **Administration** General > **Organization UUID**).'
+        required: true
+        schema:
+          type: string
+      - name: reportUuid
+        in: path
+        description: Asynchronous Process Status UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v3.0/orgs/{orgUuid}/reports/users-groups:
+    post:
+      tags:
+      - Reports
+      summary: Export Users and Groups report asynchronously (Platform)
+      operationId: exportUsersReport
+      parameters:
+      - name: orgUuid
+        in: path
+        description: 'org UUID (from the Mend App: **Administration** General > **Organization UUID**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUsersReportDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3UsersReportExportProcessDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v3.0/orgs/{orgUuid}/reports/{reportUuid}:
+    get:
+      tags:
+      - Reports
+      summary: Get Report Status
+      operationId: getReportStatus
+      parameters:
+      - name: orgUuid
+        in: path
+        description: 'org UUID (from the Mend App: **Administration** General > **Organization UUID**).'
+        required: true
+        schema:
+          type: string
+      - name: reportUuid
+        in: path
+        description: Asynchronous Process Status UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3ReportExportProcessDTOV3'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+    delete:
+      tags:
+      - Reports
+      summary: Delete Report
+      operationId: deleteReport
+      parameters:
+      - name: orgUuid
+        in: path
+        description: 'org UUID (from the Mend App: **Administration** General > **Organization UUID**).'
+        required: true
+        schema:
+          type: string
+      - name: reportUuid
+        in: path
+        description: Asynchronous Process Status UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3MessageDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v3.0/projects/{projectUuid}/ai/reports/findings:
+    post:
+      tags:
+      - Reports
+      summary: Export AI Project Findings report asynchronously
+      operationId: exportAiFindingsReport
+      parameters:
+      - name: projectUuid
+        in: path
+        description: UUID of the project
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReportExportProcessDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3ReportExportProcessDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v3.0/projects/{projectUuid}/ai/reports/inventory:
+    post:
+      tags:
+      - Reports
+      summary: Export AI Project Inventory report asynchronously
+      operationId: exportAiInventoryReport
+      parameters:
+      - name: projectUuid
+        in: path
+        description: UUID of the project
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReportExportProcessDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3ReportExportProcessDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v3.0/projects/{projectUuid}/code/reports/compliance:
+    post:
+      tags:
+      - Reports
+      summary: Export Code Project Compliance report asynchronously (Code - SAST)
+      operationId: exportCodeComplianceReport
+      parameters:
+      - name: projectUuid
+        in: path
+        description: UUID of the project
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CodeReportExportProcessDTOV3'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3ReportExportProcessDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v3.0/projects/{projectUuid}/code/reports/findings:
+    post:
+      tags:
+      - Reports
+      summary: Export Code Project Findings report asynchronously (Code - SAST)
+      operationId: exportCodeFindingsReport
+      parameters:
+      - name: projectUuid
+        in: path
+        description: UUID of the project
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateReportDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3ReportExportProcessDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v3.0/projects/{projectUuid}/code/reports/resolved:
+    post:
+      tags:
+      - Reports
+      summary: Export Code Project Resolved Findings report asynchronously (Code - SAST)
+      operationId: exportCodeResolvedReport
+      parameters:
+      - name: projectUuid
+        in: path
+        description: UUID of the project
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResolvedReportExportProcessDTOV3'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3ReportExportProcessDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v3.0/projects/{projectUuid}/code/reports/suppressions:
+    post:
+      tags:
+      - Reports
+      summary: Export Code Project Suppressions report asynchronously (Code - SAST)
+      operationId: exportCodeSuppressionsReport
+      parameters:
+      - name: projectUuid
+        in: path
+        description: UUID of the project
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateReportDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3ReportExportProcessDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v3.0/projects/{projectUuid}/images/reports/SBOM:
+    post:
+      tags:
+      - Reports
+      summary: Export Image Project SBOM report asynchronously
+      operationId: exportImgSbomReport
+      parameters:
+      - name: projectUuid
+        in: path
+        description: UUID of the project
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReportExportProcessDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3ReportExportProcessDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v3.0/projects/{projectUuid}/images/reports/attribution:
+    post:
+      tags:
+      - Reports
+      summary: Export IMG Project Attribution report asynchronously
+      operationId: exportImgAttributionReport
+      parameters:
+      - name: projectUuid
+        in: path
+        description: UUID of the project
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AttributionImgReportExportDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3ReportExportProcessDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v3.0/projects/{projectUuid}/images/reports/dueDiligence:
+    post:
+      tags:
+      - Reports
+      summary: Export IMG Project Due Diligence report asynchronously
+      operationId: exportImgFindingsReport
+      parameters:
+      - name: projectUuid
+        in: path
+        description: UUID of the project
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReportExportProcessDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3ReportExportProcessDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v3.0/accounts/{accountUuid}/dependencies/reports/inventory:
+    post:
+      tags:
+      - Reports
+      summary: Export account inventory report asynchronously (Dependencies - SCA)
+      operationId: exportAccountInventoryReport
+      parameters:
+      - name: accountUuid
+        in: path
+        description: Account UUID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateInventoryReportDTOV3'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3ReportExportProcessDTOV3'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v3.0/accounts/{accountUuid}/dependencies/reports/securityFindings:
+    post:
+      tags:
+      - Reports
+      summary: Export account dependency security findings report asynchronously (Dependencies - SCA)
+      operationId: exportAccountDependencySecurityFindingsReport
+      parameters:
+      - name: accountUuid
+        in: path
+        description: Account UUID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSecurityFindingsReportDTOV3'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3ReportExportProcessDTOV3'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v3.0/accounts/{accountUuid}/dependencies/reports/securityFindingsByLibrary:
+    post:
+      tags:
+      - Reports
+      summary: Export account dependency security findings by library report asynchronously (Dependencies - SCA)
+      operationId: exportAccountDependencySecurityFindingsByLibraryReport
+      parameters:
+      - name: accountUuid
+        in: path
+        description: Account UUID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSecurityFindingsByLibraryReportDTOV3'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3ReportExportProcessDTOV3'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v3.0/applications/{applicationUuid}/dependencies/reports/SBOM:
+    post:
+      tags:
+      - Reports
+      summary: Export application SBOM report asynchronously (Dependencies - SCA)
+      operationId: exportSbomReport_1
+      parameters:
+      - name: applicationUuid
+        in: path
+        description: Application UUID (Administration > Applications)
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProductSbomReportDTOReport'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3ReportExportProcessDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v3.0/applications/{applicationUuid}/dependencies/reports/attribution:
+    post:
+      tags:
+      - Reports
+      summary: Export application Attribution report asynchronously (Dependencies - SCA)
+      description: 'Generates a Dependencies Attribution report for the specified application asynchronously. Supported formats: JSON, HTML, TEXT.'
+      operationId: exportProductAttributionReport
+      parameters:
+      - name: applicationUuid
+        in: path
+        description: Application UUID (Administration > Applications)
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AttributionReportExportDTOV3'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3ReportExportProcessDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v3.0/applications/{applicationUuid}/dependencies/reports/dueDiligence:
+    post:
+      tags:
+      - Reports
+      summary: Export application due diligence report asynchronously (Dependencies - SCA)
+      description: 'Generates a Dependencies Due Diligence report for the specified application asynchronously. Supported formats: JSON, XML.'
+      operationId: exportProductDueDiligenceReport
+      parameters:
+      - name: applicationUuid
+        in: path
+        description: Application UUID (Administration > Applications)
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DueDiligenceReportExportDTOV3'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3ReportExportProcessDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v3.0/applications/{applicationUuid}/dependencies/reports/findings:
+    post:
+      tags:
+      - Reports
+      summary: Export application Findings report asynchronously (Dependencies - SCA)
+      description: 'Generates a Dependencies Findings report for the specified application asynchronously. Supported formats: Excel, JSON, XML.'
+      operationId: exportProductFindingsReport
+      parameters:
+      - name: applicationUuid
+        in: path
+        description: Application UUID (Administration > Applications)
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FindingsReportExportDTOV3'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3ReportExportProcessDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v3.0/applications/{applicationUuid}/dependencies/reports/inventory:
+    post:
+      tags:
+      - Reports
+      summary: Export application Inventory report asynchronously (Dependencies - SCA)
+      description: 'Generates a Dependencies Inventory report for the specified application asynchronously. Supported formats: Excel, JSON, XML.'
+      operationId: exportProductInventoryReport
+      parameters:
+      - name: applicationUuid
+        in: path
+        description: Application UUID (Administration > Applications)
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InventoryReportExportDTOV3'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3ReportExportProcessDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v3.0/applications/{applicationUuid}/dependencies/reports/risk:
+    post:
+      tags:
+      - Reports
+      summary: Export application Risk report asynchronously (Dependencies - SCA)
+      description: Generates a Dependencies Risk report for the specified application asynchronously. Default export mode is Split (PDF summary + Excel CVE detail delivered as a ZIP). Full PDF mode is also available, subject to a project-count threshold.
+      operationId: exportProductRiskReport
+      parameters:
+      - name: applicationUuid
+        in: path
+        description: Application UUID (Administration > Applications)
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RiskReportExportDTOV3'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3ReportExportProcessDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v3.0/projects/{projectUuid}/dependencies/reports/SBOM:
+    post:
+      tags:
+      - Reports
+      summary: Export project SBOM report asynchronously (Dependencies - SCA)
+      operationId: exportSbomReport
+      parameters:
+      - name: projectUuid
+        in: path
+        description: UUID of the project
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProjectSbomReportDTOReport'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3ReportExportProcessDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v3.0/projects/{projectUuid}/dependencies/reports/attribution:
+    post:
+      tags:
+      - Reports
+      summary: Export project Attribution report asynchronously (Dependencies - SCA)
+      description: 'Generates a Dependencies Attribution report for the specified project asynchronously. Supported formats: JSON, HTML, TEXT.'
+      operationId: exportProjectAttributionReport
+      parameters:
+      - name: projectUuid
+        in: path
+        description: UUID of the project
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AttributionReportExportProjectDTOV3'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3ReportExportProcessDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v3.0/projects/{projectUuid}/dependencies/reports/dueDiligence:
+    post:
+      tags:
+      - Reports
+      summary: Export project due diligence report asynchronously (Dependencies - SCA)
+      description: 'Generates a Dependencies Due Diligence report for the specified project asynchronously. Supported formats: JSON, XML.'
+      operationId: exportProjectDueDiligenceReport
+      parameters:
+      - name: projectUuid
+        in: path
+        description: UUID of the project
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DueDiligenceReportExportProjectDTOV3'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3ReportExportProcessDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v3.0/projects/{projectUuid}/dependencies/reports/findings:
+    post:
+      tags:
+      - Reports
+      summary: Export project Findings report asynchronously (Dependencies - SCA)
+      description: 'Generates a Dependencies Findings report for the specified project asynchronously. Supported formats: Excel, JSON, XML.'
+      operationId: exportProjectFindingsReport
+      parameters:
+      - name: projectUuid
+        in: path
+        description: UUID of the project
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FindingsReportExportProjectDTOV3'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3ReportExportProcessDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v3.0/projects/{projectUuid}/dependencies/reports/inventory:
+    post:
+      tags:
+      - Reports
+      summary: Export project Inventory report asynchronously (Dependencies - SCA)
+      description: 'Generates a Dependencies Inventory report for the specified project asynchronously. Supported formats: Excel, JSON, XML.'
+      operationId: exportProjectInventoryReport
+      parameters:
+      - name: projectUuid
+        in: path
+        description: UUID of the project
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InventoryReportExportProjectDTOV3'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3ReportExportProcessDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v3.0/projects/{projectUuid}/dependencies/reports/risk:
+    post:
+      tags:
+      - Reports
+      summary: Export project Risk report asynchronously (Dependencies - SCA)
+      description: Generates a Dependencies Risk report for the specified project asynchronously. Default export mode is Split (PDF summary + Excel CVE detail delivered as a ZIP). Full PDF mode is also available, subject to a project-count threshold.
+      operationId: exportProjectRiskReport
+      parameters:
+      - name: projectUuid
+        in: path
+        description: UUID of the project
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RiskReportExportProjectDTOV3'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3ReportExportProcessDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+components:
+  schemas:
+    CreateProjectSbomReportDTOReport:
+      type: object
+      properties:
+        name:
+          type: string
+        format:
+          type: string
+          enum:
+          - json
+          - html
+          - unknown
+          - xml
+          - excel
+          - yaml
+          - pdf
+          - tv
+          - rdf
+          - csv
+          - sarif
+          - text
+        sendEmailNotification:
+          type: boolean
+        labelsUuidList:
+          type: array
+          items:
+            type: string
+        excludeInactiveProjects:
+          type: boolean
+        reportType:
+          type: string
+          enum:
+          - attribution
+          - inventory
+          - vulnerabilities
+          - securityAlerts
+          - sbom
+          - Cbom
+          - securityAlertsLibrary
+          - Compliance
+          - Findings
+          - Suppressions
+          - Resolved
+          - spdx
+          - spdx_2_3
+          - cycloneDX
+          - cycloneDX_1_5
+          - cycloneDX_1_6
+          - dueDiligence
+          - unknown
+          - imgAttribution
+          - imgDueDiligence
+          - imgSpdx
+          - imgSpdx_2_3
+          - imgCycloneDX
+          - imgCycloneDX_1_5
+          - aiInventory
+          - aiFindings
+          - imgCycloneDX_1_6
+          - risk
+          - users
+          - zeroDayCatalog
+          - activityLog
+        maxDepthLevel:
+          type: integer
+          format: int32
+        includeVulnerabilities:
+          type: boolean
+        isMlBomReport:
+          type: boolean
+          example: false
+    AttributionReportExportProjectDTOV3:
+      type: object
+      properties:
+        name:
+          type: string
+        format:
+          type: string
+          description: Output file format. The Attribution report supports json, html and text.
+          example: json
+          enum:
+          - json
+          - html
+          - text
+        sendEmailNotification:
+          type: boolean
+        licenses:
+          type: array
+          items:
+            type: string
+        primaryAttribute:
+          type: string
+        library:
+          type: string
+        groupBy:
+          type: string
+        header:
+          type: string
+        title:
+          type: string
+        footer:
+          type: string
+        licenseReference:
+          type: string
+        licenseTextPlacement:
+          type: string
+        selectedColumns:
+          type: array
+          items:
+            type: string
+        customAttribute:
+          type: string
+        includeSummary:
+          type: boolean
+        includeVersion:
+          type: boolean
+        hideEmptyFields:
+          type: boolean
+        groupByOrDefault:
+          type: string
+        licenseReferenceOrDefault:
+          type: string
+        licenseTextPlacementOrDefault:
+          type: string
+        selectedColumnsOrDefaultString:
+          type: string
+    InventoryReportExportProjectDTOV3:
+      type: object
+      properties:
+        name:
+          type: string
+        format:
+          type: string
+          description: Output file format. The Inventory report supports excel, json and xml.
+          example: excel
+          enum:
+          - excel
+          - json
+          - xml
+        sendEmailNotification:
+          type: boolean
+    CreateUsersReportDTO:
+      type: object
+      properties:
+        name:
+          type: string
+        format:
+          type: string
+          enum:
+          - json
+          - html
+          - unknown
+          - xml
+          - excel
+          - yaml
+          - pdf
+          - tv
+          - rdf
+          - csv
+          - sarif
+          - cbom
+          - text
+        sendEmailNotification:
+          type: boolean
+    RiskReportExportDTOV3:
+      type: object
+      properties:
+        name:
+          type: string
+        format:
+          type: string
+          description: Output file format. The Risk report only supports pdf.
+          example: pdf
+          enum:
+          - pdf
+        sendEmailNotification:
+          type: boolean
+        projectUuids:
+          type: array
+          items:
+            type: string
+        exportMode:
+          type: string
+          description: Export mode. "split" (default) produces a ZIP (PDF summary + Excel CVE detail). "fullPdf" produces a single PDF, subject to a project-count threshold.
+          example: split
+          enum:
+          - split
+          - fullPdf
+    FindingsReportExportProjectDTOV3:
+      type: object
+      properties:
+        name:
+          type: string
+        format:
+          type: string
+          description: Output file format. The Findings report supports excel, json and xml.
+          example: excel
+          enum:
+          - excel
+          - json
+          - xml
+        sendEmailNotification:
+          type: boolean
+        vulnerabilitiesState:
+          type: array
+          description: Alert states to include. Defaults to [OPEN] when omitted.
+          example:
+          - OPEN
+          items:
+            type: string
+            description: Alert states to include. Defaults to [OPEN] when omitted.
+            example: '["OPEN"]'
+            enum:
+            - OPEN
+            - IGNORE
+        vulnerabilityTypes:
+          type: array
+          description: Filter by one or more vulnerability types. ANY (default) includes all types.
+          example:
+          - CVE
+          - GHSA
+          items:
+            type: string
+            description: Filter by one or more vulnerability types. ANY (default) includes all types.
+            example: '["CVE","GHSA"]'
+            enum:
+            - MSC
+            - CVE
+            - ANY
+            - GHSA
+            - WS
+            - MAI
+        dateRange:
+          type: integer
+          description: Include only vulnerabilities first detected within the last N days. 0 or omitted means no date filter.
+          format: int32
+          example: 30
+        zeroDayIdentifier:
+          type: string
+          description: Scope the report to a specific zero-day event, by event UUID or name.
+    UsersReportExportProcessDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+        name:
+          type: string
+        title:
+          type: string
+        reportType:
+          type: string
+          enum:
+          - attribution
+          - inventory
+          - vulnerabilities
+          - securityAlerts
+          - sbom
+          - Cbom
+          - securityAlertsLibrary
+          - Compliance
+          - Findings
+          - Suppressions
+          - Resolved
+          - spdx
+          - spdx_2_3
+          - cycloneDX
+          - cycloneDX_1_5
+          - cycloneDX_1_6
+          - dueDiligence
+          - unknown
+          - imgAttribution
+          - imgDueDiligence
+          - imgSpdx
+          - imgSpdx_2_3
+          - imgCycloneDX
+          - imgCycloneDX_1_5
+          - aiInventory
+          - aiFindings
+          - imgCycloneDX_1_6
+          - risk
+          - users
+          - zeroDayCatalog
+        format:
+          type: string
+          enum:
+          - json
+          - html
+          - unknown
+          - xml
+          - excel
+          - yaml
+          - pdf
+          - tv
+          - rdf
+          - csv
+          - sarif
+          - cbom
+          - text
+        scopeType:
+          type: string
+          enum:
+          - organization
+          - product
+          - project
+          - unsupported
+          - account
+        scopeUuidList:
+          type: array
+          items:
+            type: string
+        status:
+          type: string
+          enum:
+          - PENDING
+          - IN_PROGRESS
+          - FAILED
+          - FAILURE
+          - SUCCESS
+        createdBy:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        sendEmailNotification:
+          type: boolean
+    DWRResponsePageableV3ListReportExportProcessDTOV3:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            '
+          example:
+            totalItems: '422'
+            next: http://someUrl?cursor=3
+            cursor: 3
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReportExportProcessDTOV3'
+    CreateReportDTO:
+      type: object
+      properties:
+        name:
+          type: string
+        format:
+          type: string
+          enum:
+          - json
+          - html
+          - unknown
+          - xml
+          - excel
+          - yaml
+          - pdf
+          - tv
+          - rdf
+          - csv
+          - sarif
+          - cbom
+          - text
+        sendEmailNotification:
+          type: boolean
+        labelsUuidList:
+          type: array
+          items:
+            type: string
+        excludeInactiveProjects:
+          type: boolean
+        exportMode:
+          type: string
+          enum:
+          - split
+          - fullPdf
+        additionalParams:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+    DWRResponseV3ReportExportProcessDTOV3:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          $ref: '#/components/schemas/ReportExportProcessDTOV3'
+    MessageDTO:
+      type: object
+      properties:
+        message:
+          title: message
+          type: string
+          example: Success!
+    CreateInventoryReportDTOV3:
+      type: object
+      properties:
+        name:
+          type: string
+        sendEmailNotification:
+          type: boolean
+        format:
+          type: string
+          enum:
+          - excel
+        search:
+          title: Search Query
+          type: string
+          description: "Filter your search to return items whose property has a specific value.\nUse the syntax: **[property][operator][value]**\n+ **Property**: the name of the property of the item\n+ **Operator**:\n    + **equals (==)** - Returns true if the value exactly matches this one. If the value contains a * character, it behaves like a wildcard (similar to the LIKE operator).\nExample: entity==abc* — will return true for entities like \"abcd\" and \"abc_123\".\n+ **Value**: the value of the property.\n\nLogical operators AND (;) and OR (,) are supported in filters — param1=in=(val1,val2) and (param2==val3 or param3==val4), can also be written as — param1=in=(val1,val2);(param2==val3,param3==val4)\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ libraryName: equals"
+          example: libraryName==*log4j*
+    DWRResponseV3UsersReportExportProcessDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          $ref: '#/components/schemas/UsersReportExportProcessDTO'
+    FindingsReportExportDTOV3:
+      type: object
+      properties:
+        name:
+          type: string
+        format:
+          type: string
+          description: Output file format. The Findings report supports excel, json and xml.
+          example: excel
+          enum:
+          - excel
+          - json
+          - xml
+        sendEmailNotification:
+          type: boolean
+        projectUuids:
+          type: array
+          items:
+            type: string
+        vulnerabilitiesState:
+          type: array
+          description: Alert states to include. Defaults to [OPEN] when omitted.
+          example:
+          - OPEN
+          items:
+            type: string
+            description: Alert states to include. Defaults to [OPEN] when omitted.
+            example: '["OPEN"]'
+            enum:
+            - OPEN
+            - IGNORE
+        vulnerabilityTypes:
+          type: array
+          description: Filter by one or more vulnerability types. ANY (default) includes all types.
+          example:
+          - CVE
+          - GHSA
+          items:
+            type: string
+            description: Filter by one or more vulnerability types. ANY (default) includes all types.
+            example: '["CVE","GHSA"]'
+            enum:
+            - MSC
+            - CVE
+            - ANY
+            - GHSA
+            - WS
+            - MAI
+        dateRange:
+          type: integer
+          description: Include only vulnerabilities first detected within the last N days. 0 or omitted means no date filter.
+          format: int32
+          example: 30
+        zeroDayIdentifier:
+          type: string
+          description: Scope the report to a specific zero-day event, by event UUID or name.
+    DWRResponseV3ReportExportProcessDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          $ref: '#/components/schemas/ReportExportProcessDTO'
+    AttributionReportExportDTOV3:
+      type: object
+      properties:
+        name:
+          type: string
+        format:
+          type: string
+          description: Output file format. The Attribution report supports json, html and text.
+          example: json
+          enum:
+          - json
+          - html
+          - text
+        sendEmailNotification:
+          type: boolean
+        projectUuids:
+          type: array
+          items:
+            type: string
+        licenses:
+          type: array
+          items:
+            type: string
+        primaryAttribute:
+          type: string
+        library:
+          type: string
+        groupBy:
+          type: string
+        header:
+          type: string
+        title:
+          type: string
+        footer:
+          type: string
+        licenseReference:
+          type: string
+        licenseTextPlacement:
+          type: string
+        selectedColumns:
+          type: array
+          items:
+            type: string
+        customAttribute:
+          type: string
+        includeSummary:
+          type: boolean
+        includeVersion:
+          type: boolean
+        hideEmptyFields:
+          type: boolean
+        groupByOrDefault:
+          type: string
+        licenseReferenceOrDefault:
+          type: string
+        licenseTextPlacementOrDefault:
+          type: string
+        selectedColumnsOrDefaultString:
+          type: string
+    ReportExportProcessDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+        name:
+          type: string
+        scopeUuid:
+          type: string
+        scopeName:
+          type: string
+        subScopes:
+          type: array
+          items:
+            $ref: '#/components/schemas/EntityTreeDTO'
+        title:
+          type: string
+        reportType:
+          type: string
+          enum:
+          - attribution
+          - inventory
+          - vulnerabilities
+          - securityAlerts
+          - sbom
+          - Cbom
+          - securityAlertsLibrary
+          - Compliance
+          - Findings
+          - Suppressions
+          - Resolved
+          - spdx
+          - spdx_2_3
+          - cycloneDX
+          - cycloneDX_1_5
+          - cycloneDX_1_6
+          - dueDiligence
+          - unknown
+          - imgAttribution
+          - imgDueDiligence
+          - imgSpdx
+          - imgSpdx_2_3
+          - imgCycloneDX
+          - imgCycloneDX_1_5
+          - aiInventory
+          - aiFindings
+          - imgCycloneDX_1_6
+          - risk
+          - users
+          - zeroDayCatalog
+          - activityLog
+        format:
+          type: string
+          enum:
+          - json
+          - html
+          - unknown
+          - xml
+          - excel
+          - yaml
+          - pdf
+          - tv
+          - rdf
+          - csv
+          - sarif
+          - text
+        scopeType:
+          type: string
+          enum:
+          - organization
+          - product
+          - project
+          - unsupported
+          - account
+        scopeUuidList:
+          type: array
+          items:
+            type: string
+        projectUuids:
+          type: array
+          items:
+            type: string
+        status:
+          type: string
+          enum:
+          - PENDING
+          - IN_PROGRESS
+          - FAILED
+          - FAILURE
+          - SUCCESS
+        createdBy:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        sendEmailNotification:
+          type: boolean
+        labelsUuidList:
+          type: array
+          items:
+            type: string
+        includeVulnerabilities:
+          type: boolean
+        excludeInactiveProjects:
+          type: boolean
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+    CreateProductSbomReportDTOReport:
+      type: object
+      properties:
+        name:
+          type: string
+        format:
+          type: string
+          enum:
+          - json
+          - html
+          - unknown
+          - xml
+          - excel
+          - yaml
+          - pdf
+          - tv
+          - rdf
+          - csv
+          - sarif
+          - text
+        sendEmailNotification:
+          type: boolean
+        labelsUuidList:
+          type: array
+          items:
+            type: string
+        excludeInactiveProjects:
+          type: boolean
+        projectUuids:
+          type: array
+          items:
+            type: string
+        reportType:
+          type: string
+          enum:
+          - attribution
+          - inventory
+          - vulnerabilities
+          - securityAlerts
+          - sbom
+          - Cbom
+          - securityAlertsLibrary
+          - Compliance
+          - Findings
+          - Suppressions
+          - Resolved
+          - spdx
+          - spdx_2_3
+          - cycloneDX
+          - cycloneDX_1_5
+          - cycloneDX_1_6
+          - dueDiligence
+          - unknown
+          - imgAttribution
+          - imgDueDiligence
+          - imgSpdx
+          - imgSpdx_2_3
+          - imgCycloneDX
+          - imgCycloneDX_1_5
+          - aiInventory
+          - aiFindings
+          - imgCycloneDX_1_6
+          - risk
+          - users
+          - zeroDayCatalog
+          - activityLog
+        maxDepthLevel:
+          type: integer
+          format: int32
+        includeVulnerabilities:
+          type: boolean
+        isMlBomReport:
+          type: boolean
+          example: false
+    DueDiligenceReportExportProjectDTOV3:
+      type: object
+      properties:
+        name:
+          type: string
+        format:
+          type: string
+          description: Output file format. The Due Diligence report supports excel, json and xml.
+          example: json
+          enum:
+          - excel
+          - json
+          - xml
+        sendEmailNotification:
+          type: boolean
+    CreateSecurityFindingsByLibraryReportDTOV3:
+      type: object
+      properties:
+        name:
+          type: string
+        sendEmailNotification:
+          type: boolean
+        format:
+          type: string
+          enum:
+          - excel
+        search:
+          title: Search Query
+          type: string
+          description: "Filter your search to return items whose property has a specific value.\nUse the syntax: **[property][operator][value]**\n+ **Property**: the name of the property of the item\n+ **Operator**:\n    + **equals (==)** - Returns true if the value exactly matches this one. If the value contains a * character, it behaves like a wildcard (similar to the LIKE operator).\nExample: entity==abc* — will return true for entities like \"abcd\" and \"abc_123\".\n+ **Value**: the value of the property.\n\nLogical operators AND (;) and OR (,) are supported in filters — param1=in=(val1,val2) and (param2==val3 or param3==val4), can also be written as — param1=in=(val1,val2);(param2==val3,param3==val4)\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ libraryName: equals"
+          example: libraryName==*log4j*
+        zeroDayIdentifier:
+          title: Zero-Day Identifier
+          type: string
+          description: UUID or Name of a Zero-Day Event
+          example: CanisterWorm Supply Chain Attack
+    ResolvedReportExportProcessDTOV3:
+      type: object
+      properties:
+        name:
+          type: string
+        format:
+          type: string
+          enum:
+          - json
+          - html
+          - unknown
+          - xml
+          - excel
+          - yaml
+          - pdf
+          - tv
+          - rdf
+          - csv
+          - sarif
+          - cbom
+          - text
+        sendEmailNotification:
+          type: boolean
+        labelsUuidList:
+          type: array
+          items:
+            type: string
+        excludeInactiveProjects:
+          type: boolean
+        exportMode:
+          type: string
+          enum:
+          - split
+          - fullPdf
+        fromDate:
+          type: string
+        toDate:
+          type: string
+        additionalParams:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+    CodeReportExportProcessDTOV3:
+      type: object
+      properties:
+        name:
+          type: string
+        format:
+          type: string
+          enum:
+          - json
+          - html
+          - unknown
+          - xml
+          - excel
+          - yaml
+          - pdf
+          - tv
+          - rdf
+          - csv
+          - sarif
+          - cbom
+          - text
+        sendEmailNotification:
+          type: boolean
+        labelsUuidList:
+          type: array
+          items:
+            type: string
+        excludeInactiveProjects:
+          type: boolean
+        exportMode:
+          type: string
+          enum:
+          - split
+          - fullPdf
+        complianceStandard:
+          type: string
+        reportLevel:
+          type: string
+        description:
+          type: string
+        additionalParams:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+    DueDiligenceReportExportDTOV3:
+      type: object
+      properties:
+        name:
+          type: string
+        format:
+          type: string
+          description: Output file format. The Due Diligence report supports excel, json and xml.
+          example: json
+          enum:
+          - excel
+          - json
+          - xml
+        sendEmailNotification:
+          type: boolean
+        projectUuids:
+          type: array
+          items:
+            type: string
+    EntityTreeDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+        name:
+          type: string
+        scopeUuid:
+          type: string
+        scopeName:
+          type: string
+    InventoryReportExportDTOV3:
+      type: object
+      properties:
+        name:
+          type: string
+        format:
+          type: string
+          description: Output file format. The Inventory report supports excel, json and xml.
+          example: excel
+          enum:
+          - excel
+          - json
+          - xml
+        sendEmailNotification:
+          type: boolean
+        projectUuids:
+          type: array
+          items:
+            type: string
+    CreateSecurityFindingsReportDTOV3:
+      type: object
+      properties:
+        name:
+          type: string
+        sendEmailNotification:
+          type: boolean
+        format:
+          type: string
+          enum:
+          - excel
+        search:
+          title: Search Query
+          type: string
+          description: "Filter your search to return items whose property has a specific value.\nUse the syntax: **[property][operator][value]**\n+ **Property**: the name of the property of the item\n+ **Operator**:\n    + **equals (==)** - Returns true if the value exactly matches this one. If the value contains a * character, it behaves like a wildcard (similar to the LIKE operator).\nExample: entity==abc* — will return true for entities like \"abcd\" and \"abc_123\".\n+ **Value**: the value of the property.\n\nLogical operators AND (;) and OR (,) are supported in filters — param1=in=(val1,val2) and (param2==val3 or param3==val4), can also be written as — param1=in=(val1,val2);(param2==val3,param3==val4)\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ findingId: equals"
+          example: findingId==CVE-2020-8908
+        zeroDayIdentifier:
+          title: Zero-Day Identifier
+          type: string
+          description: UUID or Name of a Zero-Day Event
+          example: CanisterWorm Supply Chain Attack
+    RiskReportExportProjectDTOV3:
+      type: object
+      properties:
+        name:
+          type: string
+        format:
+          type: string
+          description: Output file format. The Risk report only supports pdf.
+          example: pdf
+          enum:
+          - pdf
+        sendEmailNotification:
+          type: boolean
+        exportMode:
+          type: string
+          description: Export mode. "split" (default) produces a ZIP (PDF summary + Excel CVE detail). "fullPdf" produces a single PDF, subject to a project-count threshold.
+          example: split
+          enum:
+          - split
+          - fullPdf
+    ReportExportProcessDTOV3:
+      type: object
+      properties:
+        uuid:
+          type: string
+        name:
+          type: string
+        scopeUuid:
+          type: string
+        scopeName:
+          type: string
+        subScopes:
+          type: array
+          items:
+            $ref: '#/components/schemas/EntityTreeDTO'
+        title:
+          type: string
+        reportType:
+          type: string
+          enum:
+          - attribution
+          - inventory
+          - vulnerabilities
+          - securityAlerts
+          - sbom
+          - Cbom
+          - securityAlertsLibrary
+          - Compliance
+          - Findings
+          - Suppressions
+          - Resolved
+          - spdx
+          - spdx_2_3
+          - cycloneDX
+          - cycloneDX_1_5
+          - cycloneDX_1_6
+          - dueDiligence
+          - unknown
+          - imgAttribution
+          - imgDueDiligence
+          - imgSpdx
+          - imgSpdx_2_3
+          - imgCycloneDX
+          - imgCycloneDX_1_5
+          - aiInventory
+          - aiFindings
+          - imgCycloneDX_1_6
+          - risk
+          - users
+          - zeroDayCatalog
+          - activityLog
+        format:
+          type: string
+          enum:
+          - json
+          - html
+          - unknown
+          - xml
+          - excel
+          - yaml
+          - pdf
+          - tv
+          - rdf
+          - csv
+          - sarif
+          - text
+        scopeType:
+          type: string
+          enum:
+          - organization
+          - application
+          - project
+          - account
+          - unsupported
+        status:
+          type: string
+          enum:
+          - PENDING
+          - IN_PROGRESS
+          - FAILED
+          - FAILURE
+          - SUCCESS
+        createdBy:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+    AttributionImgReportExportDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+        name:
+          type: string
+        scopeUuid:
+          type: string
+        scopeName:
+          type: string
+        subScopes:
+          type: array
+          items:
+            $ref: '#/components/schemas/EntityTreeDTO'
+        title:
+          type: string
+        reportType:
+          type: string
+          enum:
+          - attribution
+          - inventory
+          - vulnerabilities
+          - securityAlerts
+          - sbom
+          - Cbom
+          - securityAlertsLibrary
+          - Compliance
+          - Findings
+          - Suppressions
+          - Resolved
+          - spdx
+          - spdx_2_3
+          - cycloneDX
+          - cycloneDX_1_5
+          - cycloneDX_1_6
+          - dueDiligence
+          - unknown
+          - imgAttribution
+          - imgDueDiligence
+          - imgSpdx
+          - imgSpdx_2_3
+          - imgCycloneDX
+          - imgCycloneDX_1_5
+          - aiInventory
+          - aiFindings
+          - imgCycloneDX_1_6
+          - risk
+          - users
+          - zeroDayCatalog
+        format:
+          type: string
+          enum:
+          - json
+          - html
+          - unknown
+          - xml
+          - excel
+          - yaml
+          - pdf
+          - tv
+          - rdf
+          - csv
+          - sarif
+          - cbom
+          - text
+        scopeType:
+          type: string
+          enum:
+          - organization
+          - product
+          - project
+          - unsupported
+          - account
+        scopeUuidList:
+          type: array
+          items:
+            type: string
+        projectUuids:
+          type: array
+          items:
+            type: string
+        status:
+          type: string
+          enum:
+          - PENDING
+          - IN_PROGRESS
+          - FAILED
+          - FAILURE
+          - SUCCESS
+        createdBy:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        sendEmailNotification:
+          type: boolean
+        labelsUuidList:
+          type: array
+          items:
+            type: string
+        includeVulnerabilities:
+          type: boolean
+        excludeInactiveProjects:
+          type: boolean
+        groupBy:
+          type: string
+          enum:
+          - BY_COMPONENT
+          - BY_PROJECT
+        header:
+          type: string
+        footer:
+          type: string
+        selectedColumns:
+          type: array
+          items:
+            type: string
+            enum:
+            - SUMMARY
+            - PROJECTS
+            - PRODUCTS
+            - LICENSES
+            - NOTICES
+            - COPYRIGHTS
+            - PRIMARY_ATTRIBUTES
+            - PACKAGE_NAME
+            - PACKAGE_VERSION
+    DWRResponseV3MessageDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          $ref: '#/components/schemas/MessageDTO'
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: JWT token Bearer
+      scheme: bearer
+      bearerFormat: JWT

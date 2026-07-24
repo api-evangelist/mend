@@ -1,0 +1,844 @@
+openapi: 3.0.1
+info:
+  title: Mend Access Management Dependencies Source Files API
+  description: 'Mend''s enhanced API enables automation of workflows in a REST compliant format. The API features:
+
+    + Access for any user with Mend credentials, via a user key available in the user''s profile page in the Mend Platform.
+
+    + Improved security with a JWT token per organization, which expires every 10 minutes.
+
+    + Added scalability with support for cursor pagination and limiting results size.
+
+    + Broader functionality available programmatically.
+
+    + New standard API documentation for easy navigation and search.
+
+
+    **Note:** To help you get started with the Mend API 3.0, we recommend reviewing our onboarding guide -> [Getting Started with API 3.0](https://docs.mend.io/platform/latest/getting-started-with-mend-api-3-0).
+
+    This resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend API 3.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.'
+  version: '3.0'
+servers:
+- url: https://baseUrl
+  description: Generated server url
+security:
+- bearer-key: []
+tags:
+- name: Dependencies Source Files
+paths:
+  /api/v3.0/projects/{projectUuid}/dependencies/sourceFiles/inventory:
+    get:
+      tags:
+      - Dependencies Source Files
+      summary: Get source files inventory at project level
+      description: 'Returns an inventory list of the source files associated with each library in a project. Supports filtering by library UUID using the search parameter. Example: ?search=libraryUuid==b366b0ef-b211-4c37-a47c-0077e4de709f'
+      operationId: getSourceFilesInventoryProject
+      parameters:
+      - name: limit
+        in: query
+        description: Specifies the maximum number of items to be returned in the response.
+        allowEmptyValue: true
+        schema:
+          maximum: 10000
+          type: string
+          default: '50'
+      - name: cursor
+        in: query
+        description: Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved.
+        allowEmptyValue: true
+        schema:
+          type: string
+      - name: projectUuid
+        in: path
+        description: UUID of the project
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableV3CollectionSourceFileInventoryDTOV3'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+      x-order: '1'
+  /api/v3.0/projects/{projectUuid}/dependencies/sourceFiles/matchSuggestions:
+    post:
+      tags:
+      - Dependencies Source Files
+      summary: Get Mend library suggestions for source files at project level
+      description: 'Returns Mend library suggestions for the specified source file UUIDs. Request body requires: sourceFileUuids (array), recommendedForAllFiles (boolean). Supports same search filters as searchForMatch: date, license, name, owner, version. '
+      operationId: getMatchSuggestionsProject
+      parameters:
+      - name: projectUuid
+        in: path
+        description: UUID of the project
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: 'Request body containing source file UUIDs and optional filters. Fields: sourceFileUuids (required, array of UUIDs), recommendedForAllFiles (required, boolean).'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LibraryMatchSuggestionsRequestDTOV3_MatchSuggestions'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3CollectionSourceLibraryResponseDTO_MatchSuggestions'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+      x-order: '2'
+  /api/v3.0/projects/{projectUuid}/dependencies/sourceFiles/searchForMatch:
+    get:
+      tags:
+      - Dependencies Source Files
+      summary: Search for library matches for source files at project level
+      description: 'Returns library match suggestions from Mend based on manual search criteria. Uses V3 MQL search format. Available search filters: date:between:date1,date2 (e.g., between:2019-05-01,2019-06-01), license:[like|regex]:value, name:[like|equals|regex]:value, owner:like:value, version:like:value. Example: ?search=name==openssl. '
+      operationId: searchForMatchProject
+      parameters:
+      - name: projectUuid
+        in: path
+        description: UUID of the project
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3CollectionSourceLibraryResponseDTO_SearchForMatch'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+      x-order: '3'
+  /api/v3.0/applications/{applicationUuid}/dependencies/sourceFiles/inventory:
+    get:
+      tags:
+      - Dependencies Source Files
+      summary: Get source files inventory at application level
+      description: 'Returns a list of libraries together with the location of their source files. Supports filtering by library UUID using the search parameter. Example: ?search=libraryUuid==b366b0ef-b211-4c37-a47c-0077e4de709f'
+      operationId: getSourceFilesInventoryApplication
+      parameters:
+      - name: limit
+        in: query
+        description: Specifies the maximum number of items to be returned in the response.
+        allowEmptyValue: true
+        schema:
+          maximum: 10000
+          type: string
+          default: '50'
+      - name: cursor
+        in: query
+        description: Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved.
+        allowEmptyValue: true
+        schema:
+          type: string
+      - name: applicationUuid
+        in: path
+        description: Application UUID (Administration > Applications)
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableV3CollectionSourceFileInventoryDTOV3'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+      x-order: '4'
+  /api/v3.0/applications/{applicationUuid}/dependencies/sourceFiles/matchSuggestions:
+    post:
+      tags:
+      - Dependencies Source Files
+      summary: Get Mend library suggestions for source files at application level
+      description: 'Returns Mend library suggestions for the specified source file UUIDs. Request body requires: sourceFileUuids (array), recommendedForAllFiles (boolean). Supports same search filters as searchForMatch: date, license, name, owner, version. '
+      operationId: getMatchSuggestionsApplication
+      parameters:
+      - name: applicationUuid
+        in: path
+        description: Application UUID (Administration > Applications)
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: 'Request body containing source file UUIDs and optional filters. Fields: sourceFileUuids (required, array of UUIDs), recommendedForAllFiles (required, boolean).'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LibraryMatchSuggestionsRequestDTOV3_MatchSuggestions'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3CollectionSourceLibraryResponseDTO_MatchSuggestions'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+      x-order: '5'
+  /api/v3.0/applications/{applicationUuid}/dependencies/sourceFiles/searchForMatch:
+    get:
+      tags:
+      - Dependencies Source Files
+      summary: Search for library matches for source files at application level
+      description: 'Returns library match suggestions from Mend based on manual search criteria. Uses V3 MQL search format. Available search filters: date:between:date1,date2 (e.g., between:2019-05-01,2019-06-01), license:[like|regex]:value, name:[like|equals|regex]:value, owner:like:value, version:like:value. Example: ?search=name==openssl. '
+      operationId: searchForMatchApplication
+      parameters:
+      - name: applicationUuid
+        in: path
+        description: Application UUID (Administration > Applications)
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3CollectionSourceLibraryResponseDTO_SearchForMatch'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+      x-order: '6'
+  /api/v3.0/orgs/{orgUuid}/applications/dependencies/sourceFiles/remapping:
+    post:
+      tags:
+      - Dependencies Source Files
+      summary: Remap source files at application level
+      description: 'Remaps the specified source files to a target library for the specified application(s). This operation runs asynchronously and returns 202 Accepted with async process status. Requires exactly one of: targetLibraryUuid OR matchSuggestionId (not both, not neither). Request body fields: applicationUuids (required, array), sourceFileUuids (required, array), targetLibraryUuid (conditional), matchSuggestionId (conditional), comment (optional), sendEmailNotification (optional, boolean).'
+      operationId: remapSourceFilesApplication
+      parameters:
+      - name: orgUuid
+        in: path
+        description: 'org UUID (from the Mend App: **Administration** General > **Organization UUID**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: 'Request body containing remapping details. Fields: applicationUuids (required, array), sourceFileUuids (required, array), targetLibraryUuid (conditional, UUID string - use if remapping from search for a match), matchSuggestionId (conditional, base64 string - use if remapping from match suggestion), comment (optional, string), sendEmailNotification (optional, boolean). IMPORTANT: Provide exactly one of targetLibraryUuid OR matchSuggestionId, not both.'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SourceFileRemappingAppRequestDTOV3'
+        required: true
+      responses:
+        '202':
+          description: Remapping job accepted and initiated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SourceFilesRemappingAsyncStatusDtoV3'
+        '400':
+          description: 'Invalid request parameters. Possible errors: ''Only one of targetLibraryUuid or matchSuggestionId must be provided, not both'' OR ''Either targetLibraryUuid or matchSuggestionId must be provided'''
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: User lacks required permissions or application does not belong to organization
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '404':
+          description: 'Organization, application(s), or target library not found. Error: ''Target library not found'''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SourceFilesRemappingAsyncStatusDtoV3'
+      x-order: '7'
+  /api/v3.0/orgs/{orgUuid}/dependencies/sourceFiles/remapping:
+    post:
+      tags:
+      - Dependencies Source Files
+      summary: Remap source files at organization level
+      description: 'Remaps the specified source files to a target library across the entire organization. This operation runs asynchronously and returns 202 Accepted with async process status. Requires exactly one of: targetLibraryUuid OR matchSuggestionId (not both, not neither). Request body fields: sourceFileUuids (required, array), targetLibraryUuid (conditional), matchSuggestionId (conditional), comment (optional), sendEmailNotification (optional, boolean).'
+      operationId: remapSourceFilesOrganization
+      parameters:
+      - name: orgUuid
+        in: path
+        description: 'org UUID (from the Mend App: **Administration** General > **Organization UUID**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: 'Request body containing remapping details. Fields: sourceFileUuids (required, array), targetLibraryUuid (conditional, UUID string - use if remapping from search for a match), matchSuggestionId (conditional, base64 string - use if remapping from match suggestion), comment (optional, string), sendEmailNotification (optional, boolean). IMPORTANT: Provide exactly one of targetLibraryUuid OR matchSuggestionId, not both.'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SourceFileRemappingOrgRequestDTOV3'
+        required: true
+      responses:
+        '202':
+          description: Remapping job accepted and initiated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SourceFilesRemappingAsyncStatusDtoV3'
+        '400':
+          description: 'Invalid request parameters. Possible errors: ''Only one of targetLibraryUuid or matchSuggestionId must be provided, not both'' OR ''Either targetLibraryUuid or matchSuggestionId must be provided'''
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: User lacks required permissions
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '404':
+          description: 'Organization or target library not found. Error: ''Target library not found'''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SourceFilesRemappingAsyncStatusDtoV3'
+      x-order: '8'
+components:
+  schemas:
+    LiteLicenseDTO_MatchSuggestions:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          title: Licenses
+          type: string
+          example: MIT
+        severity:
+          title: License Risk
+          type: string
+          example: High
+      description: Collection of licenses associated with this library
+    RiskScoreExplanationDTO:
+      type: object
+      properties:
+        explanation:
+          title: Explanation Link
+          type: string
+          example: http://en.wikipedia.org/wiki/Academic_Free_License
+        indicatingText:
+          title: Indicating Text
+          type: string
+          example: 1) Grant of Copyright License...
+        riskScore:
+          title: Risk Score
+          type: integer
+          format: int32
+          example: 39
+    SourceFileLibraryDTO:
+      type: object
+      properties:
+        uuid:
+          title: Source Library UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Source Library Name
+          type: string
+          example: ' actionview-v0.0.1'
+        licenses:
+          type: array
+          items:
+            $ref: '#/components/schemas/LicenseDTO'
+        description:
+          type: string
+    SourceFilesRemappingAsyncStatusDtoV3:
+      type: object
+      properties:
+        uuid:
+          title: Process UUID
+          type: string
+          description: The unique identifier of the async process
+          example: caf69794-9882-4b55-82db-6b6da4fe2a92
+        status:
+          title: Process Status
+          type: string
+          description: The current status of the async process
+          example: PENDING
+          enum:
+          - PENDING
+          - IN_PROGRESS
+          - FAILED
+          - FAILURE
+          - SUCCESS
+        userEmail:
+          title: User Email
+          type: string
+          description: Email of the user who initiated the process
+          example: user@example.com
+        requestToken:
+          title: Request Token
+          type: string
+          description: Short token for tracking the request
+          example: 2cd6a43b
+      description: Async process status for source file remapping operations
+    DWRResponsePageableV3CollectionSourceFileInventoryDTOV3:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            '
+          example:
+            totalItems: '422'
+            next: http://someUrl?cursor=3
+            cursor: 3
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          type: array
+          items:
+            $ref: '#/components/schemas/SourceFileInventoryDTOV3'
+    SourceFileInventoryDTOV3:
+      type: object
+      properties:
+        uuid:
+          title: Source File UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Source File Name
+          type: string
+          example: common.js
+        matchType:
+          title: Match Type
+          type: string
+          example: MANUAL
+          enum:
+          - MANUAL
+          - AUTOMATIC
+        sha1:
+          title: SourceFileSha1
+          type: string
+          example: e9537a5384f5a7569997e87fe639961e31b38887
+          enum:
+          - MANUAL
+          - AUTOMATIC
+        localPath:
+          title: Local Path
+          type: string
+          example: C:\Users\
+        lastModified:
+          title: Source File Last Modification Date
+          type: string
+          format: date-time
+        library:
+          $ref: '#/components/schemas/SourceFileLibraryDTO'
+        comment:
+          title: Source File Comment
+          type: string
+        contextType:
+          title: Context Type
+          type: string
+          example: Organization
+          enum:
+          - SYSTEM
+          - GLOBAL_ACCOUNT
+          - DOMAIN
+          - PRODUCT
+          - PROJECT
+          - SCAN
+          - UNSUPPORTED_TYPE
+        project:
+          $ref: '#/components/schemas/ProjectDTOV3'
+    LicenseProfileDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+        name:
+          type: string
+        links:
+          uniqueItems: true
+          type: array
+          items:
+            title: Links
+            type: string
+            example: http://www.opensource.org/licenses/AFL-3.0
+        copyrightRiskScore:
+          $ref: '#/components/schemas/RiskScoreExplanationDTO'
+        patentAndRoyaltyRisk:
+          $ref: '#/components/schemas/RiskScoreExplanationDTO'
+        royaltyFree:
+          title: Royalty Free
+          type: string
+          example: Conditional
+        copyleft:
+          $ref: '#/components/schemas/DescriptionAndExplanationDTO'
+        linking:
+          $ref: '#/components/schemas/DescriptionAndExplanationDTO'
+        requiredNotices:
+          type: array
+          items:
+            title: Required Notices
+            type: string
+            example: Must identify specific modifications
+    LiteLicenseDTO_SearchForMatch:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          title: Licenses
+          type: string
+          example: MIT
+        severity:
+          title: License Risk
+          type: string
+          example: High
+      description: Collection of licenses associated with this library
+    SourceFileRemappingAppRequestDTOV3:
+      type: object
+      properties:
+        applicationUuids:
+          type: array
+          items:
+            title: Application UUIDs
+            type: string
+            description: List of application UUIDs for which the remapping applies
+            example: 123e4567-e89b-12d3-a456-426655440000
+        targetLibraryUuid:
+          title: Target Library UUID
+          type: string
+          description: The UUID of the library to which source files should be remapped. Exactly one of targetLibraryUuid or matchSuggestionId must be provided
+          example: 123e4567-e89b-12d3-a456-426655440000
+        matchSuggestionId:
+          title: Target Library Id
+          type: string
+          description: The Id of the library to which source files should be remapped. Exactly one of targetLibraryUuid or matchSuggestionId must be provided
+          example: ZWJlMTZhZjYtMmE2YS00MWQ1LWFiNTQtYWQ3YWE3OWZhNzFl
+        sourceFileUuids:
+          type: array
+          items:
+            title: Source File UUIDs
+            type: string
+            description: List of source file UUIDs to be remapped
+            example: 123e4567-e89b-12d3-a456-426655440000
+        comment:
+          title: Comment
+          type: string
+          description: Optional user comment explaining the reason for this remapping action
+        sendEmailNotification:
+          title: Send Email Notification
+          type: boolean
+          description: Whether to send email notification upon completion of the remapping operation
+          example: true
+      description: Request payload for remapping source files at application level
+    LibraryMatchSuggestionsRequestDTOV3_MatchSuggestions:
+      required:
+      - recommendedForAllFiles
+      - sourceFileUuids
+      type: object
+      properties:
+        sourceFileUuids:
+          type: array
+          items:
+            title: Source File UUIDs
+            type: string
+            description: List of source file UUIDs for which to get Mend library suggestions. Required field.
+            example: 123e4567-e89b-12d3-a456-426655440000
+        recommendedForAllFiles:
+          title: Recommended For All Files
+          type: boolean
+          description: Flag indicating whether to get recommendations that apply to all specified files. Required field.
+          example: false
+      description: Request payload for retrieving Mend library suggestions for source files. Requires sourceFileUuids and recommendedForAllFiles. Medium privilege users can optionally specify repository and version fields for more targeted suggestions.
+    ProjectDTOV3:
+      type: object
+      properties:
+        uuid:
+          title: Project UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Project Name
+          type: string
+          example: My Project
+        path:
+          title: Application Name
+          type: string
+          example: My Application
+        applicationName:
+          title: Application Name
+          type: string
+          example: My Application
+        applicationUuid:
+          title: Application Uuid
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+      description: Project information
+    DWRResponseV3CollectionSourceLibraryResponseDTO_MatchSuggestions:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          type: array
+          items:
+            $ref: '#/components/schemas/SourceLibraryResponseDTO_MatchSuggestions'
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+    SourceFileRemappingOrgRequestDTOV3:
+      type: object
+      properties:
+        targetLibraryUuid:
+          title: Target Library UUID
+          type: string
+          description: The UUID of the library to which source files should be remapped. Exactly one of targetLibraryUuid or matchSuggestionId must be provided
+          example: 123e4567-e89b-12d3-a456-426655440000
+        matchSuggestionId:
+          title: Target Library Id
+          type: string
+          description: The Id of the library to which source files should be remapped. Exactly one of targetLibraryUuid or matchSuggestionId must be provided
+          example: ZWJlMTZhZjYtMmE2YS00MWQ1LWFiNTQtYWQ3YWE3OWZhNzFl
+        sourceFileUuids:
+          type: array
+          items:
+            title: Source File UUIDs
+            type: string
+            description: List of source file UUIDs to be remapped
+            example: 123e4567-e89b-12d3-a456-426655440000
+        comment:
+          title: Comment
+          type: string
+          description: Optional user comment explaining the reason for this remapping action
+        sendEmailNotification:
+          title: Send Email Notification
+          type: boolean
+          description: Whether to send email notification upon completion of the remapping operation
+          example: true
+      description: Request payload for remapping source files at organization level
+    SourceLibraryResponseDTO_SearchForMatch:
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: Unique identifier of the library. Only available in searchForMatch endpoint.
+          example: b366b0ef-b211-4c37-a47c-0077e4de709f
+        name:
+          type: string
+          description: Name of the library
+          example: openssl
+        sha1:
+          type: string
+          description: SHA-1 hash of the library
+          example: 49f6cb968ff63793f6671d9026fb2a7034dad79a
+        licenses:
+          type: array
+          description: Collection of licenses associated with this library
+          items:
+            $ref: '#/components/schemas/LiteLicenseDTO_SearchForMatch'
+        version:
+          type: string
+          description: Version of the library
+          example: OpenSSL_1_0_1
+        owner:
+          type: string
+          description: Owner/organization of the library
+          example: openssl
+        url:
+          type: string
+          description: URL to the library source
+          example: https://github.com/openssl/openssl.git
+        date:
+          type: string
+          description: Release date of the library
+          format: date-time
+          example: '2012-03-14T12:39:00Z'
+        nonOfficialRelease:
+          type: boolean
+          description: Indicates whether this is a non-official release
+          example: false
+      description: Library match suggestion response containing library details and match metadata
+    LicenseDTO:
+      required:
+      - name
+      type: object
+      properties:
+        uuid:
+          title: License Uuid
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Licenses
+          type: string
+          example: MIT
+        spdxName:
+          title: Spdx Name
+          type: string
+          example: Glide
+        type:
+          title: Type
+          type: string
+          example: OPEN_SOURCE
+        suspected:
+          title: Suspected License
+          type: boolean
+        osiApproved:
+          title: Approved Osi
+          type: boolean
+        profile:
+          $ref: '#/components/schemas/LicenseProfileDTO'
+    SourceLibraryResponseDTO_MatchSuggestions:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the library
+          example: openssl
+        sha1:
+          type: string
+          description: SHA-1 hash of the library
+          example: 49f6cb968ff63793f6671d9026fb2a7034dad79a
+        licenses:
+          type: array
+          description: Collection of licenses associated with this library
+          items:
+            $ref: '#/components/schemas/LiteLicenseDTO_MatchSuggestions'
+        version:
+          type: string
+          description: Version of the library
+          example: OpenSSL_1_0_1
+        owner:
+          type: string
+          description: Owner/organization of the library
+          example: openssl
+        url:
+          type: string
+          description: URL to the library source
+          example: https://github.com/openssl/openssl.git
+        date:
+          type: string
+          description: Release date of the library
+          format: date-time
+          example: '2012-03-14T12:39:00Z'
+        nonOfficialRelease:
+          type: boolean
+          description: Indicates whether this is a non-official release
+          example: false
+        matchSuggestionId:
+          type: string
+          description: Base64 encoded match suggestion ID used for remapping operations.
+          nullable: true
+          example: ZWJlMTZhZjYtMmE2YS00MWQ1LWFiNTQtYWQ3YWE3OWZhNzFl
+      description: Library match suggestion response containing library details and match metadata
+    DescriptionAndExplanationDTO:
+      type: object
+      properties:
+        explanation:
+          title: Explanation Link
+          type: string
+          example: http://en.wikipedia.org/wiki/Academic_Free_License
+        indicatingText:
+          title: Indicating Text
+          type: string
+          example: 1) Grant of Copyright License...
+        description:
+          title: Description
+          type: string
+          example: Not a CopyLeft license.
+        displayText:
+          title: Display Text
+          type: string
+          example: 'No'
+    DWRResponseV3CollectionSourceLibraryResponseDTO_SearchForMatch:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          type: array
+          items:
+            $ref: '#/components/schemas/SourceLibraryResponseDTO_SearchForMatch'
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: JWT token Bearer
+      scheme: bearer
+      bearerFormat: JWT

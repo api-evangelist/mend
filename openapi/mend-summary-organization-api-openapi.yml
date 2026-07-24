@@ -1,0 +1,1058 @@
+openapi: 3.0.1
+info:
+  title: Mend Access Management Summary - Organization API
+  description: 'Mend''s enhanced API enables automation of workflows in a REST compliant format. The API features:
+
+    + Access for any user with Mend credentials, via a user key available in the user''s profile page in the Mend Platform.
+
+    + Improved security with a JWT token per organization, which expires every 10 minutes.
+
+    + Added scalability with support for cursor pagination and limiting results size.
+
+    + Broader functionality available programmatically.
+
+    + New standard API documentation for easy navigation and search.
+
+
+    **Note:** To help you get started with the Mend API 3.0, we recommend reviewing our onboarding guide -> [Getting Started with API 3.0](https://docs.mend.io/platform/latest/getting-started-with-mend-api-3-0).
+
+    This resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend API 3.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.'
+  version: '3.0'
+servers:
+- url: https://baseUrl
+  description: Generated server url
+security:
+- bearer-key: []
+tags:
+- name: Summary - Organization
+paths:
+  /api/v2.0/orgs/{orgToken}/summary/scanCountPerAgent:
+    get:
+      tags:
+      - Summary - Organization
+      summary: Get Organization Scan Count Per Agent.
+      description: 'Returns the total number of scans in selected period and a breakdown per agent.
+
+        The selected period cannot have start date older 30 days before the current date. Also selected period cannot be greater than 30 days
+
+        '
+      operationId: getScanCountPerAgent
+      parameters:
+      - name: search
+        in: query
+        description: "Filter your search to return items whose property has a specific value.\nUse the syntax: **property:operation:value** where a colon (:) separates between property, operation and value.\n+ Property: the name of the property of the item\n+ Operation:\n    + **between** - true if the value is inside a range. Syntax: lowest value comma (,) highest value. E.g. between:2019-05-01,2019-06-01\n+ Value: the value of the property.\n\nThis endpoint supports filtering on this property:\n+ date:between:date1,date2. E.g. between:2019-05-10,2019-06-01. Difference between dates cannot be greater than 30 days\n"
+        allowEmptyValue: true
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseScanSummaryCountDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v2.0/orgs/{orgToken}/summary/projects/vulnerableLibraryCount:
+    get:
+      tags:
+      - Summary - Organization
+      summary: Get Organization Vulnerable Libraries Count By Projects
+      description: Returns vulnerable libraries count by projects for a given organization.
+      operationId: getVulnerableLibsCountByProjects
+      parameters:
+      - name: pageSize
+        in: query
+        description: Enter the number of items to return in each page of the result.
+        allowEmptyValue: true
+        schema:
+          maximum: 10000
+          type: string
+          default: '50'
+      - name: page
+        in: query
+        description: Enter the page number to display in the result. Page numbers start at 0
+        allowEmptyValue: true
+        schema:
+          type: string
+          default: '0'
+      - name: search
+        in: query
+        description: "Filter your search to return items whose property has a specific value.\nUse the syntax: **property:operation:value** where a colon (:) separates between property, operation and value.\n+ Property: the name of the property of the item\n+ Operation:\n    + **equals** - true if the value is identical to this value.\n    + **like** - true if the property's value is contained within this value\n    + **regex** - true if this regular expression resolves as true.\n        The regex is not case sensitive, and special characters must be escaped with a backslash.\n        Special characters include space, double quote (\"), '<', '>', '#', '%', '{', '}', vertical bar ('|'), backslash, '^'.\n        To pass an escaped character in a URL in Postman, encode it first.\n        E.g. to return all items whose value begins with **a** or **A**, use regex:^a\n+ Value: the value of the property.\n\n\nTo combine multiple filters, separate each filter with a semicolon with no space. E.g.  property1:operation1:value1;property2:operation2:value2\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ vulnerabilityId:[equals]:value\n+ productName:[like | equals | regex]:value\n+ projectName:[like | equals | regex]:value\n"
+        allowEmptyValue: true
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableCollectionVulnrerableLibrariesByProjectCountDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v2.0/orgs/{orgToken}/summary/projects/totalLibraryCount:
+    get:
+      tags:
+      - Summary - Organization
+      summary: Get Organization Libraries Count By Projects.
+      description: Returns the total number of libraries (non-unique) for a given organization with a breakdown per project
+      operationId: getLibsCountByProjects
+      parameters:
+      - name: pageSize
+        in: query
+        description: Enter the number of items to return in each page of the result.
+        allowEmptyValue: true
+        schema:
+          maximum: 10000
+          type: string
+          default: '50'
+      - name: page
+        in: query
+        description: Enter the page number to display in the result. Page numbers start at 0
+        allowEmptyValue: true
+        schema:
+          type: string
+          default: '0'
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableCollectionLibraryCountByProjectDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v2.0/orgs/{orgToken}/summary/projects/inHouseLibraries:
+    get:
+      tags:
+      - Summary - Organization
+      summary: Get Organization In-House Libraries Count By Projects.
+      description: Returns the total number of in house libraries (non-unique) for a given organization with a breakdown per project.
+      operationId: getInHouseLibrariesByProjects
+      parameters:
+      - name: pageSize
+        in: query
+        description: Enter the number of items to return in each page of the result.
+        allowEmptyValue: true
+        schema:
+          maximum: 10000
+          type: string
+          default: '50'
+      - name: page
+        in: query
+        description: Enter the page number to display in the result. Page numbers start at 0
+        allowEmptyValue: true
+        schema:
+          type: string
+          default: '0'
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableDomainSummeryInHouseLibraryPerProjectDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v2.0/orgs/{orgToken}/summary/products/vulnerableLibraryCount:
+    get:
+      tags:
+      - Summary - Organization
+      summary: Get Organization Vulnerable Libraries Count By Products
+      description: Returns vulnerable libraries count by products for a given organization.
+      operationId: getVulnerableLibsCountByProducts
+      parameters:
+      - name: pageSize
+        in: query
+        description: Enter the number of items to return in each page of the result.
+        allowEmptyValue: true
+        schema:
+          maximum: 10000
+          type: string
+          default: '50'
+      - name: page
+        in: query
+        description: Enter the page number to display in the result. Page numbers start at 0
+        allowEmptyValue: true
+        schema:
+          type: string
+          default: '0'
+      - name: search
+        in: query
+        description: "Filter your search to return items whose property has a specific value.\nUse the syntax: **property:operation:value** where a colon (:) separates between property, operation and value.\n+ Property: the name of the property of the item\n+ Operation:\n    + **equals** - true if the value is identical to this value.\n    + **like** - true if the property's value is contained within this value\n    + **regex** - true if this regular expression resolves as true.\n        The regex is not case sensitive, and special characters must be escaped with a backslash.\n        Special characters include space, double quote (\"), '<', '>', '#', '%', '{', '}', vertical bar ('|'), backslash, '^'.\n        To pass an escaped character in a URL in Postman, encode it first.\n        E.g. to return all items whose value begins with **a** or **A**, use regex:^a\n+ Value: the value of the property.\n\n\nTo combine multiple filters, separate each filter with a semicolon with no space. E.g.  property1:operation1:value1;property2:operation2:value2\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ vulnerabilityId:[equals]:value\n+ productName:[like | equals | regex]:value\n+ projectName:[like | equals | regex]:value\n"
+        allowEmptyValue: true
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableCollectionVulnerableLibrariesCountDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v2.0/orgs/{orgToken}/summary/products/totalLibraryCount:
+    get:
+      tags:
+      - Summary - Organization
+      summary: Get Organization Libraries Count By Products.
+      description: Returns the total number of libraries (non-unique) for a given organization with a breakdown per product
+      operationId: getLibsCountByProducts
+      parameters:
+      - name: pageSize
+        in: query
+        description: Enter the number of items to return in each page of the result.
+        allowEmptyValue: true
+        schema:
+          maximum: 10000
+          type: string
+          default: '50'
+      - name: page
+        in: query
+        description: Enter the page number to display in the result. Page numbers start at 0
+        allowEmptyValue: true
+        schema:
+          type: string
+          default: '0'
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableCollectionLibraryCountByProductDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v2.0/orgs/{orgToken}/summary/products/inHouseLibraries:
+    get:
+      tags:
+      - Summary - Organization
+      summary: Get Organization In-House Libraries Count By Products.
+      description: Returns the total number of in house libraries (non-unique) for a given organization with a breakdown per product.
+      operationId: getInHouseLibrariesByProducts
+      parameters:
+      - name: pageSize
+        in: query
+        description: Enter the number of items to return in each page of the result.
+        allowEmptyValue: true
+        schema:
+          maximum: 10000
+          type: string
+          default: '50'
+      - name: page
+        in: query
+        description: Enter the page number to display in the result. Page numbers start at 0
+        allowEmptyValue: true
+        schema:
+          type: string
+          default: '0'
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableDomainSummaryInHouseLibraryPerProductDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v2.0/orgs/{orgToken}/summary/libraryCountPerLicense:
+    get:
+      tags:
+      - Summary - Organization
+      summary: Get Libraries Count Per License
+      description: Returns the total number of libraries for a given organization, along with a breakdown of the number of libraries per license.
+      operationId: getLibraryCountPerLicense
+      parameters:
+      - name: pageSize
+        in: query
+        description: Enter the number of items to return in each page of the result.
+        allowEmptyValue: true
+        schema:
+          maximum: 10000
+          type: string
+          default: '50'
+      - name: page
+        in: query
+        description: Enter the page number to display in the result. Page numbers start at 0
+        allowEmptyValue: true
+        schema:
+          type: string
+          default: '0'
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseLicenseCountDto'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v2.0/orgs/{orgToken}/summary/libraryCountPerLanguage:
+    get:
+      tags:
+      - Summary - Organization
+      summary: Get Libraries Count By Language
+      description: Returns the number of libraries with a breakdown per Language. The library count should be for all occurrences (nonunique) and only open source.
+      operationId: getLibraryCountPerLanguage
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseLibraryLanguageCountDto'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v2.0/orgs/{orgToken}/summary/effective/vulnerabilityCountPerSeverity:
+    get:
+      tags:
+      - Summary - Organization
+      summary: Get Vulnerability Alerts Count Per Effective Usage Status.
+      description: Vulnerability alert count per effective usage status.
+      operationId: getDomainVulnerabilityAlertCountPerEffectiveUsage
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      - name: cvss4
+        in: query
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseVulnerabilityAlertCountPerEffectiveUsageDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v2.0/orgs/{orgToken}/summary/alertTypes:
+    get:
+      tags:
+      - Summary - Organization
+      summary: Get Organization Alert Type Summaries
+      description: Returns the alerts count per type for a given organization.
+      operationId: getOrganizationAlertTypeSummaries
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      - name: cvss4
+        in: query
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseDomainAlertTypeSummaryDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v2.0/orgs/{orgToken}/summary/alertCountPerSeverity:
+    get:
+      tags:
+      - Summary - Organization
+      summary: Get Organization Alert Count Per Severity
+      description: Returns the active alerts count per severity for a given organization.
+      operationId: getOrganizationAlertCountPerSeverity
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      - name: cvss4
+        in: query
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseSecurityAlertPerVulnerabilityDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+components:
+  schemas:
+    DWRResponseScanSummaryCountDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/ScanSummaryCountDTO'
+    SecurityAlertPerVulnerabilityDTO:
+      type: object
+      properties:
+        total:
+          title: Total Alerts Count
+          type: integer
+          format: int32
+          example: 15
+        critical:
+          title: Critical Severity Alerts Count
+          type: integer
+          format: int32
+          example: 5
+        high:
+          title: High Severity Alerts Count
+          type: integer
+          format: int32
+          example: 4
+        medium:
+          title: Medium Severity Alerts Count
+          type: integer
+          format: int32
+          example: 3
+        low:
+          title: Low Severity Alerts Count
+          type: integer
+          format: int32
+          example: 3
+    VulnerableLibrariesCountDTO:
+      type: object
+      properties:
+        uuid:
+          title: Entity Uuid
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        productName:
+          title: Product Name
+          type: string
+          example: Product A
+        projectCount:
+          title: Project Count
+          type: integer
+          format: int64
+          example: 10
+        vulnerableLibraries:
+          title: Number of vulnerable libraries
+          type: integer
+          format: int64
+          example: 10
+    DWRResponsePageableCollectionVulnerableLibrariesCountDTO:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            + **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining.'
+          example:
+            totalItems: '422'
+            isLastPage: 'true'
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          type: array
+          items:
+            $ref: '#/components/schemas/VulnerableLibrariesCountDTO'
+      description: Provides insights into endpoint-supported pagination information
+    SecurityAlertPerLibraryDTO:
+      type: object
+      properties:
+        total:
+          title: Total Library Alerts Count
+          type: integer
+          format: int32
+          example: 15
+        librariesWithCritical:
+          title: Critical Severity Library Alerts Count
+          type: integer
+          format: int32
+          example: 5
+        librariesWithHigh:
+          title: High Severity Library Alerts Count
+          type: integer
+          format: int32
+          example: 4
+        librariesWithMedium:
+          title: Medium Severity Library Alerts Count
+          type: integer
+          format: int32
+          example: 3
+        librariesWithLow:
+          title: Low Severity Library Alerts Count
+          type: integer
+          format: int32
+          example: 3
+    DWRResponseLicenseCountDto:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/LicenseCountDto'
+    ScanSummaryCountDTO:
+      type: object
+      properties:
+        totalCount:
+          title: Total Scan Count
+          type: integer
+          description: Total number of all scans
+          format: int64
+          example: 20
+        agents:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScanSummaryItemDTO'
+    DWRResponsePageableDomainSummaryInHouseLibraryPerProductDTO:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            + **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining.'
+          example:
+            totalItems: '422'
+            isLastPage: 'true'
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/DomainSummaryInHouseLibraryPerProductDTO'
+      description: Provides insights into endpoint-supported pagination information
+    DomainSummaryInHouseLibraryPerProductDTO:
+      type: object
+      properties:
+        totalOrganizationCount:
+          title: Total Count of In-House Libraries in the Organization
+          type: integer
+          format: int64
+          example: 34
+        products:
+          title: In-House Libraries per Product
+          type: array
+          items:
+            $ref: '#/components/schemas/LibraryInHouseCountPerProductDTO'
+    ScanSummaryItemDTO:
+      type: object
+      properties:
+        name:
+          title: Agent Name
+          type: string
+          example: unified-agent
+        count:
+          title: Scan Count
+          type: integer
+          description: Number of scans by agent
+          format: int64
+          example: 10
+    DomainSummeryInHouseLibraryPerProjectDTO:
+      type: object
+      properties:
+        totalOrganizationCount:
+          title: Total Count of In-House Libraries in the Organization
+          type: integer
+          format: int32
+          example: 34
+        projects:
+          title: In-House Libraries per Project
+          type: array
+          items:
+            $ref: '#/components/schemas/LibraryInHouseCountPerProjectDTO'
+    DWRResponsePageableDomainSummeryInHouseLibraryPerProjectDTO:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            + **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining.'
+          example:
+            totalItems: '422'
+            isLastPage: 'true'
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/DomainSummeryInHouseLibraryPerProjectDTO'
+      description: Provides insights into endpoint-supported pagination information
+    VulnrerableLibrariesByProjectCountDTO:
+      type: object
+      properties:
+        uuid:
+          title: Entity Uuid
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        projectName:
+          title: Project Name
+          type: string
+          example: Entity A
+        productName:
+          title: Product Name
+          type: string
+          example: Entity B
+        vulnerableLibraries:
+          title: Number Of Vulnerable Libraries
+          type: integer
+          format: int64
+          example: 10
+    LibraryInHouseCountPerProductDTO:
+      title: In-House Libraries per Product
+      type: object
+      properties:
+        uuid:
+          title: Product UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Product Name
+          type: string
+          example: myProduct
+        inHouseLibraries:
+          title: Number of In-House Libraries in Product
+          type: integer
+          format: int32
+          example: 34
+        projectCount:
+          title: Number of Projects in Product
+          type: integer
+          format: int32
+          example: 34
+    DWRResponsePageableCollectionLibraryCountByProductDTO:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            + **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining.'
+          example:
+            totalItems: '422'
+            isLastPage: 'true'
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          type: array
+          items:
+            $ref: '#/components/schemas/LibraryCountByProductDTO'
+      description: Provides insights into endpoint-supported pagination information
+    LibraryCountDTO:
+      type: object
+      properties:
+        newVersions:
+          title: New Versions Count
+          type: integer
+          format: int32
+          example: 5
+    PolicyCountDTO:
+      type: object
+      properties:
+        violations:
+          title: Policy Violations Count
+          type: integer
+          format: int32
+          example: 5
+    LibraryInHouseCountPerProjectDTO:
+      title: In-House Libraries per Project
+      type: object
+      properties:
+        uuid:
+          title: Project UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Project Name
+          type: string
+          example: myProject
+        inHouseLibraries:
+          title: Number of In-House Libraries in Project
+          type: integer
+          format: int32
+          example: 34
+    DWRResponsePageableCollectionVulnrerableLibrariesByProjectCountDTO:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            + **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining.'
+          example:
+            totalItems: '422'
+            isLastPage: 'true'
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          type: array
+          items:
+            $ref: '#/components/schemas/VulnrerableLibrariesByProjectCountDTO'
+      description: Provides insights into endpoint-supported pagination information
+    DWRResponseDomainAlertTypeSummaryDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/DomainAlertTypeSummaryDTO'
+    DomainAlertTypeSummaryDTO:
+      type: object
+      properties:
+        policies:
+          $ref: '#/components/schemas/PolicyCountDTO'
+        libraries:
+          $ref: '#/components/schemas/LibraryCountDTO'
+        securityPerLibrary:
+          $ref: '#/components/schemas/SecurityAlertPerLibraryDTO'
+        securityPerVulnerability:
+          $ref: '#/components/schemas/SecurityAlertPerVulnerabilityDTO'
+    LibraryCountByProjectDTO:
+      type: object
+      properties:
+        uuid:
+          title: Project UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Project name
+          type: string
+          example: myProject
+        numberOfLibraries:
+          title: Number of libraries in project
+          type: integer
+          format: int32
+          example: 34
+    LibraryLanguageCountDto:
+      type: object
+      properties:
+        languages:
+          type: array
+          items:
+            $ref: '#/components/schemas/LibraryLanguageTypeCountDto'
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+    LicenseCountDto:
+      type: object
+      properties:
+        totalLibraryCount:
+          type: integer
+          format: int32
+        licenses:
+          type: array
+          items:
+            $ref: '#/components/schemas/LicensePerDomainCountDto'
+    DWRResponseSecurityAlertPerVulnerabilityDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/SecurityAlertPerVulnerabilityDTO'
+    VulnerabilityAlertCountPerEffectiveUsageDTO:
+      type: object
+      properties:
+        red:
+          $ref: '#/components/schemas/SecurityAlertPerVulnerabilityDTO'
+        yellow:
+          $ref: '#/components/schemas/SecurityAlertPerVulnerabilityDTO'
+        green:
+          $ref: '#/components/schemas/SecurityAlertPerVulnerabilityDTO'
+        grey:
+          $ref: '#/components/schemas/SecurityAlertPerVulnerabilityDTO'
+    LicensePerDomainCountDto:
+      type: object
+      properties:
+        licenseUuid:
+          title: Library UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: License Name
+          type: string
+          example: MIT
+        spdxName:
+          title: License SPDX Name
+          type: string
+          example: MIT
+        numberOfLibraries:
+          title: License Count Per Domain
+          type: integer
+          format: int64
+          example: 100
+    LibraryCountByProductDTO:
+      type: object
+      properties:
+        uuid:
+          title: Product UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Product name
+          type: string
+          example: myProduct
+        numberOfLibraries:
+          title: Number of libraries in product
+          type: integer
+          format: int32
+          example: 34
+    DWRResponsePageableCollectionLibraryCountByProjectDTO:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            + **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining.'
+          example:
+            totalItems: '422'
+            isLastPage: 'true'
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          type: array
+          items:
+            $ref: '#/components/schemas/LibraryCountByProjectDTO'
+      description: Provides insights into endpoint-supported pagination information
+    DWRResponseLibraryLanguageCountDto:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/LibraryLanguageCountDto'
+    DWRResponseVulnerabilityAlertCountPerEffectiveUsageDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/VulnerabilityAlertCountPerEffectiveUsageDTO'
+    LibraryLanguageTypeCountDto:
+      type: object
+      properties:
+        language:
+          title: Library Language
+          type: string
+          example: Java
+        count:
+          title: Total Count of Library language in User's Projects
+          type: integer
+          format: int64
+          example: 15
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: JWT token Bearer
+      scheme: bearer
+      bearerFormat: JWT
