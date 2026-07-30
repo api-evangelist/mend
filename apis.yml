@@ -1,9 +1,30 @@
 aid: mend
 name: Mend
-description: Mend is a company surfaced as a portfolio company of lightspeed-venture-partners and added
-  to the API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment
-  pipeline.
+description: >-
+  Mend.io (formerly WhiteSource) is a unified application security and AI
+  security platform that helps engineering and security teams find and
+  automatically remediate vulnerabilities across open-source dependencies,
+  proprietary code, containers, and AI models/agents. Its products span Software
+  Composition Analysis (SCA), Static Application Security Testing (SAST),
+  container image scanning, SBOM generation, automated dependency updates
+  (Renovate), and AI-native security for LLM-powered applications. Mend exposes a
+  REST-compliant AppSec Platform API (v3.0) and an SCA API (v2.0) for automating
+  scans, projects, applications, findings, reports, and administration, secured
+  with a short-lived per-organization JWT obtained from a user key.
 url: https://raw.githubusercontent.com/api-evangelist/mend/refs/heads/main/apis.yml
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://api-docs.mend.io/assets/mend-io-logo.06cad8388af3f063d8c0af6ef0386393959988075733a762b0899791865771ba.9c1bb791.svg
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
@@ -12,12 +33,757 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-20'
+x-enrichment:
+  date: '2026-07-20'
+  status: enriched
+  artifacts_added: 23
+  pass: local-v1
 tags:
+- Application Security
+- Software Composition Analysis
+- SAST
+- Container Security
+- AI Security
+- Dependency Management
+- Vulnerability Management
+- DevSecOps
+- SBOM
+- Open Source Security
 - Company
-apis: []
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+common:
+- type: AgenticAccess
+  url: agentic-access/mend-agentic-access.yml
+- type: TrustCenter
+  url: security/mend-trust-center.yml
+- type: DomainSecurity
+  url: security/mend-domain-security.yml
+- type: Authentication
+  url: authentication/mend-authentication.yml
+- type: Conventions
+  url: conventions/mend-conventions.yml
+- type: ErrorCatalog
+  url: errors/mend-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/mend-lifecycle.yml
+- type: ChangeLog
+  url: changelog/mend-changelog.yml
+- type: Conformance
+  url: conformance/mend-conformance.yml
+- type: DataModel
+  url: data-model/mend-data-model.yml
+- type: MCPServer
+  url: mcp/mend-mcp.yml
+- type: LLMsTxt
+  url: llms/mend-llms.txt
+- type: Packages
+  url: packages/mend-packages.yml
+- type: CLI
+  url: cli/mend-cli.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- url: https://www.mend.io/
+  type: Website
+- url: https://api-docs.mend.io/
+  type: DeveloperPortal
+- url: https://docs.mend.io/
+  type: Documentation
+- url: https://api-docs.mend.io/platform/3.0
+  type: APIReference
+- url: https://docs.mend.io/platform/latest/getting-started-with-mend-api-3-0
+  type: GettingStarted
+- url: https://support.mend.io/
+  type: Support
+- url: https://www.mend.io/blog/
+  type: Blog
+- url: https://www.mend.io/pricing/
+  type: Pricing
+- url: https://www.mend.io/integrations/
+  type: Integrations
+- url: https://saas.mend.io/login
+  type: Login
+- url: https://github.com/mend-toolkit
+  type: GitHubOrganization
+- url: https://status.mend.io/
+  type: StatusPage
+- url: https://trust.mend.io/
+  type: TrustCenter
+- url: https://trust.mend.io/
+  type: Compliance
+apis:
+- aid: mend:mend-access-management-api
+  name: Mend Access Management API
+  description: The Access Management API from Mend — 5 operation(s) for access management.
+  humanURL: https://api-docs.mend.io/platform/3.0
+  baseURL: https://api-saas.mend.io
+  tags:
+  - Access Management
+  properties:
+  - type: OpenAPI
+    url: openapi/mend-access-management-api-openapi.yml
+  - type: APIReference
+    url: https://api-docs.mend.io/platform/3.0
+  - type: APIReference
+    url: https://api-docs.mend.io/sca/2.0
+- aid: mend:mend-access-management-organizations-api
+  name: Mend Access Management - Organizations API
+  description: >-
+    The Access Management - Organizations API from Mend — 2 operation(s) for access management - organizations.
+  humanURL: https://api-docs.mend.io/platform/3.0
+  baseURL: https://api-saas.mend.io
+  tags:
+  - Access Management - Organizations
+  properties:
+  - type: OpenAPI
+    url: openapi/mend-access-management-organizations-api-openapi.yml
+  - type: APIReference
+    url: https://api-docs.mend.io/platform/3.0
+  - type: APIReference
+    url: https://api-docs.mend.io/sca/2.0
+- aid: mend:mend-administration-groups-api
+  name: Mend Administration - Groups API
+  description: The Administration - Groups API from Mend — 6 operation(s) for administration - groups.
+  humanURL: https://api-docs.mend.io/platform/3.0
+  baseURL: https://api-saas.mend.io
+  tags:
+  - Administration - Groups
+  properties:
+  - type: OpenAPI
+    url: openapi/mend-administration-groups-api-openapi.yml
+  - type: APIReference
+    url: https://api-docs.mend.io/platform/3.0
+  - type: APIReference
+    url: https://api-docs.mend.io/sca/2.0
+- aid: mend:mend-administration-labels-api
+  name: Mend Administration - Labels API
+  description: The Administration - Labels API from Mend — 2 operation(s) for administration - labels.
+  humanURL: https://api-docs.mend.io/platform/3.0
+  baseURL: https://api-saas.mend.io
+  tags:
+  - Administration - Labels
+  properties:
+  - type: OpenAPI
+    url: openapi/mend-administration-labels-api-openapi.yml
+  - type: APIReference
+    url: https://api-docs.mend.io/platform/3.0
+  - type: APIReference
+    url: https://api-docs.mend.io/sca/2.0
+- aid: mend:mend-administration-users-api
+  name: Mend Administration - Users API
+  description: The Administration - Users API from Mend — 5 operation(s) for administration - users.
+  humanURL: https://api-docs.mend.io/platform/3.0
+  baseURL: https://api-saas.mend.io
+  tags:
+  - Administration - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/mend-administration-users-api-openapi.yml
+  - type: APIReference
+    url: https://api-docs.mend.io/platform/3.0
+  - type: APIReference
+    url: https://api-docs.mend.io/sca/2.0
+- aid: mend:mend-ai-api
+  name: Mend AI API
+  description: The AI API from Mend — 1 operation(s) for ai.
+  humanURL: https://api-docs.mend.io/platform/3.0
+  baseURL: https://api-saas.mend.io
+  tags:
+  - AI
+  properties:
+  - type: OpenAPI
+    url: openapi/mend-ai-api-openapi.yml
+  - type: APIReference
+    url: https://api-docs.mend.io/platform/3.0
+  - type: APIReference
+    url: https://api-docs.mend.io/sca/2.0
+- aid: mend:mend-alerts-product-api
+  name: Mend Alerts - Product API
+  description: The Alerts - Product API from Mend — 3 operation(s) for alerts - product.
+  humanURL: https://api-docs.mend.io/platform/3.0
+  baseURL: https://api-saas.mend.io
+  tags:
+  - Alerts - Product
+  properties:
+  - type: OpenAPI
+    url: openapi/mend-alerts-product-api-openapi.yml
+  - type: APIReference
+    url: https://api-docs.mend.io/platform/3.0
+  - type: APIReference
+    url: https://api-docs.mend.io/sca/2.0
+- aid: mend:mend-alerts-project-api
+  name: Mend Alerts - Project API
+  description: The Alerts - Project API from Mend — 6 operation(s) for alerts - project.
+  humanURL: https://api-docs.mend.io/platform/3.0
+  baseURL: https://api-saas.mend.io
+  tags:
+  - Alerts - Project
+  properties:
+  - type: OpenAPI
+    url: openapi/mend-alerts-project-api-openapi.yml
+  - type: APIReference
+    url: https://api-docs.mend.io/platform/3.0
+  - type: APIReference
+    url: https://api-docs.mend.io/sca/2.0
+- aid: mend:mend-applications-api
+  name: Mend Applications API
+  description: The Applications API from Mend — 8 operation(s) for applications.
+  humanURL: https://api-docs.mend.io/platform/3.0
+  baseURL: https://api-saas.mend.io
+  tags:
+  - Applications
+  properties:
+  - type: OpenAPI
+    url: openapi/mend-applications-api-openapi.yml
+  - type: APIReference
+    url: https://api-docs.mend.io/platform/3.0
+  - type: APIReference
+    url: https://api-docs.mend.io/sca/2.0
+- aid: mend:mend-asynchronous-process-control-api
+  name: Mend Asynchronous Process Control API
+  description: >-
+    The Asynchronous Process Control API from Mend — 1 operation(s) for asynchronous process control.
+  humanURL: https://api-docs.mend.io/platform/3.0
+  baseURL: https://api-saas.mend.io
+  tags:
+  - Asynchronous Process Control
+  properties:
+  - type: OpenAPI
+    url: openapi/mend-asynchronous-process-control-api-openapi.yml
+  - type: APIReference
+    url: https://api-docs.mend.io/platform/3.0
+  - type: APIReference
+    url: https://api-docs.mend.io/sca/2.0
+- aid: mend:mend-customattribute-organization-api
+  name: Mend CustomAttribute - Organization API
+  description: >-
+    The CustomAttribute - Organization API from Mend — 2 operation(s) for customattribute - organization.
+  humanURL: https://api-docs.mend.io/platform/3.0
+  baseURL: https://api-saas.mend.io
+  tags:
+  - CustomAttribute - Organization
+  properties:
+  - type: OpenAPI
+    url: openapi/mend-customattribute-organization-api-openapi.yml
+  - type: APIReference
+    url: https://api-docs.mend.io/platform/3.0
+  - type: APIReference
+    url: https://api-docs.mend.io/sca/2.0
+- aid: mend:mend-customattribute-product-api
+  name: Mend CustomAttribute - Product API
+  description: >-
+    The CustomAttribute - Product API from Mend — 1 operation(s) for customattribute - product.
+  humanURL: https://api-docs.mend.io/platform/3.0
+  baseURL: https://api-saas.mend.io
+  tags:
+  - CustomAttribute - Product
+  properties:
+  - type: OpenAPI
+    url: openapi/mend-customattribute-product-api-openapi.yml
+  - type: APIReference
+    url: https://api-docs.mend.io/platform/3.0
+  - type: APIReference
+    url: https://api-docs.mend.io/sca/2.0
+- aid: mend:mend-customattribute-project-api
+  name: Mend CustomAttribute - Project API
+  description: >-
+    The CustomAttribute - Project API from Mend — 1 operation(s) for customattribute - project.
+  humanURL: https://api-docs.mend.io/platform/3.0
+  baseURL: https://api-saas.mend.io
+  tags:
+  - CustomAttribute - Project
+  properties:
+  - type: OpenAPI
+    url: openapi/mend-customattribute-project-api-openapi.yml
+  - type: APIReference
+    url: https://api-docs.mend.io/platform/3.0
+  - type: APIReference
+    url: https://api-docs.mend.io/sca/2.0
+- aid: mend:mend-dependencies-source-files-api
+  name: Mend Dependencies Source Files API
+  description: >-
+    The Dependencies Source Files API from Mend — 8 operation(s) for dependencies source files.
+  humanURL: https://api-docs.mend.io/platform/3.0
+  baseURL: https://api-saas.mend.io
+  tags:
+  - Dependencies Source Files
+  properties:
+  - type: OpenAPI
+    url: openapi/mend-dependencies-source-files-api-openapi.yml
+  - type: APIReference
+    url: https://api-docs.mend.io/platform/3.0
+  - type: APIReference
+    url: https://api-docs.mend.io/sca/2.0
+- aid: mend:mend-domain-controller-api
+  name: Mend domain-controller API
+  description: The domain-controller API from Mend — 1 operation(s) for domain-controller.
+  humanURL: https://api-docs.mend.io/platform/3.0
+  baseURL: https://api-saas.mend.io
+  tags:
+  - domain-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/mend-domain-controller-api-openapi.yml
+  - type: APIReference
+    url: https://api-docs.mend.io/platform/3.0
+  - type: APIReference
+    url: https://api-docs.mend.io/sca/2.0
+- aid: mend:mend-entities-organization-api
+  name: Mend Entities - Organization API
+  description: The Entities - Organization API from Mend — 7 operation(s) for entities - organization.
+  humanURL: https://api-docs.mend.io/platform/3.0
+  baseURL: https://api-saas.mend.io
+  tags:
+  - Entities - Organization
+  properties:
+  - type: OpenAPI
+    url: openapi/mend-entities-organization-api-openapi.yml
+  - type: APIReference
+    url: https://api-docs.mend.io/platform/3.0
+  - type: APIReference
+    url: https://api-docs.mend.io/sca/2.0
+- aid: mend:mend-entities-product-api
+  name: Mend Entities - Product API
+  description: The Entities - Product API from Mend — 2 operation(s) for entities - product.
+  humanURL: https://api-docs.mend.io/platform/3.0
+  baseURL: https://api-saas.mend.io
+  tags:
+  - Entities - Product
+  properties:
+  - type: OpenAPI
+    url: openapi/mend-entities-product-api-openapi.yml
+  - type: APIReference
+    url: https://api-docs.mend.io/platform/3.0
+  - type: APIReference
+    url: https://api-docs.mend.io/sca/2.0
+- aid: mend:mend-entities-project-api
+  name: Mend Entities - Project API
+  description: The Entities - Project API from Mend — 3 operation(s) for entities - project.
+  humanURL: https://api-docs.mend.io/platform/3.0
+  baseURL: https://api-saas.mend.io
+  tags:
+  - Entities - Project
+  properties:
+  - type: OpenAPI
+    url: openapi/mend-entities-project-api-openapi.yml
+  - type: APIReference
+    url: https://api-docs.mend.io/platform/3.0
+  - type: APIReference
+    url: https://api-docs.mend.io/sca/2.0
+- aid: mend:mend-findings-project-api
+  name: Mend Findings - Project API
+  description: The Findings - Project API from Mend — 26 operation(s) for findings - project.
+  humanURL: https://api-docs.mend.io/platform/3.0
+  baseURL: https://api-saas.mend.io
+  tags:
+  - Findings - Project
+  properties:
+  - type: OpenAPI
+    url: openapi/mend-findings-project-api-openapi.yml
+  - type: APIReference
+    url: https://api-docs.mend.io/platform/3.0
+  - type: APIReference
+    url: https://api-docs.mend.io/sca/2.0
+- aid: mend:mend-findings-scan-api
+  name: Mend Findings - Scan API
+  description: The Findings - Scan API from Mend — 5 operation(s) for findings - scan.
+  humanURL: https://api-docs.mend.io/platform/3.0
+  baseURL: https://api-saas.mend.io
+  tags:
+  - Findings - Scan
+  properties:
+  - type: OpenAPI
+    url: openapi/mend-findings-scan-api-openapi.yml
+  - type: APIReference
+    url: https://api-docs.mend.io/platform/3.0
+  - type: APIReference
+    url: https://api-docs.mend.io/sca/2.0
+- aid: mend:mend-general-info-licenses-api
+  name: Mend General Info - Licenses API
+  description: The General Info - Licenses API from Mend — 2 operation(s) for general info - licenses.
+  humanURL: https://api-docs.mend.io/platform/3.0
+  baseURL: https://api-saas.mend.io
+  tags:
+  - General Info - Licenses
+  properties:
+  - type: OpenAPI
+    url: openapi/mend-general-info-licenses-api-openapi.yml
+  - type: APIReference
+    url: https://api-docs.mend.io/platform/3.0
+  - type: APIReference
+    url: https://api-docs.mend.io/sca/2.0
+- aid: mend:mend-general-info-permissions-api
+  name: Mend General Info - Permissions API
+  description: >-
+    The General Info - Permissions API from Mend — 1 operation(s) for general info - permissions.
+  humanURL: https://api-docs.mend.io/platform/3.0
+  baseURL: https://api-saas.mend.io
+  tags:
+  - General Info - Permissions
+  properties:
+  - type: OpenAPI
+    url: openapi/mend-general-info-permissions-api-openapi.yml
+  - type: APIReference
+    url: https://api-docs.mend.io/platform/3.0
+  - type: APIReference
+    url: https://api-docs.mend.io/sca/2.0
+- aid: mend:mend-general-info-vulnerabilities-api
+  name: Mend General Info - Vulnerabilities API
+  description: >-
+    The General Info - Vulnerabilities API from Mend — 2 operation(s) for general info - vulnerabilities.
+  humanURL: https://api-docs.mend.io/platform/3.0
+  baseURL: https://api-saas.mend.io
+  tags:
+  - General Info - Vulnerabilities
+  properties:
+  - type: OpenAPI
+    url: openapi/mend-general-info-vulnerabilities-api-openapi.yml
+  - type: APIReference
+    url: https://api-docs.mend.io/platform/3.0
+  - type: APIReference
+    url: https://api-docs.mend.io/sca/2.0
+- aid: mend:mend-integrations-api
+  name: Mend Integrations API
+  description: The Integrations API from Mend — 1 operation(s) for integrations.
+  humanURL: https://api-docs.mend.io/platform/3.0
+  baseURL: https://api-saas.mend.io
+  tags:
+  - Integrations
+  properties:
+  - type: OpenAPI
+    url: openapi/mend-integrations-api-openapi.yml
+  - type: APIReference
+    url: https://api-docs.mend.io/platform/3.0
+  - type: APIReference
+    url: https://api-docs.mend.io/sca/2.0
+- aid: mend:mend-library-organization-api
+  name: Mend Library - Organization API
+  description: The Library - Organization API from Mend — 10 operation(s) for library - organization.
+  humanURL: https://api-docs.mend.io/platform/3.0
+  baseURL: https://api-saas.mend.io
+  tags:
+  - Library - Organization
+  properties:
+  - type: OpenAPI
+    url: openapi/mend-library-organization-api-openapi.yml
+  - type: APIReference
+    url: https://api-docs.mend.io/platform/3.0
+  - type: APIReference
+    url: https://api-docs.mend.io/sca/2.0
+- aid: mend:mend-library-product-api
+  name: Mend Library - Product API
+  description: The Library - Product API from Mend — 6 operation(s) for library - product.
+  humanURL: https://api-docs.mend.io/platform/3.0
+  baseURL: https://api-saas.mend.io
+  tags:
+  - Library - Product
+  properties:
+  - type: OpenAPI
+    url: openapi/mend-library-product-api-openapi.yml
+  - type: APIReference
+    url: https://api-docs.mend.io/platform/3.0
+  - type: APIReference
+    url: https://api-docs.mend.io/sca/2.0
+- aid: mend:mend-library-project-api
+  name: Mend Library - Project API
+  description: The Library - Project API from Mend — 5 operation(s) for library - project.
+  humanURL: https://api-docs.mend.io/platform/3.0
+  baseURL: https://api-saas.mend.io
+  tags:
+  - Library - Project
+  properties:
+  - type: OpenAPI
+    url: openapi/mend-library-project-api-openapi.yml
+  - type: APIReference
+    url: https://api-docs.mend.io/platform/3.0
+  - type: APIReference
+    url: https://api-docs.mend.io/sca/2.0
+- aid: mend:mend-library-source-files-api
+  name: Mend Library - Source Files API
+  description: The Library - Source Files API from Mend — 2 operation(s) for library - source files.
+  humanURL: https://api-docs.mend.io/platform/3.0
+  baseURL: https://api-saas.mend.io
+  tags:
+  - Library - Source Files
+  properties:
+  - type: OpenAPI
+    url: openapi/mend-library-source-files-api-openapi.yml
+  - type: APIReference
+    url: https://api-docs.mend.io/platform/3.0
+  - type: APIReference
+    url: https://api-docs.mend.io/sca/2.0
+- aid: mend:mend-policies-organization-api
+  name: Mend Policies - Organization API
+  description: The Policies - Organization API from Mend — 4 operation(s) for policies - organization.
+  humanURL: https://api-docs.mend.io/platform/3.0
+  baseURL: https://api-saas.mend.io
+  tags:
+  - Policies - Organization
+  properties:
+  - type: OpenAPI
+    url: openapi/mend-policies-organization-api-openapi.yml
+  - type: APIReference
+    url: https://api-docs.mend.io/platform/3.0
+  - type: APIReference
+    url: https://api-docs.mend.io/sca/2.0
+- aid: mend:mend-policies-product-api
+  name: Mend Policies - Product API
+  description: The Policies - Product API from Mend — 4 operation(s) for policies - product.
+  humanURL: https://api-docs.mend.io/platform/3.0
+  baseURL: https://api-saas.mend.io
+  tags:
+  - Policies - Product
+  properties:
+  - type: OpenAPI
+    url: openapi/mend-policies-product-api-openapi.yml
+  - type: APIReference
+    url: https://api-docs.mend.io/platform/3.0
+  - type: APIReference
+    url: https://api-docs.mend.io/sca/2.0
+- aid: mend:mend-policies-project-api
+  name: Mend Policies - Project API
+  description: The Policies - Project API from Mend — 4 operation(s) for policies - project.
+  humanURL: https://api-docs.mend.io/platform/3.0
+  baseURL: https://api-saas.mend.io
+  tags:
+  - Policies - Project
+  properties:
+  - type: OpenAPI
+    url: openapi/mend-policies-project-api-openapi.yml
+  - type: APIReference
+    url: https://api-docs.mend.io/platform/3.0
+  - type: APIReference
+    url: https://api-docs.mend.io/sca/2.0
+- aid: mend:mend-product-attribution-report-controller-api
+  name: Mend product-attribution-report-controller API
+  description: >-
+    The product-attribution-report-controller API from Mend — 1 operation(s) for product-attribution-report-controller.
+  humanURL: https://api-docs.mend.io/platform/3.0
+  baseURL: https://api-saas.mend.io
+  tags:
+  - product-attribution-report-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/mend-product-attribution-report-controller-api-openapi.yml
+  - type: APIReference
+    url: https://api-docs.mend.io/platform/3.0
+  - type: APIReference
+    url: https://api-docs.mend.io/sca/2.0
+- aid: mend:mend-project-attribution-report-controller-api
+  name: Mend project-attribution-report-controller API
+  description: >-
+    The project-attribution-report-controller API from Mend — 1 operation(s) for project-attribution-report-controller.
+  humanURL: https://api-docs.mend.io/platform/3.0
+  baseURL: https://api-saas.mend.io
+  tags:
+  - project-attribution-report-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/mend-project-attribution-report-controller-api-openapi.yml
+  - type: APIReference
+    url: https://api-docs.mend.io/platform/3.0
+  - type: APIReference
+    url: https://api-docs.mend.io/sca/2.0
+- aid: mend:mend-projects-api
+  name: Mend Projects API
+  description: The Projects API from Mend — 11 operation(s) for projects.
+  humanURL: https://api-docs.mend.io/platform/3.0
+  baseURL: https://api-saas.mend.io
+  tags:
+  - Projects
+  properties:
+  - type: OpenAPI
+    url: openapi/mend-projects-api-openapi.yml
+  - type: APIReference
+    url: https://api-docs.mend.io/platform/3.0
+  - type: APIReference
+    url: https://api-docs.mend.io/sca/2.0
+- aid: mend:mend-red-team-api
+  name: Mend Red Team API
+  description: The Red Team API from Mend — 1 operation(s) for red team.
+  humanURL: https://api-docs.mend.io/platform/3.0
+  baseURL: https://api-saas.mend.io
+  tags:
+  - Red Team
+  properties:
+  - type: OpenAPI
+    url: openapi/mend-red-team-api-openapi.yml
+  - type: APIReference
+    url: https://api-docs.mend.io/platform/3.0
+  - type: APIReference
+    url: https://api-docs.mend.io/sca/2.0
+- aid: mend:mend-reports-api
+  name: Mend Reports API
+  description: The Reports API from Mend — 43 operation(s) for reports.
+  humanURL: https://api-docs.mend.io/platform/3.0
+  baseURL: https://api-saas.mend.io
+  tags:
+  - Reports
+  properties:
+  - type: OpenAPI
+    url: openapi/mend-reports-api-openapi.yml
+  - type: APIReference
+    url: https://api-docs.mend.io/platform/3.0
+  - type: APIReference
+    url: https://api-docs.mend.io/sca/2.0
+- aid: mend:mend-scans-api
+  name: Mend Scans API
+  description: The Scans API from Mend — 6 operation(s) for scans.
+  humanURL: https://api-docs.mend.io/platform/3.0
+  baseURL: https://api-saas.mend.io
+  tags:
+  - Scans
+  properties:
+  - type: OpenAPI
+    url: openapi/mend-scans-api-openapi.yml
+  - type: APIReference
+    url: https://api-docs.mend.io/platform/3.0
+  - type: APIReference
+    url: https://api-docs.mend.io/sca/2.0
+- aid: mend:mend-settings-in-house-api
+  name: Mend Settings - In-House API
+  description: The Settings - In-House API from Mend — 4 operation(s) for settings - in-house.
+  humanURL: https://api-docs.mend.io/platform/3.0
+  baseURL: https://api-saas.mend.io
+  tags:
+  - Settings - In-House
+  properties:
+  - type: OpenAPI
+    url: openapi/mend-settings-in-house-api-openapi.yml
+  - type: APIReference
+    url: https://api-docs.mend.io/platform/3.0
+  - type: APIReference
+    url: https://api-docs.mend.io/sca/2.0
+- aid: mend:mend-settings-whitelist-api
+  name: Mend Settings - Whitelist API
+  description: The Settings - Whitelist API from Mend — 4 operation(s) for settings - whitelist.
+  humanURL: https://api-docs.mend.io/platform/3.0
+  baseURL: https://api-saas.mend.io
+  tags:
+  - Settings - Whitelist
+  properties:
+  - type: OpenAPI
+    url: openapi/mend-settings-whitelist-api-openapi.yml
+  - type: APIReference
+    url: https://api-docs.mend.io/platform/3.0
+  - type: APIReference
+    url: https://api-docs.mend.io/sca/2.0
+- aid: mend:mend-summary-organization-api
+  name: Mend Summary - Organization API
+  description: The Summary - Organization API from Mend — 12 operation(s) for summary - organization.
+  humanURL: https://api-docs.mend.io/platform/3.0
+  baseURL: https://api-saas.mend.io
+  tags:
+  - Summary - Organization
+  properties:
+  - type: OpenAPI
+    url: openapi/mend-summary-organization-api-openapi.yml
+  - type: APIReference
+    url: https://api-docs.mend.io/platform/3.0
+  - type: APIReference
+    url: https://api-docs.mend.io/sca/2.0
+- aid: mend:mend-update-request-api
+  name: Mend Update Request API
+  description: The Update Request API from Mend — 1 operation(s) for update request.
+  humanURL: https://api-docs.mend.io/platform/3.0
+  baseURL: https://api-saas.mend.io
+  tags:
+  - Update Request
+  properties:
+  - type: OpenAPI
+    url: openapi/mend-update-request-api-openapi.yml
+  - type: APIReference
+    url: https://api-docs.mend.io/platform/3.0
+  - type: APIReference
+    url: https://api-docs.mend.io/sca/2.0
+- aid: mend:mend-user-management-groups-api
+  name: Mend User Management - Groups API
+  description: >-
+    The User Management - Groups API from Mend — 5 operation(s) for user management - groups.
+  humanURL: https://api-docs.mend.io/platform/3.0
+  baseURL: https://api-saas.mend.io
+  tags:
+  - User Management - Groups
+  properties:
+  - type: OpenAPI
+    url: openapi/mend-user-management-groups-api-openapi.yml
+  - type: APIReference
+    url: https://api-docs.mend.io/platform/3.0
+  - type: APIReference
+    url: https://api-docs.mend.io/sca/2.0
+- aid: mend:mend-user-management-roles-and-permissions-api
+  name: Mend User Management - Roles And Permissions API
+  description: >-
+    The User Management - Roles And Permissions API from Mend — 3 operation(s) for user management - roles
+    and permissions.
+  humanURL: https://api-docs.mend.io/platform/3.0
+  baseURL: https://api-saas.mend.io
+  tags:
+  - User Management - Roles And Permissions
+  properties:
+  - type: OpenAPI
+    url: openapi/mend-user-management-roles-and-permissions-api-openapi.yml
+  - type: APIReference
+    url: https://api-docs.mend.io/platform/3.0
+  - type: APIReference
+    url: https://api-docs.mend.io/sca/2.0
+- aid: mend:mend-user-management-users-api
+  name: Mend User Management - Users API
+  description: The User Management - Users API from Mend — 9 operation(s) for user management - users.
+  humanURL: https://api-docs.mend.io/platform/3.0
+  baseURL: https://api-saas.mend.io
+  tags:
+  - User Management - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/mend-user-management-users-api-openapi.yml
+  - type: APIReference
+    url: https://api-docs.mend.io/platform/3.0
+  - type: APIReference
+    url: https://api-docs.mend.io/sca/2.0
+- aid: mend:mend-user-profile-api
+  name: Mend User Profile API
+  description: The User Profile API from Mend — 2 operation(s) for user profile.
+  humanURL: https://api-docs.mend.io/platform/3.0
+  baseURL: https://api-saas.mend.io
+  tags:
+  - User Profile
+  properties:
+  - type: OpenAPI
+    url: openapi/mend-user-profile-api-openapi.yml
+  - type: APIReference
+    url: https://api-docs.mend.io/platform/3.0
+  - type: APIReference
+    url: https://api-docs.mend.io/sca/2.0
+- aid: mend:mend-vulnerable-libraries-api
+  name: Mend Vulnerable Libraries API
+  description: The Vulnerable Libraries API from Mend — 1 operation(s) for vulnerable libraries.
+  humanURL: https://api-docs.mend.io/platform/3.0
+  baseURL: https://api-saas.mend.io
+  tags:
+  - Vulnerable Libraries
+  properties:
+  - type: OpenAPI
+    url: openapi/mend-vulnerable-libraries-api-openapi.yml
+  - type: APIReference
+    url: https://api-docs.mend.io/platform/3.0
+  - type: APIReference
+    url: https://api-docs.mend.io/sca/2.0
+- aid: mend:mend-zero-day-events-api
+  name: Mend Zero-Day Events API
+  description: The Zero-Day Events API from Mend — 2 operation(s) for zero-day events.
+  humanURL: https://api-docs.mend.io/platform/3.0
+  baseURL: https://api-saas.mend.io
+  tags:
+  - Zero-Day Events
+  properties:
+  - type: OpenAPI
+    url: openapi/mend-zero-day-events-api-openapi.yml
+  - type: APIReference
+    url: https://api-docs.mend.io/platform/3.0
+  - type: APIReference
+    url: https://api-docs.mend.io/sca/2.0
