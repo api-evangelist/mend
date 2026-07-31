@@ -1,0 +1,15 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/mend-platform-openapi-original.json, openapi/mend-sca-openapi-original.json
+summary:
+  types:
+  - http
+schemes:
+- name: bearer-key
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  description: JWT token Bearer
+  sources:
+  - openapi/mend-platform-openapi-original.json
+  - openapi/mend-sca-openapi-original.json

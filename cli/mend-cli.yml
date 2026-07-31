@@ -1,0 +1,27 @@
+generated: '2026-07-20'
+method: searched
+source: >-
+  github.com/mend-toolkit (Mend-SBOM-Export-CLI) and github.com/renovatebot/renovate.
+  Mend ships command-line tooling for CI/CD scanning and SBOM export; the Mend
+  Unified Agent and Mend CLI scanners are distributed as binaries from Mend for
+  pipeline integration. This artifact catalogs the command surface of the
+  publicly hosted, first-party CLIs.
+clis:
+  - name: Mend SBOM Export CLI
+    repository: https://github.com/mend-toolkit/Mend-SBOM-Export-CLI
+    description: Export SBOMs (CycloneDX / SPDX) from Mend scan results via the Mend API.
+    commands:
+      - export — generate an SBOM for a given project/scan
+  - name: renovate
+    install: npm install -g renovate
+    repository: https://github.com/renovatebot/renovate
+    description: >-
+      Mend Renovate dependency-update CLI. Runs against a repository to open
+      automated dependency-update pull requests.
+    commands:
+      - renovate — run the bot against configured repositories
+      - renovate-config-validator — validate a renovate.json configuration
+notes: >-
+  Mend also distributes the Mend Unified Agent and the Mend CLI scanner for
+  SCA/SAST from https://docs.mend.io/ for pipeline integration; those binaries
+  are catalogued in packages/mend-packages.yml.

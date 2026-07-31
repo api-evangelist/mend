@@ -1,0 +1,40 @@
+generated: '2026-07-20'
+method: derived
+source: >-
+  Derived from the path parameters and schemas of
+  openapi/mend-platform-openapi-original.json (128 paths, 255 schemas): the
+  id-reference fields (orgUuid, applicationUuid, projectUuid, scanUuid,
+  groupUuid, userUuid, labelUuid, reportUuid, findingUuid, zeroDayIdentifier) and
+  the operation tags (Applications, Projects, Scans, Findings, Reports,
+  Administration - Groups/Users/Labels, Zero-Day Events).
+docs: https://api-docs.mend.io/platform/3.0
+notation: >-
+  relationships use has_one / has_many / belongs_to with the reference field
+  name; identifiers are UUIDs (…Uuid path parameters).
+entities:
+  - {name: Account, id_field: accountUuid, domain: administration, description: A Mend account (top-level tenant).}
+  - {name: Organization, id_field: orgUuid, domain: administration, description: An organization within an account; the primary scope for API calls.}
+  - {name: Group, id_field: groupUuid, domain: administration, description: A group of users with assigned role definitions.}
+  - {name: User, id_field: userUuid, domain: administration, description: A user with Mend credentials.}
+  - {name: Label, id_field: labelUuid, domain: administration, description: A label/tag applied to applications and projects.}
+  - {name: Application, id_field: applicationUuid, domain: appsec, description: An application grouping one or more projects.}
+  - {name: Project, id_field: projectUuid, domain: appsec, description: A scanned project (repo/build) belonging to an application/organization.}
+  - {name: Scan, id_field: scanUuid, domain: appsec, description: A single scan run producing findings.}
+  - {name: Finding, id_field: findingUuid, domain: findings, description: A security/vulnerability finding at project or scan scope.}
+  - {name: Library, id_field: libraryUuid, domain: findings, description: An open-source library/dependency inventoried in a project.}
+  - {name: Report, id_field: reportUuid, domain: reports, description: An async report export (findings, inventory, SBOM, compliance, attribution).}
+  - {name: ZeroDayEvent, id_field: zeroDayIdentifier, domain: findings, description: A zero-day event and its affected findings.}
+  - {name: Integration, id_field: null, domain: administration, description: An organization integration (getOrgIntegrations).}
+relationships:
+  - {from: Account, to: Organization, kind: has_many, via: orgUuid}
+  - {from: Organization, to: Group, kind: has_many, via: orgUuid}
+  - {from: Organization, to: User, kind: has_many, via: orgUuid}
+  - {from: Organization, to: Label, kind: has_many, via: orgUuid}
+  - {from: Organization, to: Application, kind: has_many, via: orgUuid}
+  - {from: Application, to: Project, kind: has_many, via: applicationUuid}
+  - {from: Project, to: Scan, kind: has_many, via: projectUuid}
+  - {from: Project, to: Library, kind: has_many, via: projectUuid}
+  - {from: Project, to: Finding, kind: has_many, via: projectUuid}
+  - {from: Scan, to: Finding, kind: has_many, via: scanUuid}
+  - {from: Group, to: User, kind: has_many, via: groupUuid}
+  - {from: Finding, to: Library, kind: belongs_to, via: libraryUuid}

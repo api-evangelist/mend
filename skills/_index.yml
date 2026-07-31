@@ -1,0 +1,19 @@
+generated: '2026-07-20'
+method: generated
+source: >-
+  Generated from openapi/mend-platform-openapi-original.json operations (all
+  operationIds verified against the spec) plus conventions/mend-conventions.yml
+  and errors/mend-problem-types.yml.
+skills:
+  - file: mend-triage-security-findings.md
+    name: Triage Mend security findings
+    api: openapi/mend-platform-openapi-original.json
+    operations: [login, getOrganizationProjects, getSecurityVulnerabilityFindings, listProjectFindingsV3.0, bulkPatchProjectFindingV3.0]
+  - file: mend-export-sbom-report.md
+    name: Export a Mend SBOM report
+    api: openapi/mend-platform-openapi-original.json
+    operations: [login, getOrganizationApplications, getScanSummaries, exportImgSbomReport_2]
+  - file: mend-monitor-zero-day-events.md
+    name: Monitor Mend zero-day events
+    api: openapi/mend-platform-openapi-original.json
+    operations: [login, getZeroDayEvents, getZeroDayEventFindings]

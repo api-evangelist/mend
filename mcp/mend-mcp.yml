@@ -1,0 +1,42 @@
+generated: '2026-07-20'
+method: searched
+status: published
+source: >-
+  https://api-docs.mend.io/ — Mend's Redocly-hosted API documentation portal
+  publishes a hosted MCP server ("MCP server", enabled in the portal's app-data)
+  that exposes the Mend API reference to agents. Its OAuth authorization surface
+  was confirmed live at https://api-docs.mend.io/.well-known/oauth-authorization-server
+  (issuer https://auth.cloud.redocly.com, authorization endpoint
+  https://api-docs.mend.io/_mcp/oauth2/auth). This is the docs/reference MCP that
+  ships with the Redocly portal; the tool list below is a candidate mapping
+  derived from the Mend AppSec Platform API 3.0 operations for agents that call
+  the API directly.
+server:
+  name: mend-api-docs
+  transport: http
+  url: https://api-docs.mend.io/_mcp
+  auth: oauth2
+  authorization_server: https://auth.cloud.redocly.com
+  authorization_endpoint: https://api-docs.mend.io/_mcp/oauth2/auth
+  token_endpoint: https://api-docs.mend.io/_mcp/oauth2/token-portal
+tools:
+  - name: search_mend_api
+    description: Search the Mend API reference (docs MCP capability).
+  - name: list_scans
+    description: List scan summaries for an organization.
+    source_operation: openapi/mend-platform-openapi-original.json#getScanSummaries
+  - name: get_scan
+    description: Retrieve a single scan.
+    source_operation: openapi/mend-platform-openapi-original.json#getScan
+  - name: list_projects
+    description: List projects in an organization.
+    source_operation: openapi/mend-platform-openapi-original.json#getOrganizationProjects
+  - name: list_applications
+    description: List applications in an organization.
+    source_operation: openapi/mend-platform-openapi-original.json#getOrganizationApplications
+  - name: list_security_findings
+    description: List security vulnerability findings for a project.
+    source_operation: openapi/mend-platform-openapi-original.json#getSecurityVulnerabilityFindings
+  - name: list_zero_day_events
+    description: List zero-day events affecting the organization.
+    source_operation: openapi/mend-platform-openapi-original.json#getZeroDayEvents

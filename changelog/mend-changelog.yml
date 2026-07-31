@@ -1,0 +1,18 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.mend.io/platform/latest/release-notes-for-mend-products
+description: >-
+  Mend publishes a dated "Release Notes for Mend Products" page covering the Mend
+  Platform (SCA, SAST, Container, AI, Renovate) and the API. This is the live
+  source of truth for changes; the entries window below is captured from the
+  release-notes hub.
+scheme: dated release notes (per-product)
+current_version: v3.0 (AppSec Platform API)
+changelog_url: https://docs.mend.io/platform/latest/release-notes-for-mend-products
+api_changelog_note: >-
+  API-specific changes ("What's New in API v1.4" and equivalent) are published
+  per API version under https://api-docs.mend.io/.
+entries: []
+notes: >-
+  Entry-level dates were not scraped in this pass (the release-notes page is a
+  dynamic hub). The canonical, continuously-updated changelog is the URL above.

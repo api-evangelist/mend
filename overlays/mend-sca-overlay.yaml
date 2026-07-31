@@ -1,0 +1,13 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Mend SCA API
+  version: 1.0.0
+extends: openapi/mend-sca-openapi-original.json
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-provider: mend
+      x-apievangelist-api: mend-sca-api
+      x-apievangelist-auth: Bearer JWT via POST /api/v3.0/login (user key)
+      x-apievangelist-pagination: cursor
+      x-apievangelist-conventions: conventions/mend-conventions.yml

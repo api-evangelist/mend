@@ -1,0 +1,38 @@
+generated: '2026-07-20'
+method: derived
+source: >-
+  Derived from openapi/mend-platform-openapi-original.json and
+  openapi/mend-sca-openapi-original.json (securitySchemes, response media types,
+  pagination params, SBOM export operations), plus the trust.mend.io trust
+  center. Asserts which cross-cutting standards the Mend API conforms to.
+standards:
+  - id: openapi-3.0
+    conforms: true
+    evidence: both specs declare openapi 3.0.1
+  - id: oauth2
+    conforms: false
+    evidence: no oauth2 securityScheme; auth is JWT bearer obtained via a login endpoint
+  - id: jwt-bearer
+    conforms: true
+    evidence: securityScheme "bearer-key" is http bearer with bearerFormat JWT
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: error responses use a DWR-style DWRResponseBase wrapper, not application/problem+json
+  - id: cursor-pagination
+    conforms: true
+    evidence: list operations accept cursor + limit parameters
+  - id: sbom-cyclonedx-spdx
+    conforms: true
+    evidence: >-
+      SBOM report export operations (e.g. exportImgSbomReport) and the
+      Mend-SBOM-Export-CLI generate CycloneDX / SPDX SBOMs
+  - id: soc2-iso27001
+    conforms: unverified
+    evidence: >-
+      Mend publishes a SafeBase trust center at https://trust.mend.io/ (compliance
+      automation via Drata); specific certification artifacts are gated behind NDA
+      and were not enumerated in this pass
+compliance_program:
+  trust_center: https://trust.mend.io/
+  platform: "SafeBase (compliance automation: Drata)"
+  certifications_published: gated (request access via trust center)

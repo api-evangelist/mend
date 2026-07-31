@@ -1,0 +1,34 @@
+generated: '2026-07-20'
+method: searched
+source: >-
+  https://docs.mend.io/platform/latest/release-notes-for-mend-products,
+  https://status.mend.io/, and the versioned API family exposed at
+  https://api-docs.mend.io/ (v3.0, v2.0, and legacy v1.3/v1.4). Deprecated
+  operations derived from the OpenAPI specs (none flagged deprecated).
+versioning:
+  scheme: uri-path
+  current: v3.0 (AppSec Platform API)
+  supported:
+    - v3.0 — Mend AppSec Platform API (current)
+    - v2.0 — Mend SCA API
+    - '1.0 — Developer Platform API'
+    - '2.0 — Container Image API'
+  legacy:
+    - v1.4 — HTTP API (legacy)
+    - v1.3 — HTTP API (legacy)
+  docs: https://api-docs.mend.io/
+deprecation:
+  policy_url: null
+  sunset_header: false
+  notes: >-
+    Mend maintains multiple concurrently-supported API versions and older HTTP
+    API v1.3/v1.4 are marked "legacy" in the documentation. No formal RFC 8594
+    Sunset/Deprecation header policy is documented, and no operations are flagged
+    deprecated in the OpenAPI specs.
+sla:
+  url: null
+  public_uptime_target: null
+  notes: Availability commitments are handled via enterprise agreements; no public numeric SLA published.
+status_page: https://status.mend.io/
+changelog: https://docs.mend.io/platform/latest/release-notes-for-mend-products
+deprecated_operations: []

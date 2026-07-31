@@ -1,0 +1,76 @@
+generated: '2026-07-20'
+method: derived
+source: >-
+  Derived from openapi/mend-platform-openapi-original.json and
+  openapi/mend-sca-openapi-original.json, enriched with the API 3.0 description
+  and login operation description captured from api-docs.mend.io. Cross-cutting
+  request/response semantics that apply across every Mend AppSec Platform / SCA
+  operation.
+description: >-
+  How the Mend REST API behaves across every operation: authentication style,
+  token lifecycle, pagination, versioning, the error envelope, and request
+  tracing. These runtime-semantics conventions are not fully expressed by OpenAPI.
+
+base_url: https://api-saas.mend.io
+api_style: REST over HTTPS, JSON request/response
+regions: >-
+  Mend SaaS is region-partitioned; the base host is region-specific (e.g.
+  api-saas.mend.io, api-saas-eu.mend.io, api-saas-au.mend.io). Use the host that
+  matches your Mend organization's data center.
+
+authentication:
+  scheme: Bearer JWT (securityScheme "bearer-key", http bearer, bearerFormat JWT)
+  obtain: >-
+    POST /api/v3.0/login with your email + user key (from the user profile page
+    in the Mend Platform) to receive a JWT; POST /api/v3.0/login/accessToken to
+    refresh; POST /api/v3.0/logout to invalidate.
+  token_lifetime: >-
+    Short-lived, per-organization JWT. The API 3.0 overview states the token
+    expires after ~10 minutes; the login operation description states 30 minutes.
+    Treat the token as short-lived and refresh proactively.
+  detail: authentication/mend-authentication.yml
+  docs: https://docs.mend.io/platform/latest/getting-started-with-mend-api-3-0
+
+idempotency:
+  supported: false
+  notes: >-
+    The Mend API does not document an idempotency-key mechanism; no
+    Idempotency-Key header or parameter appears in either OpenAPI spec. Write
+    operations are not idempotent by contract.
+
+pagination:
+  style: cursor
+  request_params:
+    cursor: opaque cursor returned by the previous page
+    limit: maximum number of results per page
+  notes: >-
+    List endpoints use cursor pagination with a limit parameter (per the API 3.0
+    overview: "support for cursor pagination and limiting results size").
+
+versioning:
+  scheme: uri-path
+  current: v3.0 (AppSec Platform API); v2.0 (SCA API)
+  legacy: HTTP API v1.3 / v1.4, Container Image API 2.0, Developer Platform API 1.0
+  docs: https://api-docs.mend.io/
+
+error_envelope:
+  format: custom (DWR-style response wrapper; not RFC 9457 problem+json)
+  fields:
+    supportToken: >-
+      A short support token echoed on error responses (schema DWRResponseBase) to
+      quote when contacting Mend support.
+  status_codes: [400, 401, 403, 404, 500]
+  detail: errors/mend-problem-types.yml
+
+request_tracing:
+  mechanism: supportToken returned in error responses
+  notes: No dedicated request-id request header is documented.
+
+rate_limiting:
+  documented: false
+  notes: No rate-limit response headers are declared in the OpenAPI specs.
+
+cross_links:
+  authentication: authentication/mend-authentication.yml
+  errors: errors/mend-problem-types.yml
+  lifecycle: lifecycle/mend-lifecycle.yml

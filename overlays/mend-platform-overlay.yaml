@@ -1,0 +1,21 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Mend AppSec Platform API
+  version: 1.0.0
+extends: openapi/mend-platform-openapi-original.json
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-provider: mend
+      x-apievangelist-api: mend-appsec-platform-api
+      x-apievangelist-auth: Bearer JWT via POST /api/v3.0/login (user key)
+      x-apievangelist-pagination: cursor
+      x-apievangelist-conventions: conventions/mend-conventions.yml
+      x-apievangelist-errors: errors/mend-problem-types.yml
+      x-apievangelist-data-model: data-model/mend-data-model.yml
+  - target: $.servers
+    update:
+      - url: https://api-saas.mend.io
+        description: >-
+          Mend SaaS (region-specific; use the host matching your organization's
+          data center, e.g. api-saas.mend.io / api-saas-eu.mend.io).

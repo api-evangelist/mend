@@ -1,0 +1,34 @@
+generated: '2026-07-20'
+method: derived
+source: >-
+  Derived from the 4xx/5xx responses across
+  openapi/mend-platform-openapi-original.json (139x 200, 135x 400, 121x 403,
+  27x 500, 12x 401, 10x 404) and openapi/mend-sca-openapi-original.json. The Mend
+  API returns a DWR-style response wrapper (schema DWRResponseBase) rather than
+  RFC 9457 application/problem+json.
+format: custom
+envelope:
+  schema: DWRResponseBase
+  fields:
+    supportToken: A support token to quote when contacting Mend support.
+problems:
+  - status: 400
+    title: Bad Request
+    meaning: The request was malformed or failed validation.
+    envelope: DWRResponseBase
+  - status: 401
+    title: Unauthorized
+    meaning: Missing, invalid, or expired JWT. Re-authenticate via POST /api/v3.0/login or refresh the token.
+  - status: 403
+    title: Forbidden
+    meaning: The authenticated principal lacks permission for the requested organization/resource scope.
+  - status: 404
+    title: Not Found
+    meaning: The referenced entity (project, application, scan, report, etc.) does not exist or is not visible in scope.
+  - status: 500
+    title: Internal Server Error
+    meaning: An unexpected server-side error. Retry; if it persists, contact Mend support with the supportToken.
+notes: >-
+  Mend also publishes a legacy error reference for the v1.3/v1.4 HTTP API at
+  https://api-docs.mend.io/. Titles above are the OpenAPI response descriptions;
+  the DWRResponseBase envelope carries a supportToken for support escalation.

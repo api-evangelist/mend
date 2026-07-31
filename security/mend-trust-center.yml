@@ -1,0 +1,10 @@
+generated: '2026-07-20'
+method: searched
+probe: true
+source: https://trust.mend.io/
+url: https://trust.mend.io/
+evidence:
+- source: https://trust.mend.io/
+  keywords:
+  - trust center
+  - compliance certification

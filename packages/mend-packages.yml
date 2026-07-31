@@ -1,0 +1,38 @@
+generated: '2026-07-20'
+method: searched
+source: >-
+  npm registry (registry.npmjs.org), github.com/mend-toolkit, and
+  github.com/renovatebot. Mend distributes first-party developer tooling rather
+  than per-language API client SDKs; these are the officially maintained,
+  installable packages/binaries. No official language client library for the
+  AppSec Platform API 3.0 was found on npm/PyPI/Maven/NuGet/RubyGems — the API is
+  consumed directly over REST.
+packages:
+  - language: javascript
+    registry: npm
+    name: renovate
+    url: https://www.npmjs.com/package/renovate
+    install: npm install -g renovate
+    version: 43.272.4
+    license: AGPL-3.0-only
+    repository: https://github.com/renovatebot/renovate
+    official: true
+    description: >-
+      Automated dependency updates — Mend Renovate. Cross-platform, self-hostable
+      dependency-update bot (also offered as the hosted Mend Renovate App).
+  - language: multi
+    registry: github
+    name: Mend-SBOM-Export-CLI
+    url: https://github.com/mend-toolkit/Mend-SBOM-Export-CLI
+    official: true
+    description: >-
+      Mend SBOM Exporter CLI — generates SBOMs (CycloneDX / SPDX) from Mend scan
+      results via the Mend API.
+  - language: java
+    registry: mend
+    name: Mend Unified Agent
+    url: https://docs.mend.io/
+    official: true
+    description: >-
+      Mend Unified Agent (Java) — the primary scanning agent for SCA across build
+      environments; distributed as a signed JAR from Mend, not a public registry.

@@ -1,0 +1,22 @@
+# llms.txt
+
+## Table of contents
+
+ - [Global Organization/Product/Project API](https://api-docs.mend.io/1.4/global-organization-product-project-api.md)
+ - [Global Organization/Product/Project API](https://api-docs.mend.io/1.4/global-organizationproductproject-api.md)
+ - [Groups and Users API](https://api-docs.mend.io/1.4/groups-and-users-api.md)
+ - [Product and Project API](https://api-docs.mend.io/1.4/product-and-project-api.md)
+ - [HTTP API v1.3 and v1.4](https://api-docs.mend.io/1.4/api-v1-3-and-v1-4.md)
+ - [Alerts API](https://api-docs.mend.io/1.4/alerts-api.md)
+ - [HTTP API v1.3 and v1.4](https://api-docs.mend.io/1.4/http-api-v13-and-v14.md)
+ - [Issue Tracker API](https://api-docs.mend.io/1.4/issue-tracker-api.md)
+ - [Licenses and Libraries API](https://api-docs.mend.io/1.4/licenses-and-libraries-api.md)
+ - [Reports API - Asynchronous](https://api-docs.mend.io/1.4/reports-api-asynchronous.md)
+ - [Policies API](https://api-docs.mend.io/1.4/policies-api.md)
+ - [What's New in API v1.4](https://api-docs.mend.io/1.4/whats-new-in-api-v14.md)
+ - [Mend.io API Documentation](https://api-docs.mend.io/index.html.md)
+ - [Reports API - Synchronous](https://api-docs.mend.io/1.4/reports-api-synchronous.md)
+ - [Mend Container Image API](https://api-docs.mend.io/container-image/2.0.md)
+ - [Developer Platform API](https://api-docs.mend.io/developer-platform/1.0.md)
+ - [Mend API ](https://api-docs.mend.io/platform/3.0.md)
+ - [Mend API](https://api-docs.mend.io/sca/2.0.md)

@@ -1,0 +1,25 @@
+generated: '2026-07-20'
+method: searched
+source: >-
+  Live probes of the Mend hosts on 2026-07-20. The marketing host www.mend.io
+  sits behind a bot-challenge that returns HTTP 202 for every path (including
+  non-existent ones), so no /.well-known documents could be confirmed there. The
+  api-docs.mend.io host exposes an OAuth authorization-server document, but it
+  belongs to the Redocly documentation platform (issuer auth.cloud.redocly.com)
+  that powers the portal's MCP server — it is not a Mend product OAuth server —
+  so it is recorded here for provenance but not treated as a Mend discovery
+  document.
+hosts:
+  - host: https://api-saas.mend.io
+    documents:
+      - {path: /.well-known/security.txt, status: 302}
+      - {path: /.well-known/openid-configuration, status: 302}
+  - host: https://api-docs.mend.io
+    documents:
+      - {path: /.well-known/oauth-authorization-server, status: 200, note: "Redocly docs-portal MCP OAuth (auth.cloud.redocly.com); not a Mend product endpoint"}
+      - {path: /.well-known/security.txt, status: 404}
+      - {path: /.well-known/api-catalog, status: 404}
+  - host: https://www.mend.io
+    documents:
+      - {path: /.well-known/security.txt, status: 202, note: "bot-challenge; returns 202 for all paths, not a real document"}
+result: no first-party Mend /.well-known discovery documents confirmed
