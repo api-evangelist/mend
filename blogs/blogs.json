@@ -2,13 +2,20 @@
   "repo": "mend",
   "feeds": [
     {
+      "source": "https://www.mend.io/feed/",
+      "feed_url": "https://www.mend.io/feed/",
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    },
+    {
       "source": "https://www.mend.io/blog/",
       "feed_url": "https://www.mend.io/feed/",
       "title": "",
-      "saved": 1,
+      "saved": 0,
       "method": "discovered"
     }
   ],
-  "post_count": 1,
-  "fetched": "2026-07-25T15:00:33Z"
+  "post_count": 10,
+  "fetched": "2026-08-01T15:49:00Z"
 }
