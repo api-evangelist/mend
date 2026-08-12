@@ -57,6 +57,8 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: Overlay
+  url: overlays/mend-platform-overlay.yaml
 - type: AgenticAccess
   url: agentic-access/mend-agentic-access.yml
 - type: TrustCenter
