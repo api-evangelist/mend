@@ -1,0 +1,94 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mend Access Management CustomAttribute - Organization API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "CustomAttribute - Organization",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Set Custom Attribute",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://baseUrl/api/v2.0/orgs/:orgToken/libraries/:libraryUuid/customAttributes/:attributeUuid/value",
+            "params": [
+              {
+                "name": "orgToken",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+              },
+              {
+                "name": "libraryUuid",
+                "value": "",
+                "type": "path",
+                "description": "library UUID (get a project's library by running Library - Project > Get Project Libraries."
+              },
+              {
+                "name": "attributeUuid",
+                "value": "",
+                "type": "path",
+                "description": "Custom Attribute UUID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Edits the value of a custom attribute for a specified library, attribute, and context."
+        },
+        {
+          "info": {
+            "name": "Get Organization Custom Attributes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v2.0/orgs/:orgToken/customAttributes",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Filter your search to return items whose property has a specific value.\nUse the syntax: **property:operation:value** where a colon (:) separates between property, operation and value.\n+ Property: the name of the property of the item\n+ Operation:\n    + **equals** - true if the value is identical to this value.\n+ Value: the value of the property.\n+ context:[equals]:value"
+              },
+              {
+                "name": "orgToken",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+              }
+            ]
+          },
+          "docs": "Retrieves all custom attributes in the given organization"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

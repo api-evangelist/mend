@@ -1,0 +1,1050 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mend Access Management Reports API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Reports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Export AI Application Findings report asynchronously",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v3.0/applications/:applicationUuid/ai/reports/findings",
+            "params": [
+              {
+                "name": "applicationUuid",
+                "value": "",
+                "type": "path",
+                "description": "application UUID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Export AI Application Findings report asynchronously"
+        },
+        {
+          "info": {
+            "name": "Export AI Application Inventory report asynchronously",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v3.0/applications/:applicationUuid/ai/reports/inventory",
+            "params": [
+              {
+                "name": "applicationUuid",
+                "value": "",
+                "type": "path",
+                "description": "application UUID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Export AI Application Inventory report asynchronously"
+        },
+        {
+          "info": {
+            "name": "Export Code Application Compliance report asynchronously (Code - SAST)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v3.0/applications/:applicationUuid/code/reports/compliance",
+            "params": [
+              {
+                "name": "applicationUuid",
+                "value": "",
+                "type": "path",
+                "description": "Application UUID (Administration > Applications)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Export Code Application Compliance report asynchronously (Code - SAST)"
+        },
+        {
+          "info": {
+            "name": "Export Code Application Findings report asynchronously (Code - SAST)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v3.0/applications/:applicationUuid/code/reports/findings",
+            "params": [
+              {
+                "name": "applicationUuid",
+                "value": "",
+                "type": "path",
+                "description": "Application UUID (Administration > Applications)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Export Code Application Findings report asynchronously (Code - SAST)"
+        },
+        {
+          "info": {
+            "name": "Export Code Application Resolved Findings report asynchronously (Code - SAST)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v3.0/applications/:applicationUuid/code/reports/resolved",
+            "params": [
+              {
+                "name": "applicationUuid",
+                "value": "",
+                "type": "path",
+                "description": "Application UUID (Administration > Applications)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Export Code Application Resolved Findings report asynchronously (Code - SAST)"
+        },
+        {
+          "info": {
+            "name": "Export Code Application Suppressions report asynchronously (Code - SAST)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v3.0/applications/:applicationUuid/code/reports/suppressions",
+            "params": [
+              {
+                "name": "applicationUuid",
+                "value": "",
+                "type": "path",
+                "description": "Application UUID (Administration > Applications)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Export Code Application Suppressions report asynchronously (Code - SAST)"
+        },
+        {
+          "info": {
+            "name": "Export Image Application SBOM report asynchronously",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v3.0/applications/:applicationUuid/images/reports/SBOM",
+            "params": [
+              {
+                "name": "applicationUuid",
+                "value": "",
+                "type": "path",
+                "description": "application UUID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Export Image Application SBOM report asynchronously"
+        },
+        {
+          "info": {
+            "name": "Export IMG Application Attribution report asynchronously",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v3.0/applications/:applicationUuid/images/reports/attribution",
+            "params": [
+              {
+                "name": "applicationUuid",
+                "value": "",
+                "type": "path",
+                "description": "application UUID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Export IMG Application Attribution report asynchronously"
+        },
+        {
+          "info": {
+            "name": "Export IMG Application Due Diligence report asynchronously",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v3.0/applications/:applicationUuid/images/reports/dueDiligence",
+            "params": [
+              {
+                "name": "applicationUuid",
+                "value": "",
+                "type": "path",
+                "description": "application UUID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Export IMG Application Due Diligence report asynchronously"
+        },
+        {
+          "info": {
+            "name": "Export AI Organization Findings report asynchronously",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v3.0/orgs/:orgUuid/ai/reports/findings",
+            "params": [
+              {
+                "name": "orgUuid",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Export AI Organization Findings report asynchronously"
+        },
+        {
+          "info": {
+            "name": "Export AI Organization Inventory report asynchronously",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v3.0/orgs/:orgUuid/ai/reports/inventory",
+            "params": [
+              {
+                "name": "orgUuid",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Export AI Organization Inventory report asynchronously"
+        },
+        {
+          "info": {
+            "name": "Export Code Organization Compliance report asynchronously (Code - SAST)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v3.0/orgs/:orgUuid/code/reports/compliance",
+            "params": [
+              {
+                "name": "orgUuid",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Export Code Organization Compliance report asynchronously (Code - SAST)"
+        },
+        {
+          "info": {
+            "name": "Export Image Organization SBOM report asynchronously",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v3.0/orgs/:orgUuid/images/reports/SBOM",
+            "params": [
+              {
+                "name": "orgUuid",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Export Image Organization SBOM report asynchronously"
+        },
+        {
+          "info": {
+            "name": "Export IMG Organization Attribution report asynchronously",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v3.0/orgs/:orgUuid/images/reports/attribution",
+            "params": [
+              {
+                "name": "orgUuid",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Export IMG Organization Attribution report asynchronously"
+        },
+        {
+          "info": {
+            "name": "Export IMG Organization Due Diligence report asynchronously",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v3.0/orgs/:orgUuid/images/reports/dueDiligence",
+            "params": [
+              {
+                "name": "orgUuid",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Export IMG Organization Due Diligence report asynchronously"
+        },
+        {
+          "info": {
+            "name": "Get Reports",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v3.0/orgs/:orgUuid/reports",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the maximum number of items to be returned in the response."
+              },
+              {
+                "name": "orgUuid",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+              }
+            ]
+          },
+          "docs": "Get Reports"
+        },
+        {
+          "info": {
+            "name": "Download Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v3.0/orgs/:orgUuid/reports/download/:reportUuid",
+            "params": [
+              {
+                "name": "orgUuid",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+              },
+              {
+                "name": "reportUuid",
+                "value": "",
+                "type": "path",
+                "description": "Asynchronous Process Status UUID"
+              }
+            ]
+          },
+          "docs": "Download Report"
+        },
+        {
+          "info": {
+            "name": "Export Users and Groups report asynchronously (Platform)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v3.0/orgs/:orgUuid/reports/users-groups",
+            "params": [
+              {
+                "name": "orgUuid",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Export Users and Groups report asynchronously (Platform)"
+        },
+        {
+          "info": {
+            "name": "Get Report Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v3.0/orgs/:orgUuid/reports/:reportUuid",
+            "params": [
+              {
+                "name": "orgUuid",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+              },
+              {
+                "name": "reportUuid",
+                "value": "",
+                "type": "path",
+                "description": "Asynchronous Process Status UUID"
+              }
+            ]
+          },
+          "docs": "Get Report Status"
+        },
+        {
+          "info": {
+            "name": "Delete Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://baseUrl/api/v3.0/orgs/:orgUuid/reports/:reportUuid",
+            "params": [
+              {
+                "name": "orgUuid",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+              },
+              {
+                "name": "reportUuid",
+                "value": "",
+                "type": "path",
+                "description": "Asynchronous Process Status UUID"
+              }
+            ]
+          },
+          "docs": "Delete Report"
+        },
+        {
+          "info": {
+            "name": "Export AI Project Findings report asynchronously",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v3.0/projects/:projectUuid/ai/reports/findings",
+            "params": [
+              {
+                "name": "projectUuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the project"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Export AI Project Findings report asynchronously"
+        },
+        {
+          "info": {
+            "name": "Export AI Project Inventory report asynchronously",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v3.0/projects/:projectUuid/ai/reports/inventory",
+            "params": [
+              {
+                "name": "projectUuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the project"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Export AI Project Inventory report asynchronously"
+        },
+        {
+          "info": {
+            "name": "Export Code Project Compliance report asynchronously (Code - SAST)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v3.0/projects/:projectUuid/code/reports/compliance",
+            "params": [
+              {
+                "name": "projectUuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the project"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Export Code Project Compliance report asynchronously (Code - SAST)"
+        },
+        {
+          "info": {
+            "name": "Export Code Project Findings report asynchronously (Code - SAST)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v3.0/projects/:projectUuid/code/reports/findings",
+            "params": [
+              {
+                "name": "projectUuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the project"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Export Code Project Findings report asynchronously (Code - SAST)"
+        },
+        {
+          "info": {
+            "name": "Export Code Project Resolved Findings report asynchronously (Code - SAST)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v3.0/projects/:projectUuid/code/reports/resolved",
+            "params": [
+              {
+                "name": "projectUuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the project"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Export Code Project Resolved Findings report asynchronously (Code - SAST)"
+        },
+        {
+          "info": {
+            "name": "Export Code Project Suppressions report asynchronously (Code - SAST)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v3.0/projects/:projectUuid/code/reports/suppressions",
+            "params": [
+              {
+                "name": "projectUuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the project"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Export Code Project Suppressions report asynchronously (Code - SAST)"
+        },
+        {
+          "info": {
+            "name": "Export Image Project SBOM report asynchronously",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v3.0/projects/:projectUuid/images/reports/SBOM",
+            "params": [
+              {
+                "name": "projectUuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the project"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Export Image Project SBOM report asynchronously"
+        },
+        {
+          "info": {
+            "name": "Export IMG Project Attribution report asynchronously",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v3.0/projects/:projectUuid/images/reports/attribution",
+            "params": [
+              {
+                "name": "projectUuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the project"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Export IMG Project Attribution report asynchronously"
+        },
+        {
+          "info": {
+            "name": "Export IMG Project Due Diligence report asynchronously",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v3.0/projects/:projectUuid/images/reports/dueDiligence",
+            "params": [
+              {
+                "name": "projectUuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the project"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Export IMG Project Due Diligence report asynchronously"
+        },
+        {
+          "info": {
+            "name": "Export account inventory report asynchronously (Dependencies - SCA)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v3.0/accounts/:accountUuid/dependencies/reports/inventory",
+            "params": [
+              {
+                "name": "accountUuid",
+                "value": "",
+                "type": "path",
+                "description": "Account UUID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Export account inventory report asynchronously (Dependencies - SCA)"
+        },
+        {
+          "info": {
+            "name": "Export account dependency security findings report asynchronously (Dependencies - SCA)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v3.0/accounts/:accountUuid/dependencies/reports/securityFindings",
+            "params": [
+              {
+                "name": "accountUuid",
+                "value": "",
+                "type": "path",
+                "description": "Account UUID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Export account dependency security findings report asynchronously (Dependencies - SCA)"
+        },
+        {
+          "info": {
+            "name": "Export account dependency security findings by library report asynchronously (Dependencies - SCA)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v3.0/accounts/:accountUuid/dependencies/reports/securityFindingsByLibrary",
+            "params": [
+              {
+                "name": "accountUuid",
+                "value": "",
+                "type": "path",
+                "description": "Account UUID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Export account dependency security findings by library report asynchronously (Dependencies - SCA)"
+        },
+        {
+          "info": {
+            "name": "Export application SBOM report asynchronously (Dependencies - SCA)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v3.0/applications/:applicationUuid/dependencies/reports/SBOM",
+            "params": [
+              {
+                "name": "applicationUuid",
+                "value": "",
+                "type": "path",
+                "description": "Application UUID (Administration > Applications)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Export application SBOM report asynchronously (Dependencies - SCA)"
+        },
+        {
+          "info": {
+            "name": "Export application Attribution report asynchronously (Dependencies - SCA)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v3.0/applications/:applicationUuid/dependencies/reports/attribution",
+            "params": [
+              {
+                "name": "applicationUuid",
+                "value": "",
+                "type": "path",
+                "description": "Application UUID (Administration > Applications)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generates a Dependencies Attribution report for the specified application asynchronously. Supported formats: JSON, HTML, TEXT."
+        },
+        {
+          "info": {
+            "name": "Export application due diligence report asynchronously (Dependencies - SCA)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v3.0/applications/:applicationUuid/dependencies/reports/dueDiligence",
+            "params": [
+              {
+                "name": "applicationUuid",
+                "value": "",
+                "type": "path",
+                "description": "Application UUID (Administration > Applications)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generates a Dependencies Due Diligence report for the specified application asynchronously. Supported formats: JSON, XML."
+        },
+        {
+          "info": {
+            "name": "Export application Findings report asynchronously (Dependencies - SCA)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v3.0/applications/:applicationUuid/dependencies/reports/findings",
+            "params": [
+              {
+                "name": "applicationUuid",
+                "value": "",
+                "type": "path",
+                "description": "Application UUID (Administration > Applications)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generates a Dependencies Findings report for the specified application asynchronously. Supported formats: Excel, JSON, XML."
+        },
+        {
+          "info": {
+            "name": "Export application Inventory report asynchronously (Dependencies - SCA)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v3.0/applications/:applicationUuid/dependencies/reports/inventory",
+            "params": [
+              {
+                "name": "applicationUuid",
+                "value": "",
+                "type": "path",
+                "description": "Application UUID (Administration > Applications)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generates a Dependencies Inventory report for the specified application asynchronously. Supported formats: Excel, JSON, XML."
+        },
+        {
+          "info": {
+            "name": "Export application Risk report asynchronously (Dependencies - SCA)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v3.0/applications/:applicationUuid/dependencies/reports/risk",
+            "params": [
+              {
+                "name": "applicationUuid",
+                "value": "",
+                "type": "path",
+                "description": "Application UUID (Administration > Applications)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generates a Dependencies Risk report for the specified application asynchronously. Default export mode is Split (PDF summary + Excel CVE detail delivered as a ZIP). Full PDF mode is also available, subject to a project-count threshold."
+        },
+        {
+          "info": {
+            "name": "Export project SBOM report asynchronously (Dependencies - SCA)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v3.0/projects/:projectUuid/dependencies/reports/SBOM",
+            "params": [
+              {
+                "name": "projectUuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the project"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Export project SBOM report asynchronously (Dependencies - SCA)"
+        },
+        {
+          "info": {
+            "name": "Export project Attribution report asynchronously (Dependencies - SCA)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v3.0/projects/:projectUuid/dependencies/reports/attribution",
+            "params": [
+              {
+                "name": "projectUuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the project"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generates a Dependencies Attribution report for the specified project asynchronously. Supported formats: JSON, HTML, TEXT."
+        },
+        {
+          "info": {
+            "name": "Export project due diligence report asynchronously (Dependencies - SCA)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v3.0/projects/:projectUuid/dependencies/reports/dueDiligence",
+            "params": [
+              {
+                "name": "projectUuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the project"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generates a Dependencies Due Diligence report for the specified project asynchronously. Supported formats: JSON, XML."
+        },
+        {
+          "info": {
+            "name": "Export project Findings report asynchronously (Dependencies - SCA)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v3.0/projects/:projectUuid/dependencies/reports/findings",
+            "params": [
+              {
+                "name": "projectUuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the project"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generates a Dependencies Findings report for the specified project asynchronously. Supported formats: Excel, JSON, XML."
+        },
+        {
+          "info": {
+            "name": "Export project Inventory report asynchronously (Dependencies - SCA)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v3.0/projects/:projectUuid/dependencies/reports/inventory",
+            "params": [
+              {
+                "name": "projectUuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the project"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generates a Dependencies Inventory report for the specified project asynchronously. Supported formats: Excel, JSON, XML."
+        },
+        {
+          "info": {
+            "name": "Export project Risk report asynchronously (Dependencies - SCA)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v3.0/projects/:projectUuid/dependencies/reports/risk",
+            "params": [
+              {
+                "name": "projectUuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the project"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generates a Dependencies Risk report for the specified project asynchronously. Default export mode is Split (PDF summary + Excel CVE detail delivered as a ZIP). Full PDF mode is also available, subject to a project-count threshold."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

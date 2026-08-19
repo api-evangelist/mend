@@ -1,0 +1,137 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mend Access Management Entities - Product API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Entities - Product",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Product",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v2.0/products/:productToken",
+            "params": [
+              {
+                "name": "productToken",
+                "value": "",
+                "type": "path",
+                "description": "product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**)."
+              }
+            ]
+          },
+          "docs": "Returns a product as identified by its token"
+        },
+        {
+          "info": {
+            "name": "Rename Product",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://baseUrl/api/v2.0/products/:productToken",
+            "params": [
+              {
+                "name": "productToken",
+                "value": "",
+                "type": "path",
+                "description": "product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Renames the product identified by its token"
+        },
+        {
+          "info": {
+            "name": "Remove Product",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://baseUrl/api/v2.0/products/:productToken",
+            "params": [
+              {
+                "name": "productToken",
+                "value": "",
+                "type": "path",
+                "description": "product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**)."
+              }
+            ]
+          },
+          "docs": "Deletes a product as identified by its token"
+        },
+        {
+          "info": {
+            "name": "Get Product Projects",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v2.0/products/:productToken/projects",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "productToken",
+                "value": "",
+                "type": "path",
+                "description": "product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**)."
+              }
+            ]
+          },
+          "docs": "Returns a list of the projects and their tokens for a given product"
+        },
+        {
+          "info": {
+            "name": "Create Project",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v2.0/products/:productToken/projects",
+            "params": [
+              {
+                "name": "productToken",
+                "value": "",
+                "type": "path",
+                "description": "product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new project within a given product. If the project already exists it returns the existing project."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

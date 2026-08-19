@@ -1,0 +1,330 @@
+{
+  "item": [
+    {
+      "id": "eaabcf0e-9ff5-4f37-abf1-bf0aa895b46c",
+      "name": "project-attribution-report-controller",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cfcd5617-474c-4e90-85ef-f3f6814ad91b",
+          "name": "Update attribution report library settings",
+          "request": {
+            "name": "Update attribution report library settings",
+            "description": {
+              "content": "Update library settings to be reflected in the attribution report",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2.0",
+                "projects",
+                ":projectIdentifier",
+                "libraries",
+                ":libraryUuid",
+                "settings",
+                "attributionReport"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectIdentifier",
+                  "description": "(Required) project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**)."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "libraryUuid",
+                  "description": "(Required) library UUID (get a project's library by running Library - Project > Get Project Libraries."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"excluded\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "94c1f3c2-b827-43be-b920-8648d8e0140e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "projects",
+                    ":projectIdentifier",
+                    "libraries",
+                    ":libraryUuid",
+                    "settings",
+                    "attributionReport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectIdentifier",
+                      "description": "(Required) project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "libraryUuid",
+                      "description": "(Required) library UUID (get a project's library by running Library - Project > Get Project Libraries."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"excluded\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c36c7524-8c11-44fa-83be-ee66181c3c7a",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "projects",
+                    ":projectIdentifier",
+                    "libraries",
+                    ":libraryUuid",
+                    "settings",
+                    "attributionReport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectIdentifier",
+                      "description": "(Required) project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "libraryUuid",
+                      "description": "(Required) library UUID (get a project's library by running Library - Project > Get Project Libraries."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"excluded\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c5d21561-739a-4a64-8888-c400717fcb2e",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "projects",
+                    ":projectIdentifier",
+                    "libraries",
+                    ":libraryUuid",
+                    "settings",
+                    "attributionReport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectIdentifier",
+                      "description": "(Required) project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "libraryUuid",
+                      "description": "(Required) library UUID (get a project's library by running Library - Project > Get Project Libraries."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"excluded\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://baseUrl",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "efd68e3e-ee30-4bda-85c4-2b7e180a0e1a",
+    "name": "Mend Access Management project-attribution-report-controller API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Mend's enhanced API enables automation of workflows in a REST compliant format. The API features:\n+ Access for any user with Mend credentials, via a user key available in the user's profile page in the Mend Platform.\n+ Improved security with a JWT token per organization, which expires every 10 minutes.\n+ Added scalability with support for cursor pagination and limiting results size.\n+ Broader functionality available programmatically.\n+ New standard API documentation for easy navigation and search.\n\n**Note:** To help you get started with the Mend API 3.0, we recommend reviewing our onboarding guide -> [Getting Started with API 3.0](https://docs.mend.io/platform/latest/getting-started-with-mend-api-3-0).\nThis resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend API 3.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.",
+      "type": "text/plain"
+    }
+  }
+}

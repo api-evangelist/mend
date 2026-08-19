@@ -1,0 +1,289 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mend Access Management Entities - Organization API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Entities - Organization",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v2.0/orgs/:orgToken",
+            "params": [
+              {
+                "name": "orgToken",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+              }
+            ]
+          },
+          "docs": "Returns an organization as identified by its token. "
+        },
+        {
+          "info": {
+            "name": "Rename Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://baseUrl/api/v2.0/orgs/:orgToken",
+            "params": [
+              {
+                "name": "orgToken",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Renames the organization identified by its token"
+        },
+        {
+          "info": {
+            "name": "Get Organization Projects",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v2.0/orgs/:orgToken/projects",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "populateProducts",
+                "value": "",
+                "type": "query",
+                "description": "Add populateProducts=false to receive a slimmer response containing only the project UUID and name."
+              },
+              {
+                "name": "orgToken",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+              }
+            ]
+          },
+          "docs": "Returns a list of all projects accessible to the current user"
+        },
+        {
+          "info": {
+            "name": "Create Project With A New Product",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v2.0/orgs/:orgToken/projects",
+            "params": [
+              {
+                "name": "orgToken",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new project within a new product. If project name exists will return existing project"
+        },
+        {
+          "info": {
+            "name": "Get Organization Products",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v2.0/orgs/:orgToken/products",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "orgToken",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+              }
+            ]
+          },
+          "docs": "Returns a list of all products accessible to the current user"
+        },
+        {
+          "info": {
+            "name": "Create Product",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v2.0/orgs/:orgToken/products",
+            "params": [
+              {
+                "name": "orgToken",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new product, If the product already exists it returns the existing product"
+        },
+        {
+          "info": {
+            "name": "Get User Organizations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v2.0/orgs"
+          },
+          "docs": "Returns a list of all organizations where the current user is a member."
+        },
+        {
+          "info": {
+            "name": "Create Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v2.0/orgs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new organization"
+        },
+        {
+          "info": {
+            "name": "Get Organization Product Entities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v2.0/orgs/:orgToken/productEntities",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Enter the number of items to return in each page of the result."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Enter the page number to display in the result. Page numbers start at 0"
+              },
+              {
+                "name": "orgToken",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+              }
+            ]
+          },
+          "docs": "Returns extended product information for all products in an organization"
+        },
+        {
+          "info": {
+            "name": "Get Organization Entities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v2.0/orgs/:orgToken/entities",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Enter the number of items to return in each page of the result."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Enter the page number to display in the result. Page numbers start at 0"
+              },
+              {
+                "name": "orgToken",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+              }
+            ]
+          },
+          "docs": "Returns all projects and their associated product for a given organization."
+        },
+        {
+          "info": {
+            "name": "Change Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v2.0/orgs/:orgToken/changeOrganization/:otherOrgToken",
+            "params": [
+              {
+                "name": "orgToken",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+              },
+              {
+                "name": "otherOrgToken",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+              }
+            ]
+          },
+          "docs": "You can access a different organization by asking for a new JWT token for the new org. The previous JWT is still valid for the previous org until it expires. All JWT tokens are valid for 10 minutes."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,193 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mend Access Management Policies - Project API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Policies - Project",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Project Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v2.0/projects/:projectToken/policies/:policyUuid",
+            "params": [
+              {
+                "name": "projectToken",
+                "value": "",
+                "type": "path",
+                "description": "project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**)."
+              },
+              {
+                "name": "policyUuid",
+                "value": "",
+                "type": "path",
+                "description": "Policy UUID (by running Policies - Organization and run Get Organization Policies, or the equivalent for Product or Project.)"
+              }
+            ]
+          },
+          "docs": "Returns a single policy in a given project"
+        },
+        {
+          "info": {
+            "name": "Update Project Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://baseUrl/api/v2.0/projects/:projectToken/policies/:policyUuid",
+            "params": [
+              {
+                "name": "projectToken",
+                "value": "",
+                "type": "path",
+                "description": "project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**)."
+              },
+              {
+                "name": "policyUuid",
+                "value": "",
+                "type": "path",
+                "description": "Policy UUID (by running Policies - Organization and run Get Organization Policies, or the equivalent for Product or Project.)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a policy for a given project"
+        },
+        {
+          "info": {
+            "name": "Delete Project Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://baseUrl/api/v2.0/projects/:projectToken/policies/:policyUuid",
+            "params": [
+              {
+                "name": "projectToken",
+                "value": "",
+                "type": "path",
+                "description": "project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**)."
+              },
+              {
+                "name": "policyUuid",
+                "value": "",
+                "type": "path",
+                "description": "Policy UUID (by running Policies - Organization and run Get Organization Policies, or the equivalent for Product or Project.)"
+              }
+            ]
+          },
+          "docs": "Deletes a policy for a given project"
+        },
+        {
+          "info": {
+            "name": "Update Project Policy Priorities",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://baseUrl/api/v2.0/projects/:projectToken/policies/priority",
+            "params": [
+              {
+                "name": "projectToken",
+                "value": "",
+                "type": "path",
+                "description": "project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the priority of policies in a given project. Policies are numbered and then evaluated sequentially. The request body should contain a list of policy UUIDs in the desired order, starting from highest priority. The service returns a list or ordered policies."
+        },
+        {
+          "info": {
+            "name": "Apply Project Policies on Inventory",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v2.0/projects/:projectToken/policies/apply",
+            "params": [
+              {
+                "name": "projectToken",
+                "value": "",
+                "type": "path",
+                "description": "project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**)."
+              }
+            ]
+          },
+          "docs": "After initiating this call, the process will be performed asynchronously in the background. To check the status of the process and retrieve the final outcome, use the \"Get Async Process Status\" request."
+        },
+        {
+          "info": {
+            "name": "Get Project Policies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v2.0/projects/:projectToken/policies",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Filter your search to return items whose property has a specific value.\nUse the syntax: **property:operation:value** where a colon (:) separates between property, operation and value.\n+ Property: the name of the property of the item\n+ Operation:\n    + **equals** - true if the value is identical to this value.\n+ Value: the value of the property.\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ aggregatePolicies:[equals]:value.  Value can be either **true** or **false**"
+              },
+              {
+                "name": "projectToken",
+                "value": "",
+                "type": "path",
+                "description": "project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**)."
+              }
+            ]
+          },
+          "docs": "Returns all of the policies of a given project"
+        },
+        {
+          "info": {
+            "name": "Create Project Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v2.0/projects/:projectToken/policies",
+            "params": [
+              {
+                "name": "projectToken",
+                "value": "",
+                "type": "path",
+                "description": "project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new policy for a given project"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

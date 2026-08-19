@@ -1,0 +1,219 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mend Access Management Settings - Whitelist API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Settings - Whitelist",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Update single Whitelist Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://baseUrl/api/v2.0/orgs/:orgToken/settings/whiteList/:uuid",
+            "params": [
+              {
+                "name": "orgToken",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+              },
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "AllowList rule UUID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the properties of a single whitelist rule of an organization, including matching libraries, their vulnerability scores and the actions to take"
+        },
+        {
+          "info": {
+            "name": "Delete Single Whitelist Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://baseUrl/api/v2.0/orgs/:orgToken/settings/whiteList/:uuid",
+            "params": [
+              {
+                "name": "orgToken",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+              },
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "Whitelist rule UUID"
+              }
+            ]
+          },
+          "docs": "Deletes one of the whitelist rules of an organization"
+        },
+        {
+          "info": {
+            "name": "Add Whitelist Rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v2.0/orgs/:orgToken/settings/whiteList/rules",
+            "params": [
+              {
+                "name": "orgToken",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates multiple new whitelist rules for an organization, defining which libraries to match, their vulnerability scores and the actions to take. Whitelisted libraries have been pre-approved by your organization so no policy alerts will be created for them during scans, and they will be ignored by all organizational policies."
+        },
+        {
+          "info": {
+            "name": "Update Whitelist Rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://baseUrl/api/v2.0/orgs/:orgToken/settings/whiteList/rules",
+            "params": [
+              {
+                "name": "orgToken",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an organization's whitelist rules for vulnerability scores and the actions to take with libraries that appear in the whitelist"
+        },
+        {
+          "info": {
+            "name": "Delete Whitelist Rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://baseUrl/api/v2.0/orgs/:orgToken/settings/whiteList/rules",
+            "params": [
+              {
+                "name": "orgToken",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deletes all of the whitelist rules of an organization"
+        },
+        {
+          "info": {
+            "name": "Apply Whitelist Rules to Existing Inventory",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://baseUrl/api/v2.0/orgs/:orgToken/settings/whiteList/apply",
+            "params": [
+              {
+                "name": "orgToken",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+              }
+            ]
+          },
+          "docs": "Applies the current whitelist rules to an organization's inventory. Whitelisted libraries are pre-approved by the organization so no policy alerts will be created for them, and they will be ignored by all organizational policies."
+        },
+        {
+          "info": {
+            "name": "Get All Whitelist Rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v2.0/orgs/:orgToken/settings/whiteList",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Enter the number of items to return in each page of the result."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "orgToken",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+              }
+            ]
+          },
+          "docs": "Retrieves all of the whitelist rules of an organization. Whitelisted libraries are pre-approved by the organization so no policy alerts will be created for them, and they will be ignored by all organizational policies"
+        },
+        {
+          "info": {
+            "name": "Add Single Whitelist Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v2.0/orgs/:orgToken/settings/whiteList",
+            "params": [
+              {
+                "name": "orgToken",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new whitelist rule for an organization, defining which libraries to match along, their vulnerability scores and the actions to take. Whitelisted libraries have been pre-approved by your organization so no policy alerts will be created for them during scans, and they will be ignored by all organizational policies."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

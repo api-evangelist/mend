@@ -1,0 +1,187 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mend Access Management Policies - Organization API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Policies - Organization",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get organization policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v2.0/orgs/:orgToken/policies/:policyUuid",
+            "params": [
+              {
+                "name": "orgToken",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+              },
+              {
+                "name": "policyUuid",
+                "value": "",
+                "type": "path",
+                "description": "Policy UUID (by running Policies - Organization and run Get Organization Policies, or the equivalent for Product or Project.)"
+              }
+            ]
+          },
+          "docs": "Returns the given policy for a particular organization"
+        },
+        {
+          "info": {
+            "name": "Update Organization Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://baseUrl/api/v2.0/orgs/:orgToken/policies/:policyUuid",
+            "params": [
+              {
+                "name": "orgToken",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+              },
+              {
+                "name": "policyUuid",
+                "value": "",
+                "type": "path",
+                "description": "Policy UUID (by running Policies - Organization and run Get Organization Policies, or the equivalent for Product or Project.)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a policy of a given organization"
+        },
+        {
+          "info": {
+            "name": "Delete Organization Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://baseUrl/api/v2.0/orgs/:orgToken/policies/:policyUuid",
+            "params": [
+              {
+                "name": "orgToken",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+              },
+              {
+                "name": "policyUuid",
+                "value": "",
+                "type": "path",
+                "description": "Policy UUID (by running Policies - Organization and run Get Organization Policies, or the equivalent for Product or Project.)"
+              }
+            ]
+          },
+          "docs": "Deletes the given policy for an organization"
+        },
+        {
+          "info": {
+            "name": "Update Organization Policy Priorities",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://baseUrl/api/v2.0/orgs/:orgToken/policies/priority",
+            "params": [
+              {
+                "name": "orgToken",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the priority of policies in a given organization. Policies are numbered and then evaluated sequentially. The request body should contain a list of policy UUIDs in the desired order, starting from highest priority. The service returns a list or ordered policies."
+        },
+        {
+          "info": {
+            "name": "Apply Organization Policies On Inventory",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v2.0/orgs/:orgToken/policies/apply",
+            "params": [
+              {
+                "name": "orgToken",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+              }
+            ]
+          },
+          "docs": "After initiating this call, the process will be performed asynchronously in the background. To check the status of the process and retrieve the final outcome, use the \"Get Async Process Status\" request."
+        },
+        {
+          "info": {
+            "name": "Get organization policies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v2.0/orgs/:orgToken/policies",
+            "params": [
+              {
+                "name": "orgToken",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+              }
+            ]
+          },
+          "docs": "Returns all of the policies of a given organization"
+        },
+        {
+          "info": {
+            "name": "Create Organization Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v2.0/orgs/:orgToken/policies",
+            "params": [
+              {
+                "name": "orgToken",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new policy for a given organization"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,129 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mend Access Management Entities - Project API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Entities - Project",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Reassign Project",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://baseUrl/api/v2.0/projects/:projectToken/reassign/:productToken",
+            "params": [
+              {
+                "name": "projectToken",
+                "value": "",
+                "type": "path",
+                "description": "project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**)."
+              },
+              {
+                "name": "productToken",
+                "value": "",
+                "type": "path",
+                "description": "project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**)."
+              }
+            ]
+          },
+          "docs": "Reassigns a project from one product to another."
+        },
+        {
+          "info": {
+            "name": "Get Project",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v2.0/projects/:projectToken",
+            "params": [
+              {
+                "name": "projectToken",
+                "value": "",
+                "type": "path",
+                "description": "project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**)."
+              }
+            ]
+          },
+          "docs": "Returns the project identified by its token"
+        },
+        {
+          "info": {
+            "name": "Rename Project",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://baseUrl/api/v2.0/projects/:projectToken",
+            "params": [
+              {
+                "name": "projectToken",
+                "value": "",
+                "type": "path",
+                "description": "project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Renames the project identified by its token."
+        },
+        {
+          "info": {
+            "name": "Remove Project",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://baseUrl/api/v2.0/projects/:projectToken",
+            "params": [
+              {
+                "name": "projectToken",
+                "value": "",
+                "type": "path",
+                "description": "project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**)."
+              }
+            ]
+          },
+          "docs": "Deletes the project identified by its token"
+        },
+        {
+          "info": {
+            "name": "Get Project Vitals",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v2.0/projects/:projectToken/vitals",
+            "params": [
+              {
+                "name": "projectToken",
+                "value": "",
+                "type": "path",
+                "description": "project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**)."
+              }
+            ]
+          },
+          "docs": "Returns basic information about a given project"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

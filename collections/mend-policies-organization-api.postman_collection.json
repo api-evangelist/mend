@@ -1,0 +1,1740 @@
+{
+  "item": [
+    {
+      "id": "acabda76-00c5-4f02-ad8f-ba845bce2281",
+      "name": "Policies - Organization",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0fa3db0c-928d-429b-a1e0-6fafdbb55704",
+          "name": "Get organization policy",
+          "request": {
+            "name": "Get organization policy",
+            "description": {
+              "content": "Returns the given policy for a particular organization",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2.0",
+                "orgs",
+                ":orgToken",
+                "policies",
+                ":policyUuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orgToken",
+                  "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "policyUuid",
+                  "description": "(Required) Policy UUID (by running Policies - Organization and run Get Organization Policies, or the equivalent for Product or Project.)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "40d79893-bc8d-4d3a-8879-a37cebc733b2",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "orgs",
+                    ":orgToken",
+                    "policies",
+                    ":policyUuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgToken",
+                      "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "policyUuid",
+                      "description": "(Required) Policy UUID (by running Policies - Organization and run Get Organization Policies, or the equivalent for Product or Project.)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\",\n  \"retVal\": {\n    \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n    \"name\": \"A Policy\",\n    \"owner\": {\n      \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n      \"name\": \"Jon Smith\",\n      \"email\": \"jon.smith@mail.com\",\n      \"userType\": \"REGULAR\",\n      \"accountStatus\": \"INACTIVE\"\n    },\n    \"createdAt\": \"2016-09-06T01:43:02.740Z\",\n    \"priority\": 1,\n    \"filter\": {\n      \"type\": \"string\"\n    },\n    \"action\": {\n      \"type\": \"string\"\n    },\n    \"context\": {\n      \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n      \"name\": \"Context A\",\n      \"contextType\": \"ORGS\"\n    },\n    \"enabled\": true,\n    \"modifiedAt\": \"2021-10-11T23:42:39.583Z\",\n    \"modifiedBy\": \"jon.smith@mail.com\",\n    \"aggregatedPriority\": 1902\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0ec208fd-dbfa-4bf8-bebc-2d69edd9def6",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "orgs",
+                    ":orgToken",
+                    "policies",
+                    ":policyUuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgToken",
+                      "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "policyUuid",
+                      "description": "(Required) Policy UUID (by running Policies - Organization and run Get Organization Policies, or the equivalent for Product or Project.)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8b14c6ab-ee7f-40a3-9434-8155f9e8338a",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "orgs",
+                    ":orgToken",
+                    "policies",
+                    ":policyUuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgToken",
+                      "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "policyUuid",
+                      "description": "(Required) Policy UUID (by running Policies - Organization and run Get Organization Policies, or the equivalent for Product or Project.)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ac2feca3-976f-491d-bf37-29cfbf17bb94",
+          "name": "Update Organization Policy",
+          "request": {
+            "name": "Update Organization Policy",
+            "description": {
+              "content": "Updates a policy of a given organization",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2.0",
+                "orgs",
+                ":orgToken",
+                "policies",
+                ":policyUuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orgToken",
+                  "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "policyUuid",
+                  "description": "(Required) Policy UUID (by running Policies - Organization and run Get Organization Policies, or the equivalent for Product or Project.)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"action\": \"<object>\",\n  \"filter\": {\n    \"type\": \"<string>\",\n    \"groupIdRegex\": \"<string>\",\n    \"artifactIdRegex\": \"<string>\",\n    \"versionRegex\": \"<string>\"\n  },\n  \"name\": \"<string>\",\n  \"enabled\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7644013f-1467-4a05-8991-1b86617f7c9d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "orgs",
+                    ":orgToken",
+                    "policies",
+                    ":policyUuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgToken",
+                      "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "policyUuid",
+                      "description": "(Required) Policy UUID (by running Policies - Organization and run Get Organization Policies, or the equivalent for Product or Project.)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"action\": {\n    \"type\": \"<string>\"\n  },\n  \"filter\": {\n    \"type\": \"<string>\",\n    \"groupIdRegex\": \"/**\",\n    \"artifactIdRegex\": \"/**\",\n    \"versionRegex\": \"/**\"\n  },\n  \"name\": \"License Policy\",\n  \"enabled\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\",\n  \"retVal\": {\n    \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n    \"name\": \"A Policy\",\n    \"owner\": {\n      \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n      \"name\": \"Jon Smith\",\n      \"email\": \"jon.smith@mail.com\",\n      \"userType\": \"REGULAR\",\n      \"accountStatus\": \"INACTIVE\"\n    },\n    \"createdAt\": \"2025-04-29T07:59:15.867Z\",\n    \"priority\": 1,\n    \"filter\": {\n      \"type\": \"string\"\n    },\n    \"action\": {\n      \"type\": \"<string>\"\n    },\n    \"context\": {\n      \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n      \"name\": \"Context A\",\n      \"contextType\": \"ORGS\"\n    },\n    \"enabled\": true,\n    \"modifiedAt\": \"1990-08-01T10:16:40.403Z\",\n    \"modifiedBy\": \"jon.smith@mail.com\",\n    \"aggregatedPriority\": 587\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "58c45f48-38e5-44d7-9aa8-ce7efba2ecee",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "orgs",
+                    ":orgToken",
+                    "policies",
+                    ":policyUuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgToken",
+                      "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "policyUuid",
+                      "description": "(Required) Policy UUID (by running Policies - Organization and run Get Organization Policies, or the equivalent for Product or Project.)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"action\": {\n    \"type\": \"<string>\"\n  },\n  \"filter\": {\n    \"type\": \"<string>\",\n    \"groupIdRegex\": \"/**\",\n    \"artifactIdRegex\": \"/**\",\n    \"versionRegex\": \"/**\"\n  },\n  \"name\": \"License Policy\",\n  \"enabled\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3761ad90-64b4-46a3-9eb3-3234ffab8dce",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "orgs",
+                    ":orgToken",
+                    "policies",
+                    ":policyUuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgToken",
+                      "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "policyUuid",
+                      "description": "(Required) Policy UUID (by running Policies - Organization and run Get Organization Policies, or the equivalent for Product or Project.)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"action\": {\n    \"type\": \"<string>\"\n  },\n  \"filter\": {\n    \"type\": \"<string>\",\n    \"groupIdRegex\": \"/**\",\n    \"artifactIdRegex\": \"/**\",\n    \"versionRegex\": \"/**\"\n  },\n  \"name\": \"License Policy\",\n  \"enabled\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3b3055b4-1a83-4dd0-b67c-998098939008",
+          "name": "Delete Organization Policy",
+          "request": {
+            "name": "Delete Organization Policy",
+            "description": {
+              "content": "Deletes the given policy for an organization",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2.0",
+                "orgs",
+                ":orgToken",
+                "policies",
+                ":policyUuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orgToken",
+                  "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "policyUuid",
+                  "description": "(Required) Policy UUID (by running Policies - Organization and run Get Organization Policies, or the equivalent for Product or Project.)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dfe91edc-41e2-493d-bcd3-0ddae3b5d402",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "orgs",
+                    ":orgToken",
+                    "policies",
+                    ":policyUuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgToken",
+                      "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "policyUuid",
+                      "description": "(Required) Policy UUID (by running Policies - Organization and run Get Organization Policies, or the equivalent for Product or Project.)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\",\n  \"retVal\": {\n    \"message\": \"Success!\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "636c49e0-bcb7-4115-94a4-f7739d49d0d8",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "orgs",
+                    ":orgToken",
+                    "policies",
+                    ":policyUuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgToken",
+                      "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "policyUuid",
+                      "description": "(Required) Policy UUID (by running Policies - Organization and run Get Organization Policies, or the equivalent for Product or Project.)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "867da07f-3e16-4daf-80b9-f0cc2ba040c6",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "orgs",
+                    ":orgToken",
+                    "policies",
+                    ":policyUuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgToken",
+                      "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "policyUuid",
+                      "description": "(Required) Policy UUID (by running Policies - Organization and run Get Organization Policies, or the equivalent for Product or Project.)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0ebc4d40-cdfd-4c7d-9417-0a1492c283db",
+          "name": "Update Organization Policy Priorities",
+          "request": {
+            "name": "Update Organization Policy Priorities",
+            "description": {
+              "content": "Updates the priority of policies in a given organization. Policies are numbered and then evaluated sequentially. The request body should contain a list of policy UUIDs in the desired order, starting from highest priority. The service returns a list or ordered policies.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2.0",
+                "orgs",
+                ":orgToken",
+                "policies",
+                "priority"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orgToken",
+                  "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"uuids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "14cd5c64-77e2-4467-9398-2793c3b94c38",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "orgs",
+                    ":orgToken",
+                    "policies",
+                    "priority"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgToken",
+                      "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"uuids\": [\n    \"123e4567-e89b-12d3-a456-426655440000\",\n    \"123e4567-e89b-12d3-a456-426655440000\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\",\n  \"retVal\": [\n    {\n      \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n      \"name\": \"A Policy\",\n      \"owner\": {\n        \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n        \"name\": \"Jon Smith\",\n        \"email\": \"jon.smith@mail.com\",\n        \"userType\": \"REGULAR\",\n        \"accountStatus\": \"ACTIVE\"\n      },\n      \"createdAt\": \"2022-08-23T06:42:21.010Z\",\n      \"priority\": 1,\n      \"filter\": {\n        \"type\": \"string\"\n      },\n      \"action\": {\n        \"type\": \"<string>\"\n      },\n      \"context\": {\n        \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n        \"name\": \"Context A\",\n        \"contextType\": \"ORGS\"\n      },\n      \"enabled\": false,\n      \"modifiedAt\": \"2012-10-16T11:38:17.270Z\",\n      \"modifiedBy\": \"jon.smith@mail.com\",\n      \"aggregatedPriority\": 3015\n    },\n    {\n      \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n      \"name\": \"A Policy\",\n      \"owner\": {\n        \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n        \"name\": \"Jon Smith\",\n        \"email\": \"jon.smith@mail.com\",\n        \"userType\": \"REGULAR\",\n        \"accountStatus\": \"INACTIVE\"\n      },\n      \"createdAt\": \"1956-09-21T18:09:19.354Z\",\n      \"priority\": 1,\n      \"filter\": {\n        \"type\": \"string\"\n      },\n      \"action\": {\n        \"type\": \"<string>\"\n      },\n      \"context\": {\n        \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n        \"name\": \"Context A\",\n        \"contextType\": \"PRODUCTS\"\n      },\n      \"enabled\": true,\n      \"modifiedAt\": \"1977-06-26T23:03:53.266Z\",\n      \"modifiedBy\": \"jon.smith@mail.com\",\n      \"aggregatedPriority\": 3897\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4593306d-d300-4d06-ae3a-257fe4d060f5",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "orgs",
+                    ":orgToken",
+                    "policies",
+                    "priority"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgToken",
+                      "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"uuids\": [\n    \"123e4567-e89b-12d3-a456-426655440000\",\n    \"123e4567-e89b-12d3-a456-426655440000\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d964d653-9a72-48f3-ad82-6d904627498e",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "orgs",
+                    ":orgToken",
+                    "policies",
+                    "priority"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgToken",
+                      "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"uuids\": [\n    \"123e4567-e89b-12d3-a456-426655440000\",\n    \"123e4567-e89b-12d3-a456-426655440000\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b66edf83-5cdf-4907-b2dc-c8115d1cd4f1",
+          "name": "Apply Organization Policies On Inventory",
+          "request": {
+            "name": "Apply Organization Policies On Inventory",
+            "description": {
+              "content": "After initiating this call, the process will be performed asynchronously in the background. To check the status of the process and retrieve the final outcome, use the \"Get Async Process Status\" request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2.0",
+                "orgs",
+                ":orgToken",
+                "policies",
+                "apply"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orgToken",
+                  "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b16b6435-4074-4259-83fb-cb0f4f5f3ae0",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "orgs",
+                    ":orgToken",
+                    "policies",
+                    "apply"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgToken",
+                      "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\",\n  \"retVal\": {\n    \"contextUuid\": \"caf69794-9882-4b55-82db-6b6da4fe2a26\",\n    \"uuid\": \"caf69794-9882-4b55-82db-6b6da4fe2a92\",\n    \"status\": \"PENDING\",\n    \"contextType\": \"DOMAIN\",\n    \"created\": \"1982-05-24T15:13:31.595Z\",\n    \"modified\": \"1975-12-08T21:51:18.114Z\",\n    \"processType\": \"APPLY_POLICIES\",\n    \"messageContentSha1\": \"fb4016165697cc32d0b90ccc82e3c2c846eb01b7\",\n    \"requestToken\": \"2cd6a43b\",\n    \"userEmail\": \"sample@mail.com\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e5279636-b77a-4439-8694-27f7427cc064",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "orgs",
+                    ":orgToken",
+                    "policies",
+                    "apply"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgToken",
+                      "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "73ecfc13-cf96-414b-9e6c-4b7dc96b2118",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "orgs",
+                    ":orgToken",
+                    "policies",
+                    "apply"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgToken",
+                      "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "566c93c4-6b2b-4305-a242-792119165fcf",
+          "name": "Get organization policies",
+          "request": {
+            "name": "Get organization policies",
+            "description": {
+              "content": "Returns all of the policies of a given organization",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2.0",
+                "orgs",
+                ":orgToken",
+                "policies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orgToken",
+                  "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9cca55a2-3749-4a34-9572-4e7c53f07bd1",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "orgs",
+                    ":orgToken",
+                    "policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgToken",
+                      "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\",\n  \"retVal\": [\n    {\n      \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n      \"name\": \"A Policy\",\n      \"owner\": {\n        \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n        \"name\": \"Jon Smith\",\n        \"email\": \"jon.smith@mail.com\",\n        \"userType\": \"REGULAR\",\n        \"accountStatus\": \"ACTIVE\"\n      },\n      \"createdAt\": \"1977-12-14T21:04:37.962Z\",\n      \"priority\": 1,\n      \"filter\": {\n        \"type\": \"string\"\n      },\n      \"action\": {\n        \"type\": \"<string>\"\n      },\n      \"context\": {\n        \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n        \"name\": \"Context A\",\n        \"contextType\": \"PRODUCTS\"\n      },\n      \"enabled\": true,\n      \"modifiedAt\": \"1998-06-28T08:18:21.350Z\",\n      \"modifiedBy\": \"jon.smith@mail.com\",\n      \"aggregatedPriority\": 4773\n    },\n    {\n      \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n      \"name\": \"A Policy\",\n      \"owner\": {\n        \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n        \"name\": \"Jon Smith\",\n        \"email\": \"jon.smith@mail.com\",\n        \"userType\": \"REGULAR\",\n        \"accountStatus\": \"ACTIVE\"\n      },\n      \"createdAt\": \"1963-08-26T21:28:39.330Z\",\n      \"priority\": 1,\n      \"filter\": {\n        \"type\": \"string\"\n      },\n      \"action\": {\n        \"type\": \"<string>\"\n      },\n      \"context\": {\n        \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n        \"name\": \"Context A\",\n        \"contextType\": \"ORGS\"\n      },\n      \"enabled\": false,\n      \"modifiedAt\": \"1954-01-30T19:25:24.828Z\",\n      \"modifiedBy\": \"jon.smith@mail.com\",\n      \"aggregatedPriority\": 4519\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b6d331a2-6569-4948-95cc-c85a6db1878f",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "orgs",
+                    ":orgToken",
+                    "policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgToken",
+                      "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cea9d3ae-9f03-42ea-a09e-1af8c06f8926",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "orgs",
+                    ":orgToken",
+                    "policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgToken",
+                      "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bbfa5159-ea6b-4009-831b-446072e4ff76",
+          "name": "Create Organization Policy",
+          "request": {
+            "name": "Create Organization Policy",
+            "description": {
+              "content": "Creates a new policy for a given organization",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2.0",
+                "orgs",
+                ":orgToken",
+                "policies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orgToken",
+                  "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"action\": \"<object>\",\n  \"filter\": {\n    \"type\": \"<string>\",\n    \"groupIdRegex\": \"<string>\",\n    \"artifactIdRegex\": \"<string>\",\n    \"versionRegex\": \"<string>\"\n  },\n  \"name\": \"<string>\",\n  \"enabled\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9d44648e-0da1-4377-a926-9524d741c352",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "orgs",
+                    ":orgToken",
+                    "policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgToken",
+                      "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"action\": {\n    \"type\": \"<string>\"\n  },\n  \"filter\": {\n    \"type\": \"<string>\",\n    \"groupIdRegex\": \"/**\",\n    \"artifactIdRegex\": \"/**\",\n    \"versionRegex\": \"/**\"\n  },\n  \"name\": \"License Policy\",\n  \"enabled\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\",\n  \"retVal\": {\n    \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n    \"name\": \"A Policy\",\n    \"owner\": {\n      \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n      \"name\": \"Jon Smith\",\n      \"email\": \"jon.smith@mail.com\",\n      \"userType\": \"REGULAR\",\n      \"accountStatus\": \"INACTIVE\"\n    },\n    \"createdAt\": \"2025-04-29T07:59:15.867Z\",\n    \"priority\": 1,\n    \"filter\": {\n      \"type\": \"string\"\n    },\n    \"action\": {\n      \"type\": \"<string>\"\n    },\n    \"context\": {\n      \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n      \"name\": \"Context A\",\n      \"contextType\": \"ORGS\"\n    },\n    \"enabled\": true,\n    \"modifiedAt\": \"1990-08-01T10:16:40.403Z\",\n    \"modifiedBy\": \"jon.smith@mail.com\",\n    \"aggregatedPriority\": 587\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "20ee02d1-103d-4717-92a5-134931f92de8",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "orgs",
+                    ":orgToken",
+                    "policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgToken",
+                      "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"action\": {\n    \"type\": \"<string>\"\n  },\n  \"filter\": {\n    \"type\": \"<string>\",\n    \"groupIdRegex\": \"/**\",\n    \"artifactIdRegex\": \"/**\",\n    \"versionRegex\": \"/**\"\n  },\n  \"name\": \"License Policy\",\n  \"enabled\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0d07fed6-5bd0-4897-b0bb-7392c2485843",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "orgs",
+                    ":orgToken",
+                    "policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgToken",
+                      "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"action\": {\n    \"type\": \"<string>\"\n  },\n  \"filter\": {\n    \"type\": \"<string>\",\n    \"groupIdRegex\": \"/**\",\n    \"artifactIdRegex\": \"/**\",\n    \"versionRegex\": \"/**\"\n  },\n  \"name\": \"License Policy\",\n  \"enabled\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://baseUrl",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1e93bd75-3865-4fda-8d9e-d8fb1ec2f947",
+    "name": "Mend Access Management Policies - Organization API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Mend's enhanced API enables automation of workflows in a REST compliant format. The API features:\n+ Access for any user with Mend credentials, via a user key available in the user's profile page in the Mend Platform.\n+ Improved security with a JWT token per organization, which expires every 10 minutes.\n+ Added scalability with support for cursor pagination and limiting results size.\n+ Broader functionality available programmatically.\n+ New standard API documentation for easy navigation and search.\n\n**Note:** To help you get started with the Mend API 3.0, we recommend reviewing our onboarding guide -> [Getting Started with API 3.0](https://docs.mend.io/platform/latest/getting-started-with-mend-api-3-0).\nThis resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend API 3.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.",
+      "type": "text/plain"
+    }
+  }
+}

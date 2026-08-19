@@ -1,0 +1,219 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mend Access Management Settings - In-House API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Settings - In-House",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Update single InHouse Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://baseUrl/api/v2.0/orgs/:orgToken/settings/inHouse/:ruleUuid",
+            "params": [
+              {
+                "name": "orgToken",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+              },
+              {
+                "name": "ruleUuid",
+                "value": "",
+                "type": "path",
+                "description": "The In-House rule UUID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a single In-House library rule"
+        },
+        {
+          "info": {
+            "name": "Delete Single In-House Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://baseUrl/api/v2.0/orgs/:orgToken/settings/inHouse/:ruleUuid",
+            "params": [
+              {
+                "name": "orgToken",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+              },
+              {
+                "name": "ruleUuid",
+                "value": "",
+                "type": "path",
+                "description": "The InHouse rule UUID"
+              }
+            ]
+          },
+          "docs": "Deletes a single In-House library rule"
+        },
+        {
+          "info": {
+            "name": "Create Multiple In-House Rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v2.0/orgs/:orgToken/settings/inHouse/rules",
+            "params": [
+              {
+                "name": "orgToken",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates one or more in-house library rules"
+        },
+        {
+          "info": {
+            "name": "Update Multiple In-House Rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://baseUrl/api/v2.0/orgs/:orgToken/settings/inHouse/rules",
+            "params": [
+              {
+                "name": "orgToken",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the pattern-mat§ching rules of an In-House library rule"
+        },
+        {
+          "info": {
+            "name": "Delete multiple InhHouse rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://baseUrl/api/v2.0/orgs/:orgToken/settings/inHouse/rules",
+            "params": [
+              {
+                "name": "orgToken",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deletes one or more in-house library rules"
+        },
+        {
+          "info": {
+            "name": "Apply In-House Rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://baseUrl/api/v2.0/orgs/:orgToken/settings/inHouse/apply",
+            "params": [
+              {
+                "name": "orgToken",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+              }
+            ]
+          },
+          "docs": "Applies the current In-House library rules to a given organization. Use this request after creating and/or updating In-House rules"
+        },
+        {
+          "info": {
+            "name": "Get In-House Settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v2.0/orgs/:orgToken/settings/inHouse",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Enter the number of items to return in each page of the result."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "orgToken",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+              }
+            ]
+          },
+          "docs": "Returns a list of all In-House library rules for a given organization"
+        },
+        {
+          "info": {
+            "name": "Create Single In-House Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v2.0/orgs/:orgToken/settings/inHouse",
+            "params": [
+              {
+                "name": "orgToken",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a single In-House rule to match libraries by name or maven coordinates (artifact id, group id) and designate these libraries as known, trusted entities"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,223 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mend Access Management Findings - Scan API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Findings - Scan",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a list of project scan findings (Code - SAST)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v3.0/projects/:projectUuid/scans/:scanUuid/code/findings",
+            "params": [
+              {
+                "name": "projectUuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the project"
+              },
+              {
+                "name": "scanUuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the project scan for which to get findings"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the maximum number of items to be returned in the response."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get a list of findings for a specified project scan UUID.\n</br>\nThis endpoint supports paging using <em>cursor</em> and <em>limit</em> parameters described in <i>Parameters</i> section below."
+        },
+        {
+          "info": {
+            "name": "Get a project scan finding (Code - SAST)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v3.0/projects/:projectUuid/scans/:scanUuid/code/findings/:findingUuid",
+            "params": [
+              {
+                "name": "projectUuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the project"
+              },
+              {
+                "name": "scanUuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the project for which to get findings"
+              },
+              {
+                "name": "findingUuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the finding"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get a project finding for a specified project, scan and finding UUID.\n</br>"
+        },
+        {
+          "info": {
+            "name": "List image scan secrets findings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v3.0/projects/:projectuuid/scans/:scanuuid/images/findings/secrets",
+            "params": [
+              {
+                "name": "projectuuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the project"
+              },
+              {
+                "name": "scanuuid",
+                "value": "",
+                "type": "path",
+                "description": "scan UUID"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the maximum number of items to be returned in the response."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List the image scan secrets findings"
+        },
+        {
+          "info": {
+            "name": "List image scan security findings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v3.0/projects/:projectuuid/scans/:scanuuid/images/findings/security",
+            "params": [
+              {
+                "name": "projectuuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the project"
+              },
+              {
+                "name": "scanuuid",
+                "value": "",
+                "type": "path",
+                "description": "scan UUID"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the maximum number of items to be returned in the response."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List the image scan security findings"
+        },
+        {
+          "info": {
+            "name": "List image scan packages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v3.0/projects/:projectuuid/scans/:scanuuid/images/packages",
+            "params": [
+              {
+                "name": "projectuuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the project"
+              },
+              {
+                "name": "scanuuid",
+                "value": "",
+                "type": "path",
+                "description": "scan UUID"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the maximum number of items to be returned in the response."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List the image scan packages"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

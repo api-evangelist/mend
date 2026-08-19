@@ -1,0 +1,3629 @@
+{
+  "item": [
+    {
+      "id": "5d0dac19-4999-4314-af20-97846401df85",
+      "name": "Library - Organization",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b69539a8-b14c-4de3-aeaf-e1dd3068ca6c",
+          "name": "Get Library Notices",
+          "request": {
+            "name": "Get Library Notices",
+            "description": {
+              "content": "Returns the text of a library's notice",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2.0",
+                "orgs",
+                ":orgToken",
+                "libraries",
+                ":libraryUuid",
+                "notices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orgToken",
+                  "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "libraryUuid",
+                  "description": "(Required) library UUID (get a project's library by running Library - Project > Get Project Libraries."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4279dc6e-1720-4f62-81f6-7657024a1848",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "orgs",
+                    ":orgToken",
+                    "libraries",
+                    ":libraryUuid",
+                    "notices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgToken",
+                      "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "libraryUuid",
+                      "description": "(Required) library UUID (get a project's library by running Library - Project > Get Project Libraries."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\",\n  \"retVal\": [\n    {\n      \"text\": \"Developed internally\",\n      \"reference\": \"https://github.com/...\"\n    },\n    {\n      \"text\": \"Developed internally\",\n      \"reference\": \"https://github.com/...\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "61c61521-f8e4-474f-ace2-eae44237b389",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "orgs",
+                    ":orgToken",
+                    "libraries",
+                    ":libraryUuid",
+                    "notices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgToken",
+                      "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "libraryUuid",
+                      "description": "(Required) library UUID (get a project's library by running Library - Project > Get Project Libraries."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b3c306f6-aae2-472c-9783-0bd306c51c5d",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "orgs",
+                    ":orgToken",
+                    "libraries",
+                    ":libraryUuid",
+                    "notices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgToken",
+                      "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "libraryUuid",
+                      "description": "(Required) library UUID (get a project's library by running Library - Project > Get Project Libraries."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "94d184d4-74e4-4abe-aa9b-92b16ee8de6a",
+          "name": "Set Library Notice",
+          "request": {
+            "name": "Set Library Notice",
+            "description": {
+              "content": "Edits or adds a custom notice for a given library",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2.0",
+                "orgs",
+                ":orgToken",
+                "libraries",
+                ":libraryUuid",
+                "notices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orgToken",
+                  "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "libraryUuid",
+                  "description": "(Required) library UUID (get a project's library by running Library - Project > Get Project Libraries."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"<string>\",\n  \"reference\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9b979575-e04b-46f8-8059-4eba57a050ef",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "orgs",
+                    ":orgToken",
+                    "libraries",
+                    ":libraryUuid",
+                    "notices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgToken",
+                      "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "libraryUuid",
+                      "description": "(Required) library UUID (get a project's library by running Library - Project > Get Project Libraries."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"Developed internally\",\n  \"reference\": \"https://github.com/...\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\",\n  \"retVal\": {\n    \"text\": \"Developed internally\",\n    \"reference\": \"https://github.com/...\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8a0a5efa-c299-4a30-9e36-c1de73917953",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "orgs",
+                    ":orgToken",
+                    "libraries",
+                    ":libraryUuid",
+                    "notices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgToken",
+                      "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "libraryUuid",
+                      "description": "(Required) library UUID (get a project's library by running Library - Project > Get Project Libraries."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"Developed internally\",\n  \"reference\": \"https://github.com/...\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "53891730-456b-40a6-b20d-2d9ce56ee392",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "orgs",
+                    ":orgToken",
+                    "libraries",
+                    ":libraryUuid",
+                    "notices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgToken",
+                      "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "libraryUuid",
+                      "description": "(Required) library UUID (get a project's library by running Library - Project > Get Project Libraries."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"Developed internally\",\n  \"reference\": \"https://github.com/...\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5f33935e-050d-43d6-890c-900a7dc75644",
+          "name": "Assign Library License",
+          "request": {
+            "name": "Assign Library License",
+            "description": {
+              "content": "Adds a license reference to a given library",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2.0",
+                "orgs",
+                ":orgToken",
+                "libraries",
+                ":libraryUuid",
+                "licenses"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orgToken",
+                  "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "libraryUuid",
+                  "description": "(Required) library UUID (get a project's library by running Library - Project > Get Project Libraries."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"assignedByUser\": \"<boolean>\",\n  \"licenseReferences\": [\n    {\n      \"liabilityReference\": \"<string>\",\n      \"customDisclaimer\": \"<string>\"\n    },\n    {\n      \"liabilityReference\": \"<string>\",\n      \"customDisclaimer\": \"<string>\"\n    }\n  ],\n  \"uuid\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ec5ca329-ad74-4ae1-b51a-97dd49d3702b",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "orgs",
+                    ":orgToken",
+                    "libraries",
+                    ":libraryUuid",
+                    "licenses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgToken",
+                      "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "libraryUuid",
+                      "description": "(Required) library UUID (get a project's library by running Library - Project > Get Project Libraries."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"assignedByUser\": \"<boolean>\",\n  \"licenseReferences\": [\n    {\n      \"liabilityReference\": \"www.somelink.com\",\n      \"customDisclaimer\": \"<string>\"\n    },\n    {\n      \"liabilityReference\": \"www.somelink.com\",\n      \"customDisclaimer\": \"<string>\"\n    }\n  ],\n  \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\",\n  \"retVal\": {\n    \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n    \"name\": \"MIT\",\n    \"assignedByUser\": true,\n    \"licenseReferences\": [\n      {\n        \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n        \"type\": \"ARTIFACT_DESCRIPTOR\",\n        \"liabilityReference\": \"https://repo.maven.apache.org/maven2/org/jruby/ext/posix/jna-posix/1.0.3/jna-posix-1.0.3.pom\",\n        \"assignedBy\": {\n          \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n          \"name\": \"Jon Smith\",\n          \"email\": \"jon.smith@mail.com\",\n          \"userType\": \"REGULAR\",\n          \"accountStatus\": \"ACTIVE\"\n        },\n        \"textUrl\": \"string\",\n        \"customDisclaimer\": \"string\",\n        \"information\": \"distribution=repo&remoteUrl=https://repo.maven.apache.org/maven2/org/jruby/ext/posix/jna-posix/1.0.3/jna-posix-1.0.3.pom\"\n      },\n      {\n        \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n        \"type\": \"ARTIFACT_DESCRIPTOR\",\n        \"liabilityReference\": \"https://repo.maven.apache.org/maven2/org/jruby/ext/posix/jna-posix/1.0.3/jna-posix-1.0.3.pom\",\n        \"assignedBy\": {\n          \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n          \"name\": \"Jon Smith\",\n          \"email\": \"jon.smith@mail.com\",\n          \"userType\": \"REGULAR\",\n          \"accountStatus\": \"ACTIVE\"\n        },\n        \"textUrl\": \"string\",\n        \"customDisclaimer\": \"string\",\n        \"information\": \"distribution=repo&remoteUrl=https://repo.maven.apache.org/maven2/org/jruby/ext/posix/jna-posix/1.0.3/jna-posix-1.0.3.pom\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "80e92234-8b4d-43e0-afec-54b24e513b03",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "orgs",
+                    ":orgToken",
+                    "libraries",
+                    ":libraryUuid",
+                    "licenses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgToken",
+                      "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "libraryUuid",
+                      "description": "(Required) library UUID (get a project's library by running Library - Project > Get Project Libraries."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"assignedByUser\": \"<boolean>\",\n  \"licenseReferences\": [\n    {\n      \"liabilityReference\": \"www.somelink.com\",\n      \"customDisclaimer\": \"<string>\"\n    },\n    {\n      \"liabilityReference\": \"www.somelink.com\",\n      \"customDisclaimer\": \"<string>\"\n    }\n  ],\n  \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1faa7eb7-fd60-420d-a721-9c62ac0ae7eb",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "orgs",
+                    ":orgToken",
+                    "libraries",
+                    ":libraryUuid",
+                    "licenses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgToken",
+                      "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "libraryUuid",
+                      "description": "(Required) library UUID (get a project's library by running Library - Project > Get Project Libraries."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"assignedByUser\": \"<boolean>\",\n  \"licenseReferences\": [\n    {\n      \"liabilityReference\": \"www.somelink.com\",\n      \"customDisclaimer\": \"<string>\"\n    },\n    {\n      \"liabilityReference\": \"www.somelink.com\",\n      \"customDisclaimer\": \"<string>\"\n    }\n  ],\n  \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9b867721-4138-4965-95ac-ed95acc442d9",
+          "name": "Set Library Copyright",
+          "request": {
+            "name": "Set Library Copyright",
+            "description": {
+              "content": "Edits or adds a copyright statement for a given library",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2.0",
+                "orgs",
+                ":orgToken",
+                "libraries",
+                ":libraryUuid",
+                "copyrights"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orgToken",
+                  "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "libraryUuid",
+                  "description": "(Required) library UUID (get a project's library by running Library - Project > Get Project Libraries."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"copyright\": \"<string>\",\n  \"customDisclaimer\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"startYear\": \"<string>\",\n  \"endYear\": \"<string>\",\n  \"author\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2f706521-b9f7-49cb-a0b8-ce894f8ad7f4",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "orgs",
+                    ":orgToken",
+                    "libraries",
+                    ":libraryUuid",
+                    "copyrights"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgToken",
+                      "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "libraryUuid",
+                      "description": "(Required) library UUID (get a project's library by running Library - Project > Get Project Libraries."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"copyright\": \"Copyright 2002 Landmark\",\n  \"customDisclaimer\": \"a disclaimer for the copyright \",\n  \"createdAt\": \"<dateTime>\",\n  \"startYear\": \"2020\",\n  \"endYear\": \"2022\",\n  \"author\": \"Cloud Conscious, LLC\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\",\n  \"retVal\": {\n    \"copyright\": \"Copyright 2021 x greater by the end of\",\n    \"type\": \"PROJECT_HOMEPAGE\",\n    \"customDisclaimer\": \"string\",\n    \"createdAt\": \"1959-11-17T22:27:48.847Z\",\n    \"textUrl\": \"string\",\n    \"startYear\": \"2021\",\n    \"endYear\": \"2022\",\n    \"author\": \"x greater by the end of\",\n    \"referenceInfo\": \"x greater by the end of\",\n    \"assignedBy\": {\n      \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n      \"name\": \"Jon Smith\",\n      \"email\": \"jon.smith@mail.com\",\n      \"userType\": \"REGULAR\",\n      \"accountStatus\": \"ACTIVE\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "80dfa34a-54c2-4979-b7a4-b23165f71633",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "orgs",
+                    ":orgToken",
+                    "libraries",
+                    ":libraryUuid",
+                    "copyrights"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgToken",
+                      "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "libraryUuid",
+                      "description": "(Required) library UUID (get a project's library by running Library - Project > Get Project Libraries."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"copyright\": \"Copyright 2002 Landmark\",\n  \"customDisclaimer\": \"a disclaimer for the copyright \",\n  \"createdAt\": \"<dateTime>\",\n  \"startYear\": \"2020\",\n  \"endYear\": \"2022\",\n  \"author\": \"Cloud Conscious, LLC\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ab031541-afae-4760-96b5-7d60ea5a73d1",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "orgs",
+                    ":orgToken",
+                    "libraries",
+                    ":libraryUuid",
+                    "copyrights"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgToken",
+                      "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "libraryUuid",
+                      "description": "(Required) library UUID (get a project's library by running Library - Project > Get Project Libraries."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"copyright\": \"Copyright 2002 Landmark\",\n  \"customDisclaimer\": \"a disclaimer for the copyright \",\n  \"createdAt\": \"<dateTime>\",\n  \"startYear\": \"2020\",\n  \"endYear\": \"2022\",\n  \"author\": \"Cloud Conscious, LLC\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e4c46126-15c0-4d03-b6fe-18c151fd4659",
+          "name": "Revert Library User Copyrights",
+          "request": {
+            "name": "Revert Library User Copyrights",
+            "description": {
+              "content": "Reverts the copyright statement for a given library to its original text",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2.0",
+                "orgs",
+                ":orgToken",
+                "libraries",
+                ":libraryUuid",
+                "copyrights"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orgToken",
+                  "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "libraryUuid",
+                  "description": "(Required) library UUID (get a project's library by running Library - Project > Get Project Libraries."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "733dbe2d-910f-4fc7-b07c-dd89f2c8757e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "orgs",
+                    ":orgToken",
+                    "libraries",
+                    ":libraryUuid",
+                    "copyrights"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgToken",
+                      "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "libraryUuid",
+                      "description": "(Required) library UUID (get a project's library by running Library - Project > Get Project Libraries."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\",\n  \"retVal\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e6e598fd-8d83-4eb8-b23b-c91004c4422e",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "orgs",
+                    ":orgToken",
+                    "libraries",
+                    ":libraryUuid",
+                    "copyrights"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgToken",
+                      "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "libraryUuid",
+                      "description": "(Required) library UUID (get a project's library by running Library - Project > Get Project Libraries."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "613db87f-24c2-4e9c-95be-86cba132aec5",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "orgs",
+                    ":orgToken",
+                    "libraries",
+                    ":libraryUuid",
+                    "copyrights"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgToken",
+                      "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "libraryUuid",
+                      "description": "(Required) library UUID (get a project's library by running Library - Project > Get Project Libraries."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d95ec819-ff32-4eb9-b812-4eaef5727b4b",
+          "name": "Get Organization In-House Libraries",
+          "request": {
+            "name": "Get Organization In-House Libraries",
+            "description": {
+              "content": "Retrieves all libraries in an organization that have been marked as In-House",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2.0",
+                "orgs",
+                ":orgToken",
+                "libraries",
+                "inHouse"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "50"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "description": {
+                    "content": "Filter your search to return items whose property has a specific value.\nUse the syntax: **property:operation:value** where a colon (:) separates between property, operation and value.\n+ Property: the name of the property of the item\n+ Operation:\n    + **equals** - true if the value is identical to this value.\n    + **like** - true if the property's value is contained within this value\n    + **regex** - true if this regular expression resolves as true.\n        The regex is not case sensitive, and special characters must be escaped with a backslash.\n        Special characters include space, double quote (\"), '<', '>', '#', '%', '{', '}', vertical bar ('|'), backslash, '^'.\n        To pass an escaped character in a URL in Postman, encode it first.\n        E.g. to return all items whose value begins with **a** or **A**, use regex:^a\n+ Value: the value of the property.\n\nTo combine multiple filters, separate each filter with a semicolon with no space. E.g.  property1:operation1:value1;property2:operation2:value2\n\nThis endpoint supports filtering on this property:\n+ name:[like | equals | regex]:value\n+ type:[like | equals ]:value\n+ comment:[like | equals | regex]:value\n+ markType:[equals]:value\n",
+                    "type": "text/plain"
+                  },
+                  "key": "search",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Sort search results alphabetically on an item's property by entering **sort=** followed by the property name.\nE.g. enter **sort=email** to sort alphabetically by their email addresses from a-z ascending.To sort in descending order (z-a), add a minus sign ('-'). E.g. **sort=-email**.\n\nYou can sort by the following properties:\n+ name\n+ type\n+ comment\n+ markType\n",
+                    "type": "text/plain"
+                  },
+                  "key": "sort",
+                  "value": ""
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orgToken",
+                  "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "64a8d298-fcbc-4897-b78b-60f0745866a8",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "orgs",
+                    ":orgToken",
+                    "libraries",
+                    "inHouse"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "search",
+                      "value": ""
+                    },
+                    {
+                      "key": "sort",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgToken",
+                      "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"additionalData\": {\n    \"totalItems\": \"422\",\n    \"isLastPage\": \"true\"\n  },\n  \"supportToken\": \"1171c60d\",\n  \"retVal\": [\n    {\n      \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n      \"name\": \"dbus-1.10.24-13.el7_6.x86_64.rpm\",\n      \"artifactId\": \"kind-of-6.0.2.tgz\",\n      \"groupId\": \"kind-of\",\n      \"version\": \"string\",\n      \"architecture\": \"string\",\n      \"languageVersion\": \"string\",\n      \"classifier\": \"string\",\n      \"extension\": \"string\",\n      \"sha1\": \"01146b36a6218e64e58f3a8d66de5d7fc6f6d051\",\n      \"description\": \"Get the native type of a value.\",\n      \"type\": \"javascript/Node.js\",\n      \"libraryType\": \"string\",\n      \"directDependency\": true,\n      \"purl\": \"pkg:maven/commons-beanutils/commons-beanutils@1.8.0?type=jar\",\n      \"extraInfo\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"extraInformation\": {\n        \"distributionUrl\": \"string\",\n        \"downloadUrl\": \"string\",\n        \"releaseDate\": \"2007-07-10T16:42:35.568Z\",\n        \"packageManagerRepository\": \"string\",\n        \"homePage\": \"string\",\n        \"repositoryUrl\": \"string\",\n        \"author\": \"string\"\n      },\n      \"securityRisks\": [\n        {\n          \"sourceUrl\": \"string\",\n          \"riskFactor\": \"KNOWN_FALSE_POSITIVE\"\n        },\n        {\n          \"sourceUrl\": \"string\",\n          \"riskFactor\": \"UNCONFIRMED_UNSAFE\"\n        }\n      ],\n      \"noticeReference\": {\n        \"text\": \"Developed internally\",\n        \"reference\": \"https://github.com/...\"\n      },\n      \"proprietaryInfo\": {\n        \"ruleDescription\": \"string\",\n        \"rulePattern\": \"string\",\n        \"comment\": \"string\",\n        \"userInfo\": {\n          \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n          \"name\": \"Jon Smith\",\n          \"email\": \"jon.smith@mail.com\",\n          \"userType\": \"REGULAR\",\n          \"accountStatus\": \"INACTIVE\"\n        },\n        \"proprietaryMarkType\": \"BY_RULE\"\n      },\n      \"locations\": [\n        {\n          \"localPath\": \"C:\\\\\\\\Users\\\\\\\\user\\\\\\\\.m2\\\\\\\\repository\\\\\\\\commons-io-1.4.jar\",\n          \"dependencyFile\": \"C:\\\\\\\\GitHubRepos\\\\\\\\Pipline\\\\\\\\EUA\\\\\\\\plugins-automation\\\\\\\\fsa\\\\\\\\tests\\\\\\\\EUA\\\\\\\\Java\\\\\\\\bigProjectsMaven\\\\\\\\WST_417\\\\\\\\Data\\\\\\\\ksa\\\\\\\\ksa-web-core\\\\\\\\pom.xml\"\n        },\n        {\n          \"localPath\": \"C:\\\\\\\\Users\\\\\\\\user\\\\\\\\.m2\\\\\\\\repository\\\\\\\\commons-io-1.4.jar\",\n          \"dependencyFile\": \"C:\\\\\\\\GitHubRepos\\\\\\\\Pipline\\\\\\\\EUA\\\\\\\\plugins-automation\\\\\\\\fsa\\\\\\\\tests\\\\\\\\EUA\\\\\\\\Java\\\\\\\\bigProjectsMaven\\\\\\\\WST_417\\\\\\\\Data\\\\\\\\ksa\\\\\\\\ksa-web-core\\\\\\\\pom.xml\"\n        }\n      ],\n      \"attributionReportSettings\": {\n        \"excluded\": false\n      },\n      \"dependencyType\": \"string\",\n      \"violations\": 22,\n      \"workflowUuids\": [\n        \"2\",\n        \"2\"\n      ],\n      \"violatingFindings\": 2,\n      \"trackedIssue\": {\n        \"uuid\": \"string\",\n        \"issueId\": \"string\",\n        \"origin\": \"string\",\n        \"issueKey\": \"string\",\n        \"account\": {\n          \"uuid\": \"string\",\n          \"name\": \"string\"\n        },\n        \"domain\": {\n          \"uuid\": \"string\",\n          \"name\": \"string\"\n        },\n        \"application\": {\n          \"uuid\": \"string\",\n          \"name\": \"string\"\n        },\n        \"project\": {\n          \"uuid\": \"string\",\n          \"name\": \"string\"\n        },\n        \"status\": \"SUCCESS\",\n        \"issueStatus\": \"string\",\n        \"failureReason\": \"string\",\n        \"errorMessage\": \"string\",\n        \"publicLink\": \"string\",\n        \"creationDate\": \"2025-01-24T22:53:40.963Z\",\n        \"updatedAt\": \"1961-11-19T20:40:49.969Z\",\n        \"createdBy\": {\n          \"uuid\": \"string\",\n          \"name\": \"string\"\n        },\n        \"ticketType\": \"SECURITY\"\n      }\n    },\n    {\n      \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n      \"name\": \"dbus-1.10.24-13.el7_6.x86_64.rpm\",\n      \"artifactId\": \"kind-of-6.0.2.tgz\",\n      \"groupId\": \"kind-of\",\n      \"version\": \"string\",\n      \"architecture\": \"string\",\n      \"languageVersion\": \"string\",\n      \"classifier\": \"string\",\n      \"extension\": \"string\",\n      \"sha1\": \"01146b36a6218e64e58f3a8d66de5d7fc6f6d051\",\n      \"description\": \"Get the native type of a value.\",\n      \"type\": \"javascript/Node.js\",\n      \"libraryType\": \"string\",\n      \"directDependency\": true,\n      \"purl\": \"pkg:maven/commons-beanutils/commons-beanutils@1.8.0?type=jar\",\n      \"extraInfo\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\",\n        \"key_3\": \"string\",\n        \"key_4\": \"string\"\n      },\n      \"extraInformation\": {\n        \"distributionUrl\": \"string\",\n        \"downloadUrl\": \"string\",\n        \"releaseDate\": \"1998-11-05T13:05:53.016Z\",\n        \"packageManagerRepository\": \"string\",\n        \"homePage\": \"string\",\n        \"repositoryUrl\": \"string\",\n        \"author\": \"string\"\n      },\n      \"securityRisks\": [\n        {\n          \"sourceUrl\": \"string\",\n          \"riskFactor\": \"UNCONFIRMED_UNSAFE\"\n        },\n        {\n          \"sourceUrl\": \"string\",\n          \"riskFactor\": \"KNOWN_FALSE_POSITIVE\"\n        }\n      ],\n      \"noticeReference\": {\n        \"text\": \"Developed internally\",\n        \"reference\": \"https://github.com/...\"\n      },\n      \"proprietaryInfo\": {\n        \"ruleDescription\": \"string\",\n        \"rulePattern\": \"string\",\n        \"comment\": \"string\",\n        \"userInfo\": {\n          \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n          \"name\": \"Jon Smith\",\n          \"email\": \"jon.smith@mail.com\",\n          \"userType\": \"REGULAR\",\n          \"accountStatus\": \"INACTIVE\"\n        },\n        \"proprietaryMarkType\": \"BY_USER\"\n      },\n      \"locations\": [\n        {\n          \"localPath\": \"C:\\\\\\\\Users\\\\\\\\user\\\\\\\\.m2\\\\\\\\repository\\\\\\\\commons-io-1.4.jar\",\n          \"dependencyFile\": \"C:\\\\\\\\GitHubRepos\\\\\\\\Pipline\\\\\\\\EUA\\\\\\\\plugins-automation\\\\\\\\fsa\\\\\\\\tests\\\\\\\\EUA\\\\\\\\Java\\\\\\\\bigProjectsMaven\\\\\\\\WST_417\\\\\\\\Data\\\\\\\\ksa\\\\\\\\ksa-web-core\\\\\\\\pom.xml\"\n        },\n        {\n          \"localPath\": \"C:\\\\\\\\Users\\\\\\\\user\\\\\\\\.m2\\\\\\\\repository\\\\\\\\commons-io-1.4.jar\",\n          \"dependencyFile\": \"C:\\\\\\\\GitHubRepos\\\\\\\\Pipline\\\\\\\\EUA\\\\\\\\plugins-automation\\\\\\\\fsa\\\\\\\\tests\\\\\\\\EUA\\\\\\\\Java\\\\\\\\bigProjectsMaven\\\\\\\\WST_417\\\\\\\\Data\\\\\\\\ksa\\\\\\\\ksa-web-core\\\\\\\\pom.xml\"\n        }\n      ],\n      \"attributionReportSettings\": {\n        \"excluded\": false\n      },\n      \"dependencyType\": \"string\",\n      \"violations\": 22,\n      \"workflowUuids\": [\n        \"2\",\n        \"2\"\n      ],\n      \"violatingFindings\": 2,\n      \"trackedIssue\": {\n        \"uuid\": \"string\",\n        \"issueId\": \"string\",\n        \"origin\": \"string\",\n        \"issueKey\": \"string\",\n        \"account\": {\n          \"uuid\": \"string\",\n          \"name\": \"string\"\n        },\n        \"domain\": {\n          \"uuid\": \"string\",\n          \"name\": \"string\"\n        },\n        \"application\": {\n          \"uuid\": \"string\",\n          \"name\": \"string\"\n        },\n        \"project\": {\n          \"uuid\": \"string\",\n          \"name\": \"string\"\n        },\n        \"status\": \"SUCCESS\",\n        \"issueStatus\": \"string\",\n        \"failureReason\": \"string\",\n        \"errorMessage\": \"string\",\n        \"publicLink\": \"string\",\n        \"creationDate\": \"1976-12-21T22:57:36.243Z\",\n        \"updatedAt\": \"2015-03-13T10:04:37.427Z\",\n        \"createdBy\": {\n          \"uuid\": \"string\",\n          \"name\": \"string\"\n        },\n        \"ticketType\": \"SECURITY\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c2720275-8686-4738-88e5-ef36ec1cc82b",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "orgs",
+                    ":orgToken",
+                    "libraries",
+                    "inHouse"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "search",
+                      "value": ""
+                    },
+                    {
+                      "key": "sort",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgToken",
+                      "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9a333d35-e238-4a14-808b-0a323a5bbcfe",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "orgs",
+                    ":orgToken",
+                    "libraries",
+                    "inHouse"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "search",
+                      "value": ""
+                    },
+                    {
+                      "key": "sort",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgToken",
+                      "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "330ef022-2cee-4ae6-9aed-a9450312bd49",
+          "name": "Mark/Unmark Library As In-House",
+          "request": {
+            "name": "Mark/Unmark Library As In-House",
+            "description": {
+              "content": "Marks/unmarks a single library in an organization as In-House",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2.0",
+                "orgs",
+                ":orgToken",
+                "libraries",
+                "inHouse"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orgToken",
+                  "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"isInHouse\": \"<boolean>\",\n  \"libraryUuids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"comment\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ae985076-9682-439b-924e-27341475e3da",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "orgs",
+                    ":orgToken",
+                    "libraries",
+                    "inHouse"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgToken",
+                      "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"isInHouse\": \"<boolean>\",\n  \"libraryUuids\": [\n    \"123e4567-e89b-12d3-a456-426655440000\",\n    \"123e4567-e89b-12d3-a456-426655440000\"\n  ],\n  \"comment\": \"A comment\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\",\n  \"retVal\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eaa9c23d-a3fd-42e8-8eef-5555ce66db8f",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "orgs",
+                    ":orgToken",
+                    "libraries",
+                    "inHouse"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgToken",
+                      "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"isInHouse\": \"<boolean>\",\n  \"libraryUuids\": [\n    \"123e4567-e89b-12d3-a456-426655440000\",\n    \"123e4567-e89b-12d3-a456-426655440000\"\n  ],\n  \"comment\": \"A comment\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a51c7c7d-1e05-415a-b9a2-642ba805e507",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "orgs",
+                    ":orgToken",
+                    "libraries",
+                    "inHouse"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgToken",
+                      "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"isInHouse\": \"<boolean>\",\n  \"libraryUuids\": [\n    \"123e4567-e89b-12d3-a456-426655440000\",\n    \"123e4567-e89b-12d3-a456-426655440000\"\n  ],\n  \"comment\": \"A comment\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a55066c0-4cfb-43a3-9d74-22cd1dfc110c",
+          "name": "Get Library Version Vulnerability Trends",
+          "request": {
+            "name": "Get Library Version Vulnerability Trends",
+            "description": {
+              "content": "Returns the trend of the number of vulnerabilities in a library over past versions.\nDefine the scope of the trend with the parameters 'before' denoting the number of versions before the current version, and 'after'.\nDoes not support generic library types like Debian, RPM and Ruby",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2.0",
+                "orgs",
+                ":orgToken",
+                "libraries",
+                ":libraryUuid",
+                "vulnerabilityTrends"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "startVersion",
+                  "value": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "before",
+                  "value": "0"
+                },
+                {
+                  "disabled": false,
+                  "key": "after",
+                  "value": "0"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orgToken",
+                  "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "libraryUuid",
+                  "description": "(Required) library UUID (get a project's library by running Library - Project > Get Project Libraries."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a80c3132-50e9-4bf5-8ffe-21ae372452d0",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "orgs",
+                    ":orgToken",
+                    "libraries",
+                    ":libraryUuid",
+                    "vulnerabilityTrends"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startVersion",
+                      "value": ""
+                    },
+                    {
+                      "key": "before",
+                      "value": "0"
+                    },
+                    {
+                      "key": "after",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgToken",
+                      "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "libraryUuid",
+                      "description": "(Required) library UUID (get a project's library by running Library - Project > Get Project Libraries."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\",\n  \"retVal\": {\n    \"trends\": [\n      {\n        \"name\": \"Apache Ant Core\",\n        \"version\": \"1.8.2\",\n        \"type\": \"MAVEN_ARTIFACT\",\n        \"current\": true,\n        \"vulnerabilities\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      },\n      {\n        \"name\": \"Apache Ant Core\",\n        \"version\": \"1.8.2\",\n        \"type\": \"MAVEN_ARTIFACT\",\n        \"current\": true,\n        \"vulnerabilities\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0d56e02b-b833-488c-9bde-99c0f9fb178a",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "orgs",
+                    ":orgToken",
+                    "libraries",
+                    ":libraryUuid",
+                    "vulnerabilityTrends"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startVersion",
+                      "value": ""
+                    },
+                    {
+                      "key": "before",
+                      "value": "0"
+                    },
+                    {
+                      "key": "after",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgToken",
+                      "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "libraryUuid",
+                      "description": "(Required) library UUID (get a project's library by running Library - Project > Get Project Libraries."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1dc8c93a-14b2-4eb2-ac00-6851269e55d1",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "orgs",
+                    ":orgToken",
+                    "libraries",
+                    ":libraryUuid",
+                    "vulnerabilityTrends"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startVersion",
+                      "value": ""
+                    },
+                    {
+                      "key": "before",
+                      "value": "0"
+                    },
+                    {
+                      "key": "after",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgToken",
+                      "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "libraryUuid",
+                      "description": "(Required) library UUID (get a project's library by running Library - Project > Get Project Libraries."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "99de653e-4118-4c94-83cc-d26bb84223c4",
+          "name": "Get Library Versions",
+          "request": {
+            "name": "Get Library Versions",
+            "description": {
+              "content": "Returns a list of a library's versions",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2.0",
+                "orgs",
+                ":orgToken",
+                "libraries",
+                ":libraryUuid",
+                "versions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "50"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "disabled": false,
+                  "key": "removeUnstableVersions",
+                  "value": "true"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orgToken",
+                  "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "libraryUuid",
+                  "description": "(Required) library UUID (get a project's library by running Library - Project > Get Project Libraries."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "da251178-5e46-47c4-965d-67b99ca31f5d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "orgs",
+                    ":orgToken",
+                    "libraries",
+                    ":libraryUuid",
+                    "versions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "removeUnstableVersions",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgToken",
+                      "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "libraryUuid",
+                      "description": "(Required) library UUID (get a project's library by running Library - Project > Get Project Libraries."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"additionalData\": {\n    \"totalItems\": \"422\",\n    \"isLastPage\": \"true\"\n  },\n  \"supportToken\": \"1171c60d\",\n  \"retVal\": [\n    {\n      \"lastUpdatedAt\": \"1975-12-08T00:41:36.196Z\",\n      \"version\": \"original\",\n      \"release\": \"string\",\n      \"arch\": \"string\",\n      \"currentVersion\": false\n    },\n    {\n      \"lastUpdatedAt\": \"2025-01-23T11:24:36.571Z\",\n      \"version\": \"original\",\n      \"release\": \"string\",\n      \"arch\": \"string\",\n      \"currentVersion\": false\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "75623c54-8804-4328-ad61-ffb7d9abdead",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "orgs",
+                    ":orgToken",
+                    "libraries",
+                    ":libraryUuid",
+                    "versions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "removeUnstableVersions",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgToken",
+                      "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "libraryUuid",
+                      "description": "(Required) library UUID (get a project's library by running Library - Project > Get Project Libraries."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "39a001af-2593-428a-807b-2266dab9f20b",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "orgs",
+                    ":orgToken",
+                    "libraries",
+                    ":libraryUuid",
+                    "versions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "removeUnstableVersions",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgToken",
+                      "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "libraryUuid",
+                      "description": "(Required) library UUID (get a project's library by running Library - Project > Get Project Libraries."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "051e116e-a69a-489c-a14c-debbf4382da2",
+          "name": "Get Library Projects In Organization",
+          "request": {
+            "name": "Get Library Projects In Organization",
+            "description": {
+              "content": "Returns a list of an organization's projects that contain a particular library",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2.0",
+                "orgs",
+                ":orgToken",
+                "libraries",
+                ":libraryUuid",
+                "projects"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "50"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "0"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orgToken",
+                  "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "libraryUuid",
+                  "description": "(Required) library UUID (get a project's library by running Library - Project > Get Project Libraries."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4d865c14-e020-47b1-a19b-d5ed52ec2e92",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "orgs",
+                    ":orgToken",
+                    "libraries",
+                    ":libraryUuid",
+                    "projects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgToken",
+                      "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "libraryUuid",
+                      "description": "(Required) library UUID (get a project's library by running Library - Project > Get Project Libraries."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"additionalData\": {\n    \"totalItems\": \"422\",\n    \"isLastPage\": \"true\"\n  },\n  \"supportToken\": \"1171c60d\",\n  \"retVal\": [\n    {\n      \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n      \"name\": \"My Project\",\n      \"path\": \"My Product\",\n      \"productName\": \"My Product\",\n      \"productUuid\": \"123e4567-e89b-12d3-a456-426655440000\"\n    },\n    {\n      \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n      \"name\": \"My Project\",\n      \"path\": \"My Product\",\n      \"productName\": \"My Product\",\n      \"productUuid\": \"123e4567-e89b-12d3-a456-426655440000\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "56f537b1-4c91-4582-99c5-33629e4a4c06",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "orgs",
+                    ":orgToken",
+                    "libraries",
+                    ":libraryUuid",
+                    "projects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgToken",
+                      "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "libraryUuid",
+                      "description": "(Required) library UUID (get a project's library by running Library - Project > Get Project Libraries."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "77682a23-8ff7-44df-b8c5-4a29ef467f5c",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "orgs",
+                    ":orgToken",
+                    "libraries",
+                    ":libraryUuid",
+                    "projects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgToken",
+                      "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "libraryUuid",
+                      "description": "(Required) library UUID (get a project's library by running Library - Project > Get Project Libraries."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d6b71633-c7d8-4bdd-a970-3b2338615a51",
+          "name": "Get Library Details",
+          "request": {
+            "name": "Get Library Details",
+            "description": {
+              "content": "Returns a single library's details",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2.0",
+                "orgs",
+                ":orgToken",
+                "libraries",
+                ":libraryUuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "ignoreManualData",
+                  "value": "false",
+                  "description": "requestParameter called ignoreManualData, default value is false. In case the parameter is true, ignore manual changes of the user on the library"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orgToken",
+                  "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "libraryUuid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7a6b1799-284c-471c-8492-0afea873b8ce",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "orgs",
+                    ":orgToken",
+                    "libraries",
+                    ":libraryUuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ignoreManualData",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgToken",
+                      "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "libraryUuid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\",\n  \"retVal\": {\n    \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n    \"name\": \"dbus-1.10.24-13.el7_6.x86_64.rpm\",\n    \"artifactId\": \"kind-of-6.0.2.tgz\",\n    \"groupId\": \"kind-of\",\n    \"version\": \"string\",\n    \"architecture\": \"string\",\n    \"languageVersion\": \"string\",\n    \"classifier\": \"string\",\n    \"extension\": \"string\",\n    \"sha1\": \"01146b36a6218e64e58f3a8d66de5d7fc6f6d051\",\n    \"description\": \"Get the native type of a value.\",\n    \"type\": \"javascript/Node.js\",\n    \"libraryType\": \"string\",\n    \"directDependency\": false,\n    \"purl\": \"pkg:maven/commons-beanutils/commons-beanutils@1.8.0?type=jar\",\n    \"extraInfo\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"extraInformation\": {\n      \"distributionUrl\": \"string\",\n      \"downloadUrl\": \"string\",\n      \"releaseDate\": \"2002-09-25T12:32:49.889Z\",\n      \"packageManagerRepository\": \"string\",\n      \"homePage\": \"string\",\n      \"repositoryUrl\": \"string\",\n      \"author\": \"string\"\n    },\n    \"licenses\": [\n      {\n        \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n        \"name\": \"MIT\",\n        \"assignedByUser\": false,\n        \"licenseReferences\": [\n          {\n            \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n            \"type\": \"ARTIFACT_DESCRIPTOR\",\n            \"liabilityReference\": \"https://repo.maven.apache.org/maven2/org/jruby/ext/posix/jna-posix/1.0.3/jna-posix-1.0.3.pom\",\n            \"assignedBy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"textUrl\": \"string\",\n            \"customDisclaimer\": \"string\",\n            \"information\": \"distribution=repo&remoteUrl=https://repo.maven.apache.org/maven2/org/jruby/ext/posix/jna-posix/1.0.3/jna-posix-1.0.3.pom\"\n          },\n          {\n            \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n            \"type\": \"ARTIFACT_DESCRIPTOR\",\n            \"liabilityReference\": \"https://repo.maven.apache.org/maven2/org/jruby/ext/posix/jna-posix/1.0.3/jna-posix-1.0.3.pom\",\n            \"assignedBy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"textUrl\": \"string\",\n            \"customDisclaimer\": \"string\",\n            \"information\": \"distribution=repo&remoteUrl=https://repo.maven.apache.org/maven2/org/jruby/ext/posix/jna-posix/1.0.3/jna-posix-1.0.3.pom\"\n          }\n        ]\n      },\n      {\n        \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n        \"name\": \"MIT\",\n        \"assignedByUser\": true,\n        \"licenseReferences\": [\n          {\n            \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n            \"type\": \"ARTIFACT_DESCRIPTOR\",\n            \"liabilityReference\": \"https://repo.maven.apache.org/maven2/org/jruby/ext/posix/jna-posix/1.0.3/jna-posix-1.0.3.pom\",\n            \"assignedBy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"textUrl\": \"string\",\n            \"customDisclaimer\": \"string\",\n            \"information\": \"distribution=repo&remoteUrl=https://repo.maven.apache.org/maven2/org/jruby/ext/posix/jna-posix/1.0.3/jna-posix-1.0.3.pom\"\n          },\n          {\n            \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n            \"type\": \"ARTIFACT_DESCRIPTOR\",\n            \"liabilityReference\": \"https://repo.maven.apache.org/maven2/org/jruby/ext/posix/jna-posix/1.0.3/jna-posix-1.0.3.pom\",\n            \"assignedBy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"textUrl\": \"string\",\n            \"customDisclaimer\": \"string\",\n            \"information\": \"distribution=repo&remoteUrl=https://repo.maven.apache.org/maven2/org/jruby/ext/posix/jna-posix/1.0.3/jna-posix-1.0.3.pom\"\n          }\n        ]\n      }\n    ],\n    \"copyrightReferences\": [\n      {\n        \"copyright\": \"Copyright 2021 x greater by the end of\",\n        \"type\": \"PROJECT_HOMEPAGE\",\n        \"customDisclaimer\": \"string\",\n        \"createdAt\": \"2023-10-21T00:01:33.918Z\",\n        \"textUrl\": \"string\",\n        \"startYear\": \"2021\",\n        \"endYear\": \"2022\",\n        \"author\": \"x greater by the end of\",\n        \"referenceInfo\": \"x greater by the end of\"\n      },\n      {\n        \"copyright\": \"Copyright 2021 x greater by the end of\",\n        \"type\": \"PROJECT_HOMEPAGE\",\n        \"customDisclaimer\": \"string\",\n        \"createdAt\": \"1984-02-09T08:50:35.782Z\",\n        \"textUrl\": \"string\",\n        \"startYear\": \"2021\",\n        \"endYear\": \"2022\",\n        \"author\": \"x greater by the end of\",\n        \"referenceInfo\": \"x greater by the end of\"\n      }\n    ],\n    \"securityRisks\": [\n      {\n        \"sourceUrl\": \"string\",\n        \"riskFactor\": \"CONFIRMED_UNSAFE\"\n      },\n      {\n        \"sourceUrl\": \"string\",\n        \"riskFactor\": \"UNCONFIRMED_UNSAFE\"\n      }\n    ],\n    \"noticeReference\": {\n      \"text\": \"Developed internally\",\n      \"reference\": \"https://github.com/...\"\n    },\n    \"proprietaryInfo\": {\n      \"ruleDescription\": \"string\",\n      \"rulePattern\": \"string\",\n      \"comment\": \"string\",\n      \"userInfo\": {\n        \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n        \"name\": \"Jon Smith\",\n        \"email\": \"jon.smith@mail.com\",\n        \"userType\": \"REGULAR\",\n        \"accountStatus\": \"INACTIVE\"\n      },\n      \"proprietaryMarkType\": \"BY_RULE\"\n    },\n    \"attributionReportSettings\": {\n      \"excluded\": true\n    },\n    \"dependencyType\": \"string\",\n    \"violations\": 22,\n    \"workflowUuids\": [\n      \"2\",\n      \"2\"\n    ],\n    \"violatingFindings\": 2,\n    \"trackedIssue\": {\n      \"uuid\": \"string\",\n      \"issueId\": \"string\",\n      \"origin\": \"string\",\n      \"issueKey\": \"string\",\n      \"account\": {\n        \"uuid\": \"string\",\n        \"name\": \"string\"\n      },\n      \"domain\": {\n        \"uuid\": \"string\",\n        \"name\": \"string\"\n      },\n      \"application\": {\n        \"uuid\": \"string\",\n        \"name\": \"string\"\n      },\n      \"project\": {\n        \"uuid\": \"string\",\n        \"name\": \"string\"\n      },\n      \"status\": \"IN_PROGRESS\",\n      \"issueStatus\": \"string\",\n      \"failureReason\": \"string\",\n      \"errorMessage\": \"string\",\n      \"publicLink\": \"string\",\n      \"creationDate\": \"1957-01-07T03:25:46.386Z\",\n      \"updatedAt\": \"1983-07-23T13:45:02.549Z\",\n      \"createdBy\": {\n        \"uuid\": \"string\",\n        \"name\": \"string\"\n      },\n      \"ticketType\": \"SECURITY\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "86e8ccf7-3880-43e3-9f19-c886198f486b",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "orgs",
+                    ":orgToken",
+                    "libraries",
+                    ":libraryUuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ignoreManualData",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgToken",
+                      "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "libraryUuid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "951aa31d-bae9-4cda-bce5-d6d4d56af661",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "orgs",
+                    ":orgToken",
+                    "libraries",
+                    ":libraryUuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ignoreManualData",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgToken",
+                      "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "libraryUuid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c7807824-b30b-49b4-975b-8552f5c4f148",
+          "name": "Remove Library License References",
+          "request": {
+            "name": "Remove Library License References",
+            "description": {
+              "content": "Removes the license reference from a library",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2.0",
+                "orgs",
+                ":orgToken",
+                "libraries",
+                ":libraryUuid",
+                "licenses",
+                ":licenseUuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orgToken",
+                  "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "libraryUuid",
+                  "description": "(Required) library UUID (get a project's library by running Library - Project > Get Project Libraries."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "licenseUuid",
+                  "description": "(Required) license UUID to remove"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1d121f6e-8011-4149-8b99-0ac3ed7a9cd3",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "orgs",
+                    ":orgToken",
+                    "libraries",
+                    ":libraryUuid",
+                    "licenses",
+                    ":licenseUuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgToken",
+                      "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "libraryUuid",
+                      "description": "(Required) library UUID (get a project's library by running Library - Project > Get Project Libraries."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "licenseUuid",
+                      "description": "(Required) license UUID to remove"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\",\n  \"retVal\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dbe72445-8b52-43e6-9b7d-c6c10caf3e34",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "orgs",
+                    ":orgToken",
+                    "libraries",
+                    ":libraryUuid",
+                    "licenses",
+                    ":licenseUuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgToken",
+                      "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "libraryUuid",
+                      "description": "(Required) library UUID (get a project's library by running Library - Project > Get Project Libraries."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "licenseUuid",
+                      "description": "(Required) license UUID to remove"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "28c82d32-0da6-4128-a9a4-3d09298676ad",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "orgs",
+                    ":orgToken",
+                    "libraries",
+                    ":libraryUuid",
+                    "licenses",
+                    ":licenseUuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgToken",
+                      "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "libraryUuid",
+                      "description": "(Required) library UUID (get a project's library by running Library - Project > Get Project Libraries."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "licenseUuid",
+                      "description": "(Required) license UUID to remove"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2c0604dd-5d54-495a-ad63-e398e5a948c9",
+          "name": "Revert Library User Licenses",
+          "request": {
+            "name": "Revert Library User Licenses",
+            "description": {
+              "content": "Reverts the license for a given library to its original state",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2.0",
+                "orgs",
+                ":orgToken",
+                "libraries",
+                ":libraryUuid",
+                "licenses",
+                "revert"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orgToken",
+                  "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "libraryUuid",
+                  "description": "(Required) library UUID (get a project's library by running Library - Project > Get Project Libraries."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "93ebf5e6-1230-41bd-8a02-5c8aeb317d75",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "orgs",
+                    ":orgToken",
+                    "libraries",
+                    ":libraryUuid",
+                    "licenses",
+                    "revert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgToken",
+                      "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "libraryUuid",
+                      "description": "(Required) library UUID (get a project's library by running Library - Project > Get Project Libraries."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\",\n  \"retVal\": [\n    {\n      \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n      \"name\": \"MIT\",\n      \"assignedByUser\": true,\n      \"licenseReferences\": [\n        {\n          \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n          \"type\": \"ARTIFACT_DESCRIPTOR\",\n          \"liabilityReference\": \"https://repo.maven.apache.org/maven2/org/jruby/ext/posix/jna-posix/1.0.3/jna-posix-1.0.3.pom\",\n          \"assignedBy\": {\n            \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n            \"name\": \"Jon Smith\",\n            \"email\": \"jon.smith@mail.com\",\n            \"userType\": \"REGULAR\",\n            \"accountStatus\": \"INACTIVE\"\n          },\n          \"textUrl\": \"string\",\n          \"customDisclaimer\": \"string\",\n          \"information\": \"distribution=repo&remoteUrl=https://repo.maven.apache.org/maven2/org/jruby/ext/posix/jna-posix/1.0.3/jna-posix-1.0.3.pom\"\n        },\n        {\n          \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n          \"type\": \"ARTIFACT_DESCRIPTOR\",\n          \"liabilityReference\": \"https://repo.maven.apache.org/maven2/org/jruby/ext/posix/jna-posix/1.0.3/jna-posix-1.0.3.pom\",\n          \"assignedBy\": {\n            \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n            \"name\": \"Jon Smith\",\n            \"email\": \"jon.smith@mail.com\",\n            \"userType\": \"REGULAR\",\n            \"accountStatus\": \"INACTIVE\"\n          },\n          \"textUrl\": \"string\",\n          \"customDisclaimer\": \"string\",\n          \"information\": \"distribution=repo&remoteUrl=https://repo.maven.apache.org/maven2/org/jruby/ext/posix/jna-posix/1.0.3/jna-posix-1.0.3.pom\"\n        }\n      ]\n    },\n    {\n      \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n      \"name\": \"MIT\",\n      \"assignedByUser\": false,\n      \"licenseReferences\": [\n        {\n          \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n          \"type\": \"ARTIFACT_DESCRIPTOR\",\n          \"liabilityReference\": \"https://repo.maven.apache.org/maven2/org/jruby/ext/posix/jna-posix/1.0.3/jna-posix-1.0.3.pom\",\n          \"assignedBy\": {\n            \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n            \"name\": \"Jon Smith\",\n            \"email\": \"jon.smith@mail.com\",\n            \"userType\": \"REGULAR\",\n            \"accountStatus\": \"ACTIVE\"\n          },\n          \"textUrl\": \"string\",\n          \"customDisclaimer\": \"string\",\n          \"information\": \"distribution=repo&remoteUrl=https://repo.maven.apache.org/maven2/org/jruby/ext/posix/jna-posix/1.0.3/jna-posix-1.0.3.pom\"\n        },\n        {\n          \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n          \"type\": \"ARTIFACT_DESCRIPTOR\",\n          \"liabilityReference\": \"https://repo.maven.apache.org/maven2/org/jruby/ext/posix/jna-posix/1.0.3/jna-posix-1.0.3.pom\",\n          \"assignedBy\": {\n            \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n            \"name\": \"Jon Smith\",\n            \"email\": \"jon.smith@mail.com\",\n            \"userType\": \"REGULAR\",\n            \"accountStatus\": \"INACTIVE\"\n          },\n          \"textUrl\": \"string\",\n          \"customDisclaimer\": \"string\",\n          \"information\": \"distribution=repo&remoteUrl=https://repo.maven.apache.org/maven2/org/jruby/ext/posix/jna-posix/1.0.3/jna-posix-1.0.3.pom\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7026ebd1-247c-48a1-991f-2a946059a804",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "orgs",
+                    ":orgToken",
+                    "libraries",
+                    ":libraryUuid",
+                    "licenses",
+                    "revert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgToken",
+                      "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "libraryUuid",
+                      "description": "(Required) library UUID (get a project's library by running Library - Project > Get Project Libraries."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b6ff3170-2f78-48d8-bb61-d4c4c407cb76",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "orgs",
+                    ":orgToken",
+                    "libraries",
+                    ":libraryUuid",
+                    "licenses",
+                    "revert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgToken",
+                      "description": "(Required) org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "libraryUuid",
+                      "description": "(Required) library UUID (get a project's library by running Library - Project > Get Project Libraries."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://baseUrl",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c5ebf518-759b-472c-8908-617d78b59fd0",
+    "name": "Mend Access Management Library - Organization API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Mend's enhanced API enables automation of workflows in a REST compliant format. The API features:\n+ Access for any user with Mend credentials, via a user key available in the user's profile page in the Mend Platform.\n+ Improved security with a JWT token per organization, which expires every 10 minutes.\n+ Added scalability with support for cursor pagination and limiting results size.\n+ Broader functionality available programmatically.\n+ New standard API documentation for easy navigation and search.\n\n**Note:** To help you get started with the Mend API 3.0, we recommend reviewing our onboarding guide -> [Getting Started with API 3.0](https://docs.mend.io/platform/latest/getting-started-with-mend-api-3-0).\nThis resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend API 3.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.",
+      "type": "text/plain"
+    }
+  }
+}

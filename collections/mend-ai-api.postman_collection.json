@@ -1,0 +1,247 @@
+{
+  "item": [
+    {
+      "id": "1dd526a2-b7e3-463a-a832-791aa79a33fb",
+      "name": "AI",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2349e559-ebbf-4239-a850-7ad18e6c6889",
+          "name": "Get implementation weaknesses",
+          "request": {
+            "name": "Get implementation weaknesses",
+            "description": {
+              "content": "Returns a list of implementation weakness types and their details",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v3.0",
+                "ai",
+                "implementationweakness"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "weaknessID",
+                  "value": "<string>",
+                  "description": "Filter by specific weakness ID"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "71f25ce6-fc74-4a3b-aeeb-ebec1e366cc5",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3.0",
+                    "ai",
+                    "implementationweakness"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "weaknessID",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"weaknessID\": \"string\",\n    \"weaknessCategory\": \"string\",\n    \"weaknessSeverity\": \"string\",\n    \"weaknessScore\": \"string\",\n    \"weaknessTitle\": \"string\",\n    \"owaspCategory\": \"string\",\n    \"weaknessDescription\": \"string\",\n    \"weaknessPotentialImpact\": \"string\",\n    \"weaknessBestPractices\": \"string\",\n    \"weaknessReferences\": \"string\"\n  },\n  {\n    \"weaknessID\": \"string\",\n    \"weaknessCategory\": \"string\",\n    \"weaknessSeverity\": \"string\",\n    \"weaknessScore\": \"string\",\n    \"weaknessTitle\": \"string\",\n    \"owaspCategory\": \"string\",\n    \"weaknessDescription\": \"string\",\n    \"weaknessPotentialImpact\": \"string\",\n    \"weaknessBestPractices\": \"string\",\n    \"weaknessReferences\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e8dee503-ec19-459e-af1f-726e89bd5f56",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3.0",
+                    "ai",
+                    "implementationweakness"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "weaknessID",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d89880de-8f5c-4d24-b583-e38daf70ded8",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3.0",
+                    "ai",
+                    "implementationweakness"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "weaknessID",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://baseUrl",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3226162c-b4fc-4fda-b6a7-d57c6099c8e2",
+    "name": "Mend Access Management AI API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Mend's enhanced API enables automation of workflows in a REST compliant format. The API features:\n+ Access for any user with Mend credentials, via a user key available in the user's profile page in the Mend Platform.\n+ Improved security with a JWT token per organization, which expires every 10 minutes.\n+ Added scalability with support for cursor pagination and limiting results size.\n+ Broader functionality available programmatically.\n+ New standard API documentation for easy navigation and search.\n\n**Note:** To help you get started with the Mend API 3.0, we recommend reviewing our onboarding guide -> [Getting Started with API 3.0](https://docs.mend.io/platform/latest/getting-started-with-mend-api-3-0).\nThis resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend API 3.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.",
+      "type": "text/plain"
+    }
+  }
+}

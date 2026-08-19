@@ -1,0 +1,276 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mend Access Management User Management - Users API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "User Management - Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Regenerate Service User Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v2.0/orgs/:orgToken/users/service/:userUuid/regenerateUserKey",
+            "params": [
+              {
+                "name": "orgToken",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+              },
+              {
+                "name": "userUuid",
+                "value": "",
+                "type": "path",
+                "description": "User UUID (by running User Management - Users > Get Organization Users)."
+              }
+            ]
+          },
+          "docs": "Removes current service user's key and creates a new one"
+        },
+        {
+          "info": {
+            "name": "Create Service User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v2.0/orgs/:orgToken/users/service",
+            "params": [
+              {
+                "name": "orgToken",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new service user"
+        },
+        {
+          "info": {
+            "name": "Create Scan summary receiver User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v2.0/orgs/:orgToken/users/scan-summary-receiver-user",
+            "params": [
+              {
+                "name": "orgToken",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new scan summary receiver user "
+        },
+        {
+          "info": {
+            "name": "Invite User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v2.0/orgs/:orgToken/users/invite",
+            "params": [
+              {
+                "name": "orgToken",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sends an email invitation to others to join an organization"
+        },
+        {
+          "info": {
+            "name": "Get Enriched Organization Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v2.0/orgs/:orgToken/users/info",
+            "params": [
+              {
+                "name": "orgToken",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns detailed information about an organization's users"
+        },
+        {
+          "info": {
+            "name": "Get Organization Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v2.0/orgs/:orgToken/users",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Enter the number of items to return in each page of the result."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Enter the page number to display in the result. Page numbers start at 0"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Filter your search to return items whose property has a specific value.\nUse the syntax: **property:operation:value** where a colon (:) separates between property, operation and value.\n+ Property: the name of the property of the item\n+ Operation:\n    + **equals** - true if the value is identical to this value.\n    + **like** - true if the property's value is contained within this value\n    + **regex** - true if this regular expression resolves as true.\n        The regex is not case sensitive, and special characters must be escaped with a backslash.\n        Special characters include space, double quote (\"), '<', '>', '#', '%', '{', '}', vertical bar ('|'), backslash, '^'.\n        To pass an escaped character in a URL in Postman, encode it first.\n        E.g. to return all items whose value begins with **a** or **A**, use regex:^a\n+ Value: the value of the property.\n\nTo combine multiple filters, separate each filter with a semicolon with no space. E.g.  property1:operation1:value1;property2:operation2:value2\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ accountStatus:[equals|in]:value\n+ email:[like | equals | regex]:value\n+ name:[like | equals | regex]:value\n+ userType:[like | equals]:value\n+ roles:[equals|in]:value"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sort search results alphabetically on an item's property by entering **sort=** followed by the property name.\nE.g. enter **sort=email** to sort alphabetically by their email addresses from a-z ascending.To sort in descending order (z-a), add a minus sign ('-'). E.g. **sort=-email**.\n\nYou can sort by the following properties:\n+ email\n+ name\n+ userType"
+              },
+              {
+                "name": "orgToken",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+              }
+            ]
+          },
+          "docs": "Returns a list of all users in an organization (paginated)"
+        },
+        {
+          "info": {
+            "name": "Create User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v2.0/orgs/:orgToken/users",
+            "params": [
+              {
+                "name": "orgToken",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new user"
+        },
+        {
+          "info": {
+            "name": "Get Service User Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v2.0/orgs/:orgToken/users/service/:userUuid/userKey",
+            "params": [
+              {
+                "name": "orgToken",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+              },
+              {
+                "name": "userUuid",
+                "value": "",
+                "type": "path",
+                "description": "User UUID (by running User Management - Users > Get Organization Users)."
+              }
+            ]
+          },
+          "docs": "Returns service user's key"
+        },
+        {
+          "info": {
+            "name": "Get self information of groups and roles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v2.0/orgs/:orgToken/users/self",
+            "params": [
+              {
+                "name": "orgToken",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+              }
+            ]
+          },
+          "docs": "Returns information about the currently logged-in user, including group membership and roles"
+        },
+        {
+          "info": {
+            "name": "Remove User From Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://baseUrl/api/v2.0/orgs/:orgToken/users/:userUuid",
+            "params": [
+              {
+                "name": "orgToken",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+              },
+              {
+                "name": "userUuid",
+                "value": "",
+                "type": "path",
+                "description": "User UUID (by running User Management - Users > Get Organization Users)."
+              }
+            ]
+          },
+          "docs": "Deletes a user from an organization"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

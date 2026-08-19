@@ -1,0 +1,1698 @@
+{
+  "item": [
+    {
+      "id": "485ba4c4-d47f-4557-a7b3-dce8848dc7aa",
+      "name": "Scans",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8f72ee7a-e325-4189-b221-3cd7d2d18714",
+          "name": "Get Project Scans",
+          "request": {
+            "name": "Get Project Scans",
+            "description": {
+              "content": "Returns the project related scans",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v3.0",
+                "orgs",
+                ":orgUuid",
+                "projects",
+                ":projectUuid",
+                "scans"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "Specifies the maximum number of items to be returned in the response."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orgUuid",
+                  "description": "(Required) org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectUuid",
+                  "description": "(Required) UUID of the project"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "10ed1475-83b1-4f0e-8d3c-8d4c07ed82f1",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3.0",
+                    "orgs",
+                    ":orgUuid",
+                    "projects",
+                    ":projectUuid",
+                    "scans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgUuid",
+                      "description": "(Required) org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectUuid",
+                      "description": "(Required) UUID of the project"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"additionalData\": {\n    \"totalItems\": \"422\",\n    \"next\": \"http://someUrl?cursor=3\",\n    \"cursor\": 3\n  },\n  \"supportToken\": \"1171c60d\",\n  \"response\": [\n    {\n      \"uuid\": \"string\",\n      \"name\": \"string\",\n      \"processUuid\": \"string\",\n      \"scanTime\": \"1950-10-30T03:18:51.856Z\",\n      \"scanStatus\": \"string\",\n      \"engine\": \"AI\",\n      \"scanDuration\": \"string\",\n      \"configurationName\": \"string\",\n      \"reference\": \"string\",\n      \"triggeredBy\": \"string\",\n      \"agentName\": \"string\",\n      \"agentVersion\": \"string\",\n      \"supportToken\": \"string\",\n      \"projectName\": \"string\",\n      \"projectUuid\": \"string\",\n      \"tags\": [\n        {\n          \"key\": \"commit\",\n          \"value\": \"123abc\",\n          \"displayName\": \"commit:123abc\",\n          \"createdAt\": \"1997-09-14T07:14:06.964Z\"\n        },\n        {\n          \"key\": \"commit\",\n          \"value\": \"123abc\",\n          \"displayName\": \"commit:123abc\",\n          \"createdAt\": \"1996-10-29T00:26:49.622Z\"\n        }\n      ],\n      \"applicationName\": \"string\",\n      \"applicationUuid\": \"string\",\n      \"workflowUuids\": [\n        \"string\",\n        \"string\"\n      ],\n      \"workflowNames\": [\n        \"string\",\n        \"string\"\n      ],\n      \"statistics\": {\n        \"key_0\": {\n          \"key_0\": 5627\n        }\n      }\n    },\n    {\n      \"uuid\": \"string\",\n      \"name\": \"string\",\n      \"processUuid\": \"string\",\n      \"scanTime\": \"2005-01-25T01:08:25.422Z\",\n      \"scanStatus\": \"string\",\n      \"engine\": \"SAST\",\n      \"scanDuration\": \"string\",\n      \"configurationName\": \"string\",\n      \"reference\": \"string\",\n      \"triggeredBy\": \"string\",\n      \"agentName\": \"string\",\n      \"agentVersion\": \"string\",\n      \"supportToken\": \"string\",\n      \"projectName\": \"string\",\n      \"projectUuid\": \"string\",\n      \"tags\": [\n        {\n          \"key\": \"commit\",\n          \"value\": \"123abc\",\n          \"displayName\": \"commit:123abc\",\n          \"createdAt\": \"1987-06-26T15:20:48.594Z\"\n        },\n        {\n          \"key\": \"commit\",\n          \"value\": \"123abc\",\n          \"displayName\": \"commit:123abc\",\n          \"createdAt\": \"2001-01-13T18:53:09.093Z\"\n        }\n      ],\n      \"applicationName\": \"string\",\n      \"applicationUuid\": \"string\",\n      \"workflowUuids\": [\n        \"string\",\n        \"string\"\n      ],\n      \"workflowNames\": [\n        \"string\",\n        \"string\"\n      ],\n      \"statistics\": {\n        \"key_0\": {\n          \"key_0\": 2012,\n          \"key_1\": 4126\n        }\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8e3d22af-e144-4442-ac86-812e7bb366e9",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3.0",
+                    "orgs",
+                    ":orgUuid",
+                    "projects",
+                    ":projectUuid",
+                    "scans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgUuid",
+                      "description": "(Required) org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectUuid",
+                      "description": "(Required) UUID of the project"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "02909d2f-7bd8-4fb0-bf25-9440476ce9b2",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3.0",
+                    "orgs",
+                    ":orgUuid",
+                    "projects",
+                    ":projectUuid",
+                    "scans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgUuid",
+                      "description": "(Required) org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectUuid",
+                      "description": "(Required) UUID of the project"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "99190d74-f648-4f26-bfbd-3cfe6be54488",
+          "name": "Get Scan",
+          "request": {
+            "name": "Get Scan",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v3.0",
+                "orgs",
+                ":orgUuid",
+                "projects",
+                ":projectUuid",
+                "scans",
+                ":scanUuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orgUuid",
+                  "description": "(Required) org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectUuid",
+                  "description": "(Required) UUID of the project"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "scanUuid",
+                  "description": "(Required) Scan UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a9d53af3-4ad6-4c13-a089-199199769be7",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3.0",
+                    "orgs",
+                    ":orgUuid",
+                    "projects",
+                    ":projectUuid",
+                    "scans",
+                    ":scanUuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgUuid",
+                      "description": "(Required) org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectUuid",
+                      "description": "(Required) UUID of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scanUuid",
+                      "description": "(Required) Scan UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\",\n  \"response\": {\n    \"uuid\": \"string\",\n    \"name\": \"string\",\n    \"engine\": \"AI\",\n    \"status\": \"RUNNING\",\n    \"projectId\": 4038,\n    \"productId\": 446,\n    \"domainId\": 2981,\n    \"projectUuid\": \"string\",\n    \"processUuid\": \"string\",\n    \"hasViolations\": true,\n    \"startTime\": \"1978-03-06T03:21:49.648Z\",\n    \"endTime\": \"1992-08-12T17:24:24.454Z\",\n    \"lastModified\": \"2017-10-01T02:10:17.095Z\",\n    \"configurationName\": \"string\",\n    \"reference\": \"string\",\n    \"triggeredBy\": \"string\",\n    \"agentInfo\": {\n      \"agentName\": \"string\",\n      \"agentVersion\": \"string\",\n      \"errorMessage\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f955c04d-1698-4c36-b07d-3a39f2818798",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3.0",
+                    "orgs",
+                    ":orgUuid",
+                    "projects",
+                    ":projectUuid",
+                    "scans",
+                    ":scanUuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgUuid",
+                      "description": "(Required) org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectUuid",
+                      "description": "(Required) UUID of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scanUuid",
+                      "description": "(Required) Scan UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "398800bf-f052-460e-b7d2-e792b0c3d750",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3.0",
+                    "orgs",
+                    ":orgUuid",
+                    "projects",
+                    ":projectUuid",
+                    "scans",
+                    ":scanUuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgUuid",
+                      "description": "(Required) org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectUuid",
+                      "description": "(Required) UUID of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scanUuid",
+                      "description": "(Required) Scan UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9bc1e2a4-dc6b-4dcd-bd46-f395862fa84e",
+          "name": "Get Scan Summary",
+          "request": {
+            "name": "Get Scan Summary",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v3.0",
+                "orgs",
+                ":orgUuid",
+                "projects",
+                ":projectUuid",
+                "scans",
+                ":scanUuid",
+                "summary"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orgUuid",
+                  "description": "(Required) org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectUuid",
+                  "description": "(Required) UUID of the project"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "scanUuid",
+                  "description": "(Required) Scan UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "470a479a-c093-49af-9e1e-508c8e236087",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3.0",
+                    "orgs",
+                    ":orgUuid",
+                    "projects",
+                    ":projectUuid",
+                    "scans",
+                    ":scanUuid",
+                    "summary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgUuid",
+                      "description": "(Required) org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectUuid",
+                      "description": "(Required) UUID of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scanUuid",
+                      "description": "(Required) Scan UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\",\n  \"response\": {\n    \"uuid\": \"string\",\n    \"name\": \"string\",\n    \"processUuid\": \"string\",\n    \"scanTime\": \"1995-03-01T11:23:02.922Z\",\n    \"scanStatus\": \"string\",\n    \"engine\": \"DAST\",\n    \"scanDuration\": \"string\",\n    \"configurationName\": \"string\",\n    \"reference\": \"string\",\n    \"triggeredBy\": \"string\",\n    \"agentName\": \"string\",\n    \"agentVersion\": \"string\",\n    \"supportToken\": \"string\",\n    \"projectName\": \"string\",\n    \"projectUuid\": \"string\",\n    \"tags\": [\n      {\n        \"key\": \"commit\",\n        \"value\": \"123abc\",\n        \"displayName\": \"commit:123abc\",\n        \"createdAt\": \"1958-01-15T04:46:15.632Z\"\n      },\n      {\n        \"key\": \"commit\",\n        \"value\": \"123abc\",\n        \"displayName\": \"commit:123abc\",\n        \"createdAt\": \"1968-04-28T17:06:04.406Z\"\n      }\n    ],\n    \"applicationName\": \"string\",\n    \"applicationUuid\": \"string\",\n    \"workflowUuids\": [\n      \"string\",\n      \"string\"\n    ],\n    \"workflowNames\": [\n      \"string\",\n      \"string\"\n    ],\n    \"statistics\": {\n      \"key_0\": {\n        \"key_0\": 871\n      },\n      \"key_1\": {\n        \"key_0\": 8596,\n        \"key_1\": 2105,\n        \"key_2\": 4426\n      },\n      \"key_2\": {\n        \"key_0\": 8571,\n        \"key_1\": 3954\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "20058f6c-409a-4ff6-ac87-dddc7e58526a",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3.0",
+                    "orgs",
+                    ":orgUuid",
+                    "projects",
+                    ":projectUuid",
+                    "scans",
+                    ":scanUuid",
+                    "summary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgUuid",
+                      "description": "(Required) org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectUuid",
+                      "description": "(Required) UUID of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scanUuid",
+                      "description": "(Required) Scan UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c8c24894-1b71-4e02-a8f9-a98c60160a92",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3.0",
+                    "orgs",
+                    ":orgUuid",
+                    "projects",
+                    ":projectUuid",
+                    "scans",
+                    ":scanUuid",
+                    "summary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgUuid",
+                      "description": "(Required) org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectUuid",
+                      "description": "(Required) UUID of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scanUuid",
+                      "description": "(Required) Scan UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "41b05a6d-c842-41e3-8d5e-dc85d9b9e13e",
+          "name": "Get Scan Tags",
+          "request": {
+            "name": "Get Scan Tags",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v3.0",
+                "orgs",
+                ":orgUuid",
+                "projects",
+                ":projectUuid",
+                "scans",
+                ":scanUuid",
+                "tags"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orgUuid",
+                  "description": "(Required) org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectUuid",
+                  "description": "(Required) UUID of the project"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "scanUuid",
+                  "description": "(Required) Scan UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "64203ede-3559-4f78-bfdc-327788390464",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3.0",
+                    "orgs",
+                    ":orgUuid",
+                    "projects",
+                    ":projectUuid",
+                    "scans",
+                    ":scanUuid",
+                    "tags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgUuid",
+                      "description": "(Required) org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectUuid",
+                      "description": "(Required) UUID of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scanUuid",
+                      "description": "(Required) Scan UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"additionalData\": {\n    \"totalItems\": \"422\",\n    \"next\": \"http://someUrl?cursor=3\",\n    \"cursor\": 3\n  },\n  \"supportToken\": \"1171c60d\",\n  \"response\": [\n    {\n      \"key\": \"commit\",\n      \"value\": \"123abc\",\n      \"displayName\": \"commit:123abc\",\n      \"createdAt\": \"1947-06-03T08:44:09.493Z\"\n    },\n    {\n      \"key\": \"commit\",\n      \"value\": \"123abc\",\n      \"displayName\": \"commit:123abc\",\n      \"createdAt\": \"1953-10-24T19:48:53.343Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "da9f7aad-f2c3-4a61-9139-5d6d1a6beac9",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3.0",
+                    "orgs",
+                    ":orgUuid",
+                    "projects",
+                    ":projectUuid",
+                    "scans",
+                    ":scanUuid",
+                    "tags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgUuid",
+                      "description": "(Required) org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectUuid",
+                      "description": "(Required) UUID of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scanUuid",
+                      "description": "(Required) Scan UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a68280dc-93e6-4675-a480-46093dade636",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3.0",
+                    "orgs",
+                    ":orgUuid",
+                    "projects",
+                    ":projectUuid",
+                    "scans",
+                    ":scanUuid",
+                    "tags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgUuid",
+                      "description": "(Required) org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectUuid",
+                      "description": "(Required) UUID of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scanUuid",
+                      "description": "(Required) Scan UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "854ed615-06d8-4a00-86a8-eee9bd2cb2c4",
+          "name": "Get Scans Comparison",
+          "request": {
+            "name": "Get Scans Comparison",
+            "description": {
+              "content": "Compares two scans within an organization and returns a structured diff of findings, including per-finding diff type (ADDED, REMOVED, MODIFIED, UNCHANGED), aggregate stats, and field-level change details for modified findings.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v3.0",
+                "orgs",
+                ":orgUuid",
+                "scans",
+                "compare"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "sourceScanUuid",
+                  "value": "<string>",
+                  "description": "(Required) UUID of the source (baseline) scan"
+                },
+                {
+                  "disabled": false,
+                  "key": "targetScanUuid",
+                  "value": "<string>",
+                  "description": "UUID of the target (comparison) scan; defaults to the project's latest scan when omitted"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "(Required) Finding category to compare"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orgUuid",
+                  "description": "(Required) org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "26a09604-2098-4387-8319-73f67b27df53",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3.0",
+                    "orgs",
+                    ":orgUuid",
+                    "scans",
+                    "compare"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sourceScanUuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "targetScanUuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgUuid",
+                      "description": "(Required) org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\",\n  \"response\": {\n    \"source\": {\n      \"uuid\": \"string\",\n      \"name\": \"string\",\n      \"engine\": \"DAST\",\n      \"status\": \"PARTIAL\",\n      \"projectId\": 9750,\n      \"productId\": 9359,\n      \"domainId\": 7314,\n      \"projectUuid\": \"string\",\n      \"processUuid\": \"string\",\n      \"hasViolations\": false,\n      \"startTime\": \"1958-07-17T01:47:42.510Z\",\n      \"endTime\": \"1959-06-20T05:13:41.651Z\",\n      \"lastModified\": \"2020-12-30T08:29:49.357Z\",\n      \"configurationName\": \"string\",\n      \"reference\": \"string\",\n      \"triggeredBy\": \"string\",\n      \"agentInfo\": {\n        \"agentName\": \"string\",\n        \"agentVersion\": \"string\",\n        \"errorMessage\": \"string\"\n      }\n    },\n    \"target\": {\n      \"uuid\": \"string\",\n      \"name\": \"string\",\n      \"engine\": \"UNIFIED\",\n      \"status\": \"PROCESSING\",\n      \"projectId\": 1073,\n      \"productId\": 5557,\n      \"domainId\": 8514,\n      \"projectUuid\": \"string\",\n      \"processUuid\": \"string\",\n      \"hasViolations\": false,\n      \"startTime\": \"1971-05-05T10:27:27.663Z\",\n      \"endTime\": \"2026-02-26T16:01:04.402Z\",\n      \"lastModified\": \"2020-11-21T15:37:29.877Z\",\n      \"configurationName\": \"string\",\n      \"reference\": \"string\",\n      \"triggeredBy\": \"string\",\n      \"agentInfo\": {\n        \"agentName\": \"string\",\n        \"agentVersion\": \"string\",\n        \"errorMessage\": \"string\"\n      }\n    },\n    \"stats\": {\n      \"added\": 7305,\n      \"removed\": 3557,\n      \"modified\": 4355,\n      \"unchanged\": 2\n    },\n    \"findings\": [\n      {\n        \"diffType\": \"string\",\n        \"finding\": {\n          \"uuid\": \"string\",\n          \"findingId\": \"string\",\n          \"findingName\": \"string\",\n          \"type\": \"string\",\n          \"severity\": \"string\",\n          \"score\": 6257.052850788203,\n          \"element\": \"string\",\n          \"elementId\": \"string\",\n          \"refId\": \"string\",\n          \"grouping\": \"string\",\n          \"status\": \"string\",\n          \"state\": \"string\",\n          \"paths\": [\n            \"string\",\n            \"string\"\n          ],\n          \"sources\": [\n            \"string\",\n            \"string\"\n          ],\n          \"createdAt\": \"2018-12-17T17:00:17.736Z\",\n          \"updatedAt\": \"1998-09-18T01:32:25.299Z\",\n          \"dynamicFields\": {\n            \"key_0\": {}\n          },\n          \"riskFactors\": [\n            \"string\",\n            \"string\"\n          ],\n          \"riskFactorsJson\": {\n            \"key_0\": {}\n          },\n          \"engine\": \"UNIFIED\",\n          \"vendor\": \"string\",\n          \"orgUuid\": \"string\",\n          \"projectUuid\": \"string\",\n          \"projectName\": \"string\",\n          \"branch\": \"string\",\n          \"scanUuid\": \"string\",\n          \"firstScanUuid\": \"string\",\n          \"findingCategory\": \"string\",\n          \"hasViolation\": true,\n          \"numberOfViolations\": 2619,\n          \"violationWorkflowUuids\": [\n            \"string\",\n            \"string\"\n          ],\n          \"applicationUuid\": \"string\",\n          \"applicationName\": \"string\",\n          \"isNew\": false,\n          \"isDetectedAtFirstScan\": false,\n          \"isRemediationAvailable\": true\n        },\n        \"changes\": [\n          {\n            \"field\": \"string\",\n            \"before\": {},\n            \"after\": {}\n          },\n          {\n            \"field\": \"string\",\n            \"before\": {},\n            \"after\": {}\n          }\n        ]\n      },\n      {\n        \"diffType\": \"string\",\n        \"finding\": {\n          \"uuid\": \"string\",\n          \"findingId\": \"string\",\n          \"findingName\": \"string\",\n          \"type\": \"string\",\n          \"severity\": \"string\",\n          \"score\": 2014.0576323617188,\n          \"element\": \"string\",\n          \"elementId\": \"string\",\n          \"refId\": \"string\",\n          \"grouping\": \"string\",\n          \"status\": \"string\",\n          \"state\": \"string\",\n          \"paths\": [\n            \"string\",\n            \"string\"\n          ],\n          \"sources\": [\n            \"string\",\n            \"string\"\n          ],\n          \"createdAt\": \"2021-08-03T03:29:26.098Z\",\n          \"updatedAt\": \"1991-09-02T00:10:57.159Z\",\n          \"dynamicFields\": {\n            \"key_0\": {},\n            \"key_1\": {}\n          },\n          \"riskFactors\": [\n            \"string\",\n            \"string\"\n          ],\n          \"riskFactorsJson\": {\n            \"key_0\": {}\n          },\n          \"engine\": \"SCA\",\n          \"vendor\": \"string\",\n          \"orgUuid\": \"string\",\n          \"projectUuid\": \"string\",\n          \"projectName\": \"string\",\n          \"branch\": \"string\",\n          \"scanUuid\": \"string\",\n          \"firstScanUuid\": \"string\",\n          \"findingCategory\": \"string\",\n          \"hasViolation\": true,\n          \"numberOfViolations\": 5514,\n          \"violationWorkflowUuids\": [\n            \"string\",\n            \"string\"\n          ],\n          \"applicationUuid\": \"string\",\n          \"applicationName\": \"string\",\n          \"isNew\": false,\n          \"isDetectedAtFirstScan\": false,\n          \"isRemediationAvailable\": true\n        },\n        \"changes\": [\n          {\n            \"field\": \"string\",\n            \"before\": {},\n            \"after\": {}\n          },\n          {\n            \"field\": \"string\",\n            \"before\": {},\n            \"after\": {}\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ba9d1932-8a0f-4f41-ab06-68819818d56a",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3.0",
+                    "orgs",
+                    ":orgUuid",
+                    "scans",
+                    "compare"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sourceScanUuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "targetScanUuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgUuid",
+                      "description": "(Required) org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f9193e5d-9f7e-4d37-8a96-8f5bbb2d2aa6",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3.0",
+                    "orgs",
+                    ":orgUuid",
+                    "scans",
+                    "compare"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sourceScanUuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "targetScanUuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgUuid",
+                      "description": "(Required) org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3599fe25-9ba2-4a38-8701-c54a70378934",
+          "name": "Get SBOM import logs",
+          "request": {
+            "name": "Get SBOM import logs",
+            "description": {
+              "content": "Returns processing and validation logs generated during SBOM import for a specific scan.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v3.0",
+                "projects",
+                ":projectUuid",
+                "scans",
+                ":scanUuid",
+                "dependencies",
+                "SBOM",
+                "logs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectUuid",
+                  "description": "(Required) UUID of the project"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "scanUuid",
+                  "description": "(Required) Scan UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4ac3e7d6-ba97-4a0d-8a3e-27d441e2e1e3",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3.0",
+                    "projects",
+                    ":projectUuid",
+                    "scans",
+                    ":scanUuid",
+                    "dependencies",
+                    "SBOM",
+                    "logs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectUuid",
+                      "description": "(Required) UUID of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scanUuid",
+                      "description": "(Required) Scan UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6d26994b-869d-4a44-945b-c5c17d442eb6",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3.0",
+                    "projects",
+                    ":projectUuid",
+                    "scans",
+                    ":scanUuid",
+                    "dependencies",
+                    "SBOM",
+                    "logs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectUuid",
+                      "description": "(Required) UUID of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scanUuid",
+                      "description": "(Required) Scan UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b5750129-0d1c-42d2-822a-fb6b82f1204f",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3.0",
+                    "projects",
+                    ":projectUuid",
+                    "scans",
+                    ":scanUuid",
+                    "dependencies",
+                    "SBOM",
+                    "logs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectUuid",
+                      "description": "(Required) UUID of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scanUuid",
+                      "description": "(Required) Scan UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://baseUrl",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "cf78ac29-34e3-4ec4-8d22-f6078a07a80e",
+    "name": "Mend Access Management Scans API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Mend's enhanced API enables automation of workflows in a REST compliant format. The API features:\n+ Access for any user with Mend credentials, via a user key available in the user's profile page in the Mend Platform.\n+ Improved security with a JWT token per organization, which expires every 10 minutes.\n+ Added scalability with support for cursor pagination and limiting results size.\n+ Broader functionality available programmatically.\n+ New standard API documentation for easy navigation and search.\n\n**Note:** To help you get started with the Mend API 3.0, we recommend reviewing our onboarding guide -> [Getting Started with API 3.0](https://docs.mend.io/platform/latest/getting-started-with-mend-api-3-0).\nThis resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend API 3.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.",
+      "type": "text/plain"
+    }
+  }
+}

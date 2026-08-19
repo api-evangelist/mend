@@ -1,0 +1,633 @@
+{
+  "item": [
+    {
+      "id": "8b6cf5c5-9a67-4c7e-b163-e8abe347a4cd",
+      "name": "Library - Source Files",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "13a7b094-f232-4872-9303-36258f1264d9",
+          "name": "Get project source files inventory",
+          "request": {
+            "name": "Get project source files inventory",
+            "description": {
+              "content": "Returns an inventory list of the source files associated with each library in a project",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2.0",
+                "projects",
+                ":projectToken",
+                "sourceFiles",
+                "inventory"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "50",
+                  "description": "Enter the number of items to return in each page of the result."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "0",
+                  "description": "Enter the page number to display in the result. Page numbers start at 0"
+                },
+                {
+                  "description": {
+                    "content": "Filter your search to return items whose property has a specific value.\nUse the syntax: **property:operation:value** where a colon (:) separates between property, operation and value.\n+ Property: the name of the property of the item\n+ Operation:\n    + **between** - true if the value is inside a range. Syntax: lowest value comma (,) highest value. E.g. between:2019-05-01,2019-06-01\n    + **equals** - true if the value is identical to this value.\n    + **like** - true if the property's value is contained within this value\n    + **regex** - true if this regular expression resolves as true.\n        The regex is not case sensitive, and special characters must be escaped with a backslash.\n        Special characters include space, double quote (\"), '<', '>', '#', '%', '{', '}', vertical bar ('|'), backslash, '^'.\n        To pass an escaped character in a URL in Postman, encode it first.\n        E.g. to return all items whose value begins with **a** or **A**, use regex:^a\n+ Value: the value of the property.\n\nTo combine multiple filters, separate each filter with a semicolon with no space. E.g.  property1:operation1:value1;property2:operation2:value2\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ lastModified:between:date1,date2. E.g. between:2019-05-01,2019-06-01\n+ libraryName:[like | equals | regex]:value\n+ license:[like | regex]:value\n+ matchType:equals:value\n+ name:[like | equals | regex]:value\n+ sha1:[like | equals | regex]:value",
+                    "type": "text/plain"
+                  },
+                  "key": "search",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Sort search results alphabetically on an item's property by entering **sort=** followed by the property name.\nE.g. enter **sort=email** to sort alphabetically by their email addresses from a-z ascending.To sort in descending order (z-a), add a minus sign ('-'). E.g. **sort=-email**.\n\nYou can sort by the following properties:\n+ lastModified\n+ libraryName\n+ license\n+ matchType\n+ name\n+ sha1",
+                    "type": "text/plain"
+                  },
+                  "key": "sort",
+                  "value": ""
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectToken",
+                  "description": "(Required) project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c4a87a87-b604-456c-92a9-6c4b84f484e3",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "projects",
+                    ":projectToken",
+                    "sourceFiles",
+                    "inventory"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "search",
+                      "value": ""
+                    },
+                    {
+                      "key": "sort",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectToken",
+                      "description": "(Required) project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"additionalData\": {\n    \"totalItems\": \"422\",\n    \"isLastPage\": \"true\"\n  },\n  \"supportToken\": \"1171c60d\",\n  \"retVal\": [\n    {\n      \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n      \"name\": \"common.js\",\n      \"matchType\": \"MANUAL\",\n      \"sha1\": \"MANUAL\",\n      \"localPath\": \"C:\\\\Users\\\\\",\n      \"lastModified\": \"1958-11-24T16:12:53.943Z\",\n      \"library\": {\n        \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n        \"name\": \" actionview-v0.0.1\",\n        \"licenses\": [\n          {\n            \"name\": \"MIT\",\n            \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n            \"spdxName\": \"Glide\",\n            \"type\": \"OPEN_SOURCE\",\n            \"suspected\": true,\n            \"osiApproved\": true,\n            \"profile\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": \"MIT\",\n            \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n            \"spdxName\": \"Glide\",\n            \"type\": \"OPEN_SOURCE\",\n            \"suspected\": false,\n            \"osiApproved\": true,\n            \"profile\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"description\": \"string\"\n      },\n      \"project\": {\n        \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n        \"name\": \"My Project\",\n        \"path\": \"My Product\",\n        \"productName\": \"My Product\",\n        \"productUuid\": \"123e4567-e89b-12d3-a456-426655440000\"\n      },\n      \"comment\": \"string\",\n      \"contextType\": \"UNSUPPORTED_TYPE\"\n    },\n    {\n      \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n      \"name\": \"common.js\",\n      \"matchType\": \"MANUAL\",\n      \"sha1\": \"MANUAL\",\n      \"localPath\": \"C:\\\\Users\\\\\",\n      \"lastModified\": \"2008-02-28T14:53:15.610Z\",\n      \"library\": {\n        \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n        \"name\": \" actionview-v0.0.1\",\n        \"licenses\": [\n          {\n            \"name\": \"MIT\",\n            \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n            \"spdxName\": \"Glide\",\n            \"type\": \"OPEN_SOURCE\",\n            \"suspected\": true,\n            \"osiApproved\": false,\n            \"profile\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": \"MIT\",\n            \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n            \"spdxName\": \"Glide\",\n            \"type\": \"OPEN_SOURCE\",\n            \"suspected\": false,\n            \"osiApproved\": true,\n            \"profile\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"description\": \"string\"\n      },\n      \"project\": {\n        \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n        \"name\": \"My Project\",\n        \"path\": \"My Product\",\n        \"productName\": \"My Product\",\n        \"productUuid\": \"123e4567-e89b-12d3-a456-426655440000\"\n      },\n      \"comment\": \"string\",\n      \"contextType\": \"GLOBAL_ACCOUNT\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "30d540e0-8077-4c0c-a33e-c17ac599e4fa",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "projects",
+                    ":projectToken",
+                    "sourceFiles",
+                    "inventory"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "search",
+                      "value": ""
+                    },
+                    {
+                      "key": "sort",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectToken",
+                      "description": "(Required) project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8ed60398-4337-4f01-8bfd-3561b4bc7812",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "projects",
+                    ":projectToken",
+                    "sourceFiles",
+                    "inventory"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "search",
+                      "value": ""
+                    },
+                    {
+                      "key": "sort",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectToken",
+                      "description": "(Required) project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a5401f22-9d48-45c4-bcd3-3f11e723fb32",
+          "name": "Get product source files inventory",
+          "request": {
+            "name": "Get product source files inventory",
+            "description": {
+              "content": "Returns a list of libraries together with the location of their source files",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2.0",
+                "products",
+                ":productToken",
+                "sourceFiles",
+                "inventory"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "50",
+                  "description": "Enter the number of items to return in each page of the result."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "0",
+                  "description": "Enter the page number to display in the result. Page numbers start at 0"
+                },
+                {
+                  "description": {
+                    "content": "Filter your search to return items whose property has a specific value.\nUse the syntax: **property:operation:value** where a colon (:) separates between property, operation and value.\n+ Property: the name of the property of the item\n+ Operation:\n    + **between** - true if the value is inside a range. Syntax: lowest value comma (,) highest value. E.g. between:2019-05-01,2019-06-01\n    + **equals** - true if the value is identical to this value.\n    + **like** - true if the property's value is contained within this value\n    + **regex** - true if this regular expression resolves as true.\n        The regex is not case sensitive, and special characters must be escaped with a backslash.\n        Special characters include space, double quote (\"), '<', '>', '#', '%', '{', '}', vertical bar ('|'), backslash, '^'.\n        To pass an escaped character in a URL in Postman, encode it first.\n        E.g. to return all items whose value begins with **a** or **A**, use regex:^a\n+ Value: the value of the property.\n\nTo combine multiple filters, separate each filter with a semicolon with no space. E.g.  property1:operation1:value1;property2:operation2:value2\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ lastModified:between:date1,date2. E.g. between:2019-05-01,2019-06-01\n+ libraryName:[like | equals | regex]:value\n+ license:[like | regex]:value\n+ matchType:equals:value\n+ name:[like | equals | regex]:value\n+ projectName:[like | equals | regex]:value\n+ sha1:[like | equals | regex]:value",
+                    "type": "text/plain"
+                  },
+                  "key": "search",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Sort search results alphabetically on an item's property by entering **sort=** followed by the property name.\nE.g. enter **sort=email** to sort alphabetically by their email addresses from a-z ascending.To sort in descending order (z-a), add a minus sign ('-'). E.g. **sort=-email**.\n\nYou can sort by the following properties:\n+ lastModified\n+ libraryName\n+ license\n+ matchType\n+ name\n+ path\n+ projectName\n+ sha1",
+                    "type": "text/plain"
+                  },
+                  "key": "sort",
+                  "value": ""
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "productToken",
+                  "description": "(Required) product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a7762bd1-c39b-4c1a-be3a-c30a014a96af",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "products",
+                    ":productToken",
+                    "sourceFiles",
+                    "inventory"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "search",
+                      "value": ""
+                    },
+                    {
+                      "key": "sort",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "productToken",
+                      "description": "(Required) product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"additionalData\": {\n    \"totalItems\": \"422\",\n    \"isLastPage\": \"true\"\n  },\n  \"supportToken\": \"1171c60d\",\n  \"retVal\": [\n    {\n      \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n      \"name\": \"common.js\",\n      \"matchType\": \"MANUAL\",\n      \"sha1\": \"AUTOMATIC\",\n      \"localPath\": \"C:\\\\Users\\\\\",\n      \"lastModified\": \"1999-01-21T20:11:26.343Z\",\n      \"library\": {\n        \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n        \"name\": \" actionview-v0.0.1\",\n        \"licenses\": [\n          {\n            \"name\": \"MIT\",\n            \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n            \"spdxName\": \"Glide\",\n            \"type\": \"OPEN_SOURCE\",\n            \"suspected\": true,\n            \"osiApproved\": false,\n            \"profile\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": \"MIT\",\n            \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n            \"spdxName\": \"Glide\",\n            \"type\": \"OPEN_SOURCE\",\n            \"suspected\": false,\n            \"osiApproved\": true,\n            \"profile\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"description\": \"string\"\n      },\n      \"project\": {\n        \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n        \"name\": \"My Project\",\n        \"path\": \"My Product\",\n        \"productName\": \"My Product\",\n        \"productUuid\": \"123e4567-e89b-12d3-a456-426655440000\"\n      },\n      \"comment\": \"string\",\n      \"contextType\": \"GLOBAL_ACCOUNT\"\n    },\n    {\n      \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n      \"name\": \"common.js\",\n      \"matchType\": \"MANUAL\",\n      \"sha1\": \"AUTOMATIC\",\n      \"localPath\": \"C:\\\\Users\\\\\",\n      \"lastModified\": \"1985-02-23T10:16:08.113Z\",\n      \"library\": {\n        \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n        \"name\": \" actionview-v0.0.1\",\n        \"licenses\": [\n          {\n            \"name\": \"MIT\",\n            \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n            \"spdxName\": \"Glide\",\n            \"type\": \"OPEN_SOURCE\",\n            \"suspected\": false,\n            \"osiApproved\": false,\n            \"profile\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": \"MIT\",\n            \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n            \"spdxName\": \"Glide\",\n            \"type\": \"OPEN_SOURCE\",\n            \"suspected\": false,\n            \"osiApproved\": false,\n            \"profile\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"description\": \"string\"\n      },\n      \"project\": {\n        \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n        \"name\": \"My Project\",\n        \"path\": \"My Product\",\n        \"productName\": \"My Product\",\n        \"productUuid\": \"123e4567-e89b-12d3-a456-426655440000\"\n      },\n      \"comment\": \"string\",\n      \"contextType\": \"PROJECT\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d461c087-5247-4173-8bba-f98f17ef1418",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "products",
+                    ":productToken",
+                    "sourceFiles",
+                    "inventory"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "search",
+                      "value": ""
+                    },
+                    {
+                      "key": "sort",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "productToken",
+                      "description": "(Required) product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9b1d4cd9-1a36-43a0-a430-852329c1c9a9",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "products",
+                    ":productToken",
+                    "sourceFiles",
+                    "inventory"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "search",
+                      "value": ""
+                    },
+                    {
+                      "key": "sort",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "productToken",
+                      "description": "(Required) product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://baseUrl",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "31c1269e-0ac6-4680-8544-a4aca42d7ab0",
+    "name": "Mend Access Management Library - Source Files API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Mend's enhanced API enables automation of workflows in a REST compliant format. The API features:\n+ Access for any user with Mend credentials, via a user key available in the user's profile page in the Mend Platform.\n+ Improved security with a JWT token per organization, which expires every 10 minutes.\n+ Added scalability with support for cursor pagination and limiting results size.\n+ Broader functionality available programmatically.\n+ New standard API documentation for easy navigation and search.\n\n**Note:** To help you get started with the Mend API 3.0, we recommend reviewing our onboarding guide -> [Getting Started with API 3.0](https://docs.mend.io/platform/latest/getting-started-with-mend-api-3-0).\nThis resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend API 3.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,369 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mend Access Management Summary - Organization API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Summary - Organization",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Organization Scan Count Per Agent.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v2.0/orgs/:orgToken/summary/scanCountPerAgent",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Filter your search to return items whose property has a specific value.\nUse the syntax: **property:operation:value** where a colon (:) separates between property, operation and value.\n+ Property: the name of the property of the item\n+ Operation:\n    + **between** - true if the value is inside a range. Syntax: lowest value comma (,) highest value. E.g. between:2019-05-01,2019-06-01\n+ Value: the value of the property.\n\nThis endpoint supports filtering on this property:\n+ date:between:date1,date2. E.g. between:2019-05-10,2019-06-01. Difference between dates cannot be greater than 30 days\n"
+              },
+              {
+                "name": "orgToken",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+              }
+            ]
+          },
+          "docs": "Returns the total number of scans in selected period and a breakdown per agent.\nThe selected period cannot have start date older 30 days before the current date. Also selected period cannot be greater than 30 days\n"
+        },
+        {
+          "info": {
+            "name": "Get Organization Vulnerable Libraries Count By Projects",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v2.0/orgs/:orgToken/summary/projects/vulnerableLibraryCount",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Enter the number of items to return in each page of the result."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Enter the page number to display in the result. Page numbers start at 0"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Filter your search to return items whose property has a specific value.\nUse the syntax: **property:operation:value** where a colon (:) separates between property, operation and value.\n+ Property: the name of the property of the item\n+ Operation:\n    + **equals** - true if the value is identical to this value.\n    + **like** - true if the property's value is contained within this value\n    + **regex** - true if this regular expression resolves as true.\n        The regex is not case sensitive, and special characters must be escaped with a backslash.\n        Special characters include space, double quote (\"), '<', '>', '#', '%', '{', '}', vertical bar ('|'), backslash, '^'.\n        To pass an escaped character in a URL in Postman, encode it first.\n        E.g. to return all items whose value begins with **a** or **A**, use regex:^a\n+ Value: the value of the property.\n\n\nTo combine multiple filters, separate each filter with a semicolon with no space. E.g.  property1:operation1:value1;property2:operation2:value2\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ vulnerabilityId:[equals]:value\n+ productName:[like | equals | regex]:value\n+ projectName:[like | equals | regex]:value\n"
+              },
+              {
+                "name": "orgToken",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+              }
+            ]
+          },
+          "docs": "Returns vulnerable libraries count by projects for a given organization."
+        },
+        {
+          "info": {
+            "name": "Get Organization Libraries Count By Projects.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v2.0/orgs/:orgToken/summary/projects/totalLibraryCount",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Enter the number of items to return in each page of the result."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Enter the page number to display in the result. Page numbers start at 0"
+              },
+              {
+                "name": "orgToken",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+              }
+            ]
+          },
+          "docs": "Returns the total number of libraries (non-unique) for a given organization with a breakdown per project"
+        },
+        {
+          "info": {
+            "name": "Get Organization In-House Libraries Count By Projects.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v2.0/orgs/:orgToken/summary/projects/inHouseLibraries",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Enter the number of items to return in each page of the result."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Enter the page number to display in the result. Page numbers start at 0"
+              },
+              {
+                "name": "orgToken",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+              }
+            ]
+          },
+          "docs": "Returns the total number of in house libraries (non-unique) for a given organization with a breakdown per project."
+        },
+        {
+          "info": {
+            "name": "Get Organization Vulnerable Libraries Count By Products",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v2.0/orgs/:orgToken/summary/products/vulnerableLibraryCount",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Enter the number of items to return in each page of the result."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Enter the page number to display in the result. Page numbers start at 0"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Filter your search to return items whose property has a specific value.\nUse the syntax: **property:operation:value** where a colon (:) separates between property, operation and value.\n+ Property: the name of the property of the item\n+ Operation:\n    + **equals** - true if the value is identical to this value.\n    + **like** - true if the property's value is contained within this value\n    + **regex** - true if this regular expression resolves as true.\n        The regex is not case sensitive, and special characters must be escaped with a backslash.\n        Special characters include space, double quote (\"), '<', '>', '#', '%', '{', '}', vertical bar ('|'), backslash, '^'.\n        To pass an escaped character in a URL in Postman, encode it first.\n        E.g. to return all items whose value begins with **a** or **A**, use regex:^a\n+ Value: the value of the property.\n\n\nTo combine multiple filters, separate each filter with a semicolon with no space. E.g.  property1:operation1:value1;property2:operation2:value2\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ vulnerabilityId:[equals]:value\n+ productName:[like | equals | regex]:value\n+ projectName:[like | equals | regex]:value\n"
+              },
+              {
+                "name": "orgToken",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+              }
+            ]
+          },
+          "docs": "Returns vulnerable libraries count by products for a given organization."
+        },
+        {
+          "info": {
+            "name": "Get Organization Libraries Count By Products.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v2.0/orgs/:orgToken/summary/products/totalLibraryCount",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Enter the number of items to return in each page of the result."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Enter the page number to display in the result. Page numbers start at 0"
+              },
+              {
+                "name": "orgToken",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+              }
+            ]
+          },
+          "docs": "Returns the total number of libraries (non-unique) for a given organization with a breakdown per product"
+        },
+        {
+          "info": {
+            "name": "Get Organization In-House Libraries Count By Products.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v2.0/orgs/:orgToken/summary/products/inHouseLibraries",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Enter the number of items to return in each page of the result."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Enter the page number to display in the result. Page numbers start at 0"
+              },
+              {
+                "name": "orgToken",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+              }
+            ]
+          },
+          "docs": "Returns the total number of in house libraries (non-unique) for a given organization with a breakdown per product."
+        },
+        {
+          "info": {
+            "name": "Get Libraries Count Per License",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v2.0/orgs/:orgToken/summary/libraryCountPerLicense",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Enter the number of items to return in each page of the result."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Enter the page number to display in the result. Page numbers start at 0"
+              },
+              {
+                "name": "orgToken",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+              }
+            ]
+          },
+          "docs": "Returns the total number of libraries for a given organization, along with a breakdown of the number of libraries per license."
+        },
+        {
+          "info": {
+            "name": "Get Libraries Count By Language",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v2.0/orgs/:orgToken/summary/libraryCountPerLanguage",
+            "params": [
+              {
+                "name": "orgToken",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+              }
+            ]
+          },
+          "docs": "Returns the number of libraries with a breakdown per Language. The library count should be for all occurrences (nonunique) and only open source."
+        },
+        {
+          "info": {
+            "name": "Get Vulnerability Alerts Count Per Effective Usage Status.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v2.0/orgs/:orgToken/summary/effective/vulnerabilityCountPerSeverity",
+            "params": [
+              {
+                "name": "orgToken",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+              },
+              {
+                "name": "cvss4",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Vulnerability alert count per effective usage status."
+        },
+        {
+          "info": {
+            "name": "Get Organization Alert Type Summaries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v2.0/orgs/:orgToken/summary/alertTypes",
+            "params": [
+              {
+                "name": "orgToken",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+              },
+              {
+                "name": "cvss4",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the alerts count per type for a given organization."
+        },
+        {
+          "info": {
+            "name": "Get Organization Alert Count Per Severity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v2.0/orgs/:orgToken/summary/alertCountPerSeverity",
+            "params": [
+              {
+                "name": "orgToken",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+              },
+              {
+                "name": "cvss4",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the active alerts count per severity for a given organization."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

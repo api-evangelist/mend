@@ -1,0 +1,59 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mend Access Management CustomAttribute - Product API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "CustomAttribute - Product",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Set Custom Attribute",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://baseUrl/api/v2.0/products/:productToken/libraries/:libraryUuid/customAttributes/:attributeUuid/value",
+            "params": [
+              {
+                "name": "productToken",
+                "value": "",
+                "type": "path",
+                "description": "product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**)."
+              },
+              {
+                "name": "libraryUuid",
+                "value": "",
+                "type": "path",
+                "description": "library UUID (get a project's library by running Library - Project > Get Project Libraries."
+              },
+              {
+                "name": "attributeUuid",
+                "value": "",
+                "type": "path",
+                "description": "Custom Attribute UUID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Edits the value of a custom attribute for a specified library, attribute, and context."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

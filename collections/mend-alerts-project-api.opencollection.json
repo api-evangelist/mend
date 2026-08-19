@@ -1,0 +1,246 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mend Access Management Alerts - Project API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Alerts - Project",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Update Security Alert",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://baseUrl/api/v2.0/projects/:projectToken/alerts/security/:alertUuid",
+            "params": [
+              {
+                "name": "projectToken",
+                "value": "",
+                "type": "path",
+                "description": "project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**)."
+              },
+              {
+                "name": "alertUuid",
+                "value": "",
+                "type": "path",
+                "description": "Alert UUID (by running the appropriate Get in Alerts - Project)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Changes a given security alert's status and comments"
+        },
+        {
+          "info": {
+            "name": "Update Library Security Alert",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://baseUrl/api/v2.0/projects/:projectToken/alerts/security/library/:libraryUuid",
+            "params": [
+              {
+                "name": "projectToken",
+                "value": "",
+                "type": "path",
+                "description": "project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**)."
+              },
+              {
+                "name": "libraryUuid",
+                "value": "",
+                "type": "path",
+                "description": "library UUID (get a project's library by running Library - Project > Get Project Libraries."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the status of a library security alert"
+        },
+        {
+          "info": {
+            "name": "Update Legal And Compliance Alert",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://baseUrl/api/v2.0/projects/:projectToken/alerts/legal/:alertUuid",
+            "params": [
+              {
+                "name": "projectToken",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+              },
+              {
+                "name": "alertUuid",
+                "value": "",
+                "type": "path",
+                "description": "Alert UUID (by running the appropriate Get in Alerts - Project)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the status of the legal and compliance alerts for a given project"
+        },
+        {
+          "info": {
+            "name": "Get Security Alerts By Library",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v2.0/projects/:projectToken/alerts/security/groupBy/component",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Enter the number of items to return in each page of the result."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Enter the page number to display in the result. Page numbers start at 0"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Filter your search to return items whose property has a specific value.\nUse the syntax: **property:operation:value** where a colon (:) separates between property, operation and value.\n+ Property: the name of the property of the item\n+ Operation:\n    + **between** - true if the value is inside a range. Syntax: lowest value comma (,) highest value. E.g. between:2019-05-01,2019-06-01\n    + **equals** - true if the value is identical to this value.\n    + **gt** - true if the value is greater than this value.\n    + **in** - true if the value is identical to one of the items in this comma-separated list. E.g. in:value1,value2,value3\n    + **like** - true if the property's value is contained within this value\n    + **regex** - true if this regular expression resolves as true.\n        The regex is not case sensitive, and special characters must be escaped with a backslash.\n        Special characters can be space, double quote (\"), '<', '>', '#', '%', '{', '}', vertical bar ('|'), backslash, '^'.\n        To pass an escaped character in a URL in Postman, encode it first.\n        E.g. to return all items whose value begins with **a** or **A**, use regex:^a\n+ Value: the value of the property.\n\nTo combine multiple filters, separate each filter with a semicolon with no space. E.g.  property1:operation1:value1;property2:operation2:value2\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ comment:[like | equals | regex]:value\n+ commentBy:[like | equals | regex]:value\n+ componentName:[like | equals | regex]:value\n+ criticalNum:gt:value\n+ detectedAt:between:date1,date2. E.g. between:2019-05-01,2019-06-01\n+ directDependency:equals:value\n+ effective:[like | in | equals | regex]:value\n+ hasFix:equals:value\n+ highNum:gt:value\n+ lastCveUpdatedAt:between:date1,date2. E.g. between:2019-05-01,2019-06-01\n+ lowNum:gt:value\n+ mediumNum:gt:value\n+ modifiedAt:between:date1,date2. E.g. between:2019-05-01,2019-06-01\n+ projectName:[like | equals | regex]:value\n+ publishedAt:between:date1,date2. E.g. between:2019-05-01,2019-06-01\n+ score:between:lowvalue,highvalue\n+ scoreType:[like | equals | regex]:value\n+ severity:[like | equals | regex]:value\n+ sourceFileName:[like | equals | regex]:value\n+ status:[in | equals]:value\n+ vulnerabilityName:[like | equals | regex]:value\n+ vulnerabilityType:[equals | in]:value"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sort search results alphabetically on an item's property by entering **sort=** followed by the property name.\nE.g. enter **sort=email** to sort alphabetically by their email addresses from a-z ascending.To sort in descending order (z-a), add a minus sign ('-'). E.g. **sort=-email**.\n\nYou can sort by the following properties:\n+ comment\n+ commentUserName\n+ componentName\n+ detectedAt\n+ directDependency\n+ effective\n+ highNum\n+ lastCveUpdatedAt\n+ lowNum\n+ mediumNum\n+ modifiedAt\n+ projectName\n+ publishedAt\n+ score\n+ scoreType\n+ severity\n+ status\n+ vulnerabilityName\n+ vulnerabilityType\n+ weight"
+              },
+              {
+                "name": "projectToken",
+                "value": "",
+                "type": "path",
+                "description": "project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**)."
+              }
+            ]
+          },
+          "docs": "Returns all security alerts for a given project, including library and severity information, arranged by library"
+        },
+        {
+          "info": {
+            "name": "Get project security alerts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v2.0/projects/:projectToken/alerts/security",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Enter the number of items to return in each page of the result."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Enter the page number to display in the result. Page numbers start at 0"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Filter your search to return items whose property has a specific value.\nUse the syntax: **property:operation:value** where a colon (:) separates between property, operation and value.\n+ Property: the name of the property of the item\n+ Operation:\n    + **between** - true if the value is inside a range. Syntax: lowest value comma (,) highest value. E.g. between:2019-05-01,2019-06-01\n    + **equals** - true if the value is identical to this value.\n    + **gt** - true if the value is greater than this value.\n    + **in** - true if the value is identical to one of the items in this comma-separated list. E.g. in:value1,value2,value3\n    + **like** - true if the property's value is contained within this value\n    + **regex** - true if this regular expression resolves as true.\n        The regex is not case sensitive, and special characters must be escaped with a backslash.\n        Special characters include space, double quote (\"), '<', '>', '#', '%', '{', '}', vertical bar ('|'), backslash, '^'.\n        To pass an escaped character in a URL in Postman, encode it first.\n        E.g. to return all items whose value begins with **a** or **A**, use regex:^a\n+ Value: the value of the property.\n\nTo combine multiple filters, separate each filter with a semicolon with no space. E.g.  property1:operation1:value1;property2:operation2:value2\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ comment:[like | equals | regex]:value\n+ commentUserEmail:[like | equals | regex]:value\n+ componentName:[like | equals | regex]:value\n+ detectedAt:between:date1,date2. E.g. between:2019-05-01,2019-06-01\n+ directDependency:equals:value\n+ effective:[like | equals | regex | in]:value\n+ hasFix:equals:value\n+ lastCveUpdatedAt:between:date1,date2. E.g. between:2019-05-01,2019-06-01\n+ modifiedAt:between:date1,date2. E.g. between:2019-05-01,2019-06-01\n+ projectName:[like | equals | regex]:value\n+ score:between:lowvalue,highvalue\n+ scoreType:[like | equals | regex]:value\n+ severity:[like | equals | regex]:value\n+ sourceFileName:[like | equals | regex]:value\n+ status:[in | equals]:value\n+ vulnerabilityName:[like | equals | regex]:value\n+ vulnerabilityType:[equals | in]:value\n+ libraryType:[equals | in | like | regex]:value"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sort search results alphabetically on an item's property by entering **sort=** followed by the property name.\nE.g. enter **sort=email** to sort alphabetically by their email addresses from a-z ascending.To sort in descending order (z-a), add a minus sign ('-'). E.g. **sort=-email**.\n\nYou can sort by the following properties:\n+ comment\n+ commentUserEmail\n+ componentName\n+ detectedAt\n+ directDependency\n+ effective\n+ hasFix\n+ lastCveUpdatedAt\n+ modifiedAt\n+ projectName\n+ score\n+ scoreType\n+ severity\n+ sourceFileName\n+ status\n+ vulnerabilityName\n+ vulnerabilityType\n+ libraryType"
+              },
+              {
+                "name": "optionalColumns",
+                "value": "",
+                "type": "query",
+                "description": "Used to add alert integration and library location information"
+              },
+              {
+                "name": "projectToken",
+                "value": "",
+                "type": "path",
+                "description": "project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**)."
+              }
+            ]
+          },
+          "docs": "Returns all security alerts for a given project, including library and severity information"
+        },
+        {
+          "info": {
+            "name": "Get project legal and compliance alerts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v2.0/projects/:projectToken/alerts/legal",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Enter the number of items to return in each page of the result."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Enter the page number to display in the result. Page numbers start at 0"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Filter your search to return items whose property has a specific value.\nUse the syntax: **property:operation:value** where a colon (:) separates between property, operation and value.\n+ Property: the name of the property of the item\n+ Operation:\n    + **between** - true if the value is inside a range. Syntax: lowest value comma (,) highest value. E.g. between:2019-05-01,2019-06-01\n    + **equals** - true if the value is identical to this value.\n    + **gt** - true if the value is greater than this value.\n    + **in** - true if the value is identical to one of the items in this comma-separated list. E.g. in:value1,value2,value3\n    + **like** - true if the property's value is contained within this value\n    + **regex** - true if this regular expression resolves as true.\n        The regex is not case sensitive, and special characters must be escaped with a backslash.\n        Special characters include space, double quote (\"), '<', '>', '#', '%', '{', '}', vertical bar ('|'), backslash, '^'.\n        To pass an escaped character in a URL in Postman, encode it first.\n        E.g. to return all items whose value begins with **a** or **A**, use regex:^a\n+ Value: the value of the property.\n\nTo combine multiple filters, separate each filter with a semicolon with no space. E.g.  property1:operation1:value1;property2:operation2:value2\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ availableVersion:equals:value\n+ availableVersionType:[equals | in]:value\n+ comment:[like | equals | regex]:value\n+ commentUserEmail:[like | equals | regex]:value\n+ componentName:[like | equals | regex]:value\n+ componentType:[equals | in]:value\n+ detectedAt:between:date1,date2. E.g. between:2019-05-01,2019-06-01\n+ license:[like | regex ]:value\n+ modifiedAt:between:date1,date2. E.g. between:2019-05-01,2019-06-01\n+ numberOfLicenses:[gt | equals]:value\n+ policyName:[like | equals | regex]:value\n+ projectName:[like | equals | regex]:value\n+ status:[in | equals]:value\n+ type:[equals | in]:value"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sort search results alphabetically on an item's property by entering **sort=** followed by the property name.\nE.g. enter **sort=email** to sort alphabetically by their email addresses from a-z ascending.To sort in descending order (z-a), add a minus sign ('-'). E.g. **sort=-email**.\n\nYou can sort by the following properties:\n+ availableVersionType\n+ comment\n+ componentName\n+ componentType\n+ detectedAt\n+ modifiedAt\n+ numberOfLicenses\n+ policyName\n+ status\n+ type\n+ versionType"
+              },
+              {
+                "name": "projectToken",
+                "value": "",
+                "type": "path",
+                "description": "project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**)."
+              }
+            ]
+          },
+          "docs": "Returns a list of legal and compliance alerts arising from licensing issues (not vulnerabilities) for a given project"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

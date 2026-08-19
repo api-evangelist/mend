@@ -1,0 +1,47 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mend Access Management product-attribution-report-controller API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "product-attribution-report-controller",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Delete attribution report library settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://baseUrl/api/v2.0/products/:productIdentifier/librarySettings/attributionReport",
+            "params": [
+              {
+                "name": "productIdentifier",
+                "value": "",
+                "type": "path",
+                "description": "product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Delete library settings to be reflected in the attribution report"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

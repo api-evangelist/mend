@@ -1,0 +1,296 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mend Access Management Library - Product API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Library - Product",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Product Libraries by project Ids",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v2.0/products/:productToken/libraries/byProjects",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Filter your search to return items whose property has a specific value.\nUse the syntax: **property:operation:value** where a colon (:) separates between property, operation and value.\n+ Property: the name of the property of the item\n+ Operation:\n    + **equals** - true if the value is identical to this value.\n    + **in** - true if the value is identical to one of the items in this comma-separated list. E.g. in:value1,value2,value3\n    + **like** - true if the property's value is contained within this value\n    + **regex** - true if this regular expression resolves as true.\n        The regex is not case sensitive, and special characters must be escaped with a backslash.\n        Special characters include space, double quote (\"), '<', '>', '#', '%', '{', '}', vertical bar ('|'), backslash, '^'.\n        To pass an escaped character in a URL in Postman, encode it first.\n        E.g. to return all items whose value begins with **a** or **A**, use regex:^a\n+ Value: the value of the property.\n\nTo combine multiple filters, separate each filter with a semicolon with no space. E.g.  property1:operation1:value1;property2:operation2:value2\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ description:[like | equals | regex]:value\n+ directDependency:[like | equals | regex]:value\n+ hasNotice:[like | equals | regex]:value\n+ license:[like | equals | regex | in]:value\n+ locations:[like | equals | regex]:value\n+ name:[like | equals | regex]:value\n+ numberOfLicenses:[equals | gt]:value\n+ projectName:[like | equals | regex]:value\n+ type:[like | in | equals | regex]:value"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sort search results alphabetically on an item's property by entering **sort=** followed by the property name.\nE.g. enter **sort=email** to sort alphabetically by their email addresses from a-z ascending.To sort in descending order (z-a), add a minus sign ('-'). E.g. **sort=-email**.\n\nYou can sort by the following properties:\n+ description\n+ directDependency\n+ hasNotice\n+ license\n+ locations\n+ name\n+ numberOfLicenses\n+ projectName\n+ type"
+              },
+              {
+                "name": "optionalColumns",
+                "value": "",
+                "type": "query",
+                "description": "Used to add location information about the library"
+              },
+              {
+                "name": "productToken",
+                "value": "",
+                "type": "path",
+                "description": "product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**)."
+              },
+              {
+                "name": "includeNotices",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "extraInformation",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns all libraries that are included in a given projects"
+        },
+        {
+          "info": {
+            "name": "Get Product Library Vulnerabilities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v2.0/products/:productToken/libraries/:libraryUuid/vulnerabilities",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "productToken",
+                "value": "",
+                "type": "path",
+                "description": "product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**)."
+              },
+              {
+                "name": "libraryUuid",
+                "value": "",
+                "type": "path",
+                "description": "library UUID (get a project's library by running Library - Project > Get Project Libraries."
+              }
+            ]
+          },
+          "docs": "Returns a list of the vulnerabilities in the libraries of a given product"
+        },
+        {
+          "info": {
+            "name": "Get Library Projects",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v2.0/products/:productToken/libraries/:libraryUuid/projects",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "productToken",
+                "value": "",
+                "type": "path",
+                "description": "product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**)."
+              },
+              {
+                "name": "libraryUuid",
+                "value": "",
+                "type": "path",
+                "description": "library UUID (get a project's library by running Library - Project > Get Project Libraries."
+              }
+            ]
+          },
+          "docs": "Returns all of the projects in a particular product that contain a given library "
+        },
+        {
+          "info": {
+            "name": "Get Product Due Diligence Info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v2.0/products/:productToken/libraries/licenses",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Enter the number of items to return in each page of the result."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Enter the page number to display in the result. Page numbers start at 0"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Filter your search to return items whose property has a specific value.\nUse the syntax: **property:operation:value** where a colon (:) separates between property, operation and value.\n+ Property: the name of the property of the item\n+ Operation:\n    + **equals** - true if the value is identical to this value.\n    + **in** - true if the value is identical to one of the items in this comma-separated list. E.g. in:value1,value2,value3\n    + **like** - true if the property's value is contained within this value\n    + **regex** - true if this regular expression resolves as true.\n        The regex is not case sensitive, and special characters must be escaped with a backslash.\n        Special characters include space, double quote (\"), '<', '>', '#', '%', '{', '}', vertical bar ('|'), backslash, '^'.\n        To pass an escaped character in a URL in Postman, encode it first.\n        E.g. to return all items whose value begins with **a** or **A**, use regex:^a\n+ Value: the value of the property.\n\nTo combine multiple filters, separate each filter with a semicolon with no space. E.g.  property1:operation1:value1;property2:operation2:value2\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ componentName:[like | equals | regex]:value\n+ copyrights:[like | regex]:value\n+ license:[equals | in]:value\n+ licenseRisk:[equals | in]:value\n+ licenseType:[equals | in]:value\n+ projectName:[like | equals | regex]:value"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sort search results alphabetically on an item's property by entering **sort=** followed by the property name.\nE.g. enter **sort=email** to sort alphabetically by their email addresses from a-z ascending.To sort in descending order (z-a), add a minus sign ('-'). E.g. **sort=-email**.\n\nYou can sort by the following properties:\n+ componentName\n+ license\n+ licenseType\n+ copyrights\n+ licenseRisk\n+ projectName"
+              },
+              {
+                "name": "productToken",
+                "value": "",
+                "type": "path",
+                "description": "product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**)."
+              }
+            ]
+          },
+          "docs": "Returns a due diligence report listing the source and license information for all libraries in a product"
+        },
+        {
+          "info": {
+            "name": "Get In-House Libraries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v2.0/products/:productToken/libraries/inHouse",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Filter your search to return items whose property has a specific value.\nUse the syntax: **property:operation:value** where a colon (:) separates between property, operation and value.\n+ Property: the name of the property of the item\n+ Operation:\n    + **equals** - true if the value is identical to this value.\n    + **like** - true if the property's value is contained within this value\n    + **regex** - true if this regular expression resolves as true.\n        The regex is not case sensitive, and special characters must be escaped with a backslash.\n        Special characters include space, double quote (\"), '<', '>', '#', '%', '{', '}', vertical bar ('|'), backslash, '^'.\n        To pass an escaped character in a URL in Postman, encode it first.\n        E.g. to return all items whose value begins with **a** or **A**, use regex:^a\n+ Value: the value of the property.\n\nTo combine multiple filters, separate each filter with a semicolon with no space. E.g.  property1:operation1:value1;property2:operation2:value2\n\nThis endpoint supports filtering on this property:\n+ name:[like | equals | regex]:value\n+ type:[like | equals ]:value\n+ comment:[like | equals | regex]:value\n+ markType:[equals]:value\n"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sort search results alphabetically on an item's property by entering **sort=** followed by the property name.\nE.g. enter **sort=email** to sort alphabetically by their email addresses from a-z ascending.To sort in descending order (z-a), add a minus sign ('-'). E.g. **sort=-email**.\n\nYou can sort by the following properties:\n+ name\n+ type\n+ comment\n+ markType\n"
+              },
+              {
+                "name": "productToken",
+                "value": "",
+                "type": "path",
+                "description": "product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**)."
+              }
+            ]
+          },
+          "docs": "Returns all libraries in a given product that have been designated as \"In-House\". They will not trigger any alerts or be included in license analysis. so that they will not trigger any alerts or be included in license analysis."
+        },
+        {
+          "info": {
+            "name": "Get Product Libraries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v2.0/products/:productToken/libraries",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Filter your search to return items whose property has a specific value.\nUse the syntax: **property:operation:value** where a colon (:) separates between property, operation and value.\n+ Property: the name of the property of the item\n+ Operation:\n    + **equals** - true if the value is identical to this value.\n    + **in** - true if the value is identical to one of the items in this comma-separated list. E.g. in:value1,value2,value3\n    + **like** - true if the property's value is contained within this value\n    + **regex** - true if this regular expression resolves as true.\n        The regex is not case sensitive, and special characters must be escaped with a backslash.\n        Special characters include space, double quote (\"), '<', '>', '#', '%', '{', '}', vertical bar ('|'), backslash, '^'.\n        To pass an escaped character in a URL in Postman, encode it first.\n        E.g. to return all items whose value begins with **a** or **A**, use regex:^a\n+ Value: the value of the property.\n\nTo combine multiple filters, separate each filter with a semicolon with no space. E.g.  property1:operation1:value1;property2:operation2:value2\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ description:[like | equals | regex]:value\n+ directDependency:[like | equals | regex]:value\n+ hasNotice:[like | equals | regex]:value\n+ license:[like | equals | regex | in]:value\n+ locations:[like | equals | regex]:value\n+ name:[like | equals | regex]:value\n+ numberOfLicenses:[equals | gt]:value\n+ projectName:[like | equals | regex]:value\n+ type:[like | in | equals | regex]:value"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sort search results alphabetically on an item's property by entering **sort=** followed by the property name.\nE.g. enter **sort=email** to sort alphabetically by their email addresses from a-z ascending.To sort in descending order (z-a), add a minus sign ('-'). E.g. **sort=-email**.\n\nYou can sort by the following properties:\n+ description\n+ directDependency\n+ hasNotice\n+ license\n+ locations\n+ name\n+ numberOfLicenses\n+ projectName\n+ type"
+              },
+              {
+                "name": "optionalColumns",
+                "value": "",
+                "type": "query",
+                "description": "Used to add location information about the library"
+              },
+              {
+                "name": "productToken",
+                "value": "",
+                "type": "path",
+                "description": "product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**)."
+              },
+              {
+                "name": "includeNotices",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "extraInformation",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns all libraries that are included in a given product"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

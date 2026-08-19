@@ -1,0 +1,187 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mend Access Management Policies - Product API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Policies - Product",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Product Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v2.0/products/:productToken/policies/:policyUuid",
+            "params": [
+              {
+                "name": "productToken",
+                "value": "",
+                "type": "path",
+                "description": "product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**)."
+              },
+              {
+                "name": "policyUuid",
+                "value": "",
+                "type": "path",
+                "description": "Policy UUID (by running Policies - Organization and run Get Organization Policies, or the equivalent for Product or Project.)"
+              }
+            ]
+          },
+          "docs": "Returns a single policy in a given product"
+        },
+        {
+          "info": {
+            "name": "Update Product Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://baseUrl/api/v2.0/products/:productToken/policies/:policyUuid",
+            "params": [
+              {
+                "name": "productToken",
+                "value": "",
+                "type": "path",
+                "description": "product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**)."
+              },
+              {
+                "name": "policyUuid",
+                "value": "",
+                "type": "path",
+                "description": "Policy UUID (by running Policies - Organization and run Get Organization Policies, or the equivalent for Product or Project.)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a policy for a given product"
+        },
+        {
+          "info": {
+            "name": "Delete Product Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://baseUrl/api/v2.0/products/:productToken/policies/:policyUuid",
+            "params": [
+              {
+                "name": "productToken",
+                "value": "",
+                "type": "path",
+                "description": "product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**)."
+              },
+              {
+                "name": "policyUuid",
+                "value": "",
+                "type": "path",
+                "description": "Policy UUID (by running Policies - Organization and run Get Organization Policies, or the equivalent for Product or Project.)"
+              }
+            ]
+          },
+          "docs": "Deletes a policy for a given product"
+        },
+        {
+          "info": {
+            "name": "Update Product Policy Priorities",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://baseUrl/api/v2.0/products/:productToken/policies/priority",
+            "params": [
+              {
+                "name": "productToken",
+                "value": "",
+                "type": "path",
+                "description": "product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the priority of policies in a given product. Policies are numbered and then evaluated sequentially. The request body should contain a list of policy UUIDs in the desired order, starting from highest priority. The service returns a list or ordered policies."
+        },
+        {
+          "info": {
+            "name": "Apply Product Policies On Inventory",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v2.0/products/:productToken/policies/apply",
+            "params": [
+              {
+                "name": "productToken",
+                "value": "",
+                "type": "path",
+                "description": "product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**)."
+              }
+            ]
+          },
+          "docs": "After initiating this call, the process will be performed asynchronously in the background. To check the status of the process and retrieve the final outcome, use the \"Get Async Process Status\" request."
+        },
+        {
+          "info": {
+            "name": "Get Product Policies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v2.0/products/:productToken/policies",
+            "params": [
+              {
+                "name": "productToken",
+                "value": "",
+                "type": "path",
+                "description": "product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**)."
+              }
+            ]
+          },
+          "docs": "Returns all policies of a given product"
+        },
+        {
+          "info": {
+            "name": "Create Product Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v2.0/products/:productToken/policies",
+            "params": [
+              {
+                "name": "productToken",
+                "value": "",
+                "type": "path",
+                "description": "product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new policy for a given product"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

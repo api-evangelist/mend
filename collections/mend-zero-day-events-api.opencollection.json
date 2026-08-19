@@ -1,0 +1,116 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mend Access Management Zero-Day Events API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Zero-Day Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all Zero-Day Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v3.0/orgs/:orgUuid/dependencies/events/zeroday",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the maximum number of items to be returned in the response."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved."
+              },
+              {
+                "name": "orgUuid",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+              },
+              {
+                "name": "fromDate",
+                "value": "2024-01-01",
+                "type": "query",
+                "description": "Filter by creation date from (inclusive)"
+              },
+              {
+                "name": "toDate",
+                "value": "2024-12-31",
+                "type": "query",
+                "description": "Filter by creation date to (inclusive)"
+              }
+            ]
+          },
+          "docs": "Returns a list of all Zero-Day Events with optional date filters."
+        },
+        {
+          "info": {
+            "name": "Get Affected Libraries for a Zero-Day Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v3.0/orgs/:orgUuid/dependencies/events/zeroday/:eventUuid/findings",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the maximum number of items to be returned in the response."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved."
+              },
+              {
+                "name": "orgUuid",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+              },
+              {
+                "name": "eventUuid",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "Zero-Day Event UUID"
+              },
+              {
+                "name": "fromDate",
+                "value": "2024-01-01",
+                "type": "query",
+                "description": "Filter by added at from (inclusive)"
+              },
+              {
+                "name": "toDate",
+                "value": "2024-12-31",
+                "type": "query",
+                "description": "Filter by added at to (inclusive)"
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of publicly known affected packages (CVEs and their associated components) for a specific Zero-Day Event.\n\n**Note:** This endpoint returns ecosystem-wide affected package data sourced from public vulnerability databases — it does not reflect findings from your organization's inventory or installed libraries."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

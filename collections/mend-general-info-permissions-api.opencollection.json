@@ -1,0 +1,35 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mend Access Management General Info - Permissions API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "General Info - Permissions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get All Available Permissions Grouped By Roles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v2.0/permissions/byRole"
+          },
+          "docs": "Returns a list of the current user's permissions grouped by roles"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

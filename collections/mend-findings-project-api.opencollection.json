@@ -1,0 +1,935 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mend Access Management Findings - Project API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Findings - Project",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get project security findings (Dependencies - SCA)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v3.0/projects/:projectUuid/dependencies/findings/security",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the maximum number of items to be returned in the response."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved."
+              },
+              {
+                "name": "zeroDayIdentifier",
+                "value": "",
+                "type": "query",
+                "description": "UUID or Name of a Zero-Day Event"
+              },
+              {
+                "name": "projectUuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the project"
+              }
+            ]
+          },
+          "docs": "Returns all security findings for a given project"
+        },
+        {
+          "info": {
+            "name": "Get libraries security findings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v3.0/projects/:projectUuid/dependencies/findings/security/groupBy/library",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the maximum number of items to be returned in the response."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved."
+              },
+              {
+                "name": "zeroDayIdentifier",
+                "value": "",
+                "type": "query",
+                "description": "UUID or Name of a Zero-Day Event"
+              },
+              {
+                "name": "projectUuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the project"
+              }
+            ]
+          },
+          "docs": "Returns only the open source libraries with known vulnerabilities detected in a specified project."
+        },
+        {
+          "info": {
+            "name": "Get root libraries security findings (Dependencies - SCA)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v3.0/projects/:projectUuid/dependencies/findings/security/groupBy/rootLibrary",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the maximum number of items to be returned in the response."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved."
+              },
+              {
+                "name": "zeroDayIdentifier",
+                "value": "",
+                "type": "query",
+                "description": "UUID or Name of a Zero-Day Event"
+              },
+              {
+                "name": "projectUuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the project"
+              }
+            ]
+          },
+          "docs": "Get root libraries security findings for a given project"
+        },
+        {
+          "info": {
+            "name": "Update root library security finding (Dependencies - SCA)",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://baseUrl/api/v3.0/projects/:projectUuid/dependencies/findings/security/rootLibrary/:rootLibraryUuid",
+            "params": [
+              {
+                "name": "projectUuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the project"
+              },
+              {
+                "name": "rootLibraryUuid",
+                "value": "",
+                "type": "path",
+                "description": "Alert UUID (by running the appropriate Get in Alerts - Project)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Changes a given security finding's status and comments"
+        },
+        {
+          "info": {
+            "name": "Get project libraries (Dependencies - SCA)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v3.0/projects/:projectUuid/dependencies/libraries",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the maximum number of items to be returned in the response."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved."
+              },
+              {
+                "name": "projectUuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the project"
+              }
+            ]
+          },
+          "docs": "Returns the set of libraries used by a particular project"
+        },
+        {
+          "info": {
+            "name": "Get in-house libraries (Dependencies - SCA)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v3.0/projects/:projectUuid/dependencies/libraries/inHouse",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the maximum number of items to be returned in the response."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved."
+              },
+              {
+                "name": "projectUuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the project"
+              }
+            ]
+          },
+          "docs": "Returns all libraries in a given project that have been designated as \"In-House\". They will not trigger any alerts or be included in license analysis."
+        },
+        {
+          "info": {
+            "name": "Get project due diligence information (Dependencies - SCA)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v3.0/projects/:projectUuid/dependencies/libraries/licenses",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the maximum number of items to be returned in the response."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved."
+              },
+              {
+                "name": "projectUuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the project"
+              }
+            ]
+          },
+          "docs": "Returns a due diligence report listing the source and license information for all libraries in a project"
+        },
+        {
+          "info": {
+            "name": "Get a list of project findings (Code - SAST)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v3.0/projects/:projectUuid/code/findings",
+            "params": [
+              {
+                "name": "projectUuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the project"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the maximum number of items to be returned in the response."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get a list of findings for a specified project UUID.\n</br>\nThis endpoint supports paging using <em>cursor</em> and <em>limit</em> parameters described in <i>Parameters</i> section below."
+        },
+        {
+          "info": {
+            "name": "Bulk update of project findings state (review and/or suppression) or severity",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://baseUrl/api/v3.0/projects/:projectUuid/code/findings",
+            "params": [
+              {
+                "name": "projectUuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the project"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Bulk update of project findings state (review and/or suppression) or severity"
+        },
+        {
+          "info": {
+            "name": "Update a project finding state (review and/or suppression) or severity (Code - SAST)",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://baseUrl/api/v3.0/projects/:projectUuid/code/findings/:findingSnapshotId",
+            "params": [
+              {
+                "name": "projectUuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the project"
+              },
+              {
+                "name": "findingSnapshotId",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the finding snapshot"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update a project finding state (review and/or suppression) or severity"
+        },
+        {
+          "info": {
+            "name": "Get a project finding (Code - SAST)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v3.0/projects/:projectUuid/code/findings/:findingUuid",
+            "params": [
+              {
+                "name": "projectUuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the project"
+              },
+              {
+                "name": "findingUuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the finding"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get a project finding for a specified project and finding UUID.\n</br>"
+        },
+        {
+          "info": {
+            "name": "Update multiple findings status",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v3.0/projects/:projectuuid/images/findings",
+            "params": [
+              {
+                "name": "projectuuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the project"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update the status of multiple findings in bulk (e.g. suppress, review)"
+        },
+        {
+          "info": {
+            "name": "Update package status",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://baseUrl/api/v3.0/projects/:projectuuid/images/findings/packages/:packageuuid",
+            "params": [
+              {
+                "name": "projectuuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the project"
+              },
+              {
+                "name": "packageuuid",
+                "value": "",
+                "type": "path",
+                "description": "package UUID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update the status of a package (e.g. suppress, review)"
+        },
+        {
+          "info": {
+            "name": "List latest image scan secrets findings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v3.0/projects/:projectuuid/images/findings/secrets",
+            "params": [
+              {
+                "name": "projectuuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the project"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the maximum number of items to be returned in the response."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List the latest image scan secrets findings"
+        },
+        {
+          "info": {
+            "name": "List latest image scan security findings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v3.0/projects/:projectuuid/images/findings/security",
+            "params": [
+              {
+                "name": "projectuuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the project"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the maximum number of items to be returned in the response."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List the latest image scan security findings"
+        },
+        {
+          "info": {
+            "name": "Update finding status",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://baseUrl/api/v3.0/projects/:projectuuid/images/findings/security/:findingid",
+            "params": [
+              {
+                "name": "projectuuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the project"
+              },
+              {
+                "name": "findingid",
+                "value": "",
+                "type": "path",
+                "description": "vulnerability ID (CVE)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update the status of a finding (e.g. suppress, review)"
+        },
+        {
+          "info": {
+            "name": "List latest image scan packages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v3.0/projects/:projectuuid/images/packages",
+            "params": [
+              {
+                "name": "projectuuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the project"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the maximum number of items to be returned in the response."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List the latest image scan packages"
+        },
+        {
+          "info": {
+            "name": "Get project AI technologies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v3.0/projects/:projectUuid/ai/findings/technologies",
+            "params": [
+              {
+                "name": "projectUuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the project"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the maximum number of items to be returned in the response."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of AI technologies used in a specific project"
+        },
+        {
+          "info": {
+            "name": "Get project AI models",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v3.0/projects/:projectUuid/ai/findings/models",
+            "params": [
+              {
+                "name": "projectUuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the project"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the maximum number of items to be returned in the response."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of AI models used in a specific project"
+        },
+        {
+          "info": {
+            "name": "Get project AI vulnerabilities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v3.0/projects/:projectUuid/ai/vulnerabilities",
+            "params": [
+              {
+                "name": "projectUuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the project"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the maximum number of items to be returned in the response."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of AI vulnerabilities found in a specific project"
+        },
+        {
+          "info": {
+            "name": "Get AI vulnerability details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v3.0/projects/:projectUuid/ai/vulnerabilities/:vulnerabilityId",
+            "params": [
+              {
+                "name": "projectUuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the project"
+              },
+              {
+                "name": "vulnerabilityId",
+                "value": "",
+                "type": "path",
+                "description": "Vulnerability ID (e.g., MAI-2023-0002)"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns detailed information about a specific AI vulnerability"
+        },
+        {
+          "info": {
+            "name": "Get application AI models",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v3.0/applications/:applicationUuid/ai/findings/models",
+            "params": [
+              {
+                "name": "applicationUuid",
+                "value": "",
+                "type": "path",
+                "description": "Application UUID"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the maximum number of items to be returned in the response."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of AI models found in a specific application"
+        },
+        {
+          "info": {
+            "name": "Get application AI vulnerabilities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v3.0/applications/:applicationUuid/ai/vulnerabilities",
+            "params": [
+              {
+                "name": "applicationUuid",
+                "value": "",
+                "type": "path",
+                "description": "Application UUID"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the maximum number of items to be returned in the response."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of AI vulnerabilities found in a specific application"
+        },
+        {
+          "info": {
+            "name": "Get project implementation findings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v3.0/projects/:projectUuid/ai/findings/implementation",
+            "params": [
+              {
+                "name": "projectUuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the project"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the maximum number of items to be returned in the response."
+              },
+              {
+                "name": "grouped",
+                "value": "",
+                "type": "query",
+                "description": "Group findings by element"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns implementation findings for a project"
+        },
+        {
+          "info": {
+            "name": "Get implementation finding snippet",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v3.0/projects/:projectUuid/ai/findings/implementation/snippet/:snippetUuid",
+            "params": [
+              {
+                "name": "projectUuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the project"
+              },
+              {
+                "name": "snippetUuid",
+                "value": "",
+                "type": "path",
+                "description": "Snippet UUID"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the maximum number of items to be returned in the response."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns the code snippet and finding details for a specific implementation finding"
+        },
+        {
+          "info": {
+            "name": "Get application implementation findings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v3.0/applications/:applicationUuid/ai/findings/implementation",
+            "params": [
+              {
+                "name": "applicationUuid",
+                "value": "",
+                "type": "path",
+                "description": "Application UUID"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the maximum number of items to be returned in the response."
+              },
+              {
+                "name": "grouped",
+                "value": "",
+                "type": "query",
+                "description": "Group findings by element"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns implementation findings aggregated across all projects in an application"
+        },
+        {
+          "info": {
+            "name": "Get application AI vulnerability details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v3.0/applications/:applicationUuid/ai/vulnerabilities/:vulnerabilityId",
+            "params": [
+              {
+                "name": "applicationUuid",
+                "value": "",
+                "type": "path",
+                "description": "Application UUID"
+              },
+              {
+                "name": "vulnerabilityId",
+                "value": "",
+                "type": "path",
+                "description": "Vulnerability ID (e.g., MAI-2023-0002)"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns detailed information about a specific AI vulnerability in an application"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

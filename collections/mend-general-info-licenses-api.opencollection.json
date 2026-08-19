@@ -1,0 +1,72 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mend Access Management General Info - Licenses API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "General Info - Licenses",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get License Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v2.0/licenses/:licenseName",
+            "params": [
+              {
+                "name": "licenseName",
+                "value": "",
+                "type": "path",
+                "description": "license name (by running General Info - Licenses > Get All Licenses)."
+              }
+            ]
+          },
+          "docs": "Returns detailed information about a specific license"
+        },
+        {
+          "info": {
+            "name": "Get All Licenses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v2.0/licenses",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Filter your search to return items whose property has a specific value.\nUse the syntax: **property:operation:value** where a colon (:) separates between property, operation and value.\n+ Property: the name of the property of the item\n+ Operation:\n    + **equals** - true if the value is identical to this value.\n    + **like** - true if the property's value is contained within this value\n    + **in** - true if the value is identical to one of the items in this comma-separated list. E.g. in:value1,value2,value3\n+ Value: the value of the property.\n\nTo combine multiple filters, separate each filter with a semicolon with no space. E.g.  property1:operation1:value1;property2:operation2:value2\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ name:[equals | like | in]:value\n+ spdxName:[equals | like | in]:value\n+ uuid:[equals | in]:value"
+              }
+            ]
+          },
+          "docs": "Returns a list of all known licenses in the system."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

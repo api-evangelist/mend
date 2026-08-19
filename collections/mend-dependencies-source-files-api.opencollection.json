@@ -1,0 +1,216 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mend Access Management Dependencies Source Files API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Dependencies Source Files",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get source files inventory at project level",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v3.0/projects/:projectUuid/dependencies/sourceFiles/inventory",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the maximum number of items to be returned in the response."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved."
+              },
+              {
+                "name": "projectUuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the project"
+              }
+            ]
+          },
+          "docs": "Returns an inventory list of the source files associated with each library in a project. Supports filtering by library UUID using the search parameter. Example: ?search=libraryUuid==b366b0ef-b211-4c37-a47c-0077e4de709f"
+        },
+        {
+          "info": {
+            "name": "Get Mend library suggestions for source files at project level",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v3.0/projects/:projectUuid/dependencies/sourceFiles/matchSuggestions",
+            "params": [
+              {
+                "name": "projectUuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the project"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns Mend library suggestions for the specified source file UUIDs. Request body requires: sourceFileUuids (array), recommendedForAllFiles (boolean). Supports same search filters as searchForMatch: date, license, name, owner, version. "
+        },
+        {
+          "info": {
+            "name": "Search for library matches for source files at project level",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v3.0/projects/:projectUuid/dependencies/sourceFiles/searchForMatch",
+            "params": [
+              {
+                "name": "projectUuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the project"
+              }
+            ]
+          },
+          "docs": "Returns library match suggestions from Mend based on manual search criteria. Uses V3 MQL search format. Available search filters: date:between:date1,date2 (e.g., between:2019-05-01,2019-06-01), license:[like|regex]:value, name:[like|equals|regex]:value, owner:like:value, version:like:value. Example: ?search=name==openssl. "
+        },
+        {
+          "info": {
+            "name": "Get source files inventory at application level",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v3.0/applications/:applicationUuid/dependencies/sourceFiles/inventory",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the maximum number of items to be returned in the response."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved."
+              },
+              {
+                "name": "applicationUuid",
+                "value": "",
+                "type": "path",
+                "description": "Application UUID (Administration > Applications)"
+              }
+            ]
+          },
+          "docs": "Returns a list of libraries together with the location of their source files. Supports filtering by library UUID using the search parameter. Example: ?search=libraryUuid==b366b0ef-b211-4c37-a47c-0077e4de709f"
+        },
+        {
+          "info": {
+            "name": "Get Mend library suggestions for source files at application level",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v3.0/applications/:applicationUuid/dependencies/sourceFiles/matchSuggestions",
+            "params": [
+              {
+                "name": "applicationUuid",
+                "value": "",
+                "type": "path",
+                "description": "Application UUID (Administration > Applications)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns Mend library suggestions for the specified source file UUIDs. Request body requires: sourceFileUuids (array), recommendedForAllFiles (boolean). Supports same search filters as searchForMatch: date, license, name, owner, version. "
+        },
+        {
+          "info": {
+            "name": "Search for library matches for source files at application level",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v3.0/applications/:applicationUuid/dependencies/sourceFiles/searchForMatch",
+            "params": [
+              {
+                "name": "applicationUuid",
+                "value": "",
+                "type": "path",
+                "description": "Application UUID (Administration > Applications)"
+              }
+            ]
+          },
+          "docs": "Returns library match suggestions from Mend based on manual search criteria. Uses V3 MQL search format. Available search filters: date:between:date1,date2 (e.g., between:2019-05-01,2019-06-01), license:[like|regex]:value, name:[like|equals|regex]:value, owner:like:value, version:like:value. Example: ?search=name==openssl. "
+        },
+        {
+          "info": {
+            "name": "Remap source files at application level",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v3.0/orgs/:orgUuid/applications/dependencies/sourceFiles/remapping",
+            "params": [
+              {
+                "name": "orgUuid",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Remaps the specified source files to a target library for the specified application(s). This operation runs asynchronously and returns 202 Accepted with async process status. Requires exactly one of: targetLibraryUuid OR matchSuggestionId (not both, not neither). Request body fields: applicationUuids (required, array), sourceFileUuids (required, array), targetLibraryUuid (conditional), matchSuggestionId (conditional), comment (optional), sendEmailNotification (optional, boolean)."
+        },
+        {
+          "info": {
+            "name": "Remap source files at organization level",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v3.0/orgs/:orgUuid/dependencies/sourceFiles/remapping",
+            "params": [
+              {
+                "name": "orgUuid",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Remaps the specified source files to a target library across the entire organization. This operation runs asynchronously and returns 202 Accepted with async process status. Requires exactly one of: targetLibraryUuid OR matchSuggestionId (not both, not neither). Request body fields: sourceFileUuids (required, array), targetLibraryUuid (conditional), matchSuggestionId (conditional), comment (optional), sendEmailNotification (optional, boolean)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

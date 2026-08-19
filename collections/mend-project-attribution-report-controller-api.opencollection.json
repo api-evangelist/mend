@@ -1,0 +1,53 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mend Access Management project-attribution-report-controller API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "project-attribution-report-controller",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Update attribution report library settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://baseUrl/api/v2.0/projects/:projectIdentifier/libraries/:libraryUuid/settings/attributionReport",
+            "params": [
+              {
+                "name": "projectIdentifier",
+                "value": "",
+                "type": "path",
+                "description": "project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**)."
+              },
+              {
+                "name": "libraryUuid",
+                "value": "",
+                "type": "path",
+                "description": "library UUID (get a project's library by running Library - Project > Get Project Libraries."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update library settings to be reflected in the attribution report"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

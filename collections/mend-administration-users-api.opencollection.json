@@ -1,0 +1,153 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mend Access Management Administration - Users API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Administration - Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Organization Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v3.0/orgs/:orgUuid/users",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the maximum number of items to be returned in the response."
+              },
+              {
+                "name": "orgUuid",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+              }
+            ]
+          },
+          "docs": "Returns a list of all users in an organization (paginated)"
+        },
+        {
+          "info": {
+            "name": "Invite User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v3.0/orgs/:orgUuid/users/invite",
+            "params": [
+              {
+                "name": "orgUuid",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sends an email invitation to others to join an organization"
+        },
+        {
+          "info": {
+            "name": "Remove User From Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://baseUrl/api/v3.0/orgs/:orgUuid/users/:userUuid",
+            "params": [
+              {
+                "name": "orgUuid",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+              },
+              {
+                "name": "userUuid",
+                "value": "",
+                "type": "path",
+                "description": "User UUID (Administration > Users)"
+              }
+            ]
+          },
+          "docs": "Deletes a user from an organization"
+        },
+        {
+          "info": {
+            "name": "Block User",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://baseUrl/api/v3.0/orgs/:orgUuid/users/:userUuid/block",
+            "params": [
+              {
+                "name": "orgUuid",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+              },
+              {
+                "name": "userUuid",
+                "value": "",
+                "type": "path",
+                "description": "User UUID (Administration > Users)"
+              }
+            ]
+          },
+          "docs": "Blocks a user in the organization"
+        },
+        {
+          "info": {
+            "name": "Unblock User",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://baseUrl/api/v3.0/orgs/:orgUuid/users/:userUuid/unblock",
+            "params": [
+              {
+                "name": "orgUuid",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+              },
+              {
+                "name": "userUuid",
+                "value": "",
+                "type": "path",
+                "description": "User UUID (Administration > Users)"
+              }
+            ]
+          },
+          "docs": "Unblocks a user in the organization"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

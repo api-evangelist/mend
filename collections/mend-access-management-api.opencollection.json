@@ -1,0 +1,117 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mend Access Management API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Access Management",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Login",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v3.0/login",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sign in a user with email and user key, returning a JWT token which is valid for 30 minutes.\nIf you omit the organization, it defaults to the last one you signed in to. "
+        },
+        {
+          "info": {
+            "name": "Refresh Access Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v3.0/login/accessToken",
+            "headers": [
+              {
+                "name": "wss-refresh-token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "orgUuid",
+                "value": "",
+                "type": "query",
+                "description": "org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generates a new access token from a refresh token"
+        },
+        {
+          "info": {
+            "name": "Logout (revokes the refresh token)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v3.0/logout",
+            "headers": [
+              {
+                "name": "wss-refresh-token",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Logout (revokes the refresh token)"
+        },
+        {
+          "info": {
+            "name": "Refresh Access Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v2.0/login/accessToken",
+            "headers": [
+              {
+                "name": "wss-refresh-token",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Generate a new access token using the provided refresh token."
+        },
+        {
+          "info": {
+            "name": "Login",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v2.0/login",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sign in a user with email and user key, returning a JWT token which is valid for 10 minutes.\nIf you omit the organization, it defaults to the last one you signed in to. "
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

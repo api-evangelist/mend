@@ -1,0 +1,1464 @@
+{
+  "item": [
+    {
+      "id": "db667ed4-9db9-41d0-8c76-c94ad8f2866f",
+      "name": "Findings - Scan",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "15a047ae-92e7-4a88-81c8-8c86ef695f8a",
+          "name": "Get a list of project scan findings (Code - SAST)",
+          "request": {
+            "name": "Get a list of project scan findings (Code - SAST)",
+            "description": {
+              "content": "Get a list of findings for a specified project scan UUID.\n</br>\nThis endpoint supports paging using <em>cursor</em> and <em>limit</em> parameters described in <i>Parameters</i> section below.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v3.0",
+                "projects",
+                ":projectUuid",
+                "scans",
+                ":scanUuid",
+                "code",
+                "findings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Specifies the maximum number of items to be returned in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectUuid",
+                  "description": "(Required) UUID of the project"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "scanUuid",
+                  "description": "(Required) UUID of the project scan for which to get findings"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "86003e31-f0eb-4b41-8097-fa61b82c8e8d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3.0",
+                    "projects",
+                    ":projectUuid",
+                    "scans",
+                    ":scanUuid",
+                    "code",
+                    "findings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectUuid",
+                      "description": "(Required) UUID of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scanUuid",
+                      "description": "(Required) UUID of the project scan for which to get findings"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"additionalData\": {\n    \"cursor\": 1,\n    \"next\": \"https://domain.com/api/v3.0/resources?cursor=1\"\n  },\n  \"response\": [\n    {\n      \"ageRating\": 6022.812617673626,\n      \"almIssues\": {\n        \"azure\": {\n          \"project\": \"string\",\n          \"workItemId\": 8456\n        },\n        \"jira\": {\n          \"issueId\": \"string\",\n          \"project\": \"string\"\n        },\n        \"jiraPlatform\": {\n          \"createdBy\": \"string\",\n          \"createdByName\": \"string\",\n          \"createdTime\": \"string\",\n          \"errorMessage\": \"string\",\n          \"internalStatus\": \"string\",\n          \"issueKey\": \"string\",\n          \"issueStatus\": \"string\",\n          \"publicLink\": \"string\"\n        }\n      },\n      \"appId\": \"string\",\n      \"baseline\": false,\n      \"comments\": [\n        {\n          \"body\": \"string\",\n          \"createdBy\": \"string\",\n          \"createdTime\": \"string\"\n        },\n        {\n          \"body\": \"string\",\n          \"createdBy\": \"string\",\n          \"createdTime\": \"string\"\n        }\n      ],\n      \"confidenceRating\": 4694.277549976007,\n      \"correlatedDastFindingUuids\": [\n        \"string\",\n        \"string\"\n      ],\n      \"createdTime\": \"string\",\n      \"dataFlows\": [\n        {\n          \"ageRating\": 7573.960191335816,\n          \"confidenceRating\": 1532.1421907289123,\n          \"createdTime\": \"string\",\n          \"filter\": {\n            \"filterTypes\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"isFiltered\": true\n          },\n          \"functionCalls\": [\n            {\n              \"endLine\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"file\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"kind\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"line\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"snippet\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"startLine\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"endLine\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"file\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"kind\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"line\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"snippet\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"startLine\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"id\": \"string\",\n          \"inputFlow\": [\n            {\n              \"endLine\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"file\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"kind\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"line\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"snippet\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"startLine\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"endLine\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"file\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"kind\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"line\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"snippet\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"startLine\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"inputKind\": \"string\",\n          \"inputSource\": \"string\",\n          \"isNew\": false,\n          \"rating\": 3115.152003933531,\n          \"sink\": \"string\",\n          \"sinkFile\": \"string\",\n          \"sinkKind\": \"string\",\n          \"sinkLine\": 5114,\n          \"sinkSnippet\": \"string\"\n        },\n        {\n          \"ageRating\": 1245.3384377932352,\n          \"confidenceRating\": 828.1563594982899,\n          \"createdTime\": \"string\",\n          \"filter\": {\n            \"filterTypes\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"isFiltered\": true\n          },\n          \"functionCalls\": [\n            {\n              \"endLine\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"file\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"kind\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"line\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"snippet\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"startLine\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"endLine\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"file\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"kind\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"line\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"snippet\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"startLine\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"id\": \"string\",\n          \"inputFlow\": [\n            {\n              \"endLine\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"file\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"kind\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"line\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"snippet\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"startLine\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"endLine\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"file\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"kind\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"line\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"snippet\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"startLine\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"inputKind\": \"string\",\n          \"inputSource\": \"string\",\n          \"isNew\": false,\n          \"rating\": 4037.796316630785,\n          \"sink\": \"string\",\n          \"sinkFile\": \"string\",\n          \"sinkKind\": \"string\",\n          \"sinkLine\": 4379,\n          \"sinkSnippet\": \"string\"\n        }\n      ],\n      \"description\": \"string\",\n      \"hasRemediation\": false,\n      \"id\": \"string\",\n      \"isNew\": false,\n      \"issueStatus\": 4629,\n      \"projectId\": \"string\",\n      \"rating\": 9786.737314466993,\n      \"refId\": \"string\",\n      \"reviewed\": false,\n      \"riskFactors\": {\n        \"endpoints\": [\n          {\n            \"endpoint\": \"string\",\n            \"method\": \"string\"\n          },\n          {\n            \"endpoint\": \"string\",\n            \"method\": \"string\"\n          }\n        ],\n        \"hasEndpoints\": false,\n        \"isExploitable\": false,\n        \"probability\": \"string\"\n      },\n      \"scanId\": \"string\",\n      \"severity\": \"string\",\n      \"severityRating\": 719.8049876618495,\n      \"sharedStep\": {\n        \"endLine\": 9542,\n        \"file\": \"string\",\n        \"kind\": \"string\",\n        \"line\": 6030,\n        \"lineBlame\": {\n          \"commitId\": \"string\",\n          \"file\": \"string\",\n          \"line\": 7949\n        },\n        \"name\": \"string\",\n        \"snippet\": \"string\",\n        \"startLine\": 4640\n      },\n      \"snapshotId\": \"string\",\n      \"suppressed\": true,\n      \"suppressedBy\": \"string\",\n      \"suppressionMessage\": \"string\",\n      \"suppressionRejected\": true,\n      \"suppressionRequestComment\": \"string\",\n      \"suppressionRequested\": false,\n      \"suppressionTime\": \"string\",\n      \"type\": {\n        \"capec\": {\n          \"id\": \"string\",\n          \"title\": \"string\",\n          \"url\": \"string\"\n        },\n        \"commonId\": \"string\",\n        \"cwe\": {\n          \"id\": \"string\",\n          \"title\": \"string\",\n          \"url\": \"string\"\n        },\n        \"description\": \"string\",\n        \"driver\": \"string\",\n        \"engineId\": 8671,\n        \"hipaa\": {\n          \"control\": \"string\",\n          \"title\": \"string\"\n        },\n        \"hitrust\": {\n          \"control\": \"string\",\n          \"title\": \"string\"\n        },\n        \"id\": 5541,\n        \"language\": \"string\",\n        \"name\": \"string\",\n        \"nist\": {\n          \"control\": \"string\",\n          \"priority\": \"string\",\n          \"title\": \"string\",\n          \"url\": \"string\"\n        },\n        \"order\": 865,\n        \"owasp\": {\n          \"index\": \"string\",\n          \"title\": \"string\",\n          \"url\": \"string\"\n        },\n        \"owasp2021\": {\n          \"index\": \"string\",\n          \"title\": \"string\",\n          \"url\": \"string\"\n        },\n        \"pcidss\": {\n          \"section\": \"string\",\n          \"title\": \"string\"\n        },\n        \"recommendations\": [\n          \"string\",\n          \"string\"\n        ],\n        \"references\": [\n          \"string\",\n          \"string\"\n        ],\n        \"sansTop25\": {\n          \"rank\": 4351,\n          \"title\": \"string\"\n        },\n        \"sarif\": \"string\",\n        \"sarifLevel\": \"string\",\n        \"severity\": \"string\",\n        \"severityRating\": 2235.475655665149\n      },\n      \"workflowViolations\": [\n        {\n          \"name\": \"string\",\n          \"uuid\": \"string\"\n        },\n        {\n          \"name\": \"string\",\n          \"uuid\": \"string\"\n        }\n      ],\n      \"workflowViolationsCount\": 9271\n    },\n    {\n      \"ageRating\": 5897.816555671606,\n      \"almIssues\": {\n        \"azure\": {\n          \"project\": \"string\",\n          \"workItemId\": 6642\n        },\n        \"jira\": {\n          \"issueId\": \"string\",\n          \"project\": \"string\"\n        },\n        \"jiraPlatform\": {\n          \"createdBy\": \"string\",\n          \"createdByName\": \"string\",\n          \"createdTime\": \"string\",\n          \"errorMessage\": \"string\",\n          \"internalStatus\": \"string\",\n          \"issueKey\": \"string\",\n          \"issueStatus\": \"string\",\n          \"publicLink\": \"string\"\n        }\n      },\n      \"appId\": \"string\",\n      \"baseline\": true,\n      \"comments\": [\n        {\n          \"body\": \"string\",\n          \"createdBy\": \"string\",\n          \"createdTime\": \"string\"\n        },\n        {\n          \"body\": \"string\",\n          \"createdBy\": \"string\",\n          \"createdTime\": \"string\"\n        }\n      ],\n      \"confidenceRating\": 4710.095723424755,\n      \"correlatedDastFindingUuids\": [\n        \"string\",\n        \"string\"\n      ],\n      \"createdTime\": \"string\",\n      \"dataFlows\": [\n        {\n          \"ageRating\": 8727.463322834401,\n          \"confidenceRating\": 968.6982979678837,\n          \"createdTime\": \"string\",\n          \"filter\": {\n            \"filterTypes\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"isFiltered\": false\n          },\n          \"functionCalls\": [\n            {\n              \"endLine\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"file\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"kind\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"line\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"snippet\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"startLine\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"endLine\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"file\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"kind\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"line\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"snippet\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"startLine\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"id\": \"string\",\n          \"inputFlow\": [\n            {\n              \"endLine\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"file\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"kind\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"line\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"snippet\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"startLine\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"endLine\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"file\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"kind\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"line\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"snippet\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"startLine\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"inputKind\": \"string\",\n          \"inputSource\": \"string\",\n          \"isNew\": false,\n          \"rating\": 8063.742815078668,\n          \"sink\": \"string\",\n          \"sinkFile\": \"string\",\n          \"sinkKind\": \"string\",\n          \"sinkLine\": 5182,\n          \"sinkSnippet\": \"string\"\n        },\n        {\n          \"ageRating\": 7328.7402224927,\n          \"confidenceRating\": 9003.06231553432,\n          \"createdTime\": \"string\",\n          \"filter\": {\n            \"filterTypes\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"isFiltered\": true\n          },\n          \"functionCalls\": [\n            {\n              \"endLine\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"file\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"kind\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"line\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"snippet\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"startLine\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"endLine\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"file\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"kind\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"line\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"snippet\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"startLine\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"id\": \"string\",\n          \"inputFlow\": [\n            {\n              \"endLine\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"file\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"kind\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"line\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"snippet\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"startLine\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"endLine\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"file\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"kind\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"line\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"snippet\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"startLine\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"inputKind\": \"string\",\n          \"inputSource\": \"string\",\n          \"isNew\": false,\n          \"rating\": 6695.866742153524,\n          \"sink\": \"string\",\n          \"sinkFile\": \"string\",\n          \"sinkKind\": \"string\",\n          \"sinkLine\": 8259,\n          \"sinkSnippet\": \"string\"\n        }\n      ],\n      \"description\": \"string\",\n      \"hasRemediation\": true,\n      \"id\": \"string\",\n      \"isNew\": true,\n      \"issueStatus\": 4385,\n      \"projectId\": \"string\",\n      \"rating\": 1370.1951301556192,\n      \"refId\": \"string\",\n      \"reviewed\": true,\n      \"riskFactors\": {\n        \"endpoints\": [\n          {\n            \"endpoint\": \"string\",\n            \"method\": \"string\"\n          },\n          {\n            \"endpoint\": \"string\",\n            \"method\": \"string\"\n          }\n        ],\n        \"hasEndpoints\": false,\n        \"isExploitable\": false,\n        \"probability\": \"string\"\n      },\n      \"scanId\": \"string\",\n      \"severity\": \"string\",\n      \"severityRating\": 7561.973400249066,\n      \"sharedStep\": {\n        \"endLine\": 1114,\n        \"file\": \"string\",\n        \"kind\": \"string\",\n        \"line\": 1461,\n        \"lineBlame\": {\n          \"commitId\": \"string\",\n          \"file\": \"string\",\n          \"line\": 6698\n        },\n        \"name\": \"string\",\n        \"snippet\": \"string\",\n        \"startLine\": 1324\n      },\n      \"snapshotId\": \"string\",\n      \"suppressed\": true,\n      \"suppressedBy\": \"string\",\n      \"suppressionMessage\": \"string\",\n      \"suppressionRejected\": false,\n      \"suppressionRequestComment\": \"string\",\n      \"suppressionRequested\": false,\n      \"suppressionTime\": \"string\",\n      \"type\": {\n        \"capec\": {\n          \"id\": \"string\",\n          \"title\": \"string\",\n          \"url\": \"string\"\n        },\n        \"commonId\": \"string\",\n        \"cwe\": {\n          \"id\": \"string\",\n          \"title\": \"string\",\n          \"url\": \"string\"\n        },\n        \"description\": \"string\",\n        \"driver\": \"string\",\n        \"engineId\": 5187,\n        \"hipaa\": {\n          \"control\": \"string\",\n          \"title\": \"string\"\n        },\n        \"hitrust\": {\n          \"control\": \"string\",\n          \"title\": \"string\"\n        },\n        \"id\": 1542,\n        \"language\": \"string\",\n        \"name\": \"string\",\n        \"nist\": {\n          \"control\": \"string\",\n          \"priority\": \"string\",\n          \"title\": \"string\",\n          \"url\": \"string\"\n        },\n        \"order\": 916,\n        \"owasp\": {\n          \"index\": \"string\",\n          \"title\": \"string\",\n          \"url\": \"string\"\n        },\n        \"owasp2021\": {\n          \"index\": \"string\",\n          \"title\": \"string\",\n          \"url\": \"string\"\n        },\n        \"pcidss\": {\n          \"section\": \"string\",\n          \"title\": \"string\"\n        },\n        \"recommendations\": [\n          \"string\",\n          \"string\"\n        ],\n        \"references\": [\n          \"string\",\n          \"string\"\n        ],\n        \"sansTop25\": {\n          \"rank\": 4189,\n          \"title\": \"string\"\n        },\n        \"sarif\": \"string\",\n        \"sarifLevel\": \"string\",\n        \"severity\": \"string\",\n        \"severityRating\": 3388.6168546725803\n      },\n      \"workflowViolations\": [\n        {\n          \"name\": \"string\",\n          \"uuid\": \"string\"\n        },\n        {\n          \"name\": \"string\",\n          \"uuid\": \"string\"\n        }\n      ],\n      \"workflowViolationsCount\": 4011\n    }\n  ],\n  \"supportToken\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a3c85152-75f4-486a-bc0a-24a7ca307433",
+              "name": "Invalid query definition",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3.0",
+                    "projects",
+                    ":projectUuid",
+                    "scans",
+                    ":scanUuid",
+                    "code",
+                    "findings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectUuid",
+                      "description": "(Required) UUID of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scanUuid",
+                      "description": "(Required) UUID of the project scan for which to get findings"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"additionalData\": {\n    \"message\": \"Something went wrong\",\n    \"result\": \"error\",\n    \"success\": false\n  },\n  \"response\": \"\",\n  \"supportToken\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fbcefd5b-35a0-4878-bdb5-b1b9952b5be1",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3.0",
+                    "projects",
+                    ":projectUuid",
+                    "scans",
+                    ":scanUuid",
+                    "code",
+                    "findings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectUuid",
+                      "description": "(Required) UUID of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scanUuid",
+                      "description": "(Required) UUID of the project scan for which to get findings"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"additionalData\": {\n    \"message\": \"Something went wrong\",\n    \"result\": \"error\",\n    \"success\": false\n  },\n  \"response\": \"\",\n  \"supportToken\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "06d4e2dc-cabe-4641-98b2-a57a5c463ef7",
+              "name": "Error while processing the request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3.0",
+                    "projects",
+                    ":projectUuid",
+                    "scans",
+                    ":scanUuid",
+                    "code",
+                    "findings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectUuid",
+                      "description": "(Required) UUID of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scanUuid",
+                      "description": "(Required) UUID of the project scan for which to get findings"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"additionalData\": {\n    \"message\": \"Something went wrong\",\n    \"result\": \"error\",\n    \"success\": false\n  },\n  \"response\": \"\",\n  \"supportToken\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "635e2dcf-c00b-48de-984b-5c4ae8d46d1f",
+          "name": "Get a project scan finding (Code - SAST)",
+          "request": {
+            "name": "Get a project scan finding (Code - SAST)",
+            "description": {
+              "content": "Get a project finding for a specified project, scan and finding UUID.\n</br>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v3.0",
+                "projects",
+                ":projectUuid",
+                "scans",
+                ":scanUuid",
+                "code",
+                "findings",
+                ":findingUuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectUuid",
+                  "description": "(Required) UUID of the project"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "scanUuid",
+                  "description": "(Required) UUID of the project for which to get findings"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "findingUuid",
+                  "description": "(Required) UUID of the finding"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "96699688-639e-4c55-bc30-d6549f52a53a",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3.0",
+                    "projects",
+                    ":projectUuid",
+                    "scans",
+                    ":scanUuid",
+                    "code",
+                    "findings",
+                    ":findingUuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectUuid",
+                      "description": "(Required) UUID of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scanUuid",
+                      "description": "(Required) UUID of the project for which to get findings"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "findingUuid",
+                      "description": "(Required) UUID of the finding"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"additionalData\": {\n    \"key_0\": 6805.0268894897845,\n    \"key_1\": \"string\",\n    \"key_2\": 9466.60871206128\n  },\n  \"response\": {\n    \"ageRating\": 8497.72519394069,\n    \"almIssues\": {\n      \"azure\": {\n        \"project\": \"string\",\n        \"workItemId\": 6143\n      },\n      \"jira\": {\n        \"issueId\": \"string\",\n        \"project\": \"string\"\n      },\n      \"jiraPlatform\": {\n        \"createdBy\": \"string\",\n        \"createdByName\": \"string\",\n        \"createdTime\": \"string\",\n        \"errorMessage\": \"string\",\n        \"internalStatus\": \"string\",\n        \"issueKey\": \"string\",\n        \"issueStatus\": \"string\",\n        \"publicLink\": \"string\"\n      }\n    },\n    \"appId\": \"string\",\n    \"baseline\": false,\n    \"comments\": [\n      {\n        \"body\": \"string\",\n        \"createdBy\": \"string\",\n        \"createdTime\": \"string\"\n      },\n      {\n        \"body\": \"string\",\n        \"createdBy\": \"string\",\n        \"createdTime\": \"string\"\n      }\n    ],\n    \"confidenceRating\": 1953.6592206542048,\n    \"correlatedDastFindingUuids\": [\n      \"string\",\n      \"string\"\n    ],\n    \"createdTime\": \"string\",\n    \"dataFlows\": [\n      {\n        \"ageRating\": 2405.4382914011817,\n        \"confidenceRating\": 8573.763152857835,\n        \"createdTime\": \"string\",\n        \"filter\": {\n          \"filterTypes\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"isFiltered\": true\n        },\n        \"functionCalls\": [\n          {\n            \"endLine\": 9763,\n            \"file\": \"string\",\n            \"kind\": \"string\",\n            \"line\": 8565,\n            \"name\": \"string\",\n            \"snippet\": \"string\",\n            \"startLine\": 3521\n          },\n          {\n            \"endLine\": 3351,\n            \"file\": \"string\",\n            \"kind\": \"string\",\n            \"line\": 3059,\n            \"name\": \"string\",\n            \"snippet\": \"string\",\n            \"startLine\": 5801\n          }\n        ],\n        \"id\": \"string\",\n        \"inputFlow\": [\n          {\n            \"endLine\": 6666,\n            \"file\": \"string\",\n            \"kind\": \"string\",\n            \"line\": 6411,\n            \"name\": \"string\",\n            \"snippet\": \"string\",\n            \"startLine\": 4709\n          },\n          {\n            \"endLine\": 5414,\n            \"file\": \"string\",\n            \"kind\": \"string\",\n            \"line\": 5903,\n            \"name\": \"string\",\n            \"snippet\": \"string\",\n            \"startLine\": 2645\n          }\n        ],\n        \"inputKind\": \"string\",\n        \"inputSource\": \"string\",\n        \"isNew\": true,\n        \"rating\": 9233.940969006717,\n        \"sink\": \"string\",\n        \"sinkFile\": \"string\",\n        \"sinkKind\": \"string\",\n        \"sinkLine\": 6788,\n        \"sinkSnippet\": \"string\"\n      },\n      {\n        \"ageRating\": 1606.9362405522913,\n        \"confidenceRating\": 4145.232494416782,\n        \"createdTime\": \"string\",\n        \"filter\": {\n          \"filterTypes\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"isFiltered\": true\n        },\n        \"functionCalls\": [\n          {\n            \"endLine\": 1643,\n            \"file\": \"string\",\n            \"kind\": \"string\",\n            \"line\": 303,\n            \"name\": \"string\",\n            \"snippet\": \"string\",\n            \"startLine\": 4315\n          },\n          {\n            \"endLine\": 3158,\n            \"file\": \"string\",\n            \"kind\": \"string\",\n            \"line\": 22,\n            \"name\": \"string\",\n            \"snippet\": \"string\",\n            \"startLine\": 6442\n          }\n        ],\n        \"id\": \"string\",\n        \"inputFlow\": [\n          {\n            \"endLine\": 5571,\n            \"file\": \"string\",\n            \"kind\": \"string\",\n            \"line\": 9425,\n            \"name\": \"string\",\n            \"snippet\": \"string\",\n            \"startLine\": 8808\n          },\n          {\n            \"endLine\": 4314,\n            \"file\": \"string\",\n            \"kind\": \"string\",\n            \"line\": 2154,\n            \"name\": \"string\",\n            \"snippet\": \"string\",\n            \"startLine\": 8489\n          }\n        ],\n        \"inputKind\": \"string\",\n        \"inputSource\": \"string\",\n        \"isNew\": false,\n        \"rating\": 7876.669544599302,\n        \"sink\": \"string\",\n        \"sinkFile\": \"string\",\n        \"sinkKind\": \"string\",\n        \"sinkLine\": 3053,\n        \"sinkSnippet\": \"string\"\n      }\n    ],\n    \"description\": \"string\",\n    \"hasRemediation\": true,\n    \"id\": \"string\",\n    \"isNew\": false,\n    \"issueStatus\": 9137,\n    \"projectId\": \"string\",\n    \"rating\": 4774.284091758481,\n    \"refId\": \"string\",\n    \"reviewed\": false,\n    \"riskFactors\": {\n      \"endpoints\": [\n        {\n          \"endpoint\": \"string\",\n          \"method\": \"string\"\n        },\n        {\n          \"endpoint\": \"string\",\n          \"method\": \"string\"\n        }\n      ],\n      \"hasEndpoints\": true,\n      \"isExploitable\": true,\n      \"probability\": \"string\"\n    },\n    \"scanId\": \"string\",\n    \"severity\": \"string\",\n    \"severityRating\": 4100.622060244942,\n    \"sharedStep\": {\n      \"endLine\": 2218,\n      \"file\": \"string\",\n      \"kind\": \"string\",\n      \"line\": 9533,\n      \"lineBlame\": {\n        \"commitId\": \"string\",\n        \"file\": \"string\",\n        \"line\": 8195\n      },\n      \"name\": \"string\",\n      \"snippet\": \"string\",\n      \"startLine\": 3148\n    },\n    \"snapshotId\": \"string\",\n    \"suppressed\": false,\n    \"suppressedBy\": \"string\",\n    \"suppressionMessage\": \"string\",\n    \"suppressionRejected\": false,\n    \"suppressionRequestComment\": \"string\",\n    \"suppressionRequested\": false,\n    \"suppressionTime\": \"string\",\n    \"type\": {\n      \"capec\": {\n        \"id\": \"string\",\n        \"title\": \"string\",\n        \"url\": \"string\"\n      },\n      \"commonId\": \"string\",\n      \"cwe\": {\n        \"id\": \"string\",\n        \"title\": \"string\",\n        \"url\": \"string\"\n      },\n      \"description\": \"string\",\n      \"driver\": \"string\",\n      \"engineId\": 122,\n      \"hipaa\": {\n        \"control\": \"string\",\n        \"title\": \"string\"\n      },\n      \"hitrust\": {\n        \"control\": \"string\",\n        \"title\": \"string\"\n      },\n      \"id\": 9444,\n      \"language\": \"string\",\n      \"name\": \"string\",\n      \"nist\": {\n        \"control\": \"string\",\n        \"priority\": \"string\",\n        \"title\": \"string\",\n        \"url\": \"string\"\n      },\n      \"order\": 8122,\n      \"owasp\": {\n        \"index\": \"string\",\n        \"title\": \"string\",\n        \"url\": \"string\"\n      },\n      \"owasp2021\": {\n        \"index\": \"string\",\n        \"title\": \"string\",\n        \"url\": \"string\"\n      },\n      \"pcidss\": {\n        \"section\": \"string\",\n        \"title\": \"string\"\n      },\n      \"recommendations\": [\n        \"string\",\n        \"string\"\n      ],\n      \"references\": [\n        \"string\",\n        \"string\"\n      ],\n      \"sansTop25\": {\n        \"rank\": 1798,\n        \"title\": \"string\"\n      },\n      \"sarif\": \"string\",\n      \"sarifLevel\": \"string\",\n      \"severity\": \"string\",\n      \"severityRating\": 2198.3194880615188\n    },\n    \"workflowViolations\": [\n      {\n        \"name\": \"string\",\n        \"uuid\": \"string\"\n      },\n      {\n        \"name\": \"string\",\n        \"uuid\": \"string\"\n      }\n    ],\n    \"workflowViolationsCount\": 7936\n  },\n  \"supportToken\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "18739f41-6098-4ae7-af7f-3443c2009a96",
+              "name": "Invalid query definition",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3.0",
+                    "projects",
+                    ":projectUuid",
+                    "scans",
+                    ":scanUuid",
+                    "code",
+                    "findings",
+                    ":findingUuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectUuid",
+                      "description": "(Required) UUID of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scanUuid",
+                      "description": "(Required) UUID of the project for which to get findings"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "findingUuid",
+                      "description": "(Required) UUID of the finding"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"additionalData\": {\n    \"message\": \"Something went wrong\",\n    \"result\": \"error\",\n    \"success\": false\n  },\n  \"response\": \"\",\n  \"supportToken\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cb420bc1-3228-48d4-ab85-c9a263462cac",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3.0",
+                    "projects",
+                    ":projectUuid",
+                    "scans",
+                    ":scanUuid",
+                    "code",
+                    "findings",
+                    ":findingUuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectUuid",
+                      "description": "(Required) UUID of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scanUuid",
+                      "description": "(Required) UUID of the project for which to get findings"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "findingUuid",
+                      "description": "(Required) UUID of the finding"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"additionalData\": {\n    \"message\": \"Something went wrong\",\n    \"result\": \"error\",\n    \"success\": false\n  },\n  \"response\": \"\",\n  \"supportToken\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0e89e85d-0ee9-43b0-9415-150de3498d38",
+              "name": "Error while processing the request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3.0",
+                    "projects",
+                    ":projectUuid",
+                    "scans",
+                    ":scanUuid",
+                    "code",
+                    "findings",
+                    ":findingUuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectUuid",
+                      "description": "(Required) UUID of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scanUuid",
+                      "description": "(Required) UUID of the project for which to get findings"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "findingUuid",
+                      "description": "(Required) UUID of the finding"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"additionalData\": {\n    \"message\": \"Something went wrong\",\n    \"result\": \"error\",\n    \"success\": false\n  },\n  \"response\": \"\",\n  \"supportToken\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e3aa3c67-6c99-4236-8b11-5ebde2e0ee01",
+          "name": "List image scan secrets findings",
+          "request": {
+            "name": "List image scan secrets findings",
+            "description": {
+              "content": "List the image scan secrets findings",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v3.0",
+                "projects",
+                ":projectuuid",
+                "scans",
+                ":scanuuid",
+                "images",
+                "findings",
+                "secrets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "1000",
+                  "description": "Specifies the maximum number of items to be returned in the response."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectuuid",
+                  "description": "(Required) UUID of the project"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "scanuuid",
+                  "description": "(Required) scan UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2fc7b061-8202-4557-9bef-22ff3ba9671e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3.0",
+                    "projects",
+                    ":projectuuid",
+                    "scans",
+                    ":scanuuid",
+                    "images",
+                    "findings",
+                    "secrets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectuuid",
+                      "description": "(Required) UUID of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scanuuid",
+                      "description": "(Required) scan UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"additionalData\": {\n    \"error\": \"string\",\n    \"paging\": {\n      \"cursor\": 5,\n      \"next\": \"https://api-saas.mend.io/api/v3.0/projects/<project_uuid>>/images/deployments?cursor=6\"\n    },\n    \"totalItems\": 100\n  },\n  \"response\": [\n    {\n      \"category\": \"AWS\",\n      \"createdAt\": \"2020-01-01T00:00:00Z\",\n      \"description\": \"AWS Access Key\",\n      \"endLine\": 35,\n      \"filePath\": \"/home/ubuntu/.aws/credentials\",\n      \"isFromBaseLayer\": 0,\n      \"layerId\": 123456,\n      \"layerNumber\": 1,\n      \"projectName\": \"string\",\n      \"ruleId\": \"123456\",\n      \"severity\": \"HIGH\",\n      \"startLine\": 15,\n      \"updatedAt\": \"2020-01-01T00:00:00Z\",\n      \"uuid\": \"c4f93b6d-8236-4d0c-a67b-3978def476a3\"\n    },\n    {\n      \"category\": \"AWS\",\n      \"createdAt\": \"2020-01-01T00:00:00Z\",\n      \"description\": \"AWS Access Key\",\n      \"endLine\": 35,\n      \"filePath\": \"/home/ubuntu/.aws/credentials\",\n      \"isFromBaseLayer\": 0,\n      \"layerId\": 123456,\n      \"layerNumber\": 1,\n      \"projectName\": \"string\",\n      \"ruleId\": \"123456\",\n      \"severity\": \"HIGH\",\n      \"startLine\": 15,\n      \"updatedAt\": \"2020-01-01T00:00:00Z\",\n      \"uuid\": \"c4f93b6d-8236-4d0c-a67b-3978def476a3\"\n    }\n  ],\n  \"supportToken\": \"659C0A4730\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "71bee23d-acc1-4df4-9685-d014335f385e",
+              "name": "failed loading image secrets findings",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3.0",
+                    "projects",
+                    ":projectuuid",
+                    "scans",
+                    ":scanuuid",
+                    "images",
+                    "findings",
+                    "secrets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectuuid",
+                      "description": "(Required) UUID of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scanuuid",
+                      "description": "(Required) scan UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"additionalData\": {\n    \"error\": \"string\"\n  },\n  \"supportToken\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e2979c13-b52d-4ea8-810a-407d60de78e6",
+          "name": "List image scan security findings",
+          "request": {
+            "name": "List image scan security findings",
+            "description": {
+              "content": "List the image scan security findings",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v3.0",
+                "projects",
+                ":projectuuid",
+                "scans",
+                ":scanuuid",
+                "images",
+                "findings",
+                "security"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "1000",
+                  "description": "Specifies the maximum number of items to be returned in the response."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectuuid",
+                  "description": "(Required) UUID of the project"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "scanuuid",
+                  "description": "(Required) scan UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "bc7907b6-5594-4a54-afc2-7ebb5a8af8f9",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3.0",
+                    "projects",
+                    ":projectuuid",
+                    "scans",
+                    ":scanuuid",
+                    "images",
+                    "findings",
+                    "security"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectuuid",
+                      "description": "(Required) UUID of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scanuuid",
+                      "description": "(Required) scan UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"additionalData\": {\n    \"error\": \"string\",\n    \"paging\": {\n      \"cursor\": 5,\n      \"next\": \"https://api-saas.mend.io/api/v3.0/projects/<project_uuid>>/images/deployments?cursor=6\"\n    },\n    \"totalItems\": 100\n  },\n  \"response\": [\n    {\n      \"createdAt\": \"2019-12-18 16:15:26.963000\",\n      \"cvss\": 6.5,\n      \"cvssDetails\": \"CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H\",\n      \"description\": \"A vulnerability in the foo subsystem of bar could allow an unauthenticated, remote attacker to cause a denial of service (DoS) condition on an affected device.\",\n      \"detectionDate\": \"2019-12-18 16:15:26.963000\",\n      \"epss\": 5.1,\n      \"fixVersion\": \"1.2.4\",\n      \"hasFix\": true,\n      \"imageName\": \"foo:1.2.3\",\n      \"lastModifiedDate\": \"2019-12-18 16:15:26.963000\",\n      \"packageName\": \"foo\",\n      \"packageVersion\": \"1.2.3\",\n      \"projectUUID\": \"edcd08f7-0688-4a30-932b-541256072846\",\n      \"publishedDate\": \"string\",\n      \"reachabilityConfidence\": 5124.2135436653625,\n      \"reachabilityGraph\": \"string\",\n      \"reachabilityStatus\": \"string\",\n      \"severity\": \"HIGH\",\n      \"uuid\": \"edcd08f7-0688-4a30-932b-541256072846\",\n      \"vulnerabilityID\": \"CVE-2019-1234\"\n    },\n    {\n      \"createdAt\": \"2019-12-18 16:15:26.963000\",\n      \"cvss\": 6.5,\n      \"cvssDetails\": \"CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H\",\n      \"description\": \"A vulnerability in the foo subsystem of bar could allow an unauthenticated, remote attacker to cause a denial of service (DoS) condition on an affected device.\",\n      \"detectionDate\": \"2019-12-18 16:15:26.963000\",\n      \"epss\": 5.1,\n      \"fixVersion\": \"1.2.4\",\n      \"hasFix\": true,\n      \"imageName\": \"foo:1.2.3\",\n      \"lastModifiedDate\": \"2019-12-18 16:15:26.963000\",\n      \"packageName\": \"foo\",\n      \"packageVersion\": \"1.2.3\",\n      \"projectUUID\": \"edcd08f7-0688-4a30-932b-541256072846\",\n      \"publishedDate\": \"string\",\n      \"reachabilityConfidence\": 656.6162885371207,\n      \"reachabilityGraph\": \"string\",\n      \"reachabilityStatus\": \"string\",\n      \"severity\": \"HIGH\",\n      \"uuid\": \"edcd08f7-0688-4a30-932b-541256072846\",\n      \"vulnerabilityID\": \"CVE-2019-1234\"\n    }\n  ],\n  \"supportToken\": \"659C0A4730\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "57c4838a-5519-4b45-85b0-22c98dec3dec",
+              "name": "failed loading image security findings",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3.0",
+                    "projects",
+                    ":projectuuid",
+                    "scans",
+                    ":scanuuid",
+                    "images",
+                    "findings",
+                    "security"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectuuid",
+                      "description": "(Required) UUID of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scanuuid",
+                      "description": "(Required) scan UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"additionalData\": {\n    \"error\": \"string\"\n  },\n  \"supportToken\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7c2428b8-ac1e-4417-9244-79d27acb1d27",
+          "name": "List image scan packages",
+          "request": {
+            "name": "List image scan packages",
+            "description": {
+              "content": "List the image scan packages",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v3.0",
+                "projects",
+                ":projectuuid",
+                "scans",
+                ":scanuuid",
+                "images",
+                "packages"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "1000",
+                  "description": "Specifies the maximum number of items to be returned in the response."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectuuid",
+                  "description": "(Required) UUID of the project"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "scanuuid",
+                  "description": "(Required) scan UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "bf5a1cb5-8867-4ffc-aadc-d3180ff50987",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3.0",
+                    "projects",
+                    ":projectuuid",
+                    "scans",
+                    ":scanuuid",
+                    "images",
+                    "packages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectuuid",
+                      "description": "(Required) UUID of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scanuuid",
+                      "description": "(Required) scan UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"additionalData\": {\n    \"error\": \"string\",\n    \"paging\": {\n      \"cursor\": 5,\n      \"next\": \"https://api-saas.mend.io/api/v3.0/projects/<project_uuid>>/images/deployments?cursor=6\"\n    },\n    \"totalItems\": 100\n  },\n  \"response\": [\n    {\n      \"name\": \"string\",\n      \"reachable\": false,\n      \"type\": \"string\",\n      \"version\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"reachable\": true,\n      \"type\": \"string\",\n      \"version\": \"string\"\n    }\n  ],\n  \"supportToken\": \"659C0A4730\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1a56d4ca-1134-4f7d-9241-42b53a9ba577",
+              "name": "failed loading image scan packages",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3.0",
+                    "projects",
+                    ":projectuuid",
+                    "scans",
+                    ":scanuuid",
+                    "images",
+                    "packages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectuuid",
+                      "description": "(Required) UUID of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "scanuuid",
+                      "description": "(Required) scan UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"additionalData\": {\n    \"error\": \"string\"\n  },\n  \"supportToken\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://baseUrl",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "cbbfec25-011e-4b6e-aabc-0c183df61403",
+    "name": "Mend Access Management Findings - Scan API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Mend's enhanced API enables automation of workflows in a REST compliant format. The API features:\n+ Access for any user with Mend credentials, via a user key available in the user's profile page in the Mend Platform.\n+ Improved security with a JWT token per organization, which expires every 10 minutes.\n+ Added scalability with support for cursor pagination and limiting results size.\n+ Broader functionality available programmatically.\n+ New standard API documentation for easy navigation and search.\n\n**Note:** To help you get started with the Mend API 3.0, we recommend reviewing our onboarding guide -> [Getting Started with API 3.0](https://docs.mend.io/platform/latest/getting-started-with-mend-api-3-0).\nThis resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend API 3.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.",
+      "type": "text/plain"
+    }
+  }
+}

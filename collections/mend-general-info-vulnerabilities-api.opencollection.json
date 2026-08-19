@@ -1,0 +1,62 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mend Access Management General Info - Vulnerabilities API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "General Info - Vulnerabilities",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Vulnerability Remediation Proposals",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v2.0/vulnerabilities/:vulnerabilityId/remediation",
+            "params": [
+              {
+                "name": "vulnerabilityId",
+                "value": "",
+                "type": "path",
+                "description": "Vulnerability Name in the form of CVE-xxxx-xxx or WS-xxxx-xxx."
+              }
+            ]
+          },
+          "docs": "Returns the recommended remediation actions to take for a given vulnerability"
+        },
+        {
+          "info": {
+            "name": "Get Vulnerability Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v2.0/vulnerabilities/:vulnerabilityId",
+            "params": [
+              {
+                "name": "vulnerabilityId",
+                "value": "",
+                "type": "path",
+                "description": "Vulnerability Name in the form of CVE-xxxx-xxx or WS-xxxx-xxx."
+              }
+            ]
+          },
+          "docs": "Returns a complete vulnerability profile of a given CVE-ID"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

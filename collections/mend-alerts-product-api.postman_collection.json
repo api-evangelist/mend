@@ -1,0 +1,955 @@
+{
+  "item": [
+    {
+      "id": "ab1d3f14-6e5d-4865-bb35-219dc6044557",
+      "name": "Alerts - Product",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c24e4513-14ea-4d29-846b-646775de9fa3",
+          "name": "Get Security Alerts By Library",
+          "request": {
+            "name": "Get Security Alerts By Library",
+            "description": {
+              "content": "Returns security alerts for a given product grouped by library",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2.0",
+                "products",
+                ":productToken",
+                "alerts",
+                "security",
+                "groupBy",
+                "component"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "50",
+                  "description": "Enter the number of items to return in each page of the result."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "0",
+                  "description": "Enter the page number to display in the result. Page numbers start at 0"
+                },
+                {
+                  "description": {
+                    "content": "Filter your search to return items whose property has a specific value.\nUse the syntax: **property:operation:value** where a colon (:) separates between property, operation and value.\n+ Property: the name of the property of the item\n+ Operation:\n    + **between** - true if the value is inside a range. Syntax: lowest value comma (,) highest value. E.g. between:2019-05-01,2019-06-01\n    + **equals** - true if the value is identical to this value.\n    + **gt** - true if the value is greater than this value.\n    + **in** - true if the value is identical to one of the items in this comma-separated list. E.g. in:value1,value2,value3\n    + **like** - true if the property's value is contained within this value\n    + **regex** - true if this regular expression resolves as true.\n        The regex is not case sensitive, and special characters must be escaped with a backslash.\n        Special characters can be space, double quote (\"), '<', '>', '#', '%', '{', '}', vertical bar ('|'), backslash, '^'.\n        To pass an escaped character in a URL in Postman, encode it first.\n        E.g. to return all items whose value begins with **a** or **A**, use regex:^a\n+ Value: the value of the property.\n\nTo combine multiple filters, separate each filter with a semicolon with no space. E.g.  property1:operation1:value1;property2:operation2:value2\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ comment:[like | equals | regex]:value\n+ commentBy:[like | equals | regex]:value\n+ componentName:[like | equals | regex]:value\n+ criticalNum:gt:value\n+ detectedAt:between:date1,date2. E.g. between:2019-05-01,2019-06-01\n+ directDependency:equals:value\n+ effective:[like | in | equals | regex]:value\n+ hasFix:equals:value\n+ highNum:gt:value\n+ lastCveUpdatedAt:between:date1,date2. E.g. between:2019-05-01,2019-06-01\n+ lowNum:gt:value\n+ mediumNum:gt:value\n+ modifiedAt:between:date1,date2. E.g. between:2019-05-01,2019-06-01\n+ projectName:[like | equals | regex]:value\n+ publishedAt:between:date1,date2. E.g. between:2019-05-01,2019-06-01\n+ score:between:lowvalue,highvalue\n+ scoreType:[like | equals | regex]:value\n+ severity:[like | equals | regex]:value\n+ sourceFileName:[like | equals | regex]:value\n+ status:[in | equals]:value\n+ vulnerabilityName:[like | equals | regex]:value\n+ vulnerabilityType:[equals | in]:value",
+                    "type": "text/plain"
+                  },
+                  "key": "search",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Sort search results alphabetically on an item's property by entering **sort=** followed by the property name.\nE.g. enter **sort=email** to sort alphabetically by their email addresses from a-z ascending.To sort in descending order (z-a), add a minus sign ('-'). E.g. **sort=-email**.\n\nYou can sort by the following properties:\n+ comment\n+ commentUserName\n+ componentName\n+ detectedAt\n+ directDependency\n+ effective\n+ highNum\n+ lastCveUpdatedAt\n+ lowNum\n+ mediumNum\n+ modifiedAt\n+ projectName\n+ publishedAt\n+ score\n+ scoreType\n+ severity\n+ status\n+ vulnerabilityName\n+ vulnerabilityType\n+ weight",
+                    "type": "text/plain"
+                  },
+                  "key": "sort",
+                  "value": ""
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "productToken",
+                  "description": "(Required) product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a6647586-03eb-46a8-851a-8ed5ef88c9ec",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "products",
+                    ":productToken",
+                    "alerts",
+                    "security",
+                    "groupBy",
+                    "component"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "search",
+                      "value": ""
+                    },
+                    {
+                      "key": "sort",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "productToken",
+                      "description": "(Required) product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"additionalData\": {\n    \"totalItems\": \"422\",\n    \"isLastPage\": \"true\"\n  },\n  \"supportToken\": \"1171c60d\",\n  \"retVal\": [\n    {\n      \"uuid\": \"string\",\n      \"name\": \"string\",\n      \"component\": {\n        \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n        \"name\": \"dbus-1.10.24-13.el7_6.x86_64.rpm\",\n        \"description\": \"Component description\",\n        \"componentType\": \"Library\",\n        \"type\": \"string\",\n        \"libraryType\": \"REDHAT_PACKAGE_MODULE\",\n        \"directDependency\": false,\n        \"dependencyType\": \"Direct / Transitive\",\n        \"references\": {\n          \"url\": \"https://www.gnupg.org/related_software/pinentry/98\",\n          \"homePage\": \"https://www.gnupg.org/related_software/pinentry/89\",\n          \"downloadLink\": \"https://www.gnupg.org/related_software/pinentry/09\",\n          \"issueUrl\": \"https://www.gnupg.org/related_software/pinentry/87\",\n          \"pomUrl\": \"https://www.gnupg.org/related_software/pinentry/76\",\n          \"scmUrl\": \"https://www.gnupg.org/related_software/pinentry/65\",\n          \"genericPackageIndex\": \"5\",\n          \"nugetGallery\": \"string\",\n          \"tags\": \"Important\",\n          \"copyright\": \"Copyright 2002-2015 g10 Code GmbH\",\n          \"hasNotice\": false\n        },\n        \"groupId\": \"org.springframework.boot\",\n        \"artifactId\": \"spring-boot\",\n        \"version\": \"3.0.5\",\n        \"dependencyFile\": \"string\",\n        \"localPath\": \"string\"\n      },\n      \"libraryType\": \"BINARY, SOURCE\",\n      \"severity\": \"string\",\n      \"criticalNum\": 22,\n      \"highNum\": 22,\n      \"mediumNum\": 22,\n      \"lowNum\": 22,\n      \"total\": 22,\n      \"ignoreNum\": 22,\n      \"effective\": \"YELLOW\",\n      \"detectedAt\": \"1948-08-27T17:25:27.274Z\",\n      \"modifiedAt\": \"1979-02-02T23:01:47.139Z\",\n      \"publishedAt\": \"2024-01-13T07:42:05.572Z\",\n      \"lastCveUpdatedAt\": \"1947-10-05T04:09:50.891Z\",\n      \"subRowsIds\": [\n        \"cev-2020-234\",\n        \"cev-2020-234\"\n      ],\n      \"project\": {\n        \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n        \"name\": \"My Project\",\n        \"path\": \"My Product\",\n        \"productName\": \"My Product\",\n        \"productUuid\": \"123e4567-e89b-12d3-a456-426655440000\"\n      },\n      \"product\": {\n        \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n        \"name\": \"Product A\"\n      },\n      \"status\": \"LIBRARY_IN_HOUSE\",\n      \"comment\": \"no time to fix\",\n      \"directName\": \"string\",\n      \"lastScan\": \"1988-11-16T09:48:47.723Z\",\n      \"transitiveDependency\": true,\n      \"exploitCodeMaturity\": [\n        \"UNPROVEN\",\n        \"NOT_DEFINED\"\n      ],\n      \"exploitable\": true,\n      \"numOfReachable\": 22,\n      \"numOfPotentiallyReachable\": 3494,\n      \"numOfUnreachable\": 3317,\n      \"reachability\": \"GREY\",\n      \"numOfMalicious\": 22,\n      \"malicious\": true,\n      \"violations\": 22,\n      \"workflowUuids\": [\n        \"2\",\n        \"2\"\n      ],\n      \"violatingFindings\": 2\n    },\n    {\n      \"uuid\": \"string\",\n      \"name\": \"string\",\n      \"component\": {\n        \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n        \"name\": \"dbus-1.10.24-13.el7_6.x86_64.rpm\",\n        \"description\": \"Component description\",\n        \"componentType\": \"Library\",\n        \"type\": \"string\",\n        \"libraryType\": \"REDHAT_PACKAGE_MODULE\",\n        \"directDependency\": false,\n        \"dependencyType\": \"Direct / Transitive\",\n        \"references\": {\n          \"url\": \"https://www.gnupg.org/related_software/pinentry/98\",\n          \"homePage\": \"https://www.gnupg.org/related_software/pinentry/89\",\n          \"downloadLink\": \"https://www.gnupg.org/related_software/pinentry/09\",\n          \"issueUrl\": \"https://www.gnupg.org/related_software/pinentry/87\",\n          \"pomUrl\": \"https://www.gnupg.org/related_software/pinentry/76\",\n          \"scmUrl\": \"https://www.gnupg.org/related_software/pinentry/65\",\n          \"genericPackageIndex\": \"5\",\n          \"nugetGallery\": \"string\",\n          \"tags\": \"Important\",\n          \"copyright\": \"Copyright 2002-2015 g10 Code GmbH\",\n          \"hasNotice\": false\n        },\n        \"groupId\": \"org.springframework.boot\",\n        \"artifactId\": \"spring-boot\",\n        \"version\": \"3.0.5\",\n        \"dependencyFile\": \"string\",\n        \"localPath\": \"string\"\n      },\n      \"libraryType\": \"BINARY, SOURCE\",\n      \"severity\": \"string\",\n      \"criticalNum\": 22,\n      \"highNum\": 22,\n      \"mediumNum\": 22,\n      \"lowNum\": 22,\n      \"total\": 22,\n      \"ignoreNum\": 22,\n      \"effective\": \"NO_SHIELD\",\n      \"detectedAt\": \"1976-09-13T01:38:49.701Z\",\n      \"modifiedAt\": \"2016-12-09T13:33:46.170Z\",\n      \"publishedAt\": \"1973-06-27T04:08:34.954Z\",\n      \"lastCveUpdatedAt\": \"2004-03-28T04:07:46.502Z\",\n      \"subRowsIds\": [\n        \"cev-2020-234\",\n        \"cev-2020-234\"\n      ],\n      \"project\": {\n        \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n        \"name\": \"My Project\",\n        \"path\": \"My Product\",\n        \"productName\": \"My Product\",\n        \"productUuid\": \"123e4567-e89b-12d3-a456-426655440000\"\n      },\n      \"product\": {\n        \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n        \"name\": \"Product A\"\n      },\n      \"status\": \"ACTIVE\",\n      \"comment\": \"no time to fix\",\n      \"directName\": \"string\",\n      \"lastScan\": \"1978-02-05T21:06:39.330Z\",\n      \"transitiveDependency\": true,\n      \"exploitCodeMaturity\": [\n        \"FUNCTIONAL\",\n        \"NOT_DEFINED\"\n      ],\n      \"exploitable\": true,\n      \"numOfReachable\": 22,\n      \"numOfPotentiallyReachable\": 420,\n      \"numOfUnreachable\": 3875,\n      \"reachability\": \"RED\",\n      \"numOfMalicious\": 22,\n      \"malicious\": true,\n      \"violations\": 22,\n      \"workflowUuids\": [\n        \"2\",\n        \"2\"\n      ],\n      \"violatingFindings\": 2\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f11c0f63-bb2f-4e57-a4bd-3d86d5933eaf",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "products",
+                    ":productToken",
+                    "alerts",
+                    "security",
+                    "groupBy",
+                    "component"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "search",
+                      "value": ""
+                    },
+                    {
+                      "key": "sort",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "productToken",
+                      "description": "(Required) product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "01b1762e-d36c-4291-8e29-2124be4edd89",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "products",
+                    ":productToken",
+                    "alerts",
+                    "security",
+                    "groupBy",
+                    "component"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "search",
+                      "value": ""
+                    },
+                    {
+                      "key": "sort",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "productToken",
+                      "description": "(Required) product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "366d85f0-bad0-4c84-a486-6dd18d26c82d",
+          "name": "Get Product Security Alerts",
+          "request": {
+            "name": "Get Product Security Alerts",
+            "description": {
+              "content": "Returns all security alerts for a given product",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2.0",
+                "products",
+                ":productToken",
+                "alerts",
+                "security"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "50",
+                  "description": "Enter the number of items to return in each page of the result."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "0",
+                  "description": "Enter the page number to display in the result. Page numbers start at 0"
+                },
+                {
+                  "description": {
+                    "content": "Filter your search to return items whose property has a specific value.\nUse the syntax: **property:operation:value** where a colon (:) separates between property, operation and value.\n+ Property: the name of the property of the item\n+ Operation:\n    + **between** - true if the value is inside a range. Syntax: lowest value comma (,) highest value. E.g. between:2019-05-01,2019-06-01\n    + **equals** - true if the value is identical to this value.\n    + **gt** - true if the value is greater than this value.\n    + **in** - true if the value is identical to one of the items in this comma-separated list. E.g. in:value1,value2,value3\n    + **like** - true if the property's value is contained within this value\n    + **regex** - true if this regular expression resolves as true.\n        The regex is not case sensitive, and special characters must be escaped with a backslash.\n        Special characters include space, double quote (\"), '<', '>', '#', '%', '{', '}', vertical bar ('|'), backslash, '^'.\n        To pass an escaped character in a URL in Postman, encode it first.\n        E.g. to return all items whose value begins with **a** or **A**, use regex:^a\n+ Value: the value of the property.\n\nTo combine multiple filters, separate each filter with a semicolon with no space. E.g.  property1:operation1:value1;property2:operation2:value2\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ comment:[like | equals | regex]:value\n+ commentUserEmail:[like | equals | regex]:value\n+ componentName:[like | equals | regex]:value\n+ detectedAt:between:date1,date2. E.g. between:2019-05-01,2019-06-01\n+ directDependency:equals:value\n+ effective:[like | equals | regex | in]:value\n+ hasFix:equals:value\n+ lastCveUpdatedAt:between:date1,date2. E.g. between:2019-05-01,2019-06-01\n+ modifiedAt:between:date1,date2. E.g. between:2019-05-01,2019-06-01\n+ projectName:[like | equals | regex]:value\n+ score:between:lowvalue,highvalue\n+ scoreType:[like | equals | regex]:value\n+ severity:[like | equals | regex]:value\n+ sourceFileName:[like | equals | regex]:value\n+ status:[in | equals]:value\n+ vulnerabilityName:[like | equals | regex]:value\n+ vulnerabilityType:[equals | in]:value\n+ libraryType:[equals | in | like | regex]:value",
+                    "type": "text/plain"
+                  },
+                  "key": "search",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Sort search results alphabetically on an item's property by entering **sort=** followed by the property name.\nE.g. enter **sort=email** to sort alphabetically by their email addresses from a-z ascending.To sort in descending order (z-a), add a minus sign ('-'). E.g. **sort=-email**.\n\nYou can sort by the following properties:\n+ comment\n+ commentUserEmail\n+ componentName\n+ detectedAt\n+ directDependency\n+ effective\n+ hasFix\n+ lastCveUpdatedAt\n+ modifiedAt\n+ projectName\n+ score\n+ scoreType\n+ severity\n+ sourceFileName\n+ status\n+ vulnerabilityName\n+ vulnerabilityType\n+ libraryType",
+                    "type": "text/plain"
+                  },
+                  "key": "sort",
+                  "value": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "optionalColumns",
+                  "value": "<string>",
+                  "description": "Used to add alert integration and library location information"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "productToken",
+                  "description": "(Required) product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "76bd0a14-f1bc-435d-b730-10c7b9a5554d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "products",
+                    ":productToken",
+                    "alerts",
+                    "security"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "search",
+                      "value": ""
+                    },
+                    {
+                      "key": "sort",
+                      "value": ""
+                    },
+                    {
+                      "key": "optionalColumns",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "productToken",
+                      "description": "(Required) product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"additionalData\": {\n    \"totalItems\": \"422\",\n    \"isLastPage\": \"true\"\n  },\n  \"supportToken\": \"1171c60d\",\n  \"retVal\": [\n    {\n      \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n      \"name\": \"CVE-2021-42392\",\n      \"type\": \"SECURITY_VULNERABILITY\",\n      \"alertInfo\": {\n        \"status\": \"LIBRARY_WHITELIST\",\n        \"comment\": {\n          \"comment\": \"a comment\",\n          \"date\": \"1963-09-23T22:24:53.988Z\",\n          \"userEmail\": \"jon.smith@mail.com\",\n          \"username\": \"jon\"\n        },\n        \"detectedAt\": \"1992-11-28T17:32:08.079Z\",\n        \"modifiedAt\": \"1952-01-07T23:47:30.715Z\"\n      },\n      \"project\": {\n        \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n        \"name\": \"My Project\",\n        \"path\": \"My Product\",\n        \"productName\": \"My Product\",\n        \"productUuid\": \"123e4567-e89b-12d3-a456-426655440000\"\n      },\n      \"product\": {\n        \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n        \"name\": \"Product A\"\n      },\n      \"component\": {\n        \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n        \"name\": \"dbus-1.10.24-13.el7_6.x86_64.rpm\",\n        \"description\": \"Component description\",\n        \"componentType\": \"Library\",\n        \"type\": \"string\",\n        \"libraryType\": \"REDHAT_PACKAGE_MODULE\",\n        \"directDependency\": false,\n        \"dependencyType\": \"Direct / Transitive\",\n        \"references\": {\n          \"url\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"homePage\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"downloadLink\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"issueUrl\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"pomUrl\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"scmUrl\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"genericPackageIndex\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nugetGallery\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"tags\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"copyright\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"hasNotice\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"groupId\": \"org.springframework.boot\",\n        \"artifactId\": \"spring-boot\",\n        \"version\": \"3.0.5\",\n        \"dependencyFile\": \"string\",\n        \"localPath\": \"string\",\n        \"libraryLocations\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      },\n      \"vulnerability\": {\n        \"name\": \"CVE-2021-42392\",\n        \"type\": \"WS\",\n        \"description\": \"Security vulnerability found in plexus-utils before 3.0.24. XML injection found in XmlWriterUtil.java\",\n        \"score\": 5,\n        \"severity\": \"MEDIUM\",\n        \"publishDate\": \"1950-08-18T22:25:04.732Z\",\n        \"modifiedDate\": \"1970-12-30T02:20:55.120Z\",\n        \"vulnerabilityScoring\": [\n          {\n            \"score\": 5,\n            \"severity\": \"MEDIUM\",\n            \"type\": \"CVSS_2\",\n            \"scoreMetadataVector\": \"CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H\",\n            \"extraData\": {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_2\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          },\n          {\n            \"score\": 5,\n            \"severity\": \"MEDIUM\",\n            \"type\": \"CVSS_2\",\n            \"scoreMetadataVector\": \"CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H\",\n            \"extraData\": {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_2\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_3\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          }\n        ],\n        \"references\": [\n          {\n            \"value\": \"https://github.com/codehaus-plexus/plexus-utils/commit/f933e5e78dc2637e485447ed821fe14904f110de\",\n            \"source\": \"CERT\",\n            \"url\": \"https://github.com/codehaus-plexus/plexus-utils/commit/f933e5e78dc2637e485447ed821fe14904f110de\",\n            \"signature\": false,\n            \"advisory\": true,\n            \"patch\": true\n          },\n          {\n            \"value\": \"https://github.com/codehaus-plexus/plexus-utils/commit/f933e5e78dc2637e485447ed821fe14904f110de\",\n            \"source\": \"CERT\",\n            \"url\": \"https://github.com/codehaus-plexus/plexus-utils/commit/f933e5e78dc2637e485447ed821fe14904f110de\",\n            \"signature\": true,\n            \"advisory\": false,\n            \"patch\": false\n          }\n        ],\n        \"effectiveInfo\": {\n          \"referenceCount\": 8391,\n          \"shieldValue\": 4204\n        },\n        \"threatAssessment\": {\n          \"exploitCodeMaturity\": \"HIGH\",\n          \"epssPercentage\": 0.8\n        }\n      },\n      \"topFix\": {\n        \"id\": 49422,\n        \"vulnerability\": \"CVE-2021-42392\",\n        \"type\": \"UPGRADE_VERSION\",\n        \"origin\": \"WHITESOURCE_EXPERT\",\n        \"url\": \"https://github.com/codehaus-plexus/plexus-utils/commit/f933e5e78dc2637e485447ed821fe14904f110de\",\n        \"fixResolution\": \"3.0.24\",\n        \"date\": \"1965-06-30T06:01:44.002Z\",\n        \"message\": \"Upgrade to version\",\n        \"extraData\": \"string\",\n        \"minimalFixVersionFromExtraData\": \"string\",\n        \"minimalAffectedVersionFromExtraData\": \"string\"\n      },\n      \"effective\": \"RED\",\n      \"alertIntegration\": {\n        \"status\": \"SUCCESS\",\n        \"issues\": [\n          {\n            \"issueStatus\": \"Open\",\n            \"url\": \"www.jira.com/projectA-22\",\n            \"issueTrackerType\": \"Jira-cloud\",\n            \"issueIdentifier\": \"projectA-22\"\n          },\n          {\n            \"issueStatus\": \"Open\",\n            \"url\": \"www.jira.com/projectA-22\",\n            \"issueTrackerType\": \"Jira-cloud\",\n            \"issueIdentifier\": \"projectA-22\"\n          }\n        ]\n      },\n      \"threatAssessment\": {\n        \"exploitCodeMaturity\": \"HIGH\",\n        \"epssPercentage\": 0.8\n      },\n      \"exploitable\": true,\n      \"scoreMetadataVector\": \"string\",\n      \"malicious\": true,\n      \"violations\": 22,\n      \"workflowUuids\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n      \"name\": \"CVE-2021-42392\",\n      \"type\": \"SECURITY_VULNERABILITY\",\n      \"alertInfo\": {\n        \"status\": \"ACTIVE\",\n        \"comment\": {\n          \"comment\": \"a comment\",\n          \"date\": \"2006-05-01T06:32:18.725Z\",\n          \"userEmail\": \"jon.smith@mail.com\",\n          \"username\": \"jon\"\n        },\n        \"detectedAt\": \"2018-12-14T20:41:34.391Z\",\n        \"modifiedAt\": \"1984-04-21T12:33:00.118Z\"\n      },\n      \"project\": {\n        \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n        \"name\": \"My Project\",\n        \"path\": \"My Product\",\n        \"productName\": \"My Product\",\n        \"productUuid\": \"123e4567-e89b-12d3-a456-426655440000\"\n      },\n      \"product\": {\n        \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n        \"name\": \"Product A\"\n      },\n      \"component\": {\n        \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n        \"name\": \"dbus-1.10.24-13.el7_6.x86_64.rpm\",\n        \"description\": \"Component description\",\n        \"componentType\": \"Library\",\n        \"type\": \"string\",\n        \"libraryType\": \"REDHAT_PACKAGE_MODULE\",\n        \"directDependency\": false,\n        \"dependencyType\": \"Direct / Transitive\",\n        \"references\": {\n          \"url\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"homePage\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"downloadLink\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"issueUrl\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"pomUrl\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"scmUrl\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"genericPackageIndex\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nugetGallery\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"tags\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"copyright\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"hasNotice\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"groupId\": \"org.springframework.boot\",\n        \"artifactId\": \"spring-boot\",\n        \"version\": \"3.0.5\",\n        \"dependencyFile\": \"string\",\n        \"localPath\": \"string\",\n        \"libraryLocations\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      },\n      \"vulnerability\": {\n        \"name\": \"CVE-2021-42392\",\n        \"type\": \"WS\",\n        \"description\": \"Security vulnerability found in plexus-utils before 3.0.24. XML injection found in XmlWriterUtil.java\",\n        \"score\": 5,\n        \"severity\": \"MEDIUM\",\n        \"publishDate\": \"1974-09-27T06:34:58.657Z\",\n        \"modifiedDate\": \"1973-10-15T18:25:46.459Z\",\n        \"vulnerabilityScoring\": [\n          {\n            \"score\": 5,\n            \"severity\": \"MEDIUM\",\n            \"type\": \"CVSS_2\",\n            \"scoreMetadataVector\": \"CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H\",\n            \"extraData\": {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          },\n          {\n            \"score\": 5,\n            \"severity\": \"MEDIUM\",\n            \"type\": \"CVSS_2\",\n            \"scoreMetadataVector\": \"CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H\",\n            \"extraData\": {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_2\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          }\n        ],\n        \"references\": [\n          {\n            \"value\": \"https://github.com/codehaus-plexus/plexus-utils/commit/f933e5e78dc2637e485447ed821fe14904f110de\",\n            \"source\": \"CERT\",\n            \"url\": \"https://github.com/codehaus-plexus/plexus-utils/commit/f933e5e78dc2637e485447ed821fe14904f110de\",\n            \"signature\": false,\n            \"advisory\": false,\n            \"patch\": false\n          },\n          {\n            \"value\": \"https://github.com/codehaus-plexus/plexus-utils/commit/f933e5e78dc2637e485447ed821fe14904f110de\",\n            \"source\": \"CERT\",\n            \"url\": \"https://github.com/codehaus-plexus/plexus-utils/commit/f933e5e78dc2637e485447ed821fe14904f110de\",\n            \"signature\": true,\n            \"advisory\": true,\n            \"patch\": true\n          }\n        ],\n        \"effectiveInfo\": {\n          \"referenceCount\": 1355,\n          \"shieldValue\": 9223\n        },\n        \"threatAssessment\": {\n          \"exploitCodeMaturity\": \"HIGH\",\n          \"epssPercentage\": 0.8\n        }\n      },\n      \"topFix\": {\n        \"id\": 49422,\n        \"vulnerability\": \"CVE-2021-42392\",\n        \"type\": \"UPGRADE_VERSION\",\n        \"origin\": \"WHITESOURCE_EXPERT\",\n        \"url\": \"https://github.com/codehaus-plexus/plexus-utils/commit/f933e5e78dc2637e485447ed821fe14904f110de\",\n        \"fixResolution\": \"3.0.24\",\n        \"date\": \"1960-02-03T20:53:57.407Z\",\n        \"message\": \"Upgrade to version\",\n        \"extraData\": \"string\",\n        \"minimalFixVersionFromExtraData\": \"string\",\n        \"minimalAffectedVersionFromExtraData\": \"string\"\n      },\n      \"effective\": \"GREY\",\n      \"alertIntegration\": {\n        \"status\": \"SUCCESS\",\n        \"issues\": [\n          {\n            \"issueStatus\": \"Open\",\n            \"url\": \"www.jira.com/projectA-22\",\n            \"issueTrackerType\": \"Jira-cloud\",\n            \"issueIdentifier\": \"projectA-22\"\n          },\n          {\n            \"issueStatus\": \"Open\",\n            \"url\": \"www.jira.com/projectA-22\",\n            \"issueTrackerType\": \"Jira-cloud\",\n            \"issueIdentifier\": \"projectA-22\"\n          }\n        ]\n      },\n      \"threatAssessment\": {\n        \"exploitCodeMaturity\": \"HIGH\",\n        \"epssPercentage\": 0.8\n      },\n      \"exploitable\": true,\n      \"scoreMetadataVector\": \"string\",\n      \"malicious\": true,\n      \"violations\": 22,\n      \"workflowUuids\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "89d9719a-d8a7-4641-9d34-c7706353289b",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "products",
+                    ":productToken",
+                    "alerts",
+                    "security"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "search",
+                      "value": ""
+                    },
+                    {
+                      "key": "sort",
+                      "value": ""
+                    },
+                    {
+                      "key": "optionalColumns",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "productToken",
+                      "description": "(Required) product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "09af8bf5-5e1b-4aa4-a35c-424893184b8c",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "products",
+                    ":productToken",
+                    "alerts",
+                    "security"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "search",
+                      "value": ""
+                    },
+                    {
+                      "key": "sort",
+                      "value": ""
+                    },
+                    {
+                      "key": "optionalColumns",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "productToken",
+                      "description": "(Required) product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ca402c18-3534-4072-b47f-3f70a58ecf14",
+          "name": "Get Product Legal And Compliance Alerts",
+          "request": {
+            "name": "Get Product Legal And Compliance Alerts",
+            "description": {
+              "content": "Returns all legal and compliance alerts for a given product",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2.0",
+                "products",
+                ":productToken",
+                "alerts",
+                "legal"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "50",
+                  "description": "Enter the number of items to return in each page of the result."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "0",
+                  "description": "Enter the page number to display in the result. Page numbers start at 0"
+                },
+                {
+                  "description": {
+                    "content": "Filter your search to return items whose property has a specific value.\nUse the syntax: **property:operation:value** where a colon (:) separates between property, operation and value.\n+ Property: the name of the property of the item\n+ Operation:\n    + **between** - true if the value is inside a range. Syntax: lowest value comma (,) highest value. E.g. between:2019-05-01,2019-06-01\n    + **equals** - true if the value is identical to this value.\n    + **gt** - true if the value is greater than this value.\n    + **in** - true if the value is identical to one of the items in this comma-separated list. E.g. in:value1,value2,value3\n    + **like** - true if the property's value is contained within this value\n    + **regex** - true if this regular expression resolves as true.\n        The regex is not case sensitive, and special characters must be escaped with a backslash.\n        Special characters include space, double quote (\"), '<', '>', '#', '%', '{', '}', vertical bar ('|'), backslash, '^'.\n        To pass an escaped character in a URL in Postman, encode it first.\n        E.g. to return all items whose value begins with **a** or **A**, use regex:^a\n+ Value: the value of the property.\n\nTo combine multiple filters, separate each filter with a semicolon with no space. E.g.  property1:operation1:value1;property2:operation2:value2\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ availableVersion:equals:value\n+ availableVersionType:[equals | in]:value\n+ comment:[like | equals | regex]:value\n+ commentUserEmail:[like | equals | regex]:value\n+ componentName:[like | equals | regex]:value\n+ componentType:[equals | in]:value\n+ detectedAt:between:date1,date2. E.g. between:2019-05-01,2019-06-01\n+ license:[like | regex ]:value\n+ modifiedAt:between:date1,date2. E.g. between:2019-05-01,2019-06-01\n+ numberOfLicenses:[gt | equals]:value\n+ policyName:[like | equals | regex]:value\n+ projectName:[like | equals | regex]:value\n+ status:[in | equals]:value\n+ type:[equals | in]:value",
+                    "type": "text/plain"
+                  },
+                  "key": "search",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Sort search results alphabetically on an item's property by entering **sort=** followed by the property name.\nE.g. enter **sort=email** to sort alphabetically by their email addresses from a-z ascending.To sort in descending order (z-a), add a minus sign ('-'). E.g. **sort=-email**.\n\nYou can sort by the following properties:\n+ availableVersionType\n+ comment\n+ componentName\n+ componentType\n+ detectedAt\n+ modifiedAt\n+ numberOfLicenses\n+ policyName\n+ status\n+ type\n+ versionType",
+                    "type": "text/plain"
+                  },
+                  "key": "sort",
+                  "value": ""
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "productToken",
+                  "description": "(Required) product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f6757a74-8802-4841-a38a-9434c2b22bc0",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "products",
+                    ":productToken",
+                    "alerts",
+                    "legal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "search",
+                      "value": ""
+                    },
+                    {
+                      "key": "sort",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "productToken",
+                      "description": "(Required) product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"additionalData\": {\n    \"totalItems\": \"422\",\n    \"isLastPage\": \"true\"\n  },\n  \"supportToken\": \"1171c60d\",\n  \"retVal\": [\n    {\n      \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n      \"name\": \"CVE-2021-42392\",\n      \"type\": \"POLICY_VIOLATIONS\",\n      \"alertInfo\": {\n        \"status\": \"LIBRARY_REMOVED\",\n        \"comment\": {\n          \"comment\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"date\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"userEmail\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"username\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"detectedAt\": \"1989-02-05T20:56:13.229Z\",\n        \"modifiedAt\": \"2004-08-05T01:13:45.036Z\"\n      },\n      \"project\": {\n        \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n        \"name\": \"My Project\",\n        \"path\": \"My Product\",\n        \"productName\": \"My Product\",\n        \"productUuid\": \"123e4567-e89b-12d3-a456-426655440000\"\n      },\n      \"product\": {\n        \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n        \"name\": \"Product A\"\n      },\n      \"component\": {\n        \"uuid\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"description\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"componentType\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"libraryType\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"directDependency\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"dependencyType\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"references\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"groupId\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"artifactId\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"version\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"dependencyFile\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"localPath\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"policyName\": \"My Policy\"\n    },\n    {\n      \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n      \"name\": \"CVE-2021-42392\",\n      \"type\": \"POLICY_VIOLATIONS\",\n      \"alertInfo\": {\n        \"status\": \"IGNORED\",\n        \"comment\": {\n          \"comment\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"date\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"userEmail\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"username\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"detectedAt\": \"1987-05-30T19:25:31.692Z\",\n        \"modifiedAt\": \"2007-03-01T04:16:24.642Z\"\n      },\n      \"project\": {\n        \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n        \"name\": \"My Project\",\n        \"path\": \"My Product\",\n        \"productName\": \"My Product\",\n        \"productUuid\": \"123e4567-e89b-12d3-a456-426655440000\"\n      },\n      \"product\": {\n        \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n        \"name\": \"Product A\"\n      },\n      \"component\": {\n        \"uuid\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"description\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"componentType\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"libraryType\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"directDependency\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"dependencyType\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"references\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"groupId\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"artifactId\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"version\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"dependencyFile\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"localPath\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"policyName\": \"My Policy\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "345cd609-93d0-4d13-9125-b68f08759023",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "products",
+                    ":productToken",
+                    "alerts",
+                    "legal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "search",
+                      "value": ""
+                    },
+                    {
+                      "key": "sort",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "productToken",
+                      "description": "(Required) product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fbdcbd58-e3a0-4ff4-845f-71861659d4f8",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "products",
+                    ":productToken",
+                    "alerts",
+                    "legal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "search",
+                      "value": ""
+                    },
+                    {
+                      "key": "sort",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "productToken",
+                      "description": "(Required) product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://baseUrl",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "30e1a7a2-fe6d-4bf4-b95c-c6cb44af53cf",
+    "name": "Mend Access Management Alerts - Product API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Mend's enhanced API enables automation of workflows in a REST compliant format. The API features:\n+ Access for any user with Mend credentials, via a user key available in the user's profile page in the Mend Platform.\n+ Improved security with a JWT token per organization, which expires every 10 minutes.\n+ Added scalability with support for cursor pagination and limiting results size.\n+ Broader functionality available programmatically.\n+ New standard API documentation for easy navigation and search.\n\n**Note:** To help you get started with the Mend API 3.0, we recommend reviewing our onboarding guide -> [Getting Started with API 3.0](https://docs.mend.io/platform/latest/getting-started-with-mend-api-3-0).\nThis resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend API 3.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.",
+      "type": "text/plain"
+    }
+  }
+}

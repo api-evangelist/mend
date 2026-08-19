@@ -1,0 +1,1928 @@
+{
+  "item": [
+    {
+      "id": "e1c18663-0d64-4082-85e0-a6c42599984a",
+      "name": "Library - Product",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1475873f-9e09-4dee-a057-7e7f6697e13b",
+          "name": "Get Product Libraries by project Ids",
+          "request": {
+            "name": "Get Product Libraries by project Ids",
+            "description": {
+              "content": "Returns all libraries that are included in a given projects",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2.0",
+                "products",
+                ":productToken",
+                "libraries",
+                "byProjects"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "50"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "description": {
+                    "content": "Filter your search to return items whose property has a specific value.\nUse the syntax: **property:operation:value** where a colon (:) separates between property, operation and value.\n+ Property: the name of the property of the item\n+ Operation:\n    + **equals** - true if the value is identical to this value.\n    + **in** - true if the value is identical to one of the items in this comma-separated list. E.g. in:value1,value2,value3\n    + **like** - true if the property's value is contained within this value\n    + **regex** - true if this regular expression resolves as true.\n        The regex is not case sensitive, and special characters must be escaped with a backslash.\n        Special characters include space, double quote (\"), '<', '>', '#', '%', '{', '}', vertical bar ('|'), backslash, '^'.\n        To pass an escaped character in a URL in Postman, encode it first.\n        E.g. to return all items whose value begins with **a** or **A**, use regex:^a\n+ Value: the value of the property.\n\nTo combine multiple filters, separate each filter with a semicolon with no space. E.g.  property1:operation1:value1;property2:operation2:value2\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ description:[like | equals | regex]:value\n+ directDependency:[like | equals | regex]:value\n+ hasNotice:[like | equals | regex]:value\n+ license:[like | equals | regex | in]:value\n+ locations:[like | equals | regex]:value\n+ name:[like | equals | regex]:value\n+ numberOfLicenses:[equals | gt]:value\n+ projectName:[like | equals | regex]:value\n+ type:[like | in | equals | regex]:value",
+                    "type": "text/plain"
+                  },
+                  "key": "search",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Sort search results alphabetically on an item's property by entering **sort=** followed by the property name.\nE.g. enter **sort=email** to sort alphabetically by their email addresses from a-z ascending.To sort in descending order (z-a), add a minus sign ('-'). E.g. **sort=-email**.\n\nYou can sort by the following properties:\n+ description\n+ directDependency\n+ hasNotice\n+ license\n+ locations\n+ name\n+ numberOfLicenses\n+ projectName\n+ type",
+                    "type": "text/plain"
+                  },
+                  "key": "sort",
+                  "value": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "optionalColumns",
+                  "value": "<string>",
+                  "description": "Used to add location information about the library"
+                },
+                {
+                  "disabled": false,
+                  "key": "includeNotices",
+                  "value": "false"
+                },
+                {
+                  "disabled": false,
+                  "key": "extraInformation",
+                  "value": "false"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "productToken",
+                  "description": "(Required) product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"projectIdentifiers\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "04ceb5fa-7b1c-49c3-b204-2ffa44f035f1",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "products",
+                    ":productToken",
+                    "libraries",
+                    "byProjects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "search",
+                      "value": ""
+                    },
+                    {
+                      "key": "sort",
+                      "value": ""
+                    },
+                    {
+                      "key": "optionalColumns",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "includeNotices",
+                      "value": "false"
+                    },
+                    {
+                      "key": "extraInformation",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "productToken",
+                      "description": "(Required) product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"projectIdentifiers\": [\n    \"123e4567-e89b-12d3-a456-426655440000\",\n    \"123e4567-e89b-12d3-a456-426655440000\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\",\n  \"retVal\": [\n    {\n      \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n      \"name\": \"dbus-1.10.24-13.el7_6.x86_64.rpm\",\n      \"artifactId\": \"kind-of-6.0.2.tgz\",\n      \"groupId\": \"kind-of\",\n      \"version\": \"string\",\n      \"architecture\": \"string\",\n      \"languageVersion\": \"string\",\n      \"classifier\": \"string\",\n      \"extension\": \"string\",\n      \"sha1\": \"01146b36a6218e64e58f3a8d66de5d7fc6f6d051\",\n      \"description\": \"Get the native type of a value.\",\n      \"type\": \"javascript/Node.js\",\n      \"libraryType\": \"string\",\n      \"directDependency\": true,\n      \"purl\": \"pkg:maven/commons-beanutils/commons-beanutils@1.8.0?type=jar\",\n      \"extraInfo\": {\n        \"key_0\": \"string\"\n      },\n      \"extraInformation\": {\n        \"distributionUrl\": \"string\",\n        \"downloadUrl\": \"string\",\n        \"releaseDate\": \"1996-05-15T00:01:58.967Z\",\n        \"packageManagerRepository\": \"string\",\n        \"homePage\": \"string\",\n        \"repositoryUrl\": \"string\",\n        \"author\": \"string\"\n      },\n      \"licenses\": [\n        {\n          \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n          \"name\": \"MIT\",\n          \"assignedByUser\": true,\n          \"licenseReferences\": [\n            {\n              \"uuid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"liabilityReference\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"assignedBy\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"textUrl\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"customDisclaimer\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"information\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"uuid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"liabilityReference\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"assignedBy\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"textUrl\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"customDisclaimer\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"information\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n          \"name\": \"MIT\",\n          \"assignedByUser\": true,\n          \"licenseReferences\": [\n            {\n              \"uuid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"liabilityReference\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"assignedBy\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"textUrl\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"customDisclaimer\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"information\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"uuid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"liabilityReference\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"assignedBy\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"textUrl\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"customDisclaimer\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"information\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ],\n      \"copyrightReferences\": [\n        {\n          \"copyright\": \"Copyright 2021 x greater by the end of\",\n          \"type\": \"PROJECT_HOMEPAGE\",\n          \"customDisclaimer\": \"string\",\n          \"createdAt\": \"1950-01-24T23:07:59.556Z\",\n          \"textUrl\": \"string\",\n          \"startYear\": \"2021\",\n          \"endYear\": \"2022\",\n          \"author\": \"x greater by the end of\",\n          \"referenceInfo\": \"x greater by the end of\"\n        },\n        {\n          \"copyright\": \"Copyright 2021 x greater by the end of\",\n          \"type\": \"PROJECT_HOMEPAGE\",\n          \"customDisclaimer\": \"string\",\n          \"createdAt\": \"1972-02-23T12:11:47.002Z\",\n          \"textUrl\": \"string\",\n          \"startYear\": \"2021\",\n          \"endYear\": \"2022\",\n          \"author\": \"x greater by the end of\",\n          \"referenceInfo\": \"x greater by the end of\"\n        }\n      ],\n      \"securityRisks\": [\n        {\n          \"sourceUrl\": \"string\",\n          \"riskFactor\": \"UNCONFIRMED_UNSAFE\"\n        },\n        {\n          \"sourceUrl\": \"string\",\n          \"riskFactor\": \"NO_FINDINGS\"\n        }\n      ],\n      \"noticeReference\": {\n        \"text\": \"Developed internally\",\n        \"reference\": \"https://github.com/...\"\n      },\n      \"proprietaryInfo\": {\n        \"ruleDescription\": \"string\",\n        \"rulePattern\": \"string\",\n        \"comment\": \"string\",\n        \"userInfo\": {\n          \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n          \"name\": \"Jon Smith\",\n          \"email\": \"jon.smith@mail.com\",\n          \"userType\": \"REGULAR\",\n          \"accountStatus\": \"ACTIVE\"\n        },\n        \"proprietaryMarkType\": \"BY_RULE\"\n      },\n      \"locations\": [\n        {\n          \"localPath\": \"C:\\\\\\\\Users\\\\\\\\user\\\\\\\\.m2\\\\\\\\repository\\\\\\\\commons-io-1.4.jar\",\n          \"dependencyFile\": \"C:\\\\\\\\GitHubRepos\\\\\\\\Pipline\\\\\\\\EUA\\\\\\\\plugins-automation\\\\\\\\fsa\\\\\\\\tests\\\\\\\\EUA\\\\\\\\Java\\\\\\\\bigProjectsMaven\\\\\\\\WST_417\\\\\\\\Data\\\\\\\\ksa\\\\\\\\ksa-web-core\\\\\\\\pom.xml\"\n        },\n        {\n          \"localPath\": \"C:\\\\\\\\Users\\\\\\\\user\\\\\\\\.m2\\\\\\\\repository\\\\\\\\commons-io-1.4.jar\",\n          \"dependencyFile\": \"C:\\\\\\\\GitHubRepos\\\\\\\\Pipline\\\\\\\\EUA\\\\\\\\plugins-automation\\\\\\\\fsa\\\\\\\\tests\\\\\\\\EUA\\\\\\\\Java\\\\\\\\bigProjectsMaven\\\\\\\\WST_417\\\\\\\\Data\\\\\\\\ksa\\\\\\\\ksa-web-core\\\\\\\\pom.xml\"\n        }\n      ],\n      \"attributionReportSettings\": {\n        \"excluded\": false\n      },\n      \"dependencyType\": \"string\",\n      \"violations\": 22,\n      \"workflowUuids\": [\n        \"2\",\n        \"2\"\n      ],\n      \"violatingFindings\": 2,\n      \"trackedIssue\": {\n        \"uuid\": \"string\",\n        \"issueId\": \"string\",\n        \"origin\": \"string\",\n        \"issueKey\": \"string\",\n        \"account\": {\n          \"uuid\": \"string\",\n          \"name\": \"string\"\n        },\n        \"domain\": {\n          \"uuid\": \"string\",\n          \"name\": \"string\"\n        },\n        \"application\": {\n          \"uuid\": \"string\",\n          \"name\": \"string\"\n        },\n        \"project\": {\n          \"uuid\": \"string\",\n          \"name\": \"string\"\n        },\n        \"status\": \"IN_PROGRESS\",\n        \"issueStatus\": \"string\",\n        \"failureReason\": \"string\",\n        \"errorMessage\": \"string\",\n        \"publicLink\": \"string\",\n        \"creationDate\": \"1964-11-20T11:16:31.224Z\",\n        \"updatedAt\": \"1966-08-26T08:59:17.032Z\",\n        \"createdBy\": {\n          \"uuid\": \"string\",\n          \"name\": \"string\"\n        },\n        \"ticketType\": \"SECURITY\"\n      },\n      \"project\": {\n        \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n        \"name\": \"My Project\",\n        \"path\": \"My Product\",\n        \"productName\": \"My Product\",\n        \"productUuid\": \"123e4567-e89b-12d3-a456-426655440000\"\n      }\n    },\n    {\n      \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n      \"name\": \"dbus-1.10.24-13.el7_6.x86_64.rpm\",\n      \"artifactId\": \"kind-of-6.0.2.tgz\",\n      \"groupId\": \"kind-of\",\n      \"version\": \"string\",\n      \"architecture\": \"string\",\n      \"languageVersion\": \"string\",\n      \"classifier\": \"string\",\n      \"extension\": \"string\",\n      \"sha1\": \"01146b36a6218e64e58f3a8d66de5d7fc6f6d051\",\n      \"description\": \"Get the native type of a value.\",\n      \"type\": \"javascript/Node.js\",\n      \"libraryType\": \"string\",\n      \"directDependency\": true,\n      \"purl\": \"pkg:maven/commons-beanutils/commons-beanutils@1.8.0?type=jar\",\n      \"extraInfo\": {\n        \"key_0\": \"string\"\n      },\n      \"extraInformation\": {\n        \"distributionUrl\": \"string\",\n        \"downloadUrl\": \"string\",\n        \"releaseDate\": \"1964-01-19T16:06:43.137Z\",\n        \"packageManagerRepository\": \"string\",\n        \"homePage\": \"string\",\n        \"repositoryUrl\": \"string\",\n        \"author\": \"string\"\n      },\n      \"licenses\": [\n        {\n          \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n          \"name\": \"MIT\",\n          \"assignedByUser\": false,\n          \"licenseReferences\": [\n            {\n              \"uuid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"liabilityReference\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"assignedBy\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"textUrl\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"customDisclaimer\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"information\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"uuid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"liabilityReference\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"assignedBy\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"textUrl\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"customDisclaimer\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"information\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n          \"name\": \"MIT\",\n          \"assignedByUser\": true,\n          \"licenseReferences\": [\n            {\n              \"uuid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"liabilityReference\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"assignedBy\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"textUrl\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"customDisclaimer\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"information\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"uuid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"liabilityReference\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"assignedBy\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"textUrl\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"customDisclaimer\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"information\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ],\n      \"copyrightReferences\": [\n        {\n          \"copyright\": \"Copyright 2021 x greater by the end of\",\n          \"type\": \"PROJECT_HOMEPAGE\",\n          \"customDisclaimer\": \"string\",\n          \"createdAt\": \"2011-07-14T01:23:07.965Z\",\n          \"textUrl\": \"string\",\n          \"startYear\": \"2021\",\n          \"endYear\": \"2022\",\n          \"author\": \"x greater by the end of\",\n          \"referenceInfo\": \"x greater by the end of\"\n        },\n        {\n          \"copyright\": \"Copyright 2021 x greater by the end of\",\n          \"type\": \"PROJECT_HOMEPAGE\",\n          \"customDisclaimer\": \"string\",\n          \"createdAt\": \"2010-12-24T00:43:12.258Z\",\n          \"textUrl\": \"string\",\n          \"startYear\": \"2021\",\n          \"endYear\": \"2022\",\n          \"author\": \"x greater by the end of\",\n          \"referenceInfo\": \"x greater by the end of\"\n        }\n      ],\n      \"securityRisks\": [\n        {\n          \"sourceUrl\": \"string\",\n          \"riskFactor\": \"CONFIRMED_UNSAFE\"\n        },\n        {\n          \"sourceUrl\": \"string\",\n          \"riskFactor\": \"KNOWN_FALSE_POSITIVE\"\n        }\n      ],\n      \"noticeReference\": {\n        \"text\": \"Developed internally\",\n        \"reference\": \"https://github.com/...\"\n      },\n      \"proprietaryInfo\": {\n        \"ruleDescription\": \"string\",\n        \"rulePattern\": \"string\",\n        \"comment\": \"string\",\n        \"userInfo\": {\n          \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n          \"name\": \"Jon Smith\",\n          \"email\": \"jon.smith@mail.com\",\n          \"userType\": \"REGULAR\",\n          \"accountStatus\": \"LOCKOUT\"\n        },\n        \"proprietaryMarkType\": \"BY_USER\"\n      },\n      \"locations\": [\n        {\n          \"localPath\": \"C:\\\\\\\\Users\\\\\\\\user\\\\\\\\.m2\\\\\\\\repository\\\\\\\\commons-io-1.4.jar\",\n          \"dependencyFile\": \"C:\\\\\\\\GitHubRepos\\\\\\\\Pipline\\\\\\\\EUA\\\\\\\\plugins-automation\\\\\\\\fsa\\\\\\\\tests\\\\\\\\EUA\\\\\\\\Java\\\\\\\\bigProjectsMaven\\\\\\\\WST_417\\\\\\\\Data\\\\\\\\ksa\\\\\\\\ksa-web-core\\\\\\\\pom.xml\"\n        },\n        {\n          \"localPath\": \"C:\\\\\\\\Users\\\\\\\\user\\\\\\\\.m2\\\\\\\\repository\\\\\\\\commons-io-1.4.jar\",\n          \"dependencyFile\": \"C:\\\\\\\\GitHubRepos\\\\\\\\Pipline\\\\\\\\EUA\\\\\\\\plugins-automation\\\\\\\\fsa\\\\\\\\tests\\\\\\\\EUA\\\\\\\\Java\\\\\\\\bigProjectsMaven\\\\\\\\WST_417\\\\\\\\Data\\\\\\\\ksa\\\\\\\\ksa-web-core\\\\\\\\pom.xml\"\n        }\n      ],\n      \"attributionReportSettings\": {\n        \"excluded\": true\n      },\n      \"dependencyType\": \"string\",\n      \"violations\": 22,\n      \"workflowUuids\": [\n        \"2\",\n        \"2\"\n      ],\n      \"violatingFindings\": 2,\n      \"trackedIssue\": {\n        \"uuid\": \"string\",\n        \"issueId\": \"string\",\n        \"origin\": \"string\",\n        \"issueKey\": \"string\",\n        \"account\": {\n          \"uuid\": \"string\",\n          \"name\": \"string\"\n        },\n        \"domain\": {\n          \"uuid\": \"string\",\n          \"name\": \"string\"\n        },\n        \"application\": {\n          \"uuid\": \"string\",\n          \"name\": \"string\"\n        },\n        \"project\": {\n          \"uuid\": \"string\",\n          \"name\": \"string\"\n        },\n        \"status\": \"DELETED\",\n        \"issueStatus\": \"string\",\n        \"failureReason\": \"string\",\n        \"errorMessage\": \"string\",\n        \"publicLink\": \"string\",\n        \"creationDate\": \"2004-01-25T16:49:41.836Z\",\n        \"updatedAt\": \"2007-02-23T19:18:01.201Z\",\n        \"createdBy\": {\n          \"uuid\": \"string\",\n          \"name\": \"string\"\n        },\n        \"ticketType\": \"SECURITY\"\n      },\n      \"project\": {\n        \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n        \"name\": \"My Project\",\n        \"path\": \"My Product\",\n        \"productName\": \"My Product\",\n        \"productUuid\": \"123e4567-e89b-12d3-a456-426655440000\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cd415f2a-248d-4657-8658-708afcad0a4f",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "products",
+                    ":productToken",
+                    "libraries",
+                    "byProjects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "search",
+                      "value": ""
+                    },
+                    {
+                      "key": "sort",
+                      "value": ""
+                    },
+                    {
+                      "key": "optionalColumns",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "includeNotices",
+                      "value": "false"
+                    },
+                    {
+                      "key": "extraInformation",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "productToken",
+                      "description": "(Required) product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"projectIdentifiers\": [\n    \"123e4567-e89b-12d3-a456-426655440000\",\n    \"123e4567-e89b-12d3-a456-426655440000\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3abfd861-8897-4350-8273-9ace7ddd9ddc",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "products",
+                    ":productToken",
+                    "libraries",
+                    "byProjects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "search",
+                      "value": ""
+                    },
+                    {
+                      "key": "sort",
+                      "value": ""
+                    },
+                    {
+                      "key": "optionalColumns",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "includeNotices",
+                      "value": "false"
+                    },
+                    {
+                      "key": "extraInformation",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "productToken",
+                      "description": "(Required) product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"projectIdentifiers\": [\n    \"123e4567-e89b-12d3-a456-426655440000\",\n    \"123e4567-e89b-12d3-a456-426655440000\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "13381a81-7756-4a32-b0dc-20fae9c48bc2",
+          "name": "Get Product Library Vulnerabilities",
+          "request": {
+            "name": "Get Product Library Vulnerabilities",
+            "description": {
+              "content": "Returns a list of the vulnerabilities in the libraries of a given product",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2.0",
+                "products",
+                ":productToken",
+                "libraries",
+                ":libraryUuid",
+                "vulnerabilities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "50"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "0"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "productToken",
+                  "description": "(Required) product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**)."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "libraryUuid",
+                  "description": "(Required) library UUID (get a project's library by running Library - Project > Get Project Libraries."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b658d817-0e4c-49bb-a871-3e3eb6521c8e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "products",
+                    ":productToken",
+                    "libraries",
+                    ":libraryUuid",
+                    "vulnerabilities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "productToken",
+                      "description": "(Required) product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "libraryUuid",
+                      "description": "(Required) library UUID (get a project's library by running Library - Project > Get Project Libraries."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"additionalData\": {\n    \"totalItems\": \"422\",\n    \"isLastPage\": \"true\"\n  },\n  \"supportToken\": \"1171c60d\",\n  \"retVal\": [\n    {\n      \"name\": \"CVE-2021-42392\",\n      \"type\": \"WS\",\n      \"description\": \"Security vulnerability found in plexus-utils before 3.0.24. XML injection found in XmlWriterUtil.java\",\n      \"score\": 5,\n      \"severity\": \"MEDIUM\",\n      \"publishDate\": \"1991-05-16T02:46:29.827Z\",\n      \"modifiedDate\": \"1975-08-28T04:35:55.370Z\",\n      \"vulnerabilityScoring\": [\n        {\n          \"score\": 5,\n          \"severity\": \"MEDIUM\",\n          \"type\": \"CVSS_2\",\n          \"scoreMetadataVector\": \"CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H\",\n          \"extraData\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\",\n            \"key_2\": \"string\"\n          }\n        },\n        {\n          \"score\": 5,\n          \"severity\": \"MEDIUM\",\n          \"type\": \"CVSS_2\",\n          \"scoreMetadataVector\": \"CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H\",\n          \"extraData\": {\n            \"key_0\": \"string\"\n          }\n        }\n      ],\n      \"references\": [\n        {\n          \"value\": \"https://github.com/codehaus-plexus/plexus-utils/commit/f933e5e78dc2637e485447ed821fe14904f110de\",\n          \"source\": \"CERT\",\n          \"url\": \"https://github.com/codehaus-plexus/plexus-utils/commit/f933e5e78dc2637e485447ed821fe14904f110de\",\n          \"signature\": false,\n          \"advisory\": true,\n          \"patch\": false\n        },\n        {\n          \"value\": \"https://github.com/codehaus-plexus/plexus-utils/commit/f933e5e78dc2637e485447ed821fe14904f110de\",\n          \"source\": \"CERT\",\n          \"url\": \"https://github.com/codehaus-plexus/plexus-utils/commit/f933e5e78dc2637e485447ed821fe14904f110de\",\n          \"signature\": true,\n          \"advisory\": false,\n          \"patch\": true\n        }\n      ],\n      \"effectiveInfo\": {\n        \"referenceCount\": 1779,\n        \"shieldValue\": 158\n      },\n      \"threatAssessment\": {\n        \"exploitCodeMaturity\": \"HIGH\",\n        \"epssPercentage\": 0.8\n      }\n    },\n    {\n      \"name\": \"CVE-2021-42392\",\n      \"type\": \"WS\",\n      \"description\": \"Security vulnerability found in plexus-utils before 3.0.24. XML injection found in XmlWriterUtil.java\",\n      \"score\": 5,\n      \"severity\": \"MEDIUM\",\n      \"publishDate\": \"1987-12-02T17:26:36.467Z\",\n      \"modifiedDate\": \"1977-02-18T17:43:09.379Z\",\n      \"vulnerabilityScoring\": [\n        {\n          \"score\": 5,\n          \"severity\": \"MEDIUM\",\n          \"type\": \"CVSS_2\",\n          \"scoreMetadataVector\": \"CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H\",\n          \"extraData\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\",\n            \"key_2\": \"string\"\n          }\n        },\n        {\n          \"score\": 5,\n          \"severity\": \"MEDIUM\",\n          \"type\": \"CVSS_2\",\n          \"scoreMetadataVector\": \"CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H\",\n          \"extraData\": {\n            \"key_0\": \"string\"\n          }\n        }\n      ],\n      \"references\": [\n        {\n          \"value\": \"https://github.com/codehaus-plexus/plexus-utils/commit/f933e5e78dc2637e485447ed821fe14904f110de\",\n          \"source\": \"CERT\",\n          \"url\": \"https://github.com/codehaus-plexus/plexus-utils/commit/f933e5e78dc2637e485447ed821fe14904f110de\",\n          \"signature\": false,\n          \"advisory\": false,\n          \"patch\": false\n        },\n        {\n          \"value\": \"https://github.com/codehaus-plexus/plexus-utils/commit/f933e5e78dc2637e485447ed821fe14904f110de\",\n          \"source\": \"CERT\",\n          \"url\": \"https://github.com/codehaus-plexus/plexus-utils/commit/f933e5e78dc2637e485447ed821fe14904f110de\",\n          \"signature\": false,\n          \"advisory\": true,\n          \"patch\": false\n        }\n      ],\n      \"effectiveInfo\": {\n        \"referenceCount\": 8037,\n        \"shieldValue\": 9255\n      },\n      \"threatAssessment\": {\n        \"exploitCodeMaturity\": \"HIGH\",\n        \"epssPercentage\": 0.8\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f5ba35c8-1bca-4668-b5e4-83ef1bdfaa02",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "products",
+                    ":productToken",
+                    "libraries",
+                    ":libraryUuid",
+                    "vulnerabilities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "productToken",
+                      "description": "(Required) product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "libraryUuid",
+                      "description": "(Required) library UUID (get a project's library by running Library - Project > Get Project Libraries."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "215ca422-8bad-468b-820c-deeb05577de7",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "products",
+                    ":productToken",
+                    "libraries",
+                    ":libraryUuid",
+                    "vulnerabilities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "productToken",
+                      "description": "(Required) product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "libraryUuid",
+                      "description": "(Required) library UUID (get a project's library by running Library - Project > Get Project Libraries."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9b425a71-83f2-4404-9021-5eff4741f1f4",
+          "name": "Get Library Projects",
+          "request": {
+            "name": "Get Library Projects",
+            "description": {
+              "content": "Returns all of the projects in a particular product that contain a given library ",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2.0",
+                "products",
+                ":productToken",
+                "libraries",
+                ":libraryUuid",
+                "projects"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "50"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "0"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "productToken",
+                  "description": "(Required) product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**)."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "libraryUuid",
+                  "description": "(Required) library UUID (get a project's library by running Library - Project > Get Project Libraries."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "423c2a8c-ae08-4b50-bba4-aef8387f94a6",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "products",
+                    ":productToken",
+                    "libraries",
+                    ":libraryUuid",
+                    "projects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "productToken",
+                      "description": "(Required) product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "libraryUuid",
+                      "description": "(Required) library UUID (get a project's library by running Library - Project > Get Project Libraries."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\",\n  \"retVal\": [\n    {\n      \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n      \"name\": \"My Project\",\n      \"path\": \"My Product\",\n      \"productName\": \"My Product\",\n      \"productUuid\": \"123e4567-e89b-12d3-a456-426655440000\"\n    },\n    {\n      \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n      \"name\": \"My Project\",\n      \"path\": \"My Product\",\n      \"productName\": \"My Product\",\n      \"productUuid\": \"123e4567-e89b-12d3-a456-426655440000\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5f25f945-9fbf-4da3-8d29-ded5f48fab5f",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "products",
+                    ":productToken",
+                    "libraries",
+                    ":libraryUuid",
+                    "projects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "productToken",
+                      "description": "(Required) product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "libraryUuid",
+                      "description": "(Required) library UUID (get a project's library by running Library - Project > Get Project Libraries."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "087b6885-237a-4dce-9cec-78b68f8a9d59",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "products",
+                    ":productToken",
+                    "libraries",
+                    ":libraryUuid",
+                    "projects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "productToken",
+                      "description": "(Required) product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "libraryUuid",
+                      "description": "(Required) library UUID (get a project's library by running Library - Project > Get Project Libraries."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a403c44b-b3c7-4e49-8012-6cad6d2fa56e",
+          "name": "Get Product Due Diligence Info",
+          "request": {
+            "name": "Get Product Due Diligence Info",
+            "description": {
+              "content": "Returns a due diligence report listing the source and license information for all libraries in a product",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2.0",
+                "products",
+                ":productToken",
+                "libraries",
+                "licenses"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "50",
+                  "description": "Enter the number of items to return in each page of the result."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "0",
+                  "description": "Enter the page number to display in the result. Page numbers start at 0"
+                },
+                {
+                  "description": {
+                    "content": "Filter your search to return items whose property has a specific value.\nUse the syntax: **property:operation:value** where a colon (:) separates between property, operation and value.\n+ Property: the name of the property of the item\n+ Operation:\n    + **equals** - true if the value is identical to this value.\n    + **in** - true if the value is identical to one of the items in this comma-separated list. E.g. in:value1,value2,value3\n    + **like** - true if the property's value is contained within this value\n    + **regex** - true if this regular expression resolves as true.\n        The regex is not case sensitive, and special characters must be escaped with a backslash.\n        Special characters include space, double quote (\"), '<', '>', '#', '%', '{', '}', vertical bar ('|'), backslash, '^'.\n        To pass an escaped character in a URL in Postman, encode it first.\n        E.g. to return all items whose value begins with **a** or **A**, use regex:^a\n+ Value: the value of the property.\n\nTo combine multiple filters, separate each filter with a semicolon with no space. E.g.  property1:operation1:value1;property2:operation2:value2\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ componentName:[like | equals | regex]:value\n+ copyrights:[like | regex]:value\n+ license:[equals | in]:value\n+ licenseRisk:[equals | in]:value\n+ licenseType:[equals | in]:value\n+ projectName:[like | equals | regex]:value",
+                    "type": "text/plain"
+                  },
+                  "key": "search",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Sort search results alphabetically on an item's property by entering **sort=** followed by the property name.\nE.g. enter **sort=email** to sort alphabetically by their email addresses from a-z ascending.To sort in descending order (z-a), add a minus sign ('-'). E.g. **sort=-email**.\n\nYou can sort by the following properties:\n+ componentName\n+ license\n+ licenseType\n+ copyrights\n+ licenseRisk\n+ projectName",
+                    "type": "text/plain"
+                  },
+                  "key": "sort",
+                  "value": ""
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "productToken",
+                  "description": "(Required) product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5312ecb8-e779-4104-a4bb-f05decc70516",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "products",
+                    ":productToken",
+                    "libraries",
+                    "licenses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "search",
+                      "value": ""
+                    },
+                    {
+                      "key": "sort",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "productToken",
+                      "description": "(Required) product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"additionalData\": {\n    \"totalItems\": \"422\",\n    \"isLastPage\": \"true\"\n  },\n  \"supportToken\": \"1171c60d\",\n  \"retVal\": [\n    {\n      \"uuid\": \"string\",\n      \"name\": \"string\",\n      \"component\": {\n        \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n        \"name\": \"dbus-1.10.24-13.el7_6.x86_64.rpm\",\n        \"description\": \"Component description\",\n        \"componentType\": \"Library\",\n        \"type\": \"string\",\n        \"libraryType\": \"REDHAT_PACKAGE_MODULE\",\n        \"directDependency\": false,\n        \"dependencyType\": \"Direct / Transitive\",\n        \"references\": {\n          \"url\": \"https://www.gnupg.org/related_software/pinentry/98\",\n          \"homePage\": \"https://www.gnupg.org/related_software/pinentry/89\",\n          \"downloadLink\": \"https://www.gnupg.org/related_software/pinentry/09\",\n          \"issueUrl\": \"https://www.gnupg.org/related_software/pinentry/87\",\n          \"pomUrl\": \"https://www.gnupg.org/related_software/pinentry/76\",\n          \"scmUrl\": \"https://www.gnupg.org/related_software/pinentry/65\",\n          \"genericPackageIndex\": \"5\",\n          \"nugetGallery\": \"string\",\n          \"tags\": \"Important\",\n          \"copyright\": \"Copyright 2002-2015 g10 Code GmbH\",\n          \"hasNotice\": false\n        },\n        \"groupId\": \"org.springframework.boot\",\n        \"artifactId\": \"spring-boot\",\n        \"version\": \"3.0.5\",\n        \"dependencyFile\": \"string\",\n        \"localPath\": \"string\"\n      },\n      \"license\": {\n        \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n        \"type\": \"ARTIFACT_DESCRIPTOR\",\n        \"liabilityReference\": \"https://repo.maven.apache.org/maven2/org/jruby/ext/posix/jna-posix/1.0.3/jna-posix-1.0.3.pom\",\n        \"assignedBy\": {\n          \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n          \"name\": \"Jon Smith\",\n          \"email\": \"jon.smith@mail.com\",\n          \"userType\": \"REGULAR\",\n          \"accountStatus\": \"LOCKOUT\"\n        },\n        \"textUrl\": \"string\",\n        \"customDisclaimer\": \"string\",\n        \"information\": \"distribution=repo&remoteUrl=https://repo.maven.apache.org/maven2/org/jruby/ext/posix/jna-posix/1.0.3/jna-posix-1.0.3.pom\"\n      },\n      \"riskScore\": {\n        \"explanation\": \"http://en.wikipedia.org/wiki/Academic_Free_License\",\n        \"indicatingText\": \"1) Grant of Copyright License...\",\n        \"riskScore\": 39\n      },\n      \"copyrights\": [\n        \"Copyright 2010 Cloud Conscious, LLC\",\n        \"Copyright 2010 Cloud Conscious, LLC\"\n      ],\n      \"extraData\": {\n        \"homepage\": \"https://api.github.com/repos/SR-dude/AvP-Wine/zipball/original\",\n        \"authors\": [\n          {\n            \"author\": \"The Apache Software Foundation\",\n            \"authorUrl\": \"http://www.apache.org/\"\n          },\n          {\n            \"author\": \"The Apache Software Foundation\",\n            \"authorUrl\": \"http://www.apache.org/\"\n          }\n        ]\n      },\n      \"project\": {\n        \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n        \"name\": \"My Project\",\n        \"path\": \"My Product\",\n        \"productName\": \"My Product\",\n        \"productUuid\": \"123e4567-e89b-12d3-a456-426655440000\"\n      },\n      \"techTags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"purl\": \"string\"\n    },\n    {\n      \"uuid\": \"string\",\n      \"name\": \"string\",\n      \"component\": {\n        \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n        \"name\": \"dbus-1.10.24-13.el7_6.x86_64.rpm\",\n        \"description\": \"Component description\",\n        \"componentType\": \"Library\",\n        \"type\": \"string\",\n        \"libraryType\": \"REDHAT_PACKAGE_MODULE\",\n        \"directDependency\": true,\n        \"dependencyType\": \"Direct / Transitive\",\n        \"references\": {\n          \"url\": \"https://www.gnupg.org/related_software/pinentry/98\",\n          \"homePage\": \"https://www.gnupg.org/related_software/pinentry/89\",\n          \"downloadLink\": \"https://www.gnupg.org/related_software/pinentry/09\",\n          \"issueUrl\": \"https://www.gnupg.org/related_software/pinentry/87\",\n          \"pomUrl\": \"https://www.gnupg.org/related_software/pinentry/76\",\n          \"scmUrl\": \"https://www.gnupg.org/related_software/pinentry/65\",\n          \"genericPackageIndex\": \"5\",\n          \"nugetGallery\": \"string\",\n          \"tags\": \"Important\",\n          \"copyright\": \"Copyright 2002-2015 g10 Code GmbH\",\n          \"hasNotice\": false\n        },\n        \"groupId\": \"org.springframework.boot\",\n        \"artifactId\": \"spring-boot\",\n        \"version\": \"3.0.5\",\n        \"dependencyFile\": \"string\",\n        \"localPath\": \"string\"\n      },\n      \"license\": {\n        \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n        \"type\": \"ARTIFACT_DESCRIPTOR\",\n        \"liabilityReference\": \"https://repo.maven.apache.org/maven2/org/jruby/ext/posix/jna-posix/1.0.3/jna-posix-1.0.3.pom\",\n        \"assignedBy\": {\n          \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n          \"name\": \"Jon Smith\",\n          \"email\": \"jon.smith@mail.com\",\n          \"userType\": \"REGULAR\",\n          \"accountStatus\": \"INACTIVE\"\n        },\n        \"textUrl\": \"string\",\n        \"customDisclaimer\": \"string\",\n        \"information\": \"distribution=repo&remoteUrl=https://repo.maven.apache.org/maven2/org/jruby/ext/posix/jna-posix/1.0.3/jna-posix-1.0.3.pom\"\n      },\n      \"riskScore\": {\n        \"explanation\": \"http://en.wikipedia.org/wiki/Academic_Free_License\",\n        \"indicatingText\": \"1) Grant of Copyright License...\",\n        \"riskScore\": 39\n      },\n      \"copyrights\": [\n        \"Copyright 2010 Cloud Conscious, LLC\",\n        \"Copyright 2010 Cloud Conscious, LLC\"\n      ],\n      \"extraData\": {\n        \"homepage\": \"https://api.github.com/repos/SR-dude/AvP-Wine/zipball/original\",\n        \"authors\": [\n          {\n            \"author\": \"The Apache Software Foundation\",\n            \"authorUrl\": \"http://www.apache.org/\"\n          },\n          {\n            \"author\": \"The Apache Software Foundation\",\n            \"authorUrl\": \"http://www.apache.org/\"\n          }\n        ]\n      },\n      \"project\": {\n        \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n        \"name\": \"My Project\",\n        \"path\": \"My Product\",\n        \"productName\": \"My Product\",\n        \"productUuid\": \"123e4567-e89b-12d3-a456-426655440000\"\n      },\n      \"techTags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"purl\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "49fe8292-6d66-4600-8ec3-508a9f147a9c",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "products",
+                    ":productToken",
+                    "libraries",
+                    "licenses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "search",
+                      "value": ""
+                    },
+                    {
+                      "key": "sort",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "productToken",
+                      "description": "(Required) product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3570e1d8-0e81-4bd2-9e2d-43cb92ec27c6",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "products",
+                    ":productToken",
+                    "libraries",
+                    "licenses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "search",
+                      "value": ""
+                    },
+                    {
+                      "key": "sort",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "productToken",
+                      "description": "(Required) product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fa34faf3-5903-4c07-9fff-cbc477321d07",
+          "name": "Get In-House Libraries",
+          "request": {
+            "name": "Get In-House Libraries",
+            "description": {
+              "content": "Returns all libraries in a given product that have been designated as \"In-House\". They will not trigger any alerts or be included in license analysis. so that they will not trigger any alerts or be included in license analysis.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2.0",
+                "products",
+                ":productToken",
+                "libraries",
+                "inHouse"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "50"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "description": {
+                    "content": "Filter your search to return items whose property has a specific value.\nUse the syntax: **property:operation:value** where a colon (:) separates between property, operation and value.\n+ Property: the name of the property of the item\n+ Operation:\n    + **equals** - true if the value is identical to this value.\n    + **like** - true if the property's value is contained within this value\n    + **regex** - true if this regular expression resolves as true.\n        The regex is not case sensitive, and special characters must be escaped with a backslash.\n        Special characters include space, double quote (\"), '<', '>', '#', '%', '{', '}', vertical bar ('|'), backslash, '^'.\n        To pass an escaped character in a URL in Postman, encode it first.\n        E.g. to return all items whose value begins with **a** or **A**, use regex:^a\n+ Value: the value of the property.\n\nTo combine multiple filters, separate each filter with a semicolon with no space. E.g.  property1:operation1:value1;property2:operation2:value2\n\nThis endpoint supports filtering on this property:\n+ name:[like | equals | regex]:value\n+ type:[like | equals ]:value\n+ comment:[like | equals | regex]:value\n+ markType:[equals]:value\n",
+                    "type": "text/plain"
+                  },
+                  "key": "search",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Sort search results alphabetically on an item's property by entering **sort=** followed by the property name.\nE.g. enter **sort=email** to sort alphabetically by their email addresses from a-z ascending.To sort in descending order (z-a), add a minus sign ('-'). E.g. **sort=-email**.\n\nYou can sort by the following properties:\n+ name\n+ type\n+ comment\n+ markType\n",
+                    "type": "text/plain"
+                  },
+                  "key": "sort",
+                  "value": ""
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "productToken",
+                  "description": "(Required) product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "85b2668d-fcb3-427d-9d1d-31d85c8a866e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "products",
+                    ":productToken",
+                    "libraries",
+                    "inHouse"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "search",
+                      "value": ""
+                    },
+                    {
+                      "key": "sort",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "productToken",
+                      "description": "(Required) product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"additionalData\": {\n    \"totalItems\": \"422\",\n    \"isLastPage\": \"true\"\n  },\n  \"supportToken\": \"1171c60d\",\n  \"retVal\": [\n    {\n      \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n      \"name\": \"dbus-1.10.24-13.el7_6.x86_64.rpm\",\n      \"artifactId\": \"kind-of-6.0.2.tgz\",\n      \"groupId\": \"kind-of\",\n      \"version\": \"string\",\n      \"architecture\": \"string\",\n      \"languageVersion\": \"string\",\n      \"classifier\": \"string\",\n      \"extension\": \"string\",\n      \"sha1\": \"01146b36a6218e64e58f3a8d66de5d7fc6f6d051\",\n      \"description\": \"Get the native type of a value.\",\n      \"type\": \"javascript/Node.js\",\n      \"libraryType\": \"string\",\n      \"directDependency\": true,\n      \"purl\": \"pkg:maven/commons-beanutils/commons-beanutils@1.8.0?type=jar\",\n      \"extraInfo\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\"\n      },\n      \"extraInformation\": {\n        \"distributionUrl\": \"string\",\n        \"downloadUrl\": \"string\",\n        \"releaseDate\": \"1996-05-21T10:52:52.910Z\",\n        \"packageManagerRepository\": \"string\",\n        \"homePage\": \"string\",\n        \"repositoryUrl\": \"string\",\n        \"author\": \"string\"\n      },\n      \"securityRisks\": [\n        {\n          \"sourceUrl\": \"string\",\n          \"riskFactor\": \"KNOWN_FALSE_POSITIVE\"\n        },\n        {\n          \"sourceUrl\": \"string\",\n          \"riskFactor\": \"CONFIRMED_UNSAFE\"\n        }\n      ],\n      \"noticeReference\": {\n        \"text\": \"Developed internally\",\n        \"reference\": \"https://github.com/...\"\n      },\n      \"proprietaryInfo\": {\n        \"ruleDescription\": \"string\",\n        \"rulePattern\": \"string\",\n        \"comment\": \"string\",\n        \"userInfo\": {\n          \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n          \"name\": \"Jon Smith\",\n          \"email\": \"jon.smith@mail.com\",\n          \"userType\": \"REGULAR\",\n          \"accountStatus\": \"INACTIVE\"\n        },\n        \"proprietaryMarkType\": \"BY_USER\"\n      },\n      \"locations\": [\n        {\n          \"localPath\": \"C:\\\\\\\\Users\\\\\\\\user\\\\\\\\.m2\\\\\\\\repository\\\\\\\\commons-io-1.4.jar\",\n          \"dependencyFile\": \"C:\\\\\\\\GitHubRepos\\\\\\\\Pipline\\\\\\\\EUA\\\\\\\\plugins-automation\\\\\\\\fsa\\\\\\\\tests\\\\\\\\EUA\\\\\\\\Java\\\\\\\\bigProjectsMaven\\\\\\\\WST_417\\\\\\\\Data\\\\\\\\ksa\\\\\\\\ksa-web-core\\\\\\\\pom.xml\"\n        },\n        {\n          \"localPath\": \"C:\\\\\\\\Users\\\\\\\\user\\\\\\\\.m2\\\\\\\\repository\\\\\\\\commons-io-1.4.jar\",\n          \"dependencyFile\": \"C:\\\\\\\\GitHubRepos\\\\\\\\Pipline\\\\\\\\EUA\\\\\\\\plugins-automation\\\\\\\\fsa\\\\\\\\tests\\\\\\\\EUA\\\\\\\\Java\\\\\\\\bigProjectsMaven\\\\\\\\WST_417\\\\\\\\Data\\\\\\\\ksa\\\\\\\\ksa-web-core\\\\\\\\pom.xml\"\n        }\n      ],\n      \"attributionReportSettings\": {\n        \"excluded\": true\n      },\n      \"dependencyType\": \"string\",\n      \"violations\": 22,\n      \"workflowUuids\": [\n        \"2\",\n        \"2\"\n      ],\n      \"violatingFindings\": 2,\n      \"trackedIssue\": {\n        \"uuid\": \"string\",\n        \"issueId\": \"string\",\n        \"origin\": \"string\",\n        \"issueKey\": \"string\",\n        \"account\": {\n          \"uuid\": \"string\",\n          \"name\": \"string\"\n        },\n        \"domain\": {\n          \"uuid\": \"string\",\n          \"name\": \"string\"\n        },\n        \"application\": {\n          \"uuid\": \"string\",\n          \"name\": \"string\"\n        },\n        \"project\": {\n          \"uuid\": \"string\",\n          \"name\": \"string\"\n        },\n        \"status\": \"PENDING\",\n        \"issueStatus\": \"string\",\n        \"failureReason\": \"string\",\n        \"errorMessage\": \"string\",\n        \"publicLink\": \"string\",\n        \"creationDate\": \"2004-04-24T04:07:16.350Z\",\n        \"updatedAt\": \"2026-07-05T23:09:18.151Z\",\n        \"createdBy\": {\n          \"uuid\": \"string\",\n          \"name\": \"string\"\n        },\n        \"ticketType\": \"SECURITY\"\n      }\n    },\n    {\n      \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n      \"name\": \"dbus-1.10.24-13.el7_6.x86_64.rpm\",\n      \"artifactId\": \"kind-of-6.0.2.tgz\",\n      \"groupId\": \"kind-of\",\n      \"version\": \"string\",\n      \"architecture\": \"string\",\n      \"languageVersion\": \"string\",\n      \"classifier\": \"string\",\n      \"extension\": \"string\",\n      \"sha1\": \"01146b36a6218e64e58f3a8d66de5d7fc6f6d051\",\n      \"description\": \"Get the native type of a value.\",\n      \"type\": \"javascript/Node.js\",\n      \"libraryType\": \"string\",\n      \"directDependency\": true,\n      \"purl\": \"pkg:maven/commons-beanutils/commons-beanutils@1.8.0?type=jar\",\n      \"extraInfo\": {\n        \"key_0\": \"string\"\n      },\n      \"extraInformation\": {\n        \"distributionUrl\": \"string\",\n        \"downloadUrl\": \"string\",\n        \"releaseDate\": \"1949-04-05T05:51:58.077Z\",\n        \"packageManagerRepository\": \"string\",\n        \"homePage\": \"string\",\n        \"repositoryUrl\": \"string\",\n        \"author\": \"string\"\n      },\n      \"securityRisks\": [\n        {\n          \"sourceUrl\": \"string\",\n          \"riskFactor\": \"NO_FINDINGS\"\n        },\n        {\n          \"sourceUrl\": \"string\",\n          \"riskFactor\": \"KNOWN_FALSE_POSITIVE\"\n        }\n      ],\n      \"noticeReference\": {\n        \"text\": \"Developed internally\",\n        \"reference\": \"https://github.com/...\"\n      },\n      \"proprietaryInfo\": {\n        \"ruleDescription\": \"string\",\n        \"rulePattern\": \"string\",\n        \"comment\": \"string\",\n        \"userInfo\": {\n          \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n          \"name\": \"Jon Smith\",\n          \"email\": \"jon.smith@mail.com\",\n          \"userType\": \"REGULAR\",\n          \"accountStatus\": \"ACTIVE\"\n        },\n        \"proprietaryMarkType\": \"BY_RULE\"\n      },\n      \"locations\": [\n        {\n          \"localPath\": \"C:\\\\\\\\Users\\\\\\\\user\\\\\\\\.m2\\\\\\\\repository\\\\\\\\commons-io-1.4.jar\",\n          \"dependencyFile\": \"C:\\\\\\\\GitHubRepos\\\\\\\\Pipline\\\\\\\\EUA\\\\\\\\plugins-automation\\\\\\\\fsa\\\\\\\\tests\\\\\\\\EUA\\\\\\\\Java\\\\\\\\bigProjectsMaven\\\\\\\\WST_417\\\\\\\\Data\\\\\\\\ksa\\\\\\\\ksa-web-core\\\\\\\\pom.xml\"\n        },\n        {\n          \"localPath\": \"C:\\\\\\\\Users\\\\\\\\user\\\\\\\\.m2\\\\\\\\repository\\\\\\\\commons-io-1.4.jar\",\n          \"dependencyFile\": \"C:\\\\\\\\GitHubRepos\\\\\\\\Pipline\\\\\\\\EUA\\\\\\\\plugins-automation\\\\\\\\fsa\\\\\\\\tests\\\\\\\\EUA\\\\\\\\Java\\\\\\\\bigProjectsMaven\\\\\\\\WST_417\\\\\\\\Data\\\\\\\\ksa\\\\\\\\ksa-web-core\\\\\\\\pom.xml\"\n        }\n      ],\n      \"attributionReportSettings\": {\n        \"excluded\": false\n      },\n      \"dependencyType\": \"string\",\n      \"violations\": 22,\n      \"workflowUuids\": [\n        \"2\",\n        \"2\"\n      ],\n      \"violatingFindings\": 2,\n      \"trackedIssue\": {\n        \"uuid\": \"string\",\n        \"issueId\": \"string\",\n        \"origin\": \"string\",\n        \"issueKey\": \"string\",\n        \"account\": {\n          \"uuid\": \"string\",\n          \"name\": \"string\"\n        },\n        \"domain\": {\n          \"uuid\": \"string\",\n          \"name\": \"string\"\n        },\n        \"application\": {\n          \"uuid\": \"string\",\n          \"name\": \"string\"\n        },\n        \"project\": {\n          \"uuid\": \"string\",\n          \"name\": \"string\"\n        },\n        \"status\": \"FAILED\",\n        \"issueStatus\": \"string\",\n        \"failureReason\": \"string\",\n        \"errorMessage\": \"string\",\n        \"publicLink\": \"string\",\n        \"creationDate\": \"2011-06-29T04:35:56.885Z\",\n        \"updatedAt\": \"2001-10-21T11:44:18.007Z\",\n        \"createdBy\": {\n          \"uuid\": \"string\",\n          \"name\": \"string\"\n        },\n        \"ticketType\": \"SECURITY\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0007ba9b-c7f5-4c71-a918-108333593561",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "products",
+                    ":productToken",
+                    "libraries",
+                    "inHouse"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "search",
+                      "value": ""
+                    },
+                    {
+                      "key": "sort",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "productToken",
+                      "description": "(Required) product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3613aa75-bcd4-44f4-9f81-15f440c4e473",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "products",
+                    ":productToken",
+                    "libraries",
+                    "inHouse"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "search",
+                      "value": ""
+                    },
+                    {
+                      "key": "sort",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "productToken",
+                      "description": "(Required) product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5ef84baa-3f40-4616-acdf-1fcc60bb5e3f",
+          "name": "Get Product Libraries",
+          "request": {
+            "name": "Get Product Libraries",
+            "description": {
+              "content": "Returns all libraries that are included in a given product",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2.0",
+                "products",
+                ":productToken",
+                "libraries"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "50"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "description": {
+                    "content": "Filter your search to return items whose property has a specific value.\nUse the syntax: **property:operation:value** where a colon (:) separates between property, operation and value.\n+ Property: the name of the property of the item\n+ Operation:\n    + **equals** - true if the value is identical to this value.\n    + **in** - true if the value is identical to one of the items in this comma-separated list. E.g. in:value1,value2,value3\n    + **like** - true if the property's value is contained within this value\n    + **regex** - true if this regular expression resolves as true.\n        The regex is not case sensitive, and special characters must be escaped with a backslash.\n        Special characters include space, double quote (\"), '<', '>', '#', '%', '{', '}', vertical bar ('|'), backslash, '^'.\n        To pass an escaped character in a URL in Postman, encode it first.\n        E.g. to return all items whose value begins with **a** or **A**, use regex:^a\n+ Value: the value of the property.\n\nTo combine multiple filters, separate each filter with a semicolon with no space. E.g.  property1:operation1:value1;property2:operation2:value2\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ description:[like | equals | regex]:value\n+ directDependency:[like | equals | regex]:value\n+ hasNotice:[like | equals | regex]:value\n+ license:[like | equals | regex | in]:value\n+ locations:[like | equals | regex]:value\n+ name:[like | equals | regex]:value\n+ numberOfLicenses:[equals | gt]:value\n+ projectName:[like | equals | regex]:value\n+ type:[like | in | equals | regex]:value",
+                    "type": "text/plain"
+                  },
+                  "key": "search",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Sort search results alphabetically on an item's property by entering **sort=** followed by the property name.\nE.g. enter **sort=email** to sort alphabetically by their email addresses from a-z ascending.To sort in descending order (z-a), add a minus sign ('-'). E.g. **sort=-email**.\n\nYou can sort by the following properties:\n+ description\n+ directDependency\n+ hasNotice\n+ license\n+ locations\n+ name\n+ numberOfLicenses\n+ projectName\n+ type",
+                    "type": "text/plain"
+                  },
+                  "key": "sort",
+                  "value": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "optionalColumns",
+                  "value": "<string>",
+                  "description": "Used to add location information about the library"
+                },
+                {
+                  "disabled": false,
+                  "key": "includeNotices",
+                  "value": "false"
+                },
+                {
+                  "disabled": false,
+                  "key": "extraInformation",
+                  "value": "false"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "productToken",
+                  "description": "(Required) product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7ecf8fdc-22ae-463a-99ef-62b8514deed9",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "products",
+                    ":productToken",
+                    "libraries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "search",
+                      "value": ""
+                    },
+                    {
+                      "key": "sort",
+                      "value": ""
+                    },
+                    {
+                      "key": "optionalColumns",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "includeNotices",
+                      "value": "false"
+                    },
+                    {
+                      "key": "extraInformation",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "productToken",
+                      "description": "(Required) product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\",\n  \"retVal\": [\n    {\n      \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n      \"name\": \"dbus-1.10.24-13.el7_6.x86_64.rpm\",\n      \"artifactId\": \"kind-of-6.0.2.tgz\",\n      \"groupId\": \"kind-of\",\n      \"version\": \"string\",\n      \"architecture\": \"string\",\n      \"languageVersion\": \"string\",\n      \"classifier\": \"string\",\n      \"extension\": \"string\",\n      \"sha1\": \"01146b36a6218e64e58f3a8d66de5d7fc6f6d051\",\n      \"description\": \"Get the native type of a value.\",\n      \"type\": \"javascript/Node.js\",\n      \"libraryType\": \"string\",\n      \"directDependency\": true,\n      \"purl\": \"pkg:maven/commons-beanutils/commons-beanutils@1.8.0?type=jar\",\n      \"extraInfo\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\",\n        \"key_3\": \"string\",\n        \"key_4\": \"string\"\n      },\n      \"extraInformation\": {\n        \"distributionUrl\": \"string\",\n        \"downloadUrl\": \"string\",\n        \"releaseDate\": \"2010-09-20T15:23:45.014Z\",\n        \"packageManagerRepository\": \"string\",\n        \"homePage\": \"string\",\n        \"repositoryUrl\": \"string\",\n        \"author\": \"string\"\n      },\n      \"licenses\": [\n        {\n          \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n          \"name\": \"MIT\",\n          \"assignedByUser\": true,\n          \"licenseReferences\": [\n            {\n              \"uuid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"liabilityReference\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"assignedBy\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"textUrl\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"customDisclaimer\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"information\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"uuid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"liabilityReference\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"assignedBy\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"textUrl\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"customDisclaimer\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"information\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n          \"name\": \"MIT\",\n          \"assignedByUser\": false,\n          \"licenseReferences\": [\n            {\n              \"uuid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"liabilityReference\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"assignedBy\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"textUrl\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"customDisclaimer\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"information\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"uuid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"liabilityReference\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"assignedBy\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"textUrl\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"customDisclaimer\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"information\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ],\n      \"copyrightReferences\": [\n        {\n          \"copyright\": \"Copyright 2021 x greater by the end of\",\n          \"type\": \"PROJECT_HOMEPAGE\",\n          \"customDisclaimer\": \"string\",\n          \"createdAt\": \"2001-07-30T07:39:32.653Z\",\n          \"textUrl\": \"string\",\n          \"startYear\": \"2021\",\n          \"endYear\": \"2022\",\n          \"author\": \"x greater by the end of\",\n          \"referenceInfo\": \"x greater by the end of\"\n        },\n        {\n          \"copyright\": \"Copyright 2021 x greater by the end of\",\n          \"type\": \"PROJECT_HOMEPAGE\",\n          \"customDisclaimer\": \"string\",\n          \"createdAt\": \"2010-04-11T08:45:55.443Z\",\n          \"textUrl\": \"string\",\n          \"startYear\": \"2021\",\n          \"endYear\": \"2022\",\n          \"author\": \"x greater by the end of\",\n          \"referenceInfo\": \"x greater by the end of\"\n        }\n      ],\n      \"securityRisks\": [\n        {\n          \"sourceUrl\": \"string\",\n          \"riskFactor\": \"KNOWN_FALSE_POSITIVE\"\n        },\n        {\n          \"sourceUrl\": \"string\",\n          \"riskFactor\": \"NO_FINDINGS\"\n        }\n      ],\n      \"noticeReference\": {\n        \"text\": \"Developed internally\",\n        \"reference\": \"https://github.com/...\"\n      },\n      \"proprietaryInfo\": {\n        \"ruleDescription\": \"string\",\n        \"rulePattern\": \"string\",\n        \"comment\": \"string\",\n        \"userInfo\": {\n          \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n          \"name\": \"Jon Smith\",\n          \"email\": \"jon.smith@mail.com\",\n          \"userType\": \"REGULAR\",\n          \"accountStatus\": \"ACTIVE\"\n        },\n        \"proprietaryMarkType\": \"BY_RULE\"\n      },\n      \"locations\": [\n        {\n          \"localPath\": \"C:\\\\\\\\Users\\\\\\\\user\\\\\\\\.m2\\\\\\\\repository\\\\\\\\commons-io-1.4.jar\",\n          \"dependencyFile\": \"C:\\\\\\\\GitHubRepos\\\\\\\\Pipline\\\\\\\\EUA\\\\\\\\plugins-automation\\\\\\\\fsa\\\\\\\\tests\\\\\\\\EUA\\\\\\\\Java\\\\\\\\bigProjectsMaven\\\\\\\\WST_417\\\\\\\\Data\\\\\\\\ksa\\\\\\\\ksa-web-core\\\\\\\\pom.xml\"\n        },\n        {\n          \"localPath\": \"C:\\\\\\\\Users\\\\\\\\user\\\\\\\\.m2\\\\\\\\repository\\\\\\\\commons-io-1.4.jar\",\n          \"dependencyFile\": \"C:\\\\\\\\GitHubRepos\\\\\\\\Pipline\\\\\\\\EUA\\\\\\\\plugins-automation\\\\\\\\fsa\\\\\\\\tests\\\\\\\\EUA\\\\\\\\Java\\\\\\\\bigProjectsMaven\\\\\\\\WST_417\\\\\\\\Data\\\\\\\\ksa\\\\\\\\ksa-web-core\\\\\\\\pom.xml\"\n        }\n      ],\n      \"attributionReportSettings\": {\n        \"excluded\": false\n      },\n      \"dependencyType\": \"string\",\n      \"violations\": 22,\n      \"workflowUuids\": [\n        \"2\",\n        \"2\"\n      ],\n      \"violatingFindings\": 2,\n      \"trackedIssue\": {\n        \"uuid\": \"string\",\n        \"issueId\": \"string\",\n        \"origin\": \"string\",\n        \"issueKey\": \"string\",\n        \"account\": {\n          \"uuid\": \"string\",\n          \"name\": \"string\"\n        },\n        \"domain\": {\n          \"uuid\": \"string\",\n          \"name\": \"string\"\n        },\n        \"application\": {\n          \"uuid\": \"string\",\n          \"name\": \"string\"\n        },\n        \"project\": {\n          \"uuid\": \"string\",\n          \"name\": \"string\"\n        },\n        \"status\": \"DELETED\",\n        \"issueStatus\": \"string\",\n        \"failureReason\": \"string\",\n        \"errorMessage\": \"string\",\n        \"publicLink\": \"string\",\n        \"creationDate\": \"1974-01-01T10:06:29.523Z\",\n        \"updatedAt\": \"1995-01-02T05:31:20.991Z\",\n        \"createdBy\": {\n          \"uuid\": \"string\",\n          \"name\": \"string\"\n        },\n        \"ticketType\": \"LEGAL\"\n      },\n      \"project\": {\n        \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n        \"name\": \"My Project\",\n        \"path\": \"My Product\",\n        \"productName\": \"My Product\",\n        \"productUuid\": \"123e4567-e89b-12d3-a456-426655440000\"\n      }\n    },\n    {\n      \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n      \"name\": \"dbus-1.10.24-13.el7_6.x86_64.rpm\",\n      \"artifactId\": \"kind-of-6.0.2.tgz\",\n      \"groupId\": \"kind-of\",\n      \"version\": \"string\",\n      \"architecture\": \"string\",\n      \"languageVersion\": \"string\",\n      \"classifier\": \"string\",\n      \"extension\": \"string\",\n      \"sha1\": \"01146b36a6218e64e58f3a8d66de5d7fc6f6d051\",\n      \"description\": \"Get the native type of a value.\",\n      \"type\": \"javascript/Node.js\",\n      \"libraryType\": \"string\",\n      \"directDependency\": false,\n      \"purl\": \"pkg:maven/commons-beanutils/commons-beanutils@1.8.0?type=jar\",\n      \"extraInfo\": {\n        \"key_0\": \"string\"\n      },\n      \"extraInformation\": {\n        \"distributionUrl\": \"string\",\n        \"downloadUrl\": \"string\",\n        \"releaseDate\": \"2012-01-30T08:58:15.361Z\",\n        \"packageManagerRepository\": \"string\",\n        \"homePage\": \"string\",\n        \"repositoryUrl\": \"string\",\n        \"author\": \"string\"\n      },\n      \"licenses\": [\n        {\n          \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n          \"name\": \"MIT\",\n          \"assignedByUser\": false,\n          \"licenseReferences\": [\n            {\n              \"uuid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"liabilityReference\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"assignedBy\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"textUrl\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"customDisclaimer\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"information\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"uuid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"liabilityReference\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"assignedBy\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"textUrl\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"customDisclaimer\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"information\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n          \"name\": \"MIT\",\n          \"assignedByUser\": true,\n          \"licenseReferences\": [\n            {\n              \"uuid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"liabilityReference\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"assignedBy\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"textUrl\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"customDisclaimer\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"information\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"uuid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"liabilityReference\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"assignedBy\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"textUrl\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"customDisclaimer\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"information\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ],\n      \"copyrightReferences\": [\n        {\n          \"copyright\": \"Copyright 2021 x greater by the end of\",\n          \"type\": \"PROJECT_HOMEPAGE\",\n          \"customDisclaimer\": \"string\",\n          \"createdAt\": \"1957-07-18T02:28:08.038Z\",\n          \"textUrl\": \"string\",\n          \"startYear\": \"2021\",\n          \"endYear\": \"2022\",\n          \"author\": \"x greater by the end of\",\n          \"referenceInfo\": \"x greater by the end of\"\n        },\n        {\n          \"copyright\": \"Copyright 2021 x greater by the end of\",\n          \"type\": \"PROJECT_HOMEPAGE\",\n          \"customDisclaimer\": \"string\",\n          \"createdAt\": \"2013-08-28T13:35:52.277Z\",\n          \"textUrl\": \"string\",\n          \"startYear\": \"2021\",\n          \"endYear\": \"2022\",\n          \"author\": \"x greater by the end of\",\n          \"referenceInfo\": \"x greater by the end of\"\n        }\n      ],\n      \"securityRisks\": [\n        {\n          \"sourceUrl\": \"string\",\n          \"riskFactor\": \"UNCONFIRMED_UNSAFE\"\n        },\n        {\n          \"sourceUrl\": \"string\",\n          \"riskFactor\": \"KNOWN_FALSE_POSITIVE\"\n        }\n      ],\n      \"noticeReference\": {\n        \"text\": \"Developed internally\",\n        \"reference\": \"https://github.com/...\"\n      },\n      \"proprietaryInfo\": {\n        \"ruleDescription\": \"string\",\n        \"rulePattern\": \"string\",\n        \"comment\": \"string\",\n        \"userInfo\": {\n          \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n          \"name\": \"Jon Smith\",\n          \"email\": \"jon.smith@mail.com\",\n          \"userType\": \"REGULAR\",\n          \"accountStatus\": \"ACTIVE\"\n        },\n        \"proprietaryMarkType\": \"BY_USER\"\n      },\n      \"locations\": [\n        {\n          \"localPath\": \"C:\\\\\\\\Users\\\\\\\\user\\\\\\\\.m2\\\\\\\\repository\\\\\\\\commons-io-1.4.jar\",\n          \"dependencyFile\": \"C:\\\\\\\\GitHubRepos\\\\\\\\Pipline\\\\\\\\EUA\\\\\\\\plugins-automation\\\\\\\\fsa\\\\\\\\tests\\\\\\\\EUA\\\\\\\\Java\\\\\\\\bigProjectsMaven\\\\\\\\WST_417\\\\\\\\Data\\\\\\\\ksa\\\\\\\\ksa-web-core\\\\\\\\pom.xml\"\n        },\n        {\n          \"localPath\": \"C:\\\\\\\\Users\\\\\\\\user\\\\\\\\.m2\\\\\\\\repository\\\\\\\\commons-io-1.4.jar\",\n          \"dependencyFile\": \"C:\\\\\\\\GitHubRepos\\\\\\\\Pipline\\\\\\\\EUA\\\\\\\\plugins-automation\\\\\\\\fsa\\\\\\\\tests\\\\\\\\EUA\\\\\\\\Java\\\\\\\\bigProjectsMaven\\\\\\\\WST_417\\\\\\\\Data\\\\\\\\ksa\\\\\\\\ksa-web-core\\\\\\\\pom.xml\"\n        }\n      ],\n      \"attributionReportSettings\": {\n        \"excluded\": true\n      },\n      \"dependencyType\": \"string\",\n      \"violations\": 22,\n      \"workflowUuids\": [\n        \"2\",\n        \"2\"\n      ],\n      \"violatingFindings\": 2,\n      \"trackedIssue\": {\n        \"uuid\": \"string\",\n        \"issueId\": \"string\",\n        \"origin\": \"string\",\n        \"issueKey\": \"string\",\n        \"account\": {\n          \"uuid\": \"string\",\n          \"name\": \"string\"\n        },\n        \"domain\": {\n          \"uuid\": \"string\",\n          \"name\": \"string\"\n        },\n        \"application\": {\n          \"uuid\": \"string\",\n          \"name\": \"string\"\n        },\n        \"project\": {\n          \"uuid\": \"string\",\n          \"name\": \"string\"\n        },\n        \"status\": \"DELETED\",\n        \"issueStatus\": \"string\",\n        \"failureReason\": \"string\",\n        \"errorMessage\": \"string\",\n        \"publicLink\": \"string\",\n        \"creationDate\": \"1984-09-04T13:10:06.929Z\",\n        \"updatedAt\": \"2004-10-19T11:08:21.098Z\",\n        \"createdBy\": {\n          \"uuid\": \"string\",\n          \"name\": \"string\"\n        },\n        \"ticketType\": \"SECURITY\"\n      },\n      \"project\": {\n        \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n        \"name\": \"My Project\",\n        \"path\": \"My Product\",\n        \"productName\": \"My Product\",\n        \"productUuid\": \"123e4567-e89b-12d3-a456-426655440000\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5b6a3063-d9b6-484f-96cb-461afa20db11",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "products",
+                    ":productToken",
+                    "libraries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "search",
+                      "value": ""
+                    },
+                    {
+                      "key": "sort",
+                      "value": ""
+                    },
+                    {
+                      "key": "optionalColumns",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "includeNotices",
+                      "value": "false"
+                    },
+                    {
+                      "key": "extraInformation",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "productToken",
+                      "description": "(Required) product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0c77dd70-9a7d-4128-84a6-4f0c8770cfd4",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "products",
+                    ":productToken",
+                    "libraries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "search",
+                      "value": ""
+                    },
+                    {
+                      "key": "sort",
+                      "value": ""
+                    },
+                    {
+                      "key": "optionalColumns",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "includeNotices",
+                      "value": "false"
+                    },
+                    {
+                      "key": "extraInformation",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "productToken",
+                      "description": "(Required) product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://baseUrl",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "baa15e10-9af9-4b45-aebb-50fe0f550065",
+    "name": "Mend Access Management Library - Product API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Mend's enhanced API enables automation of workflows in a REST compliant format. The API features:\n+ Access for any user with Mend credentials, via a user key available in the user's profile page in the Mend Platform.\n+ Improved security with a JWT token per organization, which expires every 10 minutes.\n+ Added scalability with support for cursor pagination and limiting results size.\n+ Broader functionality available programmatically.\n+ New standard API documentation for easy navigation and search.\n\n**Note:** To help you get started with the Mend API 3.0, we recommend reviewing our onboarding guide -> [Getting Started with API 3.0](https://docs.mend.io/platform/latest/getting-started-with-mend-api-3-0).\nThis resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend API 3.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mend Access Management Asynchronous Process Control API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Asynchronous Process Control",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Async Process Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v2.0/orgs/:orgToken/asyncProcessStatus/:statusUuid",
+            "params": [
+              {
+                "name": "orgToken",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+              },
+              {
+                "name": "statusUuid",
+                "value": "",
+                "type": "path",
+                "description": "Asynchronous Process Status UUID"
+              }
+            ]
+          },
+          "docs": " Returns the status of an asynchronous process. Asynchronous processes allow requests to be performed in\n the background, enabling you to initiate tasks and check their completion status later.\n\n **Requests Performed in Async Process:**\n+ Post Apply OrganizationPolicies On Inventory.\n+ Post Apply Product Policies On Inventory.\n+ Post Apply Project Policies On Inventory."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

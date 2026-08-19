@@ -1,0 +1,427 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mend Access Management Projects API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Projects",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Project in Application",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v3.0/orgs/:orgUuid/applications/:applicationUuid/projects",
+            "params": [
+              {
+                "name": "orgUuid",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+              },
+              {
+                "name": "applicationUuid",
+                "value": "",
+                "type": "path",
+                "description": "Application UUID (Administration > Applications)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Project within the given Application. If the Project already exists it returns the existing Project."
+        },
+        {
+          "info": {
+            "name": "Get Organization Projects",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v3.0/orgs/:orgUuid/projects",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the maximum number of items to be returned in the response."
+              },
+              {
+                "name": "populateApplications",
+                "value": "",
+                "type": "query",
+                "description": "Add populateApplications=false to receive a slimmer response containing only the project UUID and name."
+              },
+              {
+                "name": "excludeInactiveProjects",
+                "value": "",
+                "type": "query",
+                "description": "Add excludeInactiveProjects=false to retrieve all projects, including inactive ones."
+              },
+              {
+                "name": "orgUuid",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+              }
+            ]
+          },
+          "docs": "Returns a list of all projects accessible to the current user"
+        },
+        {
+          "info": {
+            "name": "Create Project",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v3.0/orgs/:orgUuid/projects",
+            "params": [
+              {
+                "name": "orgUuid",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Project. If applicationName is provided and the Application does not exist, it will be created. If the Project already exists it returns the existing Project."
+        },
+        {
+          "info": {
+            "name": "Get Project Statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v3.0/orgs/:orgUuid/projects/summaries",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the maximum number of items to be returned in the response."
+              },
+              {
+                "name": "orgUuid",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns the requested statistics for the given projects that match at least one of the given identifiers."
+        },
+        {
+          "info": {
+            "name": "Get Project totals grouped by date",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v3.0/orgs/:orgUuid/projects/summaries/total/date",
+            "params": [
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "Enter the start date for the search. The date format is yyyy-MM-dd"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "Enter the end date for the search. The date format is yyyy-MM-dd"
+              },
+              {
+                "name": "orgUuid",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+              }
+            ]
+          },
+          "docs": "Returns the requested statistics for the given projects that match at least one of the given identifiers."
+        },
+        {
+          "info": {
+            "name": "Get Project totals",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v3.0/orgs/:orgUuid/projects/summaries/totals",
+            "params": [
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "Enter the start date for the search. The date format is yyyy-MM-dd"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "Enter the end date for the search. The date format is yyyy-MM-dd"
+              },
+              {
+                "name": "orgUuid",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+              }
+            ]
+          },
+          "docs": "Returns the requested statistics for the given projects that match at least one of the given identifiers."
+        },
+        {
+          "info": {
+            "name": "Get Project Labels",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v3.0/orgs/:orgUuid/projects/:projectUuid/labels",
+            "params": [
+              {
+                "name": "orgUuid",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+              },
+              {
+                "name": "projectUuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the project"
+              }
+            ]
+          },
+          "docs": "Get project labels. A label can be a string or namespace:value pair that provide additional metadata to assist with project management."
+        },
+        {
+          "info": {
+            "name": "Add Project Label",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://baseUrl/api/v3.0/orgs/:orgUuid/projects/:projectUuid/labels",
+            "params": [
+              {
+                "name": "orgUuid",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+              },
+              {
+                "name": "projectUuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the project"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a new label to a project. A label can be a string or namespace:value pair that provide additional metadata to assist with project management."
+        },
+        {
+          "info": {
+            "name": "Remove Project Label",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://baseUrl/api/v3.0/orgs/:orgUuid/projects/:projectUuid/labels/:labelUuid",
+            "params": [
+              {
+                "name": "orgUuid",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+              },
+              {
+                "name": "projectUuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the project"
+              },
+              {
+                "name": "labelUuid",
+                "value": "",
+                "type": "path",
+                "description": "Label UUID (Administration > Labels)"
+              }
+            ]
+          },
+          "docs": "Removes a label from a project"
+        },
+        {
+          "info": {
+            "name": "Get Project Violating Findings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v3.0/orgs/:orgUuid/projects/:projectUuid/violations",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the maximum number of items to be returned in the response."
+              },
+              {
+                "name": "orgUuid",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+              },
+              {
+                "name": "projectUuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the project"
+              }
+            ]
+          },
+          "docs": "Returns the violations relates to project"
+        },
+        {
+          "info": {
+            "name": "Update Multiple Violation SLA",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://baseUrl/api/v3.0/orgs/:orgUuid/projects/:projectUuid/violations/sla",
+            "params": [
+              {
+                "name": "orgUuid",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+              },
+              {
+                "name": "projectUuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the project"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the SLA of Multiple Project Violating Findings"
+        },
+        {
+          "info": {
+            "name": "Get project vulnerabilities traces (Dependencies - SCA)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v3.0/projects/:projectUuid/dependencies/effective",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the maximum number of items to be returned in the response."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved."
+              },
+              {
+                "name": "projectUuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the project"
+              }
+            ]
+          },
+          "docs": "Returns the traces of a given project. Note that this feature requires that Mend Prioritize be enabled in your Mend account."
+        },
+        {
+          "info": {
+            "name": "Update Project with SBOM (Dependencies - SCA)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v3.0/projects/:projectUuid/dependencies/importSbom",
+            "params": [
+              {
+                "name": "projectUuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the project"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "sbomFile",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Upload a single SBOM file to update an existing project. The SBOM scan is queued for asynchronous processing. Supported formats: SPDX (JSON/XML), CycloneDX (JSON/XML)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

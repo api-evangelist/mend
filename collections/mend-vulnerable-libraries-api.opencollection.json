@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mend Access Management Vulnerable Libraries API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Vulnerable Libraries",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Vulnerable Libraries By CVE",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v2.0/orgs/:orgToken/vulnerabilities/:vulnerabilityName/libraries",
+            "params": [
+              {
+                "name": "orgToken",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**)."
+              },
+              {
+                "name": "vulnerabilityName",
+                "value": "",
+                "type": "path",
+                "description": "Vulnerability Name in the form of CVE-xxxx-xxx or WS-xxxx-xxx."
+              }
+            ]
+          },
+          "docs": "Returns all of the vulnerable libraries in an organization ordered by their associated CVE-ID"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

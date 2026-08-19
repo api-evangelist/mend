@@ -1,0 +1,479 @@
+{
+  "item": [
+    {
+      "id": "6c9e4ff0-ba93-47d7-a5d1-343a06e6eaba",
+      "name": "General Info - Licenses",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "53e52f0d-ec4a-48df-b0d7-7b2228f11cb5",
+          "name": "Get License Details",
+          "request": {
+            "name": "Get License Details",
+            "description": {
+              "content": "Returns detailed information about a specific license",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2.0",
+                "licenses",
+                ":licenseName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "licenseName",
+                  "description": "(Required) license name (by running General Info - Licenses > Get All Licenses)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ebd2203c-d091-4ab3-8d38-403129ccbd31",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "licenses",
+                    ":licenseName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "licenseName",
+                      "description": "(Required) license name (by running General Info - Licenses > Get All Licenses)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\",\n  \"retVal\": {\n    \"name\": \"MIT\",\n    \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n    \"spdxName\": \"Glide\",\n    \"type\": \"OPEN_SOURCE\",\n    \"suspected\": false,\n    \"osiApproved\": false,\n    \"profile\": {\n      \"uuid\": \"string\",\n      \"name\": \"string\",\n      \"links\": [\n        \"http://www.opensource.org/licenses/AFL-3.0\"\n      ],\n      \"copyrightRiskScore\": {\n        \"explanation\": \"http://en.wikipedia.org/wiki/Academic_Free_License\",\n        \"indicatingText\": \"1) Grant of Copyright License...\",\n        \"riskScore\": 39\n      },\n      \"patentAndRoyaltyRisk\": {\n        \"explanation\": \"http://en.wikipedia.org/wiki/Academic_Free_License\",\n        \"indicatingText\": \"1) Grant of Copyright License...\",\n        \"riskScore\": 39\n      },\n      \"royaltyFree\": \"Conditional\",\n      \"copyleft\": {\n        \"explanation\": \"http://en.wikipedia.org/wiki/Academic_Free_License\",\n        \"indicatingText\": \"1) Grant of Copyright License...\",\n        \"description\": \"Not a CopyLeft license.\",\n        \"displayText\": \"No\"\n      },\n      \"linking\": {\n        \"explanation\": \"http://en.wikipedia.org/wiki/Academic_Free_License\",\n        \"indicatingText\": \"1) Grant of Copyright License...\",\n        \"description\": \"Not a CopyLeft license.\",\n        \"displayText\": \"No\"\n      },\n      \"requiredNotices\": [\n        \"Must identify specific modifications\",\n        \"Must identify specific modifications\"\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "457b3d3f-2c22-4768-945b-95580a411cb5",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "licenses",
+                    ":licenseName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "licenseName",
+                      "description": "(Required) license name (by running General Info - Licenses > Get All Licenses)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9e0dcc06-90ac-447d-b33b-71123d51562b",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "licenses",
+                    ":licenseName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "licenseName",
+                      "description": "(Required) license name (by running General Info - Licenses > Get All Licenses)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "185f1f5b-7eae-4d77-88c6-d46342512318",
+          "name": "Get All Licenses",
+          "request": {
+            "name": "Get All Licenses",
+            "description": {
+              "content": "Returns a list of all known licenses in the system.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2.0",
+                "licenses"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "50"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "description": {
+                    "content": "Filter your search to return items whose property has a specific value.\nUse the syntax: **property:operation:value** where a colon (:) separates between property, operation and value.\n+ Property: the name of the property of the item\n+ Operation:\n    + **equals** - true if the value is identical to this value.\n    + **like** - true if the property's value is contained within this value\n    + **in** - true if the value is identical to one of the items in this comma-separated list. E.g. in:value1,value2,value3\n+ Value: the value of the property.\n\nTo combine multiple filters, separate each filter with a semicolon with no space. E.g.  property1:operation1:value1;property2:operation2:value2\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ name:[equals | like | in]:value\n+ spdxName:[equals | like | in]:value\n+ uuid:[equals | in]:value",
+                    "type": "text/plain"
+                  },
+                  "key": "search",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "001511d8-d814-453f-b33f-c86d63369a29",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "licenses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "search",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"additionalData\": {\n    \"totalItems\": \"422\",\n    \"isLastPage\": \"true\"\n  },\n  \"supportToken\": \"1171c60d\",\n  \"retVal\": [\n    {\n      \"name\": \"MIT\",\n      \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n      \"spdxName\": \"Glide\",\n      \"type\": \"OPEN_SOURCE\",\n      \"suspected\": true,\n      \"osiApproved\": false,\n      \"profile\": {\n        \"uuid\": \"string\",\n        \"name\": \"string\",\n        \"links\": [\n          \"http://www.opensource.org/licenses/AFL-3.0\"\n        ],\n        \"copyrightRiskScore\": {\n          \"explanation\": \"http://en.wikipedia.org/wiki/Academic_Free_License\",\n          \"indicatingText\": \"1) Grant of Copyright License...\",\n          \"riskScore\": 39\n        },\n        \"patentAndRoyaltyRisk\": {\n          \"explanation\": \"http://en.wikipedia.org/wiki/Academic_Free_License\",\n          \"indicatingText\": \"1) Grant of Copyright License...\",\n          \"riskScore\": 39\n        },\n        \"royaltyFree\": \"Conditional\",\n        \"copyleft\": {\n          \"explanation\": \"http://en.wikipedia.org/wiki/Academic_Free_License\",\n          \"indicatingText\": \"1) Grant of Copyright License...\",\n          \"description\": \"Not a CopyLeft license.\",\n          \"displayText\": \"No\"\n        },\n        \"linking\": {\n          \"explanation\": \"http://en.wikipedia.org/wiki/Academic_Free_License\",\n          \"indicatingText\": \"1) Grant of Copyright License...\",\n          \"description\": \"Not a CopyLeft license.\",\n          \"displayText\": \"No\"\n        },\n        \"requiredNotices\": [\n          \"Must identify specific modifications\",\n          \"Must identify specific modifications\"\n        ]\n      }\n    },\n    {\n      \"name\": \"MIT\",\n      \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n      \"spdxName\": \"Glide\",\n      \"type\": \"OPEN_SOURCE\",\n      \"suspected\": true,\n      \"osiApproved\": false,\n      \"profile\": {\n        \"uuid\": \"string\",\n        \"name\": \"string\",\n        \"links\": [\n          \"http://www.opensource.org/licenses/AFL-3.0\"\n        ],\n        \"copyrightRiskScore\": {\n          \"explanation\": \"http://en.wikipedia.org/wiki/Academic_Free_License\",\n          \"indicatingText\": \"1) Grant of Copyright License...\",\n          \"riskScore\": 39\n        },\n        \"patentAndRoyaltyRisk\": {\n          \"explanation\": \"http://en.wikipedia.org/wiki/Academic_Free_License\",\n          \"indicatingText\": \"1) Grant of Copyright License...\",\n          \"riskScore\": 39\n        },\n        \"royaltyFree\": \"Conditional\",\n        \"copyleft\": {\n          \"explanation\": \"http://en.wikipedia.org/wiki/Academic_Free_License\",\n          \"indicatingText\": \"1) Grant of Copyright License...\",\n          \"description\": \"Not a CopyLeft license.\",\n          \"displayText\": \"No\"\n        },\n        \"linking\": {\n          \"explanation\": \"http://en.wikipedia.org/wiki/Academic_Free_License\",\n          \"indicatingText\": \"1) Grant of Copyright License...\",\n          \"description\": \"Not a CopyLeft license.\",\n          \"displayText\": \"No\"\n        },\n        \"requiredNotices\": [\n          \"Must identify specific modifications\",\n          \"Must identify specific modifications\"\n        ]\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4dfd7f11-84d0-4153-b9b7-544b66f013df",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "licenses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "search",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "22e34e52-15c9-4874-8d3d-68f0514b574a",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "licenses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "search",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://baseUrl",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "0501ca6a-a18a-48dc-bbc9-311abc0e00f5",
+    "name": "Mend Access Management General Info - Licenses API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Mend's enhanced API enables automation of workflows in a REST compliant format. The API features:\n+ Access for any user with Mend credentials, via a user key available in the user's profile page in the Mend Platform.\n+ Improved security with a JWT token per organization, which expires every 10 minutes.\n+ Added scalability with support for cursor pagination and limiting results size.\n+ Broader functionality available programmatically.\n+ New standard API documentation for easy navigation and search.\n\n**Note:** To help you get started with the Mend API 3.0, we recommend reviewing our onboarding guide -> [Getting Started with API 3.0](https://docs.mend.io/platform/latest/getting-started-with-mend-api-3-0).\nThis resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend API 3.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.",
+      "type": "text/plain"
+    }
+  }
+}

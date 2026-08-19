@@ -1,0 +1,47 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mend Access Management AI API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "AI",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get implementation weaknesses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v3.0/ai/implementationweakness",
+            "params": [
+              {
+                "name": "weaknessID",
+                "value": "",
+                "type": "query",
+                "description": "Filter by specific weakness ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of implementation weakness types and their details"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

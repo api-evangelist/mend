@@ -1,0 +1,82 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mend Access Management User Profile API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "User Profile",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get All User Keys",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v2.0/profile/userKeys",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Enter the number of items to return in each page of the result."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Enter the page number to display in the result. Page numbers start at 0"
+              }
+            ]
+          },
+          "docs": "Returns a list of existing user-keys for the current user. These keys are included in all API requests to identify the user"
+        },
+        {
+          "info": {
+            "name": "Generate User Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v2.0/profile/userKeys",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generates a user-key for the current user. User-keys are included in all api requests to identify the user"
+        },
+        {
+          "info": {
+            "name": "Delete User Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://baseUrl/api/v2.0/profile/userKeys/:userKey",
+            "params": [
+              {
+                "name": "userKey",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a user-key"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

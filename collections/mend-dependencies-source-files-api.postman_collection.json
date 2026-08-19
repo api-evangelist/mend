@@ -1,0 +1,2164 @@
+{
+  "item": [
+    {
+      "id": "dad91481-7d37-4814-8e91-d8c40635afe9",
+      "name": "Dependencies Source Files",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "59fe65de-f8b8-426a-bc2a-ce678a7e65a1",
+          "name": "Get source files inventory at project level",
+          "request": {
+            "name": "Get source files inventory at project level",
+            "description": {
+              "content": "Returns an inventory list of the source files associated with each library in a project. Supports filtering by library UUID using the search parameter. Example: ?search=libraryUuid==b366b0ef-b211-4c37-a47c-0077e4de709f",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v3.0",
+                "projects",
+                ":projectUuid",
+                "dependencies",
+                "sourceFiles",
+                "inventory"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "Specifies the maximum number of items to be returned in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectUuid",
+                  "description": "(Required) UUID of the project"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a386542c-9967-47cb-b751-0651b68cf860",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3.0",
+                    "projects",
+                    ":projectUuid",
+                    "dependencies",
+                    "sourceFiles",
+                    "inventory"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectUuid",
+                      "description": "(Required) UUID of the project"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"additionalData\": {\n    \"totalItems\": \"422\",\n    \"next\": \"http://someUrl?cursor=3\",\n    \"cursor\": 3\n  },\n  \"supportToken\": \"1171c60d\",\n  \"response\": [\n    {\n      \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n      \"name\": \"common.js\",\n      \"matchType\": \"MANUAL\",\n      \"sha1\": \"MANUAL\",\n      \"localPath\": \"C:\\\\Users\\\\\",\n      \"lastModified\": \"1976-09-22T20:32:41.394Z\",\n      \"library\": {\n        \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n        \"name\": \" actionview-v0.0.1\",\n        \"licenses\": [\n          {\n            \"name\": \"MIT\",\n            \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n            \"spdxName\": \"Glide\",\n            \"type\": \"OPEN_SOURCE\",\n            \"suspected\": true,\n            \"osiApproved\": true,\n            \"profile\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": \"MIT\",\n            \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n            \"spdxName\": \"Glide\",\n            \"type\": \"OPEN_SOURCE\",\n            \"suspected\": true,\n            \"osiApproved\": true,\n            \"profile\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"description\": \"string\"\n      },\n      \"comment\": \"string\",\n      \"contextType\": \"DOMAIN\",\n      \"project\": {\n        \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n        \"name\": \"My Project\",\n        \"path\": \"My Application\",\n        \"applicationName\": \"My Application\",\n        \"applicationUuid\": \"123e4567-e89b-12d3-a456-426655440000\"\n      }\n    },\n    {\n      \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n      \"name\": \"common.js\",\n      \"matchType\": \"MANUAL\",\n      \"sha1\": \"MANUAL\",\n      \"localPath\": \"C:\\\\Users\\\\\",\n      \"lastModified\": \"1971-01-09T00:11:00.186Z\",\n      \"library\": {\n        \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n        \"name\": \" actionview-v0.0.1\",\n        \"licenses\": [\n          {\n            \"name\": \"MIT\",\n            \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n            \"spdxName\": \"Glide\",\n            \"type\": \"OPEN_SOURCE\",\n            \"suspected\": false,\n            \"osiApproved\": false,\n            \"profile\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": \"MIT\",\n            \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n            \"spdxName\": \"Glide\",\n            \"type\": \"OPEN_SOURCE\",\n            \"suspected\": true,\n            \"osiApproved\": true,\n            \"profile\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"description\": \"string\"\n      },\n      \"comment\": \"string\",\n      \"contextType\": \"SCAN\",\n      \"project\": {\n        \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n        \"name\": \"My Project\",\n        \"path\": \"My Application\",\n        \"applicationName\": \"My Application\",\n        \"applicationUuid\": \"123e4567-e89b-12d3-a456-426655440000\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "397344b0-acd7-4534-84f6-c80578b0f2f8",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3.0",
+                    "projects",
+                    ":projectUuid",
+                    "dependencies",
+                    "sourceFiles",
+                    "inventory"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectUuid",
+                      "description": "(Required) UUID of the project"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "167a78ed-e17f-433c-ab65-36816e9884ce",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3.0",
+                    "projects",
+                    ":projectUuid",
+                    "dependencies",
+                    "sourceFiles",
+                    "inventory"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectUuid",
+                      "description": "(Required) UUID of the project"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "742aeeae-dccd-4b89-b625-c3ab65b50dfa",
+          "name": "Get Mend library suggestions for source files at project level",
+          "request": {
+            "name": "Get Mend library suggestions for source files at project level",
+            "description": {
+              "content": "Returns Mend library suggestions for the specified source file UUIDs. Request body requires: sourceFileUuids (array), recommendedForAllFiles (boolean). Supports same search filters as searchForMatch: date, license, name, owner, version. ",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v3.0",
+                "projects",
+                ":projectUuid",
+                "dependencies",
+                "sourceFiles",
+                "matchSuggestions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectUuid",
+                  "description": "(Required) UUID of the project"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"recommendedForAllFiles\": \"<boolean>\",\n  \"sourceFileUuids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "55c52104-903b-4e25-8aa6-18d15b3109b9",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3.0",
+                    "projects",
+                    ":projectUuid",
+                    "dependencies",
+                    "sourceFiles",
+                    "matchSuggestions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectUuid",
+                      "description": "(Required) UUID of the project"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"recommendedForAllFiles\": false,\n  \"sourceFileUuids\": [\n    \"123e4567-e89b-12d3-a456-426655440000\",\n    \"123e4567-e89b-12d3-a456-426655440000\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\",\n  \"response\": [\n    {\n      \"name\": \"openssl\",\n      \"sha1\": \"49f6cb968ff63793f6671d9026fb2a7034dad79a\",\n      \"licenses\": [\n        {\n          \"name\": \"MIT\",\n          \"severity\": \"High\"\n        },\n        {\n          \"name\": \"MIT\",\n          \"severity\": \"High\"\n        }\n      ],\n      \"version\": \"OpenSSL_1_0_1\",\n      \"owner\": \"openssl\",\n      \"url\": \"https://github.com/openssl/openssl.git\",\n      \"date\": \"2012-03-14T12:39:00Z\",\n      \"nonOfficialRelease\": false,\n      \"matchSuggestionId\": \"ZWJlMTZhZjYtMmE2YS00MWQ1LWFiNTQtYWQ3YWE3OWZhNzFl\"\n    },\n    {\n      \"name\": \"openssl\",\n      \"sha1\": \"49f6cb968ff63793f6671d9026fb2a7034dad79a\",\n      \"licenses\": [\n        {\n          \"name\": \"MIT\",\n          \"severity\": \"High\"\n        },\n        {\n          \"name\": \"MIT\",\n          \"severity\": \"High\"\n        }\n      ],\n      \"version\": \"OpenSSL_1_0_1\",\n      \"owner\": \"openssl\",\n      \"url\": \"https://github.com/openssl/openssl.git\",\n      \"date\": \"2012-03-14T12:39:00Z\",\n      \"nonOfficialRelease\": false,\n      \"matchSuggestionId\": \"ZWJlMTZhZjYtMmE2YS00MWQ1LWFiNTQtYWQ3YWE3OWZhNzFl\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7e77e921-dc2e-4696-9586-d0a95e375f11",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3.0",
+                    "projects",
+                    ":projectUuid",
+                    "dependencies",
+                    "sourceFiles",
+                    "matchSuggestions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectUuid",
+                      "description": "(Required) UUID of the project"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"recommendedForAllFiles\": false,\n  \"sourceFileUuids\": [\n    \"123e4567-e89b-12d3-a456-426655440000\",\n    \"123e4567-e89b-12d3-a456-426655440000\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2efffc63-18a5-4f1c-8201-d7d842c0139a",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3.0",
+                    "projects",
+                    ":projectUuid",
+                    "dependencies",
+                    "sourceFiles",
+                    "matchSuggestions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectUuid",
+                      "description": "(Required) UUID of the project"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"recommendedForAllFiles\": false,\n  \"sourceFileUuids\": [\n    \"123e4567-e89b-12d3-a456-426655440000\",\n    \"123e4567-e89b-12d3-a456-426655440000\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5ec3103e-8003-4547-bf1e-3938d9abef21",
+          "name": "Search for library matches for source files at project level",
+          "request": {
+            "name": "Search for library matches for source files at project level",
+            "description": {
+              "content": "Returns library match suggestions from Mend based on manual search criteria. Uses V3 MQL search format. Available search filters: date:between:date1,date2 (e.g., between:2019-05-01,2019-06-01), license:[like|regex]:value, name:[like|equals|regex]:value, owner:like:value, version:like:value. Example: ?search=name==openssl. ",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v3.0",
+                "projects",
+                ":projectUuid",
+                "dependencies",
+                "sourceFiles",
+                "searchForMatch"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectUuid",
+                  "description": "(Required) UUID of the project"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2bc3eae1-c9e9-4a55-ba39-1e50b9c0d89d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3.0",
+                    "projects",
+                    ":projectUuid",
+                    "dependencies",
+                    "sourceFiles",
+                    "searchForMatch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectUuid",
+                      "description": "(Required) UUID of the project"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\",\n  \"response\": [\n    {\n      \"uuid\": \"b366b0ef-b211-4c37-a47c-0077e4de709f\",\n      \"name\": \"openssl\",\n      \"sha1\": \"49f6cb968ff63793f6671d9026fb2a7034dad79a\",\n      \"licenses\": [\n        {\n          \"name\": \"MIT\",\n          \"severity\": \"High\"\n        },\n        {\n          \"name\": \"MIT\",\n          \"severity\": \"High\"\n        }\n      ],\n      \"version\": \"OpenSSL_1_0_1\",\n      \"owner\": \"openssl\",\n      \"url\": \"https://github.com/openssl/openssl.git\",\n      \"date\": \"2012-03-14T12:39:00Z\",\n      \"nonOfficialRelease\": false\n    },\n    {\n      \"uuid\": \"b366b0ef-b211-4c37-a47c-0077e4de709f\",\n      \"name\": \"openssl\",\n      \"sha1\": \"49f6cb968ff63793f6671d9026fb2a7034dad79a\",\n      \"licenses\": [\n        {\n          \"name\": \"MIT\",\n          \"severity\": \"High\"\n        },\n        {\n          \"name\": \"MIT\",\n          \"severity\": \"High\"\n        }\n      ],\n      \"version\": \"OpenSSL_1_0_1\",\n      \"owner\": \"openssl\",\n      \"url\": \"https://github.com/openssl/openssl.git\",\n      \"date\": \"2012-03-14T12:39:00Z\",\n      \"nonOfficialRelease\": false\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f32c411c-c480-4d49-accd-627f400e920a",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3.0",
+                    "projects",
+                    ":projectUuid",
+                    "dependencies",
+                    "sourceFiles",
+                    "searchForMatch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectUuid",
+                      "description": "(Required) UUID of the project"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "946e97f7-81e7-49aa-a28c-96acdcf9b68d",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3.0",
+                    "projects",
+                    ":projectUuid",
+                    "dependencies",
+                    "sourceFiles",
+                    "searchForMatch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectUuid",
+                      "description": "(Required) UUID of the project"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "63accbf9-ee80-4b6b-bdf8-78b86524ed25",
+          "name": "Get source files inventory at application level",
+          "request": {
+            "name": "Get source files inventory at application level",
+            "description": {
+              "content": "Returns a list of libraries together with the location of their source files. Supports filtering by library UUID using the search parameter. Example: ?search=libraryUuid==b366b0ef-b211-4c37-a47c-0077e4de709f",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v3.0",
+                "applications",
+                ":applicationUuid",
+                "dependencies",
+                "sourceFiles",
+                "inventory"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "Specifies the maximum number of items to be returned in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "applicationUuid",
+                  "description": "(Required) Application UUID (Administration > Applications)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "accef65c-dc94-4cfa-8cfd-9776ee59f187",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3.0",
+                    "applications",
+                    ":applicationUuid",
+                    "dependencies",
+                    "sourceFiles",
+                    "inventory"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "applicationUuid",
+                      "description": "(Required) Application UUID (Administration > Applications)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"additionalData\": {\n    \"totalItems\": \"422\",\n    \"next\": \"http://someUrl?cursor=3\",\n    \"cursor\": 3\n  },\n  \"supportToken\": \"1171c60d\",\n  \"response\": [\n    {\n      \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n      \"name\": \"common.js\",\n      \"matchType\": \"MANUAL\",\n      \"sha1\": \"MANUAL\",\n      \"localPath\": \"C:\\\\Users\\\\\",\n      \"lastModified\": \"2025-12-22T18:05:25.753Z\",\n      \"library\": {\n        \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n        \"name\": \" actionview-v0.0.1\",\n        \"licenses\": [\n          {\n            \"name\": \"MIT\",\n            \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n            \"spdxName\": \"Glide\",\n            \"type\": \"OPEN_SOURCE\",\n            \"suspected\": true,\n            \"osiApproved\": false,\n            \"profile\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": \"MIT\",\n            \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n            \"spdxName\": \"Glide\",\n            \"type\": \"OPEN_SOURCE\",\n            \"suspected\": true,\n            \"osiApproved\": false,\n            \"profile\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"description\": \"string\"\n      },\n      \"comment\": \"string\",\n      \"contextType\": \"PROJECT\",\n      \"project\": {\n        \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n        \"name\": \"My Project\",\n        \"path\": \"My Application\",\n        \"applicationName\": \"My Application\",\n        \"applicationUuid\": \"123e4567-e89b-12d3-a456-426655440000\"\n      }\n    },\n    {\n      \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n      \"name\": \"common.js\",\n      \"matchType\": \"MANUAL\",\n      \"sha1\": \"AUTOMATIC\",\n      \"localPath\": \"C:\\\\Users\\\\\",\n      \"lastModified\": \"1986-04-23T20:21:42.735Z\",\n      \"library\": {\n        \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n        \"name\": \" actionview-v0.0.1\",\n        \"licenses\": [\n          {\n            \"name\": \"MIT\",\n            \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n            \"spdxName\": \"Glide\",\n            \"type\": \"OPEN_SOURCE\",\n            \"suspected\": true,\n            \"osiApproved\": false,\n            \"profile\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": \"MIT\",\n            \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n            \"spdxName\": \"Glide\",\n            \"type\": \"OPEN_SOURCE\",\n            \"suspected\": false,\n            \"osiApproved\": true,\n            \"profile\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"description\": \"string\"\n      },\n      \"comment\": \"string\",\n      \"contextType\": \"GLOBAL_ACCOUNT\",\n      \"project\": {\n        \"uuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n        \"name\": \"My Project\",\n        \"path\": \"My Application\",\n        \"applicationName\": \"My Application\",\n        \"applicationUuid\": \"123e4567-e89b-12d3-a456-426655440000\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "64c011b2-6edd-4aa2-9db1-447048e0cafe",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3.0",
+                    "applications",
+                    ":applicationUuid",
+                    "dependencies",
+                    "sourceFiles",
+                    "inventory"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "applicationUuid",
+                      "description": "(Required) Application UUID (Administration > Applications)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "87702e55-26df-469c-bf71-87cf1578335f",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3.0",
+                    "applications",
+                    ":applicationUuid",
+                    "dependencies",
+                    "sourceFiles",
+                    "inventory"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "applicationUuid",
+                      "description": "(Required) Application UUID (Administration > Applications)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "36298d9d-5bf8-4865-ad85-048f02e11c7e",
+          "name": "Get Mend library suggestions for source files at application level",
+          "request": {
+            "name": "Get Mend library suggestions for source files at application level",
+            "description": {
+              "content": "Returns Mend library suggestions for the specified source file UUIDs. Request body requires: sourceFileUuids (array), recommendedForAllFiles (boolean). Supports same search filters as searchForMatch: date, license, name, owner, version. ",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v3.0",
+                "applications",
+                ":applicationUuid",
+                "dependencies",
+                "sourceFiles",
+                "matchSuggestions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "applicationUuid",
+                  "description": "(Required) Application UUID (Administration > Applications)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"recommendedForAllFiles\": \"<boolean>\",\n  \"sourceFileUuids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "84732389-50cc-49ce-bb14-53d0babefe24",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3.0",
+                    "applications",
+                    ":applicationUuid",
+                    "dependencies",
+                    "sourceFiles",
+                    "matchSuggestions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "applicationUuid",
+                      "description": "(Required) Application UUID (Administration > Applications)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"recommendedForAllFiles\": false,\n  \"sourceFileUuids\": [\n    \"123e4567-e89b-12d3-a456-426655440000\",\n    \"123e4567-e89b-12d3-a456-426655440000\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\",\n  \"response\": [\n    {\n      \"name\": \"openssl\",\n      \"sha1\": \"49f6cb968ff63793f6671d9026fb2a7034dad79a\",\n      \"licenses\": [\n        {\n          \"name\": \"MIT\",\n          \"severity\": \"High\"\n        },\n        {\n          \"name\": \"MIT\",\n          \"severity\": \"High\"\n        }\n      ],\n      \"version\": \"OpenSSL_1_0_1\",\n      \"owner\": \"openssl\",\n      \"url\": \"https://github.com/openssl/openssl.git\",\n      \"date\": \"2012-03-14T12:39:00Z\",\n      \"nonOfficialRelease\": false,\n      \"matchSuggestionId\": \"ZWJlMTZhZjYtMmE2YS00MWQ1LWFiNTQtYWQ3YWE3OWZhNzFl\"\n    },\n    {\n      \"name\": \"openssl\",\n      \"sha1\": \"49f6cb968ff63793f6671d9026fb2a7034dad79a\",\n      \"licenses\": [\n        {\n          \"name\": \"MIT\",\n          \"severity\": \"High\"\n        },\n        {\n          \"name\": \"MIT\",\n          \"severity\": \"High\"\n        }\n      ],\n      \"version\": \"OpenSSL_1_0_1\",\n      \"owner\": \"openssl\",\n      \"url\": \"https://github.com/openssl/openssl.git\",\n      \"date\": \"2012-03-14T12:39:00Z\",\n      \"nonOfficialRelease\": false,\n      \"matchSuggestionId\": \"ZWJlMTZhZjYtMmE2YS00MWQ1LWFiNTQtYWQ3YWE3OWZhNzFl\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7e3bc503-8315-4737-8813-1aec7d2e01a9",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3.0",
+                    "applications",
+                    ":applicationUuid",
+                    "dependencies",
+                    "sourceFiles",
+                    "matchSuggestions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "applicationUuid",
+                      "description": "(Required) Application UUID (Administration > Applications)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"recommendedForAllFiles\": false,\n  \"sourceFileUuids\": [\n    \"123e4567-e89b-12d3-a456-426655440000\",\n    \"123e4567-e89b-12d3-a456-426655440000\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5db04452-fdbb-4de2-8b31-c173047db638",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3.0",
+                    "applications",
+                    ":applicationUuid",
+                    "dependencies",
+                    "sourceFiles",
+                    "matchSuggestions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "applicationUuid",
+                      "description": "(Required) Application UUID (Administration > Applications)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"recommendedForAllFiles\": false,\n  \"sourceFileUuids\": [\n    \"123e4567-e89b-12d3-a456-426655440000\",\n    \"123e4567-e89b-12d3-a456-426655440000\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b59b77ca-bbdb-4bba-9489-0494fc1ebd51",
+          "name": "Search for library matches for source files at application level",
+          "request": {
+            "name": "Search for library matches for source files at application level",
+            "description": {
+              "content": "Returns library match suggestions from Mend based on manual search criteria. Uses V3 MQL search format. Available search filters: date:between:date1,date2 (e.g., between:2019-05-01,2019-06-01), license:[like|regex]:value, name:[like|equals|regex]:value, owner:like:value, version:like:value. Example: ?search=name==openssl. ",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v3.0",
+                "applications",
+                ":applicationUuid",
+                "dependencies",
+                "sourceFiles",
+                "searchForMatch"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "applicationUuid",
+                  "description": "(Required) Application UUID (Administration > Applications)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c93c1c5b-5ce8-4823-9566-fe836a3a879f",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3.0",
+                    "applications",
+                    ":applicationUuid",
+                    "dependencies",
+                    "sourceFiles",
+                    "searchForMatch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "applicationUuid",
+                      "description": "(Required) Application UUID (Administration > Applications)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\",\n  \"response\": [\n    {\n      \"uuid\": \"b366b0ef-b211-4c37-a47c-0077e4de709f\",\n      \"name\": \"openssl\",\n      \"sha1\": \"49f6cb968ff63793f6671d9026fb2a7034dad79a\",\n      \"licenses\": [\n        {\n          \"name\": \"MIT\",\n          \"severity\": \"High\"\n        },\n        {\n          \"name\": \"MIT\",\n          \"severity\": \"High\"\n        }\n      ],\n      \"version\": \"OpenSSL_1_0_1\",\n      \"owner\": \"openssl\",\n      \"url\": \"https://github.com/openssl/openssl.git\",\n      \"date\": \"2012-03-14T12:39:00Z\",\n      \"nonOfficialRelease\": false\n    },\n    {\n      \"uuid\": \"b366b0ef-b211-4c37-a47c-0077e4de709f\",\n      \"name\": \"openssl\",\n      \"sha1\": \"49f6cb968ff63793f6671d9026fb2a7034dad79a\",\n      \"licenses\": [\n        {\n          \"name\": \"MIT\",\n          \"severity\": \"High\"\n        },\n        {\n          \"name\": \"MIT\",\n          \"severity\": \"High\"\n        }\n      ],\n      \"version\": \"OpenSSL_1_0_1\",\n      \"owner\": \"openssl\",\n      \"url\": \"https://github.com/openssl/openssl.git\",\n      \"date\": \"2012-03-14T12:39:00Z\",\n      \"nonOfficialRelease\": false\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0150a9b4-a543-4389-b706-2622f07e0034",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3.0",
+                    "applications",
+                    ":applicationUuid",
+                    "dependencies",
+                    "sourceFiles",
+                    "searchForMatch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "applicationUuid",
+                      "description": "(Required) Application UUID (Administration > Applications)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "06bd06ca-c966-4bee-9e71-a881278da345",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3.0",
+                    "applications",
+                    ":applicationUuid",
+                    "dependencies",
+                    "sourceFiles",
+                    "searchForMatch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "applicationUuid",
+                      "description": "(Required) Application UUID (Administration > Applications)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4f9d60a4-2fe3-41ae-af13-24a8d3e1a353",
+          "name": "Remap source files at application level",
+          "request": {
+            "name": "Remap source files at application level",
+            "description": {
+              "content": "Remaps the specified source files to a target library for the specified application(s). This operation runs asynchronously and returns 202 Accepted with async process status. Requires exactly one of: targetLibraryUuid OR matchSuggestionId (not both, not neither). Request body fields: applicationUuids (required, array), sourceFileUuids (required, array), targetLibraryUuid (conditional), matchSuggestionId (conditional), comment (optional), sendEmailNotification (optional, boolean).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v3.0",
+                "orgs",
+                ":orgUuid",
+                "applications",
+                "dependencies",
+                "sourceFiles",
+                "remapping"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orgUuid",
+                  "description": "(Required) org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"applicationUuids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"targetLibraryUuid\": \"<string>\",\n  \"matchSuggestionId\": \"<string>\",\n  \"sourceFileUuids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"comment\": \"<string>\",\n  \"sendEmailNotification\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "693e3c6c-bbdb-4bc3-835a-f1e0663ec8d5",
+              "name": "Remapping job accepted and initiated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3.0",
+                    "orgs",
+                    ":orgUuid",
+                    "applications",
+                    "dependencies",
+                    "sourceFiles",
+                    "remapping"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgUuid",
+                      "description": "(Required) org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"applicationUuids\": [\n    \"123e4567-e89b-12d3-a456-426655440000\",\n    \"123e4567-e89b-12d3-a456-426655440000\"\n  ],\n  \"targetLibraryUuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n  \"matchSuggestionId\": \"ZWJlMTZhZjYtMmE2YS00MWQ1LWFiNTQtYWQ3YWE3OWZhNzFl\",\n  \"sourceFileUuids\": [\n    \"123e4567-e89b-12d3-a456-426655440000\",\n    \"123e4567-e89b-12d3-a456-426655440000\"\n  ],\n  \"comment\": \"<string>\",\n  \"sendEmailNotification\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uuid\": \"caf69794-9882-4b55-82db-6b6da4fe2a92\",\n  \"status\": \"PENDING\",\n  \"userEmail\": \"user@example.com\",\n  \"requestToken\": \"2cd6a43b\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d43ae987-5668-48e1-a85a-fb7546471043",
+              "name": "Invalid request parameters. Possible errors: 'Only one of targetLibraryUuid or matchSuggestionId must be provided, not both' OR 'Either targetLibraryUuid or matchSuggestionId must be provided'",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3.0",
+                    "orgs",
+                    ":orgUuid",
+                    "applications",
+                    "dependencies",
+                    "sourceFiles",
+                    "remapping"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgUuid",
+                      "description": "(Required) org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"applicationUuids\": [\n    \"123e4567-e89b-12d3-a456-426655440000\",\n    \"123e4567-e89b-12d3-a456-426655440000\"\n  ],\n  \"targetLibraryUuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n  \"matchSuggestionId\": \"ZWJlMTZhZjYtMmE2YS00MWQ1LWFiNTQtYWQ3YWE3OWZhNzFl\",\n  \"sourceFileUuids\": [\n    \"123e4567-e89b-12d3-a456-426655440000\",\n    \"123e4567-e89b-12d3-a456-426655440000\"\n  ],\n  \"comment\": \"<string>\",\n  \"sendEmailNotification\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6556a7a0-6c13-4535-b764-d9ecc0470ffa",
+              "name": "User lacks required permissions or application does not belong to organization",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3.0",
+                    "orgs",
+                    ":orgUuid",
+                    "applications",
+                    "dependencies",
+                    "sourceFiles",
+                    "remapping"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgUuid",
+                      "description": "(Required) org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"applicationUuids\": [\n    \"123e4567-e89b-12d3-a456-426655440000\",\n    \"123e4567-e89b-12d3-a456-426655440000\"\n  ],\n  \"targetLibraryUuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n  \"matchSuggestionId\": \"ZWJlMTZhZjYtMmE2YS00MWQ1LWFiNTQtYWQ3YWE3OWZhNzFl\",\n  \"sourceFileUuids\": [\n    \"123e4567-e89b-12d3-a456-426655440000\",\n    \"123e4567-e89b-12d3-a456-426655440000\"\n  ],\n  \"comment\": \"<string>\",\n  \"sendEmailNotification\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "271f9031-8626-4d34-a4cb-aea20c6a2eeb",
+              "name": "Organization, application(s), or target library not found. Error: 'Target library not found'",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3.0",
+                    "orgs",
+                    ":orgUuid",
+                    "applications",
+                    "dependencies",
+                    "sourceFiles",
+                    "remapping"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgUuid",
+                      "description": "(Required) org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"applicationUuids\": [\n    \"123e4567-e89b-12d3-a456-426655440000\",\n    \"123e4567-e89b-12d3-a456-426655440000\"\n  ],\n  \"targetLibraryUuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n  \"matchSuggestionId\": \"ZWJlMTZhZjYtMmE2YS00MWQ1LWFiNTQtYWQ3YWE3OWZhNzFl\",\n  \"sourceFileUuids\": [\n    \"123e4567-e89b-12d3-a456-426655440000\",\n    \"123e4567-e89b-12d3-a456-426655440000\"\n  ],\n  \"comment\": \"<string>\",\n  \"sendEmailNotification\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uuid\": \"caf69794-9882-4b55-82db-6b6da4fe2a92\",\n  \"status\": \"PENDING\",\n  \"userEmail\": \"user@example.com\",\n  \"requestToken\": \"2cd6a43b\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "75524b68-4134-4d3c-aba8-9f7b7a17986b",
+          "name": "Remap source files at organization level",
+          "request": {
+            "name": "Remap source files at organization level",
+            "description": {
+              "content": "Remaps the specified source files to a target library across the entire organization. This operation runs asynchronously and returns 202 Accepted with async process status. Requires exactly one of: targetLibraryUuid OR matchSuggestionId (not both, not neither). Request body fields: sourceFileUuids (required, array), targetLibraryUuid (conditional), matchSuggestionId (conditional), comment (optional), sendEmailNotification (optional, boolean).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v3.0",
+                "orgs",
+                ":orgUuid",
+                "dependencies",
+                "sourceFiles",
+                "remapping"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orgUuid",
+                  "description": "(Required) org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"targetLibraryUuid\": \"<string>\",\n  \"matchSuggestionId\": \"<string>\",\n  \"sourceFileUuids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"comment\": \"<string>\",\n  \"sendEmailNotification\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d757fb50-db09-4da8-a066-b9d2d5aee412",
+              "name": "Remapping job accepted and initiated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3.0",
+                    "orgs",
+                    ":orgUuid",
+                    "dependencies",
+                    "sourceFiles",
+                    "remapping"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgUuid",
+                      "description": "(Required) org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"targetLibraryUuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n  \"matchSuggestionId\": \"ZWJlMTZhZjYtMmE2YS00MWQ1LWFiNTQtYWQ3YWE3OWZhNzFl\",\n  \"sourceFileUuids\": [\n    \"123e4567-e89b-12d3-a456-426655440000\",\n    \"123e4567-e89b-12d3-a456-426655440000\"\n  ],\n  \"comment\": \"<string>\",\n  \"sendEmailNotification\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uuid\": \"caf69794-9882-4b55-82db-6b6da4fe2a92\",\n  \"status\": \"PENDING\",\n  \"userEmail\": \"user@example.com\",\n  \"requestToken\": \"2cd6a43b\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d82444f7-901b-4f8d-b393-65e1999495f1",
+              "name": "Invalid request parameters. Possible errors: 'Only one of targetLibraryUuid or matchSuggestionId must be provided, not both' OR 'Either targetLibraryUuid or matchSuggestionId must be provided'",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3.0",
+                    "orgs",
+                    ":orgUuid",
+                    "dependencies",
+                    "sourceFiles",
+                    "remapping"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgUuid",
+                      "description": "(Required) org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"targetLibraryUuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n  \"matchSuggestionId\": \"ZWJlMTZhZjYtMmE2YS00MWQ1LWFiNTQtYWQ3YWE3OWZhNzFl\",\n  \"sourceFileUuids\": [\n    \"123e4567-e89b-12d3-a456-426655440000\",\n    \"123e4567-e89b-12d3-a456-426655440000\"\n  ],\n  \"comment\": \"<string>\",\n  \"sendEmailNotification\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b3fae4d7-c48d-444b-8477-ac31558f6580",
+              "name": "User lacks required permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3.0",
+                    "orgs",
+                    ":orgUuid",
+                    "dependencies",
+                    "sourceFiles",
+                    "remapping"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgUuid",
+                      "description": "(Required) org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"targetLibraryUuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n  \"matchSuggestionId\": \"ZWJlMTZhZjYtMmE2YS00MWQ1LWFiNTQtYWQ3YWE3OWZhNzFl\",\n  \"sourceFileUuids\": [\n    \"123e4567-e89b-12d3-a456-426655440000\",\n    \"123e4567-e89b-12d3-a456-426655440000\"\n  ],\n  \"comment\": \"<string>\",\n  \"sendEmailNotification\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d91f830e-19a0-4acb-9a85-82ba1ff949dc",
+              "name": "Organization or target library not found. Error: 'Target library not found'",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v3.0",
+                    "orgs",
+                    ":orgUuid",
+                    "dependencies",
+                    "sourceFiles",
+                    "remapping"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orgUuid",
+                      "description": "(Required) org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"targetLibraryUuid\": \"123e4567-e89b-12d3-a456-426655440000\",\n  \"matchSuggestionId\": \"ZWJlMTZhZjYtMmE2YS00MWQ1LWFiNTQtYWQ3YWE3OWZhNzFl\",\n  \"sourceFileUuids\": [\n    \"123e4567-e89b-12d3-a456-426655440000\",\n    \"123e4567-e89b-12d3-a456-426655440000\"\n  ],\n  \"comment\": \"<string>\",\n  \"sendEmailNotification\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uuid\": \"caf69794-9882-4b55-82db-6b6da4fe2a92\",\n  \"status\": \"PENDING\",\n  \"userEmail\": \"user@example.com\",\n  \"requestToken\": \"2cd6a43b\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://baseUrl",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ee964c66-eaba-47de-afa0-42a34239c4a5",
+    "name": "Mend Access Management Dependencies Source Files API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Mend's enhanced API enables automation of workflows in a REST compliant format. The API features:\n+ Access for any user with Mend credentials, via a user key available in the user's profile page in the Mend Platform.\n+ Improved security with a JWT token per organization, which expires every 10 minutes.\n+ Added scalability with support for cursor pagination and limiting results size.\n+ Broader functionality available programmatically.\n+ New standard API documentation for easy navigation and search.\n\n**Note:** To help you get started with the Mend API 3.0, we recommend reviewing our onboarding guide -> [Getting Started with API 3.0](https://docs.mend.io/platform/latest/getting-started-with-mend-api-3-0).\nThis resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend API 3.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.",
+      "type": "text/plain"
+    }
+  }
+}

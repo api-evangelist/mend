@@ -1,0 +1,334 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mend Access Management Applications API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Applications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Organization Applications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v3.0/orgs/:orgUuid/applications",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the maximum number of items to be returned in the response."
+              },
+              {
+                "name": "orgUuid",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+              }
+            ]
+          },
+          "docs": "Returns a list of all applications accessible to the current user"
+        },
+        {
+          "info": {
+            "name": "Create Application",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v3.0/orgs/:orgUuid/applications",
+            "params": [
+              {
+                "name": "orgUuid",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Application. If the Application already exists it returns the existing Application."
+        },
+        {
+          "info": {
+            "name": "Get Application Statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v3.0/orgs/:orgUuid/applications/summaries",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the maximum number of items to be returned in the response."
+              },
+              {
+                "name": "orgUuid",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns the requested statistics for the given applications"
+        },
+        {
+          "info": {
+            "name": "Get Application totals",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v3.0/orgs/:orgUuid/applications/summaries/totals",
+            "params": [
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "Enter the start date for the search. The date format is yyyy-MM-dd"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "Enter the end date for the search. The date format is yyyy-MM-dd"
+              },
+              {
+                "name": "orgUuid",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+              }
+            ]
+          },
+          "docs": "Returns the requested statistics for the given applications"
+        },
+        {
+          "info": {
+            "name": "Get Application Labels",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v3.0/orgs/:orgUuid/applications/:applicationUuid/labels",
+            "params": [
+              {
+                "name": "orgUuid",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+              },
+              {
+                "name": "applicationUuid",
+                "value": "",
+                "type": "path",
+                "description": "Application UUID (Administration > Applications)"
+              }
+            ]
+          },
+          "docs": "Get application labels. A label can be a string or namespace:value pair that provide additional metadata to assist with project management."
+        },
+        {
+          "info": {
+            "name": "Add Application Label",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://baseUrl/api/v3.0/orgs/:orgUuid/applications/:applicationUuid/labels",
+            "params": [
+              {
+                "name": "orgUuid",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+              },
+              {
+                "name": "applicationUuid",
+                "value": "",
+                "type": "path",
+                "description": "Application UUID (Administration > Applications)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a new label to a application. A label can be a string or namespace:value pair that provide additional metadata to assist with project management."
+        },
+        {
+          "info": {
+            "name": "Remove Application Label",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://baseUrl/api/v3.0/orgs/:orgUuid/applications/:applicationUuid/labels/:labelUuid",
+            "params": [
+              {
+                "name": "orgUuid",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+              },
+              {
+                "name": "applicationUuid",
+                "value": "",
+                "type": "path",
+                "description": "Application UUID (Administration > Applications)"
+              },
+              {
+                "name": "labelUuid",
+                "value": "",
+                "type": "path",
+                "description": "Label UUID (Administration > Labels)"
+              }
+            ]
+          },
+          "docs": "Removes a label from a application"
+        },
+        {
+          "info": {
+            "name": "Get Application Scans",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://baseUrl/api/v3.0/orgs/:orgUuid/applications/:applicationUuid/scans",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the maximum number of items to be returned in the response."
+              },
+              {
+                "name": "orgUuid",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+              },
+              {
+                "name": "applicationUuid",
+                "value": "",
+                "type": "path",
+                "description": "Application UUID (Administration > Applications)"
+              }
+            ]
+          },
+          "docs": "Returns the application related scans"
+        },
+        {
+          "info": {
+            "name": "Update Multiple Violation SLA",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://baseUrl/api/v3.0/orgs/:orgUuid/applications/:applicationUuid/violations/sla",
+            "params": [
+              {
+                "name": "orgUuid",
+                "value": "",
+                "type": "path",
+                "description": "org UUID (from the Mend App: **Administration** General > **Organization UUID**)."
+              },
+              {
+                "name": "applicationUuid",
+                "value": "",
+                "type": "path",
+                "description": "Application UUID (Administration > Applications)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the SLA of Multiple Application Violating Findings"
+        },
+        {
+          "info": {
+            "name": "Import SBOM and create a new project (Dependencies - SCA)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://baseUrl/api/v3.0/applications/:applicationUuid/dependencies/projects/importSbom",
+            "params": [
+              {
+                "name": "applicationUuid",
+                "value": "",
+                "type": "path",
+                "description": "Application UUID (Administration > Applications)"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "projectName",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "projectDescription",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "sbomFile",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Imports an SBOM and creates a new project as part of the process. The SBOM scan is queued for asynchronous processing. Supported formats: SPDX (JSON/XML), CycloneDX (JSON/XML)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

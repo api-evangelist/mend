@@ -1,0 +1,461 @@
+{
+  "item": [
+    {
+      "id": "b272fdcb-3687-454d-9a96-a81c493c4001",
+      "name": "General Info - Vulnerabilities",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "88d471da-0ea6-4a7e-8b33-080bd41e0f41",
+          "name": "Get Vulnerability Remediation Proposals",
+          "request": {
+            "name": "Get Vulnerability Remediation Proposals",
+            "description": {
+              "content": "Returns the recommended remediation actions to take for a given vulnerability",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2.0",
+                "vulnerabilities",
+                ":vulnerabilityId",
+                "remediation"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "vulnerabilityId",
+                  "description": "(Required) Vulnerability Name in the form of CVE-xxxx-xxx or WS-xxxx-xxx."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7b2a0a73-9ced-465a-9ee3-d117c348bc48",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "vulnerabilities",
+                    ":vulnerabilityId",
+                    "remediation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vulnerabilityId",
+                      "description": "(Required) Vulnerability Name in the form of CVE-xxxx-xxx or WS-xxxx-xxx."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\",\n  \"retVal\": {\n    \"vulnerability\": \"CVE-2021-42392\",\n    \"topRankedFix\": {\n      \"id\": 49422,\n      \"vulnerability\": \"CVE-2021-42392\",\n      \"type\": \"UPGRADE_VERSION\",\n      \"origin\": \"WHITESOURCE_EXPERT\",\n      \"url\": \"https://github.com/codehaus-plexus/plexus-utils/commit/f933e5e78dc2637e485447ed821fe14904f110de\",\n      \"fixResolution\": \"3.0.24\",\n      \"date\": \"1977-09-30T15:26:23.835Z\",\n      \"message\": \"Upgrade to version\",\n      \"extraData\": \"string\",\n      \"minimalFixVersionFromExtraData\": \"string\",\n      \"minimalAffectedVersionFromExtraData\": \"string\"\n    },\n    \"allFixes\": [\n      {\n        \"id\": 49422,\n        \"vulnerability\": \"CVE-2021-42392\",\n        \"type\": \"UPGRADE_VERSION\",\n        \"origin\": \"WHITESOURCE_EXPERT\",\n        \"url\": \"https://github.com/codehaus-plexus/plexus-utils/commit/f933e5e78dc2637e485447ed821fe14904f110de\",\n        \"fixResolution\": \"3.0.24\",\n        \"date\": \"2019-03-09T19:56:34.932Z\",\n        \"message\": \"Upgrade to version\",\n        \"extraData\": \"string\",\n        \"minimalFixVersionFromExtraData\": \"string\",\n        \"minimalAffectedVersionFromExtraData\": \"string\"\n      },\n      {\n        \"id\": 49422,\n        \"vulnerability\": \"CVE-2021-42392\",\n        \"type\": \"UPGRADE_VERSION\",\n        \"origin\": \"WHITESOURCE_EXPERT\",\n        \"url\": \"https://github.com/codehaus-plexus/plexus-utils/commit/f933e5e78dc2637e485447ed821fe14904f110de\",\n        \"fixResolution\": \"3.0.24\",\n        \"date\": \"2024-10-25T13:45:48.738Z\",\n        \"message\": \"Upgrade to version\",\n        \"extraData\": \"string\",\n        \"minimalFixVersionFromExtraData\": \"string\",\n        \"minimalAffectedVersionFromExtraData\": \"string\"\n      }\n    ],\n    \"totalUpVotes\": 0,\n    \"totalDownVotes\": 0\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5ec6df74-fa74-4eaf-8472-ef98751b0f94",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "vulnerabilities",
+                    ":vulnerabilityId",
+                    "remediation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vulnerabilityId",
+                      "description": "(Required) Vulnerability Name in the form of CVE-xxxx-xxx or WS-xxxx-xxx."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "088c7e1c-60d7-4e86-b4bd-6501e8c7ad47",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "vulnerabilities",
+                    ":vulnerabilityId",
+                    "remediation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vulnerabilityId",
+                      "description": "(Required) Vulnerability Name in the form of CVE-xxxx-xxx or WS-xxxx-xxx."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "931d10e8-d221-4294-befc-c0f3748eea6f",
+          "name": "Get Vulnerability Profile",
+          "request": {
+            "name": "Get Vulnerability Profile",
+            "description": {
+              "content": "Returns a complete vulnerability profile of a given CVE-ID",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2.0",
+                "vulnerabilities",
+                ":vulnerabilityId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "vulnerabilityId",
+                  "description": "(Required) Vulnerability Name in the form of CVE-xxxx-xxx or WS-xxxx-xxx."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2906f213-86bb-4806-9bca-2c6c0fb196d5",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "vulnerabilities",
+                    ":vulnerabilityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vulnerabilityId",
+                      "description": "(Required) Vulnerability Name in the form of CVE-xxxx-xxx or WS-xxxx-xxx."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\",\n  \"retVal\": {\n    \"name\": \"CVE-2021-42392\",\n    \"type\": \"WS\",\n    \"description\": \"Security vulnerability found in plexus-utils before 3.0.24. XML injection found in XmlWriterUtil.java\",\n    \"score\": 5,\n    \"severity\": \"MEDIUM\",\n    \"publishDate\": \"2008-03-29T10:36:03.290Z\",\n    \"modifiedDate\": \"2013-05-16T23:48:39.082Z\",\n    \"vulnerabilityScoring\": [\n      {\n        \"score\": 5,\n        \"severity\": \"MEDIUM\",\n        \"type\": \"CVSS_2\",\n        \"scoreMetadataVector\": \"CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H\",\n        \"extraData\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\",\n          \"key_2\": \"string\",\n          \"key_3\": \"string\"\n        }\n      },\n      {\n        \"score\": 5,\n        \"severity\": \"MEDIUM\",\n        \"type\": \"CVSS_2\",\n        \"scoreMetadataVector\": \"CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H\",\n        \"extraData\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\",\n          \"key_2\": \"string\"\n        }\n      }\n    ],\n    \"references\": [\n      {\n        \"value\": \"https://github.com/codehaus-plexus/plexus-utils/commit/f933e5e78dc2637e485447ed821fe14904f110de\",\n        \"source\": \"CERT\",\n        \"url\": \"https://github.com/codehaus-plexus/plexus-utils/commit/f933e5e78dc2637e485447ed821fe14904f110de\",\n        \"signature\": true,\n        \"advisory\": true,\n        \"patch\": false\n      },\n      {\n        \"value\": \"https://github.com/codehaus-plexus/plexus-utils/commit/f933e5e78dc2637e485447ed821fe14904f110de\",\n        \"source\": \"CERT\",\n        \"url\": \"https://github.com/codehaus-plexus/plexus-utils/commit/f933e5e78dc2637e485447ed821fe14904f110de\",\n        \"signature\": false,\n        \"advisory\": false,\n        \"patch\": false\n      }\n    ],\n    \"effectiveInfo\": {\n      \"referenceCount\": 4076,\n      \"shieldValue\": 977\n    },\n    \"threatAssessment\": {\n      \"exploitCodeMaturity\": \"HIGH\",\n      \"epssPercentage\": 0.8\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "62f24a37-6d92-48fa-9af9-7195baa2d1c9",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "vulnerabilities",
+                    ":vulnerabilityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vulnerabilityId",
+                      "description": "(Required) Vulnerability Name in the form of CVE-xxxx-xxx or WS-xxxx-xxx."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "74561729-0779-4f1b-a7c7-0492672db10b",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0",
+                    "vulnerabilities",
+                    ":vulnerabilityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vulnerabilityId",
+                      "description": "(Required) Vulnerability Name in the form of CVE-xxxx-xxx or WS-xxxx-xxx."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"supportToken\": \"1171c60d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://baseUrl",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1329000d-ad01-4b33-855c-9f9e4bd7033a",
+    "name": "Mend Access Management General Info - Vulnerabilities API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Mend's enhanced API enables automation of workflows in a REST compliant format. The API features:\n+ Access for any user with Mend credentials, via a user key available in the user's profile page in the Mend Platform.\n+ Improved security with a JWT token per organization, which expires every 10 minutes.\n+ Added scalability with support for cursor pagination and limiting results size.\n+ Broader functionality available programmatically.\n+ New standard API documentation for easy navigation and search.\n\n**Note:** To help you get started with the Mend API 3.0, we recommend reviewing our onboarding guide -> [Getting Started with API 3.0](https://docs.mend.io/platform/latest/getting-started-with-mend-api-3-0).\nThis resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend API 3.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.",
+      "type": "text/plain"
+    }
+  }
+}
