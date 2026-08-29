@@ -12,6 +12,18 @@ description: >-
   scans, projects, applications, findings, reports, and administration, secured
   with a short-lived per-organization JWT obtained from a user key.
 url: https://raw.githubusercontent.com/api-evangelist/mend/refs/heads/main/apis.yml
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: self-serve
@@ -57,6 +69,9 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: CapabilityMap
+  url: capabilities/mend-capability-edges.yml
+  name: Mend Business Capability Map
 - type: Overlay
   url: overlays/mend-platform-overlay.yaml
 - type: AgenticAccess
