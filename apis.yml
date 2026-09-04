@@ -26,15 +26,16 @@ deliveryModel:
   method: derived
 accessModel:
   pricing: unknown
-  onboarding: self-serve
+  onboarding: unknown
   trial: false
   try_now: false
   public: false
-  label: Self-serve signup
-  confidence: medium
+  label: Unknown
+  confidence: low
   source:
   - authentication
-  generated: '2026-07-22'
+  - security
+  generated: '2026-09-03'
   method: derived
 image: https://api-docs.mend.io/assets/mend-io-logo.06cad8388af3f063d8c0af6ef0386393959988075733a762b0899791865771ba.9c1bb791.svg
 x-type: company
