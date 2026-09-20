@@ -70,6 +70,10 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: Pricing
+  url: https://www.mend.io/pricing/
+- type: Plans
+  url: plans/mend-plans-pricing.yml
 - type: CapabilityMap
   url: capabilities/mend-capability-edges.yml
   name: Mend Business Capability Map

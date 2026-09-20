@@ -1,0 +1,45 @@
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-09-20'
+method: searched
+source: https://www.mend.io/pricing/
+sources:
+- https://www.mend.io/pricing/
+provenance:
+  tool: planning/api-economics/harvest_pricing.py
+  run: 20260920T130003
+  grounding: every price_text was found verbatim in the fetched page text
+audience: business-product
+pricing_basis: per-seat
+published: true
+note: Pricing per 'Contributing Developer'; add-ons (Mend AI Premium, DAST, API Security, EOL Support,
+  hosting, services) may be additional charge with no prices listed. Each plan links to 'Get a demo'.
+plan_count: 3
+currency: USD
+plans:
+- name: Mend AppSec
+  price_text: Up to $1000 per dev/ per year
+  price: 1000
+  currency: USD
+  period: year
+  unit: per dev
+  included_quota: Mend SAST, Mend SCA, AI-generated code security, AI-powered fix suggestions, automated
+    dependency updates
+- name: Mend AI
+  price_text: Up to $300 per dev/ per year
+  price: 300
+  currency: USD
+  period: year
+  unit: per dev
+  included_quota: AI-BoM and Shadow AI discovery, system prompt hardening, automated red teaming, in-app
+    runtime guardrails, continuous governance
+- name: Mend Renovate Enterprise
+  price_text: Up to $250 per dev/ per year
+  price: 250
+  currency: USD
+  period: year
+  unit: per dev
+  included_quota: Automated dependency management, full-scale automation, Merge Confidence ratings, dedicated
+    support
+rate_limit_statements:
+- Pricing is per contributing developer which does not limit you with code size, number of scans, and
+  number of applications.
