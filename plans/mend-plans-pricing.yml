@@ -10,6 +10,11 @@ provenance:
   grounding: every price_text was found verbatim in the fetched page text
 audience: business-product
 pricing_basis: per-seat
+delivery:
+  delivery: managed
+  method: page
+  read: '2026-09-20'
+  managed_tier: Mend AppSec
 published: true
 note: Pricing per 'Contributing Developer'; add-ons (Mend AI Premium, DAST, API Security, EOL Support,
   hosting, services) may be additional charge with no prices listed. Each plan links to 'Get a demo'.
