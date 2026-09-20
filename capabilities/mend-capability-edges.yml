@@ -1,0 +1,152 @@
+slug: mend
+provider: Mend
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 13
+edges:
+- tag: Findings - Project
+  spec_file: mend-findings-project-api-openapi.yml
+  capability_id: BC-620.40
+  capability_id_l1: BC-620
+  capability_name: Vulnerability Management
+  confidence: 0.92
+  evidence: GET /api/v3.0/projects/{projectUuid}/dependencies/findings/security 'Get project security
+    findings (Dependencies - SCA)'; PATCH ... 'Bulk update of project findings state (review and/or suppression)
+    or severity'
+  reason: Operations list, triage, suppress and re-severity security vulnerability findings from SCA/SAST/image
+    scans — squarely vulnerability scanning and remediation tracking.
+- tag: Findings - Scan
+  spec_file: mend-findings-scan-api-openapi.yml
+  capability_id: BC-620.40
+  capability_id_l1: BC-620
+  capability_name: Vulnerability Management
+  confidence: 0.9
+  evidence: '''List image scan security findings''; ''Get a list of project scan findings (Code - SAST)'';
+    schema model.SecurityFindingExternal'
+  reason: Retrieval of per-scan security and secrets findings from code and container image scanning —
+    vulnerability identification and management.
+- tag: General Info - Vulnerabilities
+  spec_file: mend-general-info-vulnerabilities-api-openapi.yml
+  capability_id: BC-620.40
+  capability_id_l1: BC-620
+  capability_name: Vulnerability Management
+  confidence: 0.9
+  evidence: '''Get Vulnerability Remediation Proposals''; ''Get Vulnerability Profile''; schemas VulnerabilityScoringDTO,
+    VulnerabilityFixInfoDTO'
+  reason: Vulnerability profiles, scoring and fix/remediation proposals — the core of vulnerability management
+    and remediation.
+- tag: Alerts - Product
+  spec_file: mend-alerts-product-api-openapi.yml
+  capability_id: BC-620.40
+  capability_id_l1: BC-620
+  capability_name: Vulnerability Management
+  confidence: 0.88
+  evidence: GET /products/{productToken}/alerts/security getSecurityVulnerabilityAlerts_1 'Get Product
+    Security Alerts'; schemas VulnerabilityProfileDTO, VulnerabilityFixInfoDTO, SecurityAlertDTO
+  reason: Alerts here are open-source security vulnerability and license/compliance findings on scanned
+    libraries, with vulnerability profiles and fix information — squarely Vulnerability Management, not
+    monitoring or financial alerting.
+- tag: Alerts - Project
+  spec_file: mend-alerts-project-api-openapi.yml
+  capability_id: BC-620.40
+  capability_id_l1: BC-620
+  capability_name: Vulnerability Management
+  confidence: 0.88
+  evidence: PUT /projects/{projectToken}/alerts/security/{alertUuid} updateSecurityAlert; GET .../alerts/security
+    'Get project security alerts'; schemas VulnerabilityProfileDTO, VulnerabilityFixInfoDTO, ThreatAssessmentDTO
+  reason: Retrieval and triage/update of project-level security vulnerability alerts (and legal/compliance
+    policy violations) from dependency scanning — vulnerability detection and remediation tracking.
+- tag: Vulnerable Libraries
+  spec_file: mend-vulnerable-libraries-api-openapi.yml
+  capability_id: BC-620.40
+  capability_id_l1: BC-620
+  capability_name: Vulnerability Management
+  confidence: 0.85
+  evidence: GET /api/v2.0/orgs/{orgToken}/vulnerabilities/{vulnerabilityName}/libraries  getVulnerableLibrariesByCVE  Get
+    Vulnerable Libraries By CVE
+  reason: Lists the open-source libraries affected by a given CVE, with SecurityRiskDTO in the schema
+    set — identification of vulnerable components for remediation, which is Vulnerability Management.
+    Open Source Stewardship was considered but the surface is CVE-driven risk identification, not licence/supply-chain
+    artefact stewardship.
+- tag: User Management - Groups
+  spec_file: mend-user-management-groups-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.82
+  evidence: '"Create Group", "Add User To Group", "Add Group Role", "Remove Group Roles"'
+  reason: Group membership and role assignment administration — identity and access management for the
+    platform.
+- tag: Zero-Day Events
+  spec_file: mend-zero-day-events-api-openapi.yml
+  capability_id: BC-620.40
+  capability_id_l1: BC-620
+  capability_name: Vulnerability Management
+  confidence: 0.8
+  evidence: GET /api/v3.0/orgs/{orgUuid}/dependencies/events/zeroday/{eventUuid}/findings  Get Affected
+    Libraries for a Zero-Day Event
+  reason: Retrieves zero-day vulnerability events and the affected dependency findings (schemas Vulnerability,
+    ZeroDayEventFindingDTOV3) — discovery and triage of newly disclosed vulnerabilities in the estate,
+    i.e. Vulnerability Management rather than SOC threat response.
+- tag: Administration - Users
+  spec_file: mend-administration-users-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.78
+  evidence: POST /orgs/{orgUuid}/users/invite inviteUser 'Invite User'; DELETE .../users/{userUuid} 'Remove
+    User From Organization'; PUT .../block blockUser
+  reason: Invite, remove, block and unblock users of the organization — joiner/mover/leaver style account
+    administration, which maps to Identity & Access Management. Confidence held below 0.9 because it could
+    equally be framed as tenant user lifecycle.
+- tag: Administration - Groups
+  spec_file: mend-administration-groups-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.75
+  evidence: POST /orgs/{orgUuid}/groups createGroup; GET .../groups/{groupUuid}/roles getGroupRoles; POST
+    .../groups/{groupUuid}/users addUsersToGroup — schemas GroupRoleDTOV3, RoleDefinitionDTOV3
+  reason: Operations manage groups, role assignments and group membership for platform access — role-based
+    access administration, i.e. Identity & Access Management. Not a domain-security capability (no scanning
+    here), so IAM under Cybersecurity Management is the honest fit; some chance this is better read as
+    generic tenant identity administration, hence moderate confidence.
+- tag: Library - Organization
+  spec_file: mend-library-organization-api-openapi.yml
+  capability_id: BC-4200.60
+  capability_id_l1: BC-4200
+  capability_name: Open Source Stewardship
+  confidence: 0.72
+  evidence: '''Set Library Notice''; ''Assign Library License''; ''Set Library Copyright''; ''Mark/Unmark
+    Library As In-House''; ''Get Library Version Vulnerability Trends'''
+  reason: Manages open-source library metadata — licences, attribution notices, copyrights, in-house vs
+    third-party classification — i.e. stewardship of inbound open-source components and supply-chain artefacts.
+    Some overlap with vulnerability management (trends), hence 0.72.
+- tag: Scans
+  spec_file: mend-scans-api-openapi.yml
+  capability_id: BC-620.40
+  capability_id_l1: BC-620
+  capability_name: Vulnerability Management
+  confidence: 0.72
+  evidence: '"Get Project Scans", "Get Scan Summary", "Get Scans Comparison", schema UnifiedFindingDTOV3'
+  reason: Retrieval and comparison of security scan results and findings — vulnerability scanning lifecycle.
+- tag: User Management - Users
+  spec_file: mend-user-management-users-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.7
+  evidence: POST /api/v2.0/orgs/{orgToken}/users/invite  inviteUser  Invite User; DELETE /api/v2.0/orgs/{orgToken}/users/{userUuid}  removeUser  Remove
+    User From Organization
+  reason: 'Create, invite, list and remove organization users plus service users and role/group info —
+    a joiner/mover/leaver style user administration surface, i.e. Identity & Access Management. Not HR
+    employee records: the objects are platform accounts and service accounts, not people data.'
