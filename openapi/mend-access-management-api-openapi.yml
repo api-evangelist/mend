@@ -1,25 +1,12 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   title: Mend Access Management API
-  description: 'Mend''s enhanced API enables automation of workflows in a REST compliant format. The API features:
-
-    + Access for any user with Mend credentials, via a user key available in the user''s profile page in the Mend Platform.
-
-    + Improved security with a JWT token per organization, which expires every 10 minutes.
-
-    + Added scalability with support for cursor pagination and limiting results size.
-
-    + Broader functionality available programmatically.
-
-    + New standard API documentation for easy navigation and search.
-
-
-    **Note:** To help you get started with the Mend API 3.0, we recommend reviewing our onboarding guide -> [Getting Started with API 3.0](https://docs.mend.io/platform/latest/getting-started-with-mend-api-3-0).
-
-    This resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend API 3.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.'
-  version: '3.0'
+  version: '1.0'
+  description: 'Operations tagged Access Management across 2 of this provider''s published API definitions: mend-platform-openapi-original.json, mend-sca-openapi-original.json. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://baseUrl
+  description: Generated server url
+- url: https://api-saas.mend.io
   description: Generated server url
 security:
 - bearer-key: []
@@ -33,7 +20,7 @@ paths:
       summary: Login
       description: 'Sign in a user with email and user key, returning a JWT token which is valid for 30 minutes.
 
-        If you omit the organization, it defaults to the last one you signed in to. '
+        If you omit the organization, it defaults to the last one you signed in to.'
       operationId: login
       requestBody:
         content:
@@ -60,6 +47,9 @@ paths:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+    servers:
+    - url: https://baseUrl
+      description: Generated server url
   /api/v3.0/login/accessToken:
     post:
       tags:
@@ -104,6 +94,9 @@ paths:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+    servers:
+    - url: https://baseUrl
+      description: Generated server url
   /api/v3.0/logout:
     post:
       tags:
@@ -136,6 +129,9 @@ paths:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+    servers:
+    - url: https://baseUrl
+      description: Generated server url
   /api/v2.0/login/accessToken:
     post:
       tags:
@@ -166,6 +162,9 @@ paths:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+    servers:
+    - url: https://api-saas.mend.io
+      description: Generated server url
   /api/v2.0/login:
     post:
       tags:
@@ -173,7 +172,7 @@ paths:
       summary: Login
       description: 'Sign in a user with email and user key, returning a JWT token which is valid for 10 minutes.
 
-        If you omit the organization, it defaults to the last one you signed in to. '
+        If you omit the organization, it defaults to the last one you signed in to.'
       operationId: login
       requestBody:
         content:
@@ -200,31 +199,11 @@ paths:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+    servers:
+    - url: https://api-saas.mend.io
+      description: Generated server url
 components:
   schemas:
-    SessionInfo:
-      type: object
-      properties:
-        correlationId:
-          type: string
-        userUuid:
-          type: string
-        userName:
-          type: string
-        email:
-          type: string
-        refreshToken:
-          type: string
-        jwtToken:
-          type: string
-        orgName:
-          title: Organization Name
-          type: string
-          example: Organization A
-        orgUuid:
-          title: Organization Uuid
-          type: string
-          example: 123e4567-e89b-12d3-a456-426655440000
     AccessTokenRequestDTO:
       type: object
       properties:
@@ -289,6 +268,24 @@ components:
         systemAccessStartTime:
           type: integer
           format: int64
+    DWRResponseV3LoginResponseDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          $ref: '#/components/schemas/LoginResponseDTO'
+    DWRResponseV3AccessTokenResponseDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          $ref: '#/components/schemas/AccessTokenResponseDTO'
     LoginModelDTOV3:
       required:
       - email
@@ -305,15 +302,13 @@ components:
           description: Equivalent to a personal access token. Avoid pasting as plain text where it might be compromised. For a service user (recommended), you can find the user key in the Mend SCA App in **Admin > Users**. [Learn more](https://docs.mend.io/bundle/mend_maintenance/page/managing_service_users.html). For local testing purposes, you could also use one of your own personal user keys from your user profile page in the Mend SCA App.
           example: '***********'
       description: Login Model that provides user name and password for the Login process.
-    DWRResponseV3LoginResponseDTO:
+    DWRResponseBase:
       type: object
       properties:
         supportToken:
           title: Support Token
           type: string
           example: 1171c60d
-        response:
-          $ref: '#/components/schemas/LoginResponseDTO'
     LoginModelDTO:
       required:
       - email
@@ -344,25 +339,35 @@ components:
           example: 1171c60d
         retVal:
           $ref: '#/components/schemas/SessionInfo'
-    DWRResponseBase:
+    SessionInfo:
       type: object
       properties:
-        supportToken:
-          title: Support Token
+        correlationId:
           type: string
-          example: 1171c60d
-    DWRResponseV3AccessTokenResponseDTO:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
+        userUuid:
           type: string
-          example: 1171c60d
-        response:
-          $ref: '#/components/schemas/AccessTokenResponseDTO'
+        userName:
+          type: string
+        email:
+          type: string
+        refreshToken:
+          type: string
+        jwtToken:
+          type: string
+        orgName:
+          title: Organization Name
+          type: string
+          example: Organization A
+        orgUuid:
+          title: Organization Uuid
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
   securitySchemes:
     bearer-key:
       type: http
       description: JWT token Bearer
       scheme: bearer
       bearerFormat: JWT
+x-refined-from:
+- mend-platform-openapi-original.json
+- mend-sca-openapi-original.json

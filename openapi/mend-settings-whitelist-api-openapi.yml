@@ -1,25 +1,10 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Mend Access Management Settings - Whitelist API
-  description: 'Mend''s enhanced API enables automation of workflows in a REST compliant format. The API features:
-
-    + Access for any user with Mend credentials, via a user key available in the user''s profile page in the Mend Platform.
-
-    + Improved security with a JWT token per organization, which expires every 10 minutes.
-
-    + Added scalability with support for cursor pagination and limiting results size.
-
-    + Broader functionality available programmatically.
-
-    + New standard API documentation for easy navigation and search.
-
-
-    **Note:** To help you get started with the Mend API 3.0, we recommend reviewing our onboarding guide -> [Getting Started with API 3.0](https://docs.mend.io/platform/latest/getting-started-with-mend-api-3-0).
-
-    This resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend API 3.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.'
-  version: '3.0'
+  title: Mend Settings - Whitelist API
+  description: Mend's enhanced SCA API enables automation of workflows in a REST compliant format.
+  version: '2.0'
 servers:
-- url: https://baseUrl
+- url: https://api-saas.mend.io
   description: Generated server url
 security:
 - bearer-key: []
@@ -348,24 +333,6 @@ paths:
                 $ref: '#/components/schemas/DWRResponseBase'
 components:
   schemas:
-    DWRResponseListWhiteListRuleDTO:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          type: array
-          items:
-            $ref: '#/components/schemas/WhiteListRuleDTO'
-    CreateWhiteListRulesRequestDTO:
-      type: object
-      properties:
-        rules:
-          type: array
-          items:
-            $ref: '#/components/schemas/CreateWhiteListRuleRequestDTO'
     DWRResponsePageableListWhiteListRuleDTO:
       type: object
       properties:
@@ -387,44 +354,6 @@ components:
           items:
             $ref: '#/components/schemas/WhiteListRuleDTO'
       description: Provides insights into endpoint-supported pagination information
-    DWRResponseMessageDTO:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/MessageDTO'
-    DWRResponseWhiteListRuleDTO:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/WhiteListRuleDTO'
-    UpdateWhiteListRuleRequestDTO:
-      type: object
-      properties:
-        regex:
-          title: White List Regex Rule
-          type: string
-          example: '*aa*'
-        description:
-          title: White List Description
-          type: string
-          example: description for white list
-    DeleteWhiteListRuleRequestDTO:
-      required:
-      - uuid
-      type: object
-      properties:
-        uuid:
-          title: White List UUID
-          type: string
-          example: 123e4567-e89b-12d3-a456-426655440000
     UpdateWhiteListRulesRequestDTO:
       title: UpdateWhiteListRuleDTO
       required:
@@ -444,20 +373,44 @@ components:
           title: White List Description
           type: string
           example: description for white list
-    MessageDTO:
+    DeleteWhiteListRuleRequestDTO:
+      required:
+      - uuid
       type: object
       properties:
-        message:
-          title: message
+        uuid:
+          title: White List UUID
           type: string
-          example: Success!
-    DWRResponseBase:
+          example: 123e4567-e89b-12d3-a456-426655440000
+    DWRResponseMessageDTO:
       type: object
       properties:
         supportToken:
           title: Support Token
           type: string
           example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/MessageDTO'
+    DWRResponseListWhiteListRuleDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          type: array
+          items:
+            $ref: '#/components/schemas/WhiteListRuleDTO'
+    DWRResponseWhiteListRuleDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/WhiteListRuleDTO'
     CreateWhiteListRuleRequestDTO:
       required:
       - regex
@@ -471,6 +424,38 @@ components:
           title: White List Description
           type: string
           example: description for white list
+    CreateWhiteListRulesRequestDTO:
+      type: object
+      properties:
+        rules:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreateWhiteListRuleRequestDTO'
+    MessageDTO:
+      type: object
+      properties:
+        message:
+          title: message
+          type: string
+          example: Success!
+    UpdateWhiteListRuleRequestDTO:
+      type: object
+      properties:
+        regex:
+          title: White List Regex Rule
+          type: string
+          example: '*aa*'
+        description:
+          title: White List Description
+          type: string
+          example: description for white list
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
     WhiteListRuleDTO:
       required:
       - regex

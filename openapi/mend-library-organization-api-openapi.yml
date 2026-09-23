@@ -1,25 +1,10 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Mend Access Management Library - Organization API
-  description: 'Mend''s enhanced API enables automation of workflows in a REST compliant format. The API features:
-
-    + Access for any user with Mend credentials, via a user key available in the user''s profile page in the Mend Platform.
-
-    + Improved security with a JWT token per organization, which expires every 10 minutes.
-
-    + Added scalability with support for cursor pagination and limiting results size.
-
-    + Broader functionality available programmatically.
-
-    + New standard API documentation for easy navigation and search.
-
-
-    **Note:** To help you get started with the Mend API 3.0, we recommend reviewing our onboarding guide -> [Getting Started with API 3.0](https://docs.mend.io/platform/latest/getting-started-with-mend-api-3-0).
-
-    This resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend API 3.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.'
-  version: '3.0'
+  title: Mend Library - Organization API
+  description: Mend's enhanced SCA API enables automation of workflows in a REST compliant format.
+  version: '2.0'
 servers:
-- url: https://baseUrl
+- url: https://api-saas.mend.io
   description: Generated server url
 security:
 - bearer-key: []
@@ -648,6 +633,770 @@ paths:
                 $ref: '#/components/schemas/DWRResponseBase'
 components:
   schemas:
+    VulnerabilityProfileDTO:
+      type: object
+      properties:
+        name:
+          title: Vulnerability Name
+          type: string
+          example: CVE-2021-42392
+        type:
+          title: VulnerabilityType
+          type: string
+          example: WS
+          enum:
+          - CVE
+          - WS
+        description:
+          title: Vulnerability Description
+          type: string
+          example: Security vulnerability found in plexus-utils before 3.0.24. XML injection found in XmlWriterUtil.java
+        score:
+          title: Vulnerability Score
+          type: number
+          format: float
+          example: 5
+        severity:
+          title: Vulnerability Severity
+          type: string
+          example: MEDIUM
+          enum:
+          - HIGH
+          - MEDIUM
+          - LOW
+        publishDate:
+          title: Vulnerability Publish Date
+          type: string
+          format: date-time
+        modifiedDate:
+          title: Vulnerability Modified Date
+          type: string
+          format: date-time
+        vulnerabilityScoring:
+          type: array
+          items:
+            $ref: '#/components/schemas/VulnerabilityScoringDTO'
+        references:
+          type: array
+          items:
+            $ref: '#/components/schemas/VulnerabilityReferenceDTO'
+        effectiveInfo:
+          $ref: '#/components/schemas/EffectiveVulnerabilityInfoDTO'
+        threatAssessment:
+          $ref: '#/components/schemas/ThreatAssessmentDTO'
+    DWRResponseBoolean:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          type: boolean
+    DWRResponseListNoticeDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          type: array
+          items:
+            $ref: '#/components/schemas/NoticeDTO'
+    NoticeDTO:
+      required:
+      - text
+      type: object
+      properties:
+        text:
+          title: Notice Text
+          type: string
+          example: Developed internally
+        reference:
+          title: Notice REFERENCE
+          type: string
+          example: https://github.com/...
+    EntityDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+        name:
+          type: string
+    UserInfoDTO:
+      required:
+      - uuid
+      type: object
+      properties:
+        uuid:
+          title: User UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: User Name
+          type: string
+          example: Jon Smith
+        email:
+          title: User Email
+          type: string
+          example: jon.smith@mail.com
+        userType:
+          title: Type Of User
+          type: string
+          example: REGULAR
+          enum:
+          - REGULAR
+          - SERVICE
+          - SCAN_SUMMARY_RECEIVER
+        accountStatus:
+          type: string
+          enum:
+          - ACTIVE
+          - INACTIVE
+          - LOCKOUT
+    TrackedIssueDTO:
+      title: Tracked Issue Information
+      type: object
+      properties:
+        uuid:
+          type: string
+        issueId:
+          type: string
+        origin:
+          type: string
+        issueKey:
+          type: string
+        account:
+          $ref: '#/components/schemas/EntityDTO'
+        domain:
+          $ref: '#/components/schemas/EntityDTO'
+        application:
+          $ref: '#/components/schemas/EntityDTO'
+        project:
+          $ref: '#/components/schemas/EntityDTO'
+        status:
+          type: string
+          enum:
+          - PENDING
+          - IN_PROGRESS
+          - SUCCESS
+          - FAILED
+          - DELETED
+        issueStatus:
+          type: string
+        failureReason:
+          type: string
+        errorMessage:
+          type: string
+        publicLink:
+          type: string
+        creationDate:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        createdBy:
+          $ref: '#/components/schemas/EntityDTO'
+        ticketType:
+          type: string
+          enum:
+          - SECURITY
+          - LEGAL
+    DWRResponseCollectionLibraryLicenseDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          type: array
+          items:
+            $ref: '#/components/schemas/LibraryLicenseDTO'
+    LibraryVersionVulnerabilitiesDTO:
+      type: object
+      properties:
+        name:
+          title: Library Name
+          type: string
+          example: Apache Ant Core
+        version:
+          title: Library Version
+          type: string
+          example: 1.8.2
+        type:
+          title: Library Type
+          type: string
+          example: MAVEN_ARTIFACT
+        current:
+          type: boolean
+        vulnerabilities:
+          type: array
+          items:
+            $ref: '#/components/schemas/BaseVulnerabilityProfileDTO'
+    LibraryLocationDTO:
+      type: object
+      properties:
+        localPath:
+          title: Local Path
+          type: string
+          example: C:\\Users\\user\\.m2\\repository\\commons-io-1.4.jar
+        dependencyFile:
+          title: Dependency File
+          type: string
+          example: C:\\GitHubRepos\\Pipline\\EUA\\plugins-automation\\fsa\\tests\\EUA\\Java\\bigProjectsMaven\\WST_417\\Data\\ksa\\ksa-web-core\\pom.xml
+    LibraryVulnerabilityTrendsDTO:
+      type: object
+      properties:
+        trends:
+          type: array
+          items:
+            $ref: '#/components/schemas/LibraryVersionVulnerabilitiesDTO'
+    DWRResponseNoLocationsLibraryDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/NoLocationsLibraryDTO'
+    LibraryExtraInfoDTO:
+      type: object
+      properties:
+        distributionUrl:
+          type: string
+        downloadUrl:
+          type: string
+        releaseDate:
+          type: string
+          format: date-time
+        packageManagerRepository:
+          type: string
+        homePage:
+          type: string
+        repositoryUrl:
+          type: string
+        author:
+          type: string
+    SecurityRiskDTO:
+      type: object
+      properties:
+        sourceUrl:
+          type: string
+        riskFactor:
+          type: string
+          enum:
+          - NO_FINDINGS
+          - UNCONFIRMED_UNSAFE
+          - CONFIRMED_UNSAFE
+          - KNOWN_FALSE_POSITIVE
+    LicenseReferenceDTO:
+      type: object
+      properties:
+        uuid:
+          title: License Reference UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        type:
+          title: License Reference Type
+          type: string
+          example: ARTIFACT_DESCRIPTOR
+        liabilityReference:
+          title: License Liability Reference
+          type: string
+          example: https://repo.maven.apache.org/maven2/org/jruby/ext/posix/jna-posix/1.0.3/jna-posix-1.0.3.pom
+        assignedBy:
+          $ref: '#/components/schemas/UserInfoDTO'
+        textUrl:
+          title: License Reference Text URL
+          type: string
+        customDisclaimer:
+          title: License Reference Custom Disclaimer
+          type: string
+        information:
+          title: License Reference information
+          type: string
+          example: distribution=repo&remoteUrl=https://repo.maven.apache.org/maven2/org/jruby/ext/posix/jna-posix/1.0.3/jna-posix-1.0.3.pom
+    InHouseRequestDTO:
+      required:
+      - isInHouse
+      type: object
+      properties:
+        libraryUuids:
+          type: array
+          items:
+            title: Library UUID
+            type: string
+            example: 123e4567-e89b-12d3-a456-426655440000
+        comment:
+          title: User Comment
+          type: string
+          example: A comment
+        isInHouse:
+          title: In House
+          type: boolean
+          description: true for marking inHouse false for unmaking
+    CopyrightReferenceDTO:
+      required:
+      - copyright
+      type: object
+      properties:
+        type:
+          title: Copy Reference Type
+          type: string
+          example: PROJECT_HOMEPAGE
+          enum:
+          - TEXT_IN_FILE
+          - ARTIFACT_DESCRIPTOR
+          - PROJECT_HOMEPAGE
+          - USER
+          - UNSPECIFIED
+        copyright:
+          title: Copyright
+          type: string
+          example: Copyright 2021 x greater by the end of
+        customDisclaimer:
+          title: Copyright Custom Disclaimer
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        textUrl:
+          title: Copyright Text Url
+          type: string
+        startYear:
+          title: Copyright Start Year
+          type: string
+          example: '2021'
+        endYear:
+          title: Copyright End Year
+          type: string
+          example: '2022'
+        author:
+          title: Copyright Author
+          type: string
+          example: x greater by the end of
+        referenceInfo:
+          title: Copyright Reference Info
+          type: string
+          example: x greater by the end of
+    UserCopyrightReferenceDTO:
+      required:
+      - copyright
+      type: object
+      properties:
+        type:
+          title: Copy Reference Type
+          type: string
+          example: PROJECT_HOMEPAGE
+          enum:
+          - TEXT_IN_FILE
+          - ARTIFACT_DESCRIPTOR
+          - PROJECT_HOMEPAGE
+          - USER
+          - UNSPECIFIED
+        copyright:
+          title: Copyright
+          type: string
+          example: Copyright 2021 x greater by the end of
+        customDisclaimer:
+          title: Copyright Custom Disclaimer
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        textUrl:
+          title: Copyright Text Url
+          type: string
+        startYear:
+          title: Copyright Start Year
+          type: string
+          example: '2021'
+        endYear:
+          title: Copyright End Year
+          type: string
+          example: '2022'
+        author:
+          title: Copyright Author
+          type: string
+          example: x greater by the end of
+        referenceInfo:
+          title: Copyright Reference Info
+          type: string
+          example: x greater by the end of
+        assignedBy:
+          $ref: '#/components/schemas/UserInfoDTO'
+    VulnerabilityScoringDTO:
+      type: object
+      properties:
+        score:
+          title: Vulnerability Score
+          type: number
+          format: float
+          example: 5
+        severity:
+          title: Vulnerability Severity
+          type: string
+          example: MEDIUM
+          enum:
+          - LOW
+          - HIGH
+          - MEDIUM
+        type:
+          title: Vulnerability Score Type
+          type: string
+          example: CVSS_2
+          enum:
+          - CVSS_2
+          - CVSS_3
+        scoreMetadataVector:
+          title: Score Metadata Vector
+          type: string
+          example: CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H
+        extraData:
+          title: Vulnerability Extra Data
+          type: object
+          additionalProperties:
+            title: Vulnerability Extra Data
+            type: string
+    DWRResponseLibraryVulnerabilityTrendsDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/LibraryVulnerabilityTrendsDTO'
+    DWRResponseLibraryLicenseDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/LibraryLicenseDTO'
+    LibraryLicenseDTO:
+      type: object
+      properties:
+        uuid:
+          title: License UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: License Name
+          type: string
+          example: MIT
+        assignedByUser:
+          title: Assigned By User
+          type: boolean
+        licenseReferences:
+          type: array
+          items:
+            $ref: '#/components/schemas/LicenseReferenceDTO'
+    LicenseReferenceRequestDTO:
+      required:
+      - liabilityReference
+      type: object
+      properties:
+        liabilityReference:
+          title: License Liability Reference
+          type: string
+          example: www.somelink.com
+        customDisclaimer:
+          title: Liability Reference
+          type: string
+    LibraryLicenseRequestDTO:
+      required:
+      - assignedByUser
+      - licenseReferences
+      - uuid
+      type: object
+      properties:
+        uuid:
+          title: License UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        assignedByUser:
+          title: Assigned By User
+          type: boolean
+        licenseReferences:
+          type: array
+          items:
+            $ref: '#/components/schemas/LicenseReferenceRequestDTO'
+    VulnerabilityReferenceDTO:
+      type: object
+      properties:
+        value:
+          title: Vulnerability Reference Value
+          type: string
+          example: https://github.com/codehaus-plexus/plexus-utils/commit/f933e5e78dc2637e485447ed821fe14904f110de
+        source:
+          title: vulnerability reference source
+          type: string
+          example: CERT
+        url:
+          title: Vulnerability Reference Url
+          type: string
+          example: https://github.com/codehaus-plexus/plexus-utils/commit/f933e5e78dc2637e485447ed821fe14904f110de
+        signature:
+          title: Vulnerability Reference Signature
+          type: boolean
+        advisory:
+          title: Vulnerability Reference Advisory
+          type: boolean
+        patch:
+          title: Vulnerability Reference Patch
+          type: boolean
+    DWRResponseUserCopyrightReferenceDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/UserCopyrightReferenceDTO'
+    ProjectDTO:
+      type: object
+      properties:
+        uuid:
+          title: Project UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Project Name
+          type: string
+          example: My Project
+        path:
+          title: Product Name
+          type: string
+          example: My Product
+        productName:
+          title: Product Name
+          type: string
+          example: My Product
+        productUuid:
+          title: Product Uuid
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+    DWRResponsePageableCollectionProjectDTO:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            + **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining.'
+          example:
+            totalItems: '422'
+            isLastPage: 'true'
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProjectDTO'
+      description: Provides insights into endpoint-supported pagination information
+    AttributionReportLibrarySettingRuleDTO:
+      type: object
+      properties:
+        excluded:
+          type: boolean
+    CopyrightReferenceRequestDTO:
+      type: object
+      properties:
+        copyright:
+          title: Copyright Text
+          type: string
+          example: Copyright 2002 Landmark
+        customDisclaimer:
+          title: Custom Disclaimer
+          type: string
+          example: 'a disclaimer for the copyright '
+        createdAt:
+          title: Copyright Creation Date
+          type: string
+          format: date-time
+        startYear:
+          title: Copyright Start Year
+          type: string
+          example: '2020'
+        endYear:
+          title: Copyright End Year
+          type: string
+          example: '2022'
+        author:
+          title: Copyright Author
+          type: string
+          example: Cloud Conscious, LLC
+    EffectiveVulnerabilityInfoDTO:
+      type: object
+      properties:
+        referenceCount:
+          title: Vulnerability Reference Count
+          type: integer
+          format: int32
+        shieldValue:
+          title: Shield Value
+          type: integer
+          description: RED(15), YELLOW(10), GREY(8), NO_SHIELD(6), GREEN(5)
+          format: int32
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+    LibraryVersionDTO:
+      type: object
+      properties:
+        lastUpdatedAt:
+          title: Last Version Update
+          type: string
+          format: date-time
+        version:
+          title: Version
+          type: string
+          example: original
+        release:
+          type: string
+        arch:
+          type: string
+        currentVersion:
+          type: boolean
+    LightLibraryDTO:
+      type: object
+      properties:
+        uuid:
+          title: Library UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Library Name
+          type: string
+          example: dbus-1.10.24-13.el7_6.x86_64.rpm
+        artifactId:
+          title: Artifact Id
+          type: string
+          example: kind-of-6.0.2.tgz
+        groupId:
+          title: Group Id
+          type: string
+          example: kind-of
+        version:
+          type: string
+        architecture:
+          title: Architecture
+          type: string
+        languageVersion:
+          title: Language Version
+          type: string
+        classifier:
+          type: string
+        extension:
+          type: string
+        sha1:
+          title: Sha1
+          type: string
+          example: 01146b36a6218e64e58f3a8d66de5d7fc6f6d051
+        description:
+          title: Description
+          type: string
+          example: Get the native type of a value.
+        type:
+          title: Type
+          type: string
+          example: javascript/Node.js
+        libraryType:
+          type: string
+        directDependency:
+          title: Direct Dependency
+          type: boolean
+        purl:
+          title: Package Url
+          type: string
+          example: pkg:maven/commons-beanutils/commons-beanutils@1.8.0?type=jar
+        extraInfo:
+          type: object
+          additionalProperties:
+            type: string
+        extraInformation:
+          $ref: '#/components/schemas/LibraryExtraInfoDTO'
+        securityRisks:
+          type: array
+          items:
+            $ref: '#/components/schemas/SecurityRiskDTO'
+        noticeReference:
+          $ref: '#/components/schemas/NoticeDTO'
+        proprietaryInfo:
+          $ref: '#/components/schemas/ProprietaryInfoDTO'
+        locations:
+          type: array
+          items:
+            $ref: '#/components/schemas/LibraryLocationDTO'
+        attributionReportSettings:
+          $ref: '#/components/schemas/AttributionReportLibrarySettingRuleDTO'
+        dependencyType:
+          type: string
+        violations:
+          title: Number Of Violations
+          type: integer
+          format: int32
+          example: 22
+        workflowUuids:
+          title: Number Of Violated Workflows
+          type: array
+          example: 2
+          items:
+            title: Number Of Violated Workflows
+            type: string
+            example: '2'
+        violatingFindings:
+          title: Number Of Violating Findings
+          type: integer
+          format: int32
+          example: 2
+        trackedIssue:
+          $ref: '#/components/schemas/TrackedIssueDTO'
+    DWRResponsePageableListLightLibraryDTO:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            + **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining.'
+          example:
+            totalItems: '422'
+            isLastPage: 'true'
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          type: array
+          items:
+            $ref: '#/components/schemas/LightLibraryDTO'
+      description: Provides insights into endpoint-supported pagination information
+    DWRResponseNoticeDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/NoticeDTO'
     NoLocationsLibraryDTO:
       type: object
       properties:
@@ -746,303 +1495,6 @@ components:
           example: 2
         trackedIssue:
           $ref: '#/components/schemas/TrackedIssueDTO'
-    DWRResponseCollectionLibraryLicenseDTO:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          type: array
-          items:
-            $ref: '#/components/schemas/LibraryLicenseDTO'
-    LibraryLocationDTO:
-      type: object
-      properties:
-        localPath:
-          title: Local Path
-          type: string
-          example: C:\\Users\\user\\.m2\\repository\\commons-io-1.4.jar
-        dependencyFile:
-          title: Dependency File
-          type: string
-          example: C:\\GitHubRepos\\Pipline\\EUA\\plugins-automation\\fsa\\tests\\EUA\\Java\\bigProjectsMaven\\WST_417\\Data\\ksa\\ksa-web-core\\pom.xml
-    EffectiveVulnerabilityInfoDTO:
-      type: object
-      properties:
-        referenceCount:
-          title: Vulnerability Reference Count
-          type: integer
-          format: int32
-        shieldValue:
-          title: Shield Value
-          type: integer
-          description: RED(15), YELLOW(10), GREY(8), NO_SHIELD(6), GREEN(5)
-          format: int32
-    DWRResponseLibraryLicenseDTO:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/LibraryLicenseDTO'
-    DWRResponseNoLocationsLibraryDTO:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/NoLocationsLibraryDTO'
-    TrackedIssueDTO:
-      title: Tracked Issue Information
-      type: object
-      properties:
-        uuid:
-          type: string
-        issueId:
-          type: string
-        origin:
-          type: string
-        issueKey:
-          type: string
-        account:
-          $ref: '#/components/schemas/EntityDTO'
-        domain:
-          $ref: '#/components/schemas/EntityDTO'
-        application:
-          $ref: '#/components/schemas/EntityDTO'
-        project:
-          $ref: '#/components/schemas/EntityDTO'
-        status:
-          type: string
-          enum:
-          - PENDING
-          - IN_PROGRESS
-          - SUCCESS
-          - FAILED
-          - DELETED
-        issueStatus:
-          type: string
-        failureReason:
-          type: string
-        errorMessage:
-          type: string
-        publicLink:
-          type: string
-        creationDate:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
-        createdBy:
-          $ref: '#/components/schemas/EntityDTO'
-        ticketType:
-          type: string
-          enum:
-          - SECURITY
-          - LEGAL
-    VulnerabilityScoringDTO:
-      type: object
-      properties:
-        score:
-          title: Vulnerability Score
-          type: number
-          format: float
-          example: 5
-        severity:
-          title: Vulnerability Severity
-          type: string
-          example: MEDIUM
-          enum:
-          - LOW
-          - HIGH
-          - MEDIUM
-        type:
-          title: Vulnerability Score Type
-          type: string
-          example: CVSS_2
-          enum:
-          - CVSS_2
-          - CVSS_3
-        scoreMetadataVector:
-          title: Score Metadata Vector
-          type: string
-          example: CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H
-        extraData:
-          title: Vulnerability Extra Data
-          type: object
-          additionalProperties:
-            title: Vulnerability Extra Data
-            type: string
-    DWRResponseUserCopyrightReferenceDTO:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/UserCopyrightReferenceDTO'
-    DWRResponseNoticeDTO:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/NoticeDTO'
-    VulnerabilityProfileDTO:
-      type: object
-      properties:
-        name:
-          title: Vulnerability Name
-          type: string
-          example: CVE-2021-42392
-        type:
-          title: VulnerabilityType
-          type: string
-          example: WS
-          enum:
-          - CVE
-          - WS
-        description:
-          title: Vulnerability Description
-          type: string
-          example: Security vulnerability found in plexus-utils before 3.0.24. XML injection found in XmlWriterUtil.java
-        score:
-          title: Vulnerability Score
-          type: number
-          format: float
-          example: 5
-        severity:
-          title: Vulnerability Severity
-          type: string
-          example: MEDIUM
-          enum:
-          - HIGH
-          - MEDIUM
-          - LOW
-        publishDate:
-          title: Vulnerability Publish Date
-          type: string
-          format: date-time
-        modifiedDate:
-          title: Vulnerability Modified Date
-          type: string
-          format: date-time
-        vulnerabilityScoring:
-          type: array
-          items:
-            $ref: '#/components/schemas/VulnerabilityScoringDTO'
-        references:
-          type: array
-          items:
-            $ref: '#/components/schemas/VulnerabilityReferenceDTO'
-        effectiveInfo:
-          $ref: '#/components/schemas/EffectiveVulnerabilityInfoDTO'
-        threatAssessment:
-          $ref: '#/components/schemas/ThreatAssessmentDTO'
-    LightLibraryDTO:
-      type: object
-      properties:
-        uuid:
-          title: Library UUID
-          type: string
-          example: 123e4567-e89b-12d3-a456-426655440000
-        name:
-          title: Library Name
-          type: string
-          example: dbus-1.10.24-13.el7_6.x86_64.rpm
-        artifactId:
-          title: Artifact Id
-          type: string
-          example: kind-of-6.0.2.tgz
-        groupId:
-          title: Group Id
-          type: string
-          example: kind-of
-        version:
-          type: string
-        architecture:
-          title: Architecture
-          type: string
-        languageVersion:
-          title: Language Version
-          type: string
-        classifier:
-          type: string
-        extension:
-          type: string
-        sha1:
-          title: Sha1
-          type: string
-          example: 01146b36a6218e64e58f3a8d66de5d7fc6f6d051
-        description:
-          title: Description
-          type: string
-          example: Get the native type of a value.
-        type:
-          title: Type
-          type: string
-          example: javascript/Node.js
-        libraryType:
-          type: string
-        directDependency:
-          title: Direct Dependency
-          type: boolean
-        purl:
-          title: Package Url
-          type: string
-          example: pkg:maven/commons-beanutils/commons-beanutils@1.8.0?type=jar
-        extraInfo:
-          type: object
-          additionalProperties:
-            type: string
-        extraInformation:
-          $ref: '#/components/schemas/LibraryExtraInfoDTO'
-        securityRisks:
-          type: array
-          items:
-            $ref: '#/components/schemas/SecurityRiskDTO'
-        noticeReference:
-          $ref: '#/components/schemas/NoticeDTO'
-        proprietaryInfo:
-          $ref: '#/components/schemas/ProprietaryInfoDTO'
-        locations:
-          type: array
-          items:
-            $ref: '#/components/schemas/LibraryLocationDTO'
-        attributionReportSettings:
-          $ref: '#/components/schemas/AttributionReportLibrarySettingRuleDTO'
-        dependencyType:
-          type: string
-        violations:
-          title: Number Of Violations
-          type: integer
-          format: int32
-          example: 22
-        workflowUuids:
-          title: Number Of Violated Workflows
-          type: array
-          example: 2
-          items:
-            title: Number Of Violated Workflows
-            type: string
-            example: '2'
-        violatingFindings:
-          title: Number Of Violating Findings
-          type: integer
-          format: int32
-          example: 2
-        trackedIssue:
-          $ref: '#/components/schemas/TrackedIssueDTO'
     ThreatAssessmentDTO:
       type: object
       properties:
@@ -1061,169 +1513,6 @@ components:
           type: number
           format: float
           example: 0.8
-    DWRResponsePageableCollectionProjectDTO:
-      type: object
-      properties:
-        additionalData:
-          title: Provides insights into endpoint-supported pagination information.
-          type: object
-          description: '+ **totalItems**: The total count of data points returned in an API response.
-
-            + **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining.'
-          example:
-            totalItems: '422'
-            isLastPage: 'true'
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProjectDTO'
-      description: Provides insights into endpoint-supported pagination information
-    LibraryLicenseDTO:
-      type: object
-      properties:
-        uuid:
-          title: License UUID
-          type: string
-          example: 123e4567-e89b-12d3-a456-426655440000
-        name:
-          title: License Name
-          type: string
-          example: MIT
-        assignedByUser:
-          title: Assigned By User
-          type: boolean
-        licenseReferences:
-          type: array
-          items:
-            $ref: '#/components/schemas/LicenseReferenceDTO'
-    DWRResponseLibraryVulnerabilityTrendsDTO:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/LibraryVulnerabilityTrendsDTO'
-    DWRResponseString:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          type: string
-    SecurityRiskDTO:
-      type: object
-      properties:
-        sourceUrl:
-          type: string
-        riskFactor:
-          type: string
-          enum:
-          - NO_FINDINGS
-          - UNCONFIRMED_UNSAFE
-          - CONFIRMED_UNSAFE
-          - KNOWN_FALSE_POSITIVE
-    LibraryExtraInfoDTO:
-      type: object
-      properties:
-        distributionUrl:
-          type: string
-        downloadUrl:
-          type: string
-        releaseDate:
-          type: string
-          format: date-time
-        packageManagerRepository:
-          type: string
-        homePage:
-          type: string
-        repositoryUrl:
-          type: string
-        author:
-          type: string
-    InHouseRequestDTO:
-      required:
-      - isInHouse
-      type: object
-      properties:
-        libraryUuids:
-          type: array
-          items:
-            title: Library UUID
-            type: string
-            example: 123e4567-e89b-12d3-a456-426655440000
-        comment:
-          title: User Comment
-          type: string
-          example: A comment
-        isInHouse:
-          title: In House
-          type: boolean
-          description: true for marking inHouse false for unmaking
-    AttributionReportLibrarySettingRuleDTO:
-      type: object
-      properties:
-        excluded:
-          type: boolean
-    LibraryLicenseRequestDTO:
-      required:
-      - assignedByUser
-      - licenseReferences
-      - uuid
-      type: object
-      properties:
-        uuid:
-          title: License UUID
-          type: string
-          example: 123e4567-e89b-12d3-a456-426655440000
-        assignedByUser:
-          title: Assigned By User
-          type: boolean
-        licenseReferences:
-          type: array
-          items:
-            $ref: '#/components/schemas/LicenseReferenceRequestDTO'
-    EntityDTO:
-      type: object
-      properties:
-        uuid:
-          type: string
-        name:
-          type: string
-    CopyrightReferenceRequestDTO:
-      type: object
-      properties:
-        copyright:
-          title: Copyright Text
-          type: string
-          example: Copyright 2002 Landmark
-        customDisclaimer:
-          title: Custom Disclaimer
-          type: string
-          example: 'a disclaimer for the copyright '
-        createdAt:
-          title: Copyright Creation Date
-          type: string
-          format: date-time
-        startYear:
-          title: Copyright Start Year
-          type: string
-          example: '2020'
-        endYear:
-          title: Copyright End Year
-          type: string
-          example: '2022'
-        author:
-          title: Copyright Author
-          type: string
-          example: Cloud Conscious, LLC
     ProprietaryInfoDTO:
       type: object
       properties:
@@ -1240,307 +1529,6 @@ components:
           enum:
           - BY_RULE
           - BY_USER
-    DWRResponsePageableListLightLibraryDTO:
-      type: object
-      properties:
-        additionalData:
-          title: Provides insights into endpoint-supported pagination information.
-          type: object
-          description: '+ **totalItems**: The total count of data points returned in an API response.
-
-            + **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining.'
-          example:
-            totalItems: '422'
-            isLastPage: 'true'
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          type: array
-          items:
-            $ref: '#/components/schemas/LightLibraryDTO'
-      description: Provides insights into endpoint-supported pagination information
-    ProjectDTO:
-      type: object
-      properties:
-        uuid:
-          title: Project UUID
-          type: string
-          example: 123e4567-e89b-12d3-a456-426655440000
-        name:
-          title: Project Name
-          type: string
-          example: My Project
-        path:
-          title: Product Name
-          type: string
-          example: My Product
-        productName:
-          title: Product Name
-          type: string
-          example: My Product
-        productUuid:
-          title: Product Uuid
-          type: string
-          example: 123e4567-e89b-12d3-a456-426655440000
-    DWRResponseBase:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-    UserInfoDTO:
-      required:
-      - uuid
-      type: object
-      properties:
-        uuid:
-          title: User UUID
-          type: string
-          example: 123e4567-e89b-12d3-a456-426655440000
-        name:
-          title: User Name
-          type: string
-          example: Jon Smith
-        email:
-          title: User Email
-          type: string
-          example: jon.smith@mail.com
-        userType:
-          title: Type Of User
-          type: string
-          example: REGULAR
-          enum:
-          - REGULAR
-          - SERVICE
-          - SCAN_SUMMARY_RECEIVER
-        accountStatus:
-          type: string
-          enum:
-          - ACTIVE
-          - INACTIVE
-          - LOCKOUT
-    LibraryVersionDTO:
-      type: object
-      properties:
-        lastUpdatedAt:
-          title: Last Version Update
-          type: string
-          format: date-time
-        version:
-          title: Version
-          type: string
-          example: original
-        release:
-          type: string
-        arch:
-          type: string
-        currentVersion:
-          type: boolean
-    DWRResponseListNoticeDTO:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          type: array
-          items:
-            $ref: '#/components/schemas/NoticeDTO'
-    VulnerabilityReferenceDTO:
-      type: object
-      properties:
-        value:
-          title: Vulnerability Reference Value
-          type: string
-          example: https://github.com/codehaus-plexus/plexus-utils/commit/f933e5e78dc2637e485447ed821fe14904f110de
-        source:
-          title: vulnerability reference source
-          type: string
-          example: CERT
-        url:
-          title: Vulnerability Reference Url
-          type: string
-          example: https://github.com/codehaus-plexus/plexus-utils/commit/f933e5e78dc2637e485447ed821fe14904f110de
-        signature:
-          title: Vulnerability Reference Signature
-          type: boolean
-        advisory:
-          title: Vulnerability Reference Advisory
-          type: boolean
-        patch:
-          title: Vulnerability Reference Patch
-          type: boolean
-    NoticeDTO:
-      required:
-      - text
-      type: object
-      properties:
-        text:
-          title: Notice Text
-          type: string
-          example: Developed internally
-        reference:
-          title: Notice REFERENCE
-          type: string
-          example: https://github.com/...
-    LibraryVersionVulnerabilitiesDTO:
-      type: object
-      properties:
-        name:
-          title: Library Name
-          type: string
-          example: Apache Ant Core
-        version:
-          title: Library Version
-          type: string
-          example: 1.8.2
-        type:
-          title: Library Type
-          type: string
-          example: MAVEN_ARTIFACT
-        current:
-          type: boolean
-        vulnerabilities:
-          type: array
-          items:
-            $ref: '#/components/schemas/BaseVulnerabilityProfileDTO'
-    DWRResponseBoolean:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          type: boolean
-    LibraryVulnerabilityTrendsDTO:
-      type: object
-      properties:
-        trends:
-          type: array
-          items:
-            $ref: '#/components/schemas/LibraryVersionVulnerabilitiesDTO'
-    UserCopyrightReferenceDTO:
-      required:
-      - copyright
-      type: object
-      properties:
-        type:
-          title: Copy Reference Type
-          type: string
-          example: PROJECT_HOMEPAGE
-          enum:
-          - TEXT_IN_FILE
-          - ARTIFACT_DESCRIPTOR
-          - PROJECT_HOMEPAGE
-          - USER
-          - UNSPECIFIED
-        copyright:
-          title: Copyright
-          type: string
-          example: Copyright 2021 x greater by the end of
-        customDisclaimer:
-          title: Copyright Custom Disclaimer
-          type: string
-        createdAt:
-          type: string
-          format: date-time
-        textUrl:
-          title: Copyright Text Url
-          type: string
-        startYear:
-          title: Copyright Start Year
-          type: string
-          example: '2021'
-        endYear:
-          title: Copyright End Year
-          type: string
-          example: '2022'
-        author:
-          title: Copyright Author
-          type: string
-          example: x greater by the end of
-        referenceInfo:
-          title: Copyright Reference Info
-          type: string
-          example: x greater by the end of
-        assignedBy:
-          $ref: '#/components/schemas/UserInfoDTO'
-    LicenseReferenceDTO:
-      type: object
-      properties:
-        uuid:
-          title: License Reference UUID
-          type: string
-          example: 123e4567-e89b-12d3-a456-426655440000
-        type:
-          title: License Reference Type
-          type: string
-          example: ARTIFACT_DESCRIPTOR
-        liabilityReference:
-          title: License Liability Reference
-          type: string
-          example: https://repo.maven.apache.org/maven2/org/jruby/ext/posix/jna-posix/1.0.3/jna-posix-1.0.3.pom
-        assignedBy:
-          $ref: '#/components/schemas/UserInfoDTO'
-        textUrl:
-          title: License Reference Text URL
-          type: string
-        customDisclaimer:
-          title: License Reference Custom Disclaimer
-          type: string
-        information:
-          title: License Reference information
-          type: string
-          example: distribution=repo&remoteUrl=https://repo.maven.apache.org/maven2/org/jruby/ext/posix/jna-posix/1.0.3/jna-posix-1.0.3.pom
-    CopyrightReferenceDTO:
-      required:
-      - copyright
-      type: object
-      properties:
-        type:
-          title: Copy Reference Type
-          type: string
-          example: PROJECT_HOMEPAGE
-          enum:
-          - TEXT_IN_FILE
-          - ARTIFACT_DESCRIPTOR
-          - PROJECT_HOMEPAGE
-          - USER
-          - UNSPECIFIED
-        copyright:
-          title: Copyright
-          type: string
-          example: Copyright 2021 x greater by the end of
-        customDisclaimer:
-          title: Copyright Custom Disclaimer
-          type: string
-        createdAt:
-          type: string
-          format: date-time
-        textUrl:
-          title: Copyright Text Url
-          type: string
-        startYear:
-          title: Copyright Start Year
-          type: string
-          example: '2021'
-        endYear:
-          title: Copyright End Year
-          type: string
-          example: '2022'
-        author:
-          title: Copyright Author
-          type: string
-          example: x greater by the end of
-        referenceInfo:
-          title: Copyright Reference Info
-          type: string
-          example: x greater by the end of
     BaseVulnerabilityProfileDTO:
       type: object
       properties:
@@ -1603,17 +1591,14 @@ components:
           items:
             $ref: '#/components/schemas/LibraryVersionDTO'
       description: Provides insights into endpoint-supported pagination information
-    LicenseReferenceRequestDTO:
-      required:
-      - liabilityReference
+    DWRResponseString:
       type: object
       properties:
-        liabilityReference:
-          title: License Liability Reference
+        supportToken:
+          title: Support Token
           type: string
-          example: www.somelink.com
-        customDisclaimer:
-          title: Liability Reference
+          example: 1171c60d
+        retVal:
           type: string
   securitySchemes:
     bearer-key:

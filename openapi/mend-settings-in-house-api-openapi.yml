@@ -1,25 +1,10 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Mend Access Management Settings - In-House API
-  description: 'Mend''s enhanced API enables automation of workflows in a REST compliant format. The API features:
-
-    + Access for any user with Mend credentials, via a user key available in the user''s profile page in the Mend Platform.
-
-    + Improved security with a JWT token per organization, which expires every 10 minutes.
-
-    + Added scalability with support for cursor pagination and limiting results size.
-
-    + Broader functionality available programmatically.
-
-    + New standard API documentation for easy navigation and search.
-
-
-    **Note:** To help you get started with the Mend API 3.0, we recommend reviewing our onboarding guide -> [Getting Started with API 3.0](https://docs.mend.io/platform/latest/getting-started-with-mend-api-3-0).
-
-    This resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend API 3.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.'
-  version: '3.0'
+  title: Mend Settings - In-House API
+  description: Mend's enhanced SCA API enables automation of workflows in a REST compliant format.
+  version: '2.0'
 servers:
-- url: https://baseUrl
+- url: https://api-saas.mend.io
   description: Generated server url
 security:
 - bearer-key: []
@@ -350,170 +335,6 @@ paths:
                 $ref: '#/components/schemas/DWRResponseBase'
 components:
   schemas:
-    UpdateInHouseRulesRequestDTO:
-      required:
-      - uuid
-      type: object
-      properties:
-        uuid:
-          title: Proprietary Rule UUID
-          type: string
-          example: 123e4567-e89b-12d3-a456-426655440000
-        type:
-          title: Proprietary Rule Regex Type
-          type: string
-          example: NAME
-          enum:
-          - NAME
-          - LIBRARY_COORDINATES
-          - ARTIFACT_ID
-        regex:
-          title: Proprietary Regex Rule
-          type: string
-          example: '*aa*'
-        description:
-          title: Proprietary Description
-          type: string
-          example: description for white list
-        empty:
-          type: boolean
-    InHouseRuleDTO:
-      required:
-      - type
-      type: object
-      properties:
-        uuid:
-          type: string
-        type:
-          title: InHouse Rule Regex Type
-          type: string
-          enum:
-          - NAME
-          - LIBRARY_COORDINATES
-          - ARTIFACT_ID
-        regex:
-          title: InHouse Regex Rule
-          type: string
-          example: .*a*
-        description:
-          title: InHouse Rule Description
-          type: string
-        createdAt:
-          type: string
-          format: date-time
-        createdBy:
-          title: Created By
-          type: string
-          description: Jon.Snow
-        empty:
-          type: boolean
-    DeleteInHouseRuleRequestDTO:
-      required:
-      - uuid
-      type: object
-      properties:
-        uuid:
-          title: InHouse Rule UUID
-          type: string
-          example: 123e4567-e89b-12d3-a456-426655440000
-        empty:
-          type: boolean
-    DWRResponseMessageDTO:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/MessageDTO'
-    CreateInHouseRuleRequestDTO:
-      required:
-      - regex
-      - type
-      type: object
-      properties:
-        type:
-          title: InHouse Rule Regex Type
-          type: string
-          example: NAME
-          enum:
-          - NAME
-          - LIBRARY_COORDINATES
-          - ARTIFACT_ID
-        regex:
-          title: InHouse Regex Rule
-          type: string
-          example: '*aa*'
-        description:
-          title: InHouse Description
-          type: string
-          example: description for inHouse rule
-        empty:
-          type: boolean
-    UpdateInHouseRuleRequestDTO:
-      type: object
-      properties:
-        type:
-          title: InHouse Rule Regex Type
-          type: string
-          example: NAME
-          enum:
-          - NAME
-          - LIBRARY_COORDINATES
-          - ARTIFACT_ID
-        regex:
-          title: InHouse Regex Rule
-          type: string
-          example: '*aa*'
-        description:
-          title: InHouse Description
-          type: string
-          example: description for InHouse rule
-        empty:
-          type: boolean
-    DWRResponsePageableInHouseSettingsDTO:
-      type: object
-      properties:
-        additionalData:
-          title: Provides insights into endpoint-supported pagination information.
-          type: object
-          description: '+ **totalItems**: The total count of data points returned in an API response.
-
-            + **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining.'
-          example:
-            totalItems: '422'
-            isLastPage: 'true'
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/InHouseSettingsDTO'
-      description: Provides insights into endpoint-supported pagination information
-    InHouseSettingsDTO:
-      type: object
-      properties:
-        rules:
-          type: array
-          items:
-            $ref: '#/components/schemas/InHouseRuleDTO'
-        active:
-          type: boolean
-    MessageDTO:
-      type: object
-      properties:
-        message:
-          title: message
-          type: string
-          example: Success!
-    DWRResponseBase:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
     DWRResponseWarningListInHouseRuleDTO:
       title: Initiates the update process for an individual In-House library rule
       type: object
@@ -554,6 +375,170 @@ components:
         retVal:
           $ref: '#/components/schemas/InHouseRuleDTO'
       description: ddsc
+    InHouseSettingsDTO:
+      type: object
+      properties:
+        rules:
+          type: array
+          items:
+            $ref: '#/components/schemas/InHouseRuleDTO'
+        active:
+          type: boolean
+    UpdateInHouseRulesRequestDTO:
+      required:
+      - uuid
+      type: object
+      properties:
+        uuid:
+          title: Proprietary Rule UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        type:
+          title: Proprietary Rule Regex Type
+          type: string
+          example: NAME
+          enum:
+          - NAME
+          - LIBRARY_COORDINATES
+          - ARTIFACT_ID
+        regex:
+          title: Proprietary Regex Rule
+          type: string
+          example: '*aa*'
+        description:
+          title: Proprietary Description
+          type: string
+          example: description for white list
+        empty:
+          type: boolean
+    DWRResponseMessageDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/MessageDTO'
+    MessageDTO:
+      type: object
+      properties:
+        message:
+          title: message
+          type: string
+          example: Success!
+    UpdateInHouseRuleRequestDTO:
+      type: object
+      properties:
+        type:
+          title: InHouse Rule Regex Type
+          type: string
+          example: NAME
+          enum:
+          - NAME
+          - LIBRARY_COORDINATES
+          - ARTIFACT_ID
+        regex:
+          title: InHouse Regex Rule
+          type: string
+          example: '*aa*'
+        description:
+          title: InHouse Description
+          type: string
+          example: description for InHouse rule
+        empty:
+          type: boolean
+    DWRResponsePageableInHouseSettingsDTO:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            + **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining.'
+          example:
+            totalItems: '422'
+            isLastPage: 'true'
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/InHouseSettingsDTO'
+      description: Provides insights into endpoint-supported pagination information
+    InHouseRuleDTO:
+      required:
+      - type
+      type: object
+      properties:
+        uuid:
+          type: string
+        type:
+          title: InHouse Rule Regex Type
+          type: string
+          enum:
+          - NAME
+          - LIBRARY_COORDINATES
+          - ARTIFACT_ID
+        regex:
+          title: InHouse Regex Rule
+          type: string
+          example: .*a*
+        description:
+          title: InHouse Rule Description
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        createdBy:
+          title: Created By
+          type: string
+          description: Jon.Snow
+        empty:
+          type: boolean
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+    DeleteInHouseRuleRequestDTO:
+      required:
+      - uuid
+      type: object
+      properties:
+        uuid:
+          title: InHouse Rule UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        empty:
+          type: boolean
+    CreateInHouseRuleRequestDTO:
+      required:
+      - regex
+      - type
+      type: object
+      properties:
+        type:
+          title: InHouse Rule Regex Type
+          type: string
+          example: NAME
+          enum:
+          - NAME
+          - LIBRARY_COORDINATES
+          - ARTIFACT_ID
+        regex:
+          title: InHouse Regex Rule
+          type: string
+          example: '*aa*'
+        description:
+          title: InHouse Description
+          type: string
+          example: description for inHouse rule
+        empty:
+          type: boolean
   securitySchemes:
     bearer-key:
       type: http
