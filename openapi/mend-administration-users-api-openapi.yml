@@ -216,7 +216,7 @@ paths:
                 $ref: '#/components/schemas/DWRResponseBase'
 components:
   schemas:
-    DWRResponseV3UserInfoResponseDTO:
+    DWRResponseV3MessageDTO:
       type: object
       properties:
         supportToken:
@@ -224,7 +224,7 @@ components:
           type: string
           example: 1171c60d
         response:
-          $ref: '#/components/schemas/UserInfoResponseDTO'
+          $ref: '#/components/schemas/MessageDTO'
     UserInfoDTOV3:
       required:
       - uuid
@@ -258,7 +258,7 @@ components:
           - ACTIVE
           - INVITED
           - DISABLED
-    DWRResponseV3Boolean:
+    DWRResponseV3UserInfoResponseDTO:
       type: object
       properties:
         supportToken:
@@ -266,7 +266,7 @@ components:
           type: string
           example: 1171c60d
         response:
-          type: boolean
+          $ref: '#/components/schemas/UserInfoResponseDTO'
     UserInfoResponseDTO:
       required:
       - uuid
@@ -294,15 +294,13 @@ components:
           - SCAN_SUMMARY_RECEIVER
         existsInOrg:
           type: boolean
-    InviteUserRequestDTO:
-      required:
-      - email
+    MessageDTO:
       type: object
       properties:
-        email:
-          title: New User Email
+        message:
+          title: message
           type: string
-          example: jon.smith@mail.com
+          example: Success!
     DWRResponseBase:
       type: object
       properties:
@@ -331,14 +329,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/UserInfoDTOV3'
-    MessageDTO:
-      type: object
-      properties:
-        message:
-          title: message
-          type: string
-          example: Success!
-    DWRResponseV3MessageDTO:
+    DWRResponseV3Boolean:
       type: object
       properties:
         supportToken:
@@ -346,7 +337,16 @@ components:
           type: string
           example: 1171c60d
         response:
-          $ref: '#/components/schemas/MessageDTO'
+          type: boolean
+    InviteUserRequestDTO:
+      required:
+      - email
+      type: object
+      properties:
+        email:
+          title: New User Email
+          type: string
+          example: jon.smith@mail.com
   securitySchemes:
     bearer-key:
       type: http

@@ -127,43 +127,6 @@ components:
           example: 1171c60d
         retVal:
           $ref: '#/components/schemas/UserKeyDTO'
-    GenerateUserKeyRequestDTO:
-      type: object
-      properties:
-        description:
-          title: UserToken Description
-          type: string
-          example: Token A
-    DWRResponsePageableCollectionUserKeyDTO:
-      type: object
-      properties:
-        additionalData:
-          title: Provides insights into endpoint-supported pagination information.
-          type: object
-          description: '+ **totalItems**: The total count of data points returned in an API response.
-
-            + **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining.'
-          example:
-            totalItems: '422'
-            isLastPage: 'true'
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserKeyDTO'
-      description: Provides insights into endpoint-supported pagination information
-    DWRResponseMessageDTO:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/MessageDTO'
     UserKeyDTO:
       type: object
       properties:
@@ -195,6 +158,13 @@ components:
           title: Token Expiration Date
           type: string
           format: date-time
+    GenerateUserKeyRequestDTO:
+      type: object
+      properties:
+        description:
+          title: UserToken Description
+          type: string
+          example: Token A
     MessageDTO:
       type: object
       properties:
@@ -202,6 +172,15 @@ components:
           title: message
           type: string
           example: Success!
+    DWRResponseMessageDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/MessageDTO'
     DWRResponseBase:
       type: object
       properties:
@@ -209,6 +188,27 @@ components:
           title: Support Token
           type: string
           example: 1171c60d
+    DWRResponsePageableCollectionUserKeyDTO:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            + **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining.'
+          example:
+            totalItems: '422'
+            isLastPage: 'true'
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserKeyDTO'
+      description: Provides insights into endpoint-supported pagination information
   securitySchemes:
     bearer-key:
       type: http

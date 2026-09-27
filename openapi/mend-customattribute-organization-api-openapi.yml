@@ -114,36 +114,20 @@ paths:
                 $ref: '#/components/schemas/DWRResponseBase'
 components:
   schemas:
-    DWRResponsePageableListCustomAttributeDTO:
+    CustomAttributeValueDTO:
       type: object
       properties:
-        additionalData:
-          title: Provides insights into endpoint-supported pagination information.
-          type: object
-          description: '+ **totalItems**: The total count of data points returned in an API response.
-
-            + **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining.'
-          example:
-            totalItems: '422'
-            isLastPage: 'true'
-        supportToken:
-          title: Support Token
+        value:
+          title: Custom Attribute Value
           type: string
-          example: 1171c60d
-        retVal:
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomAttributeDTO'
-      description: Provides insights into endpoint-supported pagination information
-    DWRResponseMessageDTO:
+          example: Custom attribute value
+    MessageDTO:
       type: object
       properties:
-        supportToken:
-          title: Support Token
+        message:
+          title: message
           type: string
-          example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/MessageDTO'
+          example: Success!
     CustomAttributeDTO:
       type: object
       properties:
@@ -171,20 +155,15 @@ components:
           - projects
           - products
           - orgs
-    CustomAttributeValueDTO:
+    DWRResponseMessageDTO:
       type: object
       properties:
-        value:
-          title: Custom Attribute Value
+        supportToken:
+          title: Support Token
           type: string
-          example: Custom attribute value
-    MessageDTO:
-      type: object
-      properties:
-        message:
-          title: message
-          type: string
-          example: Success!
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/MessageDTO'
     DWRResponseBase:
       type: object
       properties:
@@ -192,6 +171,27 @@ components:
           title: Support Token
           type: string
           example: 1171c60d
+    DWRResponsePageableListCustomAttributeDTO:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            + **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining.'
+          example:
+            totalItems: '422'
+            isLastPage: 'true'
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttributeDTO'
+      description: Provides insights into endpoint-supported pagination information
   securitySchemes:
     bearer-key:
       type: http

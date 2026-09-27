@@ -61,6 +61,13 @@ paths:
                 type: string
 components:
   schemas:
+    v3.V3BaseResponse-v3_V3TestRunTriggerResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/v3.V3TestRunTriggerResponse'
+        supportToken:
+          type: string
     v3.V3TestRunTriggerRequest:
       type: object
       required:
@@ -86,13 +93,6 @@ components:
         testRunId:
           type: integer
           description: ID of the triggered test run
-    v3.V3BaseResponse-v3_V3TestRunTriggerResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/v3.V3TestRunTriggerResponse'
-        supportToken:
-          type: string
   securitySchemes:
     bearer-key:
       type: http

@@ -543,24 +543,46 @@ paths:
                 $ref: '#/components/schemas/DWRResponseBase'
 components:
   schemas:
-    DWRResponseLibraryLanguageCountDto:
+    PolicyCountDTO:
       type: object
       properties:
+        violations:
+          title: Policy Violations Count
+          type: integer
+          format: int32
+          example: 5
+    DWRResponsePageableDomainSummeryInHouseLibraryPerProjectDTO:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            + **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining.'
+          example:
+            totalItems: '422'
+            isLastPage: 'true'
         supportToken:
           title: Support Token
           type: string
           example: 1171c60d
         retVal:
-          $ref: '#/components/schemas/LibraryLanguageCountDto'
-    DWRResponseVulnerabilityAlertCountPerEffectiveUsageDTO:
+          $ref: '#/components/schemas/DomainSummeryInHouseLibraryPerProjectDTO'
+      description: Provides insights into endpoint-supported pagination information
+    DomainSummeryInHouseLibraryPerProjectDTO:
       type: object
       properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/VulnerabilityAlertCountPerEffectiveUsageDTO'
+        totalOrganizationCount:
+          title: Total Count of In-House Libraries in the Organization
+          type: integer
+          format: int32
+          example: 34
+        projects:
+          title: In-House Libraries per Project
+          type: array
+          items:
+            $ref: '#/components/schemas/LibraryInHouseCountPerProjectDTO'
     DWRResponsePageableDomainSummaryInHouseLibraryPerProductDTO:
       type: object
       properties:
@@ -580,42 +602,38 @@ components:
         retVal:
           $ref: '#/components/schemas/DomainSummaryInHouseLibraryPerProductDTO'
       description: Provides insights into endpoint-supported pagination information
-    LibraryLanguageCountDto:
+    DWRResponsePageableCollectionLibraryCountByProjectDTO:
       type: object
       properties:
-        languages:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            + **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining.'
+          example:
+            totalItems: '422'
+            isLastPage: 'true'
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
           type: array
           items:
-            $ref: '#/components/schemas/LibraryLanguageTypeCountDto'
-    LibraryInHouseCountPerProjectDTO:
-      title: In-House Libraries per Project
+            $ref: '#/components/schemas/LibraryCountByProjectDTO'
+      description: Provides insights into endpoint-supported pagination information
+    DomainAlertTypeSummaryDTO:
       type: object
       properties:
-        uuid:
-          title: Project UUID
-          type: string
-          example: 123e4567-e89b-12d3-a456-426655440000
-        name:
-          title: Project Name
-          type: string
-          example: myProject
-        inHouseLibraries:
-          title: Number of In-House Libraries in Project
-          type: integer
-          format: int32
-          example: 34
-    LibraryLanguageTypeCountDto:
-      type: object
-      properties:
-        language:
-          title: Library Language
-          type: string
-          example: Java
-        count:
-          title: Total Count of Library language in User's Projects
-          type: integer
-          format: int64
-          example: 15
+        policies:
+          $ref: '#/components/schemas/PolicyCountDTO'
+        libraries:
+          $ref: '#/components/schemas/LibraryCountDTO'
+        securityPerLibrary:
+          $ref: '#/components/schemas/SecurityAlertPerLibraryDTO'
+        securityPerVulnerability:
+          $ref: '#/components/schemas/SecurityAlertPerVulnerabilityDTO'
     LicensePerDomainCountDto:
       type: object
       properties:
@@ -636,6 +654,161 @@ components:
           type: integer
           format: int64
           example: 100
+    DWRResponseScanSummaryCountDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/ScanSummaryCountDTO'
+    LibraryLanguageTypeCountDto:
+      type: object
+      properties:
+        language:
+          title: Library Language
+          type: string
+          example: Java
+        count:
+          title: Total Count of Library language in User's Projects
+          type: integer
+          format: int64
+          example: 15
+    DWRResponseDomainAlertTypeSummaryDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/DomainAlertTypeSummaryDTO'
+    LibraryLanguageCountDto:
+      type: object
+      properties:
+        languages:
+          type: array
+          items:
+            $ref: '#/components/schemas/LibraryLanguageTypeCountDto'
+    DomainSummaryInHouseLibraryPerProductDTO:
+      type: object
+      properties:
+        totalOrganizationCount:
+          title: Total Count of In-House Libraries in the Organization
+          type: integer
+          format: int64
+          example: 34
+        products:
+          title: In-House Libraries per Product
+          type: array
+          items:
+            $ref: '#/components/schemas/LibraryInHouseCountPerProductDTO'
+    ScanSummaryItemDTO:
+      type: object
+      properties:
+        name:
+          title: Agent Name
+          type: string
+          example: unified-agent
+        count:
+          title: Scan Count
+          type: integer
+          description: Number of scans by agent
+          format: int64
+          example: 10
+    LibraryInHouseCountPerProjectDTO:
+      title: In-House Libraries per Project
+      type: object
+      properties:
+        uuid:
+          title: Project UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Project Name
+          type: string
+          example: myProject
+        inHouseLibraries:
+          title: Number of In-House Libraries in Project
+          type: integer
+          format: int32
+          example: 34
+    VulnerableLibrariesCountDTO:
+      type: object
+      properties:
+        uuid:
+          title: Entity Uuid
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        productName:
+          title: Product Name
+          type: string
+          example: Product A
+        projectCount:
+          title: Project Count
+          type: integer
+          format: int64
+          example: 10
+        vulnerableLibraries:
+          title: Number of vulnerable libraries
+          type: integer
+          format: int64
+          example: 10
+    LicenseCountDto:
+      type: object
+      properties:
+        totalLibraryCount:
+          type: integer
+          format: int32
+        licenses:
+          type: array
+          items:
+            $ref: '#/components/schemas/LicensePerDomainCountDto'
+    LibraryCountByProductDTO:
+      type: object
+      properties:
+        uuid:
+          title: Product UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Product name
+          type: string
+          example: myProduct
+        numberOfLibraries:
+          title: Number of libraries in product
+          type: integer
+          format: int32
+          example: 34
+    SecurityAlertPerLibraryDTO:
+      type: object
+      properties:
+        total:
+          title: Total Library Alerts Count
+          type: integer
+          format: int32
+          example: 15
+        librariesWithCritical:
+          title: Critical Severity Library Alerts Count
+          type: integer
+          format: int32
+          example: 5
+        librariesWithHigh:
+          title: High Severity Library Alerts Count
+          type: integer
+          format: int32
+          example: 4
+        librariesWithMedium:
+          title: Medium Severity Library Alerts Count
+          type: integer
+          format: int32
+          example: 3
+        librariesWithLow:
+          title: Low Severity Library Alerts Count
+          type: integer
+          format: int32
+          example: 3
     DWRResponsePageableCollectionVulnrerableLibrariesByProjectCountDTO:
       type: object
       properties:
@@ -657,42 +830,102 @@ components:
           items:
             $ref: '#/components/schemas/VulnrerableLibrariesByProjectCountDTO'
       description: Provides insights into endpoint-supported pagination information
-    DomainSummaryInHouseLibraryPerProductDTO:
+    SecurityAlertPerVulnerabilityDTO:
       type: object
       properties:
-        totalOrganizationCount:
-          title: Total Count of In-House Libraries in the Organization
+        total:
+          title: Total Alerts Count
           type: integer
-          format: int64
+          format: int32
+          example: 15
+        critical:
+          title: Critical Severity Alerts Count
+          type: integer
+          format: int32
+          example: 5
+        high:
+          title: High Severity Alerts Count
+          type: integer
+          format: int32
+          example: 4
+        medium:
+          title: Medium Severity Alerts Count
+          type: integer
+          format: int32
+          example: 3
+        low:
+          title: Low Severity Alerts Count
+          type: integer
+          format: int32
+          example: 3
+    DWRResponsePageableCollectionVulnerableLibrariesCountDTO:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            + **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining.'
+          example:
+            totalItems: '422'
+            isLastPage: 'true'
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          type: array
+          items:
+            $ref: '#/components/schemas/VulnerableLibrariesCountDTO'
+      description: Provides insights into endpoint-supported pagination information
+    LibraryInHouseCountPerProductDTO:
+      title: In-House Libraries per Product
+      type: object
+      properties:
+        uuid:
+          title: Product UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Product Name
+          type: string
+          example: myProduct
+        inHouseLibraries:
+          title: Number of In-House Libraries in Product
+          type: integer
+          format: int32
           example: 34
-        products:
-          title: In-House Libraries per Product
-          type: array
-          items:
-            $ref: '#/components/schemas/LibraryInHouseCountPerProductDTO'
-    ScanSummaryCountDTO:
-      type: object
-      properties:
-        totalCount:
-          title: Total Scan Count
+        projectCount:
+          title: Number of Projects in Product
           type: integer
-          description: Total number of all scans
-          format: int64
-          example: 20
-        agents:
-          type: array
-          items:
-            $ref: '#/components/schemas/ScanSummaryItemDTO'
-    DomainAlertTypeSummaryDTO:
+          format: int32
+          example: 34
+    LibraryCountDTO:
       type: object
       properties:
-        policies:
-          $ref: '#/components/schemas/PolicyCountDTO'
-        libraries:
-          $ref: '#/components/schemas/LibraryCountDTO'
-        securityPerLibrary:
-          $ref: '#/components/schemas/SecurityAlertPerLibraryDTO'
-        securityPerVulnerability:
+        newVersions:
+          title: New Versions Count
+          type: integer
+          format: int32
+          example: 5
+    DWRResponseLibraryLanguageCountDto:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/LibraryLanguageCountDto'
+    DWRResponseSecurityAlertPerVulnerabilityDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
           $ref: '#/components/schemas/SecurityAlertPerVulnerabilityDTO'
     DWRResponsePageableCollectionLibraryCountByProductDTO:
       type: object
@@ -731,25 +964,6 @@ components:
           type: integer
           format: int32
           example: 34
-    DWRResponsePageableDomainSummeryInHouseLibraryPerProjectDTO:
-      type: object
-      properties:
-        additionalData:
-          title: Provides insights into endpoint-supported pagination information.
-          type: object
-          description: '+ **totalItems**: The total count of data points returned in an API response.
-
-            + **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining.'
-          example:
-            totalItems: '422'
-            isLastPage: 'true'
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/DomainSummeryInHouseLibraryPerProjectDTO'
-      description: Provides insights into endpoint-supported pagination information
     VulnerabilityAlertCountPerEffectiveUsageDTO:
       type: object
       properties:
@@ -761,64 +975,19 @@ components:
           $ref: '#/components/schemas/SecurityAlertPerVulnerabilityDTO'
         grey:
           $ref: '#/components/schemas/SecurityAlertPerVulnerabilityDTO'
-    LibraryCountDTO:
+    ScanSummaryCountDTO:
       type: object
       properties:
-        newVersions:
-          title: New Versions Count
+        totalCount:
+          title: Total Scan Count
           type: integer
-          format: int32
-          example: 5
-    LibraryCountByProductDTO:
-      type: object
-      properties:
-        uuid:
-          title: Product UUID
-          type: string
-          example: 123e4567-e89b-12d3-a456-426655440000
-        name:
-          title: Product name
-          type: string
-          example: myProduct
-        numberOfLibraries:
-          title: Number of libraries in product
-          type: integer
-          format: int32
-          example: 34
-    DomainSummeryInHouseLibraryPerProjectDTO:
-      type: object
-      properties:
-        totalOrganizationCount:
-          title: Total Count of In-House Libraries in the Organization
-          type: integer
-          format: int32
-          example: 34
-        projects:
-          title: In-House Libraries per Project
+          description: Total number of all scans
+          format: int64
+          example: 20
+        agents:
           type: array
           items:
-            $ref: '#/components/schemas/LibraryInHouseCountPerProjectDTO'
-    DWRResponsePageableCollectionLibraryCountByProjectDTO:
-      type: object
-      properties:
-        additionalData:
-          title: Provides insights into endpoint-supported pagination information.
-          type: object
-          description: '+ **totalItems**: The total count of data points returned in an API response.
-
-            + **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining.'
-          example:
-            totalItems: '422'
-            isLastPage: 'true'
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          type: array
-          items:
-            $ref: '#/components/schemas/LibraryCountByProjectDTO'
-      description: Provides insights into endpoint-supported pagination information
+            $ref: '#/components/schemas/ScanSummaryItemDTO'
     VulnrerableLibrariesByProjectCountDTO:
       type: object
       properties:
@@ -839,70 +1008,15 @@ components:
           type: integer
           format: int64
           example: 10
-    LibraryInHouseCountPerProductDTO:
-      title: In-House Libraries per Product
+    DWRResponseVulnerabilityAlertCountPerEffectiveUsageDTO:
       type: object
       properties:
-        uuid:
-          title: Product UUID
-          type: string
-          example: 123e4567-e89b-12d3-a456-426655440000
-        name:
-          title: Product Name
-          type: string
-          example: myProduct
-        inHouseLibraries:
-          title: Number of In-House Libraries in Product
-          type: integer
-          format: int32
-          example: 34
-        projectCount:
-          title: Number of Projects in Product
-          type: integer
-          format: int32
-          example: 34
-    DWRResponsePageableCollectionVulnerableLibrariesCountDTO:
-      type: object
-      properties:
-        additionalData:
-          title: Provides insights into endpoint-supported pagination information.
-          type: object
-          description: '+ **totalItems**: The total count of data points returned in an API response.
-
-            + **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining.'
-          example:
-            totalItems: '422'
-            isLastPage: 'true'
         supportToken:
           title: Support Token
           type: string
           example: 1171c60d
         retVal:
-          type: array
-          items:
-            $ref: '#/components/schemas/VulnerableLibrariesCountDTO'
-      description: Provides insights into endpoint-supported pagination information
-    VulnerableLibrariesCountDTO:
-      type: object
-      properties:
-        uuid:
-          title: Entity Uuid
-          type: string
-          example: 123e4567-e89b-12d3-a456-426655440000
-        productName:
-          title: Product Name
-          type: string
-          example: Product A
-        projectCount:
-          title: Project Count
-          type: integer
-          format: int64
-          example: 10
-        vulnerableLibraries:
-          title: Number of vulnerable libraries
-          type: integer
-          format: int64
-          example: 10
+          $ref: '#/components/schemas/VulnerabilityAlertCountPerEffectiveUsageDTO'
     DWRResponseLicenseCountDto:
       type: object
       properties:
@@ -912,15 +1026,6 @@ components:
           example: 1171c60d
         retVal:
           $ref: '#/components/schemas/LicenseCountDto'
-    DWRResponseSecurityAlertPerVulnerabilityDTO:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/SecurityAlertPerVulnerabilityDTO'
     DWRResponseBase:
       type: object
       properties:
@@ -928,111 +1033,6 @@ components:
           title: Support Token
           type: string
           example: 1171c60d
-    DWRResponseDomainAlertTypeSummaryDTO:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/DomainAlertTypeSummaryDTO'
-    SecurityAlertPerLibraryDTO:
-      type: object
-      properties:
-        total:
-          title: Total Library Alerts Count
-          type: integer
-          format: int32
-          example: 15
-        librariesWithCritical:
-          title: Critical Severity Library Alerts Count
-          type: integer
-          format: int32
-          example: 5
-        librariesWithHigh:
-          title: High Severity Library Alerts Count
-          type: integer
-          format: int32
-          example: 4
-        librariesWithMedium:
-          title: Medium Severity Library Alerts Count
-          type: integer
-          format: int32
-          example: 3
-        librariesWithLow:
-          title: Low Severity Library Alerts Count
-          type: integer
-          format: int32
-          example: 3
-    ScanSummaryItemDTO:
-      type: object
-      properties:
-        name:
-          title: Agent Name
-          type: string
-          example: unified-agent
-        count:
-          title: Scan Count
-          type: integer
-          description: Number of scans by agent
-          format: int64
-          example: 10
-    SecurityAlertPerVulnerabilityDTO:
-      type: object
-      properties:
-        total:
-          title: Total Alerts Count
-          type: integer
-          format: int32
-          example: 15
-        critical:
-          title: Critical Severity Alerts Count
-          type: integer
-          format: int32
-          example: 5
-        high:
-          title: High Severity Alerts Count
-          type: integer
-          format: int32
-          example: 4
-        medium:
-          title: Medium Severity Alerts Count
-          type: integer
-          format: int32
-          example: 3
-        low:
-          title: Low Severity Alerts Count
-          type: integer
-          format: int32
-          example: 3
-    LicenseCountDto:
-      type: object
-      properties:
-        totalLibraryCount:
-          type: integer
-          format: int32
-        licenses:
-          type: array
-          items:
-            $ref: '#/components/schemas/LicensePerDomainCountDto'
-    DWRResponseScanSummaryCountDTO:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/ScanSummaryCountDTO'
-    PolicyCountDTO:
-      type: object
-      properties:
-        violations:
-          title: Policy Violations Count
-          type: integer
-          format: int32
-          example: 5
   securitySchemes:
     bearer-key:
       type: http

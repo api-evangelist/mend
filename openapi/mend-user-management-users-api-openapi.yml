@@ -424,34 +424,7 @@ paths:
                 $ref: '#/components/schemas/DWRResponseBase'
 components:
   schemas:
-    UserInfoResponseDTO:
-      required:
-      - uuid
-      type: object
-      properties:
-        uuid:
-          title: User UUID
-          type: string
-          example: 123e4567-e89b-12d3-a456-426655440000
-        name:
-          title: User Name
-          type: string
-          example: Jon Smith
-        email:
-          title: User Email
-          type: string
-          example: jon.smith@mail.com
-        userType:
-          title: Type Of User
-          type: string
-          example: REGULAR
-          enum:
-          - REGULAR
-          - SERVICE
-          - SCAN_SUMMARY_RECEIVER
-        existsInOrg:
-          type: boolean
-    DWRResponseEnrichedUserInfoDTO:
+    DWRResponseUserKeyDTO:
       type: object
       properties:
         supportToken:
@@ -459,39 +432,8 @@ components:
           type: string
           example: 1171c60d
         retVal:
-          $ref: '#/components/schemas/EnrichedUserInfoDTO'
-    UserInfoDTO:
-      required:
-      - uuid
-      type: object
-      properties:
-        uuid:
-          title: User UUID
-          type: string
-          example: 123e4567-e89b-12d3-a456-426655440000
-        name:
-          title: User Name
-          type: string
-          example: Jon Smith
-        email:
-          title: User Email
-          type: string
-          example: jon.smith@mail.com
-        userType:
-          title: Type Of User
-          type: string
-          example: REGULAR
-          enum:
-          - REGULAR
-          - SERVICE
-          - SCAN_SUMMARY_RECEIVER
-        accountStatus:
-          type: string
-          enum:
-          - ACTIVE
-          - INACTIVE
-          - LOCKOUT
-    DWRResponseMessageDTO:
+          $ref: '#/components/schemas/UserKeyDTO'
+    DWRResponseUserInfoDTO:
       type: object
       properties:
         supportToken:
@@ -499,7 +441,89 @@ components:
           type: string
           example: 1171c60d
         retVal:
-          $ref: '#/components/schemas/MessageDTO'
+          $ref: '#/components/schemas/UserInfoDTO'
+    ScanSummaryReceiverUserDTO:
+      type: object
+      properties:
+        userInfoDTO:
+          $ref: '#/components/schemas/UserInfoDTO'
+    GroupRoleDTO:
+      title: List of Group Roles
+      type: object
+      properties:
+        contextToken:
+          type: string
+          description: 'Depending on the value of contextType, this can be:
+
+            + orgToken (org UUID by running Entities - Organization > Get User Organization) or Api Token (from the Mend SCA App: **Integrate** tab > **API Key**).
+
+            + productToken (product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**.
+
+            + projectToken (project UUID by running Entities - Product > Get Product Projects) or project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+          example: 123e4567-e89b-12d3-a456-426655440000
+        contextName:
+          title: Context Name
+          type: string
+          example: My Project
+        contextType:
+          type: string
+          description: Type of entity the role will be associated with
+          example: orgs
+          enum:
+          - orgs
+          - products
+        role:
+          type: string
+          enum:
+          - DEFAULT_APPROVER
+          - ADMIN
+          - ALERT_EMAIL_RECEIVER
+          - ALERTS_IGNORER
+          - LICENSE_AND_COPYRIGHT_ASSIGNER
+          - AUDITOR
+          - USER
+          - PRODUCT_INTEGRATOR
+          - SBOM_EXPORTER
+    UserKeyDTO:
+      type: object
+      properties:
+        uuid:
+          title: User Key UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        userUuid:
+          title: User UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        userKey:
+          title: User Key
+          type: string
+          example: 8d541c7d782e4b7891ebf61e864f76cb9af75f17d4394b109f1155e88f3e86bd
+        createdAt:
+          title: Time Of Creation
+          type: string
+          format: date-time
+        lastUsedAt:
+          title: Last Token Usage
+          type: string
+          format: date-time
+        description:
+          title: Token Description
+          type: string
+          example: Token A
+        expirationDate:
+          title: Token Expiration Date
+          type: string
+          format: date-time
+    DWRResponseScanSummaryReceiverUserDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/ScanSummaryReceiverUserDTO'
     EnrichedUserInfoDTO:
       required:
       - uuid
@@ -545,15 +569,6 @@ components:
           items:
             title: Associated Groups
             type: string
-    DWRResponseServiceUserDTO:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/ServiceUserDTO'
     MessageDTO:
       type: object
       properties:
@@ -561,6 +576,22 @@ components:
           title: message
           type: string
           example: Success!
+    DWRResponseEnrichedUserInfoDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/EnrichedUserInfoDTO'
+    ServiceUserDTO:
+      type: object
+      properties:
+        userKeyDTO:
+          $ref: '#/components/schemas/UserKeyDTO'
+        userInfoDTO:
+          $ref: '#/components/schemas/UserInfoDTO'
     DWRResponseListEnrichedUserInfoDTO:
       type: object
       properties:
@@ -572,57 +603,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/EnrichedUserInfoDTO'
-    UserEmailsRequestDTO:
-      required:
-      - userEmails
-      type: object
-      properties:
-        userEmails:
-          uniqueItems: true
-          type: array
-          items:
-            type: string
-            example: jon.smith@mail.com
-    UserKeyDTO:
-      type: object
-      properties:
-        uuid:
-          title: User Key UUID
-          type: string
-          example: 123e4567-e89b-12d3-a456-426655440000
-        userUuid:
-          title: User UUID
-          type: string
-          example: 123e4567-e89b-12d3-a456-426655440000
-        userKey:
-          title: User Key
-          type: string
-          example: 8d541c7d782e4b7891ebf61e864f76cb9af75f17d4394b109f1155e88f3e86bd
-        createdAt:
-          title: Time Of Creation
-          type: string
-          format: date-time
-        lastUsedAt:
-          title: Last Token Usage
-          type: string
-          format: date-time
-        description:
-          title: Token Description
-          type: string
-          example: Token A
-        expirationDate:
-          title: Token Expiration Date
-          type: string
-          format: date-time
-    DWRResponseScanSummaryReceiverUserDTO:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/ScanSummaryReceiverUserDTO'
     UserEmailRequestDTO:
       required:
       - email
@@ -632,6 +612,33 @@ components:
           title: User Email
           type: string
           example: jon.smith@mail.com
+    UserInfoResponseDTO:
+      required:
+      - uuid
+      type: object
+      properties:
+        uuid:
+          title: User UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: User Name
+          type: string
+          example: Jon Smith
+        email:
+          title: User Email
+          type: string
+          example: jon.smith@mail.com
+        userType:
+          title: Type Of User
+          type: string
+          example: REGULAR
+          enum:
+          - REGULAR
+          - SERVICE
+          - SCAN_SUMMARY_RECEIVER
+        existsInOrg:
+          type: boolean
     DWRResponsePageableListUserInfoDTO:
       type: object
       properties:
@@ -653,57 +660,66 @@ components:
           items:
             $ref: '#/components/schemas/UserInfoDTO'
       description: Provides insights into endpoint-supported pagination information
-    ServiceUserDTO:
-      type: object
-      properties:
-        userKeyDTO:
-          $ref: '#/components/schemas/UserKeyDTO'
-        userInfoDTO:
-          $ref: '#/components/schemas/UserInfoDTO'
-    GroupRoleDTO:
-      title: List of Group Roles
-      type: object
-      properties:
-        contextToken:
-          type: string
-          description: 'Depending on the value of contextType, this can be:
-
-            + orgToken (org UUID by running Entities - Organization > Get User Organization) or Api Token (from the Mend SCA App: **Integrate** tab > **API Key**).
-
-            + productToken (product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**.
-
-            + projectToken (project UUID by running Entities - Product > Get Product Projects) or project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
-          example: 123e4567-e89b-12d3-a456-426655440000
-        contextName:
-          title: Context Name
-          type: string
-          example: My Project
-        contextType:
-          type: string
-          description: Type of entity the role will be associated with
-          example: orgs
-          enum:
-          - orgs
-          - products
-        role:
-          type: string
-          enum:
-          - DEFAULT_APPROVER
-          - ADMIN
-          - ALERT_EMAIL_RECEIVER
-          - ALERTS_IGNORER
-          - LICENSE_AND_COPYRIGHT_ASSIGNER
-          - AUDITOR
-          - USER
-          - PRODUCT_INTEGRATOR
-          - SBOM_EXPORTER
-    DWRResponseBase:
+    DWRResponseUserInfoResponseDTO:
       type: object
       properties:
         supportToken:
           title: Support Token
           type: string
           example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/UserInfoResponseDTO'
+    UserInfoDTO:
+      required:
+      - uuid
+      type: object
+      properties:
+        uuid:
+          title: User UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: User Name
+          type: string
+          example: Jon Smith
+        email:
+          title: User Email
+          type: string
+          example: jon.smith@mail.com
+        userType:
+          title: Type Of User
+          type: string
+          example: REGULAR
+          enum:
+          - REGULAR
+          - SERVICE
+          - SCAN_SUMMARY_RECEIVER
+        accountStatus:
+          type: string
+          enum:
+          - ACTIVE
+          - INACTIVE
+          - LOCKOUT
+    DWRResponseMessageDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/MessageDTO'
+    UserEmailsRequestDTO:
+      required:
+      - userEmails
+      type: object
+      properties:
+        userEmails:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+            example: jon.smith@mail.com
     CreateUserRequestDTO:
       required:
       - email
@@ -717,7 +733,14 @@ components:
           title: User Email
           type: string
           example: jon.smith@mail.com
-    DWRResponseUserKeyDTO:
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+    DWRResponseServiceUserDTO:
       type: object
       properties:
         supportToken:
@@ -725,21 +748,7 @@ components:
           type: string
           example: 1171c60d
         retVal:
-          $ref: '#/components/schemas/UserKeyDTO'
-    DWRResponseUserInfoDTO:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/UserInfoDTO'
-    ScanSummaryReceiverUserDTO:
-      type: object
-      properties:
-        userInfoDTO:
-          $ref: '#/components/schemas/UserInfoDTO'
+          $ref: '#/components/schemas/ServiceUserDTO'
     InviteUserRequestDTO:
       required:
       - email
@@ -749,15 +758,6 @@ components:
           title: New User Email
           type: string
           example: jon.smith@mail.com
-    DWRResponseUserInfoResponseDTO:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/UserInfoResponseDTO'
   securitySchemes:
     bearer-key:
       type: http

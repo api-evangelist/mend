@@ -200,6 +200,15 @@ paths:
                 $ref: '#/components/schemas/DWRResponseBase'
 components:
   schemas:
+    ContextEntityRequestDTO:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          title: Entity Name
+          type: string
+          example: Entity A
     ProductDTO:
       type: object
       properties:
@@ -211,6 +220,15 @@ components:
           title: Product Name
           type: string
           example: Product A
+    DWRResponseContextEntityDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/ContextEntityDTO'
     ContextEntityDTO:
       required:
       - name
@@ -224,6 +242,52 @@ components:
           title: Context Name
           type: string
           example: Context A
+    MessageDTO:
+      type: object
+      properties:
+        message:
+          title: message
+          type: string
+          example: Success!
+    DWRResponseMessageDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/MessageDTO'
+    DWRResponseProductDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/ProductDTO'
+    DWRResponsePageableCollectionProjectDTO:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            + **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining.'
+          example:
+            totalItems: '422'
+            isLastPage: 'true'
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProjectDTO'
+      description: Provides insights into endpoint-supported pagination information
     ProjectDTO:
       type: object
       properties:
@@ -247,6 +311,13 @@ components:
           title: Product Uuid
           type: string
           example: 123e4567-e89b-12d3-a456-426655440000
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
     CreateProjectByProductRequestDTO:
       required:
       - projectName
@@ -260,68 +331,6 @@ components:
           title: Project Description
           type: string
           example: Description for project
-    DWRResponsePageableCollectionProjectDTO:
-      type: object
-      properties:
-        additionalData:
-          title: Provides insights into endpoint-supported pagination information.
-          type: object
-          description: '+ **totalItems**: The total count of data points returned in an API response.
-
-            + **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining.'
-          example:
-            totalItems: '422'
-            isLastPage: 'true'
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProjectDTO'
-      description: Provides insights into endpoint-supported pagination information
-    DWRResponseMessageDTO:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/MessageDTO'
-    DWRResponseContextEntityDTO:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/ContextEntityDTO'
-    MessageDTO:
-      type: object
-      properties:
-        message:
-          title: message
-          type: string
-          example: Success!
-    ContextEntityRequestDTO:
-      required:
-      - name
-      type: object
-      properties:
-        name:
-          title: Entity Name
-          type: string
-          example: Entity A
-    DWRResponseBase:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
     DWRResponseCreatedProjectDTO:
       type: object
       properties:
@@ -337,15 +346,6 @@ components:
           example: 1171c60d
         retVal:
           $ref: '#/components/schemas/ProjectDTO'
-    DWRResponseProductDTO:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/ProductDTO'
   securitySchemes:
     bearer-key:
       type: http

@@ -79,57 +79,33 @@ paths:
                 $ref: '#/components/schemas/DWRResponseBase'
 components:
   schemas:
-    VulnerabilityProfileDTO:
+    DWRResponseVulnerabilityProfileDTO:
       type: object
       properties:
-        name:
-          title: Vulnerability Name
+        supportToken:
+          title: Support Token
           type: string
-          example: CVE-2021-42392
-        type:
-          title: VulnerabilityType
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/VulnerabilityProfileDTO'
+    ThreatAssessmentDTO:
+      type: object
+      properties:
+        exploitCodeMaturity:
+          title: Exploit Code Maturity
           type: string
-          example: WS
+          example: HIGH
           enum:
-          - CVE
-          - WS
-        description:
-          title: Vulnerability Description
-          type: string
-          example: Security vulnerability found in plexus-utils before 3.0.24. XML injection found in XmlWriterUtil.java
-        score:
-          title: Vulnerability Score
+          - UNPROVEN
+          - POC_CODE
+          - FUNCTIONAL
+          - HIGH
+          - NOT_DEFINED
+        epssPercentage:
+          title: Epss Percentage
           type: number
           format: float
-          example: 5
-        severity:
-          title: Vulnerability Severity
-          type: string
-          example: MEDIUM
-          enum:
-          - HIGH
-          - MEDIUM
-          - LOW
-        publishDate:
-          title: Vulnerability Publish Date
-          type: string
-          format: date-time
-        modifiedDate:
-          title: Vulnerability Modified Date
-          type: string
-          format: date-time
-        vulnerabilityScoring:
-          type: array
-          items:
-            $ref: '#/components/schemas/VulnerabilityScoringDTO'
-        references:
-          type: array
-          items:
-            $ref: '#/components/schemas/VulnerabilityReferenceDTO'
-        effectiveInfo:
-          $ref: '#/components/schemas/EffectiveVulnerabilityInfoDTO'
-        threatAssessment:
-          $ref: '#/components/schemas/ThreatAssessmentDTO'
+          example: 0.8
     VulnerabilityReferenceDTO:
       type: object
       properties:
@@ -200,33 +176,87 @@ components:
           type: string
         minimalAffectedVersionFromExtraData:
           type: string
-    ThreatAssessmentDTO:
+    VulnerabilityProfileDTO:
       type: object
       properties:
-        exploitCodeMaturity:
-          title: Exploit Code Maturity
+        name:
+          title: Vulnerability Name
           type: string
-          example: HIGH
+          example: CVE-2021-42392
+        type:
+          title: VulnerabilityType
+          type: string
+          example: WS
           enum:
-          - UNPROVEN
-          - POC_CODE
-          - FUNCTIONAL
-          - HIGH
-          - NOT_DEFINED
-        epssPercentage:
-          title: Epss Percentage
+          - CVE
+          - WS
+        description:
+          title: Vulnerability Description
+          type: string
+          example: Security vulnerability found in plexus-utils before 3.0.24. XML injection found in XmlWriterUtil.java
+        score:
+          title: Vulnerability Score
           type: number
           format: float
-          example: 0.8
-    DWRResponseVulnerabilityProfileDTO:
+          example: 5
+        severity:
+          title: Vulnerability Severity
+          type: string
+          example: MEDIUM
+          enum:
+          - HIGH
+          - MEDIUM
+          - LOW
+        publishDate:
+          title: Vulnerability Publish Date
+          type: string
+          format: date-time
+        modifiedDate:
+          title: Vulnerability Modified Date
+          type: string
+          format: date-time
+        vulnerabilityScoring:
+          type: array
+          items:
+            $ref: '#/components/schemas/VulnerabilityScoringDTO'
+        references:
+          type: array
+          items:
+            $ref: '#/components/schemas/VulnerabilityReferenceDTO'
+        effectiveInfo:
+          $ref: '#/components/schemas/EffectiveVulnerabilityInfoDTO'
+        threatAssessment:
+          $ref: '#/components/schemas/ThreatAssessmentDTO'
+    DWRResponseBase:
       type: object
       properties:
         supportToken:
           title: Support Token
           type: string
           example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/VulnerabilityProfileDTO'
+    VulnerabilityFixSummaryInfoDTO:
+      type: object
+      properties:
+        vulnerability:
+          type: string
+          description: Vulnerability Name
+          example: CVE-2021-42392
+        topRankedFix:
+          $ref: '#/components/schemas/VulnerabilityFixInfoDTO'
+        allFixes:
+          type: array
+          items:
+            $ref: '#/components/schemas/VulnerabilityFixInfoDTO'
+        totalUpVotes:
+          type: integer
+          description: Total Up Votes
+          format: int32
+          example: 0
+        totalDownVotes:
+          type: integer
+          description: Total Down Votes
+          format: int32
+          example: 0
     DWRResponseVulnerabilityFixSummaryInfoDTO:
       type: object
       properties:
@@ -236,6 +266,18 @@ components:
           example: 1171c60d
         retVal:
           $ref: '#/components/schemas/VulnerabilityFixSummaryInfoDTO'
+    EffectiveVulnerabilityInfoDTO:
+      type: object
+      properties:
+        referenceCount:
+          title: Vulnerability Reference Count
+          type: integer
+          format: int32
+        shieldValue:
+          title: Shield Value
+          type: integer
+          description: RED(15), YELLOW(10), GREY(8), NO_SHIELD(6), GREEN(5)
+          format: int32
     VulnerabilityScoringDTO:
       type: object
       properties:
@@ -269,48 +311,6 @@ components:
           additionalProperties:
             title: Vulnerability Extra Data
             type: string
-    VulnerabilityFixSummaryInfoDTO:
-      type: object
-      properties:
-        vulnerability:
-          type: string
-          description: Vulnerability Name
-          example: CVE-2021-42392
-        topRankedFix:
-          $ref: '#/components/schemas/VulnerabilityFixInfoDTO'
-        allFixes:
-          type: array
-          items:
-            $ref: '#/components/schemas/VulnerabilityFixInfoDTO'
-        totalUpVotes:
-          type: integer
-          description: Total Up Votes
-          format: int32
-          example: 0
-        totalDownVotes:
-          type: integer
-          description: Total Down Votes
-          format: int32
-          example: 0
-    EffectiveVulnerabilityInfoDTO:
-      type: object
-      properties:
-        referenceCount:
-          title: Vulnerability Reference Count
-          type: integer
-          format: int32
-        shieldValue:
-          title: Shield Value
-          type: integer
-          description: RED(15), YELLOW(10), GREY(8), NO_SHIELD(6), GREEN(5)
-          format: int32
-    DWRResponseBase:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
   securitySchemes:
     bearer-key:
       type: http

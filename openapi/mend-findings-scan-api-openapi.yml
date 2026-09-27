@@ -318,59 +318,122 @@ paths:
                     type: string
 components:
   schemas:
-    github_com_mend_cloud-native_modules_scanner_model.SecretFinding:
+    dto.AzureDevOpsWorkItem:
+      properties:
+        project:
+          type: string
+        workItemId:
+          type: integer
+      type: object
+    dto.JiraPlatformIssue:
+      properties:
+        createdBy:
+          type: string
+        createdByName:
+          type: string
+        createdTime:
+          type: string
+        errorMessage:
+          type: string
+        internalStatus:
+          type: string
+        issueKey:
+          type: string
+        issueStatus:
+          type: string
+        publicLink:
+          type: string
+      type: object
+    dto.MendCursoredResponse-array_dto_FindingV3:
+      properties:
+        additionalData:
+          properties:
+            cursor:
+              example: 1
+              type: integer
+            next:
+              example: https://domain.com/api/v3.0/resources?cursor=1
+              type: string
+          type: object
+        response:
+          items:
+            $ref: '#/components/schemas/dto.FindingV3'
+          type: array
+        supportToken:
+          type: string
+      type: object
+    dto.FindingAlmIssues:
+      properties:
+        azure:
+          $ref: '#/components/schemas/dto.AzureDevOpsWorkItem'
+        jira:
+          $ref: '#/components/schemas/dto.JiraIssue'
+        jiraPlatform:
+          $ref: '#/components/schemas/dto.JiraPlatformIssue'
+      type: object
+    common.AdditionalData:
       type: object
       properties:
-        category:
+        error:
           type: string
-          example: AWS
-        createdAt:
-          type: string
-          example: '2020-01-01T00:00:00Z'
-        description:
-          type: string
-          example: AWS Access Key
-        endLine:
+        paging:
+          $ref: '#/components/schemas/common.Paging'
+        totalItems:
           type: integer
-          example: 35
-        filePath:
+          example: 100
+    dto.Filter:
+      properties:
+        filterTypes:
+          items:
+            $ref: '#/components/schemas/dto.FilterType'
+          type: array
+        isFiltered:
+          type: boolean
+      type: object
+    dto.Workflow:
+      properties:
+        name:
           type: string
-          example: /home/ubuntu/.aws/credentials
-        isFromBaseLayer:
-          type: integer
-          example: 0
-        layerId:
-          type: integer
-          example: 123456
-        layerNumber:
-          type: integer
-          example: 1
-        projectName:
-          type: string
-        ruleId:
-          type: string
-          example: '123456'
-        severity:
-          type: string
-          example: HIGH
-        startLine:
-          type: integer
-          example: 15
-        updatedAt:
-          type: string
-          example: '2020-01-01T00:00:00Z'
         uuid:
           type: string
-          example: c4f93b6d-8236-4d0c-a67b-3978def476a3
-    common.Paging:
+      type: object
+    github_com_mend_cloud-native_modules_scanner_model.Package:
       type: object
       properties:
-        cursor:
-          type: integer
-          example: 5
-        next:
+        name:
           type: string
-          example: https://api-saas.mend.io/api/v3.0/projects/<project_uuid>>/images/deployments?cursor=6
+        reachable:
+          type: boolean
+        type:
+          type: string
+        version:
+          type: string
+    dto.MendResponse-dto_FindingV3:
+      properties:
+        additionalData:
+          additionalProperties: true
+          type: object
+        response:
+          $ref: '#/components/schemas/dto.FindingV3'
+        supportToken:
+          type: string
+      type: object
+    dto.PcidssInfo:
+      properties:
+        section:
+          type: string
+        title:
+          type: string
+      type: object
+    dto.CweInfo:
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        url:
+          type: string
+      type: object
     dto.VulnerabilityTypeDefinition:
       properties:
         capec:
@@ -424,113 +487,6 @@ components:
         severityRating:
           type: number
       type: object
-    dto.MendResponse-dto_FindingV3:
-      properties:
-        additionalData:
-          additionalProperties: true
-          type: object
-        response:
-          $ref: '#/components/schemas/dto.FindingV3'
-        supportToken:
-          type: string
-      type: object
-    dto.DataFlow:
-      properties:
-        ageRating:
-          description: Between 0 and 10
-          type: number
-        confidenceRating:
-          description: Between 0 and 10
-          type: number
-        createdTime:
-          type: string
-        filter:
-          $ref: '#/components/schemas/dto.Filter'
-        functionCalls:
-          items:
-            $ref: '#/components/schemas/dto.CallStackItem'
-          type: array
-        id:
-          type: string
-        inputFlow:
-          items:
-            $ref: '#/components/schemas/dto.CallStackItem'
-          type: array
-        inputKind:
-          type: string
-        inputSource:
-          type: string
-        isNew:
-          type: boolean
-        rating:
-          description: Between 0 and 10
-          type: number
-        sink:
-          type: string
-        sinkFile:
-          type: string
-        sinkKind:
-          type: string
-        sinkLine:
-          type: integer
-        sinkSnippet:
-          type: string
-      type: object
-    common.AdditionalData:
-      type: object
-      properties:
-        error:
-          type: string
-        paging:
-          $ref: '#/components/schemas/common.Paging'
-        totalItems:
-          type: integer
-          example: 100
-    dto.RiskFactors:
-      properties:
-        endpoints:
-          items:
-            $ref: '#/components/schemas/dto.RiskFactorEndpoint'
-          type: array
-        hasEndpoints:
-          type: boolean
-        isExploitable:
-          type: boolean
-        probability:
-          type: string
-      type: object
-    dto.HipaaInfo:
-      properties:
-        control:
-          type: string
-        title:
-          type: string
-      type: object
-    common.BaseApiResponseV3:
-      type: object
-      properties:
-        additionalData:
-          $ref: '#/components/schemas/common.AdditionalData'
-        response: {}
-        supportToken:
-          type: string
-          example: 659C0A4730
-    dto.HitrustInfo:
-      properties:
-        control:
-          type: string
-        title:
-          type: string
-      type: object
-    dto.FindingAlmIssues:
-      properties:
-        azure:
-          $ref: '#/components/schemas/dto.AzureDevOpsWorkItem'
-        jira:
-          $ref: '#/components/schemas/dto.JiraIssue'
-        jiraPlatform:
-          $ref: '#/components/schemas/dto.JiraPlatformIssue'
-      type: object
     dto.LineBlame:
       properties:
         commitId:
@@ -540,165 +496,15 @@ components:
         line:
           type: integer
       type: object
-    dto.CallStackItem:
+    common.Paging:
+      type: object
       properties:
-        endLine:
+        cursor:
           type: integer
-        file:
+          example: 5
+        next:
           type: string
-        kind:
-          type: string
-        line:
-          type: integer
-        name:
-          type: string
-        snippet:
-          type: string
-        startLine:
-          type: integer
-      type: object
-    dto.PcidssInfo:
-      properties:
-        section:
-          type: string
-        title:
-          type: string
-      type: object
-    dto.ErrorResponse:
-      properties:
-        message:
-          example: Something went wrong
-          type: string
-        result:
-          example: error
-          type: string
-        success:
-          example: false
-          type: boolean
-      type: object
-    dto.FindingComment:
-      properties:
-        body:
-          type: string
-        createdBy:
-          type: string
-        createdTime:
-          type: string
-      type: object
-    dto.RiskFactorEndpoint:
-      properties:
-        endpoint:
-          type: string
-        method:
-          type: string
-      type: object
-    dto.FindingSharedStep:
-      properties:
-        endLine:
-          type: integer
-        file:
-          type: string
-        kind:
-          type: string
-        line:
-          type: integer
-        lineBlame:
-          $ref: '#/components/schemas/dto.LineBlame'
-        name:
-          type: string
-        snippet:
-          type: string
-        startLine:
-          type: integer
-      type: object
-    dto.MendCursoredResponse-array_dto_FindingV3:
-      properties:
-        additionalData:
-          properties:
-            cursor:
-              example: 1
-              type: integer
-            next:
-              example: https://domain.com/api/v3.0/resources?cursor=1
-              type: string
-          type: object
-        response:
-          items:
-            $ref: '#/components/schemas/dto.FindingV3'
-          type: array
-        supportToken:
-          type: string
-      type: object
-    dto.OwaspInfo:
-      properties:
-        index:
-          type: string
-        title:
-          type: string
-        url:
-          type: string
-      type: object
-    dto.AzureDevOpsWorkItem:
-      properties:
-        project:
-          type: string
-        workItemId:
-          type: integer
-      type: object
-    github_com_mend_cloud-native_modules_scanner_model.Package:
-      type: object
-      properties:
-        name:
-          type: string
-        reachable:
-          type: boolean
-        type:
-          type: string
-        version:
-          type: string
-    dto.CweInfo:
-      properties:
-        id:
-          type: string
-        title:
-          type: string
-        url:
-          type: string
-      type: object
-    dto.SansTop25Info:
-      properties:
-        rank:
-          type: integer
-        title:
-          type: string
-      type: object
-    dto.NistInfo:
-      properties:
-        control:
-          type: string
-        priority:
-          type: string
-        title:
-          type: string
-        url:
-          type: string
-      type: object
-    dto.CapecInfo:
-      properties:
-        id:
-          type: string
-        title:
-          type: string
-        url:
-          type: string
-      type: object
-    dto.JiraIssue:
-      properties:
-        issueId:
-          type: string
-        project:
-          type: string
-      type: object
+          example: https://api-saas.mend.io/api/v3.0/projects/<project_uuid>>/images/deployments?cursor=6
     model.SecurityFindingExternal:
       type: object
       properties:
@@ -758,63 +564,39 @@ components:
         vulnerabilityID:
           type: string
           example: CVE-2019-1234
-    dto.JiraPlatformIssue:
+    dto.FindingComment:
       properties:
-        createdBy:
+        body:
           type: string
-        createdByName:
+        createdBy:
           type: string
         createdTime:
           type: string
-        errorMessage:
+      type: object
+    dto.FindingSharedStep:
+      properties:
+        endLine:
+          type: integer
+        file:
           type: string
-        internalStatus:
+        kind:
           type: string
-        issueKey:
+        line:
+          type: integer
+        lineBlame:
+          $ref: '#/components/schemas/dto.LineBlame'
+        name:
           type: string
-        issueStatus:
+        snippet:
           type: string
-        publicLink:
-          type: string
+        startLine:
+          type: integer
       type: object
     dto.FilterType:
       properties:
         code:
           type: integer
         name:
-          type: string
-      type: object
-    dto.Workflow:
-      properties:
-        name:
-          type: string
-        uuid:
-          type: string
-      type: object
-    dto.Filter:
-      properties:
-        filterTypes:
-          items:
-            $ref: '#/components/schemas/dto.FilterType'
-          type: array
-        isFiltered:
-          type: boolean
-      type: object
-    dto.Owasp2021Info:
-      properties:
-        index:
-          type: string
-        title:
-          type: string
-        url:
-          type: string
-      type: object
-    dto.MendErrorResponse-dto_ErrorResponse:
-      properties:
-        additionalData:
-          $ref: '#/components/schemas/dto.ErrorResponse'
-        response: {}
-        supportToken:
           type: string
       type: object
     dto.FindingV3:
@@ -904,6 +686,224 @@ components:
           type: array
         workflowViolationsCount:
           type: integer
+      type: object
+    common.BaseApiResponseV3:
+      type: object
+      properties:
+        additionalData:
+          $ref: '#/components/schemas/common.AdditionalData'
+        response: {}
+        supportToken:
+          type: string
+          example: 659C0A4730
+    dto.OwaspInfo:
+      properties:
+        index:
+          type: string
+        title:
+          type: string
+        url:
+          type: string
+      type: object
+    github_com_mend_cloud-native_modules_scanner_model.SecretFinding:
+      type: object
+      properties:
+        category:
+          type: string
+          example: AWS
+        createdAt:
+          type: string
+          example: '2020-01-01T00:00:00Z'
+        description:
+          type: string
+          example: AWS Access Key
+        endLine:
+          type: integer
+          example: 35
+        filePath:
+          type: string
+          example: /home/ubuntu/.aws/credentials
+        isFromBaseLayer:
+          type: integer
+          example: 0
+        layerId:
+          type: integer
+          example: 123456
+        layerNumber:
+          type: integer
+          example: 1
+        projectName:
+          type: string
+        ruleId:
+          type: string
+          example: '123456'
+        severity:
+          type: string
+          example: HIGH
+        startLine:
+          type: integer
+          example: 15
+        updatedAt:
+          type: string
+          example: '2020-01-01T00:00:00Z'
+        uuid:
+          type: string
+          example: c4f93b6d-8236-4d0c-a67b-3978def476a3
+    dto.SansTop25Info:
+      properties:
+        rank:
+          type: integer
+        title:
+          type: string
+      type: object
+    dto.NistInfo:
+      properties:
+        control:
+          type: string
+        priority:
+          type: string
+        title:
+          type: string
+        url:
+          type: string
+      type: object
+    dto.CapecInfo:
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        url:
+          type: string
+      type: object
+    dto.JiraIssue:
+      properties:
+        issueId:
+          type: string
+        project:
+          type: string
+      type: object
+    dto.HipaaInfo:
+      properties:
+        control:
+          type: string
+        title:
+          type: string
+      type: object
+    dto.ErrorResponse:
+      properties:
+        message:
+          example: Something went wrong
+          type: string
+        result:
+          example: error
+          type: string
+        success:
+          example: false
+          type: boolean
+      type: object
+    dto.DataFlow:
+      properties:
+        ageRating:
+          description: Between 0 and 10
+          type: number
+        confidenceRating:
+          description: Between 0 and 10
+          type: number
+        createdTime:
+          type: string
+        filter:
+          $ref: '#/components/schemas/dto.Filter'
+        functionCalls:
+          items:
+            $ref: '#/components/schemas/dto.CallStackItem'
+          type: array
+        id:
+          type: string
+        inputFlow:
+          items:
+            $ref: '#/components/schemas/dto.CallStackItem'
+          type: array
+        inputKind:
+          type: string
+        inputSource:
+          type: string
+        isNew:
+          type: boolean
+        rating:
+          description: Between 0 and 10
+          type: number
+        sink:
+          type: string
+        sinkFile:
+          type: string
+        sinkKind:
+          type: string
+        sinkLine:
+          type: integer
+        sinkSnippet:
+          type: string
+      type: object
+    dto.MendErrorResponse-dto_ErrorResponse:
+      properties:
+        additionalData:
+          $ref: '#/components/schemas/dto.ErrorResponse'
+        response: {}
+        supportToken:
+          type: string
+      type: object
+    dto.CallStackItem:
+      properties:
+        endLine:
+          type: integer
+        file:
+          type: string
+        kind:
+          type: string
+        line:
+          type: integer
+        name:
+          type: string
+        snippet:
+          type: string
+        startLine:
+          type: integer
+      type: object
+    dto.HitrustInfo:
+      properties:
+        control:
+          type: string
+        title:
+          type: string
+      type: object
+    dto.Owasp2021Info:
+      properties:
+        index:
+          type: string
+        title:
+          type: string
+        url:
+          type: string
+      type: object
+    dto.RiskFactors:
+      properties:
+        endpoints:
+          items:
+            $ref: '#/components/schemas/dto.RiskFactorEndpoint'
+          type: array
+        hasEndpoints:
+          type: boolean
+        isExploitable:
+          type: boolean
+        probability:
+          type: string
+      type: object
+    dto.RiskFactorEndpoint:
+      properties:
+        endpoint:
+          type: string
+        method:
+          type: string
       type: object
   securitySchemes:
     bearer-key:

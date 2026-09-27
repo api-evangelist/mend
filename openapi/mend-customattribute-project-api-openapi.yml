@@ -78,6 +78,13 @@ components:
           title: Custom Attribute Value
           type: string
           example: Custom attribute value
+    MessageDTO:
+      type: object
+      properties:
+        message:
+          title: message
+          type: string
+          example: Success!
     DWRResponseMessageDTO:
       type: object
       properties:
@@ -87,13 +94,6 @@ components:
           example: 1171c60d
         retVal:
           $ref: '#/components/schemas/MessageDTO'
-    MessageDTO:
-      type: object
-      properties:
-        message:
-          title: message
-          type: string
-          example: Success!
   securitySchemes:
     bearer-key:
       type: http

@@ -353,20 +353,35 @@ paths:
       x-order: '8'
 components:
   schemas:
-    LiteLicenseDTO_SearchForMatch:
+    LicenseDTO:
       required:
       - name
       type: object
       properties:
+        uuid:
+          title: License Uuid
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
         name:
           title: Licenses
           type: string
           example: MIT
-        severity:
-          title: License Risk
+        spdxName:
+          title: Spdx Name
           type: string
-          example: High
-      description: Collection of licenses associated with this library
+          example: Glide
+        type:
+          title: Type
+          type: string
+          example: OPEN_SOURCE
+        suspected:
+          title: Suspected License
+          type: boolean
+        osiApproved:
+          title: Approved Osi
+          type: boolean
+        profile:
+          $ref: '#/components/schemas/LicenseProfileDTO'
     DescriptionAndExplanationDTO:
       type: object
       properties:
@@ -386,48 +401,30 @@ components:
           title: Display Text
           type: string
           example: 'No'
-    SourceLibraryResponseDTO_SearchForMatch:
+    ProjectDTOV3:
       type: object
       properties:
         uuid:
+          title: Project UUID
           type: string
-          description: Unique identifier of the library. Only available in searchForMatch endpoint.
-          example: b366b0ef-b211-4c37-a47c-0077e4de709f
+          example: 123e4567-e89b-12d3-a456-426655440000
         name:
+          title: Project Name
           type: string
-          description: Name of the library
-          example: openssl
-        sha1:
+          example: My Project
+        path:
+          title: Application Name
           type: string
-          description: SHA-1 hash of the library
-          example: 49f6cb968ff63793f6671d9026fb2a7034dad79a
-        licenses:
-          type: array
-          description: Collection of licenses associated with this library
-          items:
-            $ref: '#/components/schemas/LiteLicenseDTO_SearchForMatch'
-        version:
+          example: My Application
+        applicationName:
+          title: Application Name
           type: string
-          description: Version of the library
-          example: OpenSSL_1_0_1
-        owner:
+          example: My Application
+        applicationUuid:
+          title: Application Uuid
           type: string
-          description: Owner/organization of the library
-          example: openssl
-        url:
-          type: string
-          description: URL to the library source
-          example: https://github.com/openssl/openssl.git
-        date:
-          type: string
-          description: Release date of the library
-          format: date-time
-          example: '2012-03-14T12:39:00Z'
-        nonOfficialRelease:
-          type: boolean
-          description: Indicates whether this is a non-official release
-          example: false
-      description: Library match suggestion response containing library details and match metadata
+          example: 123e4567-e89b-12d3-a456-426655440000
+      description: Project information
     SourceFileInventoryDTOV3:
       type: object
       properties:
@@ -480,189 +477,6 @@ components:
           - UNSUPPORTED_TYPE
         project:
           $ref: '#/components/schemas/ProjectDTOV3'
-    ProjectDTOV3:
-      type: object
-      properties:
-        uuid:
-          title: Project UUID
-          type: string
-          example: 123e4567-e89b-12d3-a456-426655440000
-        name:
-          title: Project Name
-          type: string
-          example: My Project
-        path:
-          title: Application Name
-          type: string
-          example: My Application
-        applicationName:
-          title: Application Name
-          type: string
-          example: My Application
-        applicationUuid:
-          title: Application Uuid
-          type: string
-          example: 123e4567-e89b-12d3-a456-426655440000
-      description: Project information
-    LibraryMatchSuggestionsRequestDTOV3_MatchSuggestions:
-      required:
-      - recommendedForAllFiles
-      - sourceFileUuids
-      type: object
-      properties:
-        sourceFileUuids:
-          type: array
-          items:
-            title: Source File UUIDs
-            type: string
-            description: List of source file UUIDs for which to get Mend library suggestions. Required field.
-            example: 123e4567-e89b-12d3-a456-426655440000
-        recommendedForAllFiles:
-          title: Recommended For All Files
-          type: boolean
-          description: Flag indicating whether to get recommendations that apply to all specified files. Required field.
-          example: false
-      description: Request payload for retrieving Mend library suggestions for source files. Requires sourceFileUuids and recommendedForAllFiles. Medium privilege users can optionally specify repository and version fields for more targeted suggestions.
-    SourceFileLibraryDTO:
-      type: object
-      properties:
-        uuid:
-          title: Source Library UUID
-          type: string
-          example: 123e4567-e89b-12d3-a456-426655440000
-        name:
-          title: Source Library Name
-          type: string
-          example: ' actionview-v0.0.1'
-        licenses:
-          type: array
-          items:
-            $ref: '#/components/schemas/LicenseDTO'
-        description:
-          type: string
-    DWRResponseV3CollectionSourceLibraryResponseDTO_SearchForMatch:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        response:
-          type: array
-          items:
-            $ref: '#/components/schemas/SourceLibraryResponseDTO_SearchForMatch'
-    SourceFilesRemappingAsyncStatusDtoV3:
-      type: object
-      properties:
-        uuid:
-          title: Process UUID
-          type: string
-          description: The unique identifier of the async process
-          example: caf69794-9882-4b55-82db-6b6da4fe2a92
-        status:
-          title: Process Status
-          type: string
-          description: The current status of the async process
-          example: PENDING
-          enum:
-          - PENDING
-          - IN_PROGRESS
-          - FAILED
-          - FAILURE
-          - SUCCESS
-        userEmail:
-          title: User Email
-          type: string
-          description: Email of the user who initiated the process
-          example: user@example.com
-        requestToken:
-          title: Request Token
-          type: string
-          description: Short token for tracking the request
-          example: 2cd6a43b
-      description: Async process status for source file remapping operations
-    LicenseDTO:
-      required:
-      - name
-      type: object
-      properties:
-        uuid:
-          title: License Uuid
-          type: string
-          example: 123e4567-e89b-12d3-a456-426655440000
-        name:
-          title: Licenses
-          type: string
-          example: MIT
-        spdxName:
-          title: Spdx Name
-          type: string
-          example: Glide
-        type:
-          title: Type
-          type: string
-          example: OPEN_SOURCE
-        suspected:
-          title: Suspected License
-          type: boolean
-        osiApproved:
-          title: Approved Osi
-          type: boolean
-        profile:
-          $ref: '#/components/schemas/LicenseProfileDTO'
-    LicenseProfileDTO:
-      type: object
-      properties:
-        uuid:
-          type: string
-        name:
-          type: string
-        links:
-          uniqueItems: true
-          type: array
-          items:
-            title: Links
-            type: string
-            example: http://www.opensource.org/licenses/AFL-3.0
-        copyrightRiskScore:
-          $ref: '#/components/schemas/RiskScoreExplanationDTO'
-        patentAndRoyaltyRisk:
-          $ref: '#/components/schemas/RiskScoreExplanationDTO'
-        royaltyFree:
-          title: Royalty Free
-          type: string
-          example: Conditional
-        copyleft:
-          $ref: '#/components/schemas/DescriptionAndExplanationDTO'
-        linking:
-          $ref: '#/components/schemas/DescriptionAndExplanationDTO'
-        requiredNotices:
-          type: array
-          items:
-            title: Required Notices
-            type: string
-            example: Must identify specific modifications
-    LiteLicenseDTO_MatchSuggestions:
-      required:
-      - name
-      type: object
-      properties:
-        name:
-          title: Licenses
-          type: string
-          example: MIT
-        severity:
-          title: License Risk
-          type: string
-          example: High
-      description: Collection of licenses associated with this library
-    DWRResponseBase:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
     SourceFileRemappingAppRequestDTOV3:
       type: object
       properties:
@@ -700,6 +514,38 @@ components:
           description: Whether to send email notification upon completion of the remapping operation
           example: true
       description: Request payload for remapping source files at application level
+    LicenseProfileDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+        name:
+          type: string
+        links:
+          uniqueItems: true
+          type: array
+          items:
+            title: Links
+            type: string
+            example: http://www.opensource.org/licenses/AFL-3.0
+        copyrightRiskScore:
+          $ref: '#/components/schemas/RiskScoreExplanationDTO'
+        patentAndRoyaltyRisk:
+          $ref: '#/components/schemas/RiskScoreExplanationDTO'
+        royaltyFree:
+          title: Royalty Free
+          type: string
+          example: Conditional
+        copyleft:
+          $ref: '#/components/schemas/DescriptionAndExplanationDTO'
+        linking:
+          $ref: '#/components/schemas/DescriptionAndExplanationDTO'
+        requiredNotices:
+          type: array
+          items:
+            title: Required Notices
+            type: string
+            example: Must identify specific modifications
     DWRResponsePageableV3CollectionSourceFileInventoryDTOV3:
       type: object
       properties:
@@ -721,6 +567,36 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/SourceFileInventoryDTOV3'
+    SourceFilesRemappingAsyncStatusDtoV3:
+      type: object
+      properties:
+        uuid:
+          title: Process UUID
+          type: string
+          description: The unique identifier of the async process
+          example: caf69794-9882-4b55-82db-6b6da4fe2a92
+        status:
+          title: Process Status
+          type: string
+          description: The current status of the async process
+          example: PENDING
+          enum:
+          - PENDING
+          - IN_PROGRESS
+          - FAILED
+          - FAILURE
+          - SUCCESS
+        userEmail:
+          title: User Email
+          type: string
+          description: Email of the user who initiated the process
+          example: user@example.com
+        requestToken:
+          title: Request Token
+          type: string
+          description: Short token for tracking the request
+          example: 2cd6a43b
+      description: Async process status for source file remapping operations
     SourceLibraryResponseDTO_MatchSuggestions:
       type: object
       properties:
@@ -765,6 +641,67 @@ components:
           description: Base64 encoded match suggestion ID used for remapping operations.
           example: ZWJlMTZhZjYtMmE2YS00MWQ1LWFiNTQtYWQ3YWE3OWZhNzFl
       description: Library match suggestion response containing library details and match metadata
+    LibraryMatchSuggestionsRequestDTOV3_MatchSuggestions:
+      required:
+      - recommendedForAllFiles
+      - sourceFileUuids
+      type: object
+      properties:
+        sourceFileUuids:
+          type: array
+          items:
+            title: Source File UUIDs
+            type: string
+            description: List of source file UUIDs for which to get Mend library suggestions. Required field.
+            example: 123e4567-e89b-12d3-a456-426655440000
+        recommendedForAllFiles:
+          title: Recommended For All Files
+          type: boolean
+          description: Flag indicating whether to get recommendations that apply to all specified files. Required field.
+          example: false
+      description: Request payload for retrieving Mend library suggestions for source files. Requires sourceFileUuids and recommendedForAllFiles. Medium privilege users can optionally specify repository and version fields for more targeted suggestions.
+    SourceLibraryResponseDTO_SearchForMatch:
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: Unique identifier of the library. Only available in searchForMatch endpoint.
+          example: b366b0ef-b211-4c37-a47c-0077e4de709f
+        name:
+          type: string
+          description: Name of the library
+          example: openssl
+        sha1:
+          type: string
+          description: SHA-1 hash of the library
+          example: 49f6cb968ff63793f6671d9026fb2a7034dad79a
+        licenses:
+          type: array
+          description: Collection of licenses associated with this library
+          items:
+            $ref: '#/components/schemas/LiteLicenseDTO_SearchForMatch'
+        version:
+          type: string
+          description: Version of the library
+          example: OpenSSL_1_0_1
+        owner:
+          type: string
+          description: Owner/organization of the library
+          example: openssl
+        url:
+          type: string
+          description: URL to the library source
+          example: https://github.com/openssl/openssl.git
+        date:
+          type: string
+          description: Release date of the library
+          format: date-time
+          example: '2012-03-14T12:39:00Z'
+        nonOfficialRelease:
+          type: boolean
+          description: Indicates whether this is a non-official release
+          example: false
+      description: Library match suggestion response containing library details and match metadata
     RiskScoreExplanationDTO:
       type: object
       properties:
@@ -781,6 +718,34 @@ components:
           type: integer
           format: int32
           example: 39
+    LiteLicenseDTO_SearchForMatch:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          title: Licenses
+          type: string
+          example: MIT
+        severity:
+          title: License Risk
+          type: string
+          example: High
+      description: Collection of licenses associated with this library
+    LiteLicenseDTO_MatchSuggestions:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          title: Licenses
+          type: string
+          example: MIT
+        severity:
+          title: License Risk
+          type: string
+          example: High
+      description: Collection of licenses associated with this library
     DWRResponseV3CollectionSourceLibraryResponseDTO_MatchSuggestions:
       type: object
       properties:
@@ -822,6 +787,41 @@ components:
           description: Whether to send email notification upon completion of the remapping operation
           example: true
       description: Request payload for remapping source files at organization level
+    SourceFileLibraryDTO:
+      type: object
+      properties:
+        uuid:
+          title: Source Library UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Source Library Name
+          type: string
+          example: ' actionview-v0.0.1'
+        licenses:
+          type: array
+          items:
+            $ref: '#/components/schemas/LicenseDTO'
+        description:
+          type: string
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+    DWRResponseV3CollectionSourceLibraryResponseDTO_SearchForMatch:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          type: array
+          items:
+            $ref: '#/components/schemas/SourceLibraryResponseDTO_SearchForMatch'
   securitySchemes:
     bearer-key:
       type: http

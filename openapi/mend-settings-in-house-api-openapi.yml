@@ -335,6 +335,15 @@ paths:
                 $ref: '#/components/schemas/DWRResponseBase'
 components:
   schemas:
+    InHouseSettingsDTO:
+      type: object
+      properties:
+        rules:
+          type: array
+          items:
+            $ref: '#/components/schemas/InHouseRuleDTO'
+        active:
+          type: boolean
     DWRResponseWarningListInHouseRuleDTO:
       title: Initiates the update process for an individual In-House library rule
       type: object
@@ -356,33 +365,35 @@ components:
           items:
             $ref: '#/components/schemas/InHouseRuleDTO'
       description: ddsc
-    DWRResponseWarningInHouseRuleDTO:
-      title: Initiates the update process for an individual In-House library rule
+    InHouseRuleDTO:
+      required:
+      - type
       type: object
       properties:
-        additionalData:
-          title: 'Provides warning messages for notifying about conditions related to the '
-          type: object
-          description: '+ **warningMessage**: Serves as an alert to inform you about the status of the rule being updated.
-
-            The warning message will provide information about whether the rule already exists or if some of the rules are already present'
-          example:
-            warningMessage: item already exists
-        supportToken:
-          title: Support Token
+        uuid:
           type: string
-          example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/InHouseRuleDTO'
-      description: ddsc
-    InHouseSettingsDTO:
-      type: object
-      properties:
-        rules:
-          type: array
-          items:
-            $ref: '#/components/schemas/InHouseRuleDTO'
-        active:
+        type:
+          title: InHouse Rule Regex Type
+          type: string
+          enum:
+          - NAME
+          - LIBRARY_COORDINATES
+          - ARTIFACT_ID
+        regex:
+          title: InHouse Regex Rule
+          type: string
+          example: .*a*
+        description:
+          title: InHouse Rule Description
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        createdBy:
+          title: Created By
+          type: string
+          description: Jon.Snow
+        empty:
           type: boolean
     UpdateInHouseRulesRequestDTO:
       required:
@@ -411,6 +422,13 @@ components:
           example: description for white list
         empty:
           type: boolean
+    MessageDTO:
+      type: object
+      properties:
+        message:
+          title: message
+          type: string
+          example: Success!
     DWRResponseMessageDTO:
       type: object
       properties:
@@ -420,13 +438,6 @@ components:
           example: 1171c60d
         retVal:
           $ref: '#/components/schemas/MessageDTO'
-    MessageDTO:
-      type: object
-      properties:
-        message:
-          title: message
-          type: string
-          example: Success!
     UpdateInHouseRuleRequestDTO:
       type: object
       properties:
@@ -467,36 +478,6 @@ components:
         retVal:
           $ref: '#/components/schemas/InHouseSettingsDTO'
       description: Provides insights into endpoint-supported pagination information
-    InHouseRuleDTO:
-      required:
-      - type
-      type: object
-      properties:
-        uuid:
-          type: string
-        type:
-          title: InHouse Rule Regex Type
-          type: string
-          enum:
-          - NAME
-          - LIBRARY_COORDINATES
-          - ARTIFACT_ID
-        regex:
-          title: InHouse Regex Rule
-          type: string
-          example: .*a*
-        description:
-          title: InHouse Rule Description
-          type: string
-        createdAt:
-          type: string
-          format: date-time
-        createdBy:
-          title: Created By
-          type: string
-          description: Jon.Snow
-        empty:
-          type: boolean
     DWRResponseBase:
       type: object
       properties:
@@ -504,17 +485,6 @@ components:
           title: Support Token
           type: string
           example: 1171c60d
-    DeleteInHouseRuleRequestDTO:
-      required:
-      - uuid
-      type: object
-      properties:
-        uuid:
-          title: InHouse Rule UUID
-          type: string
-          example: 123e4567-e89b-12d3-a456-426655440000
-        empty:
-          type: boolean
     CreateInHouseRuleRequestDTO:
       required:
       - regex
@@ -539,6 +509,36 @@ components:
           example: description for inHouse rule
         empty:
           type: boolean
+    DeleteInHouseRuleRequestDTO:
+      required:
+      - uuid
+      type: object
+      properties:
+        uuid:
+          title: InHouse Rule UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        empty:
+          type: boolean
+    DWRResponseWarningInHouseRuleDTO:
+      title: Initiates the update process for an individual In-House library rule
+      type: object
+      properties:
+        additionalData:
+          title: 'Provides warning messages for notifying about conditions related to the '
+          type: object
+          description: '+ **warningMessage**: Serves as an alert to inform you about the status of the rule being updated.
+
+            The warning message will provide information about whether the rule already exists or if some of the rules are already present'
+          example:
+            warningMessage: item already exists
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/InHouseRuleDTO'
+      description: ddsc
   securitySchemes:
     bearer-key:
       type: http

@@ -345,7 +345,7 @@ apis:
   - type: APIReference
     url: https://api-docs.mend.io/sca/2.0
 - aid: mend:mend-domain-controller-api
-  name: Mend domain-controller API
+  name: Mend Domain Controller API
   description: The domain-controller API from Mend — 1 operation(s) for domain-controller.
   humanURL: https://api-docs.mend.io/platform/3.0
   baseURL: https://api-saas.mend.io
@@ -587,7 +587,7 @@ apis:
   - type: APIReference
     url: https://api-docs.mend.io/sca/2.0
 - aid: mend:mend-product-attribution-report-controller-api
-  name: Mend product-attribution-report-controller API
+  name: Mend Product Attribution Report Controller API
   description: >-
     The product-attribution-report-controller API from Mend — 1 operation(s) for product-attribution-report-controller.
   humanURL: https://api-docs.mend.io/platform/3.0
@@ -602,7 +602,7 @@ apis:
   - type: APIReference
     url: https://api-docs.mend.io/sca/2.0
 - aid: mend:mend-project-attribution-report-controller-api
-  name: Mend project-attribution-report-controller API
+  name: Mend Project Attribution Report Controller API
   description: >-
     The project-attribution-report-controller API from Mend — 1 operation(s) for project-attribution-report-controller.
   humanURL: https://api-docs.mend.io/platform/3.0

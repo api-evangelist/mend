@@ -63,22 +63,6 @@ paths:
                 $ref: '#/components/schemas/DWRResponseBase'
 components:
   schemas:
-    DWRResponseBase:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-    DWRResponseAsyncProcessStatusV2DTO:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/AsyncProcessStatusV2DTO'
     AsyncProcessStatusV2DTO:
       type: object
       properties:
@@ -137,6 +121,22 @@ components:
           title: userMail
           type: string
           example: sample@mail.com
+    DWRResponseAsyncProcessStatusV2DTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/AsyncProcessStatusV2DTO'
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
   securitySchemes:
     bearer-key:
       type: http

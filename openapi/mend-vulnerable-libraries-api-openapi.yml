@@ -52,26 +52,54 @@ paths:
                 $ref: '#/components/schemas/DWRResponseBase'
 components:
   schemas:
-    NoticeDTO:
-      required:
-      - text
+    SecurityRiskDTO:
       type: object
       properties:
-        text:
-          title: Notice Text
+        sourceUrl:
           type: string
-          example: Developed internally
-        reference:
-          title: Notice REFERENCE
+        riskFactor:
           type: string
-          example: https://github.com/...
-    EntityDTO:
+          enum:
+          - NO_FINDINGS
+          - UNCONFIRMED_UNSAFE
+          - CONFIRMED_UNSAFE
+          - KNOWN_FALSE_POSITIVE
+    UserInfoDTO:
+      required:
+      - uuid
       type: object
       properties:
         uuid:
+          title: User UUID
           type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
         name:
+          title: User Name
           type: string
+          example: Jon Smith
+        email:
+          title: User Email
+          type: string
+          example: jon.smith@mail.com
+        userType:
+          title: Type Of User
+          type: string
+          example: REGULAR
+          enum:
+          - REGULAR
+          - SERVICE
+          - SCAN_SUMMARY_RECEIVER
+        accountStatus:
+          type: string
+          enum:
+          - ACTIVE
+          - INACTIVE
+          - LOCKOUT
+    AttributionReportLibrarySettingRuleDTO:
+      type: object
+      properties:
+        excluded:
+          type: boolean
     TrackedIssueDTO:
       title: Tracked Issue Information
       type: object
@@ -137,101 +165,6 @@ components:
           enum:
           - BY_RULE
           - BY_USER
-    UserInfoDTO:
-      required:
-      - uuid
-      type: object
-      properties:
-        uuid:
-          title: User UUID
-          type: string
-          example: 123e4567-e89b-12d3-a456-426655440000
-        name:
-          title: User Name
-          type: string
-          example: Jon Smith
-        email:
-          title: User Email
-          type: string
-          example: jon.smith@mail.com
-        userType:
-          title: Type Of User
-          type: string
-          example: REGULAR
-          enum:
-          - REGULAR
-          - SERVICE
-          - SCAN_SUMMARY_RECEIVER
-        accountStatus:
-          type: string
-          enum:
-          - ACTIVE
-          - INACTIVE
-          - LOCKOUT
-    DWRResponseListLightLibraryDTO:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          type: array
-          items:
-            $ref: '#/components/schemas/LightLibraryDTO'
-    AttributionReportLibrarySettingRuleDTO:
-      type: object
-      properties:
-        excluded:
-          type: boolean
-    LibraryLocationDTO:
-      type: object
-      properties:
-        localPath:
-          title: Local Path
-          type: string
-          example: C:\\Users\\user\\.m2\\repository\\commons-io-1.4.jar
-        dependencyFile:
-          title: Dependency File
-          type: string
-          example: C:\\GitHubRepos\\Pipline\\EUA\\plugins-automation\\fsa\\tests\\EUA\\Java\\bigProjectsMaven\\WST_417\\Data\\ksa\\ksa-web-core\\pom.xml
-    SecurityRiskDTO:
-      type: object
-      properties:
-        sourceUrl:
-          type: string
-        riskFactor:
-          type: string
-          enum:
-          - NO_FINDINGS
-          - UNCONFIRMED_UNSAFE
-          - CONFIRMED_UNSAFE
-          - KNOWN_FALSE_POSITIVE
-    LibraryExtraInfoDTO:
-      type: object
-      properties:
-        distributionUrl:
-          type: string
-        downloadUrl:
-          type: string
-        releaseDate:
-          type: string
-          format: date-time
-        packageManagerRepository:
-          type: string
-        homePage:
-          type: string
-        repositoryUrl:
-          type: string
-        author:
-          type: string
-    DWRResponseBase:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
     LightLibraryDTO:
       type: object
       properties:
@@ -326,6 +259,73 @@ components:
           example: 2
         trackedIssue:
           $ref: '#/components/schemas/TrackedIssueDTO'
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+    DWRResponseListLightLibraryDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          type: array
+          items:
+            $ref: '#/components/schemas/LightLibraryDTO'
+    LibraryLocationDTO:
+      type: object
+      properties:
+        localPath:
+          title: Local Path
+          type: string
+          example: C:\\Users\\user\\.m2\\repository\\commons-io-1.4.jar
+        dependencyFile:
+          title: Dependency File
+          type: string
+          example: C:\\GitHubRepos\\Pipline\\EUA\\plugins-automation\\fsa\\tests\\EUA\\Java\\bigProjectsMaven\\WST_417\\Data\\ksa\\ksa-web-core\\pom.xml
+    NoticeDTO:
+      required:
+      - text
+      type: object
+      properties:
+        text:
+          title: Notice Text
+          type: string
+          example: Developed internally
+        reference:
+          title: Notice REFERENCE
+          type: string
+          example: https://github.com/...
+    EntityDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+        name:
+          type: string
+    LibraryExtraInfoDTO:
+      type: object
+      properties:
+        distributionUrl:
+          type: string
+        downloadUrl:
+          type: string
+        releaseDate:
+          type: string
+          format: date-time
+        packageManagerRepository:
+          type: string
+        homePage:
+          type: string
+        repositoryUrl:
+          type: string
+        author:
+          type: string
   securitySchemes:
     bearer-key:
       type: http

@@ -46,6 +46,17 @@ paths:
                 $ref: '#/components/schemas/DWRResponseBase'
 components:
   schemas:
+    DWRResponseV3ListIntegrationDTOV3:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          type: array
+          items:
+            $ref: '#/components/schemas/IntegrationDTOV3'
     DWRResponseBase:
       type: object
       properties:
@@ -93,17 +104,6 @@ components:
         lastUpdate:
           type: string
           format: date-time
-    DWRResponseV3ListIntegrationDTOV3:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        response:
-          type: array
-          items:
-            $ref: '#/components/schemas/IntegrationDTOV3'
   securitySchemes:
     bearer-key:
       type: http

@@ -292,93 +292,32 @@ paths:
                 $ref: '#/components/schemas/DWRResponseBase'
 components:
   schemas:
-    ScanDiffResponseDTOV3:
+    DiffUnifiedFindingDTOV3:
       type: object
       properties:
-        source:
-          $ref: '#/components/schemas/ScanDTOV3'
-        target:
-          $ref: '#/components/schemas/ScanDTOV3'
-        stats:
-          $ref: '#/components/schemas/ScanDiffStatsDTOV3'
-        findings:
+        diffType:
+          type: string
+        finding:
+          $ref: '#/components/schemas/UnifiedFindingDTOV3'
+        changes:
           type: array
           items:
-            $ref: '#/components/schemas/DiffUnifiedFindingDTOV3'
-    ScanSummaryDTOV3:
+            $ref: '#/components/schemas/DiffChangeDTOV3'
+    ScanDiffStatsDTOV3:
       type: object
       properties:
-        uuid:
-          type: string
-        name:
-          type: string
-        processUuid:
-          type: string
-        scanTime:
-          type: string
-          format: date-time
-        scanStatus:
-          type: string
-        engine:
-          type: string
-          enum:
-          - UNIFIED
-          - SCA
-          - SAST
-          - IAC
-          - IMG
-          - AI
-          - DAST
-        scanDuration:
-          type: string
-        configurationName:
-          type: string
-        reference:
-          type: string
-        triggeredBy:
-          type: string
-        agentName:
-          type: string
-        agentVersion:
-          type: string
-        supportToken:
-          type: string
-        projectName:
-          type: string
-        projectUuid:
-          type: string
-        tags:
-          type: array
-          items:
-            $ref: '#/components/schemas/ScanTagDTO'
-        applicationName:
-          type: string
-        applicationUuid:
-          type: string
-        workflowUuids:
-          type: array
-          items:
-            type: string
-        workflowNames:
-          type: array
-          items:
-            type: string
-        statistics:
-          type: object
-          additionalProperties:
-            type: object
-            additionalProperties:
-              type: integer
-              format: int64
-    DWRResponseV3ScanDiffResponseDTOV3:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        response:
-          $ref: '#/components/schemas/ScanDiffResponseDTOV3'
+        added:
+          type: integer
+          format: int32
+        removed:
+          type: integer
+          format: int32
+        modified:
+          type: integer
+          format: int32
+        unchanged:
+          type: integer
+          format: int32
     DWRResponseV3ScanDTOV3:
       type: object
       properties:
@@ -388,27 +327,15 @@ components:
           example: 1171c60d
         response:
           $ref: '#/components/schemas/ScanDTOV3'
-    DWRResponsePageableV3ListScanSummaryDTOV3:
+    DWRResponseV3ScanDiffResponseDTOV3:
       type: object
       properties:
-        additionalData:
-          title: Provides insights into endpoint-supported pagination information.
-          type: object
-          description: '+ **totalItems**: The total count of data points returned in an API response.
-
-            '
-          example:
-            totalItems: '422'
-            next: http://someUrl?cursor=3
-            cursor: 3
         supportToken:
           title: Support Token
           type: string
           example: 1171c60d
         response:
-          type: array
-          items:
-            $ref: '#/components/schemas/ScanSummaryDTOV3'
+          $ref: '#/components/schemas/ScanDiffResponseDTOV3'
     DWRResponseV3ScanSummaryDTOV3:
       type: object
       properties:
@@ -418,86 +345,15 @@ components:
           example: 1171c60d
         response:
           $ref: '#/components/schemas/ScanSummaryDTOV3'
-    ScanDTOV3:
+    ScanAgentInfo:
       type: object
       properties:
-        uuid:
+        agentName:
           type: string
-        name:
+        agentVersion:
           type: string
-        engine:
+        errorMessage:
           type: string
-          enum:
-          - UNIFIED
-          - SCA
-          - SAST
-          - IAC
-          - IMG
-          - AI
-          - DAST
-        status:
-          type: string
-          enum:
-          - RUNNING
-          - PARTIAL
-          - PROCESSING
-          - FINISHED
-          - FAILED
-        projectId:
-          type: integer
-          format: int32
-        productId:
-          type: integer
-          format: int32
-        domainId:
-          type: integer
-          format: int32
-        projectUuid:
-          type: string
-        processUuid:
-          type: string
-        hasViolations:
-          type: boolean
-        startTime:
-          type: string
-          format: date-time
-        endTime:
-          type: string
-          format: date-time
-        lastModified:
-          type: string
-          format: date-time
-        configurationName:
-          type: string
-        reference:
-          type: string
-        triggeredBy:
-          type: string
-        agentInfo:
-          $ref: '#/components/schemas/ScanAgentInfo'
-    StreamingResponseBody:
-      type: object
-    DWRResponsePageableV3ListScanTagDTO:
-      type: object
-      properties:
-        additionalData:
-          title: Provides insights into endpoint-supported pagination information.
-          type: object
-          description: '+ **totalItems**: The total count of data points returned in an API response.
-
-            '
-          example:
-            totalItems: '422'
-            next: http://someUrl?cursor=3
-            cursor: 3
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        response:
-          type: array
-          items:
-            $ref: '#/components/schemas/ScanTagDTO'
     UnifiedFindingDTOV3:
       type: object
       properties:
@@ -616,15 +472,192 @@ components:
           title: Scan Tag Creation Date
           type: string
           format: date-time
-    ScanAgentInfo:
+    ScanSummaryDTOV3:
       type: object
       properties:
+        uuid:
+          type: string
+        name:
+          type: string
+        processUuid:
+          type: string
+        scanTime:
+          type: string
+          format: date-time
+        scanStatus:
+          type: string
+        engine:
+          type: string
+          enum:
+          - UNIFIED
+          - SCA
+          - SAST
+          - IAC
+          - IMG
+          - AI
+          - DAST
+        scanDuration:
+          type: string
+        configurationName:
+          type: string
+        reference:
+          type: string
+        triggeredBy:
+          type: string
         agentName:
           type: string
         agentVersion:
           type: string
-        errorMessage:
+        supportToken:
           type: string
+        projectName:
+          type: string
+        projectUuid:
+          type: string
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScanTagDTO'
+        applicationName:
+          type: string
+        applicationUuid:
+          type: string
+        workflowUuids:
+          type: array
+          items:
+            type: string
+        workflowNames:
+          type: array
+          items:
+            type: string
+        statistics:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: integer
+              format: int64
+    ScanDiffResponseDTOV3:
+      type: object
+      properties:
+        source:
+          $ref: '#/components/schemas/ScanDTOV3'
+        target:
+          $ref: '#/components/schemas/ScanDTOV3'
+        stats:
+          $ref: '#/components/schemas/ScanDiffStatsDTOV3'
+        findings:
+          type: array
+          items:
+            $ref: '#/components/schemas/DiffUnifiedFindingDTOV3'
+    StreamingResponseBody:
+      type: object
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+    ScanDTOV3:
+      type: object
+      properties:
+        uuid:
+          type: string
+        name:
+          type: string
+        engine:
+          type: string
+          enum:
+          - UNIFIED
+          - SCA
+          - SAST
+          - IAC
+          - IMG
+          - AI
+          - DAST
+        status:
+          type: string
+          enum:
+          - RUNNING
+          - PARTIAL
+          - PROCESSING
+          - FINISHED
+          - FAILED
+        projectId:
+          type: integer
+          format: int32
+        productId:
+          type: integer
+          format: int32
+        domainId:
+          type: integer
+          format: int32
+        projectUuid:
+          type: string
+        processUuid:
+          type: string
+        hasViolations:
+          type: boolean
+        startTime:
+          type: string
+          format: date-time
+        endTime:
+          type: string
+          format: date-time
+        lastModified:
+          type: string
+          format: date-time
+        configurationName:
+          type: string
+        reference:
+          type: string
+        triggeredBy:
+          type: string
+        agentInfo:
+          $ref: '#/components/schemas/ScanAgentInfo'
+    DWRResponsePageableV3ListScanTagDTO:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            '
+          example:
+            totalItems: '422'
+            next: http://someUrl?cursor=3
+            cursor: 3
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScanTagDTO'
+    DWRResponsePageableV3ListScanSummaryDTOV3:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            '
+          example:
+            totalItems: '422'
+            next: http://someUrl?cursor=3
+            cursor: 3
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScanSummaryDTOV3'
     DiffChangeDTOV3:
       type: object
       properties:
@@ -634,39 +667,6 @@ components:
           type: object
         after:
           type: object
-    DiffUnifiedFindingDTOV3:
-      type: object
-      properties:
-        diffType:
-          type: string
-        finding:
-          $ref: '#/components/schemas/UnifiedFindingDTOV3'
-        changes:
-          type: array
-          items:
-            $ref: '#/components/schemas/DiffChangeDTOV3'
-    ScanDiffStatsDTOV3:
-      type: object
-      properties:
-        added:
-          type: integer
-          format: int32
-        removed:
-          type: integer
-          format: int32
-        modified:
-          type: integer
-          format: int32
-        unchanged:
-          type: integer
-          format: int32
-    DWRResponseBase:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
   securitySchemes:
     bearer-key:
       type: http

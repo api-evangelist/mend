@@ -188,56 +188,15 @@ paths:
                 $ref: '#/components/schemas/DWRResponseBase'
 components:
   schemas:
-    DWRResponseProjectDTO:
+    ContextEntityRequestDTO:
+      required:
+      - name
       type: object
       properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/ProjectDTO'
-    ProjectDTO:
-      type: object
-      properties:
-        uuid:
-          title: Project UUID
-          type: string
-          example: 123e4567-e89b-12d3-a456-426655440000
         name:
-          title: Project Name
+          title: Entity Name
           type: string
-          example: My Project
-        path:
-          title: Product Name
-          type: string
-          example: My Product
-        productName:
-          title: Product Name
-          type: string
-          example: My Product
-        productUuid:
-          title: Product Uuid
-          type: string
-          example: 123e4567-e89b-12d3-a456-426655440000
-    DWRResponseVitalsDTO:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/VitalsDTO'
-    DWRResponseMessageDTO:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/MessageDTO'
+          example: Entity A
     UserInfoDTO:
       required:
       - uuid
@@ -269,29 +228,24 @@ components:
           - ACTIVE
           - INACTIVE
           - LOCKOUT
-    MessageDTO:
-      type: object
-      properties:
-        message:
-          title: message
-          type: string
-          example: Success!
-    ContextEntityRequestDTO:
-      required:
-      - name
-      type: object
-      properties:
-        name:
-          title: Entity Name
-          type: string
-          example: Entity A
-    DWRResponseBase:
+    DWRResponseProjectDTO:
       type: object
       properties:
         supportToken:
           title: Support Token
           type: string
           example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/ProjectDTO'
+    DWRResponseVitalsDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/VitalsDTO'
     VitalsDTO:
       type: object
       properties:
@@ -334,6 +288,52 @@ components:
           type: integer
           format: int64
           example: 400
+    MessageDTO:
+      type: object
+      properties:
+        message:
+          title: message
+          type: string
+          example: Success!
+    DWRResponseMessageDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/MessageDTO'
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+    ProjectDTO:
+      type: object
+      properties:
+        uuid:
+          title: Project UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Project Name
+          type: string
+          example: My Project
+        path:
+          title: Product Name
+          type: string
+          example: My Product
+        productName:
+          title: Product Name
+          type: string
+          example: My Product
+        productUuid:
+          title: Product Uuid
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
   securitySchemes:
     bearer-key:
       type: http

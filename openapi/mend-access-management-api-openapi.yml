@@ -138,7 +138,7 @@ paths:
       - Access Management
       summary: Refresh Access Token
       description: Generate a new access token using the provided refresh token.
-      operationId: refreshAccessToken
+      operationId: postApiV20LoginAccessToken
       parameters:
       - name: wss-refresh-token
         in: header
@@ -162,6 +162,8 @@ paths:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+      x-operation-id-source: normalized
+      x-operation-id-original: refreshAccessToken
     servers:
     - url: https://api-saas.mend.io
       description: Generated server url
@@ -173,7 +175,7 @@ paths:
       description: 'Sign in a user with email and user key, returning a JWT token which is valid for 10 minutes.
 
         If you omit the organization, it defaults to the last one you signed in to.'
-      operationId: login
+      operationId: postApiV20Login
       requestBody:
         content:
           application/json:
@@ -199,17 +201,29 @@ paths:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+      x-operation-id-source: normalized
+      x-operation-id-original: login
     servers:
     - url: https://api-saas.mend.io
       description: Generated server url
 components:
   schemas:
-    AccessTokenRequestDTO:
+    LoginModelDTOV3:
+      required:
+      - email
+      - userKey
       type: object
       properties:
-        accessToken:
+        email:
+          title: Email
           type: string
-      description: Previous Access Token
+          example: jon.smith@mail.com
+        userKey:
+          title: User Key
+          type: string
+          description: Equivalent to a personal access token. Avoid pasting as plain text where it might be compromised. For a service user (recommended), you can find the user key in the Mend SCA App in **Admin > Users**. [Learn more](https://docs.mend.io/bundle/mend_maintenance/page/managing_service_users.html). For local testing purposes, you could also use one of your own personal user keys from your user profile page in the Mend SCA App.
+          example: '***********'
+      description: Login Model that provides user name and password for the Login process.
     AccessTokenResponseDTO:
       type: object
       properties:
@@ -244,6 +258,37 @@ components:
         systemAccessStartTime:
           type: integer
           format: int64
+    DWRResponseV3AccessTokenResponseDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          $ref: '#/components/schemas/AccessTokenResponseDTO'
+    AccessTokenRequestDTO:
+      type: object
+      properties:
+        accessToken:
+          type: string
+      description: Previous Access Token
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+    DWRResponseV3LoginResponseDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          $ref: '#/components/schemas/LoginResponseDTO'
     LoginResponseDTO:
       type: object
       properties:
@@ -268,77 +313,6 @@ components:
         systemAccessStartTime:
           type: integer
           format: int64
-    DWRResponseV3LoginResponseDTO:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        response:
-          $ref: '#/components/schemas/LoginResponseDTO'
-    DWRResponseV3AccessTokenResponseDTO:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        response:
-          $ref: '#/components/schemas/AccessTokenResponseDTO'
-    LoginModelDTOV3:
-      required:
-      - email
-      - userKey
-      type: object
-      properties:
-        email:
-          title: Email
-          type: string
-          example: jon.smith@mail.com
-        userKey:
-          title: User Key
-          type: string
-          description: Equivalent to a personal access token. Avoid pasting as plain text where it might be compromised. For a service user (recommended), you can find the user key in the Mend SCA App in **Admin > Users**. [Learn more](https://docs.mend.io/bundle/mend_maintenance/page/managing_service_users.html). For local testing purposes, you could also use one of your own personal user keys from your user profile page in the Mend SCA App.
-          example: '***********'
-      description: Login Model that provides user name and password for the Login process.
-    DWRResponseBase:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-    LoginModelDTO:
-      required:
-      - email
-      - userKey
-      type: object
-      properties:
-        email:
-          title: Email
-          type: string
-          example: jon.smith@mail.com
-        orgToken:
-          title: Org Token
-          type: string
-          description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: Integrate tab > API Key).'
-          example: 123e4567-e89b-12d3-a456-426655440000
-        userKey:
-          title: User Key
-          type: string
-          description: Equivalent to a personal access token. Avoid pasting as plain text where it might be compromised. For a service user (recommended), you can find the user key in the Mend SCA App in **Admin > Users**. [Learn more](https://docs.mend.io/bundle/mend_maintenance/page/managing_service_users.html). For local testing purposes, you could also use one of your own personal user keys from your user profile page in the Mend SCA App.
-          example: '***********'
-      description: Login Model that provides user name and password for the Login process.
-    DWRResponseSessionInfo:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/SessionInfo'
     SessionInfo:
       type: object
       properties:
@@ -362,6 +336,36 @@ components:
           title: Organization Uuid
           type: string
           example: 123e4567-e89b-12d3-a456-426655440000
+    DWRResponseSessionInfo:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/SessionInfo'
+    LoginModelDTO:
+      required:
+      - email
+      - userKey
+      type: object
+      properties:
+        email:
+          title: Email
+          type: string
+          example: jon.smith@mail.com
+        orgToken:
+          title: Org Token
+          type: string
+          description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: Integrate tab > API Key).'
+          example: 123e4567-e89b-12d3-a456-426655440000
+        userKey:
+          title: User Key
+          type: string
+          description: Equivalent to a personal access token. Avoid pasting as plain text where it might be compromised. For a service user (recommended), you can find the user key in the Mend SCA App in **Admin > Users**. [Learn more](https://docs.mend.io/bundle/mend_maintenance/page/managing_service_users.html). For local testing purposes, you could also use one of your own personal user keys from your user profile page in the Mend SCA App.
+          example: '***********'
+      description: Login Model that provides user name and password for the Login process.
   securitySchemes:
     bearer-key:
       type: http
