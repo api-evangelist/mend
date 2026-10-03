@@ -333,6 +333,71 @@ paths:
                 $ref: '#/components/schemas/DWRResponseBase'
 components:
   schemas:
+    DeleteWhiteListRuleRequestDTO:
+      required:
+      - uuid
+      type: object
+      properties:
+        uuid:
+          title: White List UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+    UpdateWhiteListRulesRequestDTO:
+      title: UpdateWhiteListRuleDTO
+      required:
+      - regex
+      - uuid
+      type: object
+      properties:
+        uuid:
+          title: White List UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        regex:
+          title: White List Regex Rule
+          type: string
+          example: '*aa*'
+        description:
+          title: White List Description
+          type: string
+          example: description for white list
+    MessageDTO:
+      type: object
+      properties:
+        message:
+          title: message
+          type: string
+          example: Success!
+    DWRResponseMessageDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/MessageDTO'
+    DWRResponsePageableListWhiteListRuleDTO:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            + **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining.'
+          example:
+            totalItems: '422'
+            isLastPage: 'true'
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          type: array
+          items:
+            $ref: '#/components/schemas/WhiteListRuleDTO'
+      description: Provides insights into endpoint-supported pagination information
     WhiteListRuleDTO:
       required:
       - regex
@@ -361,27 +426,15 @@ components:
           title: White List Description
           type: string
           example: Sample description
-    DWRResponsePageableListWhiteListRuleDTO:
+    DWRResponseWhiteListRuleDTO:
       type: object
       properties:
-        additionalData:
-          title: Provides insights into endpoint-supported pagination information.
-          type: object
-          description: '+ **totalItems**: The total count of data points returned in an API response.
-
-            + **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining.'
-          example:
-            totalItems: '422'
-            isLastPage: 'true'
         supportToken:
           title: Support Token
           type: string
           example: 1171c60d
         retVal:
-          type: array
-          items:
-            $ref: '#/components/schemas/WhiteListRuleDTO'
-      description: Provides insights into endpoint-supported pagination information
+          $ref: '#/components/schemas/WhiteListRuleDTO'
     CreateWhiteListRuleRequestDTO:
       required:
       - regex
@@ -395,57 +448,6 @@ components:
           title: White List Description
           type: string
           example: description for white list
-    CreateWhiteListRulesRequestDTO:
-      type: object
-      properties:
-        rules:
-          type: array
-          items:
-            $ref: '#/components/schemas/CreateWhiteListRuleRequestDTO'
-    MessageDTO:
-      type: object
-      properties:
-        message:
-          title: message
-          type: string
-          example: Success!
-    UpdateWhiteListRulesRequestDTO:
-      title: UpdateWhiteListRuleDTO
-      required:
-      - regex
-      - uuid
-      type: object
-      properties:
-        uuid:
-          title: White List UUID
-          type: string
-          example: 123e4567-e89b-12d3-a456-426655440000
-        regex:
-          title: White List Regex Rule
-          type: string
-          example: '*aa*'
-        description:
-          title: White List Description
-          type: string
-          example: description for white list
-    DWRResponseWhiteListRuleDTO:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/WhiteListRuleDTO'
-    DWRResponseMessageDTO:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/MessageDTO'
     DWRResponseBase:
       type: object
       properties:
@@ -464,6 +466,13 @@ components:
           title: White List Description
           type: string
           example: description for white list
+    CreateWhiteListRulesRequestDTO:
+      type: object
+      properties:
+        rules:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreateWhiteListRuleRequestDTO'
     DWRResponseListWhiteListRuleDTO:
       type: object
       properties:
@@ -475,15 +484,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/WhiteListRuleDTO'
-    DeleteWhiteListRuleRequestDTO:
-      required:
-      - uuid
-      type: object
-      properties:
-        uuid:
-          title: White List UUID
-          type: string
-          example: 123e4567-e89b-12d3-a456-426655440000
   securitySchemes:
     bearer-key:
       type: http

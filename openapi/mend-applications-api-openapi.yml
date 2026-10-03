@@ -480,76 +480,35 @@ paths:
                 $ref: '#/components/schemas/DWRResponseV3SbomScanResponseDTO'
 components:
   schemas:
-    LabelRequestDTOV3:
-      required:
-      - namespace
-      - value
+    SbomScanInfoDTO:
       type: object
       properties:
-        namespace:
-          title: Label Namespace
+        scanUuid:
           type: string
-          example: Label Namespace A
-        value:
-          title: Label Value
+          description: Scan identifier
+          example: 45e0c7f0-2a64-4a1c-bb2b-22e1c4f02126
+        createdAt:
           type: string
-          example: Label Value A
-    ProjectViolationIdentifierDTOV3:
+          description: Scan creation timestamp
+          example: '2025-10-27T18:50:05Z'
+      description: Scan information
+    MultiContextRequestDTOV3:
       type: object
       properties:
-        findingUuid:
-          type: string
-        originUuid:
-          type: string
-        projectUuid:
-          type: string
-    SbomScanResponseDTO:
-      type: object
-      properties:
-        supportToken:
-          type: string
-          description: Support token for tracking
-          example: 1171c60d
-        project:
-          $ref: '#/components/schemas/ProjectDTOV3'
-        scan:
-          $ref: '#/components/schemas/SbomScanInfoDTO'
-        link:
-          $ref: '#/components/schemas/SbomScanLinksDTO'
-    DWRResponseV3SbomScanResponseDTO:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        response:
-          $ref: '#/components/schemas/SbomScanResponseDTO'
-    ProjectDTOV3:
-      type: object
-      properties:
-        uuid:
-          title: Project UUID
-          type: string
-          example: 123e4567-e89b-12d3-a456-426655440000
-        name:
-          title: Project Name
-          type: string
-          example: My Project
-        path:
-          title: Application Name
-          type: string
-          example: My Application
-        applicationName:
-          title: Application Name
-          type: string
-          example: My Application
-        applicationUuid:
-          title: Application Uuid
-          type: string
-          example: 123e4567-e89b-12d3-a456-426655440000
-      description: Project information
-    DWRResponsePageableV3ListScanSummaryDTOV3:
+        applicationUuids:
+          type: array
+          items:
+            title: Application UUIDs
+            type: string
+            example: 123e4567-e89b-12d3-a456-426655440000
+        projectUuids:
+          type: array
+          items:
+            title: Project UUIDs
+            type: string
+            example: 123e4567-e89b-12d3-a456-426655440000
+      description: If projectUuids and applicationUuids are empty, action will apply to the whole organization, Provides the requested statistics for all projects that match at least one of the given identifiers.
+    DWRResponsePageableV3CollectionApplicationDTOV3:
       type: object
       properties:
         additionalData:
@@ -569,46 +528,19 @@ components:
         response:
           type: array
           items:
-            $ref: '#/components/schemas/ScanSummaryDTOV3'
-    DWRResponseV3MessageDTO:
+            $ref: '#/components/schemas/ApplicationDTOV3'
+    UpdateMultipleProjectViolationSlaRequestDTOV3:
       type: object
       properties:
-        supportToken:
-          title: Support Token
+        date:
+          title: Date
+          pattern: yyyy-MM-dd
           type: string
-          example: 1171c60d
-        response:
-          $ref: '#/components/schemas/MessageDTO'
-    DWRResponseV3ListEntityLabelDTO:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        response:
+          example: 2024/12/31
+        identifiers:
           type: array
           items:
-            $ref: '#/components/schemas/EntityLabelDTO'
-    SbomScanInfoDTO:
-      type: object
-      properties:
-        scanUuid:
-          type: string
-          description: Scan identifier
-          example: 45e0c7f0-2a64-4a1c-bb2b-22e1c4f02126
-        createdAt:
-          type: string
-          description: Scan creation timestamp
-          example: '2025-10-27T18:50:05Z'
-      description: Scan information
-    MessageDTO:
-      type: object
-      properties:
-        message:
-          title: message
-          type: string
-          example: Success!
+            $ref: '#/components/schemas/ProjectViolationIdentifierDTOV3'
     ApplicationDTOV3:
       type: object
       properties:
@@ -620,6 +552,21 @@ components:
           title: Application Name
           type: string
           example: Application A
+    SbomScanLinksDTO:
+      type: object
+      properties:
+        logs:
+          type: string
+          description: Link to scan logs
+          example: /api/v3.0/projects/{projectUuid}/scans/{scanUuid}/dependencies/SBOM/logs
+      description: Log Link
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
     ScanSummaryDTOV3:
       type: object
       properties:
@@ -685,57 +632,6 @@ components:
             additionalProperties:
               type: integer
               format: int64
-    PeriodTotalsDTO:
-      type: object
-      properties:
-        currentCount:
-          type: integer
-        totalInCurrPeriod:
-          type: integer
-        totalInPrevPeriod:
-          type: integer
-    DWRResponseV3ApplicationDTOV3:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        response:
-          $ref: '#/components/schemas/ApplicationDTOV3'
-    UpdateMultipleProjectViolationSlaRequestDTOV3:
-      type: object
-      properties:
-        date:
-          title: Date
-          pattern: yyyy-MM-dd
-          type: string
-          example: 2024/12/31
-        identifiers:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProjectViolationIdentifierDTOV3'
-    DWRResponsePageableV3ListApplicationSummaryDTOV3:
-      type: object
-      properties:
-        additionalData:
-          title: Provides insights into endpoint-supported pagination information.
-          type: object
-          description: '+ **totalItems**: The total count of data points returned in an API response.
-
-            '
-          example:
-            totalItems: '422'
-            next: http://someUrl?cursor=3
-            cursor: 3
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        response:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApplicationSummaryDTOV3'
     EntityTagDTO:
       type: object
       properties:
@@ -747,51 +643,49 @@ components:
           title: Entity Tag value
           type: string
           example: value
-    DWRResponsePageableV3CollectionApplicationDTOV3:
+    MessageDTO:
       type: object
       properties:
-        additionalData:
-          title: Provides insights into endpoint-supported pagination information.
-          type: object
-          description: '+ **totalItems**: The total count of data points returned in an API response.
-
-            '
-          example:
-            totalItems: '422'
-            next: http://someUrl?cursor=3
-            cursor: 3
+        message:
+          title: message
+          type: string
+          example: Success!
+    PeriodTotalsDTO:
+      type: object
+      properties:
+        currentCount:
+          type: integer
+        totalInCurrPeriod:
+          type: integer
+        totalInPrevPeriod:
+          type: integer
+    DWRResponseV3SbomScanResponseDTO:
+      type: object
+      properties:
         supportToken:
           title: Support Token
           type: string
           example: 1171c60d
         response:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApplicationDTOV3'
-    SbomScanLinksDTO:
+          $ref: '#/components/schemas/SbomScanResponseDTO'
+    DWRResponseV3MessageDTO:
       type: object
       properties:
-        logs:
+        supportToken:
+          title: Support Token
           type: string
-          description: Link to scan logs
-          example: /api/v3.0/projects/{projectUuid}/scans/{scanUuid}/dependencies/SBOM/logs
-      description: Log Link
-    MultiContextRequestDTOV3:
+          example: 1171c60d
+        response:
+          $ref: '#/components/schemas/MessageDTO'
+    ProjectViolationIdentifierDTOV3:
       type: object
       properties:
-        applicationUuids:
-          type: array
-          items:
-            title: Application UUIDs
-            type: string
-            example: 123e4567-e89b-12d3-a456-426655440000
-        projectUuids:
-          type: array
-          items:
-            title: Project UUIDs
-            type: string
-            example: 123e4567-e89b-12d3-a456-426655440000
-      description: If projectUuids and applicationUuids are empty, action will apply to the whole organization, Provides the requested statistics for all projects that match at least one of the given identifiers.
+        findingUuid:
+          type: string
+        originUuid:
+          type: string
+        projectUuid:
+          type: string
     ScanTagDTO:
       type: object
       properties:
@@ -811,6 +705,44 @@ components:
           title: Scan Tag Creation Date
           type: string
           format: date-time
+    ProjectDTOV3:
+      type: object
+      properties:
+        uuid:
+          title: Project UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Project Name
+          type: string
+          example: My Project
+        path:
+          title: Application Name
+          type: string
+          example: My Application
+        applicationName:
+          title: Application Name
+          type: string
+          example: My Application
+        applicationUuid:
+          title: Application Uuid
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+      description: Project information
+    LabelRequestDTOV3:
+      required:
+      - namespace
+      - value
+      type: object
+      properties:
+        namespace:
+          title: Label Namespace
+          type: string
+          example: Label Namespace A
+        value:
+          title: Label Value
+          type: string
+          example: Label Value A
     CreateApplicationRequestDTOV3:
       required:
       - name
@@ -820,7 +752,35 @@ components:
           title: Application Name
           type: string
           example: My Application
-    DWRResponseV3Boolean:
+    EntityLabelDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+        namespace:
+          type: string
+        value:
+          type: string
+        displayName:
+          type: string
+        contextType:
+          type: string
+        system:
+          type: boolean
+    SbomScanResponseDTO:
+      type: object
+      properties:
+        supportToken:
+          type: string
+          description: Support token for tracking
+          example: 1171c60d
+        project:
+          $ref: '#/components/schemas/ProjectDTOV3'
+        scan:
+          $ref: '#/components/schemas/SbomScanInfoDTO'
+        link:
+          $ref: '#/components/schemas/SbomScanLinksDTO'
+    DWRResponseV3ListEntityLabelDTO:
       type: object
       properties:
         supportToken:
@@ -828,7 +788,9 @@ components:
           type: string
           example: 1171c60d
         response:
-          type: boolean
+          type: array
+          items:
+            $ref: '#/components/schemas/EntityLabelDTO'
     ApplicationSummaryDTOV3:
       type: object
       properties:
@@ -858,6 +820,36 @@ components:
             additionalProperties:
               type: integer
               format: int64
+    DWRResponsePageableV3ListApplicationSummaryDTOV3:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            '
+          example:
+            totalItems: '422'
+            next: http://someUrl?cursor=3
+            cursor: 3
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApplicationSummaryDTOV3'
+    DWRResponseV3ApplicationDTOV3:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          $ref: '#/components/schemas/ApplicationDTOV3'
     EntityLabelDTOV3:
       type: object
       properties:
@@ -879,21 +871,6 @@ components:
           - unsupported
         system:
           type: boolean
-    EntityLabelDTO:
-      type: object
-      properties:
-        uuid:
-          type: string
-        namespace:
-          type: string
-        value:
-          type: string
-        displayName:
-          type: string
-        contextType:
-          type: string
-        system:
-          type: boolean
     DWRResponseV3PeriodTotalsDTO:
       type: object
       properties:
@@ -903,13 +880,36 @@ components:
           example: 1171c60d
         response:
           $ref: '#/components/schemas/PeriodTotalsDTO'
-    DWRResponseBase:
+    DWRResponsePageableV3ListScanSummaryDTOV3:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            '
+          example:
+            totalItems: '422'
+            next: http://someUrl?cursor=3
+            cursor: 3
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScanSummaryDTOV3'
+    DWRResponseV3Boolean:
       type: object
       properties:
         supportToken:
           title: Support Token
           type: string
           example: 1171c60d
+        response:
+          type: boolean
   securitySchemes:
     bearer-key:
       type: http

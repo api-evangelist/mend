@@ -79,15 +79,18 @@ paths:
                 $ref: '#/components/schemas/DWRResponseBase'
 components:
   schemas:
-    DWRResponseVulnerabilityProfileDTO:
+    EffectiveVulnerabilityInfoDTO:
       type: object
       properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/VulnerabilityProfileDTO'
+        referenceCount:
+          title: Vulnerability Reference Count
+          type: integer
+          format: int32
+        shieldValue:
+          title: Shield Value
+          type: integer
+          description: RED(15), YELLOW(10), GREY(8), NO_SHIELD(6), GREEN(5)
+          format: int32
     ThreatAssessmentDTO:
       type: object
       properties:
@@ -106,30 +109,78 @@ components:
           type: number
           format: float
           example: 0.8
-    VulnerabilityReferenceDTO:
+    VulnerabilityFixSummaryInfoDTO:
       type: object
       properties:
-        value:
-          title: Vulnerability Reference Value
+        vulnerability:
           type: string
-          example: https://github.com/codehaus-plexus/plexus-utils/commit/f933e5e78dc2637e485447ed821fe14904f110de
-        source:
-          title: vulnerability reference source
+          description: Vulnerability Name
+          example: CVE-2021-42392
+        topRankedFix:
+          $ref: '#/components/schemas/VulnerabilityFixInfoDTO'
+        allFixes:
+          type: array
+          items:
+            $ref: '#/components/schemas/VulnerabilityFixInfoDTO'
+        totalUpVotes:
+          type: integer
+          description: Total Up Votes
+          format: int32
+          example: 0
+        totalDownVotes:
+          type: integer
+          description: Total Down Votes
+          format: int32
+          example: 0
+    DWRResponseVulnerabilityFixSummaryInfoDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
           type: string
-          example: CERT
-        url:
-          title: Vulnerability Reference Url
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/VulnerabilityFixSummaryInfoDTO'
+    VulnerabilityScoringDTO:
+      type: object
+      properties:
+        score:
+          title: Vulnerability Score
+          type: number
+          format: float
+          example: 5
+        severity:
+          title: Vulnerability Severity
           type: string
-          example: https://github.com/codehaus-plexus/plexus-utils/commit/f933e5e78dc2637e485447ed821fe14904f110de
-        signature:
-          title: Vulnerability Reference Signature
-          type: boolean
-        advisory:
-          title: Vulnerability Reference Advisory
-          type: boolean
-        patch:
-          title: Vulnerability Reference Patch
-          type: boolean
+          example: MEDIUM
+          enum:
+          - LOW
+          - HIGH
+          - MEDIUM
+        type:
+          title: Vulnerability Score Type
+          type: string
+          example: CVSS_2
+          enum:
+          - CVSS_2
+          - CVSS_3
+        scoreMetadataVector:
+          title: Score Metadata Vector
+          type: string
+          example: CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H
+        extraData:
+          title: Vulnerability Extra Data
+          type: object
+          additionalProperties:
+            title: Vulnerability Extra Data
+            type: string
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
     VulnerabilityFixInfoDTO:
       type: object
       properties:
@@ -176,6 +227,39 @@ components:
           type: string
         minimalAffectedVersionFromExtraData:
           type: string
+    DWRResponseVulnerabilityProfileDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/VulnerabilityProfileDTO'
+    VulnerabilityReferenceDTO:
+      type: object
+      properties:
+        value:
+          title: Vulnerability Reference Value
+          type: string
+          example: https://github.com/codehaus-plexus/plexus-utils/commit/f933e5e78dc2637e485447ed821fe14904f110de
+        source:
+          title: vulnerability reference source
+          type: string
+          example: CERT
+        url:
+          title: Vulnerability Reference Url
+          type: string
+          example: https://github.com/codehaus-plexus/plexus-utils/commit/f933e5e78dc2637e485447ed821fe14904f110de
+        signature:
+          title: Vulnerability Reference Signature
+          type: boolean
+        advisory:
+          title: Vulnerability Reference Advisory
+          type: boolean
+        patch:
+          title: Vulnerability Reference Patch
+          type: boolean
     VulnerabilityProfileDTO:
       type: object
       properties:
@@ -227,90 +311,6 @@ components:
           $ref: '#/components/schemas/EffectiveVulnerabilityInfoDTO'
         threatAssessment:
           $ref: '#/components/schemas/ThreatAssessmentDTO'
-    DWRResponseBase:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-    VulnerabilityFixSummaryInfoDTO:
-      type: object
-      properties:
-        vulnerability:
-          type: string
-          description: Vulnerability Name
-          example: CVE-2021-42392
-        topRankedFix:
-          $ref: '#/components/schemas/VulnerabilityFixInfoDTO'
-        allFixes:
-          type: array
-          items:
-            $ref: '#/components/schemas/VulnerabilityFixInfoDTO'
-        totalUpVotes:
-          type: integer
-          description: Total Up Votes
-          format: int32
-          example: 0
-        totalDownVotes:
-          type: integer
-          description: Total Down Votes
-          format: int32
-          example: 0
-    DWRResponseVulnerabilityFixSummaryInfoDTO:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/VulnerabilityFixSummaryInfoDTO'
-    EffectiveVulnerabilityInfoDTO:
-      type: object
-      properties:
-        referenceCount:
-          title: Vulnerability Reference Count
-          type: integer
-          format: int32
-        shieldValue:
-          title: Shield Value
-          type: integer
-          description: RED(15), YELLOW(10), GREY(8), NO_SHIELD(6), GREEN(5)
-          format: int32
-    VulnerabilityScoringDTO:
-      type: object
-      properties:
-        score:
-          title: Vulnerability Score
-          type: number
-          format: float
-          example: 5
-        severity:
-          title: Vulnerability Severity
-          type: string
-          example: MEDIUM
-          enum:
-          - LOW
-          - HIGH
-          - MEDIUM
-        type:
-          title: Vulnerability Score Type
-          type: string
-          example: CVSS_2
-          enum:
-          - CVSS_2
-          - CVSS_3
-        scoreMetadataVector:
-          title: Score Metadata Vector
-          type: string
-          example: CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H
-        extraData:
-          title: Vulnerability Extra Data
-          type: object
-          additionalProperties:
-            title: Vulnerability Extra Data
-            type: string
   securitySchemes:
     bearer-key:
       type: http

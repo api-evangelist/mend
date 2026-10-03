@@ -51,6 +51,13 @@ paths:
                 $ref: '#/components/schemas/DWRResponseBase'
 components:
   schemas:
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
     ProjectListRequestDTO:
       required:
       - projectIdentifiers
@@ -62,13 +69,6 @@ components:
             title: Project Identifiers
             type: string
             example: 123e4567-e89b-12d3-a456-426655440000
-    DWRResponseBase:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
   securitySchemes:
     bearer-key:
       type: http

@@ -197,6 +197,31 @@ components:
           title: Entity Name
           type: string
           example: Entity A
+    DWRResponseProjectDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/ProjectDTO'
+    MessageDTO:
+      type: object
+      properties:
+        message:
+          title: message
+          type: string
+          example: Success!
+    DWRResponseMessageDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/MessageDTO'
     UserInfoDTO:
       required:
       - uuid
@@ -228,24 +253,6 @@ components:
           - ACTIVE
           - INACTIVE
           - LOCKOUT
-    DWRResponseProjectDTO:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/ProjectDTO'
-    DWRResponseVitalsDTO:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/VitalsDTO'
     VitalsDTO:
       type: object
       properties:
@@ -288,14 +295,7 @@ components:
           type: integer
           format: int64
           example: 400
-    MessageDTO:
-      type: object
-      properties:
-        message:
-          title: message
-          type: string
-          example: Success!
-    DWRResponseMessageDTO:
+    DWRResponseVitalsDTO:
       type: object
       properties:
         supportToken:
@@ -303,7 +303,7 @@ components:
           type: string
           example: 1171c60d
         retVal:
-          $ref: '#/components/schemas/MessageDTO'
+          $ref: '#/components/schemas/VitalsDTO'
     DWRResponseBase:
       type: object
       properties:

@@ -114,20 +114,6 @@ paths:
                 $ref: '#/components/schemas/DWRResponseBase'
 components:
   schemas:
-    CustomAttributeValueDTO:
-      type: object
-      properties:
-        value:
-          title: Custom Attribute Value
-          type: string
-          example: Custom attribute value
-    MessageDTO:
-      type: object
-      properties:
-        message:
-          title: message
-          type: string
-          example: Success!
     CustomAttributeDTO:
       type: object
       properties:
@@ -155,22 +141,13 @@ components:
           - projects
           - products
           - orgs
-    DWRResponseMessageDTO:
+    MessageDTO:
       type: object
       properties:
-        supportToken:
-          title: Support Token
+        message:
+          title: message
           type: string
-          example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/MessageDTO'
-    DWRResponseBase:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
+          example: Success!
     DWRResponsePageableListCustomAttributeDTO:
       type: object
       properties:
@@ -192,6 +169,29 @@ components:
           items:
             $ref: '#/components/schemas/CustomAttributeDTO'
       description: Provides insights into endpoint-supported pagination information
+    CustomAttributeValueDTO:
+      type: object
+      properties:
+        value:
+          title: Custom Attribute Value
+          type: string
+          example: Custom attribute value
+    DWRResponseMessageDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/MessageDTO'
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
   securitySchemes:
     bearer-key:
       type: http

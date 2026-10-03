@@ -112,13 +112,6 @@ paths:
                 $ref: '#/components/schemas/DWRResponseBase'
 components:
   schemas:
-    DWRResponseBase:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
     UserPermissionListDTO:
       type: object
       properties:
@@ -128,6 +121,13 @@ components:
             title: User Permissions
             type: string
             example: POLICIES__POLICY__VIEW
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
     DWRResponseUserPermissionListDTO:
       type: object
       properties:

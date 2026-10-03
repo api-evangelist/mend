@@ -90,6 +90,33 @@ components:
           title: Org Name
           type: string
           example: Organization A
+    DWRResponseSessionInfo:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/SessionInfo'
+    DWRResponseCollectionDomainDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          type: array
+          items:
+            $ref: '#/components/schemas/DomainDTO'
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
     SessionInfo:
       type: object
       properties:
@@ -113,33 +140,6 @@ components:
           title: Organization Uuid
           type: string
           example: 123e4567-e89b-12d3-a456-426655440000
-    DWRResponseBase:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-    DWRResponseCollectionDomainDTO:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          type: array
-          items:
-            $ref: '#/components/schemas/DomainDTO'
-    DWRResponseSessionInfo:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/SessionInfo'
   securitySchemes:
     bearer-key:
       type: http

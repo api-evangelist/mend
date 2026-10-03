@@ -58,6 +58,11 @@ paths:
                 $ref: '#/components/schemas/DWRResponseBase'
 components:
   schemas:
+    AttributionReportLibrarySettingRuleDTO:
+      type: object
+      properties:
+        excluded:
+          type: boolean
     DWRResponseBase:
       type: object
       properties:
@@ -65,11 +70,6 @@ components:
           title: Support Token
           type: string
           example: 1171c60d
-    AttributionReportLibrarySettingRuleDTO:
-      type: object
-      properties:
-        excluded:
-          type: boolean
   securitySchemes:
     bearer-key:
       type: http

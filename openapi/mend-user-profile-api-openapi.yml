@@ -118,15 +118,6 @@ paths:
                 $ref: '#/components/schemas/DWRResponseBase'
 components:
   schemas:
-    DWRResponseUserKeyDTO:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/UserKeyDTO'
     UserKeyDTO:
       type: object
       properties:
@@ -181,13 +172,6 @@ components:
           example: 1171c60d
         retVal:
           $ref: '#/components/schemas/MessageDTO'
-    DWRResponseBase:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
     DWRResponsePageableCollectionUserKeyDTO:
       type: object
       properties:
@@ -209,6 +193,22 @@ components:
           items:
             $ref: '#/components/schemas/UserKeyDTO'
       description: Provides insights into endpoint-supported pagination information
+    DWRResponseUserKeyDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/UserKeyDTO'
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
   securitySchemes:
     bearer-key:
       type: http

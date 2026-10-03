@@ -1698,6 +1698,111 @@ paths:
                 $ref: '#/components/schemas/DWRResponseBase'
 components:
   schemas:
+    DueDiligenceReportExportProjectDTOV3:
+      type: object
+      properties:
+        name:
+          type: string
+        format:
+          type: string
+          description: Output file format. The Due Diligence report supports excel, json and xml.
+          example: json
+          enum:
+          - excel
+          - json
+          - xml
+        sendEmailNotification:
+          type: boolean
+    CreateProjectSbomReportDTOReport:
+      type: object
+      properties:
+        name:
+          type: string
+        format:
+          type: string
+          enum:
+          - json
+          - html
+          - unknown
+          - xml
+          - excel
+          - yaml
+          - pdf
+          - tv
+          - rdf
+          - csv
+          - sarif
+          - text
+        sendEmailNotification:
+          type: boolean
+        labelsUuidList:
+          type: array
+          items:
+            type: string
+        excludeInactiveProjects:
+          type: boolean
+        reportType:
+          type: string
+          enum:
+          - attribution
+          - inventory
+          - vulnerabilities
+          - securityAlerts
+          - sbom
+          - Cbom
+          - securityAlertsLibrary
+          - Compliance
+          - Findings
+          - Suppressions
+          - Resolved
+          - spdx
+          - spdx_2_3
+          - cycloneDX
+          - cycloneDX_1_5
+          - cycloneDX_1_6
+          - dueDiligence
+          - unknown
+          - imgAttribution
+          - imgDueDiligence
+          - imgSpdx
+          - imgSpdx_2_3
+          - imgCycloneDX
+          - imgCycloneDX_1_5
+          - aiInventory
+          - aiFindings
+          - imgCycloneDX_1_6
+          - risk
+          - users
+          - zeroDayCatalog
+          - activityLog
+        maxDepthLevel:
+          type: integer
+          format: int32
+        includeVulnerabilities:
+          type: boolean
+        isMlBomReport:
+          type: boolean
+          example: false
+    RiskReportExportProjectDTOV3:
+      type: object
+      properties:
+        name:
+          type: string
+        format:
+          type: string
+          description: Output file format. The Risk report only supports pdf.
+          example: pdf
+          enum:
+          - pdf
+        sendEmailNotification:
+          type: boolean
+        exportMode:
+          type: string
+          description: Export mode. "split" (default) produces a ZIP (PDF summary + Excel CVE detail). "fullPdf" produces a single PDF, subject to a project-count threshold.
+          example: split
+          enum:
+          - split
+          - fullPdf
     DWRResponsePageableV3ListReportExportProcessDTOV3:
       type: object
       properties:
@@ -1719,7 +1824,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ReportExportProcessDTOV3'
-    CreateSecurityFindingsReportDTOV3:
+    CreateSecurityFindingsByLibraryReportDTOV3:
       type: object
       properties:
         name:
@@ -1733,13 +1838,351 @@ components:
         search:
           title: Search Query
           type: string
-          description: "Filter your search to return items whose property has a specific value.\nUse the syntax: **[property][operator][value]**\n+ **Property**: the name of the property of the item\n+ **Operator**:\n    + **equals (==)** - Returns true if the value exactly matches this one. If the value contains a * character, it behaves like a wildcard (similar to the LIKE operator).\nExample: entity==abc* — will return true for entities like \"abcd\" and \"abc_123\".\n+ **Value**: the value of the property.\n\nLogical operators AND (;) and OR (,) are supported in filters — param1=in=(val1,val2) and (param2==val3 or param3==val4), can also be written as — param1=in=(val1,val2);(param2==val3,param3==val4)\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ findingId: equals"
-          example: findingId==CVE-2020-8908
+          description: "Filter your search to return items whose property has a specific value.\nUse the syntax: **[property][operator][value]**\n+ **Property**: the name of the property of the item\n+ **Operator**:\n    + **equals (==)** - Returns true if the value exactly matches this one. If the value contains a * character, it behaves like a wildcard (similar to the LIKE operator).\nExample: entity==abc* — will return true for entities like \"abcd\" and \"abc_123\".\n+ **Value**: the value of the property.\n\nLogical operators AND (;) and OR (,) are supported in filters — param1=in=(val1,val2) and (param2==val3 or param3==val4), can also be written as — param1=in=(val1,val2);(param2==val3,param3==val4)\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ libraryName: equals"
+          example: libraryName==*log4j*
         zeroDayIdentifier:
           title: Zero-Day Identifier
           type: string
           description: UUID or Name of a Zero-Day Event
           example: CanisterWorm Supply Chain Attack
+    DWRResponseV3ReportExportProcessDTOV3:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          $ref: '#/components/schemas/ReportExportProcessDTOV3'
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+    FindingsReportExportProjectDTOV3:
+      type: object
+      properties:
+        name:
+          type: string
+        format:
+          type: string
+          description: Output file format. The Findings report supports excel, json and xml.
+          example: excel
+          enum:
+          - excel
+          - json
+          - xml
+        sendEmailNotification:
+          type: boolean
+        vulnerabilitiesState:
+          type: array
+          description: Alert states to include. Defaults to [OPEN] when omitted.
+          example:
+          - OPEN
+          items:
+            type: string
+            description: Alert states to include. Defaults to [OPEN] when omitted.
+            example: '["OPEN"]'
+            enum:
+            - OPEN
+            - IGNORE
+        vulnerabilityTypes:
+          type: array
+          description: Filter by one or more vulnerability types. ANY (default) includes all types.
+          example:
+          - CVE
+          - GHSA
+          items:
+            type: string
+            description: Filter by one or more vulnerability types. ANY (default) includes all types.
+            example: '["CVE","GHSA"]'
+            enum:
+            - MSC
+            - CVE
+            - ANY
+            - GHSA
+            - WS
+            - MAI
+        dateRange:
+          type: integer
+          description: Include only vulnerabilities first detected within the last N days. 0 or omitted means no date filter.
+          format: int32
+          example: 30
+        zeroDayIdentifier:
+          type: string
+          description: Scope the report to a specific zero-day event, by event UUID or name.
+    RiskReportExportDTOV3:
+      type: object
+      properties:
+        name:
+          type: string
+        format:
+          type: string
+          description: Output file format. The Risk report only supports pdf.
+          example: pdf
+          enum:
+          - pdf
+        sendEmailNotification:
+          type: boolean
+        projectUuids:
+          type: array
+          items:
+            type: string
+        exportMode:
+          type: string
+          description: Export mode. "split" (default) produces a ZIP (PDF summary + Excel CVE detail). "fullPdf" produces a single PDF, subject to a project-count threshold.
+          example: split
+          enum:
+          - split
+          - fullPdf
+    EntityTreeDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+        name:
+          type: string
+        scopeUuid:
+          type: string
+        scopeName:
+          type: string
+    MessageDTO:
+      type: object
+      properties:
+        message:
+          title: message
+          type: string
+          example: Success!
+    DWRResponseV3MessageDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          $ref: '#/components/schemas/MessageDTO'
+    AttributionReportExportProjectDTOV3:
+      type: object
+      properties:
+        name:
+          type: string
+        format:
+          type: string
+          description: Output file format. The Attribution report supports json, html and text.
+          example: json
+          enum:
+          - json
+          - html
+          - text
+        sendEmailNotification:
+          type: boolean
+        licenses:
+          type: array
+          items:
+            type: string
+        primaryAttribute:
+          type: string
+        library:
+          type: string
+        groupBy:
+          type: string
+        header:
+          type: string
+        title:
+          type: string
+        footer:
+          type: string
+        licenseReference:
+          type: string
+        licenseTextPlacement:
+          type: string
+        selectedColumns:
+          type: array
+          items:
+            type: string
+        customAttribute:
+          type: string
+        includeSummary:
+          type: boolean
+        includeVersion:
+          type: boolean
+        hideEmptyFields:
+          type: boolean
+        groupByOrDefault:
+          type: string
+        licenseReferenceOrDefault:
+          type: string
+        licenseTextPlacementOrDefault:
+          type: string
+        selectedColumnsOrDefaultString:
+          type: string
+    CreateProductSbomReportDTOReport:
+      type: object
+      properties:
+        name:
+          type: string
+        format:
+          type: string
+          enum:
+          - json
+          - html
+          - unknown
+          - xml
+          - excel
+          - yaml
+          - pdf
+          - tv
+          - rdf
+          - csv
+          - sarif
+          - text
+        sendEmailNotification:
+          type: boolean
+        labelsUuidList:
+          type: array
+          items:
+            type: string
+        excludeInactiveProjects:
+          type: boolean
+        projectUuids:
+          type: array
+          items:
+            type: string
+        reportType:
+          type: string
+          enum:
+          - attribution
+          - inventory
+          - vulnerabilities
+          - securityAlerts
+          - sbom
+          - Cbom
+          - securityAlertsLibrary
+          - Compliance
+          - Findings
+          - Suppressions
+          - Resolved
+          - spdx
+          - spdx_2_3
+          - cycloneDX
+          - cycloneDX_1_5
+          - cycloneDX_1_6
+          - dueDiligence
+          - unknown
+          - imgAttribution
+          - imgDueDiligence
+          - imgSpdx
+          - imgSpdx_2_3
+          - imgCycloneDX
+          - imgCycloneDX_1_5
+          - aiInventory
+          - aiFindings
+          - imgCycloneDX_1_6
+          - risk
+          - users
+          - zeroDayCatalog
+          - activityLog
+        maxDepthLevel:
+          type: integer
+          format: int32
+        includeVulnerabilities:
+          type: boolean
+        isMlBomReport:
+          type: boolean
+          example: false
+    CreateInventoryReportDTOV3:
+      type: object
+      properties:
+        name:
+          type: string
+        sendEmailNotification:
+          type: boolean
+        format:
+          type: string
+          enum:
+          - excel
+        search:
+          title: Search Query
+          type: string
+          description: "Filter your search to return items whose property has a specific value.\nUse the syntax: **[property][operator][value]**\n+ **Property**: the name of the property of the item\n+ **Operator**:\n    + **equals (==)** - Returns true if the value exactly matches this one. If the value contains a * character, it behaves like a wildcard (similar to the LIKE operator).\nExample: entity==abc* — will return true for entities like \"abcd\" and \"abc_123\".\n+ **Value**: the value of the property.\n\nLogical operators AND (;) and OR (,) are supported in filters — param1=in=(val1,val2) and (param2==val3 or param3==val4), can also be written as — param1=in=(val1,val2);(param2==val3,param3==val4)\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ libraryName: equals"
+          example: libraryName==*log4j*
+    InventoryReportExportDTOV3:
+      type: object
+      properties:
+        name:
+          type: string
+        format:
+          type: string
+          description: Output file format. The Inventory report supports excel, json and xml.
+          example: excel
+          enum:
+          - excel
+          - json
+          - xml
+        sendEmailNotification:
+          type: boolean
+        projectUuids:
+          type: array
+          items:
+            type: string
+    CreateReportDTO:
+      type: object
+      properties:
+        name:
+          type: string
+        format:
+          type: string
+          enum:
+          - json
+          - html
+          - unknown
+          - xml
+          - excel
+          - yaml
+          - pdf
+          - tv
+          - rdf
+          - csv
+          - sarif
+          - cbom
+          - text
+        sendEmailNotification:
+          type: boolean
+        labelsUuidList:
+          type: array
+          items:
+            type: string
+        excludeInactiveProjects:
+          type: boolean
+        exportMode:
+          type: string
+          enum:
+          - split
+          - fullPdf
+        additionalParams:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+    InventoryReportExportProjectDTOV3:
+      type: object
+      properties:
+        name:
+          type: string
+        format:
+          type: string
+          description: Output file format. The Inventory report supports excel, json and xml.
+          example: excel
+          enum:
+          - excel
+          - json
+          - xml
+        sendEmailNotification:
+          type: boolean
     UsersReportExportProcessDTO:
       type: object
       properties:
@@ -1825,7 +2268,70 @@ components:
           format: date-time
         sendEmailNotification:
           type: boolean
-    ReportExportProcessDTO:
+    CreateSecurityFindingsReportDTOV3:
+      type: object
+      properties:
+        name:
+          type: string
+        sendEmailNotification:
+          type: boolean
+        format:
+          type: string
+          enum:
+          - excel
+        search:
+          title: Search Query
+          type: string
+          description: "Filter your search to return items whose property has a specific value.\nUse the syntax: **[property][operator][value]**\n+ **Property**: the name of the property of the item\n+ **Operator**:\n    + **equals (==)** - Returns true if the value exactly matches this one. If the value contains a * character, it behaves like a wildcard (similar to the LIKE operator).\nExample: entity==abc* — will return true for entities like \"abcd\" and \"abc_123\".\n+ **Value**: the value of the property.\n\nLogical operators AND (;) and OR (,) are supported in filters — param1=in=(val1,val2) and (param2==val3 or param3==val4), can also be written as — param1=in=(val1,val2);(param2==val3,param3==val4)\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ findingId: equals"
+          example: findingId==CVE-2020-8908
+        zeroDayIdentifier:
+          title: Zero-Day Identifier
+          type: string
+          description: UUID or Name of a Zero-Day Event
+          example: CanisterWorm Supply Chain Attack
+    DueDiligenceReportExportDTOV3:
+      type: object
+      properties:
+        name:
+          type: string
+        format:
+          type: string
+          description: Output file format. The Due Diligence report supports excel, json and xml.
+          example: json
+          enum:
+          - excel
+          - json
+          - xml
+        sendEmailNotification:
+          type: boolean
+        projectUuids:
+          type: array
+          items:
+            type: string
+    CreateUsersReportDTO:
+      type: object
+      properties:
+        name:
+          type: string
+        format:
+          type: string
+          enum:
+          - json
+          - html
+          - unknown
+          - xml
+          - excel
+          - yaml
+          - pdf
+          - tv
+          - rdf
+          - csv
+          - sarif
+          - cbom
+          - text
+        sendEmailNotification:
+          type: boolean
+    ReportExportProcessDTOV3:
       type: object
       properties:
         uuid:
@@ -1895,18 +2401,10 @@ components:
           type: string
           enum:
           - organization
-          - product
+          - application
           - project
-          - unsupported
           - account
-        scopeUuidList:
-          type: array
-          items:
-            type: string
-        projectUuids:
-          type: array
-          items:
-            type: string
+          - unsupported
         status:
           type: string
           enum:
@@ -1920,84 +2418,7 @@ components:
         createdAt:
           type: string
           format: date-time
-        sendEmailNotification:
-          type: boolean
-        labelsUuidList:
-          type: array
-          items:
-            type: string
-        includeVulnerabilities:
-          type: boolean
-        excludeInactiveProjects:
-          type: boolean
-    FindingsReportExportProjectDTOV3:
-      type: object
-      properties:
-        name:
-          type: string
-        format:
-          type: string
-          description: Output file format. The Findings report supports excel, json and xml.
-          example: excel
-          enum:
-          - excel
-          - json
-          - xml
-        sendEmailNotification:
-          type: boolean
-        vulnerabilitiesState:
-          type: array
-          description: Alert states to include. Defaults to [OPEN] when omitted.
-          example:
-          - OPEN
-          items:
-            type: string
-            description: Alert states to include. Defaults to [OPEN] when omitted.
-            example: '["OPEN"]'
-            enum:
-            - OPEN
-            - IGNORE
-        vulnerabilityTypes:
-          type: array
-          description: Filter by one or more vulnerability types. ANY (default) includes all types.
-          example:
-          - CVE
-          - GHSA
-          items:
-            type: string
-            description: Filter by one or more vulnerability types. ANY (default) includes all types.
-            example: '["CVE","GHSA"]'
-            enum:
-            - MSC
-            - CVE
-            - ANY
-            - GHSA
-            - WS
-            - MAI
-        dateRange:
-          type: integer
-          description: Include only vulnerabilities first detected within the last N days. 0 or omitted means no date filter.
-          format: int32
-          example: 30
-        zeroDayIdentifier:
-          type: string
-          description: Scope the report to a specific zero-day event, by event UUID or name.
-    InventoryReportExportProjectDTOV3:
-      type: object
-      properties:
-        name:
-          type: string
-        format:
-          type: string
-          description: Output file format. The Inventory report supports excel, json and xml.
-          example: excel
-          enum:
-          - excel
-          - json
-          - xml
-        sendEmailNotification:
-          type: boolean
-    CreateUsersReportDTO:
+    CodeReportExportProcessDTOV3:
       type: object
       properties:
         name:
@@ -2020,74 +2441,74 @@ components:
           - text
         sendEmailNotification:
           type: boolean
-    EntityTreeDTO:
-      type: object
-      properties:
-        uuid:
+        labelsUuidList:
+          type: array
+          items:
+            type: string
+        excludeInactiveProjects:
+          type: boolean
+        exportMode:
           type: string
-        name:
+          enum:
+          - split
+          - fullPdf
+        complianceStandard:
           type: string
-        scopeUuid:
+        reportLevel:
           type: string
-        scopeName:
+        description:
           type: string
-    FindingsReportExportDTOV3:
+        additionalParams:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+    ResolvedReportExportProcessDTOV3:
       type: object
       properties:
         name:
           type: string
         format:
           type: string
-          description: Output file format. The Findings report supports excel, json and xml.
-          example: excel
           enum:
-          - excel
           - json
+          - html
+          - unknown
           - xml
+          - excel
+          - yaml
+          - pdf
+          - tv
+          - rdf
+          - csv
+          - sarif
+          - cbom
+          - text
         sendEmailNotification:
           type: boolean
-        projectUuids:
+        labelsUuidList:
           type: array
           items:
             type: string
-        vulnerabilitiesState:
-          type: array
-          description: Alert states to include. Defaults to [OPEN] when omitted.
-          example:
-          - OPEN
-          items:
-            type: string
-            description: Alert states to include. Defaults to [OPEN] when omitted.
-            example: '["OPEN"]'
-            enum:
-            - OPEN
-            - IGNORE
-        vulnerabilityTypes:
-          type: array
-          description: Filter by one or more vulnerability types. ANY (default) includes all types.
-          example:
-          - CVE
-          - GHSA
-          items:
-            type: string
-            description: Filter by one or more vulnerability types. ANY (default) includes all types.
-            example: '["CVE","GHSA"]'
-            enum:
-            - MSC
-            - CVE
-            - ANY
-            - GHSA
-            - WS
-            - MAI
-        dateRange:
-          type: integer
-          description: Include only vulnerabilities first detected within the last N days. 0 or omitted means no date filter.
-          format: int32
-          example: 30
-        zeroDayIdentifier:
+        excludeInactiveProjects:
+          type: boolean
+        exportMode:
           type: string
-          description: Scope the report to a specific zero-day event, by event UUID or name.
-    DWRResponseV3MessageDTO:
+          enum:
+          - split
+          - fullPdf
+        fromDate:
+          type: string
+        toDate:
+          type: string
+        additionalParams:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+    DWRResponseV3ReportExportProcessDTO:
       type: object
       properties:
         supportToken:
@@ -2095,7 +2516,75 @@ components:
           type: string
           example: 1171c60d
         response:
-          $ref: '#/components/schemas/MessageDTO'
+          $ref: '#/components/schemas/ReportExportProcessDTO'
+    AttributionReportExportDTOV3:
+      type: object
+      properties:
+        name:
+          type: string
+        format:
+          type: string
+          description: Output file format. The Attribution report supports json, html and text.
+          example: json
+          enum:
+          - json
+          - html
+          - text
+        sendEmailNotification:
+          type: boolean
+        projectUuids:
+          type: array
+          items:
+            type: string
+        licenses:
+          type: array
+          items:
+            type: string
+        primaryAttribute:
+          type: string
+        library:
+          type: string
+        groupBy:
+          type: string
+        header:
+          type: string
+        title:
+          type: string
+        footer:
+          type: string
+        licenseReference:
+          type: string
+        licenseTextPlacement:
+          type: string
+        selectedColumns:
+          type: array
+          items:
+            type: string
+        customAttribute:
+          type: string
+        includeSummary:
+          type: boolean
+        includeVersion:
+          type: boolean
+        hideEmptyFields:
+          type: boolean
+        groupByOrDefault:
+          type: string
+        licenseReferenceOrDefault:
+          type: string
+        licenseTextPlacementOrDefault:
+          type: string
+        selectedColumnsOrDefaultString:
+          type: string
+    DWRResponseV3UsersReportExportProcessDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          $ref: '#/components/schemas/UsersReportExportProcessDTO'
     AttributionImgReportExportDTO:
       type: object
       properties:
@@ -2224,555 +2713,7 @@ components:
             - PRIMARY_ATTRIBUTES
             - PACKAGE_NAME
             - PACKAGE_VERSION
-    AttributionReportExportProjectDTOV3:
-      type: object
-      properties:
-        name:
-          type: string
-        format:
-          type: string
-          description: Output file format. The Attribution report supports json, html and text.
-          example: json
-          enum:
-          - json
-          - html
-          - text
-        sendEmailNotification:
-          type: boolean
-        licenses:
-          type: array
-          items:
-            type: string
-        primaryAttribute:
-          type: string
-        library:
-          type: string
-        groupBy:
-          type: string
-        header:
-          type: string
-        title:
-          type: string
-        footer:
-          type: string
-        licenseReference:
-          type: string
-        licenseTextPlacement:
-          type: string
-        selectedColumns:
-          type: array
-          items:
-            type: string
-        customAttribute:
-          type: string
-        includeSummary:
-          type: boolean
-        includeVersion:
-          type: boolean
-        hideEmptyFields:
-          type: boolean
-        groupByOrDefault:
-          type: string
-        licenseReferenceOrDefault:
-          type: string
-        licenseTextPlacementOrDefault:
-          type: string
-        selectedColumnsOrDefaultString:
-          type: string
-    DueDiligenceReportExportDTOV3:
-      type: object
-      properties:
-        name:
-          type: string
-        format:
-          type: string
-          description: Output file format. The Due Diligence report supports excel, json and xml.
-          example: json
-          enum:
-          - excel
-          - json
-          - xml
-        sendEmailNotification:
-          type: boolean
-        projectUuids:
-          type: array
-          items:
-            type: string
-    DWRResponseV3ReportExportProcessDTOV3:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        response:
-          $ref: '#/components/schemas/ReportExportProcessDTOV3'
-    MessageDTO:
-      type: object
-      properties:
-        message:
-          title: message
-          type: string
-          example: Success!
-    DWRResponseV3UsersReportExportProcessDTO:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        response:
-          $ref: '#/components/schemas/UsersReportExportProcessDTO'
-    AttributionReportExportDTOV3:
-      type: object
-      properties:
-        name:
-          type: string
-        format:
-          type: string
-          description: Output file format. The Attribution report supports json, html and text.
-          example: json
-          enum:
-          - json
-          - html
-          - text
-        sendEmailNotification:
-          type: boolean
-        projectUuids:
-          type: array
-          items:
-            type: string
-        licenses:
-          type: array
-          items:
-            type: string
-        primaryAttribute:
-          type: string
-        library:
-          type: string
-        groupBy:
-          type: string
-        header:
-          type: string
-        title:
-          type: string
-        footer:
-          type: string
-        licenseReference:
-          type: string
-        licenseTextPlacement:
-          type: string
-        selectedColumns:
-          type: array
-          items:
-            type: string
-        customAttribute:
-          type: string
-        includeSummary:
-          type: boolean
-        includeVersion:
-          type: boolean
-        hideEmptyFields:
-          type: boolean
-        groupByOrDefault:
-          type: string
-        licenseReferenceOrDefault:
-          type: string
-        licenseTextPlacementOrDefault:
-          type: string
-        selectedColumnsOrDefaultString:
-          type: string
-    CreateProjectSbomReportDTOReport:
-      type: object
-      properties:
-        name:
-          type: string
-        format:
-          type: string
-          enum:
-          - json
-          - html
-          - unknown
-          - xml
-          - excel
-          - yaml
-          - pdf
-          - tv
-          - rdf
-          - csv
-          - sarif
-          - text
-        sendEmailNotification:
-          type: boolean
-        labelsUuidList:
-          type: array
-          items:
-            type: string
-        excludeInactiveProjects:
-          type: boolean
-        reportType:
-          type: string
-          enum:
-          - attribution
-          - inventory
-          - vulnerabilities
-          - securityAlerts
-          - sbom
-          - Cbom
-          - securityAlertsLibrary
-          - Compliance
-          - Findings
-          - Suppressions
-          - Resolved
-          - spdx
-          - spdx_2_3
-          - cycloneDX
-          - cycloneDX_1_5
-          - cycloneDX_1_6
-          - dueDiligence
-          - unknown
-          - imgAttribution
-          - imgDueDiligence
-          - imgSpdx
-          - imgSpdx_2_3
-          - imgCycloneDX
-          - imgCycloneDX_1_5
-          - aiInventory
-          - aiFindings
-          - imgCycloneDX_1_6
-          - risk
-          - users
-          - zeroDayCatalog
-          - activityLog
-        maxDepthLevel:
-          type: integer
-          format: int32
-        includeVulnerabilities:
-          type: boolean
-        isMlBomReport:
-          type: boolean
-          example: false
-    CreateProductSbomReportDTOReport:
-      type: object
-      properties:
-        name:
-          type: string
-        format:
-          type: string
-          enum:
-          - json
-          - html
-          - unknown
-          - xml
-          - excel
-          - yaml
-          - pdf
-          - tv
-          - rdf
-          - csv
-          - sarif
-          - text
-        sendEmailNotification:
-          type: boolean
-        labelsUuidList:
-          type: array
-          items:
-            type: string
-        excludeInactiveProjects:
-          type: boolean
-        projectUuids:
-          type: array
-          items:
-            type: string
-        reportType:
-          type: string
-          enum:
-          - attribution
-          - inventory
-          - vulnerabilities
-          - securityAlerts
-          - sbom
-          - Cbom
-          - securityAlertsLibrary
-          - Compliance
-          - Findings
-          - Suppressions
-          - Resolved
-          - spdx
-          - spdx_2_3
-          - cycloneDX
-          - cycloneDX_1_5
-          - cycloneDX_1_6
-          - dueDiligence
-          - unknown
-          - imgAttribution
-          - imgDueDiligence
-          - imgSpdx
-          - imgSpdx_2_3
-          - imgCycloneDX
-          - imgCycloneDX_1_5
-          - aiInventory
-          - aiFindings
-          - imgCycloneDX_1_6
-          - risk
-          - users
-          - zeroDayCatalog
-          - activityLog
-        maxDepthLevel:
-          type: integer
-          format: int32
-        includeVulnerabilities:
-          type: boolean
-        isMlBomReport:
-          type: boolean
-          example: false
-    CodeReportExportProcessDTOV3:
-      type: object
-      properties:
-        name:
-          type: string
-        format:
-          type: string
-          enum:
-          - json
-          - html
-          - unknown
-          - xml
-          - excel
-          - yaml
-          - pdf
-          - tv
-          - rdf
-          - csv
-          - sarif
-          - cbom
-          - text
-        sendEmailNotification:
-          type: boolean
-        labelsUuidList:
-          type: array
-          items:
-            type: string
-        excludeInactiveProjects:
-          type: boolean
-        exportMode:
-          type: string
-          enum:
-          - split
-          - fullPdf
-        complianceStandard:
-          type: string
-        reportLevel:
-          type: string
-        description:
-          type: string
-        additionalParams:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: string
-    CreateInventoryReportDTOV3:
-      type: object
-      properties:
-        name:
-          type: string
-        sendEmailNotification:
-          type: boolean
-        format:
-          type: string
-          enum:
-          - excel
-        search:
-          title: Search Query
-          type: string
-          description: "Filter your search to return items whose property has a specific value.\nUse the syntax: **[property][operator][value]**\n+ **Property**: the name of the property of the item\n+ **Operator**:\n    + **equals (==)** - Returns true if the value exactly matches this one. If the value contains a * character, it behaves like a wildcard (similar to the LIKE operator).\nExample: entity==abc* — will return true for entities like \"abcd\" and \"abc_123\".\n+ **Value**: the value of the property.\n\nLogical operators AND (;) and OR (,) are supported in filters — param1=in=(val1,val2) and (param2==val3 or param3==val4), can also be written as — param1=in=(val1,val2);(param2==val3,param3==val4)\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ libraryName: equals"
-          example: libraryName==*log4j*
-    RiskReportExportProjectDTOV3:
-      type: object
-      properties:
-        name:
-          type: string
-        format:
-          type: string
-          description: Output file format. The Risk report only supports pdf.
-          example: pdf
-          enum:
-          - pdf
-        sendEmailNotification:
-          type: boolean
-        exportMode:
-          type: string
-          description: Export mode. "split" (default) produces a ZIP (PDF summary + Excel CVE detail). "fullPdf" produces a single PDF, subject to a project-count threshold.
-          example: split
-          enum:
-          - split
-          - fullPdf
-    InventoryReportExportDTOV3:
-      type: object
-      properties:
-        name:
-          type: string
-        format:
-          type: string
-          description: Output file format. The Inventory report supports excel, json and xml.
-          example: excel
-          enum:
-          - excel
-          - json
-          - xml
-        sendEmailNotification:
-          type: boolean
-        projectUuids:
-          type: array
-          items:
-            type: string
-    CreateReportDTO:
-      type: object
-      properties:
-        name:
-          type: string
-        format:
-          type: string
-          enum:
-          - json
-          - html
-          - unknown
-          - xml
-          - excel
-          - yaml
-          - pdf
-          - tv
-          - rdf
-          - csv
-          - sarif
-          - cbom
-          - text
-        sendEmailNotification:
-          type: boolean
-        labelsUuidList:
-          type: array
-          items:
-            type: string
-        excludeInactiveProjects:
-          type: boolean
-        exportMode:
-          type: string
-          enum:
-          - split
-          - fullPdf
-        additionalParams:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: string
-    ResolvedReportExportProcessDTOV3:
-      type: object
-      properties:
-        name:
-          type: string
-        format:
-          type: string
-          enum:
-          - json
-          - html
-          - unknown
-          - xml
-          - excel
-          - yaml
-          - pdf
-          - tv
-          - rdf
-          - csv
-          - sarif
-          - cbom
-          - text
-        sendEmailNotification:
-          type: boolean
-        labelsUuidList:
-          type: array
-          items:
-            type: string
-        excludeInactiveProjects:
-          type: boolean
-        exportMode:
-          type: string
-          enum:
-          - split
-          - fullPdf
-        fromDate:
-          type: string
-        toDate:
-          type: string
-        additionalParams:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: string
-    CreateSecurityFindingsByLibraryReportDTOV3:
-      type: object
-      properties:
-        name:
-          type: string
-        sendEmailNotification:
-          type: boolean
-        format:
-          type: string
-          enum:
-          - excel
-        search:
-          title: Search Query
-          type: string
-          description: "Filter your search to return items whose property has a specific value.\nUse the syntax: **[property][operator][value]**\n+ **Property**: the name of the property of the item\n+ **Operator**:\n    + **equals (==)** - Returns true if the value exactly matches this one. If the value contains a * character, it behaves like a wildcard (similar to the LIKE operator).\nExample: entity==abc* — will return true for entities like \"abcd\" and \"abc_123\".\n+ **Value**: the value of the property.\n\nLogical operators AND (;) and OR (,) are supported in filters — param1=in=(val1,val2) and (param2==val3 or param3==val4), can also be written as — param1=in=(val1,val2);(param2==val3,param3==val4)\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ libraryName: equals"
-          example: libraryName==*log4j*
-        zeroDayIdentifier:
-          title: Zero-Day Identifier
-          type: string
-          description: UUID or Name of a Zero-Day Event
-          example: CanisterWorm Supply Chain Attack
-    RiskReportExportDTOV3:
-      type: object
-      properties:
-        name:
-          type: string
-        format:
-          type: string
-          description: Output file format. The Risk report only supports pdf.
-          example: pdf
-          enum:
-          - pdf
-        sendEmailNotification:
-          type: boolean
-        projectUuids:
-          type: array
-          items:
-            type: string
-        exportMode:
-          type: string
-          description: Export mode. "split" (default) produces a ZIP (PDF summary + Excel CVE detail). "fullPdf" produces a single PDF, subject to a project-count threshold.
-          example: split
-          enum:
-          - split
-          - fullPdf
-    DWRResponseV3ReportExportProcessDTO:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        response:
-          $ref: '#/components/schemas/ReportExportProcessDTO'
-    DWRResponseBase:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-    ReportExportProcessDTOV3:
+    ReportExportProcessDTO:
       type: object
       properties:
         uuid:
@@ -2842,10 +2783,18 @@ components:
           type: string
           enum:
           - organization
-          - application
+          - product
           - project
-          - account
           - unsupported
+          - account
+        scopeUuidList:
+          type: array
+          items:
+            type: string
+        projectUuids:
+          type: array
+          items:
+            type: string
         status:
           type: string
           enum:
@@ -2859,21 +2808,72 @@ components:
         createdAt:
           type: string
           format: date-time
-    DueDiligenceReportExportProjectDTOV3:
+        sendEmailNotification:
+          type: boolean
+        labelsUuidList:
+          type: array
+          items:
+            type: string
+        includeVulnerabilities:
+          type: boolean
+        excludeInactiveProjects:
+          type: boolean
+    FindingsReportExportDTOV3:
       type: object
       properties:
         name:
           type: string
         format:
           type: string
-          description: Output file format. The Due Diligence report supports excel, json and xml.
-          example: json
+          description: Output file format. The Findings report supports excel, json and xml.
+          example: excel
           enum:
           - excel
           - json
           - xml
         sendEmailNotification:
           type: boolean
+        projectUuids:
+          type: array
+          items:
+            type: string
+        vulnerabilitiesState:
+          type: array
+          description: Alert states to include. Defaults to [OPEN] when omitted.
+          example:
+          - OPEN
+          items:
+            type: string
+            description: Alert states to include. Defaults to [OPEN] when omitted.
+            example: '["OPEN"]'
+            enum:
+            - OPEN
+            - IGNORE
+        vulnerabilityTypes:
+          type: array
+          description: Filter by one or more vulnerability types. ANY (default) includes all types.
+          example:
+          - CVE
+          - GHSA
+          items:
+            type: string
+            description: Filter by one or more vulnerability types. ANY (default) includes all types.
+            example: '["CVE","GHSA"]'
+            enum:
+            - MSC
+            - CVE
+            - ANY
+            - GHSA
+            - WS
+            - MAI
+        dateRange:
+          type: integer
+          description: Include only vulnerabilities first detected within the last N days. 0 or omitted means no date filter.
+          format: int32
+          example: 30
+        zeroDayIdentifier:
+          type: string
+          description: Scope the report to a specific zero-day event, by event UUID or name.
   securitySchemes:
     bearer-key:
       type: http

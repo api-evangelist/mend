@@ -181,6 +181,27 @@ paths:
                 $ref: '#/components/schemas/DWRResponseBase'
 components:
   schemas:
+    MessageDTO:
+      type: object
+      properties:
+        message:
+          title: message
+          type: string
+          example: Success!
+    DomainLabelRequestDTO:
+      required:
+      - namespace
+      - value
+      type: object
+      properties:
+        namespace:
+          title: Label Namespace
+          type: string
+          example: Label Namespace A
+        value:
+          title: Label Value
+          type: string
+          example: Label Value A
     DWRResponseV3MessageDTO:
       type: object
       properties:
@@ -190,6 +211,13 @@ components:
           example: 1171c60d
         response:
           $ref: '#/components/schemas/MessageDTO'
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
     DWRResponsePageableV3ListOrganizationLabelDTOV3:
       type: object
       properties:
@@ -211,27 +239,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/OrganizationLabelDTOV3'
-    DomainLabelRequestDTO:
-      required:
-      - namespace
-      - value
-      type: object
-      properties:
-        namespace:
-          title: Label Namespace
-          type: string
-          example: Label Namespace A
-        value:
-          title: Label Value
-          type: string
-          example: Label Value A
-    MessageDTO:
-      type: object
-      properties:
-        message:
-          title: message
-          type: string
-          example: Success!
     OrganizationLabelRequestDTO:
       required:
       - namespace
@@ -271,13 +278,6 @@ components:
         id:
           type: integer
           format: int64
-    DWRResponseBase:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
   securitySchemes:
     bearer-key:
       type: http

@@ -549,31 +549,87 @@ paths:
                 $ref: '#/components/schemas/DWRResponseBase'
 components:
   schemas:
-    GroupRoleRequestDTOV3:
-      required:
-      - scopeType
-      - scopeUuid
+    DWRResponseV3GroupRoleDTOV3:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          $ref: '#/components/schemas/GroupRoleDTOV3'
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+    MessageDTO:
+      type: object
+      properties:
+        message:
+          title: message
+          type: string
+          example: Success!
+    GroupScopeMultiRoleDefinitionDTOV3:
       type: object
       properties:
         scopeUuid:
           type: string
-          example: 123e4567-e89b-12d3-a456-426655440000
+        scopeName:
+          type: string
         scopeType:
           type: string
-          example: organization
           enum:
           - organization
           - application
           - project
           - account
           - unsupported
-        role:
+        roleDefinitions:
+          type: array
+          items:
+            $ref: '#/components/schemas/RoleDefinitionDTOV3'
+    GroupSummaryDTOV3:
+      type: object
+      properties:
+        uuid:
+          title: Group UUID
           type: string
-          enum:
-          - ADMIN
-          - SCAN_MANAGER
-          - SECURITY_ANALYST
-          - MEMBER
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Group Name
+          type: string
+          example: Group A
+        description:
+          title: Group Description
+          type: string
+          example: Group description
+        users:
+          title: User Count
+          type: integer
+          description: The amount of users in that group
+          format: int32
+          example: 22
+        affectedApplications:
+          title: Affected Applications
+          type: integer
+          format: int32
+          example: 5
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupRoleDTOV3'
+    DWRResponseV3MessageDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          $ref: '#/components/schemas/MessageDTO'
     GroupWithRoleDefinitionsSummaryDTOV3:
       type: object
       properties:
@@ -604,39 +660,67 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/GroupScopeMultiRoleDefinitionDTOV3'
-    RoleDefinitionDTOV3:
+    CreateGroupRequestDTO:
+      required:
+      - description
+      - name
       type: object
       properties:
-        uuid:
-          type: string
         name:
+          title: Group Name
           type: string
+          example: Group A
         description:
+          title: Group Description
           type: string
-        type:
+          example: Group description
+    GroupRoleDTOV3:
+      type: object
+      properties:
+        scopeUuid:
           type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        scopeName:
+          title: Context Name
+          type: string
+          example: My Project
         scopeType:
           type: string
+          description: Type of entity the role will be associated with
+          example: organization
           enum:
           - organization
           - application
           - project
           - account
           - unsupported
-        createdBy:
+        role:
           type: string
-        createdAt:
+          enum:
+          - ADMIN
+          - SCAN_MANAGER
+          - SECURITY_ANALYST
+          - MEMBER
+    DWRResponseV3GroupDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
           type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
-        originalRole:
-          type: string
-        capabilities:
+          example: 1171c60d
+        response:
+          $ref: '#/components/schemas/GroupDTO'
+    UserEmailsRequestDTO:
+      required:
+      - userEmails
+      type: object
+      properties:
+        userEmails:
+          uniqueItems: true
           type: array
           items:
             type: string
+            example: jon.smith@mail.com
     MultipleGroupRolesPerContextDTOV3:
       required:
       - scopeType
@@ -671,150 +755,6 @@ components:
             - SCAN_MANAGER
             - SECURITY_ANALYST
             - MEMBER
-    DWRResponsePageableV3ListUserInfoDTO:
-      type: object
-      properties:
-        additionalData:
-          title: Provides insights into endpoint-supported pagination information.
-          type: object
-          description: '+ **totalItems**: The total count of data points returned in an API response.
-
-            '
-          example:
-            totalItems: '422'
-            next: http://someUrl?cursor=3
-            cursor: 3
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        response:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserInfoDTO'
-    DWRResponseV3GroupRoleDTOV3:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        response:
-          $ref: '#/components/schemas/GroupRoleDTOV3'
-    DWRResponseV3MessageDTO:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        response:
-          $ref: '#/components/schemas/MessageDTO'
-    DWRResponsePageableV3ListMultipleGroupRolesPerContextDTOV3:
-      type: object
-      properties:
-        additionalData:
-          title: Provides insights into endpoint-supported pagination information.
-          type: object
-          description: '+ **totalItems**: The total count of data points returned in an API response.
-
-            '
-          example:
-            totalItems: '422'
-            next: http://someUrl?cursor=3
-            cursor: 3
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        response:
-          type: array
-          items:
-            $ref: '#/components/schemas/MultipleGroupRolesPerContextDTOV3'
-    MessageDTO:
-      type: object
-      properties:
-        message:
-          title: message
-          type: string
-          example: Success!
-    UpdateGroupRequestDTO:
-      type: object
-      properties:
-        name:
-          title: Group Name
-          type: string
-          example: Group A
-        description:
-          title: Group Description
-          type: string
-          example: Group description
-      description: DTO for updating an existing group
-    CreateGroupRequestDTO:
-      required:
-      - description
-      - name
-      type: object
-      properties:
-        name:
-          title: Group Name
-          type: string
-          example: Group A
-        description:
-          title: Group Description
-          type: string
-          example: Group description
-    DWRResponsePageableV3ListGroupSummaryDTOV3:
-      type: object
-      properties:
-        additionalData:
-          title: Provides insights into endpoint-supported pagination information.
-          type: object
-          description: '+ **totalItems**: The total count of data points returned in an API response.
-
-            '
-          example:
-            totalItems: '422'
-            next: http://someUrl?cursor=3
-            cursor: 3
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        response:
-          type: array
-          items:
-            $ref: '#/components/schemas/GroupSummaryDTOV3'
-    GroupSummaryDTOV3:
-      type: object
-      properties:
-        uuid:
-          title: Group UUID
-          type: string
-          example: 123e4567-e89b-12d3-a456-426655440000
-        name:
-          title: Group Name
-          type: string
-          example: Group A
-        description:
-          title: Group Description
-          type: string
-          example: Group description
-        users:
-          title: User Count
-          type: integer
-          description: The amount of users in that group
-          format: int32
-          example: 22
-        affectedApplications:
-          title: Affected Applications
-          type: integer
-          format: int32
-          example: 5
-        roles:
-          type: array
-          items:
-            $ref: '#/components/schemas/GroupRoleDTOV3'
     GroupDTO:
       type: object
       properties:
@@ -835,39 +775,28 @@ components:
           type: integer
           format: int32
           example: 22
-    GroupRoleDTOV3:
+    UpdateGroupRequestDTO:
       type: object
       properties:
-        scopeUuid:
+        name:
+          title: Group Name
           type: string
-          example: 123e4567-e89b-12d3-a456-426655440000
-        scopeName:
-          title: Context Name
+          example: Group A
+        description:
+          title: Group Description
           type: string
-          example: My Project
-        scopeType:
-          type: string
-          description: Type of entity the role will be associated with
-          example: organization
-          enum:
-          - organization
-          - application
-          - project
-          - account
-          - unsupported
-        role:
-          type: string
-          enum:
-          - ADMIN
-          - SCAN_MANAGER
-          - SECURITY_ANALYST
-          - MEMBER
-    GroupScopeMultiRoleDefinitionDTOV3:
+          example: Group description
+      description: DTO for updating an existing group
+    RoleDefinitionDTOV3:
       type: object
       properties:
-        scopeUuid:
+        uuid:
           type: string
-        scopeName:
+        name:
+          type: string
+        description:
+          type: string
+        type:
           type: string
         scopeType:
           type: string
@@ -877,10 +806,20 @@ components:
           - project
           - account
           - unsupported
-        roleDefinitions:
+        createdBy:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        originalRole:
+          type: string
+        capabilities:
           type: array
           items:
-            $ref: '#/components/schemas/RoleDefinitionDTOV3'
+            type: string
     UserInfoDTO:
       required:
       - uuid
@@ -912,33 +851,48 @@ components:
           - ACTIVE
           - INACTIVE
           - LOCKOUT
-    UserEmailsRequestDTO:
-      required:
-      - userEmails
+    DWRResponsePageableV3ListGroupSummaryDTOV3:
       type: object
       properties:
-        userEmails:
-          uniqueItems: true
-          type: array
-          items:
-            type: string
-            example: jon.smith@mail.com
-    DWRResponseBase:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-    DWRResponseV3GroupDTO:
-      type: object
-      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            '
+          example:
+            totalItems: '422'
+            next: http://someUrl?cursor=3
+            cursor: 3
         supportToken:
           title: Support Token
           type: string
           example: 1171c60d
         response:
-          $ref: '#/components/schemas/GroupDTO'
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupSummaryDTOV3'
+    DWRResponsePageableV3ListMultipleGroupRolesPerContextDTOV3:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            '
+          example:
+            totalItems: '422'
+            next: http://someUrl?cursor=3
+            cursor: 3
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          type: array
+          items:
+            $ref: '#/components/schemas/MultipleGroupRolesPerContextDTOV3'
     DWRResponsePageableV3ListGroupWithRoleDefinitionsSummaryDTOV3:
       type: object
       properties:
@@ -960,6 +914,52 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/GroupWithRoleDefinitionsSummaryDTOV3'
+    DWRResponsePageableV3ListUserInfoDTO:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            '
+          example:
+            totalItems: '422'
+            next: http://someUrl?cursor=3
+            cursor: 3
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserInfoDTO'
+    GroupRoleRequestDTOV3:
+      required:
+      - scopeType
+      - scopeUuid
+      type: object
+      properties:
+        scopeUuid:
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        scopeType:
+          type: string
+          example: organization
+          enum:
+          - organization
+          - application
+          - project
+          - account
+          - unsupported
+        role:
+          type: string
+          enum:
+          - ADMIN
+          - SCAN_MANAGER
+          - SECURITY_ANALYST
+          - MEMBER
   securitySchemes:
     bearer-key:
       type: http

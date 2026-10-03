@@ -216,15 +216,6 @@ paths:
                 $ref: '#/components/schemas/DWRResponseBase'
 components:
   schemas:
-    DWRResponseV3MessageDTO:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        response:
-          $ref: '#/components/schemas/MessageDTO'
     UserInfoDTOV3:
       required:
       - uuid
@@ -258,15 +249,34 @@ components:
           - ACTIVE
           - INVITED
           - DISABLED
-    DWRResponseV3UserInfoResponseDTO:
+    MessageDTO:
       type: object
       properties:
+        message:
+          title: message
+          type: string
+          example: Success!
+    DWRResponsePageableV3ListUserInfoDTOV3:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            '
+          example:
+            totalItems: '422'
+            next: http://someUrl?cursor=3
+            cursor: 3
         supportToken:
           title: Support Token
           type: string
           example: 1171c60d
         response:
-          $ref: '#/components/schemas/UserInfoResponseDTO'
+          type: array
+          items:
+            $ref: '#/components/schemas/UserInfoDTOV3'
     UserInfoResponseDTO:
       required:
       - uuid
@@ -294,13 +304,24 @@ components:
           - SCAN_SUMMARY_RECEIVER
         existsInOrg:
           type: boolean
-    MessageDTO:
+    DWRResponseV3MessageDTO:
       type: object
       properties:
-        message:
-          title: message
+        supportToken:
+          title: Support Token
           type: string
-          example: Success!
+          example: 1171c60d
+        response:
+          $ref: '#/components/schemas/MessageDTO'
+    DWRResponseV3UserInfoResponseDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          $ref: '#/components/schemas/UserInfoResponseDTO'
     DWRResponseBase:
       type: object
       properties:
@@ -308,36 +329,6 @@ components:
           title: Support Token
           type: string
           example: 1171c60d
-    DWRResponsePageableV3ListUserInfoDTOV3:
-      type: object
-      properties:
-        additionalData:
-          title: Provides insights into endpoint-supported pagination information.
-          type: object
-          description: '+ **totalItems**: The total count of data points returned in an API response.
-
-            '
-          example:
-            totalItems: '422'
-            next: http://someUrl?cursor=3
-            cursor: 3
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        response:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserInfoDTOV3'
-    DWRResponseV3Boolean:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        response:
-          type: boolean
     InviteUserRequestDTO:
       required:
       - email
@@ -347,6 +338,15 @@ components:
           title: New User Email
           type: string
           example: jon.smith@mail.com
+    DWRResponseV3Boolean:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          type: boolean
   securitySchemes:
     bearer-key:
       type: http
