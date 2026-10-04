@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mend/main/json-schema/mend-multi-context-request-dtov3-schema.json",
+  "title": "MultiContextRequestDTOV3",
+  "description": "If projectUuids and applicationUuids are empty, action will apply to the whole organization, Provides the requested statistics for all projects that match at least one of the given identifiers.",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mend-applications-api-openapi.yml#/components/schemas/MultiContextRequestDTOV3",
+  "type": "object",
+  "properties": {
+    "applicationUuids": {
+      "type": "array",
+      "items": {
+        "title": "Application UUIDs",
+        "type": "string"
+      }
+    },
+    "projectUuids": {
+      "type": "array",
+      "items": {
+        "title": "Project UUIDs",
+        "type": "string"
+      }
+    }
+  }
+}

@@ -1,0 +1,667 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mend/main/json-schema/mend-policy-request-dto-schema.json",
+  "title": "PolicyRequestDTO",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mend-policies-organization-api-openapi.yml#/components/schemas/PolicyRequestDTO",
+  "required": [
+    "action",
+    "filter",
+    "name"
+  ],
+  "type": "object",
+  "properties": {
+    "name": {
+      "title": "Policy Name",
+      "type": "string"
+    },
+    "filter": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/$defs/GAV_REGEX"
+        },
+        {
+          "$ref": "#/$defs/LIBRARY_REQUEST_HISTORY"
+        },
+        {
+          "$ref": "#/$defs/LIBRARY_STALENESS"
+        },
+        {
+          "$ref": "#/$defs/LICENSE"
+        },
+        {
+          "$ref": "#/$defs/PRIMARY_ATTRIBUTE_VALUE"
+        },
+        {
+          "$ref": "#/$defs/PRODUCT"
+        },
+        {
+          "$ref": "#/$defs/ReferenceNameRequiredException"
+        },
+        {
+          "$ref": "#/$defs/EFFECTIVENESS"
+        },
+        {
+          "$ref": "#/$defs/VULNERABILITY_SCORE"
+        }
+      ]
+    },
+    "action": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/APPROVE"
+        },
+        {
+          "$ref": "#/$defs/CONDITIONS"
+        },
+        {
+          "$ref": "#/$defs/CREATE_ISSUE"
+        },
+        {
+          "$ref": "#/$defs/REASSIGN"
+        },
+        {
+          "$ref": "#/$defs/REJECT"
+        }
+      ]
+    },
+    "enabled": {
+      "title": "Enabled",
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "$defs": {
+    "APPROVE": {
+      "type": "object",
+      "description": "type: APPROVE",
+      "allOf": [
+        {
+          "$ref": "#/$defs/BasePolicyActionDTO"
+        }
+      ]
+    },
+    "BasePolicyActionDTO": {
+      "required": [
+        "type"
+      ],
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "CONDITIONS": {
+      "type": "object",
+      "description": "type: CONDITIONS",
+      "allOf": [
+        {
+          "$ref": "#/$defs/BasePolicyActionDTO"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "approveWhenAllSatisfied": {
+              "title": "Approve When All Satisfied",
+              "type": "boolean",
+              "default": false
+            },
+            "rejectWhenOneRejected": {
+              "title": "Reject When One Condition is Rejected",
+              "type": "boolean",
+              "default": false
+            },
+            "conditions": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/ConditionInfo"
+              }
+            },
+            "failPolicyCheck": {
+              "title": "Fail Policy Check",
+              "type": "boolean",
+              "default": false
+            }
+          }
+        }
+      ]
+    },
+    "CREATE_ISSUE": {
+      "required": [
+        "issueTrackerType"
+      ],
+      "type": "object",
+      "description": "type: CREATE_ISSUE",
+      "allOf": [
+        {
+          "$ref": "#/$defs/BasePolicyActionDTO"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "failPolicyCheck": {
+              "title": "Fail Policy Check",
+              "type": "boolean",
+              "default": false
+            },
+            "issueTrackerType": {
+              "title": "Issue Tracker Type",
+              "type": "string",
+              "enum": [
+                "COMMON_ISSUE_TRACKER"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "ConditionInfo": {
+      "required": [
+        "conditionText",
+        "duePeriod"
+      ],
+      "type": "object",
+      "properties": {
+        "duty": {
+          "type": "string",
+          "enum": [
+            "REQUESTER",
+            "APPROVER"
+          ]
+        },
+        "user": {
+          "$ref": "#/$defs/PolicyUserDTO"
+        },
+        "group": {
+          "$ref": "#/$defs/PolicyGroupDTO"
+        },
+        "conditionText": {
+          "title": "Condition Description",
+          "type": "string"
+        },
+        "duePeriod": {
+          "title": "Due Period",
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "description": "Condition will apply to duty or user or group"
+    },
+    "EFFECTIVENESS": {
+      "required": [
+        "shieldValue"
+      ],
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "shieldValue": {
+          "title": "Effective Value",
+          "type": "string",
+          "enum": [
+            "RED",
+            "YELLOW",
+            "GREY",
+            "NO_SHIELD",
+            "GREEN"
+          ]
+        }
+      },
+      "description": "type: EFFECTIVENESS"
+    },
+    "GAV_REGEX": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "groupIdRegex": {
+          "title": "Group Id Regex",
+          "type": "string"
+        },
+        "artifactIdRegex": {
+          "title": "Artifact Id Regex",
+          "type": "string"
+        },
+        "versionRegex": {
+          "title": "Version Regex",
+          "type": "string"
+        }
+      },
+      "description": "type: GAV_REGEX"
+    },
+    "LIBRARY_REQUEST_HISTORY": {
+      "required": [
+        "libraryRequestHistory"
+      ],
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "libraryRequestHistory": {
+          "title": "Library Request History",
+          "type": "string",
+          "enum": [
+            "APPROVED_AT_LEAST_ONCE",
+            "APPROVED_AT_LEAST_ONCE_OR_PENDING",
+            "REJECTED_AT_LEAST_ONCE",
+            "REJECTED_AT_LEAST_ONCE_OR_PENDING",
+            "PENDING"
+          ]
+        }
+      },
+      "description": "type: LIBRARY_REQUEST_HISTORY"
+    },
+    "LIBRARY_STALENESS": {
+      "required": [
+        "monthsBack"
+      ],
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "monthsBack": {
+          "title": "Months Back",
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "description": "type: LIBRARY_STALENESS"
+    },
+    "LICENSE": {
+      "required": [
+        "licenses"
+      ],
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "licenses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/PolicyLicenseDTO"
+          }
+        },
+        "inclusive": {
+          "title": "Inclusive",
+          "type": "boolean",
+          "description": "Trigger only when ALL licenses of the library are matched"
+        }
+      },
+      "description": "type: LICENSE"
+    },
+    "PRIMARY_ATTRIBUTE_VALUE": {
+      "required": [
+        "attributeValue"
+      ],
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "attributeValue": {
+          "title": "Attribute Value",
+          "type": "string"
+        }
+      },
+      "description": "type: PRIMARY_ATTRIBUTE_VALUE"
+    },
+    "PRODUCT": {
+      "required": [
+        "productToken"
+      ],
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "productToken": {
+          "title": "Product Token",
+          "type": "string"
+        },
+        "productName": {
+          "title": "Product Name",
+          "type": "string",
+          "description": "product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**)."
+        }
+      },
+      "description": "type: PRODUCT"
+    },
+    "PolicyGroupDTO": {
+      "required": [
+        "uuid"
+      ],
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "title": "Group Uuid",
+          "type": "string"
+        },
+        "name": {
+          "title": "Group Name",
+          "type": "string"
+        }
+      }
+    },
+    "PolicyLicenseDTO": {
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "title": "License Uuid",
+          "type": "string"
+        },
+        "name": {
+          "title": "License Name",
+          "type": "string"
+        }
+      }
+    },
+    "PolicyUserDTO": {
+      "required": [
+        "uuid"
+      ],
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "title": "User Uuid",
+          "type": "string"
+        },
+        "name": {
+          "title": "User Name",
+          "type": "string"
+        },
+        "email": {
+          "title": "User Name",
+          "type": "string"
+        }
+      }
+    },
+    "REASSIGN": {
+      "type": "object",
+      "description": "type: REASSIGN",
+      "allOf": [
+        {
+          "$ref": "#/$defs/BasePolicyActionDTO"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "user": {
+              "$ref": "#/$defs/PolicyUserDTO"
+            },
+            "group": {
+              "$ref": "#/$defs/PolicyGroupDTO"
+            },
+            "failPolicyCheck": {
+              "title": "Fail Policy Check",
+              "type": "boolean",
+              "default": false
+            }
+          }
+        }
+      ]
+    },
+    "REJECT": {
+      "type": "object",
+      "description": "type: REJECT",
+      "allOf": [
+        {
+          "$ref": "#/$defs/BasePolicyActionDTO"
+        }
+      ]
+    },
+    "ReferenceNameRequiredException": {
+      "type": "object",
+      "properties": {
+        "cause": {
+          "type": "object",
+          "properties": {
+            "stackTrace": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "classLoaderName": {
+                    "type": "string"
+                  },
+                  "moduleName": {
+                    "type": "string"
+                  },
+                  "moduleVersion": {
+                    "type": "string"
+                  },
+                  "methodName": {
+                    "type": "string"
+                  },
+                  "fileName": {
+                    "type": "string"
+                  },
+                  "lineNumber": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "className": {
+                    "type": "string"
+                  },
+                  "nativeMethod": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            },
+            "message": {
+              "type": "string"
+            },
+            "suppressed": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "stackTrace": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "classLoaderName": {
+                          "type": "string"
+                        },
+                        "moduleName": {
+                          "type": "string"
+                        },
+                        "moduleVersion": {
+                          "type": "string"
+                        },
+                        "methodName": {
+                          "type": "string"
+                        },
+                        "fileName": {
+                          "type": "string"
+                        },
+                        "lineNumber": {
+                          "type": "integer",
+                          "format": "int32"
+                        },
+                        "className": {
+                          "type": "string"
+                        },
+                        "nativeMethod": {
+                          "type": "boolean"
+                        }
+                      }
+                    }
+                  },
+                  "message": {
+                    "type": "string"
+                  },
+                  "localizedMessage": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "localizedMessage": {
+              "type": "string"
+            }
+          }
+        },
+        "stackTrace": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "classLoaderName": {
+                "type": "string"
+              },
+              "moduleName": {
+                "type": "string"
+              },
+              "moduleVersion": {
+                "type": "string"
+              },
+              "methodName": {
+                "type": "string"
+              },
+              "fileName": {
+                "type": "string"
+              },
+              "lineNumber": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "className": {
+                "type": "string"
+              },
+              "nativeMethod": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "requestId": {
+          "type": "string"
+        },
+        "errorCode": {
+          "type": "string"
+        },
+        "errorType": {
+          "type": "string",
+          "enum": [
+            "Client",
+            "Service",
+            "Unknown"
+          ]
+        },
+        "errorMessage": {
+          "type": "string"
+        },
+        "statusCode": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "serviceName": {
+          "type": "string"
+        },
+        "httpHeaders": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "rawResponse": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "byte"
+          }
+        },
+        "rawResponseContent": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "retryable": {
+          "type": "boolean"
+        },
+        "suppressed": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "stackTrace": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "classLoaderName": {
+                      "type": "string"
+                    },
+                    "moduleName": {
+                      "type": "string"
+                    },
+                    "moduleVersion": {
+                      "type": "string"
+                    },
+                    "methodName": {
+                      "type": "string"
+                    },
+                    "fileName": {
+                      "type": "string"
+                    },
+                    "lineNumber": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "className": {
+                      "type": "string"
+                    },
+                    "nativeMethod": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              },
+              "message": {
+                "type": "string"
+              },
+              "localizedMessage": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "localizedMessage": {
+          "type": "string"
+        }
+      }
+    },
+    "VULNERABILITY_SCORE": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "from": {
+          "type": "number",
+          "format": "float"
+        },
+        "to": {
+          "type": "number",
+          "format": "float"
+        }
+      },
+      "description": "type: VULNERABILITY_SCORE"
+    }
+  }
+}

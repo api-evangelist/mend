@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mend/main/json-schema/mend-dwrresponse-context-entity-dto-schema.json",
+  "title": "DWRResponseContextEntityDTO",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mend-entities-product-api-openapi.yml#/components/schemas/DWRResponseContextEntityDTO",
+  "type": "object",
+  "properties": {
+    "supportToken": {
+      "title": "Support Token",
+      "type": "string"
+    },
+    "retVal": {
+      "$ref": "#/$defs/ContextEntityDTO"
+    }
+  },
+  "$defs": {
+    "ContextEntityDTO": {
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "title": "Context Uuid",
+          "type": "string"
+        },
+        "name": {
+          "title": "Context Name",
+          "type": "string"
+        }
+      }
+    }
+  }
+}

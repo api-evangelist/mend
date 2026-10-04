@@ -1,0 +1,556 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mend/main/json-schema/mend-dwrresponse-pageable-collection-legal-and-compliance-alert-base-dto-schema.json",
+  "title": "DWRResponsePageableCollectionLegalAndComplianceAlertBaseDTO",
+  "description": "Provides insights into endpoint-supported pagination information",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mend-alerts-product-api-openapi.yml#/components/schemas/DWRResponsePageableCollectionLegalAndComplianceAlertBaseDTO",
+  "type": "object",
+  "properties": {
+    "additionalData": {
+      "title": "Provides insights into endpoint-supported pagination information.",
+      "type": "object",
+      "description": "+ **totalItems**: The total count of data points returned in an API response.\n+ **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining."
+    },
+    "supportToken": {
+      "title": "Support Token",
+      "type": "string"
+    },
+    "retVal": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/LegalAndComplianceAlertBaseDTO"
+      }
+    }
+  },
+  "$defs": {
+    "AlertInfoDTO": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "title": "Alert Status",
+          "type": "string",
+          "enum": [
+            "ACTIVE",
+            "IGNORED",
+            "LIBRARY_REMOVED",
+            "LIBRARY_IN_HOUSE",
+            "LIBRARY_WHITELIST"
+          ]
+        },
+        "comment": {
+          "$ref": "#/$defs/UserCommentDTO"
+        },
+        "detectedAt": {
+          "title": "Alert Detection Date",
+          "type": "string",
+          "format": "date-time"
+        },
+        "modifiedAt": {
+          "title": "Alert Modification Date",
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "BaseComponentDTO": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "title": "Component UUID",
+          "type": "string"
+        },
+        "name": {
+          "title": "Component Name",
+          "type": "string"
+        },
+        "description": {
+          "title": "Component Description",
+          "type": "string"
+        },
+        "componentType": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "libraryType": {
+          "title": "Library Type",
+          "type": "string"
+        },
+        "directDependency": {
+          "title": "Direct Dependency",
+          "type": "boolean"
+        },
+        "dependencyType": {
+          "title": "Dependency Type",
+          "type": "string"
+        },
+        "references": {
+          "$ref": "#/$defs/ComponentReferencesDTO"
+        },
+        "groupId": {
+          "title": "Component Name",
+          "type": "string"
+        },
+        "artifactId": {
+          "title": "Component Artifact",
+          "type": "string"
+        },
+        "version": {
+          "title": "Component Version",
+          "type": "string"
+        },
+        "dependencyFile": {
+          "type": "string"
+        },
+        "localPath": {
+          "type": "string"
+        }
+      },
+      "anyOf": [
+        {
+          "$ref": "#/$defs/LibraryComponentDTO"
+        },
+        {
+          "$ref": "#/$defs/SourceFileComponentDTO"
+        }
+      ]
+    },
+    "ComponentReferencesDTO": {
+      "title": "Component References",
+      "type": "object",
+      "properties": {
+        "url": {
+          "title": "Reference Url",
+          "type": "string"
+        },
+        "homePage": {
+          "title": "Reference Home Page",
+          "type": "string"
+        },
+        "downloadLink": {
+          "title": "Reference Download Link",
+          "type": "string"
+        },
+        "issueUrl": {
+          "title": "Reference Issue Url",
+          "type": "string"
+        },
+        "pomUrl": {
+          "title": "Reference Pom Url",
+          "type": "string"
+        },
+        "scmUrl": {
+          "title": "Reference Scm Url",
+          "type": "string"
+        },
+        "genericPackageIndex": {
+          "title": "Reference Generic Package Index",
+          "type": "string"
+        },
+        "nugetGallery": {
+          "title": "Reference Nugget Gallery",
+          "type": "string"
+        },
+        "tags": {
+          "title": "Reference Tags",
+          "type": "string"
+        },
+        "copyright": {
+          "title": "Reference Copyright",
+          "type": "string"
+        },
+        "hasNotice": {
+          "title": "Reference Has Notice",
+          "type": "boolean"
+        }
+      }
+    },
+    "LegalAndComplianceAlertBaseDTO": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "title": "Alert Uuid",
+          "type": "string"
+        },
+        "name": {
+          "title": "Alert Name",
+          "type": "string",
+          "description": "Identifier of the alert, changes based on alert type"
+        },
+        "type": {
+          "type": "string"
+        },
+        "alertInfo": {
+          "$ref": "#/$defs/AlertInfoDTO"
+        },
+        "project": {
+          "$ref": "#/$defs/ProjectDTO"
+        },
+        "product": {
+          "$ref": "#/$defs/ProductDTO"
+        },
+        "component": {
+          "$ref": "#/$defs/BaseComponentDTO"
+        }
+      },
+      "anyOf": [
+        {
+          "$ref": "#/$defs/PolicyViolationAlertDTO"
+        },
+        {
+          "$ref": "#/$defs/NewVersionAlertDTO"
+        },
+        {
+          "$ref": "#/$defs/RejectedLibraryInUseAlertDTO"
+        },
+        {
+          "$ref": "#/$defs/MultipleLicensesAlertDTO"
+        }
+      ]
+    },
+    "LibraryComponentDTO": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "title": "Component UUID",
+          "type": "string"
+        },
+        "name": {
+          "title": "Component Name",
+          "type": "string"
+        },
+        "description": {
+          "title": "Component Description",
+          "type": "string"
+        },
+        "componentType": {
+          "title": "Component Type",
+          "type": "string",
+          "enum": [
+            "Library"
+          ]
+        },
+        "type": {
+          "type": "string"
+        },
+        "libraryType": {
+          "title": "Library Type",
+          "type": "string"
+        },
+        "directDependency": {
+          "title": "Direct Dependency",
+          "type": "boolean"
+        },
+        "dependencyType": {
+          "title": "Dependency Type",
+          "type": "string"
+        },
+        "references": {
+          "$ref": "#/$defs/ComponentReferencesDTO"
+        },
+        "groupId": {
+          "title": "Component Name",
+          "type": "string"
+        },
+        "artifactId": {
+          "title": "Component Artifact",
+          "type": "string"
+        },
+        "version": {
+          "title": "Component Version",
+          "type": "string"
+        },
+        "dependencyFile": {
+          "type": "string"
+        },
+        "localPath": {
+          "type": "string"
+        }
+      }
+    },
+    "MultipleLicensesAlertDTO": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "title": "Alert Uuid",
+          "type": "string"
+        },
+        "name": {
+          "title": "Alert Name",
+          "type": "string",
+          "description": "Identifier of the alert, changes based on alert type"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "MULTIPLE_LICENSES"
+          ]
+        },
+        "alertInfo": {
+          "$ref": "#/$defs/AlertInfoDTO"
+        },
+        "project": {
+          "$ref": "#/$defs/ProjectDTO"
+        },
+        "product": {
+          "$ref": "#/$defs/ProductDTO"
+        },
+        "component": {
+          "$ref": "#/$defs/BaseComponentDTO"
+        },
+        "numberOfLicenses": {
+          "title": "Number Of Licenses",
+          "type": "integer",
+          "format": "int32"
+        },
+        "licenses": {
+          "type": "array",
+          "items": {
+            "title": "Licenses",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "NewVersionAlertDTO": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "title": "Alert Uuid",
+          "type": "string"
+        },
+        "name": {
+          "title": "Alert Name",
+          "type": "string",
+          "description": "Identifier of the alert, changes based on alert type"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "NEW_VERSION"
+          ]
+        },
+        "alertInfo": {
+          "$ref": "#/$defs/AlertInfoDTO"
+        },
+        "project": {
+          "$ref": "#/$defs/ProjectDTO"
+        },
+        "product": {
+          "$ref": "#/$defs/ProductDTO"
+        },
+        "component": {
+          "$ref": "#/$defs/BaseComponentDTO"
+        },
+        "availableVersion": {
+          "title": "Available Version",
+          "type": "string"
+        },
+        "availableVersionType": {
+          "title": "Version Type",
+          "type": "string",
+          "enum": [
+            "MAJOR",
+            "MINOR"
+          ]
+        }
+      }
+    },
+    "PolicyViolationAlertDTO": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "title": "Alert Uuid",
+          "type": "string"
+        },
+        "name": {
+          "title": "Alert Name",
+          "type": "string",
+          "description": "Identifier of the alert, changes based on alert type"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "POLICY_VIOLATIONS"
+          ]
+        },
+        "alertInfo": {
+          "$ref": "#/$defs/AlertInfoDTO"
+        },
+        "project": {
+          "$ref": "#/$defs/ProjectDTO"
+        },
+        "product": {
+          "$ref": "#/$defs/ProductDTO"
+        },
+        "component": {
+          "$ref": "#/$defs/BaseComponentDTO"
+        },
+        "policyName": {
+          "title": "Policy Name",
+          "type": "string"
+        }
+      }
+    },
+    "ProductDTO": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "title": "Product Uuid",
+          "type": "string"
+        },
+        "name": {
+          "title": "Product Name",
+          "type": "string"
+        }
+      }
+    },
+    "ProjectDTO": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "title": "Project UUID",
+          "type": "string"
+        },
+        "name": {
+          "title": "Project Name",
+          "type": "string"
+        },
+        "path": {
+          "title": "Product Name",
+          "type": "string"
+        },
+        "productName": {
+          "title": "Product Name",
+          "type": "string"
+        },
+        "productUuid": {
+          "title": "Product Uuid",
+          "type": "string"
+        }
+      }
+    },
+    "RejectedLibraryInUseAlertDTO": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "title": "Alert Uuid",
+          "type": "string"
+        },
+        "name": {
+          "title": "Alert Name",
+          "type": "string",
+          "description": "Identifier of the alert, changes based on alert type"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "REJECTED_LIBRARY_IN_USE"
+          ]
+        },
+        "alertInfo": {
+          "$ref": "#/$defs/AlertInfoDTO"
+        },
+        "project": {
+          "$ref": "#/$defs/ProjectDTO"
+        },
+        "product": {
+          "$ref": "#/$defs/ProductDTO"
+        },
+        "component": {
+          "$ref": "#/$defs/BaseComponentDTO"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        }
+      }
+    },
+    "SourceFileComponentDTO": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "title": "Component UUID",
+          "type": "string"
+        },
+        "name": {
+          "title": "Component Name",
+          "type": "string"
+        },
+        "description": {
+          "title": "Component Description",
+          "type": "string"
+        },
+        "componentType": {
+          "title": "Component Type",
+          "type": "string",
+          "enum": [
+            "Source File"
+          ]
+        },
+        "type": {
+          "type": "string"
+        },
+        "libraryType": {
+          "title": "Library Type",
+          "type": "string"
+        },
+        "directDependency": {
+          "title": "Direct Dependency",
+          "type": "boolean"
+        },
+        "dependencyType": {
+          "title": "Dependency Type",
+          "type": "string"
+        },
+        "references": {
+          "$ref": "#/$defs/ComponentReferencesDTO"
+        },
+        "groupId": {
+          "title": "Component Name",
+          "type": "string"
+        },
+        "artifactId": {
+          "title": "Component Artifact",
+          "type": "string"
+        },
+        "version": {
+          "title": "Component Version",
+          "type": "string"
+        },
+        "dependencyFile": {
+          "type": "string"
+        },
+        "localPath": {
+          "type": "string"
+        }
+      }
+    },
+    "UserCommentDTO": {
+      "type": "object",
+      "properties": {
+        "comment": {
+          "title": "Comment",
+          "type": "string"
+        },
+        "date": {
+          "title": "comment date",
+          "type": "string",
+          "format": "date-time"
+        },
+        "userEmail": {
+          "title": "User Email",
+          "type": "string"
+        },
+        "username": {
+          "title": "User Email",
+          "type": "string"
+        }
+      }
+    }
+  }
+}

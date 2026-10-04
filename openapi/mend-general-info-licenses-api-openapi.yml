@@ -90,6 +90,41 @@ paths:
                 $ref: '#/components/schemas/DWRResponseBase'
 components:
   schemas:
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+    DWRResponseLicenseDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/LicenseDTO'
+    DescriptionAndExplanationDTO:
+      type: object
+      properties:
+        explanation:
+          title: Explanation Link
+          type: string
+          example: http://en.wikipedia.org/wiki/Academic_Free_License
+        indicatingText:
+          title: Indicating Text
+          type: string
+          example: 1) Grant of Copyright License...
+        description:
+          title: Description
+          type: string
+          example: Not a CopyLeft license.
+        displayText:
+          title: Display Text
+          type: string
+          example: 'No'
     DWRResponsePageableCollectionLicenseDTO:
       type: object
       properties:
@@ -111,25 +146,35 @@ components:
           items:
             $ref: '#/components/schemas/LicenseDTO'
       description: Provides insights into endpoint-supported pagination information
-    DescriptionAndExplanationDTO:
+    LicenseDTO:
+      required:
+      - name
       type: object
       properties:
-        explanation:
-          title: Explanation Link
+        uuid:
+          title: License Uuid
           type: string
-          example: http://en.wikipedia.org/wiki/Academic_Free_License
-        indicatingText:
-          title: Indicating Text
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Licenses
           type: string
-          example: 1) Grant of Copyright License...
-        description:
-          title: Description
+          example: MIT
+        spdxName:
+          title: Spdx Name
           type: string
-          example: Not a CopyLeft license.
-        displayText:
-          title: Display Text
+          example: Glide
+        type:
+          title: Type
           type: string
-          example: 'No'
+          example: OPEN_SOURCE
+        suspected:
+          title: Suspected License
+          type: boolean
+        osiApproved:
+          title: Approved Osi
+          type: boolean
+        profile:
+          $ref: '#/components/schemas/LicenseProfileDTO'
     LicenseProfileDTO:
       type: object
       properties:
@@ -162,44 +207,6 @@ components:
             title: Required Notices
             type: string
             example: Must identify specific modifications
-    LicenseDTO:
-      required:
-      - name
-      type: object
-      properties:
-        uuid:
-          title: License Uuid
-          type: string
-          example: 123e4567-e89b-12d3-a456-426655440000
-        name:
-          title: Licenses
-          type: string
-          example: MIT
-        spdxName:
-          title: Spdx Name
-          type: string
-          example: Glide
-        type:
-          title: Type
-          type: string
-          example: OPEN_SOURCE
-        suspected:
-          title: Suspected License
-          type: boolean
-        osiApproved:
-          title: Approved Osi
-          type: boolean
-        profile:
-          $ref: '#/components/schemas/LicenseProfileDTO'
-    DWRResponseLicenseDTO:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/LicenseDTO'
     RiskScoreExplanationDTO:
       type: object
       properties:
@@ -216,13 +223,6 @@ components:
           type: integer
           format: int32
           example: 39
-    DWRResponseBase:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
   securitySchemes:
     bearer-key:
       type: http

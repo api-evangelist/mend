@@ -1,0 +1,159 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mend/main/json-schema/mend-report-export-process-dto-schema.json",
+  "title": "ReportExportProcessDTO",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mend-reports-api-openapi.yml#/components/schemas/ReportExportProcessDTO",
+  "type": "object",
+  "properties": {
+    "uuid": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "scopeUuid": {
+      "type": "string"
+    },
+    "scopeName": {
+      "type": "string"
+    },
+    "subScopes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/EntityTreeDTO"
+      }
+    },
+    "title": {
+      "type": "string"
+    },
+    "reportType": {
+      "type": "string",
+      "enum": [
+        "attribution",
+        "inventory",
+        "vulnerabilities",
+        "securityAlerts",
+        "sbom",
+        "Cbom",
+        "securityAlertsLibrary",
+        "Compliance",
+        "Findings",
+        "Suppressions",
+        "Resolved",
+        "spdx",
+        "spdx_2_3",
+        "cycloneDX",
+        "cycloneDX_1_5",
+        "cycloneDX_1_6",
+        "dueDiligence",
+        "unknown",
+        "imgAttribution",
+        "imgDueDiligence",
+        "imgSpdx",
+        "imgSpdx_2_3",
+        "imgCycloneDX",
+        "imgCycloneDX_1_5",
+        "aiInventory",
+        "aiFindings",
+        "imgCycloneDX_1_6",
+        "risk",
+        "users",
+        "zeroDayCatalog",
+        "activityLog"
+      ]
+    },
+    "format": {
+      "type": "string",
+      "enum": [
+        "json",
+        "html",
+        "unknown",
+        "xml",
+        "excel",
+        "yaml",
+        "pdf",
+        "tv",
+        "rdf",
+        "csv",
+        "sarif",
+        "text"
+      ]
+    },
+    "scopeType": {
+      "type": "string",
+      "enum": [
+        "organization",
+        "product",
+        "project",
+        "unsupported",
+        "account"
+      ]
+    },
+    "scopeUuidList": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "projectUuids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "PENDING",
+        "IN_PROGRESS",
+        "FAILED",
+        "FAILURE",
+        "SUCCESS"
+      ]
+    },
+    "createdBy": {
+      "type": "string"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "sendEmailNotification": {
+      "type": "boolean"
+    },
+    "labelsUuidList": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "includeVulnerabilities": {
+      "type": "boolean"
+    },
+    "excludeInactiveProjects": {
+      "type": "boolean"
+    }
+  },
+  "$defs": {
+    "EntityTreeDTO": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "scopeUuid": {
+          "type": "string"
+        },
+        "scopeName": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

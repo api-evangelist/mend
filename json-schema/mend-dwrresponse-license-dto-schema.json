@@ -1,0 +1,137 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mend/main/json-schema/mend-dwrresponse-license-dto-schema.json",
+  "title": "DWRResponseLicenseDTO",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mend-general-info-licenses-api-openapi.yml#/components/schemas/DWRResponseLicenseDTO",
+  "type": "object",
+  "properties": {
+    "supportToken": {
+      "title": "Support Token",
+      "type": "string"
+    },
+    "retVal": {
+      "$ref": "#/$defs/LicenseDTO"
+    }
+  },
+  "$defs": {
+    "DescriptionAndExplanationDTO": {
+      "type": "object",
+      "properties": {
+        "explanation": {
+          "title": "Explanation Link",
+          "type": "string"
+        },
+        "indicatingText": {
+          "title": "Indicating Text",
+          "type": "string"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "displayText": {
+          "title": "Display Text",
+          "type": "string"
+        }
+      }
+    },
+    "LicenseDTO": {
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "title": "License Uuid",
+          "type": "string"
+        },
+        "name": {
+          "title": "Licenses",
+          "type": "string"
+        },
+        "spdxName": {
+          "title": "Spdx Name",
+          "type": "string"
+        },
+        "type": {
+          "title": "Type",
+          "type": "string"
+        },
+        "suspected": {
+          "title": "Suspected License",
+          "type": "boolean"
+        },
+        "osiApproved": {
+          "title": "Approved Osi",
+          "type": "boolean"
+        },
+        "profile": {
+          "$ref": "#/$defs/LicenseProfileDTO"
+        }
+      }
+    },
+    "LicenseProfileDTO": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "links": {
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "title": "Links",
+            "type": "string"
+          }
+        },
+        "copyrightRiskScore": {
+          "$ref": "#/$defs/RiskScoreExplanationDTO"
+        },
+        "patentAndRoyaltyRisk": {
+          "$ref": "#/$defs/RiskScoreExplanationDTO"
+        },
+        "royaltyFree": {
+          "title": "Royalty Free",
+          "type": "string"
+        },
+        "copyleft": {
+          "$ref": "#/$defs/DescriptionAndExplanationDTO"
+        },
+        "linking": {
+          "$ref": "#/$defs/DescriptionAndExplanationDTO"
+        },
+        "requiredNotices": {
+          "type": "array",
+          "items": {
+            "title": "Required Notices",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "RiskScoreExplanationDTO": {
+      "type": "object",
+      "properties": {
+        "explanation": {
+          "title": "Explanation Link",
+          "type": "string"
+        },
+        "indicatingText": {
+          "title": "Indicating Text",
+          "type": "string"
+        },
+        "riskScore": {
+          "title": "Risk Score",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    }
+  }
+}

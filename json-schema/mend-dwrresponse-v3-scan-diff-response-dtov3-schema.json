@@ -1,0 +1,329 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mend/main/json-schema/mend-dwrresponse-v3-scan-diff-response-dtov3-schema.json",
+  "title": "DWRResponseV3ScanDiffResponseDTOV3",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mend-scans-api-openapi.yml#/components/schemas/DWRResponseV3ScanDiffResponseDTOV3",
+  "type": "object",
+  "properties": {
+    "supportToken": {
+      "title": "Support Token",
+      "type": "string"
+    },
+    "response": {
+      "$ref": "#/$defs/ScanDiffResponseDTOV3"
+    }
+  },
+  "$defs": {
+    "DiffChangeDTOV3": {
+      "type": "object",
+      "properties": {
+        "field": {
+          "type": "string"
+        },
+        "before": {
+          "type": "object"
+        },
+        "after": {
+          "type": "object"
+        }
+      }
+    },
+    "DiffUnifiedFindingDTOV3": {
+      "type": "object",
+      "properties": {
+        "diffType": {
+          "type": "string"
+        },
+        "finding": {
+          "$ref": "#/$defs/UnifiedFindingDTOV3"
+        },
+        "changes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/DiffChangeDTOV3"
+          }
+        }
+      }
+    },
+    "ScanAgentInfo": {
+      "type": "object",
+      "properties": {
+        "agentName": {
+          "type": "string"
+        },
+        "agentVersion": {
+          "type": "string"
+        },
+        "errorMessage": {
+          "type": "string"
+        }
+      }
+    },
+    "ScanDTOV3": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "engine": {
+          "type": "string",
+          "enum": [
+            "UNIFIED",
+            "SCA",
+            "SAST",
+            "IAC",
+            "IMG",
+            "AI",
+            "DAST"
+          ]
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "RUNNING",
+            "PARTIAL",
+            "PROCESSING",
+            "FINISHED",
+            "FAILED"
+          ]
+        },
+        "projectId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "productId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "domainId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "projectUuid": {
+          "type": "string"
+        },
+        "processUuid": {
+          "type": "string"
+        },
+        "hasViolations": {
+          "type": "boolean"
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "lastModified": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "configurationName": {
+          "type": "string"
+        },
+        "reference": {
+          "type": "string"
+        },
+        "triggeredBy": {
+          "type": "string"
+        },
+        "agentInfo": {
+          "$ref": "#/$defs/ScanAgentInfo"
+        }
+      }
+    },
+    "ScanDiffResponseDTOV3": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "$ref": "#/$defs/ScanDTOV3"
+        },
+        "target": {
+          "$ref": "#/$defs/ScanDTOV3"
+        },
+        "stats": {
+          "$ref": "#/$defs/ScanDiffStatsDTOV3"
+        },
+        "findings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/DiffUnifiedFindingDTOV3"
+          }
+        }
+      }
+    },
+    "ScanDiffStatsDTOV3": {
+      "type": "object",
+      "properties": {
+        "added": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "removed": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "modified": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "unchanged": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "UnifiedFindingDTOV3": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string"
+        },
+        "findingId": {
+          "type": "string"
+        },
+        "findingName": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "severity": {
+          "type": "string"
+        },
+        "score": {
+          "type": "number",
+          "format": "float"
+        },
+        "element": {
+          "type": "string"
+        },
+        "elementId": {
+          "type": "string"
+        },
+        "refId": {
+          "type": "string"
+        },
+        "grouping": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "paths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "dynamicFields": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        },
+        "riskFactors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "riskFactorsJson": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        },
+        "engine": {
+          "type": "string",
+          "enum": [
+            "UNIFIED",
+            "SCA",
+            "SAST",
+            "IAC",
+            "IMG",
+            "AI",
+            "DAST"
+          ]
+        },
+        "vendor": {
+          "type": "string"
+        },
+        "orgUuid": {
+          "type": "string"
+        },
+        "projectUuid": {
+          "type": "string"
+        },
+        "projectName": {
+          "type": "string"
+        },
+        "branch": {
+          "type": "string"
+        },
+        "scanUuid": {
+          "type": "string"
+        },
+        "firstScanUuid": {
+          "type": "string"
+        },
+        "findingCategory": {
+          "type": "string"
+        },
+        "hasViolation": {
+          "type": "boolean"
+        },
+        "numberOfViolations": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "violationWorkflowUuids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "applicationUuid": {
+          "type": "string"
+        },
+        "applicationName": {
+          "type": "string"
+        },
+        "isNew": {
+          "type": "boolean"
+        },
+        "isDetectedAtFirstScan": {
+          "type": "boolean"
+        },
+        "isRemediationAvailable": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}

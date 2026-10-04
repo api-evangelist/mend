@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mend/main/json-schema/mend-dwrresponse-vitals-dto-schema.json",
+  "title": "DWRResponseVitalsDTO",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mend-entities-project-api-openapi.yml#/components/schemas/DWRResponseVitalsDTO",
+  "type": "object",
+  "properties": {
+    "supportToken": {
+      "title": "Support Token",
+      "type": "string"
+    },
+    "retVal": {
+      "$ref": "#/$defs/VitalsDTO"
+    }
+  },
+  "$defs": {
+    "UserInfoDTO": {
+      "required": [
+        "uuid"
+      ],
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "title": "User UUID",
+          "type": "string"
+        },
+        "name": {
+          "title": "User Name",
+          "type": "string"
+        },
+        "email": {
+          "title": "User Email",
+          "type": "string"
+        },
+        "userType": {
+          "title": "Type Of User",
+          "type": "string",
+          "enum": [
+            "REGULAR",
+            "SERVICE",
+            "SCAN_SUMMARY_RECEIVER"
+          ]
+        },
+        "accountStatus": {
+          "type": "string",
+          "enum": [
+            "ACTIVE",
+            "INACTIVE",
+            "LOCKOUT"
+          ]
+        }
+      }
+    },
+    "VitalsDTO": {
+      "type": "object",
+      "properties": {
+        "lastScan": {
+          "title": "Last Scan Date",
+          "type": "string",
+          "format": "date-time"
+        },
+        "lastUserScanned": {
+          "$ref": "#/$defs/UserInfoDTO"
+        },
+        "requestToken": {
+          "title": "Request Token",
+          "type": "string"
+        },
+        "lastSourceFileMatch": {
+          "title": "Last Source File Match",
+          "type": "string",
+          "format": "date-time"
+        },
+        "lastScanComment": {
+          "title": "Last Scan Comment",
+          "type": "string"
+        },
+        "projectCreationDate": {
+          "title": "Project Creation Date",
+          "type": "string",
+          "format": "date-time"
+        },
+        "pluginName": {
+          "title": "Plugin Name",
+          "type": "string"
+        },
+        "pluginVersion": {
+          "title": "Plugin Version",
+          "type": "string"
+        },
+        "extraProperties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "libraryCount": {
+          "title": "Library Count",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    }
+  }
+}

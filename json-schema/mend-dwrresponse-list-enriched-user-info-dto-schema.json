@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mend/main/json-schema/mend-dwrresponse-list-enriched-user-info-dto-schema.json",
+  "title": "DWRResponseListEnrichedUserInfoDTO",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mend-user-management-users-api-openapi.yml#/components/schemas/DWRResponseListEnrichedUserInfoDTO",
+  "type": "object",
+  "properties": {
+    "supportToken": {
+      "title": "Support Token",
+      "type": "string"
+    },
+    "retVal": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/EnrichedUserInfoDTO"
+      }
+    }
+  },
+  "$defs": {
+    "EnrichedUserInfoDTO": {
+      "required": [
+        "uuid"
+      ],
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "title": "User UUID",
+          "type": "string"
+        },
+        "name": {
+          "title": "User Name",
+          "type": "string"
+        },
+        "email": {
+          "title": "User Email",
+          "type": "string"
+        },
+        "userType": {
+          "title": "Type Of User",
+          "type": "string",
+          "enum": [
+            "REGULAR",
+            "SERVICE",
+            "SCAN_SUMMARY_RECEIVER"
+          ]
+        },
+        "accountStatus": {
+          "type": "string",
+          "enum": [
+            "ACTIVE",
+            "INACTIVE",
+            "LOCKOUT"
+          ]
+        },
+        "roles": {
+          "title": "List of Group Roles",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/GroupRoleDTO"
+          }
+        },
+        "activationLink": {
+          "title": "Activation Link",
+          "type": "string"
+        },
+        "groupNames": {
+          "title": "Associated Groups",
+          "type": "array",
+          "items": {
+            "title": "Associated Groups",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "GroupRoleDTO": {
+      "title": "List of Group Roles",
+      "type": "object",
+      "properties": {
+        "contextToken": {
+          "type": "string",
+          "description": "Depending on the value of contextType, this can be:\n+ orgToken (org UUID by running Entities - Organization > Get User Organization) or Api Token (from the Mend SCA App: **Integrate** tab > **API Key**).\n+ productToken (product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**.\n+ projectToken (project UUID by running Entities - Product > Get Product Projects) or project Token (from the Mend SCA App: **Integrate** tab > **Project Token**)."
+        },
+        "contextName": {
+          "title": "Context Name",
+          "type": "string"
+        },
+        "contextType": {
+          "type": "string",
+          "description": "Type of entity the role will be associated with",
+          "enum": [
+            "orgs",
+            "products"
+          ]
+        },
+        "role": {
+          "type": "string",
+          "enum": [
+            "DEFAULT_APPROVER",
+            "ADMIN",
+            "ALERT_EMAIL_RECEIVER",
+            "ALERTS_IGNORER",
+            "LICENSE_AND_COPYRIGHT_ASSIGNER",
+            "AUDITOR",
+            "USER",
+            "PRODUCT_INTEGRATOR",
+            "SBOM_EXPORTER"
+          ]
+        }
+      }
+    }
+  }
+}

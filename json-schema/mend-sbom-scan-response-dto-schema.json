@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mend/main/json-schema/mend-sbom-scan-response-dto-schema.json",
+  "title": "SbomScanResponseDTO",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mend-applications-api-openapi.yml#/components/schemas/SbomScanResponseDTO",
+  "type": "object",
+  "properties": {
+    "supportToken": {
+      "type": "string",
+      "description": "Support token for tracking"
+    },
+    "project": {
+      "$ref": "#/$defs/ProjectDTOV3"
+    },
+    "scan": {
+      "$ref": "#/$defs/SbomScanInfoDTO"
+    },
+    "link": {
+      "$ref": "#/$defs/SbomScanLinksDTO"
+    }
+  },
+  "$defs": {
+    "ProjectDTOV3": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "title": "Project UUID",
+          "type": "string"
+        },
+        "name": {
+          "title": "Project Name",
+          "type": "string"
+        },
+        "path": {
+          "title": "Application Name",
+          "type": "string"
+        },
+        "applicationName": {
+          "title": "Application Name",
+          "type": "string"
+        },
+        "applicationUuid": {
+          "title": "Application Uuid",
+          "type": "string"
+        }
+      },
+      "description": "Project information"
+    },
+    "SbomScanInfoDTO": {
+      "type": "object",
+      "properties": {
+        "scanUuid": {
+          "type": "string",
+          "description": "Scan identifier"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Scan creation timestamp"
+        }
+      },
+      "description": "Scan information"
+    },
+    "SbomScanLinksDTO": {
+      "type": "object",
+      "properties": {
+        "logs": {
+          "type": "string",
+          "description": "Link to scan logs"
+        }
+      },
+      "description": "Log Link"
+    }
+  }
+}

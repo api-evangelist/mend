@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mend/main/json-schema/mend-dwrresponse-collection-domain-dto-schema.json",
+  "title": "DWRResponseCollectionDomainDTO",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mend-access-management-organizations-api-openapi.yml#/components/schemas/DWRResponseCollectionDomainDTO",
+  "type": "object",
+  "properties": {
+    "supportToken": {
+      "title": "Support Token",
+      "type": "string"
+    },
+    "retVal": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/DomainDTO"
+      }
+    }
+  },
+  "$defs": {
+    "DomainDTO": {
+      "title": "OrgDTO",
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "title": "Org Uuid",
+          "type": "string"
+        },
+        "name": {
+          "title": "Org Name",
+          "type": "string"
+        }
+      }
+    }
+  }
+}

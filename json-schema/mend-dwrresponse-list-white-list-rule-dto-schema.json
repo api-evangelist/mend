@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mend/main/json-schema/mend-dwrresponse-list-white-list-rule-dto-schema.json",
+  "title": "DWRResponseListWhiteListRuleDTO",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mend-settings-whitelist-api-openapi.yml#/components/schemas/DWRResponseListWhiteListRuleDTO",
+  "type": "object",
+  "properties": {
+    "supportToken": {
+      "title": "Support Token",
+      "type": "string"
+    },
+    "retVal": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/WhiteListRuleDTO"
+      }
+    }
+  },
+  "$defs": {
+    "WhiteListRuleDTO": {
+      "required": [
+        "regex"
+      ],
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "title": "White List UUID",
+          "type": "string"
+        },
+        "regexType": {
+          "title": "WhiteList Regex Type",
+          "type": "string",
+          "enum": [
+            "BY_NAME",
+            "BY_LIBRARY"
+          ]
+        },
+        "regex": {
+          "title": "White List Regex Rule",
+          "type": "string"
+        },
+        "createdBy": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "description": {
+          "title": "White List Description",
+          "type": "string"
+        }
+      }
+    }
+  }
+}

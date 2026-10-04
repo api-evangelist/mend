@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mend/main/json-schema/mend-create-in-house-rule-request-dto-schema.json",
+  "title": "CreateInHouseRuleRequestDTO",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mend-settings-in-house-api-openapi.yml#/components/schemas/CreateInHouseRuleRequestDTO",
+  "required": [
+    "regex",
+    "type"
+  ],
+  "type": "object",
+  "properties": {
+    "type": {
+      "title": "InHouse Rule Regex Type",
+      "type": "string",
+      "enum": [
+        "NAME",
+        "LIBRARY_COORDINATES",
+        "ARTIFACT_ID"
+      ]
+    },
+    "regex": {
+      "title": "InHouse Regex Rule",
+      "type": "string"
+    },
+    "description": {
+      "title": "InHouse Description",
+      "type": "string"
+    },
+    "empty": {
+      "type": "boolean"
+    }
+  }
+}

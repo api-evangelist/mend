@@ -46,6 +46,13 @@ paths:
                 $ref: '#/components/schemas/DWRResponseBase'
 components:
   schemas:
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
     DWRResponseV3ListIntegrationDTOV3:
       type: object
       properties:
@@ -57,13 +64,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/IntegrationDTOV3'
-    DWRResponseBase:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
     IntegrationDTOV3:
       type: object
       properties:

@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mend/main/json-schema/mend-dwrresponse-collection-project-dto-schema.json",
+  "title": "DWRResponseCollectionProjectDTO",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mend-library-product-api-openapi.yml#/components/schemas/DWRResponseCollectionProjectDTO",
+  "type": "object",
+  "properties": {
+    "supportToken": {
+      "title": "Support Token",
+      "type": "string"
+    },
+    "retVal": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/ProjectDTO"
+      }
+    }
+  },
+  "$defs": {
+    "ProjectDTO": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "title": "Project UUID",
+          "type": "string"
+        },
+        "name": {
+          "title": "Project Name",
+          "type": "string"
+        },
+        "path": {
+          "title": "Product Name",
+          "type": "string"
+        },
+        "productName": {
+          "title": "Product Name",
+          "type": "string"
+        },
+        "productUuid": {
+          "title": "Product Uuid",
+          "type": "string"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mend/main/json-schema/mend-dwrresponse-v3-list-integration-dtov3-schema.json",
+  "title": "DWRResponseV3ListIntegrationDTOV3",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mend-integrations-api-openapi.yml#/components/schemas/DWRResponseV3ListIntegrationDTOV3",
+  "type": "object",
+  "properties": {
+    "supportToken": {
+      "title": "Support Token",
+      "type": "string"
+    },
+    "response": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/IntegrationDTOV3"
+      }
+    }
+  },
+  "$defs": {
+    "IntegrationDTOV3": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string"
+        },
+        "orgUuid": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "ACTIVE",
+            "SUSPENDED",
+            "DELETED"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "JIRA",
+            "GITHUB",
+            "INVICTI",
+            "WIZ"
+          ]
+        },
+        "variant": {
+          "type": "string",
+          "enum": [
+            "JIRA_CLOUD",
+            "JIRA_CLOUD_SECURITY",
+            "JIRA_DC",
+            "WIZ_COMMERCIAL",
+            "WIZ_GOV",
+            "WIZ_COMM_ON_GOV",
+            "WIZ_DEMO"
+          ]
+        },
+        "extraData": {
+          "type": "object"
+        },
+        "createdBy": {
+          "type": "string"
+        },
+        "creationDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "lastUpdate": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}

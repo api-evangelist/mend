@@ -64,15 +64,6 @@ paths:
                 $ref: '#/components/schemas/DWRResponseBase'
 components:
   schemas:
-    DWRResponseMessageDTO:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/MessageDTO'
     MessageDTO:
       type: object
       properties:
@@ -87,6 +78,15 @@ components:
           title: Support Token
           type: string
           example: 1171c60d
+    DWRResponseMessageDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/MessageDTO'
     CustomAttributeValueDTO:
       type: object
       properties:

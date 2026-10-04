@@ -1,0 +1,43 @@
+generated: '2026-10-04'
+method: probed
+generator: harvest-agent-card.py
+source: https://api-docs.mend.io/.well-known/agent-card.json
+card:
+  file: a2a/mend-agent-card.json
+  name: Developer Documentation
+  version: 0.0.1
+discovery:
+  path: /.well-known/agent-card.json
+  canonical: true
+  host: api-docs.mend.io
+x-evidence:
+  fetched: '2026-10-04'
+  url: https://api-docs.mend.io/.well-known/agent-card.json
+  http_status: 200
+  content_type: application/json
+  body_bytes: 628
+  body_parses_as: json object
+conformance:
+  spec: A2A 1.0.0
+  grade: conformant
+  protocol_version: 0.3.0
+  transport: HTTP+JSON
+  card_shape: 0.3 (top-level protocolVersion)
+  hard_checks:
+    capabilities_is_object: true
+    protocol_version_present: true
+    skills_is_array: true
+  optional_fields:
+    transport_declared: true
+    defaultInputModes: true
+    defaultOutputModes: true
+  deviations: &id001 []
+cards:
+- file: a2a/mend-agent-card.json
+  primary: true
+  host: api-docs.mend.io
+  url: https://api-docs.mend.io/.well-known/agent-card.json
+  http_status: 200
+  name: Developer Documentation
+  grade: conformant
+  deviations: *id001

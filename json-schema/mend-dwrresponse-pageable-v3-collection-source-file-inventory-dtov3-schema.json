@@ -1,0 +1,254 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mend/main/json-schema/mend-dwrresponse-pageable-v3-collection-source-file-inventory-dtov3-schema.json",
+  "title": "DWRResponsePageableV3CollectionSourceFileInventoryDTOV3",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mend-dependencies-source-files-api-openapi.yml#/components/schemas/DWRResponsePageableV3CollectionSourceFileInventoryDTOV3",
+  "type": "object",
+  "properties": {
+    "additionalData": {
+      "title": "Provides insights into endpoint-supported pagination information.",
+      "type": "object",
+      "description": "+ **totalItems**: The total count of data points returned in an API response.\n"
+    },
+    "supportToken": {
+      "title": "Support Token",
+      "type": "string"
+    },
+    "response": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/SourceFileInventoryDTOV3"
+      }
+    }
+  },
+  "$defs": {
+    "DescriptionAndExplanationDTO": {
+      "type": "object",
+      "properties": {
+        "explanation": {
+          "title": "Explanation Link",
+          "type": "string"
+        },
+        "indicatingText": {
+          "title": "Indicating Text",
+          "type": "string"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "displayText": {
+          "title": "Display Text",
+          "type": "string"
+        }
+      }
+    },
+    "LicenseDTO": {
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "title": "License Uuid",
+          "type": "string"
+        },
+        "name": {
+          "title": "Licenses",
+          "type": "string"
+        },
+        "spdxName": {
+          "title": "Spdx Name",
+          "type": "string"
+        },
+        "type": {
+          "title": "Type",
+          "type": "string"
+        },
+        "suspected": {
+          "title": "Suspected License",
+          "type": "boolean"
+        },
+        "osiApproved": {
+          "title": "Approved Osi",
+          "type": "boolean"
+        },
+        "profile": {
+          "$ref": "#/$defs/LicenseProfileDTO"
+        }
+      }
+    },
+    "LicenseProfileDTO": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "links": {
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "title": "Links",
+            "type": "string"
+          }
+        },
+        "copyrightRiskScore": {
+          "$ref": "#/$defs/RiskScoreExplanationDTO"
+        },
+        "patentAndRoyaltyRisk": {
+          "$ref": "#/$defs/RiskScoreExplanationDTO"
+        },
+        "royaltyFree": {
+          "title": "Royalty Free",
+          "type": "string"
+        },
+        "copyleft": {
+          "$ref": "#/$defs/DescriptionAndExplanationDTO"
+        },
+        "linking": {
+          "$ref": "#/$defs/DescriptionAndExplanationDTO"
+        },
+        "requiredNotices": {
+          "type": "array",
+          "items": {
+            "title": "Required Notices",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ProjectDTOV3": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "title": "Project UUID",
+          "type": "string"
+        },
+        "name": {
+          "title": "Project Name",
+          "type": "string"
+        },
+        "path": {
+          "title": "Application Name",
+          "type": "string"
+        },
+        "applicationName": {
+          "title": "Application Name",
+          "type": "string"
+        },
+        "applicationUuid": {
+          "title": "Application Uuid",
+          "type": "string"
+        }
+      },
+      "description": "Project information"
+    },
+    "RiskScoreExplanationDTO": {
+      "type": "object",
+      "properties": {
+        "explanation": {
+          "title": "Explanation Link",
+          "type": "string"
+        },
+        "indicatingText": {
+          "title": "Indicating Text",
+          "type": "string"
+        },
+        "riskScore": {
+          "title": "Risk Score",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "SourceFileInventoryDTOV3": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "title": "Source File UUID",
+          "type": "string"
+        },
+        "name": {
+          "title": "Source File Name",
+          "type": "string"
+        },
+        "matchType": {
+          "title": "Match Type",
+          "type": "string",
+          "enum": [
+            "MANUAL",
+            "AUTOMATIC"
+          ]
+        },
+        "sha1": {
+          "title": "SourceFileSha1",
+          "type": "string",
+          "enum": [
+            "MANUAL",
+            "AUTOMATIC"
+          ]
+        },
+        "localPath": {
+          "title": "Local Path",
+          "type": "string"
+        },
+        "lastModified": {
+          "title": "Source File Last Modification Date",
+          "type": "string",
+          "format": "date-time"
+        },
+        "library": {
+          "$ref": "#/$defs/SourceFileLibraryDTO"
+        },
+        "comment": {
+          "title": "Source File Comment",
+          "type": "string"
+        },
+        "contextType": {
+          "title": "Context Type",
+          "type": "string",
+          "enum": [
+            "SYSTEM",
+            "GLOBAL_ACCOUNT",
+            "DOMAIN",
+            "PRODUCT",
+            "PROJECT",
+            "SCAN",
+            "UNSUPPORTED_TYPE"
+          ]
+        },
+        "project": {
+          "$ref": "#/$defs/ProjectDTOV3"
+        }
+      }
+    },
+    "SourceFileLibraryDTO": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "title": "Source Library UUID",
+          "type": "string"
+        },
+        "name": {
+          "title": "Source Library Name",
+          "type": "string"
+        },
+        "licenses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/LicenseDTO"
+          }
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

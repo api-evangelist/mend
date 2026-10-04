@@ -1,0 +1,486 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mend/main/json-schema/mend-dwrresponse-pageable-list-library-dto-schema.json",
+  "title": "DWRResponsePageableListLibraryDTO",
+  "description": "Provides insights into endpoint-supported pagination information",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mend-library-project-api-openapi.yml#/components/schemas/DWRResponsePageableListLibraryDTO",
+  "type": "object",
+  "properties": {
+    "additionalData": {
+      "title": "Provides insights into endpoint-supported pagination information.",
+      "type": "object",
+      "description": "+ **totalItems**: The total count of data points returned in an API response.\n+ **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining."
+    },
+    "supportToken": {
+      "title": "Support Token",
+      "type": "string"
+    },
+    "retVal": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/LibraryDTO"
+      }
+    }
+  },
+  "$defs": {
+    "AttributionReportLibrarySettingRuleDTO": {
+      "type": "object",
+      "properties": {
+        "excluded": {
+          "type": "boolean"
+        }
+      }
+    },
+    "CopyrightReferenceDTO": {
+      "required": [
+        "copyright"
+      ],
+      "type": "object",
+      "properties": {
+        "type": {
+          "title": "Copy Reference Type",
+          "type": "string",
+          "enum": [
+            "TEXT_IN_FILE",
+            "ARTIFACT_DESCRIPTOR",
+            "PROJECT_HOMEPAGE",
+            "USER",
+            "UNSPECIFIED"
+          ]
+        },
+        "copyright": {
+          "title": "Copyright",
+          "type": "string"
+        },
+        "customDisclaimer": {
+          "title": "Copyright Custom Disclaimer",
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "textUrl": {
+          "title": "Copyright Text Url",
+          "type": "string"
+        },
+        "startYear": {
+          "title": "Copyright Start Year",
+          "type": "string"
+        },
+        "endYear": {
+          "title": "Copyright End Year",
+          "type": "string"
+        },
+        "author": {
+          "title": "Copyright Author",
+          "type": "string"
+        },
+        "referenceInfo": {
+          "title": "Copyright Reference Info",
+          "type": "string"
+        }
+      }
+    },
+    "EntityDTO": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "LibraryDTO": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "title": "Library UUID",
+          "type": "string"
+        },
+        "name": {
+          "title": "Library Name",
+          "type": "string"
+        },
+        "artifactId": {
+          "title": "Artifact Id",
+          "type": "string"
+        },
+        "groupId": {
+          "title": "Group Id",
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "architecture": {
+          "title": "Architecture",
+          "type": "string"
+        },
+        "languageVersion": {
+          "title": "Language Version",
+          "type": "string"
+        },
+        "classifier": {
+          "type": "string"
+        },
+        "extension": {
+          "type": "string"
+        },
+        "sha1": {
+          "title": "Sha1",
+          "type": "string"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "type": {
+          "title": "Type",
+          "type": "string"
+        },
+        "libraryType": {
+          "type": "string"
+        },
+        "directDependency": {
+          "title": "Direct Dependency",
+          "type": "boolean"
+        },
+        "purl": {
+          "title": "Package Url",
+          "type": "string"
+        },
+        "extraInfo": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "extraInformation": {
+          "$ref": "#/$defs/LibraryExtraInfoDTO"
+        },
+        "licenses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/LibraryLicenseDTO"
+          }
+        },
+        "copyrightReferences": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/CopyrightReferenceDTO"
+          }
+        },
+        "securityRisks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SecurityRiskDTO"
+          }
+        },
+        "noticeReference": {
+          "$ref": "#/$defs/NoticeDTO"
+        },
+        "proprietaryInfo": {
+          "$ref": "#/$defs/ProprietaryInfoDTO"
+        },
+        "locations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/LibraryLocationDTO"
+          }
+        },
+        "attributionReportSettings": {
+          "$ref": "#/$defs/AttributionReportLibrarySettingRuleDTO"
+        },
+        "dependencyType": {
+          "type": "string"
+        },
+        "violations": {
+          "title": "Number Of Violations",
+          "type": "integer",
+          "format": "int32"
+        },
+        "workflowUuids": {
+          "title": "Number Of Violated Workflows",
+          "type": "array",
+          "items": {
+            "title": "Number Of Violated Workflows",
+            "type": "string"
+          }
+        },
+        "violatingFindings": {
+          "title": "Number Of Violating Findings",
+          "type": "integer",
+          "format": "int32"
+        },
+        "trackedIssue": {
+          "$ref": "#/$defs/TrackedIssueDTO"
+        }
+      }
+    },
+    "LibraryExtraInfoDTO": {
+      "type": "object",
+      "properties": {
+        "distributionUrl": {
+          "type": "string"
+        },
+        "downloadUrl": {
+          "type": "string"
+        },
+        "releaseDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "packageManagerRepository": {
+          "type": "string"
+        },
+        "homePage": {
+          "type": "string"
+        },
+        "repositoryUrl": {
+          "type": "string"
+        },
+        "author": {
+          "type": "string"
+        }
+      }
+    },
+    "LibraryLicenseDTO": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "title": "License UUID",
+          "type": "string"
+        },
+        "name": {
+          "title": "License Name",
+          "type": "string"
+        },
+        "assignedByUser": {
+          "title": "Assigned By User",
+          "type": "boolean"
+        },
+        "licenseReferences": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/LicenseReferenceDTO"
+          }
+        }
+      }
+    },
+    "LibraryLocationDTO": {
+      "type": "object",
+      "properties": {
+        "localPath": {
+          "title": "Local Path",
+          "type": "string"
+        },
+        "dependencyFile": {
+          "title": "Dependency File",
+          "type": "string"
+        }
+      }
+    },
+    "LicenseReferenceDTO": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "title": "License Reference UUID",
+          "type": "string"
+        },
+        "type": {
+          "title": "License Reference Type",
+          "type": "string"
+        },
+        "liabilityReference": {
+          "title": "License Liability Reference",
+          "type": "string"
+        },
+        "assignedBy": {
+          "$ref": "#/$defs/UserInfoDTO"
+        },
+        "textUrl": {
+          "title": "License Reference Text URL",
+          "type": "string"
+        },
+        "customDisclaimer": {
+          "title": "License Reference Custom Disclaimer",
+          "type": "string"
+        },
+        "information": {
+          "title": "License Reference information",
+          "type": "string"
+        }
+      }
+    },
+    "NoticeDTO": {
+      "required": [
+        "text"
+      ],
+      "type": "object",
+      "properties": {
+        "text": {
+          "title": "Notice Text",
+          "type": "string"
+        },
+        "reference": {
+          "title": "Notice REFERENCE",
+          "type": "string"
+        }
+      }
+    },
+    "ProprietaryInfoDTO": {
+      "type": "object",
+      "properties": {
+        "ruleDescription": {
+          "type": "string"
+        },
+        "rulePattern": {
+          "type": "string"
+        },
+        "comment": {
+          "type": "string"
+        },
+        "userInfo": {
+          "$ref": "#/$defs/UserInfoDTO"
+        },
+        "proprietaryMarkType": {
+          "type": "string",
+          "enum": [
+            "BY_RULE",
+            "BY_USER"
+          ]
+        }
+      }
+    },
+    "SecurityRiskDTO": {
+      "type": "object",
+      "properties": {
+        "sourceUrl": {
+          "type": "string"
+        },
+        "riskFactor": {
+          "type": "string",
+          "enum": [
+            "NO_FINDINGS",
+            "UNCONFIRMED_UNSAFE",
+            "CONFIRMED_UNSAFE",
+            "KNOWN_FALSE_POSITIVE"
+          ]
+        }
+      }
+    },
+    "TrackedIssueDTO": {
+      "title": "Tracked Issue Information",
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string"
+        },
+        "issueId": {
+          "type": "string"
+        },
+        "origin": {
+          "type": "string"
+        },
+        "issueKey": {
+          "type": "string"
+        },
+        "account": {
+          "$ref": "#/$defs/EntityDTO"
+        },
+        "domain": {
+          "$ref": "#/$defs/EntityDTO"
+        },
+        "application": {
+          "$ref": "#/$defs/EntityDTO"
+        },
+        "project": {
+          "$ref": "#/$defs/EntityDTO"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "PENDING",
+            "IN_PROGRESS",
+            "SUCCESS",
+            "FAILED",
+            "DELETED"
+          ]
+        },
+        "issueStatus": {
+          "type": "string"
+        },
+        "failureReason": {
+          "type": "string"
+        },
+        "errorMessage": {
+          "type": "string"
+        },
+        "publicLink": {
+          "type": "string"
+        },
+        "creationDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "createdBy": {
+          "$ref": "#/$defs/EntityDTO"
+        },
+        "ticketType": {
+          "type": "string",
+          "enum": [
+            "SECURITY",
+            "LEGAL"
+          ]
+        }
+      }
+    },
+    "UserInfoDTO": {
+      "required": [
+        "uuid"
+      ],
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "title": "User UUID",
+          "type": "string"
+        },
+        "name": {
+          "title": "User Name",
+          "type": "string"
+        },
+        "email": {
+          "title": "User Email",
+          "type": "string"
+        },
+        "userType": {
+          "title": "Type Of User",
+          "type": "string",
+          "enum": [
+            "REGULAR",
+            "SERVICE",
+            "SCAN_SUMMARY_RECEIVER"
+          ]
+        },
+        "accountStatus": {
+          "type": "string",
+          "enum": [
+            "ACTIVE",
+            "INACTIVE",
+            "LOCKOUT"
+          ]
+        }
+      }
+    }
+  }
+}

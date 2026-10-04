@@ -333,15 +333,19 @@ paths:
                 $ref: '#/components/schemas/DWRResponseBase'
 components:
   schemas:
-    DeleteWhiteListRuleRequestDTO:
+    CreateWhiteListRuleRequestDTO:
       required:
-      - uuid
+      - regex
       type: object
       properties:
-        uuid:
-          title: White List UUID
+        regex:
+          title: White List Regex Rule
           type: string
-          example: 123e4567-e89b-12d3-a456-426655440000
+          example: '*aa*'
+        description:
+          title: White List Description
+          type: string
+          example: description for white list
     UpdateWhiteListRulesRequestDTO:
       title: UpdateWhiteListRuleDTO
       required:
@@ -361,14 +365,14 @@ components:
           title: White List Description
           type: string
           example: description for white list
-    MessageDTO:
+    DWRResponseBase:
       type: object
       properties:
-        message:
-          title: message
+        supportToken:
+          title: Support Token
           type: string
-          example: Success!
-    DWRResponseMessageDTO:
+          example: 1171c60d
+    DWRResponseWhiteListRuleDTO:
       type: object
       properties:
         supportToken:
@@ -376,7 +380,25 @@ components:
           type: string
           example: 1171c60d
         retVal:
-          $ref: '#/components/schemas/MessageDTO'
+          $ref: '#/components/schemas/WhiteListRuleDTO'
+    UpdateWhiteListRuleRequestDTO:
+      type: object
+      properties:
+        regex:
+          title: White List Regex Rule
+          type: string
+          example: '*aa*'
+        description:
+          title: White List Description
+          type: string
+          example: description for white list
+    MessageDTO:
+      type: object
+      properties:
+        message:
+          title: message
+          type: string
+          example: Success!
     DWRResponsePageableListWhiteListRuleDTO:
       type: object
       properties:
@@ -398,6 +420,26 @@ components:
           items:
             $ref: '#/components/schemas/WhiteListRuleDTO'
       description: Provides insights into endpoint-supported pagination information
+    DWRResponseListWhiteListRuleDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          type: array
+          items:
+            $ref: '#/components/schemas/WhiteListRuleDTO'
+    DeleteWhiteListRuleRequestDTO:
+      required:
+      - uuid
+      type: object
+      properties:
+        uuid:
+          title: White List UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
     WhiteListRuleDTO:
       required:
       - regex
@@ -426,46 +468,6 @@ components:
           title: White List Description
           type: string
           example: Sample description
-    DWRResponseWhiteListRuleDTO:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/WhiteListRuleDTO'
-    CreateWhiteListRuleRequestDTO:
-      required:
-      - regex
-      type: object
-      properties:
-        regex:
-          title: White List Regex Rule
-          type: string
-          example: '*aa*'
-        description:
-          title: White List Description
-          type: string
-          example: description for white list
-    DWRResponseBase:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-    UpdateWhiteListRuleRequestDTO:
-      type: object
-      properties:
-        regex:
-          title: White List Regex Rule
-          type: string
-          example: '*aa*'
-        description:
-          title: White List Description
-          type: string
-          example: description for white list
     CreateWhiteListRulesRequestDTO:
       type: object
       properties:
@@ -473,7 +475,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CreateWhiteListRuleRequestDTO'
-    DWRResponseListWhiteListRuleDTO:
+    DWRResponseMessageDTO:
       type: object
       properties:
         supportToken:
@@ -481,9 +483,7 @@ components:
           type: string
           example: 1171c60d
         retVal:
-          type: array
-          items:
-            $ref: '#/components/schemas/WhiteListRuleDTO'
+          $ref: '#/components/schemas/MessageDTO'
   securitySchemes:
     bearer-key:
       type: http

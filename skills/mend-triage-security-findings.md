@@ -1,8 +1,8 @@
 ---
-name: Triage Mend security findings
+name: triage-security-findings
 description: Authenticate to the Mend AppSec Platform API, list a project's open security vulnerability findings, and bulk-update their status.
 api: openapi/mend-platform-openapi-original.json
-operations: [login, getOrganizationProjects, getSecurityVulnerabilityFindings, listProjectFindingsV3.0, bulkPatchProjectFindingV3.0]
+operations: [postApiV20Login, getOrganizationProjects, getSecurityVulnerabilityFindings, listProjectFindingsV3.0, bulkPatchProjectFindingV3.0]
 ---
 
 # Triage Mend security findings

@@ -118,6 +118,13 @@ paths:
                 $ref: '#/components/schemas/DWRResponseBase'
 components:
   schemas:
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
     UserKeyDTO:
       type: object
       properties:
@@ -149,13 +156,6 @@ components:
           title: Token Expiration Date
           type: string
           format: date-time
-    GenerateUserKeyRequestDTO:
-      type: object
-      properties:
-        description:
-          title: UserToken Description
-          type: string
-          example: Token A
     MessageDTO:
       type: object
       properties:
@@ -163,15 +163,13 @@ components:
           title: message
           type: string
           example: Success!
-    DWRResponseMessageDTO:
+    GenerateUserKeyRequestDTO:
       type: object
       properties:
-        supportToken:
-          title: Support Token
+        description:
+          title: UserToken Description
           type: string
-          example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/MessageDTO'
+          example: Token A
     DWRResponsePageableCollectionUserKeyDTO:
       type: object
       properties:
@@ -202,13 +200,15 @@ components:
           example: 1171c60d
         retVal:
           $ref: '#/components/schemas/UserKeyDTO'
-    DWRResponseBase:
+    DWRResponseMessageDTO:
       type: object
       properties:
         supportToken:
           title: Support Token
           type: string
           example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/MessageDTO'
   securitySchemes:
     bearer-key:
       type: http

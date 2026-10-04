@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mend/main/json-schema/mend-model-security-finding-external-schema.json",
+  "title": "model.SecurityFindingExternal",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mend-findings-project-api-openapi.yml#/components/schemas/model.SecurityFindingExternal",
+  "type": "object",
+  "properties": {
+    "createdAt": {
+      "type": "string"
+    },
+    "cvss": {
+      "type": "number"
+    },
+    "cvssDetails": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "detectionDate": {
+      "type": "string"
+    },
+    "epss": {
+      "type": "number"
+    },
+    "fixVersion": {
+      "type": "string"
+    },
+    "hasFix": {
+      "type": "boolean"
+    },
+    "imageName": {
+      "type": "string"
+    },
+    "lastModifiedDate": {
+      "type": "string"
+    },
+    "packageName": {
+      "type": "string"
+    },
+    "packageVersion": {
+      "type": "string"
+    },
+    "projectUUID": {
+      "type": "string"
+    },
+    "publishedDate": {
+      "type": "string"
+    },
+    "reachabilityConfidence": {
+      "type": "number"
+    },
+    "reachabilityGraph": {
+      "type": "string"
+    },
+    "reachabilityStatus": {
+      "type": "string"
+    },
+    "severity": {
+      "type": "string"
+    },
+    "uuid": {
+      "type": "string"
+    },
+    "vulnerabilityID": {
+      "type": "string"
+    }
+  }
+}

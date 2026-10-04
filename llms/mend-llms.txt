@@ -6,17 +6,18 @@
  - [Global Organization/Product/Project API](https://api-docs.mend.io/1.4/global-organizationproductproject-api.md)
  - [Groups and Users API](https://api-docs.mend.io/1.4/groups-and-users-api.md)
  - [Product and Project API](https://api-docs.mend.io/1.4/product-and-project-api.md)
- - [HTTP API v1.3 and v1.4](https://api-docs.mend.io/1.4/api-v1-3-and-v1-4.md)
  - [Alerts API](https://api-docs.mend.io/1.4/alerts-api.md)
  - [HTTP API v1.3 and v1.4](https://api-docs.mend.io/1.4/http-api-v13-and-v14.md)
+ - [HTTP API v1.3 and v1.4](https://api-docs.mend.io/1.4/api-v1-3-and-v1-4.md)
  - [Issue Tracker API](https://api-docs.mend.io/1.4/issue-tracker-api.md)
  - [Licenses and Libraries API](https://api-docs.mend.io/1.4/licenses-and-libraries-api.md)
  - [Reports API - Asynchronous](https://api-docs.mend.io/1.4/reports-api-asynchronous.md)
  - [Policies API](https://api-docs.mend.io/1.4/policies-api.md)
  - [What's New in API v1.4](https://api-docs.mend.io/1.4/whats-new-in-api-v14.md)
  - [Mend.io API Documentation](https://api-docs.mend.io/index.html.md)
+ - [Mend Container Image API](https://api-docs.mend.io/container-image/2.0.md): Mend's enhanced Container Image API enables automation of workflows. The API features: + Access for any user with Mend credentials, via a user key available in the user's profile page in the Mend Application. + Added scalability with support for pagination, filtering and sorting search results. + Broader functionality available programmatically. + New standard API documentation for easy navigation and search. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance. To access your base URL for API calls go to the **Mend Application > Cloud Native**.
+ - [Developer Platform API](https://api-docs.mend.io/developer-platform/1.0.md): Mend's Developer Platform API 1.0 features: - Access via GitHub tokens. - Automation of Credentials for GitHub. - New standard API documentation for easy navigation and search.
  - [Reports API - Synchronous](https://api-docs.mend.io/1.4/reports-api-synchronous.md)
- - [Mend Container Image API](https://api-docs.mend.io/container-image/2.0.md)
- - [Developer Platform API](https://api-docs.mend.io/developer-platform/1.0.md)
- - [Mend API ](https://api-docs.mend.io/platform/3.0.md)
- - [Mend API](https://api-docs.mend.io/sca/2.0.md)
+ - [Mend API ](https://api-docs.mend.io/platform/3.0.md): Mend's enhanced API enables automation of workflows in a REST compliant format. The API features: + Access for any user with Mend credentials, via a user key available in the user's profile page in the Mend Platform. + Improved security with a JWT token per organization, which expires every 10 minutes. + Added scalability with support for cursor pagination and limiting results size. + Broader functionality available programmatically. + New standard API documentation for easy navigation and search. **Note:** To help you get started with the Mend API 3.0, we recommend reviewing our onboarding guide -> [Getting Started with API 3.0](https://docs.mend.io/platform/latest/getting-started-with-mend-api-3-0). This resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend API 3.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.
+ - [Mend API](https://api-docs.mend.io/sca/2.0.md): Mend's enhanced SCA API enables automation of workflows in a REST compliant format. The API features: + Access for any user with Mend credentials, via a user key available in the user's profile page in the Mend App. + Improved security with a JWT token per organization, which expires every 10 minutes. + Added scalability with support for pagination, filtering and sorting search results. + Broader functionality available programmatically. + New standard API documentation for easy navigation and search. **Note:** To help you get started with the Mend SCA API 2.0, we recommend reviewing our onboarding guide -> [Getting Started with Mend SCA API 2.0](https://docs.mend.io/legacy-sca/latest/getting-started-with-mend-sca-api-2-0). This resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend SCA API 2.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.
+

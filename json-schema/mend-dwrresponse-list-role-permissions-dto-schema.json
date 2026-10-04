@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mend/main/json-schema/mend-dwrresponse-list-role-permissions-dto-schema.json",
+  "title": "DWRResponseListRolePermissionsDTO",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mend-general-info-permissions-api-openapi.yml#/components/schemas/DWRResponseListRolePermissionsDTO",
+  "type": "object",
+  "properties": {
+    "supportToken": {
+      "title": "Support Token",
+      "type": "string"
+    },
+    "retVal": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/RolePermissionsDTO"
+      }
+    }
+  },
+  "$defs": {
+    "RolePermissionsDTO": {
+      "type": "object",
+      "properties": {
+        "role": {
+          "type": "string",
+          "enum": [
+            "DEFAULT_APPROVER",
+            "ADMIN",
+            "ALERT_EMAIL_RECEIVER",
+            "ALERTS_IGNORER",
+            "LICENSE_AND_COPYRIGHT_ASSIGNER",
+            "AUDITOR",
+            "USER",
+            "PRODUCT_INTEGRATOR",
+            "SBOM_EXPORTER"
+          ]
+        },
+        "permissions": {
+          "type": "array",
+          "items": {
+            "title": "User Permissions",
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

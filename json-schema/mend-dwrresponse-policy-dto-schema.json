@@ -1,0 +1,344 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mend/main/json-schema/mend-dwrresponse-policy-dto-schema.json",
+  "title": "DWRResponsePolicyDTO",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mend-policies-organization-api-openapi.yml#/components/schemas/DWRResponsePolicyDTO",
+  "type": "object",
+  "properties": {
+    "supportToken": {
+      "title": "Support Token",
+      "type": "string"
+    },
+    "retVal": {
+      "$ref": "#/$defs/PolicyDTO"
+    }
+  },
+  "$defs": {
+    "APPROVE": {
+      "type": "object",
+      "description": "type: APPROVE",
+      "allOf": [
+        {
+          "$ref": "#/$defs/BasePolicyActionDTO"
+        }
+      ]
+    },
+    "BasePolicyActionDTO": {
+      "required": [
+        "type"
+      ],
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "BasePolicyFilterDTO": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "CONDITIONS": {
+      "type": "object",
+      "description": "type: CONDITIONS",
+      "allOf": [
+        {
+          "$ref": "#/$defs/BasePolicyActionDTO"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "approveWhenAllSatisfied": {
+              "title": "Approve When All Satisfied",
+              "type": "boolean",
+              "default": false
+            },
+            "rejectWhenOneRejected": {
+              "title": "Reject When One Condition is Rejected",
+              "type": "boolean",
+              "default": false
+            },
+            "conditions": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/ConditionInfo"
+              }
+            },
+            "failPolicyCheck": {
+              "title": "Fail Policy Check",
+              "type": "boolean",
+              "default": false
+            }
+          }
+        }
+      ]
+    },
+    "CREATE_ISSUE": {
+      "required": [
+        "issueTrackerType"
+      ],
+      "type": "object",
+      "description": "type: CREATE_ISSUE",
+      "allOf": [
+        {
+          "$ref": "#/$defs/BasePolicyActionDTO"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "failPolicyCheck": {
+              "title": "Fail Policy Check",
+              "type": "boolean",
+              "default": false
+            },
+            "issueTrackerType": {
+              "title": "Issue Tracker Type",
+              "type": "string",
+              "enum": [
+                "COMMON_ISSUE_TRACKER"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "ConditionInfo": {
+      "required": [
+        "conditionText",
+        "duePeriod"
+      ],
+      "type": "object",
+      "properties": {
+        "duty": {
+          "type": "string",
+          "enum": [
+            "REQUESTER",
+            "APPROVER"
+          ]
+        },
+        "user": {
+          "$ref": "#/$defs/PolicyUserDTO"
+        },
+        "group": {
+          "$ref": "#/$defs/PolicyGroupDTO"
+        },
+        "conditionText": {
+          "title": "Condition Description",
+          "type": "string"
+        },
+        "duePeriod": {
+          "title": "Due Period",
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "description": "Condition will apply to duty or user or group"
+    },
+    "PolicyContextDTO": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "title": "Policy Uuid",
+          "type": "string"
+        },
+        "name": {
+          "title": "Context Name",
+          "type": "string"
+        },
+        "contextType": {
+          "title": "ContextType",
+          "type": "string",
+          "enum": [
+            "ORGS",
+            "PRODUCTS",
+            "PROJECTS"
+          ]
+        }
+      }
+    },
+    "PolicyDTO": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "title": "Policy Uuid",
+          "type": "string"
+        },
+        "name": {
+          "title": "Policy Name",
+          "type": "string"
+        },
+        "owner": {
+          "$ref": "#/$defs/UserInfoDTO"
+        },
+        "createdAt": {
+          "title": "Policy Creation Date",
+          "type": "string",
+          "format": "date-time"
+        },
+        "priority": {
+          "title": "Priority",
+          "type": "integer",
+          "description": "1 is the lowest priority",
+          "format": "int32"
+        },
+        "filter": {
+          "$ref": "#/$defs/BasePolicyFilterDTO"
+        },
+        "action": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/APPROVE"
+            },
+            {
+              "$ref": "#/$defs/CONDITIONS"
+            },
+            {
+              "$ref": "#/$defs/CREATE_ISSUE"
+            },
+            {
+              "$ref": "#/$defs/REASSIGN"
+            },
+            {
+              "$ref": "#/$defs/REJECT"
+            }
+          ]
+        },
+        "context": {
+          "$ref": "#/$defs/PolicyContextDTO"
+        },
+        "enabled": {
+          "title": "Enabled",
+          "type": "boolean"
+        },
+        "modifiedAt": {
+          "title": "Policy Modification Date",
+          "type": "string",
+          "format": "date-time"
+        },
+        "modifiedBy": {
+          "title": "Policy Modified By",
+          "type": "string"
+        },
+        "aggregatedPriority": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "description": "Policies are checked by order of priority; note that 1 is the lowest priority"
+    },
+    "PolicyGroupDTO": {
+      "required": [
+        "uuid"
+      ],
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "title": "Group Uuid",
+          "type": "string"
+        },
+        "name": {
+          "title": "Group Name",
+          "type": "string"
+        }
+      }
+    },
+    "PolicyUserDTO": {
+      "required": [
+        "uuid"
+      ],
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "title": "User Uuid",
+          "type": "string"
+        },
+        "name": {
+          "title": "User Name",
+          "type": "string"
+        },
+        "email": {
+          "title": "User Name",
+          "type": "string"
+        }
+      }
+    },
+    "REASSIGN": {
+      "type": "object",
+      "description": "type: REASSIGN",
+      "allOf": [
+        {
+          "$ref": "#/$defs/BasePolicyActionDTO"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "user": {
+              "$ref": "#/$defs/PolicyUserDTO"
+            },
+            "group": {
+              "$ref": "#/$defs/PolicyGroupDTO"
+            },
+            "failPolicyCheck": {
+              "title": "Fail Policy Check",
+              "type": "boolean",
+              "default": false
+            }
+          }
+        }
+      ]
+    },
+    "REJECT": {
+      "type": "object",
+      "description": "type: REJECT",
+      "allOf": [
+        {
+          "$ref": "#/$defs/BasePolicyActionDTO"
+        }
+      ]
+    },
+    "UserInfoDTO": {
+      "required": [
+        "uuid"
+      ],
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "title": "User UUID",
+          "type": "string"
+        },
+        "name": {
+          "title": "User Name",
+          "type": "string"
+        },
+        "email": {
+          "title": "User Email",
+          "type": "string"
+        },
+        "userType": {
+          "title": "Type Of User",
+          "type": "string",
+          "enum": [
+            "REGULAR",
+            "SERVICE",
+            "SCAN_SUMMARY_RECEIVER"
+          ]
+        },
+        "accountStatus": {
+          "type": "string",
+          "enum": [
+            "ACTIVE",
+            "INACTIVE",
+            "LOCKOUT"
+          ]
+        }
+      }
+    }
+  }
+}

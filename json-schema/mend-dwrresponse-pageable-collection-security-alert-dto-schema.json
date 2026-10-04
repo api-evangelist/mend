@@ -1,0 +1,731 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mend/main/json-schema/mend-dwrresponse-pageable-collection-security-alert-dto-schema.json",
+  "title": "DWRResponsePageableCollectionSecurityAlertDTO",
+  "description": "Provides insights into endpoint-supported pagination information",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mend-alerts-product-api-openapi.yml#/components/schemas/DWRResponsePageableCollectionSecurityAlertDTO",
+  "type": "object",
+  "properties": {
+    "additionalData": {
+      "title": "Provides insights into endpoint-supported pagination information.",
+      "type": "object",
+      "description": "+ **totalItems**: The total count of data points returned in an API response.\n+ **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining."
+    },
+    "supportToken": {
+      "title": "Support Token",
+      "type": "string"
+    },
+    "retVal": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/SecurityAlertDTO"
+      }
+    }
+  },
+  "$defs": {
+    "AlertInfoDTO": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "title": "Alert Status",
+          "type": "string",
+          "enum": [
+            "ACTIVE",
+            "IGNORED",
+            "LIBRARY_REMOVED",
+            "LIBRARY_IN_HOUSE",
+            "LIBRARY_WHITELIST"
+          ]
+        },
+        "comment": {
+          "$ref": "#/$defs/UserCommentDTO"
+        },
+        "detectedAt": {
+          "title": "Alert Detection Date",
+          "type": "string",
+          "format": "date-time"
+        },
+        "modifiedAt": {
+          "title": "Alert Modification Date",
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "AlertIntegrationDTO": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "title": "Risk Integration Status",
+          "type": "string",
+          "enum": [
+            "SUCCESS",
+            "FAILURE",
+            "PROCESSING"
+          ]
+        },
+        "issues": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/IssueTrackerDTO"
+          }
+        }
+      }
+    },
+    "BaseLocationComponentDTO": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "title": "Component UUID",
+          "type": "string"
+        },
+        "name": {
+          "title": "Component Name",
+          "type": "string"
+        },
+        "description": {
+          "title": "Component Description",
+          "type": "string"
+        },
+        "componentType": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "libraryType": {
+          "title": "Library Type",
+          "type": "string"
+        },
+        "directDependency": {
+          "title": "Direct Dependency",
+          "type": "boolean"
+        },
+        "dependencyType": {
+          "title": "Dependency Type",
+          "type": "string"
+        },
+        "references": {
+          "$ref": "#/$defs/ComponentReferencesDTO"
+        },
+        "groupId": {
+          "title": "Component Name",
+          "type": "string"
+        },
+        "artifactId": {
+          "title": "Component Artifact",
+          "type": "string"
+        },
+        "version": {
+          "title": "Component Version",
+          "type": "string"
+        },
+        "dependencyFile": {
+          "type": "string"
+        },
+        "localPath": {
+          "type": "string"
+        },
+        "libraryLocations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/LibraryLocationDTO"
+          }
+        }
+      },
+      "anyOf": [
+        {
+          "$ref": "#/$defs/LibraryLocationComponentDTO"
+        },
+        {
+          "$ref": "#/$defs/SourceFileLocationComponentDTO"
+        }
+      ]
+    },
+    "ComponentReferencesDTO": {
+      "title": "Component References",
+      "type": "object",
+      "properties": {
+        "url": {
+          "title": "Reference Url",
+          "type": "string"
+        },
+        "homePage": {
+          "title": "Reference Home Page",
+          "type": "string"
+        },
+        "downloadLink": {
+          "title": "Reference Download Link",
+          "type": "string"
+        },
+        "issueUrl": {
+          "title": "Reference Issue Url",
+          "type": "string"
+        },
+        "pomUrl": {
+          "title": "Reference Pom Url",
+          "type": "string"
+        },
+        "scmUrl": {
+          "title": "Reference Scm Url",
+          "type": "string"
+        },
+        "genericPackageIndex": {
+          "title": "Reference Generic Package Index",
+          "type": "string"
+        },
+        "nugetGallery": {
+          "title": "Reference Nugget Gallery",
+          "type": "string"
+        },
+        "tags": {
+          "title": "Reference Tags",
+          "type": "string"
+        },
+        "copyright": {
+          "title": "Reference Copyright",
+          "type": "string"
+        },
+        "hasNotice": {
+          "title": "Reference Has Notice",
+          "type": "boolean"
+        }
+      }
+    },
+    "EffectiveVulnerabilityInfoDTO": {
+      "type": "object",
+      "properties": {
+        "referenceCount": {
+          "title": "Vulnerability Reference Count",
+          "type": "integer",
+          "format": "int32"
+        },
+        "shieldValue": {
+          "title": "Shield Value",
+          "type": "integer",
+          "description": "RED(15), YELLOW(10), GREY(8), NO_SHIELD(6), GREEN(5)",
+          "format": "int32"
+        }
+      }
+    },
+    "IssueTrackerDTO": {
+      "type": "object",
+      "properties": {
+        "issueStatus": {
+          "title": "Issue Status",
+          "type": "string"
+        },
+        "url": {
+          "title": "Issue URL",
+          "type": "string"
+        },
+        "issueTrackerType": {
+          "title": "Issue Integration Type",
+          "type": "string"
+        },
+        "issueIdentifier": {
+          "title": "Issue Identifier",
+          "type": "string"
+        }
+      }
+    },
+    "LibraryLocationComponentDTO": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "title": "Component UUID",
+          "type": "string"
+        },
+        "name": {
+          "title": "Component Name",
+          "type": "string"
+        },
+        "description": {
+          "title": "Component Description",
+          "type": "string"
+        },
+        "componentType": {
+          "title": "Component Type",
+          "type": "string",
+          "enum": [
+            "Library"
+          ]
+        },
+        "type": {
+          "type": "string"
+        },
+        "libraryType": {
+          "title": "Library Type",
+          "type": "string"
+        },
+        "directDependency": {
+          "title": "Direct Dependency",
+          "type": "boolean"
+        },
+        "dependencyType": {
+          "title": "Dependency Type",
+          "type": "string"
+        },
+        "references": {
+          "$ref": "#/$defs/ComponentReferencesDTO"
+        },
+        "groupId": {
+          "title": "Component Name",
+          "type": "string"
+        },
+        "artifactId": {
+          "title": "Component Artifact",
+          "type": "string"
+        },
+        "version": {
+          "title": "Component Version",
+          "type": "string"
+        },
+        "dependencyFile": {
+          "type": "string"
+        },
+        "localPath": {
+          "type": "string"
+        },
+        "libraryLocations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/LibraryLocationDTO"
+          }
+        }
+      }
+    },
+    "LibraryLocationDTO": {
+      "type": "object",
+      "properties": {
+        "localPath": {
+          "title": "Local Path",
+          "type": "string"
+        },
+        "dependencyFile": {
+          "title": "Dependency File",
+          "type": "string"
+        }
+      }
+    },
+    "ProductDTO": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "title": "Product Uuid",
+          "type": "string"
+        },
+        "name": {
+          "title": "Product Name",
+          "type": "string"
+        }
+      }
+    },
+    "ProjectDTO": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "title": "Project UUID",
+          "type": "string"
+        },
+        "name": {
+          "title": "Project Name",
+          "type": "string"
+        },
+        "path": {
+          "title": "Product Name",
+          "type": "string"
+        },
+        "productName": {
+          "title": "Product Name",
+          "type": "string"
+        },
+        "productUuid": {
+          "title": "Product Uuid",
+          "type": "string"
+        }
+      }
+    },
+    "SecurityAlertDTO": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "title": "Alert Uuid",
+          "type": "string"
+        },
+        "name": {
+          "title": "Alert Name",
+          "type": "string",
+          "description": "Identifier of the alert, changes based on alert type"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "SECURITY_VULNERABILITY"
+          ]
+        },
+        "alertInfo": {
+          "$ref": "#/$defs/AlertInfoDTO"
+        },
+        "project": {
+          "$ref": "#/$defs/ProjectDTO"
+        },
+        "product": {
+          "$ref": "#/$defs/ProductDTO"
+        },
+        "component": {
+          "$ref": "#/$defs/BaseLocationComponentDTO"
+        },
+        "vulnerability": {
+          "$ref": "#/$defs/VulnerabilityProfileDTO"
+        },
+        "topFix": {
+          "$ref": "#/$defs/VulnerabilityFixInfoDTO"
+        },
+        "effective": {
+          "title": "Effective Value",
+          "type": "string",
+          "enum": [
+            "RED",
+            "YELLOW",
+            "GREY",
+            "NO_SHIELD",
+            "GREEN"
+          ]
+        },
+        "alertIntegration": {
+          "$ref": "#/$defs/AlertIntegrationDTO"
+        },
+        "threatAssessment": {
+          "$ref": "#/$defs/ThreatAssessmentDTO"
+        },
+        "exploitable": {
+          "title": "Is Vulnerability Exploitable",
+          "type": "boolean"
+        },
+        "scoreMetadataVector": {
+          "type": "string"
+        },
+        "malicious": {
+          "title": "Is Vulnerability Malicious",
+          "type": "boolean"
+        },
+        "violations": {
+          "title": "Number Of Violations",
+          "type": "integer",
+          "format": "int32"
+        },
+        "workflowUuids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SourceFileLocationComponentDTO": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "title": "Component UUID",
+          "type": "string"
+        },
+        "name": {
+          "title": "Component Name",
+          "type": "string"
+        },
+        "description": {
+          "title": "Component Description",
+          "type": "string"
+        },
+        "componentType": {
+          "title": "Component Type",
+          "type": "string",
+          "enum": [
+            "Source File"
+          ]
+        },
+        "type": {
+          "type": "string"
+        },
+        "libraryType": {
+          "title": "Library Type",
+          "type": "string"
+        },
+        "directDependency": {
+          "title": "Direct Dependency",
+          "type": "boolean"
+        },
+        "dependencyType": {
+          "title": "Dependency Type",
+          "type": "string"
+        },
+        "references": {
+          "$ref": "#/$defs/ComponentReferencesDTO"
+        },
+        "groupId": {
+          "title": "Component Name",
+          "type": "string"
+        },
+        "artifactId": {
+          "title": "Component Artifact",
+          "type": "string"
+        },
+        "version": {
+          "title": "Component Version",
+          "type": "string"
+        },
+        "dependencyFile": {
+          "type": "string"
+        },
+        "localPath": {
+          "type": "string"
+        },
+        "libraryLocations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/LibraryLocationDTO"
+          }
+        },
+        "sourceFile": {
+          "title": "Source File Name",
+          "type": "string"
+        },
+        "sourceFileUuid": {
+          "title": "Source File UUID",
+          "type": "string"
+        }
+      }
+    },
+    "ThreatAssessmentDTO": {
+      "type": "object",
+      "properties": {
+        "exploitCodeMaturity": {
+          "title": "Exploit Code Maturity",
+          "type": "string",
+          "enum": [
+            "UNPROVEN",
+            "POC_CODE",
+            "FUNCTIONAL",
+            "HIGH",
+            "NOT_DEFINED"
+          ]
+        },
+        "epssPercentage": {
+          "title": "Epss Percentage",
+          "type": "number",
+          "format": "float"
+        }
+      }
+    },
+    "UserCommentDTO": {
+      "type": "object",
+      "properties": {
+        "comment": {
+          "title": "Comment",
+          "type": "string"
+        },
+        "date": {
+          "title": "comment date",
+          "type": "string",
+          "format": "date-time"
+        },
+        "userEmail": {
+          "title": "User Email",
+          "type": "string"
+        },
+        "username": {
+          "title": "User Email",
+          "type": "string"
+        }
+      }
+    },
+    "VulnerabilityFixInfoDTO": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "integer",
+          "format": "int32"
+        },
+        "vulnerability": {
+          "title": "Vulnerability Name",
+          "type": "string"
+        },
+        "type": {
+          "title": "Type",
+          "type": "string",
+          "enum": [
+            "CHANGE_FILES",
+            "PATCH",
+            "UPGRADE_VERSION"
+          ]
+        },
+        "origin": {
+          "title": "Origin",
+          "type": "string"
+        },
+        "url": {
+          "title": "Url",
+          "type": "string"
+        },
+        "fixResolution": {
+          "title": "Fix Resolution",
+          "type": "string"
+        },
+        "date": {
+          "title": "Date",
+          "type": "string",
+          "format": "date-time"
+        },
+        "message": {
+          "title": "Message",
+          "type": "string"
+        },
+        "extraData": {
+          "type": "string"
+        },
+        "minimalFixVersionFromExtraData": {
+          "type": "string"
+        },
+        "minimalAffectedVersionFromExtraData": {
+          "type": "string"
+        }
+      }
+    },
+    "VulnerabilityProfileDTO": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "title": "Vulnerability Name",
+          "type": "string"
+        },
+        "type": {
+          "title": "VulnerabilityType",
+          "type": "string",
+          "enum": [
+            "CVE",
+            "WS"
+          ]
+        },
+        "description": {
+          "title": "Vulnerability Description",
+          "type": "string"
+        },
+        "score": {
+          "title": "Vulnerability Score",
+          "type": "number",
+          "format": "float"
+        },
+        "severity": {
+          "title": "Vulnerability Severity",
+          "type": "string",
+          "enum": [
+            "HIGH",
+            "MEDIUM",
+            "LOW"
+          ]
+        },
+        "publishDate": {
+          "title": "Vulnerability Publish Date",
+          "type": "string",
+          "format": "date-time"
+        },
+        "modifiedDate": {
+          "title": "Vulnerability Modified Date",
+          "type": "string",
+          "format": "date-time"
+        },
+        "vulnerabilityScoring": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/VulnerabilityScoringDTO"
+          }
+        },
+        "references": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/VulnerabilityReferenceDTO"
+          }
+        },
+        "effectiveInfo": {
+          "$ref": "#/$defs/EffectiveVulnerabilityInfoDTO"
+        },
+        "threatAssessment": {
+          "$ref": "#/$defs/ThreatAssessmentDTO"
+        }
+      }
+    },
+    "VulnerabilityReferenceDTO": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "title": "Vulnerability Reference Value",
+          "type": "string"
+        },
+        "source": {
+          "title": "vulnerability reference source",
+          "type": "string"
+        },
+        "url": {
+          "title": "Vulnerability Reference Url",
+          "type": "string"
+        },
+        "signature": {
+          "title": "Vulnerability Reference Signature",
+          "type": "boolean"
+        },
+        "advisory": {
+          "title": "Vulnerability Reference Advisory",
+          "type": "boolean"
+        },
+        "patch": {
+          "title": "Vulnerability Reference Patch",
+          "type": "boolean"
+        }
+      }
+    },
+    "VulnerabilityScoringDTO": {
+      "type": "object",
+      "properties": {
+        "score": {
+          "title": "Vulnerability Score",
+          "type": "number",
+          "format": "float"
+        },
+        "severity": {
+          "title": "Vulnerability Severity",
+          "type": "string",
+          "enum": [
+            "LOW",
+            "HIGH",
+            "MEDIUM"
+          ]
+        },
+        "type": {
+          "title": "Vulnerability Score Type",
+          "type": "string",
+          "enum": [
+            "CVSS_2",
+            "CVSS_3"
+          ]
+        },
+        "scoreMetadataVector": {
+          "title": "Score Metadata Vector",
+          "type": "string"
+        },
+        "extraData": {
+          "title": "Vulnerability Extra Data",
+          "type": "object",
+          "additionalProperties": {
+            "title": "Vulnerability Extra Data",
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

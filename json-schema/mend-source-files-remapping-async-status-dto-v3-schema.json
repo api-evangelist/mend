@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mend/main/json-schema/mend-source-files-remapping-async-status-dto-v3-schema.json",
+  "title": "SourceFilesRemappingAsyncStatusDtoV3",
+  "description": "Async process status for source file remapping operations",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mend-dependencies-source-files-api-openapi.yml#/components/schemas/SourceFilesRemappingAsyncStatusDtoV3",
+  "type": "object",
+  "properties": {
+    "uuid": {
+      "title": "Process UUID",
+      "type": "string",
+      "description": "The unique identifier of the async process"
+    },
+    "status": {
+      "title": "Process Status",
+      "type": "string",
+      "description": "The current status of the async process",
+      "enum": [
+        "PENDING",
+        "IN_PROGRESS",
+        "FAILED",
+        "FAILURE",
+        "SUCCESS"
+      ]
+    },
+    "userEmail": {
+      "title": "User Email",
+      "type": "string",
+      "description": "Email of the user who initiated the process"
+    },
+    "requestToken": {
+      "title": "Request Token",
+      "type": "string",
+      "description": "Short token for tracking the request"
+    }
+  }
+}

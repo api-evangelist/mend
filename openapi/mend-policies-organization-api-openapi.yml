@@ -277,91 +277,6 @@ paths:
                 $ref: '#/components/schemas/DWRResponseBase'
 components:
   schemas:
-    PRIMARY_ATTRIBUTE_VALUE:
-      required:
-      - attributeValue
-      type: object
-      properties:
-        type:
-          type: string
-        attributeValue:
-          title: Attribute Value
-          type: string
-          example: value
-      description: 'type: PRIMARY_ATTRIBUTE_VALUE'
-    CONDITIONS:
-      type: object
-      description: 'type: CONDITIONS'
-      allOf:
-      - $ref: '#/components/schemas/BasePolicyActionDTO'
-      - type: object
-        properties:
-          approveWhenAllSatisfied:
-            title: Approve When All Satisfied
-            type: boolean
-            default: false
-          rejectWhenOneRejected:
-            title: Reject When One Condition is Rejected
-            type: boolean
-            default: false
-          conditions:
-            type: array
-            items:
-              $ref: '#/components/schemas/ConditionInfo'
-          failPolicyCheck:
-            title: Fail Policy Check
-            type: boolean
-            default: false
-    PRODUCT:
-      required:
-      - productToken
-      type: object
-      properties:
-        type:
-          type: string
-        productToken:
-          title: Product Token
-          type: string
-          example: 123e4567-e89b-12d3-a456-426655440000
-        productName:
-          title: Product Name
-          type: string
-          description: 'product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**).'
-          example: Product A
-      description: 'type: PRODUCT'
-    PolicyUserDTO:
-      required:
-      - uuid
-      type: object
-      properties:
-        uuid:
-          title: User Uuid
-          type: string
-          example: 123e4567-e89b-12d3-a456-426655440000
-        name:
-          title: User Name
-          type: string
-          example: jon.smith
-        email:
-          title: User Name
-          type: string
-          example: jon.smith@mail.com
-    LICENSE:
-      required:
-      - licenses
-      type: object
-      properties:
-        type:
-          type: string
-        licenses:
-          type: array
-          items:
-            $ref: '#/components/schemas/PolicyLicenseDTO'
-        inclusive:
-          title: Inclusive
-          type: boolean
-          description: Trigger only when ALL licenses of the library are matched
-      description: 'type: LICENSE'
     ConditionInfo:
       required:
       - conditionText
@@ -387,195 +302,7 @@ components:
           format: int32
           example: 10
       description: Condition will apply to duty or user or group
-    UpdatePrioritiesRequestDTO:
-      required:
-      - uuids
-      type: object
-      properties:
-        uuids:
-          type: array
-          items:
-            title: Policy Uuid
-            type: string
-            example: 123e4567-e89b-12d3-a456-426655440000
-      description: Must contain all policy uuids
-    PolicyGroupDTO:
-      required:
-      - uuid
-      type: object
-      properties:
-        uuid:
-          title: Group Uuid
-          type: string
-          example: 123e4567-e89b-12d3-a456-426655440000
-        name:
-          title: Group Name
-          type: string
-          example: Group A
-    DWRResponseBase:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-    VULNERABILITY_SCORE:
-      type: object
-      properties:
-        type:
-          type: string
-        from:
-          type: number
-          format: float
-        to:
-          type: number
-          format: float
-      description: 'type: VULNERABILITY_SCORE'
-    PolicyRequestDTO:
-      required:
-      - action
-      - filter
-      - name
-      type: object
-      properties:
-        name:
-          title: Policy Name
-          type: string
-          example: License Policy
-        filter:
-          type: object
-          oneOf:
-          - $ref: '#/components/schemas/GAV_REGEX'
-          - $ref: '#/components/schemas/LIBRARY_REQUEST_HISTORY'
-          - $ref: '#/components/schemas/LIBRARY_STALENESS'
-          - $ref: '#/components/schemas/LICENSE'
-          - $ref: '#/components/schemas/PRIMARY_ATTRIBUTE_VALUE'
-          - $ref: '#/components/schemas/PRODUCT'
-          - $ref: '#/components/schemas/ReferenceNameRequiredException'
-          - $ref: '#/components/schemas/EFFECTIVENESS'
-          - $ref: '#/components/schemas/VULNERABILITY_SCORE'
-        action:
-          oneOf:
-          - $ref: '#/components/schemas/APPROVE'
-          - $ref: '#/components/schemas/CONDITIONS'
-          - $ref: '#/components/schemas/CREATE_ISSUE'
-          - $ref: '#/components/schemas/REASSIGN'
-          - $ref: '#/components/schemas/REJECT'
-        enabled:
-          title: Enabled
-          type: boolean
-          default: true
-    LIBRARY_REQUEST_HISTORY:
-      required:
-      - libraryRequestHistory
-      type: object
-      properties:
-        type:
-          type: string
-        libraryRequestHistory:
-          title: Library Request History
-          type: string
-          enum:
-          - APPROVED_AT_LEAST_ONCE
-          - APPROVED_AT_LEAST_ONCE_OR_PENDING
-          - REJECTED_AT_LEAST_ONCE
-          - REJECTED_AT_LEAST_ONCE_OR_PENDING
-          - PENDING
-      description: 'type: LIBRARY_REQUEST_HISTORY'
-    DWRResponseAsyncProcessStatusV2DTO:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/AsyncProcessStatusV2DTO'
-    MessageDTO:
-      type: object
-      properties:
-        message:
-          title: message
-          type: string
-          example: Success!
-    EFFECTIVENESS:
-      required:
-      - shieldValue
-      type: object
-      properties:
-        type:
-          type: string
-        shieldValue:
-          title: Effective Value
-          type: string
-          enum:
-          - RED
-          - YELLOW
-          - GREY
-          - NO_SHIELD
-          - GREEN
-      description: 'type: EFFECTIVENESS'
-    REASSIGN:
-      type: object
-      description: 'type: REASSIGN'
-      allOf:
-      - $ref: '#/components/schemas/BasePolicyActionDTO'
-      - type: object
-        properties:
-          user:
-            $ref: '#/components/schemas/PolicyUserDTO'
-          group:
-            $ref: '#/components/schemas/PolicyGroupDTO'
-          failPolicyCheck:
-            title: Fail Policy Check
-            type: boolean
-            default: false
-    BasePolicyActionDTO:
-      required:
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-      discriminator:
-        propertyName: type
-    GAV_REGEX:
-      type: object
-      properties:
-        type:
-          type: string
-        groupIdRegex:
-          title: Group Id Regex
-          type: string
-          example: /**
-        artifactIdRegex:
-          title: Artifact Id Regex
-          type: string
-          example: /**
-        versionRegex:
-          title: Version Regex
-          type: string
-          example: /**
-      description: 'type: GAV_REGEX'
-    REJECT:
-      type: object
-      description: 'type: REJECT'
-      allOf:
-      - $ref: '#/components/schemas/BasePolicyActionDTO'
-    LIBRARY_STALENESS:
-      required:
-      - monthsBack
-      type: object
-      properties:
-        type:
-          type: string
-        monthsBack:
-          title: Months Back
-          type: integer
-          format: int32
-          example: 36
-      description: 'type: LIBRARY_STALENESS'
-    PolicyDTO:
+    PolicyContextDTO:
       type: object
       properties:
         uuid:
@@ -583,52 +310,24 @@ components:
           type: string
           example: 123e4567-e89b-12d3-a456-426655440000
         name:
-          title: Policy Name
+          title: Context Name
           type: string
-          example: A Policy
-        owner:
-          $ref: '#/components/schemas/UserInfoDTO'
-        createdAt:
-          title: Policy Creation Date
+          example: Context A
+        contextType:
+          title: ContextType
           type: string
-          format: date-time
-        priority:
-          title: Priority
-          type: integer
-          description: 1 is the lowest priority
-          format: int32
-          example: 1
-        filter:
-          $ref: '#/components/schemas/BasePolicyFilterDTO'
-        action:
-          oneOf:
-          - $ref: '#/components/schemas/APPROVE'
-          - $ref: '#/components/schemas/CONDITIONS'
-          - $ref: '#/components/schemas/CREATE_ISSUE'
-          - $ref: '#/components/schemas/REASSIGN'
-          - $ref: '#/components/schemas/REJECT'
-        context:
-          $ref: '#/components/schemas/PolicyContextDTO'
-        enabled:
-          title: Enabled
-          type: boolean
-        modifiedAt:
-          title: Policy Modification Date
-          type: string
-          format: date-time
-        modifiedBy:
-          title: Policy Modified By
-          type: string
-          example: jon.smith@mail.com
-        aggregatedPriority:
-          type: integer
-          format: int32
-      description: Policies are checked by order of priority; note that 1 is the lowest priority
-    BasePolicyFilterDTO:
+          example: orgs
+          enum:
+          - ORGS
+          - PRODUCTS
+          - PROJECTS
+    MessageDTO:
       type: object
       properties:
-        type:
+        message:
+          title: message
           type: string
+          example: Success!
     DWRResponseCollectionPolicyDTO:
       type: object
       properties:
@@ -649,6 +348,48 @@ components:
           example: 1171c60d
         retVal:
           $ref: '#/components/schemas/MessageDTO'
+    EFFECTIVENESS:
+      required:
+      - shieldValue
+      type: object
+      properties:
+        type:
+          type: string
+        shieldValue:
+          title: Effective Value
+          type: string
+          enum:
+          - RED
+          - YELLOW
+          - GREY
+          - NO_SHIELD
+          - GREEN
+      description: 'type: EFFECTIVENESS'
+    LIBRARY_STALENESS:
+      required:
+      - monthsBack
+      type: object
+      properties:
+        type:
+          type: string
+        monthsBack:
+          title: Months Back
+          type: integer
+          format: int32
+          example: 36
+      description: 'type: LIBRARY_STALENESS'
+    PRIMARY_ATTRIBUTE_VALUE:
+      required:
+      - attributeValue
+      type: object
+      properties:
+        type:
+          type: string
+        attributeValue:
+          title: Attribute Value
+          type: string
+          example: value
+      description: 'type: PRIMARY_ATTRIBUTE_VALUE'
     DWRResponsePolicyDTO:
       type: object
       properties:
@@ -658,74 +399,15 @@ components:
           example: 1171c60d
         retVal:
           $ref: '#/components/schemas/PolicyDTO'
-    PolicyLicenseDTO:
+    BasePolicyActionDTO:
       required:
-      - name
+      - type
       type: object
       properties:
-        uuid:
-          title: License Uuid
+        type:
           type: string
-          example: 123e4567-e89b-12d3-a456-426655440000
-        name:
-          title: License Name
-          type: string
-          example: MIT
-    CREATE_ISSUE:
-      required:
-      - issueTrackerType
-      type: object
-      description: 'type: CREATE_ISSUE'
-      allOf:
-      - $ref: '#/components/schemas/BasePolicyActionDTO'
-      - type: object
-        properties:
-          failPolicyCheck:
-            title: Fail Policy Check
-            type: boolean
-            default: false
-          issueTrackerType:
-            title: Issue Tracker Type
-            type: string
-            example: COMMON_ISSUE_TRACKER
-            enum:
-            - COMMON_ISSUE_TRACKER
-    UserInfoDTO:
-      required:
-      - uuid
-      type: object
-      properties:
-        uuid:
-          title: User UUID
-          type: string
-          example: 123e4567-e89b-12d3-a456-426655440000
-        name:
-          title: User Name
-          type: string
-          example: Jon Smith
-        email:
-          title: User Email
-          type: string
-          example: jon.smith@mail.com
-        userType:
-          title: Type Of User
-          type: string
-          example: REGULAR
-          enum:
-          - REGULAR
-          - SERVICE
-          - SCAN_SUMMARY_RECEIVER
-        accountStatus:
-          type: string
-          enum:
-          - ACTIVE
-          - INACTIVE
-          - LOCKOUT
-    APPROVE:
-      type: object
-      description: 'type: APPROVE'
-      allOf:
-      - $ref: '#/components/schemas/BasePolicyActionDTO'
+      discriminator:
+        propertyName: type
     AsyncProcessStatusV2DTO:
       type: object
       properties:
@@ -784,7 +466,21 @@ components:
           title: userMail
           type: string
           example: sample@mail.com
-    PolicyContextDTO:
+    BasePolicyFilterDTO:
+      type: object
+      properties:
+        type:
+          type: string
+    DWRResponseAsyncProcessStatusV2DTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/AsyncProcessStatusV2DTO'
+    PolicyDTO:
       type: object
       properties:
         uuid:
@@ -792,17 +488,85 @@ components:
           type: string
           example: 123e4567-e89b-12d3-a456-426655440000
         name:
-          title: Context Name
+          title: Policy Name
           type: string
-          example: Context A
-        contextType:
-          title: ContextType
+          example: A Policy
+        owner:
+          $ref: '#/components/schemas/UserInfoDTO'
+        createdAt:
+          title: Policy Creation Date
           type: string
-          example: orgs
-          enum:
-          - ORGS
-          - PRODUCTS
-          - PROJECTS
+          format: date-time
+        priority:
+          title: Priority
+          type: integer
+          description: 1 is the lowest priority
+          format: int32
+          example: 1
+        filter:
+          $ref: '#/components/schemas/BasePolicyFilterDTO'
+        action:
+          oneOf:
+          - $ref: '#/components/schemas/APPROVE'
+          - $ref: '#/components/schemas/CONDITIONS'
+          - $ref: '#/components/schemas/CREATE_ISSUE'
+          - $ref: '#/components/schemas/REASSIGN'
+          - $ref: '#/components/schemas/REJECT'
+        context:
+          $ref: '#/components/schemas/PolicyContextDTO'
+        enabled:
+          title: Enabled
+          type: boolean
+        modifiedAt:
+          title: Policy Modification Date
+          type: string
+          format: date-time
+        modifiedBy:
+          title: Policy Modified By
+          type: string
+          example: jon.smith@mail.com
+        aggregatedPriority:
+          type: integer
+          format: int32
+      description: Policies are checked by order of priority; note that 1 is the lowest priority
+    GAV_REGEX:
+      type: object
+      properties:
+        type:
+          type: string
+        groupIdRegex:
+          title: Group Id Regex
+          type: string
+          example: /**
+        artifactIdRegex:
+          title: Artifact Id Regex
+          type: string
+          example: /**
+        versionRegex:
+          title: Version Regex
+          type: string
+          example: /**
+      description: 'type: GAV_REGEX'
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+    PolicyGroupDTO:
+      required:
+      - uuid
+      type: object
+      properties:
+        uuid:
+          title: Group Uuid
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Group Name
+          type: string
+          example: Group A
     ReferenceNameRequiredException:
       type: object
       properties:
@@ -953,6 +717,242 @@ components:
                 type: string
         localizedMessage:
           type: string
+    CONDITIONS:
+      type: object
+      description: 'type: CONDITIONS'
+      allOf:
+      - $ref: '#/components/schemas/BasePolicyActionDTO'
+      - type: object
+        properties:
+          approveWhenAllSatisfied:
+            title: Approve When All Satisfied
+            type: boolean
+            default: false
+          rejectWhenOneRejected:
+            title: Reject When One Condition is Rejected
+            type: boolean
+            default: false
+          conditions:
+            type: array
+            items:
+              $ref: '#/components/schemas/ConditionInfo'
+          failPolicyCheck:
+            title: Fail Policy Check
+            type: boolean
+            default: false
+    PolicyLicenseDTO:
+      required:
+      - name
+      type: object
+      properties:
+        uuid:
+          title: License Uuid
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: License Name
+          type: string
+          example: MIT
+    REASSIGN:
+      type: object
+      description: 'type: REASSIGN'
+      allOf:
+      - $ref: '#/components/schemas/BasePolicyActionDTO'
+      - type: object
+        properties:
+          user:
+            $ref: '#/components/schemas/PolicyUserDTO'
+          group:
+            $ref: '#/components/schemas/PolicyGroupDTO'
+          failPolicyCheck:
+            title: Fail Policy Check
+            type: boolean
+            default: false
+    LIBRARY_REQUEST_HISTORY:
+      required:
+      - libraryRequestHistory
+      type: object
+      properties:
+        type:
+          type: string
+        libraryRequestHistory:
+          title: Library Request History
+          type: string
+          enum:
+          - APPROVED_AT_LEAST_ONCE
+          - APPROVED_AT_LEAST_ONCE_OR_PENDING
+          - REJECTED_AT_LEAST_ONCE
+          - REJECTED_AT_LEAST_ONCE_OR_PENDING
+          - PENDING
+      description: 'type: LIBRARY_REQUEST_HISTORY'
+    APPROVE:
+      type: object
+      description: 'type: APPROVE'
+      allOf:
+      - $ref: '#/components/schemas/BasePolicyActionDTO'
+    CREATE_ISSUE:
+      required:
+      - issueTrackerType
+      type: object
+      description: 'type: CREATE_ISSUE'
+      allOf:
+      - $ref: '#/components/schemas/BasePolicyActionDTO'
+      - type: object
+        properties:
+          failPolicyCheck:
+            title: Fail Policy Check
+            type: boolean
+            default: false
+          issueTrackerType:
+            title: Issue Tracker Type
+            type: string
+            example: COMMON_ISSUE_TRACKER
+            enum:
+            - COMMON_ISSUE_TRACKER
+    PolicyRequestDTO:
+      required:
+      - action
+      - filter
+      - name
+      type: object
+      properties:
+        name:
+          title: Policy Name
+          type: string
+          example: License Policy
+        filter:
+          type: object
+          oneOf:
+          - $ref: '#/components/schemas/GAV_REGEX'
+          - $ref: '#/components/schemas/LIBRARY_REQUEST_HISTORY'
+          - $ref: '#/components/schemas/LIBRARY_STALENESS'
+          - $ref: '#/components/schemas/LICENSE'
+          - $ref: '#/components/schemas/PRIMARY_ATTRIBUTE_VALUE'
+          - $ref: '#/components/schemas/PRODUCT'
+          - $ref: '#/components/schemas/ReferenceNameRequiredException'
+          - $ref: '#/components/schemas/EFFECTIVENESS'
+          - $ref: '#/components/schemas/VULNERABILITY_SCORE'
+        action:
+          oneOf:
+          - $ref: '#/components/schemas/APPROVE'
+          - $ref: '#/components/schemas/CONDITIONS'
+          - $ref: '#/components/schemas/CREATE_ISSUE'
+          - $ref: '#/components/schemas/REASSIGN'
+          - $ref: '#/components/schemas/REJECT'
+        enabled:
+          title: Enabled
+          type: boolean
+          default: true
+    UpdatePrioritiesRequestDTO:
+      required:
+      - uuids
+      type: object
+      properties:
+        uuids:
+          type: array
+          items:
+            title: Policy Uuid
+            type: string
+            example: 123e4567-e89b-12d3-a456-426655440000
+      description: Must contain all policy uuids
+    PolicyUserDTO:
+      required:
+      - uuid
+      type: object
+      properties:
+        uuid:
+          title: User Uuid
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: User Name
+          type: string
+          example: jon.smith
+        email:
+          title: User Name
+          type: string
+          example: jon.smith@mail.com
+    VULNERABILITY_SCORE:
+      type: object
+      properties:
+        type:
+          type: string
+        from:
+          type: number
+          format: float
+        to:
+          type: number
+          format: float
+      description: 'type: VULNERABILITY_SCORE'
+    REJECT:
+      type: object
+      description: 'type: REJECT'
+      allOf:
+      - $ref: '#/components/schemas/BasePolicyActionDTO'
+    LICENSE:
+      required:
+      - licenses
+      type: object
+      properties:
+        type:
+          type: string
+        licenses:
+          type: array
+          items:
+            $ref: '#/components/schemas/PolicyLicenseDTO'
+        inclusive:
+          title: Inclusive
+          type: boolean
+          description: Trigger only when ALL licenses of the library are matched
+      description: 'type: LICENSE'
+    UserInfoDTO:
+      required:
+      - uuid
+      type: object
+      properties:
+        uuid:
+          title: User UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: User Name
+          type: string
+          example: Jon Smith
+        email:
+          title: User Email
+          type: string
+          example: jon.smith@mail.com
+        userType:
+          title: Type Of User
+          type: string
+          example: REGULAR
+          enum:
+          - REGULAR
+          - SERVICE
+          - SCAN_SUMMARY_RECEIVER
+        accountStatus:
+          type: string
+          enum:
+          - ACTIVE
+          - INACTIVE
+          - LOCKOUT
+    PRODUCT:
+      required:
+      - productToken
+      type: object
+      properties:
+        type:
+          type: string
+        productToken:
+          title: Product Token
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        productName:
+          title: Product Name
+          type: string
+          description: 'product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**).'
+          example: Product A
+      description: 'type: PRODUCT'
   securitySchemes:
     bearer-key:
       type: http

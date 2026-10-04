@@ -1,16 +1,11 @@
 aid: mend
 name: Mend
-description: >-
-  Mend.io (formerly WhiteSource) is a unified application security and AI
-  security platform that helps engineering and security teams find and
-  automatically remediate vulnerabilities across open-source dependencies,
-  proprietary code, containers, and AI models/agents. Its products span Software
-  Composition Analysis (SCA), Static Application Security Testing (SAST),
-  container image scanning, SBOM generation, automated dependency updates
-  (Renovate), and AI-native security for LLM-powered applications. Mend exposes a
-  REST-compliant AppSec Platform API (v3.0) and an SCA API (v2.0) for automating
-  scans, projects, applications, findings, reports, and administration, secured
-  with a short-lived per-organization JWT obtained from a user key.
+description: Mend.io (formerly WhiteSource) is a unified application security and AI security platform that helps engineering and security teams
+  find and automatically remediate vulnerabilities across open-source dependencies, proprietary code, containers, and AI models/agents. Its products
+  span Software Composition Analysis (SCA), Static Application Security Testing (SAST), container image scanning, SBOM generation, automated dependency
+  updates (Renovate), and AI-native security for LLM-powered applications. Mend exposes a REST-compliant AppSec Platform API (v3.0) and an SCA
+  API (v2.0) for automating scans, projects, applications, findings, reports, and administration, secured with a short-lived per-organization
+  JWT obtained from a user key.
 url: https://raw.githubusercontent.com/api-evangelist/mend/refs/heads/main/apis.yml
 deliveryModel:
   model: saas
@@ -42,16 +37,11 @@ x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - lightspeed-venture-partners
-x-tier: stub
-x-tier-reason: portfolio-lead
+x-tier: profiled
+x-tier-reason: enrichment pass 2026-10-04 (modular-v1; was portfolio-lead)
 specificationVersion: '0.23'
 created: '2026-07-17'
 modified: '2026-07-20'
-x-enrichment:
-  date: '2026-07-20'
-  status: enriched
-  artifacts_added: 23
-  pass: local-v1
 tags:
 - Application Security
 - Software Composition Analysis
@@ -70,6 +60,24 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: Spectral
+  url: rules/mend-rules.yml
+- type: JSONLD
+  url: json-ld/mend-context.jsonld
+- type: Vocabulary
+  url: vocabulary/mend-vocabulary.yml
+- type: AgentCard
+  url: a2a/mend-a2a.yml
+- type: Hosts
+  url: hosts/mend-hosts.yml
+- type: Vendors
+  url: vendors/mend-vendors.yml
+- type: TermsOfService
+  url: https://www.mend.io/terms-of-service
+- type: PrivacyPolicy
+  url: https://www.mend.io/privacy-policy
+- type: Newsroom
+  url: https://www.mend.io/newsroom/
 - type: Pricing
   url: https://www.mend.io/pricing/
 - type: Plans
@@ -103,8 +111,6 @@ common:
   url: mcp/mend-mcp.yml
 - type: LLMsTxt
   url: llms/mend-llms.txt
-- type: Packages
-  url: packages/mend-packages.yml
 - type: CLI
   url: cli/mend-cli.yml
 - type: AgentSkill
@@ -152,10 +158,21 @@ apis:
     url: https://api-docs.mend.io/platform/3.0
   - type: APIReference
     url: https://api-docs.mend.io/sca/2.0
+  - type: JSONSchema
+    url: json-schema/mend-login-model-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-login-model-dtov3-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-session-info-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-v3-access-token-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-v3-login-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-session-info-schema.json
 - aid: mend:mend-access-management-organizations-api
   name: Mend Access Management - Organizations API
-  description: >-
-    The Access Management - Organizations API from Mend — 2 operation(s) for access management - organizations.
+  description: The Access Management - Organizations API from Mend — 2 operation(s) for access management - organizations.
   humanURL: https://api-docs.mend.io/platform/3.0
   baseURL: https://api-saas.mend.io
   tags:
@@ -167,6 +184,10 @@ apis:
     url: https://api-docs.mend.io/platform/3.0
   - type: APIReference
     url: https://api-docs.mend.io/sca/2.0
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-collection-domain-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-session-info-schema.json
 - aid: mend:mend-administration-groups-api
   name: Mend Administration - Groups API
   description: The Administration - Groups API from Mend — 6 operation(s) for administration - groups.
@@ -181,6 +202,18 @@ apis:
     url: https://api-docs.mend.io/platform/3.0
   - type: APIReference
     url: https://api-docs.mend.io/sca/2.0
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-pageable-v3-list-group-with-role-definitions-summary-dtov3-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-pageable-v3-list-multiple-group-roles-per-context-dtov3-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-pageable-v3-list-group-summary-dtov3-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-pageable-v3-list-user-info-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-group-role-request-dtov3-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-update-group-request-dto-schema.json
 - aid: mend:mend-administration-labels-api
   name: Mend Administration - Labels API
   description: The Administration - Labels API from Mend — 2 operation(s) for administration - labels.
@@ -195,6 +228,14 @@ apis:
     url: https://api-docs.mend.io/platform/3.0
   - type: APIReference
     url: https://api-docs.mend.io/sca/2.0
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-pageable-v3-list-organization-label-dtov3-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-domain-label-request-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-organization-label-request-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-v3-message-dto-schema.json
 - aid: mend:mend-administration-users-api
   name: Mend Administration - Users API
   description: The Administration - Users API from Mend — 5 operation(s) for administration - users.
@@ -209,6 +250,16 @@ apis:
     url: https://api-docs.mend.io/platform/3.0
   - type: APIReference
     url: https://api-docs.mend.io/sca/2.0
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-pageable-v3-list-user-info-dtov3-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-v3-user-info-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-v3-message-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-v3-boolean-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-invite-user-request-dto-schema.json
 - aid: mend:mend-ai-api
   name: Mend AI API
   description: The AI API from Mend — 1 operation(s) for ai.
@@ -225,6 +276,8 @@ apis:
     url: https://api-docs.mend.io/platform/3.0
   - type: APIReference
     url: https://api-docs.mend.io/sca/2.0
+  - type: JSONSchema
+    url: json-schema/mend-v3-v3-implementation-weakness-response-schema.json
 - aid: mend:mend-alerts-product-api
   name: Mend Alerts - Product API
   description: The Alerts - Product API from Mend — 3 operation(s) for alerts - product.
@@ -239,6 +292,12 @@ apis:
     url: https://api-docs.mend.io/platform/3.0
   - type: APIReference
     url: https://api-docs.mend.io/sca/2.0
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-pageable-collection-legal-and-compliance-alert-base-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-pageable-collection-security-alert-library-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-pageable-collection-security-alert-dto-schema.json
 - aid: mend:mend-alerts-project-api
   name: Mend Alerts - Project API
   description: The Alerts - Project API from Mend — 6 operation(s) for alerts - project.
@@ -253,6 +312,16 @@ apis:
     url: https://api-docs.mend.io/platform/3.0
   - type: APIReference
     url: https://api-docs.mend.io/sca/2.0
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-pageable-collection-legal-and-compliance-alert-base-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-pageable-collection-security-alert-library-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-pageable-collection-security-alert-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-update-risk-request-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-boolean-schema.json
 - aid: mend:mend-applications-api
   name: Mend Applications API
   description: The Applications API from Mend — 8 operation(s) for applications.
@@ -269,10 +338,21 @@ apis:
     url: https://api-docs.mend.io/platform/3.0
   - type: APIReference
     url: https://api-docs.mend.io/sca/2.0
+  - type: JSONSchema
+    url: json-schema/mend-multi-context-request-dtov3-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-pageable-v3-list-application-summary-dtov3-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-pageable-v3-collection-application-dtov3-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-pageable-v3-list-scan-summary-dtov3-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-sbom-scan-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-label-request-dtov3-schema.json
 - aid: mend:mend-asynchronous-process-control-api
   name: Mend Asynchronous Process Control API
-  description: >-
-    The Asynchronous Process Control API from Mend — 1 operation(s) for asynchronous process control.
+  description: The Asynchronous Process Control API from Mend — 1 operation(s) for asynchronous process control.
   humanURL: https://api-docs.mend.io/platform/3.0
   baseURL: https://api-saas.mend.io
   tags:
@@ -284,10 +364,11 @@ apis:
     url: https://api-docs.mend.io/platform/3.0
   - type: APIReference
     url: https://api-docs.mend.io/sca/2.0
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-async-process-status-v2-dto-schema.json
 - aid: mend:mend-customattribute-organization-api
   name: Mend CustomAttribute - Organization API
-  description: >-
-    The CustomAttribute - Organization API from Mend — 2 operation(s) for customattribute - organization.
+  description: The CustomAttribute - Organization API from Mend — 2 operation(s) for customattribute - organization.
   humanURL: https://api-docs.mend.io/platform/3.0
   baseURL: https://api-saas.mend.io
   tags:
@@ -299,10 +380,15 @@ apis:
     url: https://api-docs.mend.io/platform/3.0
   - type: APIReference
     url: https://api-docs.mend.io/sca/2.0
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-pageable-list-custom-attribute-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-message-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-custom-attribute-value-dto-schema.json
 - aid: mend:mend-customattribute-product-api
   name: Mend CustomAttribute - Product API
-  description: >-
-    The CustomAttribute - Product API from Mend — 1 operation(s) for customattribute - product.
+  description: The CustomAttribute - Product API from Mend — 1 operation(s) for customattribute - product.
   humanURL: https://api-docs.mend.io/platform/3.0
   baseURL: https://api-saas.mend.io
   tags:
@@ -314,10 +400,13 @@ apis:
     url: https://api-docs.mend.io/platform/3.0
   - type: APIReference
     url: https://api-docs.mend.io/sca/2.0
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-message-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-custom-attribute-value-dto-schema.json
 - aid: mend:mend-customattribute-project-api
   name: Mend CustomAttribute - Project API
-  description: >-
-    The CustomAttribute - Project API from Mend — 1 operation(s) for customattribute - project.
+  description: The CustomAttribute - Project API from Mend — 1 operation(s) for customattribute - project.
   humanURL: https://api-docs.mend.io/platform/3.0
   baseURL: https://api-saas.mend.io
   tags:
@@ -329,10 +418,13 @@ apis:
     url: https://api-docs.mend.io/platform/3.0
   - type: APIReference
     url: https://api-docs.mend.io/sca/2.0
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-message-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-custom-attribute-value-dto-schema.json
 - aid: mend:mend-dependencies-source-files-api
   name: Mend Dependencies Source Files API
-  description: >-
-    The Dependencies Source Files API from Mend — 8 operation(s) for dependencies source files.
+  description: The Dependencies Source Files API from Mend — 8 operation(s) for dependencies source files.
   humanURL: https://api-docs.mend.io/platform/3.0
   baseURL: https://api-saas.mend.io
   tags:
@@ -344,6 +436,18 @@ apis:
     url: https://api-docs.mend.io/platform/3.0
   - type: APIReference
     url: https://api-docs.mend.io/sca/2.0
+  - type: JSONSchema
+    url: json-schema/mend-source-file-remapping-app-request-dtov3-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-source-file-remapping-org-request-dtov3-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-library-match-suggestions-request-dtov3-match-suggestions-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-source-files-remapping-async-status-dto-v3-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-pageable-v3-collection-source-file-inventory-dtov3-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-v3-collection-source-library-response-dto-match-suggestions-schema.json
 - aid: mend:mend-domain-controller-api
   name: Mend Domain Controller API
   description: The domain-controller API from Mend — 1 operation(s) for domain-controller.
@@ -358,6 +462,8 @@ apis:
     url: https://api-docs.mend.io/platform/3.0
   - type: APIReference
     url: https://api-docs.mend.io/sca/2.0
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-collection-domain-dto-schema.json
 - aid: mend:mend-entities-organization-api
   name: Mend Entities - Organization API
   description: The Entities - Organization API from Mend — 7 operation(s) for entities - organization.
@@ -372,6 +478,18 @@ apis:
     url: https://api-docs.mend.io/platform/3.0
   - type: APIReference
     url: https://api-docs.mend.io/sca/2.0
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-pageable-collection-domain-entities-product-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-pageable-collection-domain-entities-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-pageable-collection-product-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-pageable-collection-project-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-created-create-project-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-created-product-dto-schema.json
 - aid: mend:mend-entities-product-api
   name: Mend Entities - Product API
   description: The Entities - Product API from Mend — 2 operation(s) for entities - product.
@@ -386,6 +504,18 @@ apis:
     url: https://api-docs.mend.io/platform/3.0
   - type: APIReference
     url: https://api-docs.mend.io/sca/2.0
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-pageable-collection-project-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-created-project-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-create-project-by-product-request-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-context-entity-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-message-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-product-dto-schema.json
 - aid: mend:mend-entities-project-api
   name: Mend Entities - Project API
   description: The Entities - Project API from Mend — 3 operation(s) for entities - project.
@@ -400,6 +530,14 @@ apis:
     url: https://api-docs.mend.io/platform/3.0
   - type: APIReference
     url: https://api-docs.mend.io/sca/2.0
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-message-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-project-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-vitals-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-context-entity-request-dto-schema.json
 - aid: mend:mend-findings-project-api
   name: Mend Findings - Project API
   description: The Findings - Project API from Mend — 26 operation(s) for findings - project.
@@ -414,6 +552,14 @@ apis:
     url: https://api-docs.mend.io/platform/3.0
   - type: APIReference
     url: https://api-docs.mend.io/sca/2.0
+  - type: JSONSchema
+    url: json-schema/mend-model-security-finding-external-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-github-com-mend-cloud-native-modules-common-model-finding-status-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-github-com-mend-cloud-native-modules-scanner-model-secret-finding-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dto-patch-finding-schema.json
 - aid: mend:mend-findings-scan-api
   name: Mend Findings - Scan API
   description: The Findings - Scan API from Mend — 5 operation(s) for findings - scan.
@@ -428,6 +574,18 @@ apis:
     url: https://api-docs.mend.io/platform/3.0
   - type: APIReference
     url: https://api-docs.mend.io/sca/2.0
+  - type: JSONSchema
+    url: json-schema/mend-model-security-finding-external-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-github-com-mend-cloud-native-modules-scanner-model-secret-finding-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dto-mend-cursored-response-array-dto-finding-v3-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dto-mend-response-dto-finding-v3-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-common-base-api-response-v3-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-github-com-mend-cloud-native-modules-scanner-model-package-schema.json
 - aid: mend:mend-general-info-licenses-api
   name: Mend General Info - Licenses API
   description: The General Info - Licenses API from Mend — 2 operation(s) for general info - licenses.
@@ -442,10 +600,13 @@ apis:
     url: https://api-docs.mend.io/platform/3.0
   - type: APIReference
     url: https://api-docs.mend.io/sca/2.0
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-pageable-collection-license-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-license-dto-schema.json
 - aid: mend:mend-general-info-permissions-api
   name: Mend General Info - Permissions API
-  description: >-
-    The General Info - Permissions API from Mend — 1 operation(s) for general info - permissions.
+  description: The General Info - Permissions API from Mend — 1 operation(s) for general info - permissions.
   humanURL: https://api-docs.mend.io/platform/3.0
   baseURL: https://api-saas.mend.io
   tags:
@@ -457,10 +618,11 @@ apis:
     url: https://api-docs.mend.io/platform/3.0
   - type: APIReference
     url: https://api-docs.mend.io/sca/2.0
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-list-role-permissions-dto-schema.json
 - aid: mend:mend-general-info-vulnerabilities-api
   name: Mend General Info - Vulnerabilities API
-  description: >-
-    The General Info - Vulnerabilities API from Mend — 2 operation(s) for general info - vulnerabilities.
+  description: The General Info - Vulnerabilities API from Mend — 2 operation(s) for general info - vulnerabilities.
   humanURL: https://api-docs.mend.io/platform/3.0
   baseURL: https://api-saas.mend.io
   tags:
@@ -472,6 +634,10 @@ apis:
     url: https://api-docs.mend.io/platform/3.0
   - type: APIReference
     url: https://api-docs.mend.io/sca/2.0
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-vulnerability-fix-summary-info-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-vulnerability-profile-dto-schema.json
 - aid: mend:mend-integrations-api
   name: Mend Integrations API
   description: The Integrations API from Mend — 1 operation(s) for integrations.
@@ -488,6 +654,8 @@ apis:
     url: https://api-docs.mend.io/platform/3.0
   - type: APIReference
     url: https://api-docs.mend.io/sca/2.0
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-v3-list-integration-dtov3-schema.json
 - aid: mend:mend-library-organization-api
   name: Mend Library - Organization API
   description: The Library - Organization API from Mend — 10 operation(s) for library - organization.
@@ -502,6 +670,18 @@ apis:
     url: https://api-docs.mend.io/platform/3.0
   - type: APIReference
     url: https://api-docs.mend.io/sca/2.0
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-pageable-collection-library-version-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-pageable-list-light-library-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-pageable-collection-project-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-copyright-reference-request-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-in-house-request-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-library-license-request-dto-schema.json
 - aid: mend:mend-library-product-api
   name: Mend Library - Product API
   description: The Library - Product API from Mend — 6 operation(s) for library - product.
@@ -516,6 +696,18 @@ apis:
     url: https://api-docs.mend.io/platform/3.0
   - type: APIReference
     url: https://api-docs.mend.io/sca/2.0
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-pageable-list-vulnerability-profile-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-pageable-list-due-diligence-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-pageable-list-light-library-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-project-list-request-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-list-project-library-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-collection-project-dto-schema.json
 - aid: mend:mend-library-project-api
   name: Mend Library - Project API
   description: The Library - Project API from Mend — 5 operation(s) for library - project.
@@ -530,6 +722,16 @@ apis:
     url: https://api-docs.mend.io/platform/3.0
   - type: APIReference
     url: https://api-docs.mend.io/sca/2.0
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-pageable-list-due-diligence-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-pageable-list-light-library-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-pageable-list-library-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-list-vulnerability-profile-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-collection-library-impact-dto-schema.json
 - aid: mend:mend-library-source-files-api
   name: Mend Library - Source Files API
   description: The Library - Source Files API from Mend — 2 operation(s) for library - source files.
@@ -544,6 +746,8 @@ apis:
     url: https://api-docs.mend.io/platform/3.0
   - type: APIReference
     url: https://api-docs.mend.io/sca/2.0
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-pageable-collection-source-file-inventory-dto-schema.json
 - aid: mend:mend-policies-organization-api
   name: Mend Policies - Organization API
   description: The Policies - Organization API from Mend — 4 operation(s) for policies - organization.
@@ -558,6 +762,18 @@ apis:
     url: https://api-docs.mend.io/platform/3.0
   - type: APIReference
     url: https://api-docs.mend.io/sca/2.0
+  - type: JSONSchema
+    url: json-schema/mend-policy-request-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-update-priorities-request-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-collection-policy-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-async-process-status-v2-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-message-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-policy-dto-schema.json
 - aid: mend:mend-policies-product-api
   name: Mend Policies - Product API
   description: The Policies - Product API from Mend — 4 operation(s) for policies - product.
@@ -572,6 +788,18 @@ apis:
     url: https://api-docs.mend.io/platform/3.0
   - type: APIReference
     url: https://api-docs.mend.io/sca/2.0
+  - type: JSONSchema
+    url: json-schema/mend-policy-request-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-update-priorities-request-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-collection-policy-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-async-process-status-v2-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-message-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-policy-dto-schema.json
 - aid: mend:mend-policies-project-api
   name: Mend Policies - Project API
   description: The Policies - Project API from Mend — 4 operation(s) for policies - project.
@@ -586,10 +814,21 @@ apis:
     url: https://api-docs.mend.io/platform/3.0
   - type: APIReference
     url: https://api-docs.mend.io/sca/2.0
+  - type: JSONSchema
+    url: json-schema/mend-policy-request-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-update-priorities-request-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-collection-policy-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-async-process-status-v2-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-message-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-policy-dto-schema.json
 - aid: mend:mend-product-attribution-report-controller-api
   name: Mend Product Attribution Report Controller API
-  description: >-
-    The product-attribution-report-controller API from Mend — 1 operation(s) for product-attribution-report-controller.
+  description: The product-attribution-report-controller API from Mend — 1 operation(s) for product-attribution-report-controller.
   humanURL: https://api-docs.mend.io/platform/3.0
   baseURL: https://api-saas.mend.io
   tags:
@@ -601,10 +840,11 @@ apis:
     url: https://api-docs.mend.io/platform/3.0
   - type: APIReference
     url: https://api-docs.mend.io/sca/2.0
+  - type: JSONSchema
+    url: json-schema/mend-project-list-request-dto-schema.json
 - aid: mend:mend-project-attribution-report-controller-api
   name: Mend Project Attribution Report Controller API
-  description: >-
-    The project-attribution-report-controller API from Mend — 1 operation(s) for project-attribution-report-controller.
+  description: The project-attribution-report-controller API from Mend — 1 operation(s) for project-attribution-report-controller.
   humanURL: https://api-docs.mend.io/platform/3.0
   baseURL: https://api-saas.mend.io
   tags:
@@ -616,6 +856,8 @@ apis:
     url: https://api-docs.mend.io/platform/3.0
   - type: APIReference
     url: https://api-docs.mend.io/sca/2.0
+  - type: JSONSchema
+    url: json-schema/mend-attribution-report-library-setting-rule-dto-schema.json
 - aid: mend:mend-projects-api
   name: Mend Projects API
   description: The Projects API from Mend — 11 operation(s) for projects.
@@ -632,6 +874,18 @@ apis:
     url: https://api-docs.mend.io/platform/3.0
   - type: APIReference
     url: https://api-docs.mend.io/sca/2.0
+  - type: JSONSchema
+    url: json-schema/mend-multi-context-request-dtov3-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-create-project-in-org-request-dtov3-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-pageable-v3-list-project-violation-dtov3-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-pageable-v3-list-project-summary-dtov3-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-pageable-v3-list-project-trace-dtov3-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-pageable-v3-collection-project-dtov3-schema.json
 - aid: mend:mend-red-team-api
   name: Mend Red Team API
   description: The Red Team API from Mend — 1 operation(s) for red team.
@@ -646,6 +900,10 @@ apis:
     url: https://api-docs.mend.io/platform/3.0
   - type: APIReference
     url: https://api-docs.mend.io/sca/2.0
+  - type: JSONSchema
+    url: json-schema/mend-v3-v3-test-run-trigger-request-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-v3-v3-base-response-v3-v3-test-run-trigger-response-schema.json
 - aid: mend:mend-reports-api
   name: Mend Reports API
   description: The Reports API from Mend — 43 operation(s) for reports.
@@ -660,6 +918,18 @@ apis:
     url: https://api-docs.mend.io/platform/3.0
   - type: APIReference
     url: https://api-docs.mend.io/sca/2.0
+  - type: JSONSchema
+    url: json-schema/mend-attribution-img-report-export-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-report-export-process-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-findings-report-export-dtov3-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-findings-report-export-project-dtov3-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-create-security-findings-report-dtov3-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-create-security-findings-by-library-report-dtov3-schema.json
 - aid: mend:mend-scans-api
   name: Mend Scans API
   description: The Scans API from Mend — 6 operation(s) for scans.
@@ -674,6 +944,18 @@ apis:
     url: https://api-docs.mend.io/platform/3.0
   - type: APIReference
     url: https://api-docs.mend.io/sca/2.0
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-pageable-v3-list-scan-summary-dtov3-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-pageable-v3-list-scan-tag-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-v3-scan-diff-response-dtov3-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-v3-scan-summary-dtov3-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-v3-scan-dtov3-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-streaming-response-body-schema.json
 - aid: mend:mend-settings-in-house-api
   name: Mend Settings - In-House API
   description: The Settings - In-House API from Mend — 4 operation(s) for settings - in-house.
@@ -688,6 +970,18 @@ apis:
     url: https://api-docs.mend.io/platform/3.0
   - type: APIReference
     url: https://api-docs.mend.io/sca/2.0
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-pageable-in-house-settings-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-warning-list-in-house-rule-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-warning-in-house-rule-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-update-in-house-rules-request-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-create-in-house-rule-request-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-update-in-house-rule-request-dto-schema.json
 - aid: mend:mend-settings-whitelist-api
   name: Mend Settings - Whitelist API
   description: The Settings - Whitelist API from Mend — 4 operation(s) for settings - whitelist.
@@ -702,6 +996,18 @@ apis:
     url: https://api-docs.mend.io/platform/3.0
   - type: APIReference
     url: https://api-docs.mend.io/sca/2.0
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-pageable-list-white-list-rule-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-update-white-list-rules-request-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-create-white-list-rule-request-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-update-white-list-rule-request-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-list-white-list-rule-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-white-list-rule-dto-schema.json
 - aid: mend:mend-summary-organization-api
   name: Mend Summary - Organization API
   description: The Summary - Organization API from Mend — 12 operation(s) for summary - organization.
@@ -716,6 +1022,18 @@ apis:
     url: https://api-docs.mend.io/platform/3.0
   - type: APIReference
     url: https://api-docs.mend.io/sca/2.0
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-pageable-collection-vulnrerable-libraries-by-project-count-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-pageable-collection-vulnerable-libraries-count-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-pageable-collection-library-count-by-product-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-pageable-collection-library-count-by-project-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-pageable-domain-summary-in-house-library-per-product-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-pageable-domain-summery-in-house-library-per-project-dto-schema.json
 - aid: mend:mend-update-request-api
   name: Mend Update Request API
   description: The Update Request API from Mend — 1 operation(s) for update request.
@@ -730,10 +1048,11 @@ apis:
     url: https://api-docs.mend.io/platform/3.0
   - type: APIReference
     url: https://api-docs.mend.io/sca/2.0
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-message-dto-schema.json
 - aid: mend:mend-user-management-groups-api
   name: Mend User Management - Groups API
-  description: >-
-    The User Management - Groups API from Mend — 5 operation(s) for user management - groups.
+  description: The User Management - Groups API from Mend — 5 operation(s) for user management - groups.
   humanURL: https://api-docs.mend.io/platform/3.0
   baseURL: https://api-saas.mend.io
   tags:
@@ -745,11 +1064,21 @@ apis:
     url: https://api-docs.mend.io/platform/3.0
   - type: APIReference
     url: https://api-docs.mend.io/sca/2.0
+  - type: JSONSchema
+    url: json-schema/mend-group-role-request-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-pageable-list-multiple-group-roles-per-context-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-pageable-list-group-summary-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-pageable-list-user-info-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-update-group-request-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-create-group-request-dto-schema.json
 - aid: mend:mend-user-management-roles-and-permissions-api
   name: Mend User Management - Roles And Permissions API
-  description: >-
-    The User Management - Roles And Permissions API from Mend — 3 operation(s) for user management - roles
-    and permissions.
+  description: The User Management - Roles And Permissions API from Mend — 3 operation(s) for user management - roles and permissions.
   humanURL: https://api-docs.mend.io/platform/3.0
   baseURL: https://api-saas.mend.io
   tags:
@@ -761,6 +1090,8 @@ apis:
     url: https://api-docs.mend.io/platform/3.0
   - type: APIReference
     url: https://api-docs.mend.io/sca/2.0
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-user-permission-list-dto-schema.json
 - aid: mend:mend-user-management-users-api
   name: Mend User Management - Users API
   description: The User Management - Users API from Mend — 9 operation(s) for user management - users.
@@ -775,6 +1106,18 @@ apis:
     url: https://api-docs.mend.io/platform/3.0
   - type: APIReference
     url: https://api-docs.mend.io/sca/2.0
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-pageable-list-user-info-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-list-enriched-user-info-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-create-user-request-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-scan-summary-receiver-user-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-enriched-user-info-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-user-info-response-dto-schema.json
 - aid: mend:mend-user-profile-api
   name: Mend User Profile API
   description: The User Profile API from Mend — 2 operation(s) for user profile.
@@ -789,6 +1132,14 @@ apis:
     url: https://api-docs.mend.io/platform/3.0
   - type: APIReference
     url: https://api-docs.mend.io/sca/2.0
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-pageable-collection-user-key-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-message-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-user-key-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-generate-user-key-request-dto-schema.json
 - aid: mend:mend-vulnerable-libraries-api
   name: Mend Vulnerable Libraries API
   description: The Vulnerable Libraries API from Mend — 1 operation(s) for vulnerable libraries.
@@ -803,6 +1154,8 @@ apis:
     url: https://api-docs.mend.io/platform/3.0
   - type: APIReference
     url: https://api-docs.mend.io/sca/2.0
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-list-light-library-dto-schema.json
 - aid: mend:mend-zero-day-events-api
   name: Mend Zero-Day Events API
   description: The Zero-Day Events API from Mend — 2 operation(s) for zero-day events.
@@ -817,3 +1170,13 @@ apis:
     url: https://api-docs.mend.io/platform/3.0
   - type: APIReference
     url: https://api-docs.mend.io/sca/2.0
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-pageable-v3-list-zero-day-event-finding-dtov3-schema.json
+  - type: JSONSchema
+    url: json-schema/mend-dwrresponse-pageable-v3-list-zero-day-event-dtov3-schema.json
+x-enrichment:
+  date: '2026-10-04'
+  status: enriched
+  artifacts_added: 150
+  pass: modular-v1
+  engine: identity=local,contract=local,surfaces=local,docs=local,regulatory=local

@@ -58,6 +58,13 @@ paths:
                 $ref: '#/components/schemas/DWRResponseBase'
 components:
   schemas:
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
     DWRResponseMessageDTO:
       type: object
       properties:
@@ -74,13 +81,6 @@ components:
           title: message
           type: string
           example: Success!
-    DWRResponseBase:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
   securitySchemes:
     bearer-key:
       type: http

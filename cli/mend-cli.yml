@@ -1,5 +1,7 @@
 generated: '2026-07-20'
 method: searched
+install: ""
+commands: []
 source: >-
   github.com/mend-toolkit (Mend-SBOM-Export-CLI) and github.com/renovatebot/renovate.
   Mend ships command-line tooling for CI/CD scanning and SBOM export; the Mend

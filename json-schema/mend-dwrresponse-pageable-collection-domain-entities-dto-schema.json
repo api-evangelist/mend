@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mend/main/json-schema/mend-dwrresponse-pageable-collection-domain-entities-dto-schema.json",
+  "title": "DWRResponsePageableCollectionDomainEntitiesDTO",
+  "description": "Provides insights into endpoint-supported pagination information",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mend-entities-organization-api-openapi.yml#/components/schemas/DWRResponsePageableCollectionDomainEntitiesDTO",
+  "type": "object",
+  "properties": {
+    "additionalData": {
+      "title": "Provides insights into endpoint-supported pagination information.",
+      "type": "object",
+      "description": "+ **totalItems**: The total count of data points returned in an API response.\n+ **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining."
+    },
+    "supportToken": {
+      "title": "Support Token",
+      "type": "string"
+    },
+    "retVal": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/DomainEntitiesDTO"
+      }
+    }
+  },
+  "$defs": {
+    "DomainEntitiesDTO": {
+      "type": "object",
+      "properties": {
+        "project": {
+          "$ref": "#/$defs/DomainEntitiesProjectDTO"
+        },
+        "product": {
+          "$ref": "#/$defs/DomainEntitiesProductDTO"
+        }
+      }
+    },
+    "DomainEntitiesProductDTO": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "title": "Product Uuid",
+          "type": "string"
+        },
+        "name": {
+          "title": "Product Name",
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/EntityTagDTO"
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "DomainEntitiesProjectDTO": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "title": "Project UUID",
+          "type": "string"
+        },
+        "name": {
+          "title": "Project Name",
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/EntityTagDTO"
+          }
+        },
+        "lastScanned": {
+          "title": "Last Project Scan Date",
+          "type": "string",
+          "format": "date-time"
+        },
+        "scannedByEmail": {
+          "title": "Scanned By",
+          "type": "string"
+        },
+        "scanComment": {
+          "title": "Scan Comment",
+          "type": "string"
+        },
+        "createdAt": {
+          "title": "Creation Date",
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "EntityTagDTO": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "title": "Entity Tag Key",
+          "type": "string"
+        },
+        "value": {
+          "title": "Entity Tag value",
+          "type": "string"
+        }
+      }
+    }
+  }
+}

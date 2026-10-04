@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mend/main/json-schema/mend-library-match-suggestions-request-dtov3-match-suggestions-schema.json",
+  "title": "LibraryMatchSuggestionsRequestDTOV3_MatchSuggestions",
+  "description": "Request payload for retrieving Mend library suggestions for source files. Requires sourceFileUuids and recommendedForAllFiles. Medium privilege users can optionally specify repository and version fields for more targeted suggestions.",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mend-dependencies-source-files-api-openapi.yml#/components/schemas/LibraryMatchSuggestionsRequestDTOV3_MatchSuggestions",
+  "required": [
+    "recommendedForAllFiles",
+    "sourceFileUuids"
+  ],
+  "type": "object",
+  "properties": {
+    "sourceFileUuids": {
+      "type": "array",
+      "items": {
+        "title": "Source File UUIDs",
+        "type": "string",
+        "description": "List of source file UUIDs for which to get Mend library suggestions. Required field."
+      }
+    },
+    "recommendedForAllFiles": {
+      "title": "Recommended For All Files",
+      "type": "boolean",
+      "description": "Flag indicating whether to get recommendations that apply to all specified files. Required field."
+    }
+  }
+}

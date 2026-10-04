@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mend/main/json-schema/mend-update-in-house-rules-request-dto-schema.json",
+  "title": "UpdateInHouseRulesRequestDTO",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mend-settings-in-house-api-openapi.yml#/components/schemas/UpdateInHouseRulesRequestDTO",
+  "required": [
+    "uuid"
+  ],
+  "type": "object",
+  "properties": {
+    "uuid": {
+      "title": "Proprietary Rule UUID",
+      "type": "string"
+    },
+    "type": {
+      "title": "Proprietary Rule Regex Type",
+      "type": "string",
+      "enum": [
+        "NAME",
+        "LIBRARY_COORDINATES",
+        "ARTIFACT_ID"
+      ]
+    },
+    "regex": {
+      "title": "Proprietary Regex Rule",
+      "type": "string"
+    },
+    "description": {
+      "title": "Proprietary Description",
+      "type": "string"
+    },
+    "empty": {
+      "type": "boolean"
+    }
+  }
+}

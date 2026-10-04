@@ -32,6 +32,7 @@ authentication:
   docs: https://docs.mend.io/platform/latest/getting-started-with-mend-api-3-0
 
 idempotency:
+  coverage: none
   supported: false
   notes: >-
     The Mend API does not document an idempotency-key mechanism; no

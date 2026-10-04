@@ -149,6 +149,13 @@ paths:
                 $ref: '#/components/schemas/DWRResponseBase'
 components:
   schemas:
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
     Vulnerability:
       type: object
       properties:
@@ -157,6 +164,27 @@ components:
           description: Vulnerability name (CVE)
           example: CVE-2021-44228
       description: Vulnerability details
+    DWRResponsePageableV3ListZeroDayEventDTOV3:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            '
+          example:
+            totalItems: '422'
+            next: http://someUrl?cursor=3
+            cursor: 3
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          type: array
+          items:
+            $ref: '#/components/schemas/ZeroDayEventDTOV3'
     DWRResponsePageableV3ListZeroDayEventFindingDTOV3:
       type: object
       properties:
@@ -178,37 +206,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ZeroDayEventFindingDTOV3'
-    ZeroDayEventFindingDTOV3:
-      type: object
-      properties:
-        component:
-          $ref: '#/components/schemas/Component'
-        vulnerability:
-          $ref: '#/components/schemas/Vulnerability'
-        addedAt:
-          type: string
-          description: Date added to the Zero-Day event
-          format: date-time
-      description: Zero-Day Event Finding
-    DWRResponseBase:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-    Component:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Component name
-          example: abc-v1.2.3.tgz
-        sha1:
-          type: string
-          description: Component SHA1 hash
-          example: 124dgfgtr3545trtgt345g
-      description: Component details
     ZeroDayEventDTOV3:
       type: object
       properties:
@@ -232,27 +229,30 @@ components:
           description: Updated date
           format: date-time
       description: Zero-Day Event
-    DWRResponsePageableV3ListZeroDayEventDTOV3:
+    Component:
       type: object
       properties:
-        additionalData:
-          title: Provides insights into endpoint-supported pagination information.
-          type: object
-          description: '+ **totalItems**: The total count of data points returned in an API response.
-
-            '
-          example:
-            totalItems: '422'
-            next: http://someUrl?cursor=3
-            cursor: 3
-        supportToken:
-          title: Support Token
+        name:
           type: string
-          example: 1171c60d
-        response:
-          type: array
-          items:
-            $ref: '#/components/schemas/ZeroDayEventDTOV3'
+          description: Component name
+          example: abc-v1.2.3.tgz
+        sha1:
+          type: string
+          description: Component SHA1 hash
+          example: 124dgfgtr3545trtgt345g
+      description: Component details
+    ZeroDayEventFindingDTOV3:
+      type: object
+      properties:
+        component:
+          $ref: '#/components/schemas/Component'
+        vulnerability:
+          $ref: '#/components/schemas/Vulnerability'
+        addedAt:
+          type: string
+          description: Date added to the Zero-Day event
+          format: date-time
+      description: Zero-Day Event Finding
   securitySchemes:
     bearer-key:
       type: http

@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mend/main/json-schema/mend-update-risk-request-dto-schema.json",
+  "title": "UpdateRiskRequestDTO",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mend-alerts-project-api-openapi.yml#/components/schemas/UpdateRiskRequestDTO",
+  "type": "object",
+  "properties": {
+    "status": {
+      "title": "Alert Status",
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "IGNORED"
+      ]
+    },
+    "comment": {
+      "title": "Alert Comment",
+      "maxLength": 500,
+      "type": "string"
+    },
+    "isViolating": {
+      "type": "boolean"
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mend/main/json-schema/mend-dto-patch-finding-schema.json",
+  "title": "dto.PatchFinding",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mend-findings-project-api-openapi.yml#/components/schemas/dto.PatchFinding",
+  "properties": {
+    "customSeverity": {
+      "description": "If set, it has to be either <em>High</em>, <em>Medium</em> or <em>Low</em>.\nCase insensitive, all values are converted to have the first letter uppercase and others lowercase, e.g. <em>High</em>.",
+      "type": "string"
+    },
+    "origin": {
+      "description": "Optional, origin used for telemetry.",
+      "type": "string"
+    },
+    "reviewed": {
+      "type": "boolean"
+    },
+    "suppressed": {
+      "type": "boolean"
+    },
+    "suppressionReason": {
+      "description": "Has to be unset or empty if <b>suppressed</b> is not set or if it's false.",
+      "type": "string"
+    }
+  },
+  "type": "object"
+}

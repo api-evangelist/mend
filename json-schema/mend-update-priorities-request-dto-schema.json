@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mend/main/json-schema/mend-update-priorities-request-dto-schema.json",
+  "title": "UpdatePrioritiesRequestDTO",
+  "description": "Must contain all policy uuids",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mend-policies-organization-api-openapi.yml#/components/schemas/UpdatePrioritiesRequestDTO",
+  "required": [
+    "uuids"
+  ],
+  "type": "object",
+  "properties": {
+    "uuids": {
+      "type": "array",
+      "items": {
+        "title": "Policy Uuid",
+        "type": "string"
+      }
+    }
+  }
+}

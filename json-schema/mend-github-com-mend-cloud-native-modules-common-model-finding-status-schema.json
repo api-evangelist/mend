@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mend/main/json-schema/mend-github-com-mend-cloud-native-modules-common-model-finding-status-schema.json",
+  "title": "github_com_mend_cloud-native_modules_common_model.FindingStatus",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mend-findings-project-api-openapi.yml#/components/schemas/github_com_mend_cloud-native_modules_common_model.FindingStatus",
+  "type": "object",
+  "properties": {
+    "applicationuuid": {
+      "type": "string"
+    },
+    "comment": {
+      "type": "string"
+    },
+    "createdAt": {
+      "type": "string"
+    },
+    "detectTime": {
+      "type": "string"
+    },
+    "distribution": {
+      "type": "string"
+    },
+    "distributionVersion": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "orguuid": {
+      "type": "string"
+    },
+    "packageDistroID": {
+      "type": "integer"
+    },
+    "packageName": {
+      "type": "string"
+    },
+    "packageUUID": {
+      "type": "string"
+    },
+    "packageVersion": {
+      "type": "string"
+    },
+    "projectuuid": {
+      "type": "string"
+    },
+    "reason": {
+      "type": "string"
+    },
+    "scanuuid": {
+      "type": "string"
+    },
+    "secretUUID": {
+      "type": "string"
+    },
+    "severity": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "updatedAt": {
+      "type": "string"
+    },
+    "uuid": {
+      "type": "string"
+    },
+    "vulnerabilityID": {
+      "type": "string"
+    }
+  }
+}

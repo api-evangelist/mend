@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mend/main/json-schema/mend-source-file-remapping-org-request-dtov3-schema.json",
+  "title": "SourceFileRemappingOrgRequestDTOV3",
+  "description": "Request payload for remapping source files at organization level",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mend-dependencies-source-files-api-openapi.yml#/components/schemas/SourceFileRemappingOrgRequestDTOV3",
+  "type": "object",
+  "properties": {
+    "targetLibraryUuid": {
+      "title": "Target Library UUID",
+      "type": "string",
+      "description": "The UUID of the library to which source files should be remapped. Exactly one of targetLibraryUuid or matchSuggestionId must be provided"
+    },
+    "matchSuggestionId": {
+      "title": "Target Library Id",
+      "type": "string",
+      "description": "The Id of the library to which source files should be remapped. Exactly one of targetLibraryUuid or matchSuggestionId must be provided"
+    },
+    "sourceFileUuids": {
+      "type": "array",
+      "items": {
+        "title": "Source File UUIDs",
+        "type": "string",
+        "description": "List of source file UUIDs to be remapped"
+      }
+    },
+    "comment": {
+      "title": "Comment",
+      "type": "string",
+      "description": "Optional user comment explaining the reason for this remapping action"
+    },
+    "sendEmailNotification": {
+      "title": "Send Email Notification",
+      "type": "boolean",
+      "description": "Whether to send email notification upon completion of the remapping operation"
+    }
+  }
+}

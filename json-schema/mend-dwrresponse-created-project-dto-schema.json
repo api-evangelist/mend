@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mend/main/json-schema/mend-dwrresponse-created-project-dto-schema.json",
+  "title": "DWRResponseCreatedProjectDTO",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mend-entities-product-api-openapi.yml#/components/schemas/DWRResponseCreatedProjectDTO",
+  "type": "object",
+  "properties": {
+    "additionalData": {
+      "title": "Provides insights on creating resources using supported endpoints.",
+      "type": "object",
+      "description": "+ **created**: Indicates whether the requested project was successfully created or if it already exists. \n When “true”, this signifies the project was successfully created. When “false”, this indicates the project already exists"
+    },
+    "supportToken": {
+      "title": "Support Token",
+      "type": "string"
+    },
+    "retVal": {
+      "$ref": "#/$defs/ProjectDTO"
+    }
+  },
+  "$defs": {
+    "ProjectDTO": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "title": "Project UUID",
+          "type": "string"
+        },
+        "name": {
+          "title": "Project Name",
+          "type": "string"
+        },
+        "path": {
+          "title": "Product Name",
+          "type": "string"
+        },
+        "productName": {
+          "title": "Product Name",
+          "type": "string"
+        },
+        "productUuid": {
+          "title": "Product Uuid",
+          "type": "string"
+        }
+      }
+    }
+  }
+}

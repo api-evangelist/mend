@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mend/main/json-schema/mend-dwrresponse-collection-library-impact-dto-schema.json",
+  "title": "DWRResponseCollectionLibraryImpactDTO",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mend-library-project-api-openapi.yml#/components/schemas/DWRResponseCollectionLibraryImpactDTO",
+  "type": "object",
+  "properties": {
+    "supportToken": {
+      "title": "Support Token",
+      "type": "string"
+    },
+    "retVal": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/LibraryImpactDTO"
+      }
+    }
+  },
+  "$defs": {
+    "LibraryImpactDTO": {
+      "type": "object",
+      "properties": {
+        "libraryPath": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/LibraryImpactNodeDTO"
+          }
+        }
+      }
+    },
+    "LibraryImpactNodeDTO": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "title": "Library UUID",
+          "type": "string"
+        },
+        "name": {
+          "title": "Library Name",
+          "type": "string"
+        },
+        "order": {
+          "title": "Library Impact Order",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    }
+  }
+}

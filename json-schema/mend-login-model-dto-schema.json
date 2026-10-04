@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mend/main/json-schema/mend-login-model-dto-schema.json",
+  "title": "LoginModelDTO",
+  "description": "Login Model that provides user name and password for the Login process.",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mend-access-management-api-openapi.yml#/components/schemas/LoginModelDTO",
+  "required": [
+    "email",
+    "userKey"
+  ],
+  "type": "object",
+  "properties": {
+    "email": {
+      "title": "Email",
+      "type": "string"
+    },
+    "orgToken": {
+      "title": "Org Token",
+      "type": "string",
+      "description": "org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: Integrate tab > API Key)."
+    },
+    "userKey": {
+      "title": "User Key",
+      "type": "string",
+      "description": "Equivalent to a personal access token. Avoid pasting as plain text where it might be compromised. For a service user (recommended), you can find the user key in the Mend SCA App in **Admin > Users**. [Learn more](https://docs.mend.io/bundle/mend_maintenance/page/managing_service_users.html). For local testing purposes, you could also use one of your own personal user keys from your user profile page in the Mend SCA App."
+    }
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mend/main/json-schema/mend-dwrresponse-pageable-list-white-list-rule-dto-schema.json",
+  "title": "DWRResponsePageableListWhiteListRuleDTO",
+  "description": "Provides insights into endpoint-supported pagination information",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mend-settings-whitelist-api-openapi.yml#/components/schemas/DWRResponsePageableListWhiteListRuleDTO",
+  "type": "object",
+  "properties": {
+    "additionalData": {
+      "title": "Provides insights into endpoint-supported pagination information.",
+      "type": "object",
+      "description": "+ **totalItems**: The total count of data points returned in an API response.\n+ **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining."
+    },
+    "supportToken": {
+      "title": "Support Token",
+      "type": "string"
+    },
+    "retVal": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/WhiteListRuleDTO"
+      }
+    }
+  },
+  "$defs": {
+    "WhiteListRuleDTO": {
+      "required": [
+        "regex"
+      ],
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "title": "White List UUID",
+          "type": "string"
+        },
+        "regexType": {
+          "title": "WhiteList Regex Type",
+          "type": "string",
+          "enum": [
+            "BY_NAME",
+            "BY_LIBRARY"
+          ]
+        },
+        "regex": {
+          "title": "White List Regex Rule",
+          "type": "string"
+        },
+        "createdBy": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "description": {
+          "title": "White List Description",
+          "type": "string"
+        }
+      }
+    }
+  }
+}

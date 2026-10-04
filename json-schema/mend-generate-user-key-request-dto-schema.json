@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mend/main/json-schema/mend-generate-user-key-request-dto-schema.json",
+  "title": "GenerateUserKeyRequestDTO",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mend-user-profile-api-openapi.yml#/components/schemas/GenerateUserKeyRequestDTO",
+  "type": "object",
+  "properties": {
+    "description": {
+      "title": "UserToken Description",
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mend/main/json-schema/mend-github-com-mend-cloud-native-modules-scanner-model-package-schema.json",
+  "title": "github_com_mend_cloud-native_modules_scanner_model.Package",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mend-findings-scan-api-openapi.yml#/components/schemas/github_com_mend_cloud-native_modules_scanner_model.Package",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "reachable": {
+      "type": "boolean"
+    },
+    "type": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    }
+  }
+}

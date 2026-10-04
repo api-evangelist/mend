@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mend/main/json-schema/mend-context-entity-request-dto-schema.json",
+  "title": "ContextEntityRequestDTO",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mend-entities-project-api-openapi.yml#/components/schemas/ContextEntityRequestDTO",
+  "required": [
+    "name"
+  ],
+  "type": "object",
+  "properties": {
+    "name": {
+      "title": "Entity Name",
+      "type": "string"
+    }
+  }
+}

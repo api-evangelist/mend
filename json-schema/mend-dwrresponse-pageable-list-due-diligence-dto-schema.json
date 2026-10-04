@@ -1,0 +1,322 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mend/main/json-schema/mend-dwrresponse-pageable-list-due-diligence-dto-schema.json",
+  "title": "DWRResponsePageableListDueDiligenceDTO",
+  "description": "Provides insights into endpoint-supported pagination information",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mend-library-product-api-openapi.yml#/components/schemas/DWRResponsePageableListDueDiligenceDTO",
+  "type": "object",
+  "properties": {
+    "additionalData": {
+      "title": "Provides insights into endpoint-supported pagination information.",
+      "type": "object",
+      "description": "+ **totalItems**: The total count of data points returned in an API response.\n+ **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining."
+    },
+    "supportToken": {
+      "title": "Support Token",
+      "type": "string"
+    },
+    "retVal": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/DueDiligenceDTO"
+      }
+    }
+  },
+  "$defs": {
+    "ComponentReferencesDTO": {
+      "title": "Component References",
+      "type": "object",
+      "properties": {
+        "url": {
+          "title": "Reference Url",
+          "type": "string"
+        },
+        "homePage": {
+          "title": "Reference Home Page",
+          "type": "string"
+        },
+        "downloadLink": {
+          "title": "Reference Download Link",
+          "type": "string"
+        },
+        "issueUrl": {
+          "title": "Reference Issue Url",
+          "type": "string"
+        },
+        "pomUrl": {
+          "title": "Reference Pom Url",
+          "type": "string"
+        },
+        "scmUrl": {
+          "title": "Reference Scm Url",
+          "type": "string"
+        },
+        "genericPackageIndex": {
+          "title": "Reference Generic Package Index",
+          "type": "string"
+        },
+        "nugetGallery": {
+          "title": "Reference Nugget Gallery",
+          "type": "string"
+        },
+        "tags": {
+          "title": "Reference Tags",
+          "type": "string"
+        },
+        "copyright": {
+          "title": "Reference Copyright",
+          "type": "string"
+        },
+        "hasNotice": {
+          "title": "Reference Has Notice",
+          "type": "boolean"
+        }
+      }
+    },
+    "DueDiligenceDTO": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "component": {
+          "$ref": "#/$defs/LibraryComponentDTO"
+        },
+        "license": {
+          "$ref": "#/$defs/LicenseReferenceDTO"
+        },
+        "riskScore": {
+          "$ref": "#/$defs/RiskScoreExplanationDTO"
+        },
+        "copyrights": {
+          "type": "array",
+          "items": {
+            "title": "Copyright",
+            "type": "string"
+          }
+        },
+        "extraData": {
+          "$ref": "#/$defs/ResourceExtraDataDTO"
+        },
+        "project": {
+          "$ref": "#/$defs/ProjectDTO"
+        },
+        "techTags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "purl": {
+          "type": "string"
+        }
+      }
+    },
+    "LibraryComponentDTO": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "title": "Component UUID",
+          "type": "string"
+        },
+        "name": {
+          "title": "Component Name",
+          "type": "string"
+        },
+        "description": {
+          "title": "Component Description",
+          "type": "string"
+        },
+        "componentType": {
+          "title": "Component Type",
+          "type": "string",
+          "enum": [
+            "Library"
+          ]
+        },
+        "type": {
+          "type": "string"
+        },
+        "libraryType": {
+          "title": "Library Type",
+          "type": "string"
+        },
+        "directDependency": {
+          "title": "Direct Dependency",
+          "type": "boolean"
+        },
+        "dependencyType": {
+          "title": "Dependency Type",
+          "type": "string"
+        },
+        "references": {
+          "$ref": "#/$defs/ComponentReferencesDTO"
+        },
+        "groupId": {
+          "title": "Component Name",
+          "type": "string"
+        },
+        "artifactId": {
+          "title": "Component Artifact",
+          "type": "string"
+        },
+        "version": {
+          "title": "Component Version",
+          "type": "string"
+        },
+        "dependencyFile": {
+          "type": "string"
+        },
+        "localPath": {
+          "type": "string"
+        }
+      }
+    },
+    "LicenseReferenceDTO": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "title": "License Reference UUID",
+          "type": "string"
+        },
+        "type": {
+          "title": "License Reference Type",
+          "type": "string"
+        },
+        "liabilityReference": {
+          "title": "License Liability Reference",
+          "type": "string"
+        },
+        "assignedBy": {
+          "$ref": "#/$defs/UserInfoDTO"
+        },
+        "textUrl": {
+          "title": "License Reference Text URL",
+          "type": "string"
+        },
+        "customDisclaimer": {
+          "title": "License Reference Custom Disclaimer",
+          "type": "string"
+        },
+        "information": {
+          "title": "License Reference information",
+          "type": "string"
+        }
+      }
+    },
+    "ProjectDTO": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "title": "Project UUID",
+          "type": "string"
+        },
+        "name": {
+          "title": "Project Name",
+          "type": "string"
+        },
+        "path": {
+          "title": "Product Name",
+          "type": "string"
+        },
+        "productName": {
+          "title": "Product Name",
+          "type": "string"
+        },
+        "productUuid": {
+          "title": "Product Uuid",
+          "type": "string"
+        }
+      }
+    },
+    "ResourceAuthorDTO": {
+      "type": "object",
+      "properties": {
+        "author": {
+          "title": "Resource Author",
+          "type": "string"
+        },
+        "authorUrl": {
+          "title": "Author URL",
+          "type": "string"
+        }
+      }
+    },
+    "ResourceExtraDataDTO": {
+      "type": "object",
+      "properties": {
+        "homepage": {
+          "title": "Home Page",
+          "type": "string"
+        },
+        "authors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ResourceAuthorDTO"
+          }
+        }
+      }
+    },
+    "RiskScoreExplanationDTO": {
+      "type": "object",
+      "properties": {
+        "explanation": {
+          "title": "Explanation Link",
+          "type": "string"
+        },
+        "indicatingText": {
+          "title": "Indicating Text",
+          "type": "string"
+        },
+        "riskScore": {
+          "title": "Risk Score",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "UserInfoDTO": {
+      "required": [
+        "uuid"
+      ],
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "title": "User UUID",
+          "type": "string"
+        },
+        "name": {
+          "title": "User Name",
+          "type": "string"
+        },
+        "email": {
+          "title": "User Email",
+          "type": "string"
+        },
+        "userType": {
+          "title": "Type Of User",
+          "type": "string",
+          "enum": [
+            "REGULAR",
+            "SERVICE",
+            "SCAN_SUMMARY_RECEIVER"
+          ]
+        },
+        "accountStatus": {
+          "type": "string",
+          "enum": [
+            "ACTIVE",
+            "INACTIVE",
+            "LOCKOUT"
+          ]
+        }
+      }
+    }
+  }
+}

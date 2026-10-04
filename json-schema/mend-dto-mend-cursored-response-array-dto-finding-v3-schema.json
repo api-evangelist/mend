@@ -1,0 +1,636 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mend/main/json-schema/mend-dto-mend-cursored-response-array-dto-finding-v3-schema.json",
+  "title": "dto.MendCursoredResponse-array_dto_FindingV3",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mend-findings-scan-api-openapi.yml#/components/schemas/dto.MendCursoredResponse-array_dto_FindingV3",
+  "properties": {
+    "additionalData": {
+      "properties": {
+        "cursor": {
+          "type": "integer"
+        },
+        "next": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "response": {
+      "items": {
+        "$ref": "#/$defs/dto.FindingV3"
+      },
+      "type": "array"
+    },
+    "supportToken": {
+      "type": "string"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "dto.AzureDevOpsWorkItem": {
+      "properties": {
+        "project": {
+          "type": "string"
+        },
+        "workItemId": {
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "dto.CallStackItem": {
+      "properties": {
+        "endLine": {
+          "type": "integer"
+        },
+        "file": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "line": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "snippet": {
+          "type": "string"
+        },
+        "startLine": {
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "dto.CapecInfo": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "dto.CweInfo": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "dto.DataFlow": {
+      "properties": {
+        "ageRating": {
+          "description": "Between 0 and 10",
+          "type": "number"
+        },
+        "confidenceRating": {
+          "description": "Between 0 and 10",
+          "type": "number"
+        },
+        "createdTime": {
+          "type": "string"
+        },
+        "filter": {
+          "$ref": "#/$defs/dto.Filter"
+        },
+        "functionCalls": {
+          "items": {
+            "$ref": "#/$defs/dto.CallStackItem"
+          },
+          "type": "array"
+        },
+        "id": {
+          "type": "string"
+        },
+        "inputFlow": {
+          "items": {
+            "$ref": "#/$defs/dto.CallStackItem"
+          },
+          "type": "array"
+        },
+        "inputKind": {
+          "type": "string"
+        },
+        "inputSource": {
+          "type": "string"
+        },
+        "isNew": {
+          "type": "boolean"
+        },
+        "rating": {
+          "description": "Between 0 and 10",
+          "type": "number"
+        },
+        "sink": {
+          "type": "string"
+        },
+        "sinkFile": {
+          "type": "string"
+        },
+        "sinkKind": {
+          "type": "string"
+        },
+        "sinkLine": {
+          "type": "integer"
+        },
+        "sinkSnippet": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "dto.Filter": {
+      "properties": {
+        "filterTypes": {
+          "items": {
+            "$ref": "#/$defs/dto.FilterType"
+          },
+          "type": "array"
+        },
+        "isFiltered": {
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "dto.FilterType": {
+      "properties": {
+        "code": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "dto.FindingAlmIssues": {
+      "properties": {
+        "azure": {
+          "$ref": "#/$defs/dto.AzureDevOpsWorkItem"
+        },
+        "jira": {
+          "$ref": "#/$defs/dto.JiraIssue"
+        },
+        "jiraPlatform": {
+          "$ref": "#/$defs/dto.JiraPlatformIssue"
+        }
+      },
+      "type": "object"
+    },
+    "dto.FindingComment": {
+      "properties": {
+        "body": {
+          "type": "string"
+        },
+        "createdBy": {
+          "type": "string"
+        },
+        "createdTime": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "dto.FindingSharedStep": {
+      "properties": {
+        "endLine": {
+          "type": "integer"
+        },
+        "file": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "line": {
+          "type": "integer"
+        },
+        "lineBlame": {
+          "$ref": "#/$defs/dto.LineBlame"
+        },
+        "name": {
+          "type": "string"
+        },
+        "snippet": {
+          "type": "string"
+        },
+        "startLine": {
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "dto.FindingV3": {
+      "properties": {
+        "ageRating": {
+          "description": "Between 0 and 10",
+          "type": "number"
+        },
+        "almIssues": {
+          "$ref": "#/$defs/dto.FindingAlmIssues"
+        },
+        "appId": {
+          "type": "string"
+        },
+        "baseline": {
+          "type": "boolean"
+        },
+        "comments": {
+          "items": {
+            "$ref": "#/$defs/dto.FindingComment"
+          },
+          "type": "array"
+        },
+        "confidenceRating": {
+          "description": "Between 0 and 10",
+          "type": "number"
+        },
+        "correlatedDastFindingUuids": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "createdTime": {
+          "type": "string"
+        },
+        "dataFlows": {
+          "items": {
+            "$ref": "#/$defs/dto.DataFlow"
+          },
+          "type": "array"
+        },
+        "description": {
+          "type": "string"
+        },
+        "hasRemediation": {
+          "type": "boolean"
+        },
+        "id": {
+          "description": "Uniquely identifies the finding across multiple scans",
+          "type": "string"
+        },
+        "isNew": {
+          "type": "boolean"
+        },
+        "issueStatus": {
+          "type": "integer"
+        },
+        "projectId": {
+          "type": "string"
+        },
+        "rating": {
+          "description": "Between 0 and 10",
+          "type": "number"
+        },
+        "refId": {
+          "description": "Uniquely identifies the finding across multiple scans",
+          "type": "string"
+        },
+        "reviewed": {
+          "type": "boolean"
+        },
+        "riskFactors": {
+          "$ref": "#/$defs/dto.RiskFactors"
+        },
+        "scanId": {
+          "description": "Uniquely identifies the scan this finding was loaded from",
+          "type": "string"
+        },
+        "severity": {
+          "type": "string"
+        },
+        "severityRating": {
+          "description": "Between 0 and 10",
+          "type": "number"
+        },
+        "sharedStep": {
+          "$ref": "#/$defs/dto.FindingSharedStep"
+        },
+        "snapshotId": {
+          "description": "Uniquely identifies the finding within a scan, it's equivalent to the pair of <em>id</em> and <em>scanId</em>",
+          "type": "string"
+        },
+        "suppressed": {
+          "type": "boolean"
+        },
+        "suppressedBy": {
+          "type": "string"
+        },
+        "suppressionMessage": {
+          "description": "Always empty if suppressed is not set",
+          "type": "string"
+        },
+        "suppressionRejected": {
+          "type": "boolean"
+        },
+        "suppressionRequestComment": {
+          "type": "string"
+        },
+        "suppressionRequested": {
+          "type": "boolean"
+        },
+        "suppressionTime": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/$defs/dto.VulnerabilityTypeDefinition"
+        },
+        "workflowViolations": {
+          "items": {
+            "$ref": "#/$defs/dto.Workflow"
+          },
+          "type": "array"
+        },
+        "workflowViolationsCount": {
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "dto.HipaaInfo": {
+      "properties": {
+        "control": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "dto.HitrustInfo": {
+      "properties": {
+        "control": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "dto.JiraIssue": {
+      "properties": {
+        "issueId": {
+          "type": "string"
+        },
+        "project": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "dto.JiraPlatformIssue": {
+      "properties": {
+        "createdBy": {
+          "type": "string"
+        },
+        "createdByName": {
+          "type": "string"
+        },
+        "createdTime": {
+          "type": "string"
+        },
+        "errorMessage": {
+          "type": "string"
+        },
+        "internalStatus": {
+          "type": "string"
+        },
+        "issueKey": {
+          "type": "string"
+        },
+        "issueStatus": {
+          "type": "string"
+        },
+        "publicLink": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "dto.LineBlame": {
+      "properties": {
+        "commitId": {
+          "type": "string"
+        },
+        "file": {
+          "type": "string"
+        },
+        "line": {
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "dto.NistInfo": {
+      "properties": {
+        "control": {
+          "type": "string"
+        },
+        "priority": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "dto.Owasp2021Info": {
+      "properties": {
+        "index": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "dto.OwaspInfo": {
+      "properties": {
+        "index": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "dto.PcidssInfo": {
+      "properties": {
+        "section": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "dto.RiskFactorEndpoint": {
+      "properties": {
+        "endpoint": {
+          "type": "string"
+        },
+        "method": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "dto.RiskFactors": {
+      "properties": {
+        "endpoints": {
+          "items": {
+            "$ref": "#/$defs/dto.RiskFactorEndpoint"
+          },
+          "type": "array"
+        },
+        "hasEndpoints": {
+          "type": "boolean"
+        },
+        "isExploitable": {
+          "type": "boolean"
+        },
+        "probability": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "dto.SansTop25Info": {
+      "properties": {
+        "rank": {
+          "type": "integer"
+        },
+        "title": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "dto.VulnerabilityTypeDefinition": {
+      "properties": {
+        "capec": {
+          "$ref": "#/$defs/dto.CapecInfo"
+        },
+        "commonId": {
+          "type": "string"
+        },
+        "cwe": {
+          "$ref": "#/$defs/dto.CweInfo"
+        },
+        "description": {
+          "type": "string"
+        },
+        "driver": {
+          "type": "string"
+        },
+        "engineId": {
+          "type": "integer"
+        },
+        "hipaa": {
+          "$ref": "#/$defs/dto.HipaaInfo"
+        },
+        "hitrust": {
+          "$ref": "#/$defs/dto.HitrustInfo"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "language": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "nist": {
+          "$ref": "#/$defs/dto.NistInfo"
+        },
+        "order": {
+          "type": "integer"
+        },
+        "owasp": {
+          "$ref": "#/$defs/dto.OwaspInfo"
+        },
+        "owasp2021": {
+          "$ref": "#/$defs/dto.Owasp2021Info"
+        },
+        "pcidss": {
+          "$ref": "#/$defs/dto.PcidssInfo"
+        },
+        "recommendations": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "references": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "sansTop25": {
+          "$ref": "#/$defs/dto.SansTop25Info"
+        },
+        "sarif": {
+          "type": "string"
+        },
+        "sarifLevel": {
+          "type": "string"
+        },
+        "severity": {
+          "type": "string"
+        },
+        "severityRating": {
+          "type": "number"
+        }
+      },
+      "type": "object"
+    },
+    "dto.Workflow": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "uuid": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

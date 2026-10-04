@@ -1,0 +1,145 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mend/main/json-schema/mend-dwrresponse-pageable-v3-list-scan-summary-dtov3-schema.json",
+  "title": "DWRResponsePageableV3ListScanSummaryDTOV3",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mend-applications-api-openapi.yml#/components/schemas/DWRResponsePageableV3ListScanSummaryDTOV3",
+  "type": "object",
+  "properties": {
+    "additionalData": {
+      "title": "Provides insights into endpoint-supported pagination information.",
+      "type": "object",
+      "description": "+ **totalItems**: The total count of data points returned in an API response.\n"
+    },
+    "supportToken": {
+      "title": "Support Token",
+      "type": "string"
+    },
+    "response": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/ScanSummaryDTOV3"
+      }
+    }
+  },
+  "$defs": {
+    "ScanSummaryDTOV3": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "processUuid": {
+          "type": "string"
+        },
+        "scanTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "scanStatus": {
+          "type": "string"
+        },
+        "engine": {
+          "type": "string",
+          "enum": [
+            "UNIFIED",
+            "SCA",
+            "SAST",
+            "IAC",
+            "IMG",
+            "AI",
+            "DAST"
+          ]
+        },
+        "scanDuration": {
+          "type": "string"
+        },
+        "configurationName": {
+          "type": "string"
+        },
+        "reference": {
+          "type": "string"
+        },
+        "triggeredBy": {
+          "type": "string"
+        },
+        "agentName": {
+          "type": "string"
+        },
+        "agentVersion": {
+          "type": "string"
+        },
+        "supportToken": {
+          "type": "string"
+        },
+        "projectName": {
+          "type": "string"
+        },
+        "projectUuid": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ScanTagDTO"
+          }
+        },
+        "applicationName": {
+          "type": "string"
+        },
+        "applicationUuid": {
+          "type": "string"
+        },
+        "workflowUuids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "workflowNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "statistics": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        }
+      }
+    },
+    "ScanTagDTO": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "title": "Scan Tag Key",
+          "type": "string"
+        },
+        "value": {
+          "title": "Scan Tag Value",
+          "type": "string"
+        },
+        "displayName": {
+          "title": "Scan Tag Display Name",
+          "type": "string"
+        },
+        "createdAt": {
+          "title": "Scan Tag Creation Date",
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}

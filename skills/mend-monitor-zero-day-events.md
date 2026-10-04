@@ -1,8 +1,8 @@
 ---
-name: Monitor Mend zero-day events
+name: monitor-zero-day-events
 description: Authenticate to the Mend AppSec Platform API and list active zero-day events and the findings they affect.
 api: openapi/mend-platform-openapi-original.json
-operations: [login, getZeroDayEvents, getZeroDayEventFindings]
+operations: [postApiV20Login, getZeroDayEvents, getZeroDayEventFindings]
 ---
 
 # Monitor Mend zero-day events

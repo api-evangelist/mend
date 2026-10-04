@@ -2,7 +2,7 @@ overlay: 1.0.0
 info:
   title: API Evangelist enhancements for Mend AppSec Platform API
   version: 1.0.0
-extends: openapi/mend-platform-openapi-original.json
+extends: ../openapi/_original/mend-platform-openapi-original.json
 actions:
   - target: $.info
     update:

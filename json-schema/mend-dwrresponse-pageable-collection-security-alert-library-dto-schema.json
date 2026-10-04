@@ -1,0 +1,370 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mend/main/json-schema/mend-dwrresponse-pageable-collection-security-alert-library-dto-schema.json",
+  "title": "DWRResponsePageableCollectionSecurityAlertLibraryDTO",
+  "description": "Provides insights into endpoint-supported pagination information",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mend-alerts-product-api-openapi.yml#/components/schemas/DWRResponsePageableCollectionSecurityAlertLibraryDTO",
+  "type": "object",
+  "properties": {
+    "additionalData": {
+      "title": "Provides insights into endpoint-supported pagination information.",
+      "type": "object",
+      "description": "+ **totalItems**: The total count of data points returned in an API response.\n+ **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining."
+    },
+    "supportToken": {
+      "title": "Support Token",
+      "type": "string"
+    },
+    "retVal": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/SecurityAlertLibraryDTO"
+      }
+    }
+  },
+  "$defs": {
+    "ComponentReferencesDTO": {
+      "title": "Component References",
+      "type": "object",
+      "properties": {
+        "url": {
+          "title": "Reference Url",
+          "type": "string"
+        },
+        "homePage": {
+          "title": "Reference Home Page",
+          "type": "string"
+        },
+        "downloadLink": {
+          "title": "Reference Download Link",
+          "type": "string"
+        },
+        "issueUrl": {
+          "title": "Reference Issue Url",
+          "type": "string"
+        },
+        "pomUrl": {
+          "title": "Reference Pom Url",
+          "type": "string"
+        },
+        "scmUrl": {
+          "title": "Reference Scm Url",
+          "type": "string"
+        },
+        "genericPackageIndex": {
+          "title": "Reference Generic Package Index",
+          "type": "string"
+        },
+        "nugetGallery": {
+          "title": "Reference Nugget Gallery",
+          "type": "string"
+        },
+        "tags": {
+          "title": "Reference Tags",
+          "type": "string"
+        },
+        "copyright": {
+          "title": "Reference Copyright",
+          "type": "string"
+        },
+        "hasNotice": {
+          "title": "Reference Has Notice",
+          "type": "boolean"
+        }
+      }
+    },
+    "LibraryComponentDTO": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "title": "Component UUID",
+          "type": "string"
+        },
+        "name": {
+          "title": "Component Name",
+          "type": "string"
+        },
+        "description": {
+          "title": "Component Description",
+          "type": "string"
+        },
+        "componentType": {
+          "title": "Component Type",
+          "type": "string",
+          "enum": [
+            "Library"
+          ]
+        },
+        "type": {
+          "type": "string"
+        },
+        "libraryType": {
+          "title": "Library Type",
+          "type": "string"
+        },
+        "directDependency": {
+          "title": "Direct Dependency",
+          "type": "boolean"
+        },
+        "dependencyType": {
+          "title": "Dependency Type",
+          "type": "string"
+        },
+        "references": {
+          "$ref": "#/$defs/ComponentReferencesDTO"
+        },
+        "groupId": {
+          "title": "Component Name",
+          "type": "string"
+        },
+        "artifactId": {
+          "title": "Component Artifact",
+          "type": "string"
+        },
+        "version": {
+          "title": "Component Version",
+          "type": "string"
+        },
+        "dependencyFile": {
+          "type": "string"
+        },
+        "localPath": {
+          "type": "string"
+        }
+      }
+    },
+    "ProductDTO": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "title": "Product Uuid",
+          "type": "string"
+        },
+        "name": {
+          "title": "Product Name",
+          "type": "string"
+        }
+      }
+    },
+    "ProjectDTO": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "title": "Project UUID",
+          "type": "string"
+        },
+        "name": {
+          "title": "Project Name",
+          "type": "string"
+        },
+        "path": {
+          "title": "Product Name",
+          "type": "string"
+        },
+        "productName": {
+          "title": "Product Name",
+          "type": "string"
+        },
+        "productUuid": {
+          "title": "Product Uuid",
+          "type": "string"
+        }
+      }
+    },
+    "SecurityAlertLibraryDTO": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "component": {
+          "$ref": "#/$defs/LibraryComponentDTO"
+        },
+        "libraryType": {
+          "title": "Library Type",
+          "type": "string",
+          "enum": [
+            "BINARY, SOURCE"
+          ]
+        },
+        "severity": {
+          "type": "string"
+        },
+        "criticalNum": {
+          "title": "Number Of Critical Vulnerabilities",
+          "type": "integer",
+          "format": "int32"
+        },
+        "highNum": {
+          "title": "Number Of High Vulnerabilities",
+          "type": "integer",
+          "format": "int32"
+        },
+        "mediumNum": {
+          "title": "Number Of MEDIUM Vulnerabilities",
+          "type": "integer",
+          "format": "int32"
+        },
+        "lowNum": {
+          "title": "Number Of Low Vulnerabilities",
+          "type": "integer",
+          "format": "int32"
+        },
+        "total": {
+          "title": "Number Of All Vulnerabilities",
+          "type": "integer",
+          "format": "int32"
+        },
+        "ignoreNum": {
+          "title": "Number Of Ignored Vulnerabilities",
+          "type": "integer",
+          "format": "int32"
+        },
+        "effective": {
+          "title": "Effective Value",
+          "type": "string",
+          "enum": [
+            "RED",
+            "YELLOW",
+            "GREY",
+            "NO_SHIELD",
+            "GREEN"
+          ]
+        },
+        "detectedAt": {
+          "title": "First Alert Detection Date",
+          "type": "string",
+          "format": "date-time"
+        },
+        "modifiedAt": {
+          "title": "Alert Modified Date",
+          "type": "string",
+          "format": "date-time"
+        },
+        "publishedAt": {
+          "title": "First Vulnerability Published Date",
+          "type": "string",
+          "format": "date-time"
+        },
+        "lastCveUpdatedAt": {
+          "title": "Last Vulnerability Updated Date",
+          "type": "string",
+          "format": "date-time"
+        },
+        "subRowsIds": {
+          "type": "array",
+          "items": {
+            "title": "Vulnerability Names",
+            "type": "string"
+          }
+        },
+        "project": {
+          "$ref": "#/$defs/ProjectDTO"
+        },
+        "product": {
+          "$ref": "#/$defs/ProductDTO"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "ACTIVE",
+            "IGNORED",
+            "LIBRARY_REMOVED",
+            "LIBRARY_IN_HOUSE",
+            "LIBRARY_WHITELIST"
+          ]
+        },
+        "comment": {
+          "title": "Comment on suppressed library",
+          "type": "string"
+        },
+        "directName": {
+          "type": "string"
+        },
+        "lastScan": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "transitiveDependency": {
+          "title": "Transitive Dependency",
+          "type": "boolean"
+        },
+        "exploitCodeMaturity": {
+          "type": "array",
+          "items": {
+            "title": "Exploit Code Maturity List",
+            "type": "string",
+            "enum": [
+              "UNPROVEN",
+              "POC_CODE",
+              "FUNCTIONAL",
+              "HIGH",
+              "NOT_DEFINED"
+            ]
+          }
+        },
+        "exploitable": {
+          "title": "Is Library Exploitable",
+          "type": "boolean"
+        },
+        "numOfReachable": {
+          "title": "Number Of Reachable Vulnerabilities",
+          "type": "integer",
+          "format": "int32"
+        },
+        "numOfPotentiallyReachable": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "numOfUnreachable": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "reachability": {
+          "title": "Effective Value",
+          "type": "string",
+          "enum": [
+            "RED",
+            "YELLOW",
+            "GREY",
+            "NO_SHIELD",
+            "GREEN"
+          ]
+        },
+        "numOfMalicious": {
+          "title": "Number Of Malicious Vulnerabilities",
+          "type": "integer",
+          "format": "int32"
+        },
+        "malicious": {
+          "title": "Is Library Malicious",
+          "type": "boolean"
+        },
+        "violations": {
+          "title": "Number Of Violations",
+          "type": "integer",
+          "format": "int32"
+        },
+        "workflowUuids": {
+          "title": "Number Of Violated Workflows",
+          "type": "array",
+          "items": {
+            "title": "Number Of Violated Workflows",
+            "type": "string"
+          }
+        },
+        "violatingFindings": {
+          "title": "Number Of Violating Findings",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    }
+  }
+}

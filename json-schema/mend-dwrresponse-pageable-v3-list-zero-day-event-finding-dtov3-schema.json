@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mend/main/json-schema/mend-dwrresponse-pageable-v3-list-zero-day-event-finding-dtov3-schema.json",
+  "title": "DWRResponsePageableV3ListZeroDayEventFindingDTOV3",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mend-zero-day-events-api-openapi.yml#/components/schemas/DWRResponsePageableV3ListZeroDayEventFindingDTOV3",
+  "type": "object",
+  "properties": {
+    "additionalData": {
+      "title": "Provides insights into endpoint-supported pagination information.",
+      "type": "object",
+      "description": "+ **totalItems**: The total count of data points returned in an API response.\n"
+    },
+    "supportToken": {
+      "title": "Support Token",
+      "type": "string"
+    },
+    "response": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/ZeroDayEventFindingDTOV3"
+      }
+    }
+  },
+  "$defs": {
+    "Component": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Component name"
+        },
+        "sha1": {
+          "type": "string",
+          "description": "Component SHA1 hash"
+        }
+      },
+      "description": "Component details"
+    },
+    "Vulnerability": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Vulnerability name (CVE)"
+        }
+      },
+      "description": "Vulnerability details"
+    },
+    "ZeroDayEventFindingDTOV3": {
+      "type": "object",
+      "properties": {
+        "component": {
+          "$ref": "#/$defs/Component"
+        },
+        "vulnerability": {
+          "$ref": "#/$defs/Vulnerability"
+        },
+        "addedAt": {
+          "type": "string",
+          "description": "Date added to the Zero-Day event",
+          "format": "date-time"
+        }
+      },
+      "description": "Zero-Day Event Finding"
+    }
+  }
+}

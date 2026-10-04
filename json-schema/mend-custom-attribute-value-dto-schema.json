@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mend/main/json-schema/mend-custom-attribute-value-dto-schema.json",
+  "title": "CustomAttributeValueDTO",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mend-customattribute-organization-api-openapi.yml#/components/schemas/CustomAttributeValueDTO",
+  "type": "object",
+  "properties": {
+    "value": {
+      "title": "Custom Attribute Value",
+      "type": "string"
+    }
+  }
+}

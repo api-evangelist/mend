@@ -181,6 +181,13 @@ paths:
                 $ref: '#/components/schemas/DWRResponseBase'
 components:
   schemas:
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
     MessageDTO:
       type: object
       properties:
@@ -188,6 +195,31 @@ components:
           title: message
           type: string
           example: Success!
+    OrganizationLabelDTOV3:
+      type: object
+      properties:
+        uuid:
+          type: string
+        namespace:
+          type: string
+        value:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+        system:
+          type: boolean
+        applications:
+          type: integer
+          format: int64
+        projects:
+          type: integer
+          format: int64
+        id:
+          type: integer
+          format: int64
     DomainLabelRequestDTO:
       required:
       - namespace
@@ -202,22 +234,6 @@ components:
           title: Label Value
           type: string
           example: Label Value A
-    DWRResponseV3MessageDTO:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        response:
-          $ref: '#/components/schemas/MessageDTO'
-    DWRResponseBase:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
     DWRResponsePageableV3ListOrganizationLabelDTOV3:
       type: object
       properties:
@@ -253,31 +269,15 @@ components:
           title: Label Value
           type: string
           example: Label Value A
-    OrganizationLabelDTOV3:
+    DWRResponseV3MessageDTO:
       type: object
       properties:
-        uuid:
+        supportToken:
+          title: Support Token
           type: string
-        namespace:
-          type: string
-        value:
-          type: string
-        createdAt:
-          type: string
-          format: date-time
-        createdBy:
-          type: string
-        system:
-          type: boolean
-        applications:
-          type: integer
-          format: int64
-        projects:
-          type: integer
-          format: int64
-        id:
-          type: integer
-          format: int64
+          example: 1171c60d
+        response:
+          $ref: '#/components/schemas/MessageDTO'
   securitySchemes:
     bearer-key:
       type: http

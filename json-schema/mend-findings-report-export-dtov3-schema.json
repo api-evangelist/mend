@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mend/main/json-schema/mend-findings-report-export-dtov3-schema.json",
+  "title": "FindingsReportExportDTOV3",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mend-reports-api-openapi.yml#/components/schemas/FindingsReportExportDTOV3",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "format": {
+      "type": "string",
+      "description": "Output file format. The Findings report supports excel, json and xml.",
+      "enum": [
+        "excel",
+        "json",
+        "xml"
+      ]
+    },
+    "sendEmailNotification": {
+      "type": "boolean"
+    },
+    "projectUuids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "vulnerabilitiesState": {
+      "type": "array",
+      "description": "Alert states to include. Defaults to [OPEN] when omitted.",
+      "items": {
+        "type": "string",
+        "description": "Alert states to include. Defaults to [OPEN] when omitted.",
+        "enum": [
+          "OPEN",
+          "IGNORE"
+        ]
+      }
+    },
+    "vulnerabilityTypes": {
+      "type": "array",
+      "description": "Filter by one or more vulnerability types. ANY (default) includes all types.",
+      "items": {
+        "type": "string",
+        "description": "Filter by one or more vulnerability types. ANY (default) includes all types.",
+        "enum": [
+          "MSC",
+          "CVE",
+          "ANY",
+          "GHSA",
+          "WS",
+          "MAI"
+        ]
+      }
+    },
+    "dateRange": {
+      "type": "integer",
+      "description": "Include only vulnerabilities first detected within the last N days. 0 or omitted means no date filter.",
+      "format": "int32"
+    },
+    "zeroDayIdentifier": {
+      "type": "string",
+      "description": "Scope the report to a specific zero-day event, by event UUID or name."
+    }
+  }
+}

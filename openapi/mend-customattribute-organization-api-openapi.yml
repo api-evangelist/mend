@@ -114,6 +114,13 @@ paths:
                 $ref: '#/components/schemas/DWRResponseBase'
 components:
   schemas:
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
     CustomAttributeDTO:
       type: object
       properties:
@@ -169,13 +176,6 @@ components:
           items:
             $ref: '#/components/schemas/CustomAttributeDTO'
       description: Provides insights into endpoint-supported pagination information
-    CustomAttributeValueDTO:
-      type: object
-      properties:
-        value:
-          title: Custom Attribute Value
-          type: string
-          example: Custom attribute value
     DWRResponseMessageDTO:
       type: object
       properties:
@@ -185,13 +185,13 @@ components:
           example: 1171c60d
         retVal:
           $ref: '#/components/schemas/MessageDTO'
-    DWRResponseBase:
+    CustomAttributeValueDTO:
       type: object
       properties:
-        supportToken:
-          title: Support Token
+        value:
+          title: Custom Attribute Value
           type: string
-          example: 1171c60d
+          example: Custom attribute value
   securitySchemes:
     bearer-key:
       type: http

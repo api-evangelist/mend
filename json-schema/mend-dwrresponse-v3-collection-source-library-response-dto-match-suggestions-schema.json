@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mend/main/json-schema/mend-dwrresponse-v3-collection-source-library-response-dto-match-suggestions-schema.json",
+  "title": "DWRResponseV3CollectionSourceLibraryResponseDTO_MatchSuggestions",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mend-dependencies-source-files-api-openapi.yml#/components/schemas/DWRResponseV3CollectionSourceLibraryResponseDTO_MatchSuggestions",
+  "type": "object",
+  "properties": {
+    "supportToken": {
+      "title": "Support Token",
+      "type": "string"
+    },
+    "response": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/SourceLibraryResponseDTO_MatchSuggestions"
+      }
+    }
+  },
+  "$defs": {
+    "LiteLicenseDTO_MatchSuggestions": {
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "title": "Licenses",
+          "type": "string"
+        },
+        "severity": {
+          "title": "License Risk",
+          "type": "string"
+        }
+      },
+      "description": "Collection of licenses associated with this library"
+    },
+    "SourceLibraryResponseDTO_MatchSuggestions": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the library"
+        },
+        "sha1": {
+          "type": "string",
+          "description": "SHA-1 hash of the library"
+        },
+        "licenses": {
+          "type": "array",
+          "description": "Collection of licenses associated with this library",
+          "items": {
+            "$ref": "#/$defs/LiteLicenseDTO_MatchSuggestions"
+          }
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the library"
+        },
+        "owner": {
+          "type": "string",
+          "description": "Owner/organization of the library"
+        },
+        "url": {
+          "type": "string",
+          "description": "URL to the library source"
+        },
+        "date": {
+          "type": "string",
+          "description": "Release date of the library",
+          "format": "date-time"
+        },
+        "nonOfficialRelease": {
+          "type": "boolean",
+          "description": "Indicates whether this is a non-official release"
+        },
+        "matchSuggestionId": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Base64 encoded match suggestion ID used for remapping operations."
+        }
+      },
+      "description": "Library match suggestion response containing library details and match metadata"
+    }
+  }
+}

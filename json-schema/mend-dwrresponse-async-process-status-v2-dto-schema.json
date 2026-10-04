@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mend/main/json-schema/mend-dwrresponse-async-process-status-v2-dto-schema.json",
+  "title": "DWRResponseAsyncProcessStatusV2DTO",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mend-asynchronous-process-control-api-openapi.yml#/components/schemas/DWRResponseAsyncProcessStatusV2DTO",
+  "type": "object",
+  "properties": {
+    "supportToken": {
+      "title": "Support Token",
+      "type": "string"
+    },
+    "retVal": {
+      "$ref": "#/$defs/AsyncProcessStatusV2DTO"
+    }
+  },
+  "$defs": {
+    "AsyncProcessStatusV2DTO": {
+      "type": "object",
+      "properties": {
+        "contextUuid": {
+          "title": "contextUuid",
+          "type": "string"
+        },
+        "uuid": {
+          "title": "uuid",
+          "type": "string"
+        },
+        "status": {
+          "title": "status",
+          "type": "string",
+          "enum": [
+            "PENDING",
+            "IN_PROGRESS",
+            "FAILED",
+            "FAILURE",
+            "SUCCESS"
+          ]
+        },
+        "contextType": {
+          "title": "contextType",
+          "type": "string",
+          "enum": [
+            "SYSTEM",
+            "GLOBAL_ACCOUNT",
+            "DOMAIN",
+            "PRODUCT",
+            "PROJECT",
+            "SCAN",
+            "UNSUPPORTED_TYPE"
+          ]
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "modified": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "processType": {
+          "title": "processType",
+          "type": "string"
+        },
+        "messageContentSha1": {
+          "title": "messageContentSha1",
+          "type": "string"
+        },
+        "userMail": {
+          "type": "string",
+          "writeOnly": true
+        },
+        "requestToken": {
+          "title": "requestToken",
+          "type": "string"
+        },
+        "userEmail": {
+          "title": "userMail",
+          "type": "string"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mend/main/json-schema/mend-dwrresponse-pageable-collection-user-key-dto-schema.json",
+  "title": "DWRResponsePageableCollectionUserKeyDTO",
+  "description": "Provides insights into endpoint-supported pagination information",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mend-user-profile-api-openapi.yml#/components/schemas/DWRResponsePageableCollectionUserKeyDTO",
+  "type": "object",
+  "properties": {
+    "additionalData": {
+      "title": "Provides insights into endpoint-supported pagination information.",
+      "type": "object",
+      "description": "+ **totalItems**: The total count of data points returned in an API response.\n+ **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining."
+    },
+    "supportToken": {
+      "title": "Support Token",
+      "type": "string"
+    },
+    "retVal": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/UserKeyDTO"
+      }
+    }
+  },
+  "$defs": {
+    "UserKeyDTO": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "title": "User Key UUID",
+          "type": "string"
+        },
+        "userUuid": {
+          "title": "User UUID",
+          "type": "string"
+        },
+        "userKey": {
+          "title": "User Key",
+          "type": "string"
+        },
+        "createdAt": {
+          "title": "Time Of Creation",
+          "type": "string",
+          "format": "date-time"
+        },
+        "lastUsedAt": {
+          "title": "Last Token Usage",
+          "type": "string",
+          "format": "date-time"
+        },
+        "description": {
+          "title": "Token Description",
+          "type": "string"
+        },
+        "expirationDate": {
+          "title": "Token Expiration Date",
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}

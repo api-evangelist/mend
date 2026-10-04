@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mend/main/json-schema/mend-v3-v3-base-response-v3-v3-test-run-trigger-response-schema.json",
+  "title": "v3.V3BaseResponse-v3_V3TestRunTriggerResponse",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mend-red-team-api-openapi.yml#/components/schemas/v3.V3BaseResponse-v3_V3TestRunTriggerResponse",
+  "type": "object",
+  "properties": {
+    "data": {
+      "$ref": "#/$defs/v3.V3TestRunTriggerResponse"
+    },
+    "supportToken": {
+      "type": "string"
+    }
+  },
+  "$defs": {
+    "v3.V3TestRunTriggerResponse": {
+      "type": "object",
+      "properties": {
+        "testRunId": {
+          "type": "integer",
+          "description": "ID of the triggered test run"
+        }
+      }
+    }
+  }
+}

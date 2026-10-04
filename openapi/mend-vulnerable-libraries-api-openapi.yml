@@ -52,11 +52,38 @@ paths:
                 $ref: '#/components/schemas/DWRResponseBase'
 components:
   schemas:
-    AttributionReportLibrarySettingRuleDTO:
+    LibraryExtraInfoDTO:
       type: object
       properties:
-        excluded:
-          type: boolean
+        distributionUrl:
+          type: string
+        downloadUrl:
+          type: string
+        releaseDate:
+          type: string
+          format: date-time
+        packageManagerRepository:
+          type: string
+        homePage:
+          type: string
+        repositoryUrl:
+          type: string
+        author:
+          type: string
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+    EntityDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+        name:
+          type: string
     LibraryLocationDTO:
       type: object
       properties:
@@ -68,6 +95,63 @@ components:
           title: Dependency File
           type: string
           example: C:\\GitHubRepos\\Pipline\\EUA\\plugins-automation\\fsa\\tests\\EUA\\Java\\bigProjectsMaven\\WST_417\\Data\\ksa\\ksa-web-core\\pom.xml
+    NoticeDTO:
+      required:
+      - text
+      type: object
+      properties:
+        text:
+          title: Notice Text
+          type: string
+          example: Developed internally
+        reference:
+          title: Notice REFERENCE
+          type: string
+          example: https://github.com/...
+    DWRResponseListLightLibraryDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          type: array
+          items:
+            $ref: '#/components/schemas/LightLibraryDTO'
+    AttributionReportLibrarySettingRuleDTO:
+      type: object
+      properties:
+        excluded:
+          type: boolean
+    SecurityRiskDTO:
+      type: object
+      properties:
+        sourceUrl:
+          type: string
+        riskFactor:
+          type: string
+          enum:
+          - NO_FINDINGS
+          - UNCONFIRMED_UNSAFE
+          - CONFIRMED_UNSAFE
+          - KNOWN_FALSE_POSITIVE
+    ProprietaryInfoDTO:
+      type: object
+      properties:
+        ruleDescription:
+          type: string
+        rulePattern:
+          type: string
+        comment:
+          type: string
+        userInfo:
+          $ref: '#/components/schemas/UserInfoDTO'
+        proprietaryMarkType:
+          type: string
+          enum:
+          - BY_RULE
+          - BY_USER
     UserInfoDTO:
       required:
       - uuid
@@ -99,17 +183,55 @@ components:
           - ACTIVE
           - INACTIVE
           - LOCKOUT
-    DWRResponseListLightLibraryDTO:
+    TrackedIssueDTO:
+      title: Tracked Issue Information
       type: object
       properties:
-        supportToken:
-          title: Support Token
+        uuid:
           type: string
-          example: 1171c60d
-        retVal:
-          type: array
-          items:
-            $ref: '#/components/schemas/LightLibraryDTO'
+        issueId:
+          type: string
+        origin:
+          type: string
+        issueKey:
+          type: string
+        account:
+          $ref: '#/components/schemas/EntityDTO'
+        domain:
+          $ref: '#/components/schemas/EntityDTO'
+        application:
+          $ref: '#/components/schemas/EntityDTO'
+        project:
+          $ref: '#/components/schemas/EntityDTO'
+        status:
+          type: string
+          enum:
+          - PENDING
+          - IN_PROGRESS
+          - SUCCESS
+          - FAILED
+          - DELETED
+        issueStatus:
+          type: string
+        failureReason:
+          type: string
+        errorMessage:
+          type: string
+        publicLink:
+          type: string
+        creationDate:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        createdBy:
+          $ref: '#/components/schemas/EntityDTO'
+        ticketType:
+          type: string
+          enum:
+          - SECURITY
+          - LEGAL
     LightLibraryDTO:
       type: object
       properties:
@@ -204,128 +326,6 @@ components:
           example: 2
         trackedIssue:
           $ref: '#/components/schemas/TrackedIssueDTO'
-    LibraryExtraInfoDTO:
-      type: object
-      properties:
-        distributionUrl:
-          type: string
-        downloadUrl:
-          type: string
-        releaseDate:
-          type: string
-          format: date-time
-        packageManagerRepository:
-          type: string
-        homePage:
-          type: string
-        repositoryUrl:
-          type: string
-        author:
-          type: string
-    ProprietaryInfoDTO:
-      type: object
-      properties:
-        ruleDescription:
-          type: string
-        rulePattern:
-          type: string
-        comment:
-          type: string
-        userInfo:
-          $ref: '#/components/schemas/UserInfoDTO'
-        proprietaryMarkType:
-          type: string
-          enum:
-          - BY_RULE
-          - BY_USER
-    TrackedIssueDTO:
-      title: Tracked Issue Information
-      type: object
-      properties:
-        uuid:
-          type: string
-        issueId:
-          type: string
-        origin:
-          type: string
-        issueKey:
-          type: string
-        account:
-          $ref: '#/components/schemas/EntityDTO'
-        domain:
-          $ref: '#/components/schemas/EntityDTO'
-        application:
-          $ref: '#/components/schemas/EntityDTO'
-        project:
-          $ref: '#/components/schemas/EntityDTO'
-        status:
-          type: string
-          enum:
-          - PENDING
-          - IN_PROGRESS
-          - SUCCESS
-          - FAILED
-          - DELETED
-        issueStatus:
-          type: string
-        failureReason:
-          type: string
-        errorMessage:
-          type: string
-        publicLink:
-          type: string
-        creationDate:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
-        createdBy:
-          $ref: '#/components/schemas/EntityDTO'
-        ticketType:
-          type: string
-          enum:
-          - SECURITY
-          - LEGAL
-    DWRResponseBase:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-    NoticeDTO:
-      required:
-      - text
-      type: object
-      properties:
-        text:
-          title: Notice Text
-          type: string
-          example: Developed internally
-        reference:
-          title: Notice REFERENCE
-          type: string
-          example: https://github.com/...
-    EntityDTO:
-      type: object
-      properties:
-        uuid:
-          type: string
-        name:
-          type: string
-    SecurityRiskDTO:
-      type: object
-      properties:
-        sourceUrl:
-          type: string
-        riskFactor:
-          type: string
-          enum:
-          - NO_FINDINGS
-          - UNCONFIRMED_UNSAFE
-          - CONFIRMED_UNSAFE
-          - KNOWN_FALSE_POSITIVE
   securitySchemes:
     bearer-key:
       type: http

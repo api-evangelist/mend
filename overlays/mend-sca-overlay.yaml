@@ -2,7 +2,7 @@ overlay: 1.0.0
 info:
   title: API Evangelist enhancements for Mend SCA API
   version: 1.0.0
-extends: openapi/mend-sca-openapi-original.json
+extends: ../openapi/_original/mend-sca-openapi-original.json
 actions:
   - target: $.info
     update:

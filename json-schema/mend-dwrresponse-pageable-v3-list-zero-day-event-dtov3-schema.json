@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mend/main/json-schema/mend-dwrresponse-pageable-v3-list-zero-day-event-dtov3-schema.json",
+  "title": "DWRResponsePageableV3ListZeroDayEventDTOV3",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mend-zero-day-events-api-openapi.yml#/components/schemas/DWRResponsePageableV3ListZeroDayEventDTOV3",
+  "type": "object",
+  "properties": {
+    "additionalData": {
+      "title": "Provides insights into endpoint-supported pagination information.",
+      "type": "object",
+      "description": "+ **totalItems**: The total count of data points returned in an API response.\n"
+    },
+    "supportToken": {
+      "title": "Support Token",
+      "type": "string"
+    },
+    "response": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/ZeroDayEventDTOV3"
+      }
+    }
+  },
+  "$defs": {
+    "ZeroDayEventDTOV3": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "description": "UUID for external integrations"
+        },
+        "name": {
+          "type": "string",
+          "description": "Event name"
+        },
+        "description": {
+          "type": "string",
+          "description": "Event description"
+        },
+        "publishedAt": {
+          "type": "string",
+          "description": "Publish date",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Updated date",
+          "format": "date-time"
+        }
+      },
+      "description": "Zero-Day Event"
+    }
+  }
+}

@@ -1,8 +1,8 @@
 ---
-name: Export a Mend SBOM report
+name: export-sbom-report
 description: Authenticate to the Mend AppSec Platform API, select an application, and request an SBOM report export.
 api: openapi/mend-platform-openapi-original.json
-operations: [login, getOrganizationApplications, getScanSummaries, exportImgSbomReport_2]
+operations: [postApiV20Login, getOrganizationApplications, getScanSummaries, exportImgSbomReport_2]
 ---
 
 # Export a Mend SBOM report

@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mend/main/json-schema/mend-create-project-by-product-request-dto-schema.json",
+  "title": "CreateProjectByProductRequestDTO",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mend-entities-product-api-openapi.yml#/components/schemas/CreateProjectByProductRequestDTO",
+  "required": [
+    "projectName"
+  ],
+  "type": "object",
+  "properties": {
+    "projectName": {
+      "title": "Project Name",
+      "type": "string"
+    },
+    "projectDescription": {
+      "title": "Project Description",
+      "type": "string"
+    }
+  }
+}

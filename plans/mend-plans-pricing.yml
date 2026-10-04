@@ -2,6 +2,7 @@
 generated: '2026-09-20'
 method: searched
 source: https://www.mend.io/pricing/
+name: Mend API Plans
 sources:
 - https://www.mend.io/pricing/
 provenance:

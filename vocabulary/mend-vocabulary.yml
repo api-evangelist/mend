@@ -1,0 +1,431 @@
+generated: '2026-10-04'
+method: derived
+generator: derive-vocabulary.py
+source:
+- openapi/mend-access-management-api-openapi.yml
+- openapi/mend-access-management-organizations-api-openapi.yml
+- openapi/mend-administration-groups-api-openapi.yml
+- openapi/mend-administration-labels-api-openapi.yml
+- openapi/mend-administration-users-api-openapi.yml
+vocabulary:
+  name: Mend Domain Vocabulary
+  description: 'Terms declared by Mend''s own API contract: its resource groups, objects and enumerations, with the contract''s definitions. Derived,
+    not authored.'
+  version: '2026-10-04'
+  terms:
+  - term: AccessTokenRequestDTO
+    definition: Previous Access Token
+    tags:
+    - Object
+    source: openapi/mend-access-management-api-openapi.yml#/components/schemas/AccessTokenRequestDTO
+  - term: DWRResponseV3AccessTokenResponseDTO
+    definition: 'Object declared by the contract with fields: supportToken, response.'
+    tags:
+    - Object
+    source: openapi/mend-access-management-api-openapi.yml#/components/schemas/DWRResponseV3AccessTokenResponseDTO
+  - term: LoginModelDTOV3
+    definition: Login Model that provides user name and password for the Login process.
+    tags:
+    - Object
+    source: openapi/mend-access-management-api-openapi.yml#/components/schemas/LoginModelDTOV3
+  - term: AccessTokenResponseDTO
+    definition: 'Object declared by the contract with fields: userUuid, username, email, jwtToken, tokenType, orgName, orgUuid, accountName, accountUuid,
+      tokenTTL, systemAccess, serviceSystemAccess. (2 more)'
+    tags:
+    - Object
+    source: openapi/mend-access-management-api-openapi.yml#/components/schemas/AccessTokenResponseDTO
+  - term: DWRResponseBase
+    definition: 'Object declared by the contract with fields: supportToken.'
+    tags:
+    - Object
+    source: openapi/mend-access-management-api-openapi.yml#/components/schemas/DWRResponseBase
+  - term: DWRResponseV3LoginResponseDTO
+    definition: 'Object declared by the contract with fields: supportToken, response.'
+    tags:
+    - Object
+    source: openapi/mend-access-management-api-openapi.yml#/components/schemas/DWRResponseV3LoginResponseDTO
+  - term: LoginResponseDTO
+    definition: 'Object declared by the contract with fields: userUuid, userName, email, refreshToken, jwtTTL, systemAccess, serviceSystemAccess,
+      sessionStartTime, systemAccessStartTime.'
+    tags:
+    - Object
+    source: openapi/mend-access-management-api-openapi.yml#/components/schemas/LoginResponseDTO
+  - term: DWRResponseSessionInfo
+    definition: 'Object declared by the contract with fields: supportToken, retVal.'
+    tags:
+    - Object
+    source: openapi/mend-access-management-api-openapi.yml#/components/schemas/DWRResponseSessionInfo
+  - term: LoginModelDTO
+    definition: Login Model that provides user name and password for the Login process.
+    tags:
+    - Object
+    source: openapi/mend-access-management-api-openapi.yml#/components/schemas/LoginModelDTO
+  - term: SessionInfo
+    definition: 'Object declared by the contract with fields: correlationId, userUuid, userName, email, refreshToken, jwtToken, orgName, orgUuid.'
+    tags:
+    - Object
+    source: openapi/mend-access-management-api-openapi.yml#/components/schemas/SessionInfo
+  - term: OrgDTO
+    definition: 'Object declared by the contract with fields: uuid, name.'
+    tags:
+    - Object
+    source: openapi/mend-access-management-organizations-api-openapi.yml#/components/schemas/DomainDTO
+  - term: DWRResponseCollectionDomainDTO
+    definition: 'Object declared by the contract with fields: supportToken, retVal.'
+    tags:
+    - Object
+    source: openapi/mend-access-management-organizations-api-openapi.yml#/components/schemas/DWRResponseCollectionDomainDTO
+  - term: DWRResponseV3GroupRoleDTOV3
+    definition: 'Object declared by the contract with fields: supportToken, response.'
+    tags:
+    - Object
+    source: openapi/mend-administration-groups-api-openapi.yml#/components/schemas/DWRResponseV3GroupRoleDTOV3
+  - term: MessageDTO
+    definition: 'Object declared by the contract with fields: message.'
+    tags:
+    - Object
+    source: openapi/mend-administration-groups-api-openapi.yml#/components/schemas/MessageDTO
+  - term: GroupScopeMultiRoleDefinitionDTOV3
+    definition: 'Object declared by the contract with fields: scopeUuid, scopeName, scopeType, roleDefinitions.'
+    tags:
+    - Object
+    source: openapi/mend-administration-groups-api-openapi.yml#/components/schemas/GroupScopeMultiRoleDefinitionDTOV3
+  - term: GroupSummaryDTOV3
+    definition: 'Object declared by the contract with fields: uuid, name, description, users, affectedApplications, roles.'
+    tags:
+    - Object
+    source: openapi/mend-administration-groups-api-openapi.yml#/components/schemas/GroupSummaryDTOV3
+  - term: DWRResponseV3MessageDTO
+    definition: 'Object declared by the contract with fields: supportToken, response.'
+    tags:
+    - Object
+    source: openapi/mend-administration-groups-api-openapi.yml#/components/schemas/DWRResponseV3MessageDTO
+  - term: GroupWithRoleDefinitionsSummaryDTOV3
+    definition: 'Object declared by the contract with fields: uuid, name, description, users, affectedApplications, roleDefinitions.'
+    tags:
+    - Object
+    source: openapi/mend-administration-groups-api-openapi.yml#/components/schemas/GroupWithRoleDefinitionsSummaryDTOV3
+  - term: CreateGroupRequestDTO
+    definition: 'Object declared by the contract with fields: name, description.'
+    tags:
+    - Object
+    source: openapi/mend-administration-groups-api-openapi.yml#/components/schemas/CreateGroupRequestDTO
+  - term: GroupRoleDTOV3
+    definition: 'Object declared by the contract with fields: scopeUuid, scopeName, scopeType, role.'
+    tags:
+    - Object
+    source: openapi/mend-administration-groups-api-openapi.yml#/components/schemas/GroupRoleDTOV3
+  - term: DWRResponseV3GroupDTO
+    definition: 'Object declared by the contract with fields: supportToken, response.'
+    tags:
+    - Object
+    source: openapi/mend-administration-groups-api-openapi.yml#/components/schemas/DWRResponseV3GroupDTO
+  - term: UserEmailsRequestDTO
+    definition: 'Object declared by the contract with fields: userEmails.'
+    tags:
+    - Object
+    source: openapi/mend-administration-groups-api-openapi.yml#/components/schemas/UserEmailsRequestDTO
+  - term: MultipleGroupRolesPerContextDTOV3
+    definition: 'Object declared by the contract with fields: scopeUuid, scopeName, scopeType, roles.'
+    tags:
+    - Object
+    source: openapi/mend-administration-groups-api-openapi.yml#/components/schemas/MultipleGroupRolesPerContextDTOV3
+  - term: GroupDTO
+    definition: 'Object declared by the contract with fields: uuid, name, description, userCount.'
+    tags:
+    - Object
+    source: openapi/mend-administration-groups-api-openapi.yml#/components/schemas/GroupDTO
+  - term: UpdateGroupRequestDTO
+    definition: DTO for updating an existing group
+    tags:
+    - Object
+    source: openapi/mend-administration-groups-api-openapi.yml#/components/schemas/UpdateGroupRequestDTO
+  - term: RoleDefinitionDTOV3
+    definition: 'Object declared by the contract with fields: uuid, name, description, type, scopeType, createdBy, createdAt, updatedAt, originalRole,
+      capabilities.'
+    tags:
+    - Object
+    source: openapi/mend-administration-groups-api-openapi.yml#/components/schemas/RoleDefinitionDTOV3
+  - term: UserInfoDTO
+    definition: 'Object declared by the contract with fields: uuid, name, email, userType, accountStatus.'
+    tags:
+    - Object
+    source: openapi/mend-administration-groups-api-openapi.yml#/components/schemas/UserInfoDTO
+  - term: DWRResponsePageableV3ListGroupSummaryDTOV3
+    definition: 'Object declared by the contract with fields: additionalData, supportToken, response.'
+    tags:
+    - Object
+    source: openapi/mend-administration-groups-api-openapi.yml#/components/schemas/DWRResponsePageableV3ListGroupSummaryDTOV3
+  - term: DWRResponsePageableV3ListMultipleGroupRolesPerContextDTOV3
+    definition: 'Object declared by the contract with fields: additionalData, supportToken, response.'
+    tags:
+    - Object
+    source: openapi/mend-administration-groups-api-openapi.yml#/components/schemas/DWRResponsePageableV3ListMultipleGroupRolesPerContextDTOV3
+  - term: DWRResponsePageableV3ListGroupWithRoleDefinitionsSummaryDTOV3
+    definition: 'Object declared by the contract with fields: additionalData, supportToken, response.'
+    tags:
+    - Object
+    source: openapi/mend-administration-groups-api-openapi.yml#/components/schemas/DWRResponsePageableV3ListGroupWithRoleDefinitionsSummaryDTOV3
+  - term: DWRResponsePageableV3ListUserInfoDTO
+    definition: 'Object declared by the contract with fields: additionalData, supportToken, response.'
+    tags:
+    - Object
+    source: openapi/mend-administration-groups-api-openapi.yml#/components/schemas/DWRResponsePageableV3ListUserInfoDTO
+  - term: GroupRoleRequestDTOV3
+    definition: 'Object declared by the contract with fields: scopeUuid, scopeType, role.'
+    tags:
+    - Object
+    source: openapi/mend-administration-groups-api-openapi.yml#/components/schemas/GroupRoleRequestDTOV3
+  - term: DomainLabelRequestDTO
+    definition: 'Object declared by the contract with fields: namespace, value.'
+    tags:
+    - Object
+    source: openapi/mend-administration-labels-api-openapi.yml#/components/schemas/DomainLabelRequestDTO
+  - term: DWRResponsePageableV3ListOrganizationLabelDTOV3
+    definition: 'Object declared by the contract with fields: additionalData, supportToken, response.'
+    tags:
+    - Object
+    source: openapi/mend-administration-labels-api-openapi.yml#/components/schemas/DWRResponsePageableV3ListOrganizationLabelDTOV3
+  - term: OrganizationLabelRequestDTO
+    definition: 'Object declared by the contract with fields: namespace, value.'
+    tags:
+    - Object
+    source: openapi/mend-administration-labels-api-openapi.yml#/components/schemas/OrganizationLabelRequestDTO
+  - term: OrganizationLabelDTOV3
+    definition: 'Object declared by the contract with fields: uuid, namespace, value, createdAt, createdBy, system, applications, projects, id.'
+    tags:
+    - Object
+    source: openapi/mend-administration-labels-api-openapi.yml#/components/schemas/OrganizationLabelDTOV3
+  - term: UserInfoDTOV3
+    definition: 'Object declared by the contract with fields: uuid, name, email, userType, accountStatus.'
+    tags:
+    - Object
+    source: openapi/mend-administration-users-api-openapi.yml#/components/schemas/UserInfoDTOV3
+  - term: DWRResponsePageableV3ListUserInfoDTOV3
+    definition: 'Object declared by the contract with fields: additionalData, supportToken, response.'
+    tags:
+    - Object
+    source: openapi/mend-administration-users-api-openapi.yml#/components/schemas/DWRResponsePageableV3ListUserInfoDTOV3
+  - term: UserInfoResponseDTO
+    definition: 'Object declared by the contract with fields: uuid, name, email, userType, existsInOrg.'
+    tags:
+    - Object
+    source: openapi/mend-administration-users-api-openapi.yml#/components/schemas/UserInfoResponseDTO
+  - term: DWRResponseV3UserInfoResponseDTO
+    definition: 'Object declared by the contract with fields: supportToken, response.'
+    tags:
+    - Object
+    source: openapi/mend-administration-users-api-openapi.yml#/components/schemas/DWRResponseV3UserInfoResponseDTO
+  - term: InviteUserRequestDTO
+    definition: 'Object declared by the contract with fields: email.'
+    tags:
+    - Object
+    source: openapi/mend-administration-users-api-openapi.yml#/components/schemas/InviteUserRequestDTO
+  - term: DWRResponseV3Boolean
+    definition: 'Object declared by the contract with fields: supportToken, response.'
+    tags:
+    - Object
+    source: openapi/mend-administration-users-api-openapi.yml#/components/schemas/DWRResponseV3Boolean
+  - term: v3.V3ImplementationWeaknessResponse
+    definition: 'Object declared by the contract with fields: weaknessID, weaknessCategory, weaknessSeverity, weaknessScore, weaknessTitle, owaspCategory,
+      weaknessDescription, weaknessPotentialImpact, weaknessBestPractices, weaknessReferences.'
+    tags:
+    - Object
+    source: openapi/mend-ai-api-openapi.yml#/components/schemas/v3.V3ImplementationWeaknessResponse
+  - term: UserCommentDTO
+    definition: 'Object declared by the contract with fields: comment, date, userEmail, username.'
+    tags:
+    - Object
+    source: openapi/mend-alerts-product-api-openapi.yml#/components/schemas/UserCommentDTO
+  - term: SecurityAlertDTO
+    definition: 'Object declared by the contract with fields: uuid, name, type, alertInfo, project, product, component, vulnerability, topFix,
+      effective, alertIntegration, threatAssessment. (5 more)'
+    tags:
+    - Object
+    source: openapi/mend-alerts-product-api-openapi.yml#/components/schemas/SecurityAlertDTO
+  - term: SecurityAlertLibraryDTO
+    definition: 'Object declared by the contract with fields: uuid, name, component, libraryType, severity, criticalNum, highNum, mediumNum, lowNum,
+      total, ignoreNum, effective. (23 more)'
+    tags:
+    - Object
+    source: openapi/mend-alerts-product-api-openapi.yml#/components/schemas/SecurityAlertLibraryDTO
+  - term: AlertInfoDTO
+    definition: 'Object declared by the contract with fields: status, comment, detectedAt, modifiedAt.'
+    tags:
+    - Object
+    source: openapi/mend-alerts-product-api-openapi.yml#/components/schemas/AlertInfoDTO
+  - term: ProjectDTO
+    definition: 'Object declared by the contract with fields: uuid, name, path, productName, productUuid.'
+    tags:
+    - Object
+    source: openapi/mend-alerts-product-api-openapi.yml#/components/schemas/ProjectDTO
+  - term: RejectedLibraryInUseAlertDTO
+    definition: 'Object declared by the contract with fields: uuid, name, type, alertInfo, project, product, component, description.'
+    tags:
+    - Object
+    source: openapi/mend-alerts-product-api-openapi.yml#/components/schemas/RejectedLibraryInUseAlertDTO
+  - term: EffectiveVulnerabilityInfoDTO
+    definition: 'Object declared by the contract with fields: referenceCount, shieldValue.'
+    tags:
+    - Object
+    source: openapi/mend-alerts-product-api-openapi.yml#/components/schemas/EffectiveVulnerabilityInfoDTO
+  - term: BaseComponentDTO
+    definition: 'Object declared by the contract with fields: uuid, name, description, componentType, type, libraryType, directDependency, dependencyType,
+      references, groupId, artifactId, version. (2 more)'
+    tags:
+    - Object
+    source: openapi/mend-alerts-product-api-openapi.yml#/components/schemas/BaseComponentDTO
+  - term: VulnerabilityScoringDTO
+    definition: 'Object declared by the contract with fields: score, severity, type, scoreMetadataVector, extraData.'
+    tags:
+    - Object
+    source: openapi/mend-alerts-product-api-openapi.yml#/components/schemas/VulnerabilityScoringDTO
+  - term: BaseLocationComponentDTO
+    definition: 'Object declared by the contract with fields: uuid, name, description, componentType, type, libraryType, directDependency, dependencyType,
+      references, groupId, artifactId, version. (3 more)'
+    tags:
+    - Object
+    source: openapi/mend-alerts-product-api-openapi.yml#/components/schemas/BaseLocationComponentDTO
+  - term: VulnerabilityReferenceDTO
+    definition: 'Object declared by the contract with fields: value, source, url, signature, advisory, patch.'
+    tags:
+    - Object
+    source: openapi/mend-alerts-product-api-openapi.yml#/components/schemas/VulnerabilityReferenceDTO
+  - term: LibraryComponentDTO
+    definition: 'Object declared by the contract with fields: uuid, name, description, componentType, type, libraryType, directDependency, dependencyType,
+      references, groupId, artifactId, version. (2 more)'
+    tags:
+    - Object
+    source: openapi/mend-alerts-product-api-openapi.yml#/components/schemas/LibraryComponentDTO
+  - term: MultipleLicensesAlertDTO
+    definition: 'Object declared by the contract with fields: uuid, name, type, alertInfo, project, product, component, numberOfLicenses, licenses.'
+    tags:
+    - Object
+    source: openapi/mend-alerts-product-api-openapi.yml#/components/schemas/MultipleLicensesAlertDTO
+  - term: NewVersionAlertDTO
+    definition: 'Object declared by the contract with fields: uuid, name, type, alertInfo, project, product, component, availableVersion, availableVersionType.'
+    tags:
+    - Object
+    source: openapi/mend-alerts-product-api-openapi.yml#/components/schemas/NewVersionAlertDTO
+  - term: IssueTrackerDTO
+    definition: 'Object declared by the contract with fields: issueStatus, url, issueTrackerType, issueIdentifier.'
+    tags:
+    - Object
+    source: openapi/mend-alerts-product-api-openapi.yml#/components/schemas/IssueTrackerDTO
+  - term: ThreatAssessmentDTO
+    definition: 'Object declared by the contract with fields: exploitCodeMaturity, epssPercentage.'
+    tags:
+    - Object
+    source: openapi/mend-alerts-product-api-openapi.yml#/components/schemas/ThreatAssessmentDTO
+  - term: PolicyViolationAlertDTO
+    definition: 'Object declared by the contract with fields: uuid, name, type, alertInfo, project, product, component, policyName.'
+    tags:
+    - Object
+    source: openapi/mend-alerts-product-api-openapi.yml#/components/schemas/PolicyViolationAlertDTO
+  - term: SourceFileLocationComponentDTO
+    definition: 'Object declared by the contract with fields: uuid, name, description, componentType, type, libraryType, directDependency, dependencyType,
+      references, groupId, artifactId, version. (5 more)'
+    tags:
+    - Object
+    source: openapi/mend-alerts-product-api-openapi.yml#/components/schemas/SourceFileLocationComponentDTO
+  - term: DWRResponsePageableCollectionSecurityAlertLibraryDTO
+    definition: Provides insights into endpoint-supported pagination information
+    tags:
+    - Object
+    source: openapi/mend-alerts-product-api-openapi.yml#/components/schemas/DWRResponsePageableCollectionSecurityAlertLibraryDTO
+  - term: DWRResponsePageableCollectionLegalAndComplianceAlertBaseDTO
+    definition: Provides insights into endpoint-supported pagination information
+    tags:
+    - Object
+    source: openapi/mend-alerts-product-api-openapi.yml#/components/schemas/DWRResponsePageableCollectionLegalAndComplianceAlertBaseDTO
+  - term: LibraryLocationDTO
+    definition: 'Object declared by the contract with fields: localPath, dependencyFile.'
+    tags:
+    - Object
+    source: openapi/mend-alerts-product-api-openapi.yml#/components/schemas/LibraryLocationDTO
+  - term: LibraryLocationComponentDTO
+    definition: 'Object declared by the contract with fields: uuid, name, description, componentType, type, libraryType, directDependency, dependencyType,
+      references, groupId, artifactId, version. (3 more)'
+    tags:
+    - Object
+    source: openapi/mend-alerts-product-api-openapi.yml#/components/schemas/LibraryLocationComponentDTO
+  - term: AlertIntegrationDTO
+    definition: 'Object declared by the contract with fields: status, issues.'
+    tags:
+    - Object
+    source: openapi/mend-alerts-product-api-openapi.yml#/components/schemas/AlertIntegrationDTO
+  - term: Component References
+    definition: 'Object declared by the contract with fields: url, homePage, downloadLink, issueUrl, pomUrl, scmUrl, genericPackageIndex, nugetGallery,
+      tags, copyright, hasNotice.'
+    tags:
+    - Object
+    source: openapi/mend-alerts-product-api-openapi.yml#/components/schemas/ComponentReferencesDTO
+  - term: SourceFileComponentDTO
+    definition: 'Object declared by the contract with fields: uuid, name, description, componentType, type, libraryType, directDependency, dependencyType,
+      references, groupId, artifactId, version. (2 more)'
+    tags:
+    - Object
+    source: openapi/mend-alerts-product-api-openapi.yml#/components/schemas/SourceFileComponentDTO
+  - term: ProductDTO
+    definition: 'Object declared by the contract with fields: uuid, name.'
+    tags:
+    - Object
+    source: openapi/mend-alerts-product-api-openapi.yml#/components/schemas/ProductDTO
+  - term: VulnerabilityFixInfoDTO
+    definition: 'Object declared by the contract with fields: id, vulnerability, type, origin, url, fixResolution, date, message, extraData, minimalFixVersionFromExtraData,
+      minimalAffectedVersionFromExtraData.'
+    tags:
+    - Object
+    source: openapi/mend-alerts-product-api-openapi.yml#/components/schemas/VulnerabilityFixInfoDTO
+  - term: LegalAndComplianceAlertBaseDTO
+    definition: 'Object declared by the contract with fields: uuid, name, type, alertInfo, project, product, component.'
+    tags:
+    - Object
+    source: openapi/mend-alerts-product-api-openapi.yml#/components/schemas/LegalAndComplianceAlertBaseDTO
+  - term: VulnerabilityProfileDTO
+    definition: 'Object declared by the contract with fields: name, type, description, score, severity, publishDate, modifiedDate, vulnerabilityScoring,
+      references, effectiveInfo, threatAssessment.'
+    tags:
+    - Object
+    source: openapi/mend-alerts-product-api-openapi.yml#/components/schemas/VulnerabilityProfileDTO
+  - term: DWRResponsePageableCollectionSecurityAlertDTO
+    definition: Provides insights into endpoint-supported pagination information
+    tags:
+    - Object
+    source: openapi/mend-alerts-product-api-openapi.yml#/components/schemas/DWRResponsePageableCollectionSecurityAlertDTO
+  - term: DWRResponseBoolean
+    definition: 'Object declared by the contract with fields: supportToken, retVal.'
+    tags:
+    - Object
+    source: openapi/mend-alerts-project-api-openapi.yml#/components/schemas/DWRResponseBoolean
+  - term: UpdateRiskRequestDTO
+    definition: 'Object declared by the contract with fields: status, comment, isViolating.'
+    tags:
+    - Object
+    source: openapi/mend-alerts-project-api-openapi.yml#/components/schemas/UpdateRiskRequestDTO
+  - term: SbomScanInfoDTO
+    definition: Scan information
+    tags:
+    - Object
+    source: openapi/mend-applications-api-openapi.yml#/components/schemas/SbomScanInfoDTO
+  - term: MultiContextRequestDTOV3
+    definition: If projectUuids and applicationUuids are empty, action will apply to the whole organization, Provides the requested statistics
+      for all projects that match at least one of the given identifiers.
+    tags:
+    - Object
+    source: openapi/mend-applications-api-openapi.yml#/components/schemas/MultiContextRequestDTOV3
+  - term: DWRResponsePageableV3CollectionApplicationDTOV3
+    definition: 'Object declared by the contract with fields: additionalData, supportToken, response.'
+    tags:
+    - Object
+    source: openapi/mend-applications-api-openapi.yml#/components/schemas/DWRResponsePageableV3CollectionApplicationDTOV3
+  - term: UpdateMultipleProjectViolationSlaRequestDTOV3
+    definition: 'Object declared by the contract with fields: date, identifiers.'
+    tags:
+    - Object
+    source: openapi/mend-applications-api-openapi.yml#/components/schemas/UpdateMultipleProjectViolationSlaRequestDTOV3
+  - term: ApplicationDTOV3
+    definition: 'Object declared by the contract with fields: uuid, name.'
+    tags:
+    - Object
+    source: openapi/mend-applications-api-openapi.yml#/components/schemas/ApplicationDTOV3

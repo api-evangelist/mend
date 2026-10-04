@@ -208,21 +208,37 @@ paths:
       description: Generated server url
 components:
   schemas:
-    AccessTokenRequestDTO:
-      type: object
-      properties:
-        accessToken:
-          type: string
-      description: Previous Access Token
-    DWRResponseV3AccessTokenResponseDTO:
+    DWRResponseBase:
       type: object
       properties:
         supportToken:
           title: Support Token
           type: string
           example: 1171c60d
-        response:
-          $ref: '#/components/schemas/AccessTokenResponseDTO'
+    LoginResponseDTO:
+      type: object
+      properties:
+        userUuid:
+          type: string
+        userName:
+          type: string
+        email:
+          type: string
+        refreshToken:
+          type: string
+        jwtTTL:
+          type: integer
+          format: int64
+        systemAccess:
+          type: boolean
+        serviceSystemAccess:
+          type: boolean
+        sessionStartTime:
+          type: integer
+          format: int64
+        systemAccessStartTime:
+          type: integer
+          format: int64
     LoginModelDTOV3:
       required:
       - email
@@ -239,6 +255,21 @@ components:
           description: Equivalent to a personal access token. Avoid pasting as plain text where it might be compromised. For a service user (recommended), you can find the user key in the Mend SCA App in **Admin > Users**. [Learn more](https://docs.mend.io/bundle/mend_maintenance/page/managing_service_users.html). For local testing purposes, you could also use one of your own personal user keys from your user profile page in the Mend SCA App.
           example: '***********'
       description: Login Model that provides user name and password for the Login process.
+    AccessTokenRequestDTO:
+      type: object
+      properties:
+        accessToken:
+          type: string
+      description: Previous Access Token
+    DWRResponseV3AccessTokenResponseDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          $ref: '#/components/schemas/AccessTokenResponseDTO'
     AccessTokenResponseDTO:
       type: object
       properties:
@@ -273,13 +304,6 @@ components:
         systemAccessStartTime:
           type: integer
           format: int64
-    DWRResponseBase:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
     DWRResponseV3LoginResponseDTO:
       type: object
       properties:
@@ -289,30 +313,6 @@ components:
           example: 1171c60d
         response:
           $ref: '#/components/schemas/LoginResponseDTO'
-    LoginResponseDTO:
-      type: object
-      properties:
-        userUuid:
-          type: string
-        userName:
-          type: string
-        email:
-          type: string
-        refreshToken:
-          type: string
-        jwtTTL:
-          type: integer
-          format: int64
-        systemAccess:
-          type: boolean
-        serviceSystemAccess:
-          type: boolean
-        sessionStartTime:
-          type: integer
-          format: int64
-        systemAccessStartTime:
-          type: integer
-          format: int64
     DWRResponseSessionInfo:
       type: object
       properties:

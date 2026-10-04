@@ -424,49 +424,27 @@ paths:
                 $ref: '#/components/schemas/DWRResponseBase'
 components:
   schemas:
-    DWRResponseScanSummaryReceiverUserDTO:
+    DWRResponsePageableListUserInfoDTO:
       type: object
       properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            + **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining.'
+          example:
+            totalItems: '422'
+            isLastPage: 'true'
         supportToken:
           title: Support Token
           type: string
           example: 1171c60d
         retVal:
-          $ref: '#/components/schemas/ScanSummaryReceiverUserDTO'
-    UserInfoResponseDTO:
-      required:
-      - uuid
-      type: object
-      properties:
-        uuid:
-          title: User UUID
-          type: string
-          example: 123e4567-e89b-12d3-a456-426655440000
-        name:
-          title: User Name
-          type: string
-          example: Jon Smith
-        email:
-          title: User Email
-          type: string
-          example: jon.smith@mail.com
-        userType:
-          title: Type Of User
-          type: string
-          example: REGULAR
-          enum:
-          - REGULAR
-          - SERVICE
-          - SCAN_SUMMARY_RECEIVER
-        existsInOrg:
-          type: boolean
-    DWRResponseBase:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
+          type: array
+          items:
+            $ref: '#/components/schemas/UserInfoDTO'
+      description: Provides insights into endpoint-supported pagination information
     MessageDTO:
       type: object
       properties:
@@ -474,29 +452,6 @@ components:
           title: message
           type: string
           example: Success!
-    ScanSummaryReceiverUserDTO:
-      type: object
-      properties:
-        userInfoDTO:
-          $ref: '#/components/schemas/UserInfoDTO'
-    DWRResponseUserInfoResponseDTO:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/UserInfoResponseDTO'
-    UserEmailRequestDTO:
-      required:
-      - email
-      type: object
-      properties:
-        email:
-          title: User Email
-          type: string
-          example: jon.smith@mail.com
     GroupRoleDTO:
       title: List of Group Roles
       type: object
@@ -534,7 +489,14 @@ components:
           - USER
           - PRODUCT_INTEGRATOR
           - SBOM_EXPORTER
-    DWRResponseUserKeyDTO:
+    ServiceUserDTO:
+      type: object
+      properties:
+        userKeyDTO:
+          $ref: '#/components/schemas/UserKeyDTO'
+        userInfoDTO:
+          $ref: '#/components/schemas/UserInfoDTO'
+    DWRResponseScanSummaryReceiverUserDTO:
       type: object
       properties:
         supportToken:
@@ -542,7 +504,7 @@ components:
           type: string
           example: 1171c60d
         retVal:
-          $ref: '#/components/schemas/UserKeyDTO'
+          $ref: '#/components/schemas/ScanSummaryReceiverUserDTO'
     CreateUserRequestDTO:
       required:
       - email
@@ -556,27 +518,35 @@ components:
           title: User Email
           type: string
           example: jon.smith@mail.com
-    DWRResponsePageableListUserInfoDTO:
+    UserEmailRequestDTO:
+      required:
+      - email
       type: object
       properties:
-        additionalData:
-          title: Provides insights into endpoint-supported pagination information.
-          type: object
-          description: '+ **totalItems**: The total count of data points returned in an API response.
-
-            + **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining.'
-          example:
-            totalItems: '422'
-            isLastPage: 'true'
+        email:
+          title: User Email
+          type: string
+          example: jon.smith@mail.com
+    DWRResponseUserInfoResponseDTO:
+      type: object
+      properties:
         supportToken:
           title: Support Token
           type: string
           example: 1171c60d
         retVal:
+          $ref: '#/components/schemas/UserInfoResponseDTO'
+    UserEmailsRequestDTO:
+      required:
+      - userEmails
+      type: object
+      properties:
+        userEmails:
+          uniqueItems: true
           type: array
           items:
-            $ref: '#/components/schemas/UserInfoDTO'
-      description: Provides insights into endpoint-supported pagination information
+            type: string
+            example: jon.smith@mail.com
     UserKeyDTO:
       type: object
       properties:
@@ -608,55 +578,6 @@ components:
           title: Token Expiration Date
           type: string
           format: date-time
-    UserEmailsRequestDTO:
-      required:
-      - userEmails
-      type: object
-      properties:
-        userEmails:
-          uniqueItems: true
-          type: array
-          items:
-            type: string
-            example: jon.smith@mail.com
-    DWRResponseListEnrichedUserInfoDTO:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          type: array
-          items:
-            $ref: '#/components/schemas/EnrichedUserInfoDTO'
-    DWRResponseEnrichedUserInfoDTO:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/EnrichedUserInfoDTO'
-    DWRResponseServiceUserDTO:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/ServiceUserDTO'
-    InviteUserRequestDTO:
-      required:
-      - email
-      type: object
-      properties:
-        email:
-          title: New User Email
-          type: string
-          example: jon.smith@mail.com
     EnrichedUserInfoDTO:
       required:
       - uuid
@@ -702,7 +623,7 @@ components:
           items:
             title: Associated Groups
             type: string
-    DWRResponseMessageDTO:
+    DWRResponseEnrichedUserInfoDTO:
       type: object
       properties:
         supportToken:
@@ -710,7 +631,84 @@ components:
           type: string
           example: 1171c60d
         retVal:
-          $ref: '#/components/schemas/MessageDTO'
+          $ref: '#/components/schemas/EnrichedUserInfoDTO'
+    InviteUserRequestDTO:
+      required:
+      - email
+      type: object
+      properties:
+        email:
+          title: New User Email
+          type: string
+          example: jon.smith@mail.com
+    DWRResponseListEnrichedUserInfoDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnrichedUserInfoDTO'
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+    DWRResponseServiceUserDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/ServiceUserDTO'
+    DWRResponseUserKeyDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/UserKeyDTO'
+    UserInfoResponseDTO:
+      required:
+      - uuid
+      type: object
+      properties:
+        uuid:
+          title: User UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: User Name
+          type: string
+          example: Jon Smith
+        email:
+          title: User Email
+          type: string
+          example: jon.smith@mail.com
+        userType:
+          title: Type Of User
+          type: string
+          example: REGULAR
+          enum:
+          - REGULAR
+          - SERVICE
+          - SCAN_SUMMARY_RECEIVER
+        existsInOrg:
+          type: boolean
+    ScanSummaryReceiverUserDTO:
+      type: object
+      properties:
+        userInfoDTO:
+          $ref: '#/components/schemas/UserInfoDTO'
     DWRResponseUserInfoDTO:
       type: object
       properties:
@@ -751,13 +749,15 @@ components:
           - ACTIVE
           - INACTIVE
           - LOCKOUT
-    ServiceUserDTO:
+    DWRResponseMessageDTO:
       type: object
       properties:
-        userKeyDTO:
-          $ref: '#/components/schemas/UserKeyDTO'
-        userInfoDTO:
-          $ref: '#/components/schemas/UserInfoDTO'
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/MessageDTO'
   securitySchemes:
     bearer-key:
       type: http

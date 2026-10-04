@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mend/main/json-schema/mend-group-role-request-dtov3-schema.json",
+  "title": "GroupRoleRequestDTOV3",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mend-administration-groups-api-openapi.yml#/components/schemas/GroupRoleRequestDTOV3",
+  "required": [
+    "scopeType",
+    "scopeUuid"
+  ],
+  "type": "object",
+  "properties": {
+    "scopeUuid": {
+      "type": "string"
+    },
+    "scopeType": {
+      "type": "string",
+      "enum": [
+        "organization",
+        "application",
+        "project",
+        "account",
+        "unsupported"
+      ]
+    },
+    "role": {
+      "type": "string",
+      "enum": [
+        "ADMIN",
+        "SCAN_MANAGER",
+        "SECURITY_ANALYST",
+        "MEMBER"
+      ]
+    }
+  }
+}

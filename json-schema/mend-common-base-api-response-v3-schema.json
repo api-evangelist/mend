@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mend/main/json-schema/mend-common-base-api-response-v3-schema.json",
+  "title": "common.BaseApiResponseV3",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mend-findings-scan-api-openapi.yml#/components/schemas/common.BaseApiResponseV3",
+  "type": "object",
+  "properties": {
+    "additionalData": {
+      "$ref": "#/$defs/common.AdditionalData"
+    },
+    "response": {},
+    "supportToken": {
+      "type": "string"
+    }
+  },
+  "$defs": {
+    "common.AdditionalData": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "string"
+        },
+        "paging": {
+          "$ref": "#/$defs/common.Paging"
+        },
+        "totalItems": {
+          "type": "integer"
+        }
+      }
+    },
+    "common.Paging": {
+      "type": "object",
+      "properties": {
+        "cursor": {
+          "type": "integer"
+        },
+        "next": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

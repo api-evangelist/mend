@@ -78,6 +78,36 @@ paths:
                 $ref: '#/components/schemas/DWRResponseBase'
 components:
   schemas:
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+    SessionInfo:
+      type: object
+      properties:
+        correlationId:
+          type: string
+        userUuid:
+          type: string
+        userName:
+          type: string
+        email:
+          type: string
+        refreshToken:
+          type: string
+        jwtToken:
+          type: string
+        orgName:
+          title: Organization Name
+          type: string
+          example: Organization A
+        orgUuid:
+          title: Organization Uuid
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
     DomainDTO:
       title: OrgDTO
       type: object
@@ -110,36 +140,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/DomainDTO'
-    DWRResponseBase:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-    SessionInfo:
-      type: object
-      properties:
-        correlationId:
-          type: string
-        userUuid:
-          type: string
-        userName:
-          type: string
-        email:
-          type: string
-        refreshToken:
-          type: string
-        jwtToken:
-          type: string
-        orgName:
-          title: Organization Name
-          type: string
-          example: Organization A
-        orgUuid:
-          title: Organization Uuid
-          type: string
-          example: 123e4567-e89b-12d3-a456-426655440000
   securitySchemes:
     bearer-key:
       type: http

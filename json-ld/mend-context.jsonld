@@ -1,0 +1,1037 @@
+{
+  "@context": {
+    "@vocab": "https://mend.io/schema#",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "mend": "https://mend.io/schema#",
+    "AccessTokenRequestDTO": "mend:AccessTokenRequestDTO",
+    "accessToken": {
+      "@id": "mend:accessToken",
+      "@type": "xsd:string"
+    },
+    "DWRResponseV3AccessTokenResponseDTO": "mend:DWRResponseV3AccessTokenResponseDTO",
+    "supportToken": {
+      "@id": "mend:supportToken",
+      "@type": "xsd:string"
+    },
+    "response": {
+      "@id": "mend:response",
+      "@type": "@id"
+    },
+    "LoginModelDTOV3": "mend:LoginModelDTOV3",
+    "email": {
+      "@id": "mend:email",
+      "@type": "xsd:string"
+    },
+    "userKey": {
+      "@id": "mend:userKey",
+      "@type": "xsd:string"
+    },
+    "AccessTokenResponseDTO": "mend:AccessTokenResponseDTO",
+    "userUuid": {
+      "@id": "mend:userUuid",
+      "@type": "xsd:string"
+    },
+    "username": {
+      "@id": "mend:username",
+      "@type": "xsd:string"
+    },
+    "jwtToken": {
+      "@id": "mend:jwtToken",
+      "@type": "xsd:string"
+    },
+    "tokenType": {
+      "@id": "mend:tokenType",
+      "@type": "xsd:string"
+    },
+    "orgName": {
+      "@id": "mend:orgName",
+      "@type": "xsd:string"
+    },
+    "orgUuid": {
+      "@id": "mend:orgUuid",
+      "@type": "xsd:string"
+    },
+    "accountName": {
+      "@id": "mend:accountName",
+      "@type": "xsd:string"
+    },
+    "accountUuid": {
+      "@id": "mend:accountUuid",
+      "@type": "xsd:string"
+    },
+    "tokenTTL": {
+      "@id": "mend:tokenTTL",
+      "@type": "xsd:integer"
+    },
+    "systemAccess": {
+      "@id": "mend:systemAccess",
+      "@type": "xsd:boolean"
+    },
+    "serviceSystemAccess": {
+      "@id": "mend:serviceSystemAccess",
+      "@type": "xsd:boolean"
+    },
+    "sessionStartTime": {
+      "@id": "mend:sessionStartTime",
+      "@type": "xsd:integer"
+    },
+    "systemAccessStartTime": {
+      "@id": "mend:systemAccessStartTime",
+      "@type": "xsd:integer"
+    },
+    "DWRResponseBase": "mend:DWRResponseBase",
+    "DWRResponseV3LoginResponseDTO": "mend:DWRResponseV3LoginResponseDTO",
+    "LoginResponseDTO": "mend:LoginResponseDTO",
+    "userName": {
+      "@id": "mend:userName",
+      "@type": "xsd:string"
+    },
+    "refreshToken": {
+      "@id": "mend:refreshToken",
+      "@type": "xsd:string"
+    },
+    "jwtTTL": {
+      "@id": "mend:jwtTTL",
+      "@type": "xsd:integer"
+    },
+    "DWRResponseSessionInfo": "mend:DWRResponseSessionInfo",
+    "retVal": {
+      "@id": "mend:retVal",
+      "@type": "@id"
+    },
+    "LoginModelDTO": "mend:LoginModelDTO",
+    "orgToken": {
+      "@id": "mend:orgToken",
+      "@type": "xsd:string"
+    },
+    "SessionInfo": "mend:SessionInfo",
+    "correlationId": {
+      "@id": "mend:correlationId",
+      "@type": "xsd:string"
+    },
+    "DomainDTO": "mend:DomainDTO",
+    "uuid": {
+      "@id": "mend:uuid",
+      "@type": "xsd:string"
+    },
+    "name": {
+      "@id": "mend:name",
+      "@type": "xsd:string"
+    },
+    "DWRResponseCollectionDomainDTO": "mend:DWRResponseCollectionDomainDTO",
+    "DWRResponseV3GroupRoleDTOV3": "mend:DWRResponseV3GroupRoleDTOV3",
+    "MessageDTO": "mend:MessageDTO",
+    "message": {
+      "@id": "mend:message",
+      "@type": "xsd:string"
+    },
+    "GroupScopeMultiRoleDefinitionDTOV3": "mend:GroupScopeMultiRoleDefinitionDTOV3",
+    "scopeUuid": {
+      "@id": "mend:scopeUuid",
+      "@type": "xsd:string"
+    },
+    "scopeName": {
+      "@id": "mend:scopeName",
+      "@type": "xsd:string"
+    },
+    "scopeType": {
+      "@id": "mend:scopeType",
+      "@type": "xsd:string"
+    },
+    "roleDefinitions": {
+      "@id": "mend:roleDefinitions",
+      "@container": "@list"
+    },
+    "GroupSummaryDTOV3": "mend:GroupSummaryDTOV3",
+    "description": {
+      "@id": "mend:description",
+      "@type": "xsd:string"
+    },
+    "users": {
+      "@id": "mend:users",
+      "@type": "xsd:integer"
+    },
+    "affectedApplications": {
+      "@id": "mend:affectedApplications",
+      "@type": "xsd:integer"
+    },
+    "roles": {
+      "@id": "mend:roles",
+      "@container": "@list"
+    },
+    "DWRResponseV3MessageDTO": "mend:DWRResponseV3MessageDTO",
+    "GroupWithRoleDefinitionsSummaryDTOV3": "mend:GroupWithRoleDefinitionsSummaryDTOV3",
+    "CreateGroupRequestDTO": "mend:CreateGroupRequestDTO",
+    "GroupRoleDTOV3": "mend:GroupRoleDTOV3",
+    "role": {
+      "@id": "mend:role",
+      "@type": "xsd:string"
+    },
+    "DWRResponseV3GroupDTO": "mend:DWRResponseV3GroupDTO",
+    "UserEmailsRequestDTO": "mend:UserEmailsRequestDTO",
+    "userEmails": {
+      "@id": "mend:userEmails",
+      "@container": "@list"
+    },
+    "MultipleGroupRolesPerContextDTOV3": "mend:MultipleGroupRolesPerContextDTOV3",
+    "GroupDTO": "mend:GroupDTO",
+    "userCount": {
+      "@id": "mend:userCount",
+      "@type": "xsd:integer"
+    },
+    "UpdateGroupRequestDTO": "mend:UpdateGroupRequestDTO",
+    "RoleDefinitionDTOV3": "mend:RoleDefinitionDTOV3",
+    "type": {
+      "@id": "mend:type",
+      "@type": "xsd:string"
+    },
+    "createdBy": {
+      "@id": "mend:createdBy",
+      "@type": "xsd:string"
+    },
+    "createdAt": {
+      "@id": "mend:createdAt",
+      "@type": "xsd:dateTime"
+    },
+    "updatedAt": {
+      "@id": "mend:updatedAt",
+      "@type": "xsd:dateTime"
+    },
+    "originalRole": {
+      "@id": "mend:originalRole",
+      "@type": "xsd:string"
+    },
+    "capabilities": {
+      "@id": "mend:capabilities",
+      "@container": "@list"
+    },
+    "UserInfoDTO": "mend:UserInfoDTO",
+    "userType": {
+      "@id": "mend:userType",
+      "@type": "xsd:string"
+    },
+    "accountStatus": {
+      "@id": "mend:accountStatus",
+      "@type": "xsd:string"
+    },
+    "DWRResponsePageableV3ListGroupSummaryDTOV3": "mend:DWRResponsePageableV3ListGroupSummaryDTOV3",
+    "additionalData": {
+      "@id": "mend:additionalData"
+    },
+    "DWRResponsePageableV3ListMultipleGroupRolesPerContextDTOV3": "mend:DWRResponsePageableV3ListMultipleGroupRolesPerContextDTOV3",
+    "DWRResponsePageableV3ListGroupWithRoleDefinitionsSummaryDTOV3": "mend:DWRResponsePageableV3ListGroupWithRoleDefinitionsSummaryDTOV3",
+    "DWRResponsePageableV3ListUserInfoDTO": "mend:DWRResponsePageableV3ListUserInfoDTO",
+    "GroupRoleRequestDTOV3": "mend:GroupRoleRequestDTOV3",
+    "DomainLabelRequestDTO": "mend:DomainLabelRequestDTO",
+    "namespace": {
+      "@id": "mend:namespace",
+      "@type": "xsd:string"
+    },
+    "value": {
+      "@id": "mend:value",
+      "@type": "xsd:string"
+    },
+    "DWRResponsePageableV3ListOrganizationLabelDTOV3": "mend:DWRResponsePageableV3ListOrganizationLabelDTOV3",
+    "OrganizationLabelRequestDTO": "mend:OrganizationLabelRequestDTO",
+    "OrganizationLabelDTOV3": "mend:OrganizationLabelDTOV3",
+    "system": {
+      "@id": "mend:system",
+      "@type": "xsd:boolean"
+    },
+    "applications": {
+      "@id": "mend:applications",
+      "@type": "xsd:integer"
+    },
+    "projects": {
+      "@id": "mend:projects",
+      "@type": "xsd:integer"
+    },
+    "id": {
+      "@id": "mend:id",
+      "@type": "xsd:integer"
+    },
+    "UserInfoDTOV3": "mend:UserInfoDTOV3",
+    "DWRResponsePageableV3ListUserInfoDTOV3": "mend:DWRResponsePageableV3ListUserInfoDTOV3",
+    "UserInfoResponseDTO": "mend:UserInfoResponseDTO",
+    "existsInOrg": {
+      "@id": "mend:existsInOrg",
+      "@type": "xsd:boolean"
+    },
+    "DWRResponseV3UserInfoResponseDTO": "mend:DWRResponseV3UserInfoResponseDTO",
+    "InviteUserRequestDTO": "mend:InviteUserRequestDTO",
+    "DWRResponseV3Boolean": "mend:DWRResponseV3Boolean",
+    "v3.V3ImplementationWeaknessResponse": "mend:v3.V3ImplementationWeaknessResponse",
+    "weaknessID": {
+      "@id": "mend:weaknessID",
+      "@type": "xsd:string"
+    },
+    "weaknessCategory": {
+      "@id": "mend:weaknessCategory",
+      "@type": "xsd:string"
+    },
+    "weaknessSeverity": {
+      "@id": "mend:weaknessSeverity",
+      "@type": "xsd:string"
+    },
+    "weaknessScore": {
+      "@id": "mend:weaknessScore",
+      "@type": "xsd:string"
+    },
+    "weaknessTitle": {
+      "@id": "mend:weaknessTitle",
+      "@type": "xsd:string"
+    },
+    "owaspCategory": {
+      "@id": "mend:owaspCategory",
+      "@type": "xsd:string"
+    },
+    "weaknessDescription": {
+      "@id": "mend:weaknessDescription",
+      "@type": "xsd:string"
+    },
+    "weaknessPotentialImpact": {
+      "@id": "mend:weaknessPotentialImpact",
+      "@type": "xsd:string"
+    },
+    "weaknessBestPractices": {
+      "@id": "mend:weaknessBestPractices",
+      "@type": "xsd:string"
+    },
+    "weaknessReferences": {
+      "@id": "mend:weaknessReferences",
+      "@type": "xsd:string"
+    },
+    "UserCommentDTO": "mend:UserCommentDTO",
+    "comment": {
+      "@id": "mend:comment",
+      "@type": "xsd:string"
+    },
+    "date": {
+      "@id": "mend:date",
+      "@type": "xsd:dateTime"
+    },
+    "userEmail": {
+      "@id": "mend:userEmail",
+      "@type": "xsd:string"
+    },
+    "SecurityAlertDTO": "mend:SecurityAlertDTO",
+    "alertInfo": {
+      "@id": "mend:alertInfo",
+      "@type": "@id"
+    },
+    "project": {
+      "@id": "mend:project",
+      "@type": "@id"
+    },
+    "product": {
+      "@id": "mend:product",
+      "@type": "@id"
+    },
+    "component": {
+      "@id": "mend:component",
+      "@type": "@id"
+    },
+    "vulnerability": {
+      "@id": "mend:vulnerability",
+      "@type": "@id"
+    },
+    "topFix": {
+      "@id": "mend:topFix",
+      "@type": "@id"
+    },
+    "effective": {
+      "@id": "mend:effective",
+      "@type": "xsd:string"
+    },
+    "alertIntegration": {
+      "@id": "mend:alertIntegration",
+      "@type": "@id"
+    },
+    "threatAssessment": {
+      "@id": "mend:threatAssessment",
+      "@type": "@id"
+    },
+    "exploitable": {
+      "@id": "mend:exploitable",
+      "@type": "xsd:boolean"
+    },
+    "scoreMetadataVector": {
+      "@id": "mend:scoreMetadataVector",
+      "@type": "xsd:string"
+    },
+    "malicious": {
+      "@id": "mend:malicious",
+      "@type": "xsd:boolean"
+    },
+    "violations": {
+      "@id": "mend:violations",
+      "@type": "xsd:integer"
+    },
+    "workflowUuids": {
+      "@id": "mend:workflowUuids",
+      "@container": "@list"
+    },
+    "SecurityAlertLibraryDTO": "mend:SecurityAlertLibraryDTO",
+    "libraryType": {
+      "@id": "mend:libraryType",
+      "@type": "xsd:string"
+    },
+    "severity": {
+      "@id": "mend:severity",
+      "@type": "xsd:string"
+    },
+    "criticalNum": {
+      "@id": "mend:criticalNum",
+      "@type": "xsd:integer"
+    },
+    "highNum": {
+      "@id": "mend:highNum",
+      "@type": "xsd:integer"
+    },
+    "mediumNum": {
+      "@id": "mend:mediumNum",
+      "@type": "xsd:integer"
+    },
+    "lowNum": {
+      "@id": "mend:lowNum",
+      "@type": "xsd:integer"
+    },
+    "total": {
+      "@id": "mend:total",
+      "@type": "xsd:integer"
+    },
+    "ignoreNum": {
+      "@id": "mend:ignoreNum",
+      "@type": "xsd:integer"
+    },
+    "detectedAt": {
+      "@id": "mend:detectedAt",
+      "@type": "xsd:dateTime"
+    },
+    "modifiedAt": {
+      "@id": "mend:modifiedAt",
+      "@type": "xsd:dateTime"
+    },
+    "publishedAt": {
+      "@id": "mend:publishedAt",
+      "@type": "xsd:dateTime"
+    },
+    "lastCveUpdatedAt": {
+      "@id": "mend:lastCveUpdatedAt",
+      "@type": "xsd:dateTime"
+    },
+    "subRowsIds": {
+      "@id": "mend:subRowsIds",
+      "@container": "@list"
+    },
+    "status": {
+      "@id": "mend:status",
+      "@type": "xsd:string"
+    },
+    "directName": {
+      "@id": "mend:directName",
+      "@type": "xsd:string"
+    },
+    "lastScan": {
+      "@id": "mend:lastScan",
+      "@type": "xsd:dateTime"
+    },
+    "transitiveDependency": {
+      "@id": "mend:transitiveDependency",
+      "@type": "xsd:boolean"
+    },
+    "exploitCodeMaturity": {
+      "@id": "mend:exploitCodeMaturity",
+      "@container": "@list"
+    },
+    "numOfReachable": {
+      "@id": "mend:numOfReachable",
+      "@type": "xsd:integer"
+    },
+    "numOfPotentiallyReachable": {
+      "@id": "mend:numOfPotentiallyReachable",
+      "@type": "xsd:integer"
+    },
+    "numOfUnreachable": {
+      "@id": "mend:numOfUnreachable",
+      "@type": "xsd:integer"
+    },
+    "reachability": {
+      "@id": "mend:reachability",
+      "@type": "xsd:string"
+    },
+    "numOfMalicious": {
+      "@id": "mend:numOfMalicious",
+      "@type": "xsd:integer"
+    },
+    "violatingFindings": {
+      "@id": "mend:violatingFindings",
+      "@type": "xsd:integer"
+    },
+    "AlertInfoDTO": "mend:AlertInfoDTO",
+    "ProjectDTO": "mend:ProjectDTO",
+    "path": {
+      "@id": "mend:path",
+      "@type": "xsd:string"
+    },
+    "productName": {
+      "@id": "mend:productName",
+      "@type": "xsd:string"
+    },
+    "productUuid": {
+      "@id": "mend:productUuid",
+      "@type": "xsd:string"
+    },
+    "RejectedLibraryInUseAlertDTO": "mend:RejectedLibraryInUseAlertDTO",
+    "EffectiveVulnerabilityInfoDTO": "mend:EffectiveVulnerabilityInfoDTO",
+    "referenceCount": {
+      "@id": "mend:referenceCount",
+      "@type": "xsd:integer"
+    },
+    "shieldValue": {
+      "@id": "mend:shieldValue",
+      "@type": "xsd:integer"
+    },
+    "BaseComponentDTO": "mend:BaseComponentDTO",
+    "componentType": {
+      "@id": "mend:componentType",
+      "@type": "xsd:string"
+    },
+    "directDependency": {
+      "@id": "mend:directDependency",
+      "@type": "xsd:boolean"
+    },
+    "dependencyType": {
+      "@id": "mend:dependencyType",
+      "@type": "xsd:string"
+    },
+    "references": {
+      "@id": "mend:references",
+      "@type": "@id"
+    },
+    "groupId": {
+      "@id": "mend:groupId",
+      "@type": "xsd:string"
+    },
+    "artifactId": {
+      "@id": "mend:artifactId",
+      "@type": "xsd:string"
+    },
+    "version": {
+      "@id": "mend:version",
+      "@type": "xsd:string"
+    },
+    "dependencyFile": {
+      "@id": "mend:dependencyFile",
+      "@type": "xsd:string"
+    },
+    "localPath": {
+      "@id": "mend:localPath",
+      "@type": "xsd:string"
+    },
+    "VulnerabilityScoringDTO": "mend:VulnerabilityScoringDTO",
+    "score": {
+      "@id": "mend:score",
+      "@type": "xsd:decimal"
+    },
+    "extraData": {
+      "@id": "mend:extraData"
+    },
+    "BaseLocationComponentDTO": "mend:BaseLocationComponentDTO",
+    "libraryLocations": {
+      "@id": "mend:libraryLocations",
+      "@container": "@list"
+    },
+    "VulnerabilityReferenceDTO": "mend:VulnerabilityReferenceDTO",
+    "source": {
+      "@id": "mend:source",
+      "@type": "xsd:string"
+    },
+    "url": {
+      "@id": "mend:url",
+      "@type": "xsd:string"
+    },
+    "signature": {
+      "@id": "mend:signature",
+      "@type": "xsd:boolean"
+    },
+    "advisory": {
+      "@id": "mend:advisory",
+      "@type": "xsd:boolean"
+    },
+    "patch": {
+      "@id": "mend:patch",
+      "@type": "xsd:boolean"
+    },
+    "LibraryComponentDTO": "mend:LibraryComponentDTO",
+    "MultipleLicensesAlertDTO": "mend:MultipleLicensesAlertDTO",
+    "numberOfLicenses": {
+      "@id": "mend:numberOfLicenses",
+      "@type": "xsd:integer"
+    },
+    "licenses": {
+      "@id": "mend:licenses",
+      "@container": "@list"
+    },
+    "NewVersionAlertDTO": "mend:NewVersionAlertDTO",
+    "availableVersion": {
+      "@id": "mend:availableVersion",
+      "@type": "xsd:string"
+    },
+    "availableVersionType": {
+      "@id": "mend:availableVersionType",
+      "@type": "xsd:string"
+    },
+    "IssueTrackerDTO": "mend:IssueTrackerDTO",
+    "issueStatus": {
+      "@id": "mend:issueStatus",
+      "@type": "xsd:string"
+    },
+    "issueTrackerType": {
+      "@id": "mend:issueTrackerType",
+      "@type": "xsd:string"
+    },
+    "issueIdentifier": {
+      "@id": "mend:issueIdentifier",
+      "@type": "xsd:string"
+    },
+    "ThreatAssessmentDTO": "mend:ThreatAssessmentDTO",
+    "epssPercentage": {
+      "@id": "mend:epssPercentage",
+      "@type": "xsd:decimal"
+    },
+    "PolicyViolationAlertDTO": "mend:PolicyViolationAlertDTO",
+    "policyName": {
+      "@id": "mend:policyName",
+      "@type": "xsd:string"
+    },
+    "SourceFileLocationComponentDTO": "mend:SourceFileLocationComponentDTO",
+    "sourceFile": {
+      "@id": "mend:sourceFile",
+      "@type": "xsd:string"
+    },
+    "sourceFileUuid": {
+      "@id": "mend:sourceFileUuid",
+      "@type": "xsd:string"
+    },
+    "DWRResponsePageableCollectionSecurityAlertLibraryDTO": "mend:DWRResponsePageableCollectionSecurityAlertLibraryDTO",
+    "DWRResponsePageableCollectionLegalAndComplianceAlertBaseDTO": "mend:DWRResponsePageableCollectionLegalAndComplianceAlertBaseDTO",
+    "LibraryLocationDTO": "mend:LibraryLocationDTO",
+    "LibraryLocationComponentDTO": "mend:LibraryLocationComponentDTO",
+    "AlertIntegrationDTO": "mend:AlertIntegrationDTO",
+    "issues": {
+      "@id": "mend:issues",
+      "@container": "@list"
+    },
+    "ComponentReferencesDTO": "mend:ComponentReferencesDTO",
+    "homePage": {
+      "@id": "mend:homePage",
+      "@type": "xsd:string"
+    },
+    "downloadLink": {
+      "@id": "mend:downloadLink",
+      "@type": "xsd:string"
+    },
+    "issueUrl": {
+      "@id": "mend:issueUrl",
+      "@type": "xsd:string"
+    },
+    "pomUrl": {
+      "@id": "mend:pomUrl",
+      "@type": "xsd:string"
+    },
+    "scmUrl": {
+      "@id": "mend:scmUrl",
+      "@type": "xsd:string"
+    },
+    "genericPackageIndex": {
+      "@id": "mend:genericPackageIndex",
+      "@type": "xsd:string"
+    },
+    "nugetGallery": {
+      "@id": "mend:nugetGallery",
+      "@type": "xsd:string"
+    },
+    "tags": {
+      "@id": "mend:tags",
+      "@type": "xsd:string"
+    },
+    "copyright": {
+      "@id": "mend:copyright",
+      "@type": "xsd:string"
+    },
+    "hasNotice": {
+      "@id": "mend:hasNotice",
+      "@type": "xsd:boolean"
+    },
+    "SourceFileComponentDTO": "mend:SourceFileComponentDTO",
+    "ProductDTO": "mend:ProductDTO",
+    "VulnerabilityFixInfoDTO": "mend:VulnerabilityFixInfoDTO",
+    "origin": {
+      "@id": "mend:origin",
+      "@type": "xsd:string"
+    },
+    "fixResolution": {
+      "@id": "mend:fixResolution",
+      "@type": "xsd:string"
+    },
+    "minimalFixVersionFromExtraData": {
+      "@id": "mend:minimalFixVersionFromExtraData",
+      "@type": "xsd:string"
+    },
+    "minimalAffectedVersionFromExtraData": {
+      "@id": "mend:minimalAffectedVersionFromExtraData",
+      "@type": "xsd:string"
+    },
+    "LegalAndComplianceAlertBaseDTO": "mend:LegalAndComplianceAlertBaseDTO",
+    "VulnerabilityProfileDTO": "mend:VulnerabilityProfileDTO",
+    "publishDate": {
+      "@id": "mend:publishDate",
+      "@type": "xsd:dateTime"
+    },
+    "modifiedDate": {
+      "@id": "mend:modifiedDate",
+      "@type": "xsd:dateTime"
+    },
+    "vulnerabilityScoring": {
+      "@id": "mend:vulnerabilityScoring",
+      "@container": "@list"
+    },
+    "effectiveInfo": {
+      "@id": "mend:effectiveInfo",
+      "@type": "@id"
+    },
+    "DWRResponsePageableCollectionSecurityAlertDTO": "mend:DWRResponsePageableCollectionSecurityAlertDTO",
+    "DWRResponseBoolean": "mend:DWRResponseBoolean",
+    "UpdateRiskRequestDTO": "mend:UpdateRiskRequestDTO",
+    "isViolating": {
+      "@id": "mend:isViolating",
+      "@type": "xsd:boolean"
+    },
+    "SbomScanInfoDTO": "mend:SbomScanInfoDTO",
+    "scanUuid": {
+      "@id": "mend:scanUuid",
+      "@type": "xsd:string"
+    },
+    "MultiContextRequestDTOV3": "mend:MultiContextRequestDTOV3",
+    "applicationUuids": {
+      "@id": "mend:applicationUuids",
+      "@container": "@list"
+    },
+    "projectUuids": {
+      "@id": "mend:projectUuids",
+      "@container": "@list"
+    },
+    "DWRResponsePageableV3CollectionApplicationDTOV3": "mend:DWRResponsePageableV3CollectionApplicationDTOV3",
+    "UpdateMultipleProjectViolationSlaRequestDTOV3": "mend:UpdateMultipleProjectViolationSlaRequestDTOV3",
+    "identifiers": {
+      "@id": "mend:identifiers",
+      "@container": "@list"
+    },
+    "ApplicationDTOV3": "mend:ApplicationDTOV3",
+    "SbomScanLinksDTO": "mend:SbomScanLinksDTO",
+    "logs": {
+      "@id": "mend:logs",
+      "@type": "xsd:string"
+    },
+    "ScanSummaryDTOV3": "mend:ScanSummaryDTOV3",
+    "processUuid": {
+      "@id": "mend:processUuid",
+      "@type": "xsd:string"
+    },
+    "scanTime": {
+      "@id": "mend:scanTime",
+      "@type": "xsd:dateTime"
+    },
+    "scanStatus": {
+      "@id": "mend:scanStatus",
+      "@type": "xsd:string"
+    },
+    "engine": {
+      "@id": "mend:engine",
+      "@type": "xsd:string"
+    },
+    "scanDuration": {
+      "@id": "mend:scanDuration",
+      "@type": "xsd:string"
+    },
+    "configurationName": {
+      "@id": "mend:configurationName",
+      "@type": "xsd:string"
+    },
+    "reference": {
+      "@id": "mend:reference",
+      "@type": "xsd:string"
+    },
+    "triggeredBy": {
+      "@id": "mend:triggeredBy",
+      "@type": "xsd:string"
+    },
+    "agentName": {
+      "@id": "mend:agentName",
+      "@type": "xsd:string"
+    },
+    "agentVersion": {
+      "@id": "mend:agentVersion",
+      "@type": "xsd:string"
+    },
+    "projectName": {
+      "@id": "mend:projectName",
+      "@type": "xsd:string"
+    },
+    "projectUuid": {
+      "@id": "mend:projectUuid",
+      "@type": "xsd:string"
+    },
+    "applicationName": {
+      "@id": "mend:applicationName",
+      "@type": "xsd:string"
+    },
+    "applicationUuid": {
+      "@id": "mend:applicationUuid",
+      "@type": "xsd:string"
+    },
+    "workflowNames": {
+      "@id": "mend:workflowNames",
+      "@container": "@list"
+    },
+    "statistics": {
+      "@id": "mend:statistics"
+    },
+    "EntityTagDTO": "mend:EntityTagDTO",
+    "key": {
+      "@id": "mend:key",
+      "@type": "xsd:string"
+    },
+    "PeriodTotalsDTO": "mend:PeriodTotalsDTO",
+    "currentCount": {
+      "@id": "mend:currentCount",
+      "@type": "xsd:integer"
+    },
+    "totalInCurrPeriod": {
+      "@id": "mend:totalInCurrPeriod",
+      "@type": "xsd:integer"
+    },
+    "totalInPrevPeriod": {
+      "@id": "mend:totalInPrevPeriod",
+      "@type": "xsd:integer"
+    },
+    "DWRResponseV3SbomScanResponseDTO": "mend:DWRResponseV3SbomScanResponseDTO",
+    "ProjectViolationIdentifierDTOV3": "mend:ProjectViolationIdentifierDTOV3",
+    "findingUuid": {
+      "@id": "mend:findingUuid",
+      "@type": "xsd:string"
+    },
+    "originUuid": {
+      "@id": "mend:originUuid",
+      "@type": "xsd:string"
+    },
+    "ScanTagDTO": "mend:ScanTagDTO",
+    "displayName": {
+      "@id": "mend:displayName",
+      "@type": "xsd:string"
+    },
+    "ProjectDTOV3": "mend:ProjectDTOV3",
+    "LabelRequestDTOV3": "mend:LabelRequestDTOV3",
+    "CreateApplicationRequestDTOV3": "mend:CreateApplicationRequestDTOV3",
+    "EntityLabelDTO": "mend:EntityLabelDTO",
+    "contextType": {
+      "@id": "mend:contextType",
+      "@type": "xsd:string"
+    },
+    "SbomScanResponseDTO": "mend:SbomScanResponseDTO",
+    "scan": {
+      "@id": "mend:scan",
+      "@type": "@id"
+    },
+    "link": {
+      "@id": "mend:link",
+      "@type": "@id"
+    },
+    "DWRResponseV3ListEntityLabelDTO": "mend:DWRResponseV3ListEntityLabelDTO",
+    "ApplicationSummaryDTOV3": "mend:ApplicationSummaryDTOV3",
+    "creationDate": {
+      "@id": "mend:creationDate",
+      "@type": "xsd:dateTime"
+    },
+    "labels": {
+      "@id": "mend:labels",
+      "@container": "@list"
+    },
+    "DWRResponsePageableV3ListApplicationSummaryDTOV3": "mend:DWRResponsePageableV3ListApplicationSummaryDTOV3",
+    "DWRResponseV3ApplicationDTOV3": "mend:DWRResponseV3ApplicationDTOV3",
+    "EntityLabelDTOV3": "mend:EntityLabelDTOV3",
+    "DWRResponseV3PeriodTotalsDTO": "mend:DWRResponseV3PeriodTotalsDTO",
+    "DWRResponsePageableV3ListScanSummaryDTOV3": "mend:DWRResponsePageableV3ListScanSummaryDTOV3",
+    "DWRResponseAsyncProcessStatusV2DTO": "mend:DWRResponseAsyncProcessStatusV2DTO",
+    "AsyncProcessStatusV2DTO": "mend:AsyncProcessStatusV2DTO",
+    "contextUuid": {
+      "@id": "mend:contextUuid",
+      "@type": "xsd:string"
+    },
+    "created": {
+      "@id": "mend:created",
+      "@type": "xsd:dateTime"
+    },
+    "modified": {
+      "@id": "mend:modified",
+      "@type": "xsd:dateTime"
+    },
+    "processType": {
+      "@id": "mend:processType",
+      "@type": "xsd:string"
+    },
+    "messageContentSha1": {
+      "@id": "mend:messageContentSha1",
+      "@type": "xsd:string"
+    },
+    "userMail": {
+      "@id": "mend:userMail",
+      "@type": "xsd:string"
+    },
+    "requestToken": {
+      "@id": "mend:requestToken",
+      "@type": "xsd:string"
+    },
+    "CustomAttributeDTO": "mend:CustomAttributeDTO",
+    "valueType": {
+      "@id": "mend:valueType",
+      "@type": "xsd:string"
+    },
+    "DWRResponsePageableListCustomAttributeDTO": "mend:DWRResponsePageableListCustomAttributeDTO",
+    "CustomAttributeValueDTO": "mend:CustomAttributeValueDTO",
+    "DWRResponseMessageDTO": "mend:DWRResponseMessageDTO",
+    "LicenseDTO": "mend:LicenseDTO",
+    "spdxName": {
+      "@id": "mend:spdxName",
+      "@type": "xsd:string"
+    },
+    "suspected": {
+      "@id": "mend:suspected",
+      "@type": "xsd:boolean"
+    },
+    "osiApproved": {
+      "@id": "mend:osiApproved",
+      "@type": "xsd:boolean"
+    },
+    "profile": {
+      "@id": "mend:profile",
+      "@type": "@id"
+    },
+    "SourceFileInventoryDTOV3": "mend:SourceFileInventoryDTOV3",
+    "matchType": {
+      "@id": "mend:matchType",
+      "@type": "xsd:string"
+    },
+    "sha1": {
+      "@id": "mend:sha1",
+      "@type": "xsd:string"
+    },
+    "lastModified": {
+      "@id": "mend:lastModified",
+      "@type": "xsd:dateTime"
+    },
+    "library": {
+      "@id": "mend:library",
+      "@type": "@id"
+    },
+    "SourceLibraryResponseDTO_MatchSuggestions": "mend:SourceLibraryResponseDTO_MatchSuggestions",
+    "owner": {
+      "@id": "mend:owner",
+      "@type": "xsd:string"
+    },
+    "nonOfficialRelease": {
+      "@id": "mend:nonOfficialRelease",
+      "@type": "xsd:boolean"
+    },
+    "matchSuggestionId": {
+      "@id": "mend:matchSuggestionId",
+      "@type": "xsd:string"
+    },
+    "LibraryMatchSuggestionsRequestDTOV3_MatchSuggestions": "mend:LibraryMatchSuggestionsRequestDTOV3_MatchSuggestions",
+    "sourceFileUuids": {
+      "@id": "mend:sourceFileUuids",
+      "@container": "@list"
+    },
+    "recommendedForAllFiles": {
+      "@id": "mend:recommendedForAllFiles",
+      "@type": "xsd:boolean"
+    },
+    "LicenseProfileDTO": "mend:LicenseProfileDTO",
+    "links": {
+      "@id": "mend:links",
+      "@container": "@list"
+    },
+    "copyrightRiskScore": {
+      "@id": "mend:copyrightRiskScore",
+      "@type": "@id"
+    },
+    "patentAndRoyaltyRisk": {
+      "@id": "mend:patentAndRoyaltyRisk",
+      "@type": "@id"
+    },
+    "royaltyFree": {
+      "@id": "mend:royaltyFree",
+      "@type": "xsd:string"
+    },
+    "copyleft": {
+      "@id": "mend:copyleft",
+      "@type": "@id"
+    },
+    "linking": {
+      "@id": "mend:linking",
+      "@type": "@id"
+    },
+    "requiredNotices": {
+      "@id": "mend:requiredNotices",
+      "@container": "@list"
+    },
+    "LiteLicenseDTO_MatchSuggestions": "mend:LiteLicenseDTO_MatchSuggestions",
+    "DescriptionAndExplanationDTO": "mend:DescriptionAndExplanationDTO",
+    "explanation": {
+      "@id": "mend:explanation",
+      "@type": "xsd:string"
+    },
+    "indicatingText": {
+      "@id": "mend:indicatingText",
+      "@type": "xsd:string"
+    },
+    "displayText": {
+      "@id": "mend:displayText",
+      "@type": "xsd:string"
+    },
+    "LiteLicenseDTO_SearchForMatch": "mend:LiteLicenseDTO_SearchForMatch",
+    "DWRResponsePageableV3CollectionSourceFileInventoryDTOV3": "mend:DWRResponsePageableV3CollectionSourceFileInventoryDTOV3",
+    "SourceLibraryResponseDTO_SearchForMatch": "mend:SourceLibraryResponseDTO_SearchForMatch",
+    "SourceFileRemappingOrgRequestDTOV3": "mend:SourceFileRemappingOrgRequestDTOV3",
+    "targetLibraryUuid": {
+      "@id": "mend:targetLibraryUuid",
+      "@type": "xsd:string"
+    },
+    "sendEmailNotification": {
+      "@id": "mend:sendEmailNotification",
+      "@type": "xsd:boolean"
+    },
+    "DWRResponseV3CollectionSourceLibraryResponseDTO_MatchSuggestions": "mend:DWRResponseV3CollectionSourceLibraryResponseDTO_MatchSuggestions",
+    "SourceFileLibraryDTO": "mend:SourceFileLibraryDTO",
+    "DWRResponseV3CollectionSourceLibraryResponseDTO_SearchForMatch": "mend:DWRResponseV3CollectionSourceLibraryResponseDTO_SearchForMatch",
+    "RiskScoreExplanationDTO": "mend:RiskScoreExplanationDTO",
+    "riskScore": {
+      "@id": "mend:riskScore",
+      "@type": "xsd:integer"
+    }
+  },
+  "@type": "schema:Dataset",
+  "schema:name": "Mend API JSON-LD context",
+  "schema:description": "A JSON-LD @context for the objects Mend's own API contract declares: one class per component schema, one property per declared field, typed from the contract. Derived by script (derive-json-ld.py, 2026-10-04) from openapi/mend-access-management-api-openapi.yml, openapi/mend-access-management-organizations-api-openapi.yml, openapi/mend-administration-groups-api-openapi.yml.",
+  "dcterms:created": "2026-10-04",
+  "dcterms:source": [
+    "openapi/mend-access-management-api-openapi.yml",
+    "openapi/mend-access-management-organizations-api-openapi.yml",
+    "openapi/mend-administration-groups-api-openapi.yml",
+    "openapi/mend-administration-labels-api-openapi.yml",
+    "openapi/mend-administration-users-api-openapi.yml"
+  ]
+}
