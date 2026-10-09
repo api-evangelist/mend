@@ -1,0 +1,37 @@
+# Front Door AI Index — mend — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: mend
+  lexicon_version: '1.0'
+  probed_at: '2026-09-25'
+  host: www.mend.io
+  final_host: www.mend.io
+  ownership: own
+  owner: mend
+  shares_host_with:
+  - renovate-json
+  inherited_from: null
+  alias_of: null
+  verdict: scored
+  score: 101
+  band: 6
+  band_label: dominant
+  host_score: 101
+  density: 40.89
+  words: 2470
+  tiers:
+    agentic: 14
+    core: 87
+    model: 0
+  ambiguous: 10
+  top_terms:
+    AI: 82
+    agent: 9
+    prompts: 7
+    LLMs: 5
+    AI agent: 3
+    MCP: 2
+    copilot: 1
+    conversational AI: 1
+    smart: 1
