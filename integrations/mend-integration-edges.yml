@@ -1,0 +1,67 @@
+generated: '2026-10-14'
+method: searched
+checked:
+- https://marketplace.atlassian.com/
+- https://marketplace.visualstudio.com/vscode
+- https://plugins.jetbrains.com/
+marketplace_apps: []
+edges:
+- partner_name: Atlassian Marketplace
+  partner: atlassian
+  partner_match: aggregator
+  type: marketplace
+  marketplace: atlassian
+  channel: partner-built
+  relationship: platform-app
+  direction: third-party
+  evidence: https://marketplace.atlassian.com/vendors/1210606/mend-io
+  listing_count: 5
+  apps:
+  - Mend Integration for Jira Cloud
+  - Mend for Bitbucket  Server & Data Center
+  - Mend for Jira Data Center (formerly WhiteSource)
+  - Mend
+  - Mend for Bitbucket Cloud (legacy)
+  publisher_name: Mend.io
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+- partner_name: JetBrains Marketplace
+  partner: jetbrains
+  partner_match: aggregator
+  type: marketplace
+  marketplace: jetbrains
+  channel: partner-built
+  relationship: platform-app
+  direction: third-party
+  evidence: https://plugins.jetbrains.com/vendor/55a55509-b338-41d4-ac4f-79850dcd6cbb
+  listing_count: 2
+  apps:
+  - Mend Advise for PyCharm
+  - Mend Advise
+  publisher_name: Mend
+  badges:
+  - Verified vendor
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+- partner_name: Visual Studio Code Marketplace
+  partner: vs-code-marketplace
+  partner_match: aggregator
+  type: marketplace
+  marketplace: vscode
+  channel: partner-built
+  relationship: platform-app
+  direction: third-party
+  evidence: https://marketplace.visualstudio.com/publishers/Mend
+  listing_count: 1
+  apps:
+  - Mend Advise
+  publisher_name: Mend
+  badges:
+  - Verified publisher
+  - Verified domain
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+source:
+- https://marketplace.atlassian.com/
+- https://marketplace.visualstudio.com/vscode
+- https://plugins.jetbrains.com/
