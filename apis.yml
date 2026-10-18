@@ -150,6 +150,8 @@ apis:
   humanURL: https://api-docs.mend.io/platform/3.0
   baseURL: https://api-saas.mend.io
   tags:
+  - Identity and Access Management
+  tags_raw:
   - Access Management
   properties:
   - type: OpenAPI
