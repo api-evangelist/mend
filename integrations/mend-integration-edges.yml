@@ -1,9 +1,13 @@
 generated: '2026-10-14'
 method: searched
 checked:
+- https://cyclonedx.org/tool-center/
 - https://marketplace.atlassian.com/
 - https://marketplace.visualstudio.com/vscode
 - https://plugins.jetbrains.com/
+- https://raw.githubusercontent.com/ossf/ossf-landscape/0c5085851606608158f3adb796e5c22265ee174d/landscape.yml
+- https://spdx.dev/use/spdx-tools/
+- https://www.openchainproject.org/community-of-conformance
 marketplace_apps: []
 edges:
 - partner_name: Atlassian Marketplace
@@ -61,6 +65,34 @@ edges:
   - Verified domain
   detected_by: sweep-devtools.py
   detected: '2026-10-14'
+- partner_name: CycloneDX (OWASP)
+  partner: null
+  partner_match: register
+  type: register
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  category: SBOM standard (CycloneDX)
+  evidence: https://cyclonedx.org/tool-center/#toolCard-mend_sca
+  contract_reference:
+    register: CycloneDX Tool Center (cyclonedx.org/tool-center)
+    standard: CycloneDX (ECMA-424)
+    spec_file: null
+    role: cyclonedx-tool
+    registered_name: Mend (Whitesource)
+    tools:
+    - Mend SCA
+    website: https://www.mend.io/
+    matched_domain: mend.io
+    matched_by: domain+name-among-holders
+    availability:
+    - SUBSCRIPTION
+    signal_note: 'participation only: a Tool Center listing means the publisher ships CycloneDX support; tools,
+      capabilities and their count are context, never read (breadth is not credit)'
+    detected_by: sweep-software-supply-chain.py
+    detected: '2026-10-18'
+  detected_by: sweep-software-supply-chain.py
+  first_seen: '2026-10-18'
 source:
 - https://marketplace.atlassian.com/
 - https://marketplace.visualstudio.com/vscode

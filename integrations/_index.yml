@@ -39,3 +39,31 @@
   relationship: platform-app
   status: not-a-workflow
   arazzo: null
+- slug: mend-cyclonedx-owasp
+  label: CycloneDX (OWASP)
+  partner_name: CycloneDX (OWASP)
+  category: SBOM standard (CycloneDX)
+  type: register
+  channel: standard-directory
+  evidence: https://cyclonedx.org/tool-center/#toolCard-mend_sca
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: CycloneDX Tool Center (cyclonedx.org/tool-center)
+    standard: CycloneDX (ECMA-424)
+    spec_file: null
+    role: cyclonedx-tool
+    registered_name: Mend (Whitesource)
+    tools:
+    - Mend SCA
+    website: https://www.mend.io/
+    matched_domain: mend.io
+    matched_by: domain+name-among-holders
+    availability:
+    - SUBSCRIPTION
+    signal_note: 'participation only: a Tool Center listing means the publisher ships CycloneDX support; tools,
+      capabilities and their count are context, never read (breadth is not credit)'
+    detected_by: sweep-software-supply-chain.py
+    detected: '2026-10-18'
+  status: not-a-workflow
+  arazzo: null
