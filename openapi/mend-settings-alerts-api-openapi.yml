@@ -1,0 +1,285 @@
+openapi: 3.2.0
+info:
+  title: Mend Settings - Alerts API
+  description: 'Mend''s enhanced SCA API enables automation of workflows in a REST compliant format. The API features:
+
+    + Access for any user with Mend credentials, via a user key available in the user''s profile page in the Mend App.
+
+    + Improved security with a JWT token per organization, which expires every 10 minutes.
+
+    + Added scalability with support for pagination, filtering and sorting search results.
+
+    + Broader functionality available programmatically.
+
+    + New standard API documentation for easy navigation and search.
+
+
+    **Note:** To help you get started with the Mend SCA API 2.0, we recommend reviewing our onboarding guide -> Getting Started with Mend SCA API 2.0.
+
+    This resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend SCA API 2.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.'
+  version: 3.0.1
+servers:
+- url: https://api-saas.mend.io
+  description: Generated server url
+security:
+- bearer-key: []
+tags:
+- name: Settings - Alerts
+paths:
+  /api/v2.0/orgs/{orgToken}/sca/settings/alerts/restoreToDefaults:
+    put:
+      tags:
+      - Settings - Alerts
+      summary: Restore Alert Settings to Defaults
+      description: Restores an organization's alerts to their original default settings.
+      operationId: restoreToDefaults
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseListAlertRuleDTO'
+  /api/v2.0/orgs/{orgToken}/sca/settings/alerts/recalculateAlerts/project/{projectToken}:
+    put:
+      tags:
+      - Settings - Alerts
+      summary: Recalculate Project Alerts
+      description: Recalculates an organization's alerts using the current alert settings. Use this after making changes to the alert settings. Note that recalculating may take a long time since it is applied to the entire organization
+      operationId: recalculateProjectAlerts
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      - name: projectToken
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+  /api/v2.0/orgs/{orgToken}/sca/settings/alerts:
+    get:
+      tags:
+      - Settings - Alerts
+      summary: Get Organization Alert Settings
+      description: Retrieves an organization's current alert settings
+      operationId: getOrgAlertTypeSettings
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseAlertTypeSettingsDTO'
+    put:
+      tags:
+      - Settings - Alerts
+      summary: Update Organization Alert Settings
+      description: Updates one or more alert settings in an organization
+      operationId: updateOrgAlertTypeSettings
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AlertTypeSettingsRequestDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseAlertTypeSettingsDTO'
+components:
+  schemas:
+    AlertRuleDTO:
+      required:
+      - active
+      - alertType
+      type: object
+      properties:
+        alertType:
+          title: Alert Type
+          type: string
+          example: POLICY_VIOLATIONS
+          enum:
+          - POLICY_VIOLATIONS
+          - SECURITY_VULNERABILITY
+          - MULTIPLE_LICENSES
+          - REJECTED_LIBRARY_IN_USE
+          - NEW_VERSION
+        active:
+          title: Alert Activation Status
+          type: boolean
+        options:
+          oneOf:
+          - $ref: '#/components/schemas/NewVersionOptionsDTO'
+    DWRResponseAlertTypeSettingsDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/AlertTypeSettingsDTO'
+    AlertTypeSettingsDTO:
+      type: object
+      properties:
+        rules:
+          type: array
+          items:
+            $ref: '#/components/schemas/AlertRuleDTO'
+    AlertTypeSettingsRequestDTO:
+      type: object
+      properties:
+        rules:
+          type: array
+          items:
+            $ref: '#/components/schemas/AlertRuleRequestDTO'
+    DWRResponseListAlertRuleDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          type: array
+          items:
+            $ref: '#/components/schemas/AlertRuleDTO'
+    AlertRuleRequestDTO:
+      required:
+      - active
+      - alertType
+      type: object
+      properties:
+        alertType:
+          title: Alert Type
+          type: string
+          example: POLICY_VIOLATIONS
+          enum:
+          - POLICY_VIOLATIONS
+          - SECURITY_VULNERABILITY
+          - MULTIPLE_LICENSES
+          - REJECTED_LIBRARY_IN_USE
+          - NEW_VERSION
+        active:
+          title: Alert Activation Status
+          type: boolean
+        options:
+          oneOf:
+          - $ref: '#/components/schemas/NewVersionOptionsDTO'
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+    NewVersionOptionsDTO:
+      type: object
+      description: 'type: NEW_VERSION_OPTIONS'
+      allOf:
+      - $ref: '#/components/schemas/RiskTypeOptionsDTO'
+      - type: object
+        properties:
+          minorVersionSensitive:
+            title: Minor Version Sensitive
+            type: boolean
+          sourceLibraryVersionSensitive:
+            title: Source Library Version Sensitive
+            type: boolean
+    RiskTypeOptionsDTO:
+      title: Additional Options
+      required:
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+      discriminator:
+        propertyName: type
+      oneOf:
+      - $ref: '#/components/schemas/NewVersionOptionsDTO'
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: JWT token Bearer
+      scheme: bearer
+      bearerFormat: JWT

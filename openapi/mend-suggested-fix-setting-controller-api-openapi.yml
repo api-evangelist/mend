@@ -1,0 +1,148 @@
+openapi: 3.2.0
+info:
+  title: Mend Suggested Fix Setting Controller API
+  description: 'Mend''s enhanced SCA API enables automation of workflows in a REST compliant format. The API features:
+
+    + Access for any user with Mend credentials, via a user key available in the user''s profile page in the Mend App.
+
+    + Improved security with a JWT token per organization, which expires every 10 minutes.
+
+    + Added scalability with support for pagination, filtering and sorting search results.
+
+    + Broader functionality available programmatically.
+
+    + New standard API documentation for easy navigation and search.
+
+
+    **Note:** To help you get started with the Mend SCA API 2.0, we recommend reviewing our onboarding guide -> Getting Started with Mend SCA API 2.0.
+
+    This resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend SCA API 2.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.'
+  version: 3.0.1
+servers:
+- url: https://api-saas.mend.io
+  description: Generated server url
+security:
+- bearer-key: []
+tags:
+- name: suggested-fix-setting-controller
+paths:
+  /api/v2.0/orgs/{orgToken}/settings/suggestedFix/rule:
+    post:
+      tags:
+      - suggested-fix-setting-controller
+      operationId: setSuggestedFixSettingByDomain
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SuggestedFixSettingRuleDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseMessageDTO'
+      summary: Set suggested fix setting by domain
+      x-summary-source: derived
+  /api/v2.0/orgs/{orgToken}/settings/suggestedFix:
+    get:
+      tags:
+      - suggested-fix-setting-controller
+      operationId: getSuggestedFixSettingByDomain
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseSuggestedFixSettingRuleDTO'
+      summary: Get suggested fix setting by domain
+      x-summary-source: derived
+components:
+  schemas:
+    DWRResponseMessageDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/MessageDTO'
+    MessageDTO:
+      type: object
+      properties:
+        message:
+          title: message
+          type: string
+          example: Success!
+    DWRResponseSuggestedFixSettingRuleDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/SuggestedFixSettingRuleDTO'
+    SuggestedFixSettingRuleDTO:
+      type: object
+      properties:
+        fixStrategy:
+          type: string
+          enum:
+          - LVP
+          - TRANSITIVE_AWARE
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: JWT token Bearer
+      scheme: bearer
+      bearerFormat: JWT

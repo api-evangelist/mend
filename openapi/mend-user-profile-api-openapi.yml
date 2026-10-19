@@ -1,8 +1,23 @@
 openapi: 3.2.0
 info:
   title: Mend User Profile API
-  description: Mend's enhanced SCA API enables automation of workflows in a REST compliant format.
-  version: '2.0'
+  description: 'Mend''s enhanced SCA API enables automation of workflows in a REST compliant format. The API features:
+
+    + Access for any user with Mend credentials, via a user key available in the user''s profile page in the Mend App.
+
+    + Improved security with a JWT token per organization, which expires every 10 minutes.
+
+    + Added scalability with support for pagination, filtering and sorting search results.
+
+    + Broader functionality available programmatically.
+
+    + New standard API documentation for easy navigation and search.
+
+
+    **Note:** To help you get started with the Mend SCA API 2.0, we recommend reviewing our onboarding guide -> Getting Started with Mend SCA API 2.0.
+
+    This resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend SCA API 2.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.'
+  version: 3.0.1
 servers:
 - url: https://api-saas.mend.io
   description: Generated server url
@@ -11,6 +26,190 @@ security:
 tags:
 - name: User Profile
 paths:
+  /api/v2.0/profile/password:
+    put:
+      tags:
+      - User Profile
+      summary: Change Password
+      description: Changes the current user's password
+      operationId: changePassword
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserChangePasswordDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseMessageDTO'
+  /api/v2.0/profile:
+    put:
+      tags:
+      - User Profile
+      summary: Change Name
+      description: Changes the current user's name
+      operationId: changeName
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserChangeNameDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseMessageDTO'
+  /api/v3.0/profile/preferences:
+    get:
+      tags:
+      - User Profile
+      summary: Get User Preferences
+      description: Returns the current user's preferences
+      operationId: getUserPreferences
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableV3CollectionPreferencesDTO'
+    post:
+      tags:
+      - User Profile
+      summary: Upsert user preferences
+      description: Update/Insert user preferences
+      operationId: upsertUserPreferences
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PreferencesRequestDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3PreferencesDTO'
+  /api/v3.0/profile/email-pref:
+    get:
+      tags:
+      - User Profile
+      summary: get email preferences
+      description: get user email preferences
+      operationId: getUserEmailPreferences
+      parameters:
+      - name: keyId
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3ListEmailPreferencesDTO'
+    post:
+      tags:
+      - User Profile
+      summary: Upsert email preferences
+      description: Update/Insert user email preferences
+      operationId: upsertUserEmailPreferences
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateEmailPreferencesRequestDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3EmailPreferencesDTO'
   /api/v2.0/profile/userKeys:
     get:
       tags:
@@ -35,24 +234,24 @@ paths:
           type: string
           default: '0'
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponsePageableCollectionUserKeyDTO'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableCollectionUserKeyDTO'
     post:
       tags:
       - User Profile
@@ -66,24 +265,129 @@ paths:
               $ref: '#/components/schemas/GenerateUserKeyRequestDTO'
         required: true
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponseUserKeyDTO'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseUserKeyDTO'
+  /api/v2.0/profile/encryptCredentials:
+    post:
+      tags:
+      - User Profile
+      summary: Encrypt credentials to a client key
+      description: Encrypts the supplied payload to the caller-supplied client public key (MCP web-login). Called by the BFF.
+      operationId: encryptCredentials
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EncryptCredentialsRequestDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseEncryptedCredentialsDTO'
+  /api/v2.0/profile/cliCredentials:
+    post:
+      tags:
+      - User Profile
+      summary: Issue CLI web-login credentials
+      description: Gets-or-creates the current user's CLI user key and returns it encrypted to the caller-supplied client public key. Called by the BFF during CLI web-login; the plaintext key never leaves the platform.
+      operationId: cliCredentials
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CliCredentialsRequestDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseEncryptedCredentialsDTO'
+  /api/v3.0/profile/email-pref/bulk:
+    get:
+      tags:
+      - User Profile
+      summary: get email preferences for number of users
+      operationId: getEmailPreferencesForUsers
+      parameters:
+      - name: userEmails
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: keyId
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: orgUuid
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3ListEmailPreferencesDTO'
   /api/v2.0/profile/userKeys/{userKey}:
     delete:
       tags:
@@ -98,26 +402,61 @@ paths:
         schema:
           type: string
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponseMessageDTO'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseMessageDTO'
 components:
   schemas:
+    CliCredentialsRequestDTO:
+      type: object
+      properties:
+        clientPublicKey:
+          title: Client public key
+          type: string
+          description: Ephemeral RSA public key (PKIX/SPKI DER, base64url) the credentials are encrypted to
+    DWRResponsePageableCollectionUserKeyDTO:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            + **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining.'
+          example:
+            totalItems: '422'
+            isLastPage: 'true'
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserKeyDTO'
+      description: Provides insights into endpoint-supported pagination information
+    MessageDTO:
+      type: object
+      properties:
+        message:
+          title: message
+          type: string
+          example: Success!
     DWRResponseBase:
       type: object
       properties:
@@ -125,6 +464,71 @@ components:
           title: Support Token
           type: string
           example: 1171c60d
+    DWRResponseEncryptedCredentialsDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/EncryptedCredentialsDTO'
+    DWRResponsePageableV3CollectionPreferencesDTO:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            '
+          example:
+            totalItems: '422'
+            next: http://someUrl?cursor=3
+            cursor: 3
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          type: array
+          items:
+            $ref: '#/components/schemas/PreferencesDTO'
+    UserChangeNameDTO:
+      type: object
+      properties:
+        name:
+          title: New Name
+          type: string
+          example: John Doe
+    PreferencesRequestDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+        keyId:
+          type: string
+        category:
+          type: string
+        configurations:
+          type: string
+    PreferencesDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+        keyId:
+          type: string
+        category:
+          type: string
+        configurations:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
     UserKeyDTO:
       type: object
       properties:
@@ -156,13 +560,48 @@ components:
           title: Token Expiration Date
           type: string
           format: date-time
-    MessageDTO:
+    DWRResponseV3EmailPreferencesDTO:
       type: object
       properties:
-        message:
-          title: message
+        supportToken:
+          title: Support Token
           type: string
-          example: Success!
+          example: 1171c60d
+        response:
+          $ref: '#/components/schemas/EmailPreferencesDTO'
+    DWRResponseV3PreferencesDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          $ref: '#/components/schemas/PreferencesDTO'
+    UpdateEmailPreferencesRequestDTO:
+      type: object
+      properties:
+        userEmail:
+          type: string
+        engineType:
+          type: string
+        enabled:
+          type: boolean
+        keyId:
+          type: string
+        orgUuid:
+          type: string
+    EncryptCredentialsRequestDTO:
+      type: object
+      properties:
+        clientPublicKey:
+          title: Client public key
+          type: string
+          description: Ephemeral RSA public key (PKIX/SPKI DER, base64url) the payload is encrypted to
+        payload:
+          title: Payload
+          type: string
+          description: Plaintext (e.g. JSON) to encrypt to the client public key
     GenerateUserKeyRequestDTO:
       type: object
       properties:
@@ -170,27 +609,50 @@ components:
           title: UserToken Description
           type: string
           example: Token A
-    DWRResponsePageableCollectionUserKeyDTO:
+    UserChangePasswordDTO:
       type: object
       properties:
-        additionalData:
-          title: Provides insights into endpoint-supported pagination information.
-          type: object
-          description: '+ **totalItems**: The total count of data points returned in an API response.
-
-            + **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining.'
-          example:
-            totalItems: '422'
-            isLastPage: 'true'
+        password:
+          type: string
+        currentPassword:
+          type: string
+    DWRResponseV3ListEmailPreferencesDTO:
+      type: object
+      properties:
         supportToken:
           title: Support Token
           type: string
           example: 1171c60d
-        retVal:
+        response:
           type: array
           items:
-            $ref: '#/components/schemas/UserKeyDTO'
-      description: Provides insights into endpoint-supported pagination information
+            $ref: '#/components/schemas/EmailPreferencesDTO'
+    EmailPreferencesDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+        userEmail:
+          type: string
+        engineType:
+          type: string
+          enum:
+          - UNIFIED
+          - SCA
+          - SAST
+          - IAC
+          - IMG
+          - AI
+          - DAST
+        enabled:
+          type: boolean
+        keyId:
+          type: string
+        orgUuid:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
     DWRResponseUserKeyDTO:
       type: object
       properties:
@@ -200,6 +662,11 @@ components:
           example: 1171c60d
         retVal:
           $ref: '#/components/schemas/UserKeyDTO'
+    EncryptedCredentialsDTO:
+      type: object
+      properties:
+        encryptedCredentials:
+          type: string
     DWRResponseMessageDTO:
       type: object
       properties:

@@ -1,0 +1,1247 @@
+openapi: 3.2.0
+info:
+  title: Mend ASPM API
+  description: 'Mend''s enhanced SCA API enables automation of workflows in a REST compliant format. The API features:
+
+    + Access for any user with Mend credentials, via a user key available in the user''s profile page in the Mend App.
+
+    + Improved security with a JWT token per organization, which expires every 10 minutes.
+
+    + Added scalability with support for pagination, filtering and sorting search results.
+
+    + Broader functionality available programmatically.
+
+    + New standard API documentation for easy navigation and search.
+
+
+    **Note:** To help you get started with the Mend SCA API 2.0, we recommend reviewing our onboarding guide -> Getting Started with Mend SCA API 2.0.
+
+    This resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend SCA API 2.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.'
+  version: 3.0.1
+servers:
+- url: https://api-saas.mend.io
+  description: Generated server url
+security:
+- bearer-key: []
+tags:
+- name: ASPM
+paths:
+  /api/v3.0/projects/{projectUuid}/dast/findings/{findingUuid}:
+    get:
+      tags:
+      - ASPM
+      operationId: getProjectDastFinding
+      parameters:
+      - name: projectUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: findingUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Get project dast finding
+      x-summary-source: derived
+    put:
+      tags:
+      - ASPM
+      operationId: updateProjectDastFinding
+      parameters:
+      - name: projectUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: findingUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Update project dast finding
+      x-summary-source: derived
+  /api/v3.0/projects/{projectUuid}/posture/graph:
+    post:
+      tags:
+      - ASPM
+      operationId: projectQueryPostureGraph
+      parameters:
+      - name: projectUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Project query posture graph
+      x-summary-source: derived
+  /api/v3.0/orgs/{orgUuid}/posture/graph:
+    post:
+      tags:
+      - ASPM
+      operationId: queryPostureGraph
+      parameters:
+      - name: orgUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Query posture graph
+      x-summary-source: derived
+  /api/v3.0/integrations/scanEngines/{integrationUuid}/sync:
+    post:
+      tags:
+      - ASPM
+      operationId: syncIntegration
+      parameters:
+      - name: integrationUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Sync integration
+      x-summary-source: derived
+  /api/v3.0/integrations/scanEngines/{integrationUuid}/configurations/{configurationUuid}/sync:
+    post:
+      tags:
+      - ASPM
+      operationId: syncConfiguration
+      parameters:
+      - name: integrationUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: configurationUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Sync configuration
+      x-summary-source: derived
+  /api/v3.0/integrations/scanEngines/{integrationUuid}/configurations/{configurationUuid}/scans/{scanUuid}/data:
+    post:
+      tags:
+      - ASPM
+      operationId: createConfigurationScanById
+      parameters:
+      - name: configurationUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: scanUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Create configuration scan by id
+      x-summary-source: derived
+  /api/v3.0/integrations/scanEngines/{integrationUuid}/configurations/{configurationUuid}:
+    get:
+      tags:
+      - ASPM
+      operationId: getConfiguration
+      parameters:
+      - name: integrationUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: configurationUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Get configuration
+      x-summary-source: derived
+    post:
+      tags:
+      - ASPM
+      operationId: updateConfiguration
+      parameters:
+      - name: integrationUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: configurationUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Update configuration
+      x-summary-source: derived
+    delete:
+      tags:
+      - ASPM
+      operationId: deleteConfiguration_1
+      parameters:
+      - name: integrationUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: configurationUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Delete configuration 1
+      x-summary-source: derived
+  /api/v3.0/integrations/scanEngines/{integrationUuid}/configurations:
+    get:
+      tags:
+      - ASPM
+      operationId: getConfigurations_1
+      parameters:
+      - name: integrationUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Get configurations 1
+      x-summary-source: derived
+    post:
+      tags:
+      - ASPM
+      operationId: createConfiguration_1
+      parameters:
+      - name: integrationUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Create configuration 1
+      x-summary-source: derived
+  /api/v3.0/integrations/scanEngines:
+    post:
+      tags:
+      - ASPM
+      operationId: createIntegration
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Create integration
+      x-summary-source: derived
+  /api/v3.0/assets/containerrepository:
+    post:
+      tags:
+      - ASPM
+      operationId: createContainerRepoAsset
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Create container repo asset
+      x-summary-source: derived
+  /api/v3.0/assets/coderepository:
+    post:
+      tags:
+      - ASPM
+      operationId: createCodeRepoAsset
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Create code repo asset
+      x-summary-source: derived
+  /api/v3.0/applications/{applicationUuid}/posture/graph:
+    post:
+      tags:
+      - ASPM
+      operationId: applicationQueryPostureGraph
+      parameters:
+      - name: applicationUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Application query posture graph
+      x-summary-source: derived
+  /api/v3.0/projects/{projectUuid}/technologies:
+    get:
+      tags:
+      - ASPM
+      operationId: getProjectTechnologies
+      parameters:
+      - name: projectUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Get project technologies
+      x-summary-source: derived
+  /api/v3.0/projects/{projectUuid}/findings:
+    get:
+      tags:
+      - ASPM
+      operationId: getProjectFindings
+      parameters:
+      - name: projectUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Get project findings
+      x-summary-source: derived
+  /api/v3.0/projects/{projectUuid}/dast/report:
+    get:
+      tags:
+      - ASPM
+      operationId: getProjectDastReport
+      parameters:
+      - name: projectUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Get project dast report
+      x-summary-source: derived
+  /api/v3.0/projects/{projectUuid}/dast/findings:
+    get:
+      tags:
+      - ASPM
+      operationId: getProjectDastFindings
+      parameters:
+      - name: projectUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Get project dast findings
+      x-summary-source: derived
+  /api/v3.0/projects/{projectUuid}/assets:
+    get:
+      tags:
+      - ASPM
+      operationId: getProjectAssets
+      parameters:
+      - name: projectUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Get project assets
+      x-summary-source: derived
+  /api/v3.0/orgs/{orgUuid}/integrations/scanEngines/configurations:
+    get:
+      tags:
+      - ASPM
+      operationId: getOrgIntegrationConfigurations
+      parameters:
+      - name: orgUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Get org integration configurations
+      x-summary-source: derived
+  /api/v3.0/orgs/{orgUuid}/integrations/scanEngines:
+    get:
+      tags:
+      - ASPM
+      operationId: getIntegrations
+      parameters:
+      - name: orgUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Get integrations
+      x-summary-source: derived
+  /api/v3.0/orgs/{orgUuid}/assets:
+    get:
+      tags:
+      - ASPM
+      operationId: getAssets
+      parameters:
+      - name: orgUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Get assets
+      x-summary-source: derived
+  /api/v3.0/integrations/scanEngines/{integrationUuid}/validate:
+    get:
+      tags:
+      - ASPM
+      operationId: validateIntegration
+      parameters:
+      - name: integrationUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Validate integration
+      x-summary-source: derived
+  /api/v3.0/integrations/scanEngines/{integrationUuid}/entities:
+    get:
+      tags:
+      - ASPM
+      operationId: getIntegrationExternalEntities
+      parameters:
+      - name: integrationUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Get integration external entities
+      x-summary-source: derived
+  /api/v3.0/integrations/scanEngines/{integrationUuid}:
+    get:
+      tags:
+      - ASPM
+      operationId: getIntegration
+      parameters:
+      - name: integrationUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Get integration
+      x-summary-source: derived
+    delete:
+      tags:
+      - ASPM
+      operationId: deleteIntegration
+      parameters:
+      - name: integrationUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Delete integration
+      x-summary-source: derived
+  /api/v3.0/findings/{findingUuid}:
+    get:
+      tags:
+      - ASPM
+      operationId: getFinding
+      parameters:
+      - name: findingUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Get finding
+      x-summary-source: derived
+  /api/v3.0/assets/{assetUuid}/technologies:
+    get:
+      tags:
+      - ASPM
+      operationId: getAssetTechnologies
+      parameters:
+      - name: assetUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Get asset technologies
+      x-summary-source: derived
+  /api/v3.0/assets/{assetUuid}/findings:
+    get:
+      tags:
+      - ASPM
+      operationId: getAssetFindings
+      parameters:
+      - name: assetUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Get asset findings
+      x-summary-source: derived
+  /api/v3.0/assets/{assetUuid}:
+    get:
+      tags:
+      - ASPM
+      operationId: getAsset
+      parameters:
+      - name: assetUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Get asset
+      x-summary-source: derived
+  /api/v3.0/applications/{applicationUuid}/technologies:
+    get:
+      tags:
+      - ASPM
+      operationId: getApplicationTechnologies
+      parameters:
+      - name: applicationUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Get application technologies
+      x-summary-source: derived
+  /api/v3.0/applications/{applicationUuid}/findings:
+    get:
+      tags:
+      - ASPM
+      operationId: getApplicationFindings
+      parameters:
+      - name: applicationUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Get application findings
+      x-summary-source: derived
+  /api/v3.0/applications/{applicationUuid}/assets:
+    get:
+      tags:
+      - ASPM
+      operationId: getApplicationAssets
+      parameters:
+      - name: applicationUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Get application assets
+      x-summary-source: derived
+components:
+  schemas:
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: JWT token Bearer
+      scheme: bearer
+      bearerFormat: JWT

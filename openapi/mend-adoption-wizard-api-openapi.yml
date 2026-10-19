@@ -1,0 +1,598 @@
+openapi: 3.2.0
+info:
+  title: Mend Adoption Wizard API
+  description: 'Mend''s enhanced SCA API enables automation of workflows in a REST compliant format. The API features:
+
+    + Access for any user with Mend credentials, via a user key available in the user''s profile page in the Mend App.
+
+    + Improved security with a JWT token per organization, which expires every 10 minutes.
+
+    + Added scalability with support for pagination, filtering and sorting search results.
+
+    + Broader functionality available programmatically.
+
+    + New standard API documentation for easy navigation and search.
+
+
+    **Note:** To help you get started with the Mend SCA API 2.0, we recommend reviewing our onboarding guide -> Getting Started with Mend SCA API 2.0.
+
+    This resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend SCA API 2.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.'
+  version: 3.0.1
+servers:
+- url: https://api-saas.mend.io
+  description: Generated server url
+security:
+- bearer-key: []
+tags:
+- name: Adoption Wizard
+paths:
+  /api/v3.0/orgs/{orgUuid}/adoptionWizard/start:
+    post:
+      tags:
+      - Adoption Wizard
+      summary: Start an Adoption Wizard onboarding the user completes by scanning manually
+      description: Records that the user accepted the suggested manual setup (classic-repo only); their next SAST scan from the integration is then tracked as the onboarding scan.
+      operationId: startManualOnboarding
+      parameters:
+      - name: orgUuid
+        in: path
+        description: Org UUID (Administration > General)
+        required: true
+        schema:
+          type: string
+      - name: engine
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - sast
+      - name: scanSource
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - developer-platform
+          - classic-repo
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3MessageDTO'
+  /api/v3.0/orgs/{orgUuid}/adoptionWizard/repositories/{repoId}/onboard:
+    post:
+      tags:
+      - Adoption Wizard
+      summary: Onboard a repository to the Adoption Wizard engine
+      operationId: onboardRepository
+      parameters:
+      - name: orgUuid
+        in: path
+        description: Org UUID (Administration > General)
+        required: true
+        schema:
+          type: string
+      - name: repoId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: engine
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - sast
+      - name: scanSource
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - developer-platform
+          - classic-repo
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3MessageDTO'
+  /api/v3.0/orgs/{orgUuid}/adoptionWizard/invite:
+    post:
+      tags:
+      - Adoption Wizard
+      summary: Delegate the Adoption Wizard onboarding to another user
+      operationId: invite
+      parameters:
+      - name: orgUuid
+        in: path
+        description: Org UUID (Administration > General)
+        required: true
+        schema:
+          type: string
+      - name: engine
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - sast
+      - name: scanSource
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - developer-platform
+          - classic-repo
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdoptionWizardInviteRequestDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3MessageDTO'
+    delete:
+      tags:
+      - Adoption Wizard
+      summary: Cancel a pending Adoption Wizard delegation
+      operationId: cancelInvite
+      parameters:
+      - name: orgUuid
+        in: path
+        description: Org UUID (Administration > General)
+        required: true
+        schema:
+          type: string
+      - name: engine
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - sast
+      - name: scanSource
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - developer-platform
+          - classic-repo
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3MessageDTO'
+  /api/v3.0/orgs/{orgUuid}/adoptionWizard/status:
+    get:
+      tags:
+      - Adoption Wizard
+      summary: Get Organization Adoption Wizard Status
+      operationId: getAdoptionWizardStatus
+      parameters:
+      - name: orgUuid
+        in: path
+        description: Org UUID (Administration > General)
+        required: true
+        schema:
+          type: string
+      - name: engine
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - sast
+      - name: scanSource
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - developer-platform
+          - classic-repo
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3AdoptionWizardStatusDTO'
+    delete:
+      tags:
+      - Adoption Wizard
+      summary: Reset an organization's Adoption Wizard status
+      description: Deletes the status of the given engine/scanSource in any state, so eligibility is evaluated afresh. For support use on stuck onboardings.
+      operationId: resetAdoptionWizardStatus
+      parameters:
+      - name: orgUuid
+        in: path
+        description: Org UUID (Administration > General)
+        required: true
+        schema:
+          type: string
+      - name: engine
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - sast
+      - name: scanSource
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - developer-platform
+          - classic-repo
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3MessageDTO'
+  /api/v3.0/orgs/{orgUuid}/adoptionWizard/repositories:
+    get:
+      tags:
+      - Adoption Wizard
+      summary: Get Organization Adoption Wizard Onboardable Repositories
+      operationId: getOnboardableRepositories
+      parameters:
+      - name: cursor
+        in: query
+        description: Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved
+        required: false
+        allowEmptyValue: true
+        schema:
+          type: string
+          default: '0'
+      - name: limit
+        in: query
+        description: Specifies the maximum number of items to be return in the response.
+        required: false
+        allowEmptyValue: true
+        schema:
+          maximum: 10000
+          type: string
+          default: '50'
+      - name: orgUuid
+        in: path
+        description: Org UUID (Administration > General)
+        required: true
+        schema:
+          type: string
+      - name: engine
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - sast
+      - name: scanSource
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - developer-platform
+          - classic-repo
+      - name: name
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3AdoptionWizardRepositoriesDTO'
+  /api/v3.0/orgs/{orgUuid}/adoptionWizard/invitedUser:
+    get:
+      tags:
+      - Adoption Wizard
+      summary: Verify the current user may complete a pending Adoption Wizard delegation
+      description: Returns 200 if the session user is an org admin or the specific user invited for this engine/scanSource, 403 otherwise. Used by Developer Platform to gate its own onboarding endpoint against users who were never delegated.
+      operationId: checkInvitedUser
+      parameters:
+      - name: orgUuid
+        in: path
+        description: Org UUID (Administration > General)
+        required: true
+        schema:
+          type: string
+      - name: engine
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - sast
+      - name: scanSource
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - developer-platform
+          - classic-repo
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+  /api/v3.0/orgs/{orgUuid}/adoptionWizard/capability:
+    get:
+      tags:
+      - Adoption Wizard
+      summary: Get Organization Adoption Wizard Capability
+      operationId: getAdoptionWizardCapability
+      parameters:
+      - name: orgUuid
+        in: path
+        description: Org UUID (Administration > General)
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3AdoptionWizardCapabilityDTO'
+components:
+  schemas:
+    AdoptionWizardStatusDTO:
+      type: object
+      properties:
+        status:
+          type: string
+        scanUuid:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+        progress:
+          $ref: '#/components/schemas/ProgressDTO'
+        invitedUserEmail:
+          type: string
+        projectUuid:
+          type: string
+        supportToken:
+          type: string
+    ProgressDTO:
+      required:
+      - currentStage
+      - overallPercentage
+      type: object
+      properties:
+        overallPercentage:
+          maximum: 100
+          minimum: 0
+          type: integer
+          format: int32
+        currentStage:
+          maxLength: 255
+          minLength: 0
+          type: string
+    AdoptionWizardRepositoriesDTO:
+      type: object
+      properties:
+        repositories:
+          type: array
+          items:
+            $ref: '#/components/schemas/AdoptionWizardRepositoryDTO'
+    AdoptionWizardCapabilityDTO:
+      type: object
+      properties:
+        adoptionOptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/AdoptionOptionDTO'
+    AdoptionOptionDTO:
+      type: object
+      properties:
+        engine:
+          type: string
+        scanSource:
+          type: string
+        state:
+          type: string
+          enum:
+          - ELIGIBLE
+          - IN_PROGRESS
+          - FINISHED
+    DWRResponseV3AdoptionWizardStatusDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          $ref: '#/components/schemas/AdoptionWizardStatusDTO'
+    DWRResponseV3MessageDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          $ref: '#/components/schemas/MessageDTO'
+    DWRResponseV3AdoptionWizardCapabilityDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          $ref: '#/components/schemas/AdoptionWizardCapabilityDTO'
+    MessageDTO:
+      type: object
+      properties:
+        message:
+          title: message
+          type: string
+          example: Success!
+    AdoptionWizardInviteRequestDTO:
+      type: object
+      properties:
+        email:
+          type: string
+        message:
+          type: string
+    AdoptionWizardRepositoryDTO:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+    DWRResponseV3AdoptionWizardRepositoriesDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          $ref: '#/components/schemas/AdoptionWizardRepositoriesDTO'
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: JWT token Bearer
+      scheme: bearer
+      bearerFormat: JWT

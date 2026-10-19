@@ -1,0 +1,737 @@
+openapi: 3.2.0
+info:
+  title: Mend User Management - Roles Definitions API
+  description: 'Mend''s enhanced SCA API enables automation of workflows in a REST compliant format. The API features:
+
+    + Access for any user with Mend credentials, via a user key available in the user''s profile page in the Mend App.
+
+    + Improved security with a JWT token per organization, which expires every 10 minutes.
+
+    + Added scalability with support for pagination, filtering and sorting search results.
+
+    + Broader functionality available programmatically.
+
+    + New standard API documentation for easy navigation and search.
+
+
+    **Note:** To help you get started with the Mend SCA API 2.0, we recommend reviewing our onboarding guide -> Getting Started with Mend SCA API 2.0.
+
+    This resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend SCA API 2.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.'
+  version: 3.0.1
+servers:
+- url: https://api-saas.mend.io
+  description: Generated server url
+security:
+- bearer-key: []
+tags:
+- name: User Management - Roles Definitions
+paths:
+  /api/v3.0/orgs/{orgUuid}/roleDefinitions:
+    get:
+      tags:
+      - User Management - Roles Definitions
+      summary: Get Organization Role Definitions
+      description: Returns a list of available role definitions for the given organization
+      operationId: getRoleDefinitions
+      parameters:
+      - name: orgUuid
+        in: path
+        description: Org UUID (Administration > General)
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3ListRoleDefinitionDTOV3'
+    post:
+      tags:
+      - User Management - Roles Definitions
+      summary: Create Organization Role Definition
+      description: Creates a custom role definition for the given organization
+      operationId: createCustomRoleDefinition
+      parameters:
+      - name: orgUuid
+        in: path
+        description: Org UUID (Administration > General)
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoleDefinitionRequestDTOV3'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3RoleDefinitionDTOV3'
+  /api/v3.0/accounts/{accountUuid}/roleDefinitions:
+    get:
+      tags:
+      - User Management - Roles Definitions
+      summary: Get Account Role Definitions
+      description: Returns a list of available role definitions for the given account
+      operationId: getRoleDefinitions_1
+      parameters:
+      - name: accountUuid
+        in: path
+        description: Account UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3ListRoleDefinitionDTOV3'
+    post:
+      tags:
+      - User Management - Roles Definitions
+      summary: Create Account Role Definition
+      description: Creates a custom role definition for the given account
+      operationId: createCustomRoleDefinition_1
+      parameters:
+      - name: accountUuid
+        in: path
+        description: Account UUID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoleDefinitionRequestDTOV3'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3RoleDefinitionDTOV3'
+  /api/v3.0/orgs/{orgUuid}/roleDefinitions/{roleDefinitionUuid}:
+    get:
+      tags:
+      - User Management - Roles Definitions
+      summary: Get Organization Role Definition by UUID
+      description: Returns the role definition identified by its UUID
+      operationId: getRoleDefinition
+      parameters:
+      - name: orgUuid
+        in: path
+        description: Org UUID (Administration > General)
+        required: true
+        schema:
+          type: string
+      - name: roleDefinitionUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3RoleDefinitionDTOV3'
+    delete:
+      tags:
+      - User Management - Roles Definitions
+      summary: Delete Organization Role Definition
+      description: Deletes the role definition for the given organization
+      operationId: deleteRoleDefinition
+      parameters:
+      - name: orgUuid
+        in: path
+        description: Org UUID (Administration > General)
+        required: true
+        schema:
+          type: string
+      - name: roleDefinitionUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3MessageDTO'
+    patch:
+      tags:
+      - User Management - Roles Definitions
+      summary: Update Organization Role Definition
+      description: Updates the role definition for the given organization
+      operationId: updateRoleDefinition
+      parameters:
+      - name: orgUuid
+        in: path
+        description: Org UUID (Administration > General)
+        required: true
+        schema:
+          type: string
+      - name: roleDefinitionUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoleDefinitionRequestDTOV3'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3MessageDTO'
+  /api/v3.0/accounts/{accountUuid}/roleDefinitions/{roleDefinitionUuid}:
+    get:
+      tags:
+      - User Management - Roles Definitions
+      summary: Get Account Role Definition by UUID
+      description: Returns the role definition identified by its UUID
+      operationId: getRoleDefinition_1
+      parameters:
+      - name: accountUuid
+        in: path
+        description: Account UUID
+        required: true
+        schema:
+          type: string
+      - name: roleDefinitionUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3RoleDefinitionDTOV3'
+    delete:
+      tags:
+      - User Management - Roles Definitions
+      summary: Delete Account Role Definition
+      description: Deletes the role definition for the given account
+      operationId: deleteRoleDefinition_1
+      parameters:
+      - name: accountUuid
+        in: path
+        description: Account UUID
+        required: true
+        schema:
+          type: string
+      - name: roleDefinitionUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3MessageDTO'
+    patch:
+      tags:
+      - User Management - Roles Definitions
+      summary: Update Account Role Definition
+      description: Updates the role definition for the given account
+      operationId: updateRoleDefinition_1
+      parameters:
+      - name: accountUuid
+        in: path
+        description: Account UUID
+        required: true
+        schema:
+          type: string
+      - name: roleDefinitionUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoleDefinitionRequestDTOV3'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3MessageDTO'
+  /api/v3.0/orgs/{orgUuid}/roleDefinitions/{roleDefinitionUuid}/capabilities:
+    get:
+      tags:
+      - User Management - Roles Definitions
+      summary: Get Organization Role Definition Capabilities
+      description: Returns a list of permissions granted to the given role
+      operationId: getRoleDefinitionCapabilities
+      parameters:
+      - name: orgUuid
+        in: path
+        description: Org UUID (Administration > General)
+        required: true
+        schema:
+          type: string
+      - name: roleDefinitionUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3RoleDefinitionCapabilitiesDTOV3'
+  /api/v3.0/orgs/{orgUuid}/roleDefinitions/capabilities:
+    get:
+      tags:
+      - User Management - Roles Definitions
+      summary: Get Assignable Capabilities
+      description: This api returns a list of assignable capabilities.
+      operationId: getAssignableCapabilities
+      parameters:
+      - name: orgUuid
+        in: path
+        description: Org UUID (Administration > General)
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3ListRoleCapabilityDTOV3'
+  /api/v3.0/accounts/{accountUuid}/roleDefinitions/{roleDefinitionUuid}/capabilities:
+    get:
+      tags:
+      - User Management - Roles Definitions
+      summary: Get Account Role Definition Capabilities
+      description: Returns a list of capabilities granted to the given role
+      operationId: getRoleDefinitionCapabilities_1
+      parameters:
+      - name: accountUuid
+        in: path
+        description: Account UUID
+        required: true
+        schema:
+          type: string
+      - name: roleDefinitionUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3RoleDefinitionCapabilitiesDTOV3'
+  /api/v3.0/accounts/{accountUuid}/roleDefinitions/capabilities:
+    get:
+      tags:
+      - User Management - Roles Definitions
+      summary: Get All Assignable Capabilities
+      description: This api returns a list of assignable capabilities.
+      operationId: getAssignableCapabilities_1
+      parameters:
+      - name: accountUuid
+        in: path
+        description: Account UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3ListRoleCapabilityDTOV3'
+components:
+  schemas:
+    RoleDefinitionCapabilitiesDTOV3:
+      type: object
+      properties:
+        capabilities:
+          type: array
+          items:
+            type: string
+    DWRResponseV3ListRoleCapabilityDTOV3:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          type: array
+          items:
+            $ref: '#/components/schemas/RoleCapabilityDTOV3'
+    RoleDefinitionDTOV3:
+      type: object
+      properties:
+        uuid:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        type:
+          type: string
+        scopeType:
+          type: string
+          enum:
+          - organization
+          - application
+          - project
+          - account
+          - unsupported
+        createdBy:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        originalRole:
+          type: string
+        capabilities:
+          type: array
+          items:
+            type: string
+    RoleDefinitionRequestDTOV3:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        capabilities:
+          type: array
+          items:
+            type: string
+    RoleCapabilityDTOV3:
+      type: object
+      properties:
+        id:
+          type: string
+          enum:
+          - SCANS__UPDATE_PROJECTS
+          - SCANS__CREATE_ENTITIES
+          - WORKFLOWS__VIEW
+          - WORKFLOWS__WRITE
+          - WORKFLOWS__DELETE
+          - WORKFLOWS__UPDATE_SLA
+          - SUPPRESSIONS__REQUEST_CODE
+          - SUPPRESSIONS__MANAGE_CODE
+          - SUPPRESSIONS__MANAGE_CODE_LOW
+          - SUPPRESSIONS__MANAGE_CODE_MEDIUM
+          - SUPPRESSIONS__MANAGE_CODE_HIGH
+          - SUPPRESSIONS__SUPPRESS_CN
+          - SUPPRESSIONS__SUPPRESS_SCA
+          - SUPPRESSIONS__SUPPRESS_AI
+          - SUPPRESSIONS__SUPPRESS_ALL
+          - JIRA_TICKET__SECURITY_CREATE
+          - REVIEW_STATUS__UPDATE
+          - SEVERITY__UPDATE
+          - COMMENT__ADD
+          - RED_TEAMING__VIEW
+          - RED_TEAMING__RUN_CAMPAIGN
+          - RED_TEAMING__MANAGE_TARGETS
+          - RED_TEAMING__DELETE_TARGET
+          - RED_TEAMING__MANAGE_SETTINGS
+          - RED_TEAMING__SUPPRESS_FINDINGS
+        name:
+          type: string
+        category:
+          type: string
+        subcategory:
+          type: string
+        implies:
+          type: array
+          items:
+            type: string
+            enum:
+            - SCANS__UPDATE_PROJECTS
+            - SCANS__CREATE_ENTITIES
+            - WORKFLOWS__VIEW
+            - WORKFLOWS__WRITE
+            - WORKFLOWS__DELETE
+            - WORKFLOWS__UPDATE_SLA
+            - SUPPRESSIONS__REQUEST_CODE
+            - SUPPRESSIONS__MANAGE_CODE
+            - SUPPRESSIONS__MANAGE_CODE_LOW
+            - SUPPRESSIONS__MANAGE_CODE_MEDIUM
+            - SUPPRESSIONS__MANAGE_CODE_HIGH
+            - SUPPRESSIONS__SUPPRESS_CN
+            - SUPPRESSIONS__SUPPRESS_SCA
+            - SUPPRESSIONS__SUPPRESS_AI
+            - SUPPRESSIONS__SUPPRESS_ALL
+            - JIRA_TICKET__SECURITY_CREATE
+            - REVIEW_STATUS__UPDATE
+            - SEVERITY__UPDATE
+            - COMMENT__ADD
+            - RED_TEAMING__VIEW
+            - RED_TEAMING__RUN_CAMPAIGN
+            - RED_TEAMING__MANAGE_TARGETS
+            - RED_TEAMING__DELETE_TARGET
+            - RED_TEAMING__MANAGE_SETTINGS
+            - RED_TEAMING__SUPPRESS_FINDINGS
+    DWRResponseV3ListRoleDefinitionDTOV3:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          type: array
+          items:
+            $ref: '#/components/schemas/RoleDefinitionDTOV3'
+    DWRResponseV3RoleDefinitionDTOV3:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          $ref: '#/components/schemas/RoleDefinitionDTOV3'
+    DWRResponseV3MessageDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          $ref: '#/components/schemas/MessageDTO'
+    MessageDTO:
+      type: object
+      properties:
+        message:
+          title: message
+          type: string
+          example: Success!
+    DWRResponseV3RoleDefinitionCapabilitiesDTOV3:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          $ref: '#/components/schemas/RoleDefinitionCapabilitiesDTOV3'
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: JWT token Bearer
+      scheme: bearer
+      bearerFormat: JWT

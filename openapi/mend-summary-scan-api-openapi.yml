@@ -1,0 +1,190 @@
+openapi: 3.2.0
+info:
+  title: Mend Summary - Scan API
+  description: 'Mend''s enhanced SCA API enables automation of workflows in a REST compliant format. The API features:
+
+    + Access for any user with Mend credentials, via a user key available in the user''s profile page in the Mend App.
+
+    + Improved security with a JWT token per organization, which expires every 10 minutes.
+
+    + Added scalability with support for pagination, filtering and sorting search results.
+
+    + Broader functionality available programmatically.
+
+    + New standard API documentation for easy navigation and search.
+
+
+    **Note:** To help you get started with the Mend SCA API 2.0, we recommend reviewing our onboarding guide -> Getting Started with Mend SCA API 2.0.
+
+    This resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend SCA API 2.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.'
+  version: 3.0.1
+servers:
+- url: https://api-saas.mend.io
+  description: Generated server url
+security:
+- bearer-key: []
+tags:
+- name: Summary - Scan
+paths:
+  /api/v2.0/orgs/{orgIdentifier}/scans/summaries:
+    post:
+      tags:
+      - Summary - Scan
+      summary: Get Scan Statistics
+      description: Returns the requested statistics for the given scans
+      operationId: getScanSummaries_1
+      parameters:
+      - name: orgIdentifier
+        in: path
+        description: entity UUID or ApiToken (organization, product or project).
+        required: true
+        schema:
+          type: string
+      - name: categories
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      - name: checkUfDbStatus
+        in: query
+        description: When true, the returned scan status is reconciled against the scan's ingestion status in the Unified Findings DB. Omit it to get the scan status as stored.
+        required: false
+        schema:
+          type: boolean
+          default: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MultiContextRequestDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ScanSummaryDTO'
+components:
+  schemas:
+    ScanSummaryDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+        name:
+          type: string
+        processUuid:
+          type: string
+        scanTime:
+          type: string
+          format: date-time
+        scanStatus:
+          type: string
+        scanType:
+          type: string
+        scanDuration:
+          type: string
+        configurationName:
+          type: string
+        reference:
+          type: string
+        triggeredBy:
+          type: string
+        agentName:
+          type: string
+        agentVersion:
+          type: string
+        supportToken:
+          type: string
+        projectName:
+          type: string
+        projectUuid:
+          type: string
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScanTagDTO'
+        path:
+          type: string
+        productUuid:
+          type: string
+        workflowUuids:
+          type: array
+          items:
+            type: string
+        workflowNames:
+          type: array
+          items:
+            type: string
+        statistics:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: integer
+              format: int64
+    ScanTagDTO:
+      type: object
+      properties:
+        key:
+          title: Scan Tag Key
+          type: string
+          example: commit
+        value:
+          title: Scan Tag Value
+          type: string
+          example: 123abc
+        displayName:
+          title: Scan Tag Display Name
+          type: string
+          example: commit:123abc
+        createdAt:
+          title: Scan Tag Creation Date
+          type: string
+          format: date-time
+    MultiContextRequestDTO:
+      type: object
+      properties:
+        projectIdentifiers:
+          type: array
+          items:
+            title: Project Identifiers
+            type: string
+            example: 123e4567-e89b-12d3-a456-426655440000
+        productIdentifiers:
+          type: array
+          items:
+            title: Product Identifier
+            type: string
+            example: 123e4567-e89b-12d3-a456-426655440000
+      description: If projectIdentifiers and productIdentifiers are empty, action will apply to the whole organization
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: JWT token Bearer
+      scheme: bearer
+      bearerFormat: JWT

@@ -1,0 +1,490 @@
+openapi: 3.2.0
+info:
+  title: Mend Internal Projects API
+  description: 'Mend''s enhanced SCA API enables automation of workflows in a REST compliant format. The API features:
+
+    + Access for any user with Mend credentials, via a user key available in the user''s profile page in the Mend App.
+
+    + Improved security with a JWT token per organization, which expires every 10 minutes.
+
+    + Added scalability with support for pagination, filtering and sorting search results.
+
+    + Broader functionality available programmatically.
+
+    + New standard API documentation for easy navigation and search.
+
+
+    **Note:** To help you get started with the Mend SCA API 2.0, we recommend reviewing our onboarding guide -> Getting Started with Mend SCA API 2.0.
+
+    This resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend SCA API 2.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.'
+  version: 3.0.1
+servers:
+- url: https://api-saas.mend.io
+  description: Generated server url
+security:
+- bearer-key: []
+tags:
+- name: Internal Projects
+paths:
+  /api/v2.0/internal/projects/{projectIdentifier}/scans/{scanIdentifier}:
+    put:
+      tags:
+      - Internal Projects
+      summary: Update Project Scan
+      operationId: updateScan_2
+      parameters:
+      - name: projectIdentifier
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      - name: scanIdentifier
+        in: path
+        description: Scan Identifier
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScanDTO'
+  /api/v2.0/internal/projects/{projectIdentifier}/updateSastStatistics:
+    post:
+      tags:
+      - Internal Projects
+      summary: Update Project SAST Statistics
+      operationId: updateProjectSastStatistics
+      parameters:
+      - name: projectIdentifier
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateProjectSastStatisticsRequestDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageDTO'
+  /api/v2.0/internal/projects/{projectIdentifier}/updateSastScan:
+    post:
+      tags:
+      - Internal Projects
+      summary: Update Project SAST Scan
+      operationId: updateProjectSastScan
+      parameters:
+      - name: projectIdentifier
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageDTO'
+  /api/v2.0/internal/projects/{projectIdentifier}/updateContextCategories:
+    post:
+      tags:
+      - Internal Projects
+      summary: Update Project Context Risk Classification Categories
+      operationId: updateProjectContextCategories
+      parameters:
+      - name: projectIdentifier
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateProjectContextRiskDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageDTO'
+  /api/v2.0/internal/projects/{projectIdentifier}/updateApprovalRequests:
+    post:
+      tags:
+      - Internal Projects
+      summary: Update suppression request
+      description: Updates the project suppression request
+      operationId: updateApprovalRequests
+      parameters:
+      - name: projectIdentifier
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateMultipleProjectApprovalRequestBranchTypeDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseMessageDTO'
+  /api/v2.0/internal/projects/{projectIdentifier}/classificationEvidence:
+    post:
+      tags:
+      - Internal Projects
+      summary: Save Project Classification Evidence
+      description: Stores the classification evidence for the project, fully replacing any previously stored evidence
+      operationId: classificationEvidence
+      parameters:
+      - name: projectIdentifier
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/ClassificationCategoryDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageDTO'
+components:
+  schemas:
+    UpdateMultipleProjectApprovalRequestBranchTypeDTO:
+      type: object
+      properties:
+        elementUuids:
+          type: array
+          items:
+            type: string
+        branchType:
+          type: string
+        scanUuid:
+          type: string
+        state:
+          type: string
+    UpdateProjectSastStatisticsRequestDTO:
+      type: object
+      properties:
+        critical:
+          type: integer
+          format: int32
+        high:
+          type: integer
+          format: int32
+        medium:
+          type: integer
+          format: int32
+        low:
+          type: integer
+          format: int32
+        vulnerabilityTypes:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int64
+        riskFactorsHigh:
+          type: integer
+          format: int32
+        riskFactorsEndpoints:
+          type: integer
+          format: int32
+        riskFactorsExploitable:
+          type: integer
+          format: int32
+        riskFactorsQuantumUnsafe:
+          type: integer
+          format: int32
+        riskFactorsCryptoMisuse:
+          type: integer
+          format: int32
+        riskFactorsBrokenCryptography:
+          type: integer
+          format: int32
+        riskFactorsUnknownCryptography:
+          type: integer
+          format: int32
+    ScanDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+          enum:
+          - SCA
+          - SAST
+          - UNIFIED
+          - IAC
+          - IMG
+          - DAST
+          - AI
+          - REDTEAM
+          - CN
+        status:
+          type: string
+          enum:
+          - PLACE_HOLDER_01
+          - PLACE_HOLDER_02
+          - PLACE_HOLDER_03
+          - RUNNING
+          - PLACE_HOLDER_04
+          - PLACE_HOLDER_05
+          - PLACE_HOLDER_06
+          - PARTIAL
+          - PROCESSING
+          - PLACE_HOLDER_07
+          - PLACE_HOLDER_08
+          - PLACE_HOLDER_09
+          - FINISHED
+          - PLACE_HOLDER_10
+          - PLACE_HOLDER_11
+          - PLACE_HOLDER_12
+          - FAILED
+        aeStatus:
+          type: string
+          enum:
+          - FAILED
+          - PROCESSED
+          - PARTIAL
+          - IGNORED
+        ufDbStatus:
+          type: string
+          enum:
+          - FAILED
+          - STORED
+        projectId:
+          type: integer
+          format: int32
+        productId:
+          type: integer
+          format: int32
+        domainId:
+          type: integer
+          format: int32
+        projectUuid:
+          type: string
+        processUuid:
+          type: string
+        hasViolations:
+          type: boolean
+        startTime:
+          type: string
+          format: date-time
+        endTime:
+          type: string
+          format: date-time
+        lastModified:
+          type: string
+          format: date-time
+        configurationName:
+          type: string
+        enforceFailedBuild:
+          type: boolean
+        reference:
+          type: string
+        triggeredBy:
+          type: string
+        agentInfo:
+          $ref: '#/components/schemas/ScanAgentInfo'
+        workflowUuids:
+          type: array
+          items:
+            type: string
+        workflowNames:
+          type: array
+          items:
+            type: string
+        supportToken:
+          type: string
+        progress:
+          $ref: '#/components/schemas/ProgressDTO'
+    ProgressDTO:
+      required:
+      - currentStage
+      - overallPercentage
+      type: object
+      properties:
+        overallPercentage:
+          maximum: 100
+          minimum: 0
+          type: integer
+          format: int32
+        currentStage:
+          maxLength: 255
+          minLength: 0
+          type: string
+    ClassificationCategoryDTO:
+      type: object
+      properties:
+        category:
+          type: string
+        confidence:
+          type: number
+          format: double
+        group:
+          type: string
+        evidence:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClassificationEvidenceDTO'
+    DWRResponseMessageDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/MessageDTO'
+    UpdateProjectContextRiskDTO:
+      type: object
+      properties:
+        categories:
+          type: array
+          items:
+            type: string
+    MessageDTO:
+      type: object
+      properties:
+        message:
+          title: message
+          type: string
+          example: Success!
+    ClassificationEvidenceDTO:
+      type: object
+      properties:
+        filename:
+          type: string
+        evidenceItems:
+          type: array
+          items:
+            type: string
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+    ScanAgentInfo:
+      type: object
+      properties:
+        agentName:
+          type: string
+        agentVersion:
+          type: string
+        errorMessage:
+          type: string
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: JWT token Bearer
+      scheme: bearer
+      bearerFormat: JWT

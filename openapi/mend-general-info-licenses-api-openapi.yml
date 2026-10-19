@@ -1,8 +1,23 @@
 openapi: 3.2.0
 info:
   title: Mend General Info - Licenses API
-  description: Mend's enhanced SCA API enables automation of workflows in a REST compliant format.
-  version: '2.0'
+  description: 'Mend''s enhanced SCA API enables automation of workflows in a REST compliant format. The API features:
+
+    + Access for any user with Mend credentials, via a user key available in the user''s profile page in the Mend App.
+
+    + Improved security with a JWT token per organization, which expires every 10 minutes.
+
+    + Added scalability with support for pagination, filtering and sorting search results.
+
+    + Broader functionality available programmatically.
+
+    + New standard API documentation for easy navigation and search.
+
+
+    **Note:** To help you get started with the Mend SCA API 2.0, we recommend reviewing our onboarding guide -> Getting Started with Mend SCA API 2.0.
+
+    This resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend SCA API 2.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.'
+  version: 3.0.1
 servers:
 - url: https://api-saas.mend.io
   description: Generated server url
@@ -26,24 +41,57 @@ paths:
         schema:
           type: string
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponseLicenseDTO'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseLicenseDTO'
+  /api/v2.0/licenses/byUuid/{licenseUuid}:
+    get:
+      tags:
+      - General Info - Licenses
+      summary: Get License Details
+      description: Returns detailed information about a specific license
+      operationId: getLicenseDetailsUuid
+      parameters:
+      - name: licenseUuid
+        in: path
+        description: license UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseLicenseDTO'
   /api/v2.0/licenses:
     get:
       tags:
@@ -69,34 +117,29 @@ paths:
         in: query
         description: "Filter your search to return items whose property has a specific value.\nUse the syntax: **property:operation:value** where a colon (:) separates between property, operation and value.\n+ Property: the name of the property of the item\n+ Operation:\n    + **equals** - true if the value is identical to this value.\n    + **like** - true if the property's value is contained within this value\n    + **in** - true if the value is identical to one of the items in this comma-separated list. E.g. in:value1,value2,value3\n+ Value: the value of the property.\n\nTo combine multiple filters, separate each filter with a semicolon with no space. E.g.  property1:operation1:value1;property2:operation2:value2\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ name:[equals | like | in]:value\n+ spdxName:[equals | like | in]:value\n+ uuid:[equals | in]:value"
         allowEmptyValue: true
+        schema:
+          type: string
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponsePageableCollectionLicenseDTO'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableCollectionLicenseDTO'
 components:
   schemas:
-    DWRResponseBase:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
     DWRResponseLicenseDTO:
       type: object
       properties:
@@ -106,46 +149,6 @@ components:
           example: 1171c60d
         retVal:
           $ref: '#/components/schemas/LicenseDTO'
-    DescriptionAndExplanationDTO:
-      type: object
-      properties:
-        explanation:
-          title: Explanation Link
-          type: string
-          example: http://en.wikipedia.org/wiki/Academic_Free_License
-        indicatingText:
-          title: Indicating Text
-          type: string
-          example: 1) Grant of Copyright License...
-        description:
-          title: Description
-          type: string
-          example: Not a CopyLeft license.
-        displayText:
-          title: Display Text
-          type: string
-          example: 'No'
-    DWRResponsePageableCollectionLicenseDTO:
-      type: object
-      properties:
-        additionalData:
-          title: Provides insights into endpoint-supported pagination information.
-          type: object
-          description: '+ **totalItems**: The total count of data points returned in an API response.
-
-            + **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining.'
-          example:
-            totalItems: '422'
-            isLastPage: 'true'
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          type: array
-          items:
-            $ref: '#/components/schemas/LicenseDTO'
-      description: Provides insights into endpoint-supported pagination information
     LicenseDTO:
       required:
       - name
@@ -175,6 +178,43 @@ components:
           type: boolean
         profile:
           $ref: '#/components/schemas/LicenseProfileDTO'
+    RiskScoreExplanationDTO:
+      type: object
+      properties:
+        explanation:
+          title: Explanation Link
+          type: string
+          example: http://en.wikipedia.org/wiki/Academic_Free_License
+        indicatingText:
+          title: Indicating Text
+          type: string
+          example: 1) Grant of Copyright License...
+        riskScore:
+          title: Risk Score
+          type: integer
+          format: int32
+          example: 39
+    DWRResponsePageableCollectionLicenseDTO:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            + **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining.'
+          example:
+            totalItems: '422'
+            isLastPage: 'true'
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          type: array
+          items:
+            $ref: '#/components/schemas/LicenseDTO'
+      description: Provides insights into endpoint-supported pagination information
     LicenseProfileDTO:
       type: object
       properties:
@@ -207,7 +247,14 @@ components:
             title: Required Notices
             type: string
             example: Must identify specific modifications
-    RiskScoreExplanationDTO:
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+    DescriptionAndExplanationDTO:
       type: object
       properties:
         explanation:
@@ -218,11 +265,14 @@ components:
           title: Indicating Text
           type: string
           example: 1) Grant of Copyright License...
-        riskScore:
-          title: Risk Score
-          type: integer
-          format: int32
-          example: 39
+        description:
+          title: Description
+          type: string
+          example: Not a CopyLeft license.
+        displayText:
+          title: Display Text
+          type: string
+          example: 'No'
   securitySchemes:
     bearer-key:
       type: http

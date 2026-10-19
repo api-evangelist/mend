@@ -1,0 +1,221 @@
+openapi: 3.2.0
+info:
+  title: Mend CVSS Settings API
+  description: 'Mend''s enhanced SCA API enables automation of workflows in a REST compliant format. The API features:
+
+    + Access for any user with Mend credentials, via a user key available in the user''s profile page in the Mend App.
+
+    + Improved security with a JWT token per organization, which expires every 10 minutes.
+
+    + Added scalability with support for pagination, filtering and sorting search results.
+
+    + Broader functionality available programmatically.
+
+    + New standard API documentation for easy navigation and search.
+
+
+    **Note:** To help you get started with the Mend SCA API 2.0, we recommend reviewing our onboarding guide -> Getting Started with Mend SCA API 2.0.
+
+    This resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend SCA API 2.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.'
+  version: 3.0.1
+servers:
+- url: https://api-saas.mend.io
+  description: Generated server url
+security:
+- bearer-key: []
+tags:
+- name: CVSS Settings
+paths:
+  /api/v2.0/orgs/{orgToken}/settings/cvss/rule:
+    post:
+      tags:
+      - CVSS Settings
+      summary: Set Organization CVSS Settings
+      description: updates / add the CVSS settings Rule for a given organization.
+      operationId: setCvssSettingByDomain
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CvssSettingRulesDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseMessageDTO'
+  /api/v2.0/orgs/{orgToken}/settings/cvss:
+    get:
+      tags:
+      - CVSS Settings
+      summary: Get Organization CVSS Settings
+      description: Returns the CVSS settings Rule for a given organization.
+      operationId: getCvssSettingByDomain
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseCvssSettingRulesDTO'
+components:
+  schemas:
+    CvssSettingRulesDTO:
+      required:
+      - settingValue
+      type: object
+      properties:
+        settingType:
+          type: string
+          enum:
+          - NOTIFY_ON_NEW_TASK
+          - NOTIFY_ON_REQUESTS_CLOSED_BY_POLICY
+          - NOTIFY_ON_PROJECT_SETUP_COMPLETION
+          - WHITESOURCE_FOR_DEVELOPERS
+          - PERSIST_UNIDENTIFIED_SOURCE_FILES
+          - CACHE_GITTA_RESULTS
+          - OPERATION_NOTIFICATIONS
+          - EMAIL_NOTIFICATIONS
+          - SECURITY_ALERTING_MODE
+          - EARLY_WARNING
+          - ADDITIONAL_LICENSES
+          - ADD_PRODUCT_TO_ADMINS_GROUP
+          - OVERRIDE_ORIGINAL_LIBRARY_MATCH
+          - JFROG
+          - OEM_INTEGRATION
+          - CHECK_LAST_PROJECT_TO_UPDATE_MULTIPLE_LIBRARY_VERSION_ALERTS
+          - ALERT
+          - ENTITLEMENTS
+          - TIER
+          - BUSINESS_IMPACT
+          - BUSINESS_IMPACT_WEIGHTS
+          - SAML_USER_WITHOUT_ROLE_POLICY
+          - SAML_IDP_DOMAINS_SETTINGS
+          - SAML_ATTRIBUTES_SETTINGS
+          - SAML_ROLE_GROUP_MAPPING_SETTINGS
+          - SAML_APPROVE_IDP
+          - SAML_METADATA_LINK
+          - SAML_SKIP_IF_EMPTY_ATTRIBUTES
+          - SAML_ENFORCE_SSO_LOGIN
+          - SAML_JUST_IN_TIME_PROVISIONING
+          - PROCESSING_AGENT_UPDATE_REQUEST
+          - MULTIPLE_POLICY_ISSUE
+          - SCM_AGENT_CONCURRENT_SCAN_REQUEST_LIMIT
+          - ASYNC_REPORT_EXPORT_PAGE_SIZE
+          - SAML_ORGANIZATION_LOGIN_EXPIRATION_PERIOD_DAYS
+          - USER_KEY_ROTATION_SETTINGS
+          - CLI_VERSION
+          - CVSS_SETTINGS
+          - USER_LEVEL_ACCESS_ONLY_FOR_API
+          - SBOM_EXPORTER_ROLE
+          - SAST_NEW_GENERATION_ENGINES
+          - SAST_TYPE_BASED_INCREMENTAL_ENGINES
+          - SAST_AI_REMEDIATION
+          - AI_USAGE_CODE_REMEDIATION
+          - FIX_STRATEGY
+          - AUTO_PLATFORM_SWITCH
+          - PERSIST_CLONE
+          - AI_USAGE_CODE_SCAN_CUSTOMIZATION
+          - AI_USAGE_PROJECT_CLASSIFICATION
+          - AGENTIC_DETECTION_ENGINE
+          - AI_USAGE_CODE_FINDINGS_TRIAGE
+          - PLATFORM_AI_ASSISTANT
+          - SUPPORT_ADDITIONAL_VUL_TYPES
+          - SUPPORT_AI_VUL_TYPES
+          - AI_CONSENT
+          - SYSTEM_PROMPT_SCANNING_ENABLED_DEFAULT
+          - IP_WHITELIST
+          - IP_WHITELIST_PLATFORM
+          - PROJECT_ACTIVITY_FILTER
+          - RISK_REDUCTION_TIMEFRAME_FILTER_MAX_VALUE
+          - UPDATE_PROJECT_TAGS_ON_SCA_SCAN
+          - STORE_SCAN_COMMENT_AS_TAG
+          - COMPONENT_LICENSES_ENABLED
+          - SOURCE_FILE_MATCHING_MODE
+          - INTERNAL_STATISTICS
+          - INCLUDE_PROPRIETARY_LIBRARIES_IN_WORKFLOWS
+        settingValue:
+          title: Setting Value
+          type: string
+          example: CVSS_3
+          enum:
+          - CVSS_3
+          - CVSS_4
+    DWRResponseMessageDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/MessageDTO'
+    MessageDTO:
+      type: object
+      properties:
+        message:
+          title: message
+          type: string
+          example: Success!
+    DWRResponseCvssSettingRulesDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/CvssSettingRulesDTO'
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: JWT token Bearer
+      scheme: bearer
+      bearerFormat: JWT

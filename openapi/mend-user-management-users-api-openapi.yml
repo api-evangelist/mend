@@ -1,8 +1,23 @@
 openapi: 3.2.0
 info:
   title: Mend User Management - Users API
-  description: Mend's enhanced SCA API enables automation of workflows in a REST compliant format.
-  version: '2.0'
+  description: 'Mend''s enhanced SCA API enables automation of workflows in a REST compliant format. The API features:
+
+    + Access for any user with Mend credentials, via a user key available in the user''s profile page in the Mend App.
+
+    + Improved security with a JWT token per organization, which expires every 10 minutes.
+
+    + Added scalability with support for pagination, filtering and sorting search results.
+
+    + Broader functionality available programmatically.
+
+    + New standard API documentation for easy navigation and search.
+
+
+    **Note:** To help you get started with the Mend SCA API 2.0, we recommend reviewing our onboarding guide -> Getting Started with Mend SCA API 2.0.
+
+    This resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend SCA API 2.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.'
+  version: 3.0.1
 servers:
 - url: https://api-saas.mend.io
   description: Generated server url
@@ -32,24 +47,24 @@ paths:
         schema:
           type: string
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponseUserKeyDTO'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseUserKeyDTO'
   /api/v2.0/orgs/{orgToken}/users/service:
     post:
       tags:
@@ -71,24 +86,24 @@ paths:
               $ref: '#/components/schemas/UserEmailRequestDTO'
         required: true
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponseServiceUserDTO'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseServiceUserDTO'
   /api/v2.0/orgs/{orgToken}/users/scan-summary-receiver-user:
     post:
       tags:
@@ -110,31 +125,31 @@ paths:
               $ref: '#/components/schemas/UserEmailRequestDTO'
         required: true
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponseScanSummaryReceiverUserDTO'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseScanSummaryReceiverUserDTO'
   /api/v2.0/orgs/{orgToken}/users/invite:
     post:
       tags:
       - User Management - Users
       summary: Invite User
       description: Sends an email invitation to others to join an organization
-      operationId: inviteUser
+      operationId: inviteUser_1
       parameters:
       - name: orgToken
         in: path
@@ -149,24 +164,24 @@ paths:
               $ref: '#/components/schemas/InviteUserRequestDTO'
         required: true
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponseUserInfoResponseDTO'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseUserInfoResponseDTO'
   /api/v2.0/orgs/{orgToken}/users/info:
     post:
       tags:
@@ -188,31 +203,31 @@ paths:
               $ref: '#/components/schemas/UserEmailsRequestDTO'
         required: true
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponseListEnrichedUserInfoDTO'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseListEnrichedUserInfoDTO'
   /api/v2.0/orgs/{orgToken}/users:
     get:
       tags:
       - User Management - Users
       summary: Get Organization Users
       description: Returns a list of all users in an organization (paginated)
-      operationId: getUsersPaginated
+      operationId: getUsersPaginated_1
       parameters:
       - name: pageSize
         in: query
@@ -231,8 +246,10 @@ paths:
           default: '0'
       - name: search
         in: query
-        description: "Filter your search to return items whose property has a specific value.\nUse the syntax: **property:operation:value** where a colon (:) separates between property, operation and value.\n+ Property: the name of the property of the item\n+ Operation:\n    + **equals** - true if the value is identical to this value.\n    + **like** - true if the property's value is contained within this value\n    + **regex** - true if this regular expression resolves as true.\n        The regex is not case sensitive, and special characters must be escaped with a backslash.\n        Special characters include space, double quote (\"), '<', '>', '#', '%', '{', '}', vertical bar ('|'), backslash, '^'.\n        To pass an escaped character in a URL in Postman, encode it first.\n        E.g. to return all items whose value begins with **a** or **A**, use regex:^a\n+ Value: the value of the property.\n\nTo combine multiple filters, separate each filter with a semicolon with no space. E.g.  property1:operation1:value1;property2:operation2:value2\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ accountStatus:[equals|in]:value\n+ email:[like | equals | regex]:value\n+ name:[like | equals | regex]:value\n+ userType:[like | equals]:value\n+ roles:[equals|in]:value"
+        description: "Filter your search to return items whose property has a specific value.\nUse the syntax: **property:operation:value** where a colon (:) separates between property, operation and value.\n+ Property: the name of the property of the item\n+ Operation:\n    + **equals** - true if the value is identical to this value.\n    + **in** - true if the value is identical to one of the items in this comma-separated list. E.g. in:value1,value2,value3\n    + **like** - true if the property's value is contained within this value\n    + **regex** - true if this regular expression resolves as true.\n        The regex is not case sensitive, and special characters must be escaped with a backslash.\n        Special characters include space, double quote (\"), '<', '>', '#', '%', '{', '}', vertical bar ('|'), backslash, '^'.\n        To pass an escaped character in a URL in Postman, encode it first.\n        E.g. to return all items whose value begins with **a** or **A**, use regex:^a\n+ Value: the value of the property.\n\nTo combine multiple filters, separate each filter with a semicolon with no space. E.g.  property1:operation1:value1;property2:operation2:value2\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ accountStatus:[equals|in]:value\n+ email:[like | equals | regex]:value\n+ name:[like | equals | regex]:value\n+ userType:[like | equals | in]:value\n+ roles:[equals|in]:value"
         allowEmptyValue: true
+        schema:
+          type: string
       - name: sort
         in: query
         description: 'Sort search results alphabetically on an item''s property by entering **sort=** followed by the property name.
@@ -248,6 +265,8 @@ paths:
 
           + userType'
         allowEmptyValue: true
+        schema:
+          type: string
       - name: orgToken
         in: path
         description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
@@ -255,24 +274,24 @@ paths:
         schema:
           type: string
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponsePageableListUserInfoDTO'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableListUserInfoDTO'
     post:
       tags:
       - User Management - Users
@@ -293,24 +312,24 @@ paths:
               $ref: '#/components/schemas/CreateUserRequestDTO'
         required: true
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponseUserInfoDTO'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseUserInfoDTO'
   /api/v2.0/orgs/{orgToken}/users/service/{userUuid}/userKey:
     get:
       tags:
@@ -332,24 +351,24 @@ paths:
         schema:
           type: string
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponseUserKeyDTO'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseUserKeyDTO'
   /api/v2.0/orgs/{orgToken}/users/self:
     get:
       tags:
@@ -365,31 +384,31 @@ paths:
         schema:
           type: string
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponseEnrichedUserInfoDTO'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseEnrichedUserInfoDTO'
   /api/v2.0/orgs/{orgToken}/users/{userUuid}:
     delete:
       tags:
       - User Management - Users
       summary: Remove User From Organization
       description: Deletes a user from an organization
-      operationId: removeUser
+      operationId: removeUser_1
       parameters:
       - name: orgToken
         in: path
@@ -404,47 +423,57 @@ paths:
         schema:
           type: string
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponseMessageDTO'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseMessageDTO'
 components:
   schemas:
-    DWRResponsePageableListUserInfoDTO:
+    DWRResponseUserInfoDTO:
       type: object
       properties:
-        additionalData:
-          title: Provides insights into endpoint-supported pagination information.
-          type: object
-          description: '+ **totalItems**: The total count of data points returned in an API response.
-
-            + **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining.'
-          example:
-            totalItems: '422'
-            isLastPage: 'true'
         supportToken:
           title: Support Token
           type: string
           example: 1171c60d
         retVal:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserInfoDTO'
-      description: Provides insights into endpoint-supported pagination information
+          $ref: '#/components/schemas/UserInfoDTO'
+    DWRResponseServiceUserDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/ServiceUserDTO'
+    CreateUserRequestDTO:
+      required:
+      - email
+      type: object
+      properties:
+        name:
+          title: User Name
+          type: string
+          example: jon
+        email:
+          title: User Email
+          type: string
+          example: jon.smith@mail.com
     MessageDTO:
       type: object
       properties:
@@ -452,6 +481,134 @@ components:
           title: message
           type: string
           example: Success!
+    DWRResponseEnrichedUserInfoDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/EnrichedUserInfoDTO'
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+    UserEmailRequestDTO:
+      required:
+      - email
+      type: object
+      properties:
+        email:
+          title: User Email
+          type: string
+          example: jon.smith@mail.com
+    ScanSummaryReceiverUserDTO:
+      type: object
+      properties:
+        userInfoDTO:
+          $ref: '#/components/schemas/UserInfoDTO'
+    UserInfoResponseDTO:
+      required:
+      - uuid
+      type: object
+      properties:
+        uuid:
+          title: User UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: User Name
+          type: string
+          example: Jon Smith
+        email:
+          title: User Email
+          type: string
+          example: jon.smith@mail.com
+        userType:
+          title: Type Of User
+          type: string
+          example: REGULAR
+          enum:
+          - REGULAR
+          - SERVICE
+          - SCAN_SUMMARY_RECEIVER
+        existsInOrg:
+          type: boolean
+    UserKeyDTO:
+      type: object
+      properties:
+        uuid:
+          title: User Key UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        userUuid:
+          title: User UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        userKey:
+          title: User Key
+          type: string
+          example: 8d541c7d782e4b7891ebf61e864f76cb9af75f17d4394b109f1155e88f3e86bd
+        createdAt:
+          title: Time Of Creation
+          type: string
+          format: date-time
+        lastUsedAt:
+          title: Last Token Usage
+          type: string
+          format: date-time
+        description:
+          title: Token Description
+          type: string
+          example: Token A
+        expirationDate:
+          title: Token Expiration Date
+          type: string
+          format: date-time
+    DWRResponseUserInfoResponseDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/UserInfoResponseDTO'
+    UserEmailsRequestDTO:
+      required:
+      - userEmails
+      type: object
+      properties:
+        userEmails:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+            example: jon.smith@mail.com
+    DWRResponseListEnrichedUserInfoDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnrichedUserInfoDTO'
+    InviteUserRequestDTO:
+      required:
+      - email
+      type: object
+      properties:
+        email:
+          title: New User Email
+          type: string
+          example: jon.smith@mail.com
     GroupRoleDTO:
       title: List of Group Roles
       type: object
@@ -496,7 +653,7 @@ components:
           $ref: '#/components/schemas/UserKeyDTO'
         userInfoDTO:
           $ref: '#/components/schemas/UserInfoDTO'
-    DWRResponseScanSummaryReceiverUserDTO:
+    DWRResponseUserKeyDTO:
       type: object
       properties:
         supportToken:
@@ -504,80 +661,7 @@ components:
           type: string
           example: 1171c60d
         retVal:
-          $ref: '#/components/schemas/ScanSummaryReceiverUserDTO'
-    CreateUserRequestDTO:
-      required:
-      - email
-      type: object
-      properties:
-        name:
-          title: User Name
-          type: string
-          example: jon
-        email:
-          title: User Email
-          type: string
-          example: jon.smith@mail.com
-    UserEmailRequestDTO:
-      required:
-      - email
-      type: object
-      properties:
-        email:
-          title: User Email
-          type: string
-          example: jon.smith@mail.com
-    DWRResponseUserInfoResponseDTO:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/UserInfoResponseDTO'
-    UserEmailsRequestDTO:
-      required:
-      - userEmails
-      type: object
-      properties:
-        userEmails:
-          uniqueItems: true
-          type: array
-          items:
-            type: string
-            example: jon.smith@mail.com
-    UserKeyDTO:
-      type: object
-      properties:
-        uuid:
-          title: User Key UUID
-          type: string
-          example: 123e4567-e89b-12d3-a456-426655440000
-        userUuid:
-          title: User UUID
-          type: string
-          example: 123e4567-e89b-12d3-a456-426655440000
-        userKey:
-          title: User Key
-          type: string
-          example: 8d541c7d782e4b7891ebf61e864f76cb9af75f17d4394b109f1155e88f3e86bd
-        createdAt:
-          title: Time Of Creation
-          type: string
-          format: date-time
-        lastUsedAt:
-          title: Last Token Usage
-          type: string
-          format: date-time
-        description:
-          title: Token Description
-          type: string
-          example: Token A
-        expirationDate:
-          title: Token Expiration Date
-          type: string
-          format: date-time
+          $ref: '#/components/schemas/UserKeyDTO'
     EnrichedUserInfoDTO:
       required:
       - uuid
@@ -623,101 +707,6 @@ components:
           items:
             title: Associated Groups
             type: string
-    DWRResponseEnrichedUserInfoDTO:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/EnrichedUserInfoDTO'
-    InviteUserRequestDTO:
-      required:
-      - email
-      type: object
-      properties:
-        email:
-          title: New User Email
-          type: string
-          example: jon.smith@mail.com
-    DWRResponseListEnrichedUserInfoDTO:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          type: array
-          items:
-            $ref: '#/components/schemas/EnrichedUserInfoDTO'
-    DWRResponseBase:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-    DWRResponseServiceUserDTO:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/ServiceUserDTO'
-    DWRResponseUserKeyDTO:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/UserKeyDTO'
-    UserInfoResponseDTO:
-      required:
-      - uuid
-      type: object
-      properties:
-        uuid:
-          title: User UUID
-          type: string
-          example: 123e4567-e89b-12d3-a456-426655440000
-        name:
-          title: User Name
-          type: string
-          example: Jon Smith
-        email:
-          title: User Email
-          type: string
-          example: jon.smith@mail.com
-        userType:
-          title: Type Of User
-          type: string
-          example: REGULAR
-          enum:
-          - REGULAR
-          - SERVICE
-          - SCAN_SUMMARY_RECEIVER
-        existsInOrg:
-          type: boolean
-    ScanSummaryReceiverUserDTO:
-      type: object
-      properties:
-        userInfoDTO:
-          $ref: '#/components/schemas/UserInfoDTO'
-    DWRResponseUserInfoDTO:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/UserInfoDTO'
     UserInfoDTO:
       required:
       - uuid
@@ -749,6 +738,15 @@ components:
           - ACTIVE
           - INACTIVE
           - LOCKOUT
+    DWRResponseScanSummaryReceiverUserDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/ScanSummaryReceiverUserDTO'
     DWRResponseMessageDTO:
       type: object
       properties:
@@ -758,6 +756,27 @@ components:
           example: 1171c60d
         retVal:
           $ref: '#/components/schemas/MessageDTO'
+    DWRResponsePageableListUserInfoDTO:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            + **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining.'
+          example:
+            totalItems: '422'
+            isLastPage: 'true'
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserInfoDTO'
+      description: Provides insights into endpoint-supported pagination information
   securitySchemes:
     bearer-key:
       type: http

@@ -1,0 +1,145 @@
+openapi: 3.2.0
+info:
+  title: Mend Asynchronous Process Control API
+  description: Mend's enhanced SCA API enables automation of workflows in a REST compliant format.
+  version: '2.0'
+servers:
+- url: https://api-saas.mend.io
+  description: Generated server url
+security:
+- bearer-key: []
+tags:
+- name: Asynchronous Process Control
+paths:
+  /api/v2.0/orgs/{orgToken}/asyncProcessStatus/{statusUuid}:
+    get:
+      tags:
+      - Asynchronous Process Control
+      summary: Get Async Process Status
+      description: 'Returns the status of an asynchronous process. Asynchronous processes allow requests to be performed in
+
+        the background, enabling you to initiate tasks and check their completion status later.
+
+
+        **Requests Performed in Async Process:**
+
+        + Post Apply OrganizationPolicies On Inventory.
+
+        + Post Apply Product Policies On Inventory.
+
+        + Post Apply Project Policies On Inventory.'
+      operationId: getReportStatus
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      - name: statusUuid
+        in: path
+        description: Asynchronous Process Status UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseAsyncProcessStatusV2DTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+components:
+  schemas:
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+    DWRResponseAsyncProcessStatusV2DTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/AsyncProcessStatusV2DTO'
+    AsyncProcessStatusV2DTO:
+      type: object
+      properties:
+        contextUuid:
+          title: contextUuid
+          type: string
+          example: caf69794-9882-4b55-82db-6b6da4fe2a26
+        uuid:
+          title: uuid
+          type: string
+          example: caf69794-9882-4b55-82db-6b6da4fe2a92
+        status:
+          title: status
+          type: string
+          example: PENDING
+          enum:
+          - PENDING
+          - IN_PROGRESS
+          - FAILED
+          - FAILURE
+          - SUCCESS
+        contextType:
+          title: contextType
+          type: string
+          example: DOMAIN
+          enum:
+          - SYSTEM
+          - GLOBAL_ACCOUNT
+          - DOMAIN
+          - PRODUCT
+          - PROJECT
+          - SCAN
+          - UNSUPPORTED_TYPE
+        created:
+          type: string
+          format: date-time
+        modified:
+          type: string
+          format: date-time
+        processType:
+          title: processType
+          type: string
+          example: APPLY_POLICIES
+        messageContentSha1:
+          title: messageContentSha1
+          type: string
+          example: fb4016165697cc32d0b90ccc82e3c2c846eb01b7
+        userMail:
+          type: string
+          writeOnly: true
+        requestToken:
+          title: requestToken
+          type: string
+          example: 2cd6a43b
+        userEmail:
+          title: userMail
+          type: string
+          example: sample@mail.com
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: JWT token Bearer
+      scheme: bearer
+      bearerFormat: JWT

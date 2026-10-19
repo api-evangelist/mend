@@ -1,8 +1,23 @@
 openapi: 3.2.0
 info:
   title: Mend Entities - Organization API
-  description: Mend's enhanced SCA API enables automation of workflows in a REST compliant format.
-  version: '2.0'
+  description: 'Mend''s enhanced SCA API enables automation of workflows in a REST compliant format. The API features:
+
+    + Access for any user with Mend credentials, via a user key available in the user''s profile page in the Mend App.
+
+    + Improved security with a JWT token per organization, which expires every 10 minutes.
+
+    + Added scalability with support for pagination, filtering and sorting search results.
+
+    + Broader functionality available programmatically.
+
+    + New standard API documentation for easy navigation and search.
+
+
+    **Note:** To help you get started with the Mend SCA API 2.0, we recommend reviewing our onboarding guide -> Getting Started with Mend SCA API 2.0.
+
+    This resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend SCA API 2.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.'
+  version: 3.0.1
 servers:
 - url: https://api-saas.mend.io
   description: Generated server url
@@ -26,24 +41,24 @@ paths:
         schema:
           type: string
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponseContextEntityDTO'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseContextEntityDTO'
     put:
       tags:
       - Entities - Organization
@@ -64,24 +79,56 @@ paths:
               $ref: '#/components/schemas/ContextEntityRequestDTO'
         required: true
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponseDomainDTO'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseDomainDTO'
+    delete:
+      tags:
+      - Entities - Organization
+      summary: Remove Organization
+      description: Deletes the organization identified by its token
+      operationId: removeEntity_2
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageDTO'
   /api/v2.0/orgs/{orgToken}/projects:
     get:
       tags:
@@ -110,6 +157,13 @@ paths:
         schema:
           type: string
           default: 'true'
+      - name: excludeInactiveProjects
+        in: query
+        description: Add excludeInactiveProjects=false to retrieve all projects, including inactive ones.
+        allowEmptyValue: true
+        schema:
+          type: string
+          default: 'true'
       - name: orgToken
         in: path
         description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
@@ -117,30 +171,30 @@ paths:
         schema:
           type: string
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponsePageableCollectionProjectDTO'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableCollectionProjectDTO'
     post:
       tags:
       - Entities - Organization
       summary: Create Project With A New Product
       description: Creates a new project within a new product. If project name exists will return existing project
-      operationId: createProject_1
+      operationId: createProject_2
       parameters:
       - name: orgToken
         in: path
@@ -155,24 +209,24 @@ paths:
               $ref: '#/components/schemas/CreateProjectByOrganizationRequestDTO'
         required: true
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponseCreatedCreateProjectResponseDTO'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseCreatedCreateProjectResponseDTO'
   /api/v2.0/orgs/{orgToken}/products:
     get:
       tags:
@@ -201,24 +255,24 @@ paths:
         schema:
           type: string
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponsePageableCollectionProductDTO'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableCollectionProductDTO'
     post:
       tags:
       - Entities - Organization
@@ -239,24 +293,24 @@ paths:
               $ref: '#/components/schemas/CreateProductDTO'
         required: true
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponseCreatedProductDTO'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseCreatedProductDTO'
   /api/v2.0/orgs:
     get:
       tags:
@@ -265,24 +319,24 @@ paths:
       description: Returns a list of all organizations where the current user is a member.
       operationId: getUserDomains
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponseCollectionDomainDTO'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseCollectionDomainDTO'
     post:
       tags:
       - Entities - Organization
@@ -296,24 +350,107 @@ paths:
               $ref: '#/components/schemas/ContextEntityRequestDTO'
         required: true
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponseDomainDTO'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseDomainDTO'
+  /api/v2.0/orgs/{orgToken}/settings:
+    get:
+      tags:
+      - Entities - Organization
+      summary: Get Organization Settings
+      operationId: getDomainSettings_1
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseDomainSettingsDTO'
+  /api/v2.0/orgs/{orgToken}/products/byPermission:
+    get:
+      tags:
+      - Entities - Organization
+      summary: Get Products By Permission
+      description: Returns a list of all products the current user has the given permission for
+      operationId: getProductsByPermission
+      parameters:
+      - name: pageSize
+        in: query
+        allowEmptyValue: true
+        schema:
+          maximum: 10000
+          type: string
+          default: '50'
+      - name: page
+        in: query
+        allowEmptyValue: true
+        schema:
+          type: string
+          default: '0'
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      - name: permission
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableCollectionProductDTO'
   /api/v2.0/orgs/{orgToken}/productEntities:
     get:
       tags:
@@ -344,31 +481,77 @@ paths:
         schema:
           type: string
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponsePageableCollectionDomainEntitiesProductDTO'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableCollectionDomainEntitiesProductDTO'
+  /api/v2.0/orgs/{orgToken}/managed-products:
+    get:
+      tags:
+      - Entities - Organization
+      summary: Get Managed Products
+      description: Returns a list of all products managed by the current user
+      operationId: getManagedProducts
+      parameters:
+      - name: pageSize
+        in: query
+        allowEmptyValue: true
+        schema:
+          maximum: 10000
+          type: string
+          default: '50'
+      - name: page
+        in: query
+        allowEmptyValue: true
+        schema:
+          type: string
+          default: '0'
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableCollectionProductDTO'
   /api/v2.0/orgs/{orgToken}/entities:
     get:
       tags:
       - Entities - Organization
       summary: Get Organization Entities
       description: Returns all projects and their associated product for a given organization.
-      operationId: getDomainEntities
+      operationId: getDomainEntities_1
       parameters:
       - name: pageSize
         in: query
@@ -392,30 +575,30 @@ paths:
         schema:
           type: string
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponsePageableCollectionDomainEntitiesDTO'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableCollectionDomainEntitiesDTO'
   /api/v2.0/orgs/{orgToken}/changeOrganization/{otherOrgToken}:
     get:
       tags:
       - Entities - Organization
       summary: Change Organization
-      description: You can access a different organization by asking for a new JWT token for the new org. The previous JWT is still valid for the previous org until it expires. All JWT tokens are valid for 10 minutes.
+      description: You can access a different organization by asking for a new JWT token for the new org. The previous JWT is still valid for the previous org until it expires. All JWT tokens are valid for 30 minutes.
       operationId: changeDomain
       parameters:
       - name: orgToken
@@ -431,57 +614,148 @@ paths:
         schema:
           type: string
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponseSessionInfo'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseSessionInfo'
+  /api/v2.0/orgs/{orgToken}/capabilities:
+    get:
+      tags:
+      - Entities - Organization
+      summary: Get Organization Capabilities
+      operationId: getDomainCapabilities
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseCapabilitiesDTO'
+  /api/v2.0/orgs/{orgToken}/account:
+    get:
+      tags:
+      - Entities - Organization
+      description: Get Organization Account
+      operationId: getAccount
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content: {}
+      summary: Get account
+      x-summary-source: derived
 components:
   schemas:
-    DWRResponseCreatedProductDTO:
+    CapabilitiesDTO:
       type: object
       properties:
-        additionalData:
-          title: Provides insights on creating resources using supported endpoints.
+        tier:
+          type: string
+        capabilities:
           type: object
-          description: "+ **created**: Indicates whether the requested project was successfully created or if it already exists. \n When “true”, this signifies the project was successfully created. When “false”, this indicates the project already exists"
-          example:
-            created: 'true'
+          additionalProperties:
+            type: string
+    ProjectDTO:
+      type: object
+      properties:
+        uuid:
+          title: Project UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Project Name
+          type: string
+          example: My Project
+        path:
+          title: Product Name
+          type: string
+          example: My Product
+        productName:
+          title: Product Name
+          type: string
+          example: My Product
+        productUuid:
+          title: Product Uuid
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+    MessageDTO:
+      type: object
+      properties:
+        message:
+          title: message
+          type: string
+          example: Success!
+    ContextEntityDTO:
+      required:
+      - name
+      type: object
+      properties:
+        uuid:
+          title: Context Uuid
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Context Name
+          type: string
+          example: Context A
+    DWRResponseBase:
+      type: object
+      properties:
         supportToken:
           title: Support Token
           type: string
           example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/ProductDTO'
-    CreateProjectResponseDTO:
-      type: object
-      properties:
-        project:
-          $ref: '#/components/schemas/ProjectDTO'
-        product:
-          $ref: '#/components/schemas/ProductDTO'
-    CreateProductDTO:
-      required:
-      - productName
-      type: object
-      properties:
-        productName:
-          title: Product Name
-          type: string
-          example: Product A
     DWRResponsePageableCollectionProductDTO:
       type: object
       properties:
@@ -503,7 +777,34 @@ components:
           items:
             $ref: '#/components/schemas/ProductDTO'
       description: Provides insights into endpoint-supported pagination information
-    DWRResponsePageableCollectionProjectDTO:
+    DWRResponseCapabilitiesDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/CapabilitiesDTO'
+    DWRResponseSessionInfo:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/SessionInfo'
+    CreateProductDTO:
+      required:
+      - productName
+      type: object
+      properties:
+        productName:
+          title: Product Name
+          type: string
+          example: Product A
+    DWRResponsePageableCollectionDomainEntitiesProductDTO:
       type: object
       properties:
         additionalData:
@@ -522,35 +823,86 @@ components:
         retVal:
           type: array
           items:
-            $ref: '#/components/schemas/ProjectDTO'
+            $ref: '#/components/schemas/DomainEntitiesProductDTO'
       description: Provides insights into endpoint-supported pagination information
-    ContextEntityRequestDTO:
-      required:
-      - name
+    ProductDTO:
       type: object
       properties:
+        uuid:
+          title: Product Uuid
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
         name:
-          title: Entity Name
-          type: string
-          example: Entity A
-    CreateProjectByOrganizationRequestDTO:
-      required:
-      - projectName
-      type: object
-      properties:
-        projectName:
-          title: Project Name
-          type: string
-          example: Project A
-        projectDescription:
-          title: Project Description
-          type: string
-          example: Description for project
-        productName:
           title: Product Name
           type: string
           example: Product A
-      description: If product name is empty a default product will be created
+    DWRResponseContextEntityDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/ContextEntityDTO'
+    DWRResponseCollectionDomainDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          type: array
+          items:
+            $ref: '#/components/schemas/DomainDTO'
+    DWRResponseCreatedProductDTO:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights on creating resources using supported endpoints.
+          type: object
+          description: "+ **created**: Indicates whether the requested project was successfully created or if it already exists. \n When “true”, this signifies the project was successfully created. When “false”, this indicates the project already exists"
+          example:
+            created: 'true'
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/ProductDTO'
+    DWRResponsePageableCollectionDomainEntitiesDTO:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            + **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining.'
+          example:
+            totalItems: '422'
+            isLastPage: 'true'
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          type: array
+          items:
+            $ref: '#/components/schemas/DomainEntitiesDTO'
+      description: Provides insights into endpoint-supported pagination information
+    EntityTagDTO:
+      type: object
+      properties:
+        key:
+          title: Entity Tag Key
+          type: string
+          example: key
+        value:
+          title: Entity Tag value
+          type: string
+          example: value
     SessionInfo:
       type: object
       properties:
@@ -586,7 +938,7 @@ components:
           title: Org Name
           type: string
           example: Organization A
-    DWRResponsePageableCollectionDomainEntitiesProductDTO:
+    DWRResponsePageableCollectionProjectDTO:
       type: object
       properties:
         additionalData:
@@ -605,9 +957,9 @@ components:
         retVal:
           type: array
           items:
-            $ref: '#/components/schemas/DomainEntitiesProductDTO'
+            $ref: '#/components/schemas/ProjectDTO'
       description: Provides insights into endpoint-supported pagination information
-    DWRResponseCollectionDomainDTO:
+    DWRResponseDomainSettingsDTO:
       type: object
       properties:
         supportToken:
@@ -615,34 +967,7 @@ components:
           type: string
           example: 1171c60d
         retVal:
-          type: array
-          items:
-            $ref: '#/components/schemas/DomainDTO'
-    DomainEntitiesDTO:
-      type: object
-      properties:
-        project:
-          $ref: '#/components/schemas/DomainEntitiesProjectDTO'
-        product:
-          $ref: '#/components/schemas/DomainEntitiesProductDTO'
-    ProductDTO:
-      type: object
-      properties:
-        uuid:
-          title: Product Uuid
-          type: string
-          example: 123e4567-e89b-12d3-a456-426655440000
-        name:
-          title: Product Name
-          type: string
-          example: Product A
-    DWRResponseBase:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
+          $ref: '#/components/schemas/DomainSettingsDTO'
     DWRResponseCreatedCreateProjectResponseDTO:
       type: object
       properties:
@@ -658,119 +983,6 @@ components:
           example: 1171c60d
         retVal:
           $ref: '#/components/schemas/CreateProjectResponseDTO'
-    DWRResponseDomainDTO:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/DomainDTO'
-    DomainEntitiesProductDTO:
-      type: object
-      properties:
-        uuid:
-          title: Product Uuid
-          type: string
-          example: 123e4567-e89b-12d3-a456-426655440000
-        name:
-          title: Product Name
-          type: string
-          example: Product A
-        tags:
-          type: array
-          items:
-            $ref: '#/components/schemas/EntityTagDTO'
-        createdAt:
-          type: string
-          format: date-time
-    DWRResponseContextEntityDTO:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/ContextEntityDTO'
-    ContextEntityDTO:
-      required:
-      - name
-      type: object
-      properties:
-        uuid:
-          title: Context Uuid
-          type: string
-          example: 123e4567-e89b-12d3-a456-426655440000
-        name:
-          title: Context Name
-          type: string
-          example: Context A
-    DWRResponsePageableCollectionDomainEntitiesDTO:
-      type: object
-      properties:
-        additionalData:
-          title: Provides insights into endpoint-supported pagination information.
-          type: object
-          description: '+ **totalItems**: The total count of data points returned in an API response.
-
-            + **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining.'
-          example:
-            totalItems: '422'
-            isLastPage: 'true'
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          type: array
-          items:
-            $ref: '#/components/schemas/DomainEntitiesDTO'
-      description: Provides insights into endpoint-supported pagination information
-    ProjectDTO:
-      type: object
-      properties:
-        uuid:
-          title: Project UUID
-          type: string
-          example: 123e4567-e89b-12d3-a456-426655440000
-        name:
-          title: Project Name
-          type: string
-          example: My Project
-        path:
-          title: Product Name
-          type: string
-          example: My Product
-        productName:
-          title: Product Name
-          type: string
-          example: My Product
-        productUuid:
-          title: Product Uuid
-          type: string
-          example: 123e4567-e89b-12d3-a456-426655440000
-    DWRResponseSessionInfo:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/SessionInfo'
-    EntityTagDTO:
-      type: object
-      properties:
-        key:
-          title: Entity Tag Key
-          type: string
-          example: key
-        value:
-          title: Entity Tag value
-          type: string
-          example: value
     DomainEntitiesProjectDTO:
       type: object
       properties:
@@ -802,6 +1014,81 @@ components:
           title: Creation Date
           type: string
           format: date-time
+    ContextEntityRequestDTO:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          title: Entity Name
+          type: string
+          example: Entity A
+    DomainEntitiesProductDTO:
+      type: object
+      properties:
+        uuid:
+          title: Product Uuid
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Product Name
+          type: string
+          example: Product A
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/EntityTagDTO'
+        createdAt:
+          type: string
+          format: date-time
+    CreateProjectByOrganizationRequestDTO:
+      required:
+      - projectName
+      type: object
+      properties:
+        projectName:
+          title: Project Name
+          type: string
+          example: Project A
+        projectDescription:
+          title: Project Description
+          type: string
+          example: Description for project
+        productName:
+          title: Product Name
+          type: string
+          example: Product A
+      description: If product name is empty a default product will be created
+    DomainSettingsDTO:
+      type: object
+      properties:
+        settings:
+          type: object
+          additionalProperties:
+            type: string
+    DomainEntitiesDTO:
+      type: object
+      properties:
+        project:
+          $ref: '#/components/schemas/DomainEntitiesProjectDTO'
+        product:
+          $ref: '#/components/schemas/DomainEntitiesProductDTO'
+    CreateProjectResponseDTO:
+      type: object
+      properties:
+        project:
+          $ref: '#/components/schemas/ProjectDTO'
+        product:
+          $ref: '#/components/schemas/ProductDTO'
+    DWRResponseDomainDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/DomainDTO'
   securitySchemes:
     bearer-key:
       type: http

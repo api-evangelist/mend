@@ -1,0 +1,328 @@
+openapi: 3.2.0
+info:
+  title: Mend Administration - Activity Log API
+  description: 'Mend''s enhanced SCA API enables automation of workflows in a REST compliant format. The API features:
+
+    + Access for any user with Mend credentials, via a user key available in the user''s profile page in the Mend App.
+
+    + Improved security with a JWT token per organization, which expires every 10 minutes.
+
+    + Added scalability with support for pagination, filtering and sorting search results.
+
+    + Broader functionality available programmatically.
+
+    + New standard API documentation for easy navigation and search.
+
+
+    **Note:** To help you get started with the Mend SCA API 2.0, we recommend reviewing our onboarding guide -> Getting Started with Mend SCA API 2.0.
+
+    This resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend SCA API 2.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.'
+  version: 3.0.1
+servers:
+- url: https://api-saas.mend.io
+  description: Generated server url
+security:
+- bearer-key: []
+tags:
+- name: Administration - Activity Log
+paths:
+  /api/v3.0/orgs/{orgUuid}/activity-logs/options:
+    get:
+      tags:
+      - Administration - Activity Log
+      summary: Get Organization Activity Log Options
+      description: 'Returns the distinct values available per filterable activity-log field. Currently supported fields: category, event.'
+      operationId: getOrganizationActivityLogOptions
+      parameters:
+      - name: fields
+        in: query
+        description: 'Comma-separated list of activity-log fields to return the distinct available values for. Currently supported: category, event.'
+        required: true
+        schema:
+          type: string
+      - name: orgUuid
+        in: path
+        description: Org UUID (Administration > General)
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3MapStringListString'
+  /api/v3.0/orgs/{orgUuid}/activity-logs:
+    get:
+      tags:
+      - Administration - Activity Log
+      summary: Get Organization Activity Logs
+      description: Returns the organization's activity log events accessible to the current user
+      operationId: getOrganizationActivityLogs
+      parameters:
+      - name: cursor
+        in: query
+        description: Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved
+        allowEmptyValue: true
+        schema:
+          type: string
+          default: '0'
+      - name: limit
+        in: query
+        description: Specifies the maximum number of items to be return in the response.
+        allowEmptyValue: true
+        schema:
+          maximum: 10000
+          type: string
+          default: '50'
+      - name: search
+        in: query
+        description: "Filter your search to return items whose property has a specific value.\nUse the syntax: **[property][operator][value]**\n+ **Property**: the name of the property of the item\n+ **Operator**:\n    + **equals (==)** - Returns true if the value exactly matches this one. If the value contains a * character, it behaves like a wildcard (similar to the LIKE operator).\nExample: entity==abc* — will return true for entities like \"abcd\" and \"abc_123\".\n    + **in (=in=)** - Returns true if the value matches any item in the comma-separated list.\nExample: entity=in=value1,value2 — will return true for entities which are either value1, or value2.\n    + **between (=btw=)** - Returns true if the value falls within the specified range.\nExample: entity=btw=10,20 — will return true for values between 10 and 20.\n    + **greaterThan (=gt=)** - Returns true if the value is greater than the specified parameter.\nExample: entity=gt=100 — will return true for values greater than 100.\n\n+ **Value**: the value of the property.\n\nLogical operators AND (;) and OR (,) are supported in filters — param1=in=(val1,val2) and (param2==val3 or param3==val4), can also be written as — param1=in=(val1,val2);(param2==val3,param3==val4)\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ timestamp: between, gt\n+ event: equals, in\n+ category: equals, in\n+ eventType: equals, in\n+ engineType: equals, in\n+ userName: equals (use full values or the LIKE operator)\n+ ipAddress: equals (use full values or the LIKE operator)\n+ applications: UUID Values: equals, in (scope filter)\n+ labels: UUID Values: equals, in (scope filter)\n+ projects: UUID Values: equals, in (scope filter)"
+        allowEmptyValue: true
+        schema:
+          type: string
+      - name: sort
+        in: query
+        description: Sort by a single field; prefix with - for descending. Defaults to -timestamp.
+        allowEmptyValue: true
+      - name: startDate
+        in: query
+        description: 'Start of the time window. Format: yyyy-MM-dd or yyyy-MM-dd''T''HH:mm:ss, optionally with a zone offset (Z or +HH:mm); without an offset the value is interpreted as UTC. With days, the window is [startDate, startDate + days]; without days it extends to now. Takes precedence over a timestamp filter inside search.'
+        allowEmptyValue: true
+        schema:
+          type: string
+      - name: days
+        in: query
+        description: Length of the time window in days (positive integer). With startDate, the window is [startDate, startDate + days]; without startDate it is the last <days> days. Takes precedence over a timestamp filter inside search.
+        allowEmptyValue: true
+        schema:
+          type: integer
+          format: int32
+      - name: engineType
+        in: query
+        description: Comma-separated engine types to filter by, e.g. SCA,SAST,IMG,IAC,AI,PLATFORM. Case-insensitive. Takes precedence over an engineType filter inside search.
+        allowEmptyValue: true
+        schema:
+          type: string
+      - name: orgUuid
+        in: path
+        description: Org UUID (Administration > General)
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableV3ListActivityLogDTOV3'
+components:
+  schemas:
+    DWRResponsePageableV3ListActivityLogDTOV3:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            '
+          example:
+            totalItems: '422'
+            next: http://someUrl?cursor=3
+            cursor: 3
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          type: array
+          items:
+            $ref: '#/components/schemas/ActivityLogDTOV3'
+    ActivityLogDTOV3:
+      type: object
+      properties:
+        uuid:
+          title: Event UUID
+          type: string
+          description: Unique event identifier
+          example: 0190f3a1-1c2d-7e4f-8a9b-1234567890ab
+        timestamp:
+          title: Event time
+          type: string
+          description: ISO-8601 UTC timestamp
+          example: '2026-05-31T14:22:05Z'
+        event:
+          title: Event
+          type: string
+          description: Raw event name; the UI renders the display label
+          example: LOGGED_IN
+        category:
+          title: Category
+          type: string
+          description: Raw category name; the UI renders the display label
+          example: AUTHENTICATION
+        eventType:
+          title: Event Type
+          type: string
+          enum:
+          - ACTIVITY
+          - AUDIT
+        engineType:
+          title: Engine Type
+          type: string
+          enum:
+          - PLATFORM
+          - SCA
+          - SAST
+          - IMG
+          - CN
+          - IAC
+          - DAST
+          - AI
+          - LLM
+        changeType:
+          title: Change Type
+          type:
+          - string
+          - 'null'
+          description: Raw change type for audit events
+          enum:
+          - CREATED
+          - CHANGED
+          - DELETED
+          - ORDER
+        userName:
+          title: User
+          type: string
+          description: Consolidated actor display value (user name, or Mend System / Mend Expert)
+          example: John Smith
+        actorType:
+          title: Actor Type
+          type: string
+          description: Raw operator classification
+          enum:
+          - USER
+          - SYSTEM
+          - EXPERT
+          - IDP
+        entityType:
+          title: Entity Type
+          type:
+          - string
+          - 'null'
+          description: Type of the modified object
+          example: LIBRARY
+        entityUuid:
+          title: Entity Uuid
+          type:
+          - string
+          - 'null'
+        entityName:
+          title: Entity Name
+          type:
+          - string
+          - 'null'
+        scopeType:
+          title: Scope Type
+          type:
+          - string
+          - 'null'
+          description: Raw context scope name in which the action occurred
+          example: ORGANIZATION
+        scopeUuid:
+          title: Scope Uuid
+          type:
+          - string
+          - 'null'
+        scopeName:
+          title: Scope Name
+          type:
+          - string
+          - 'null'
+        applicationUuid:
+          title: Application Uuid
+          type:
+          - string
+          - 'null'
+        applicationName:
+          title: Application Name
+          type:
+          - string
+          - 'null'
+        projectUuid:
+          title: Project Uuid
+          type:
+          - string
+          - 'null'
+        projectName:
+          title: Project Name
+          type:
+          - string
+          - 'null'
+        details:
+          title: Details
+          type: object
+          additionalProperties:
+            title: Details
+            type: object
+            description: 'For AUDIT: before/after. For ACTIVITY: structured action payload'
+          description: 'For AUDIT: before/after. For ACTIVITY: structured action payload'
+        requestToken:
+          title: Request Token
+          type:
+          - string
+          - 'null'
+          description: Per-event correlation token for support
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+    DWRResponseV3MapStringListString:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: JWT token Bearer
+      scheme: bearer
+      bearerFormat: JWT

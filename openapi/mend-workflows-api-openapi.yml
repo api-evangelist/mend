@@ -1,0 +1,1616 @@
+openapi: 3.2.0
+info:
+  title: Mend Workflows API
+  description: 'Mend''s enhanced SCA API enables automation of workflows in a REST compliant format. The API features:
+
+    + Access for any user with Mend credentials, via a user key available in the user''s profile page in the Mend App.
+
+    + Improved security with a JWT token per organization, which expires every 10 minutes.
+
+    + Added scalability with support for pagination, filtering and sorting search results.
+
+    + Broader functionality available programmatically.
+
+    + New standard API documentation for easy navigation and search.
+
+
+    **Note:** To help you get started with the Mend SCA API 2.0, we recommend reviewing our onboarding guide -> Getting Started with Mend SCA API 2.0.
+
+    This resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend SCA API 2.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.'
+  version: 3.0.1
+servers:
+- url: https://api-saas.mend.io
+  description: Generated server url
+security:
+- bearer-key: []
+tags:
+- name: Workflows
+paths:
+  /api/v3.0/orgs/{orgUuid}/automation/workflows:
+    get:
+      tags:
+      - Workflows
+      summary: Get Organization Workflows
+      operationId: getAutomationWorkflowsV3
+      parameters:
+      - name: cursor
+        in: query
+        description: Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved
+        allowEmptyValue: true
+        schema:
+          type: string
+          default: '0'
+      - name: limit
+        in: query
+        description: Specifies the maximum number of items to be return in the response.
+        allowEmptyValue: true
+        schema:
+          maximum: 10000
+          type: string
+          default: '50'
+      - name: sort
+        in: query
+        description: 'Sort search results alphabetically on an item''s property by entering **sort=** followed by the property name.
+
+          E.g. enter **sort=email** to sort alphabetically by their email addresses from a-z ascending.To sort in descending order (z-a), add a minus sign (''-''). E.g. **sort=-email**.
+
+
+          You can sort by the following properties:
+
+          + name
+
+          + owner
+
+          + enabled
+
+          + createdAt
+
+          + updatedAt'
+        allowEmptyValue: true
+        schema:
+          type: string
+      - name: orgUuid
+        in: path
+        description: Org UUID (Administration > General)
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableV3ListAutomationWorkflowSummaryDTO'
+    put:
+      tags:
+      - Workflows
+      summary: Update Workflow
+      operationId: updateAutomationWorkflowV3
+      parameters:
+      - name: orgUuid
+        in: path
+        description: Org UUID (Administration > General)
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AutomationWorkflowUpdateRequestDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3AutomationWorkflowResponseDTO'
+    post:
+      tags:
+      - Workflows
+      summary: Create Workflow
+      operationId: createAutomationWorkflow
+      parameters:
+      - name: orgUuid
+        in: path
+        description: Org UUID (Administration > General)
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AutomationWorkflowUpdateRequestDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3AutomationWorkflowResponseDTO'
+  /api/v3.0/accounts/{accountUuid}/automation/workflows:
+    get:
+      tags:
+      - Workflows
+      summary: Get Account-Level Workflows List
+      operationId: getAccountWorkflowsV3
+      parameters:
+      - name: cursor
+        in: query
+        description: Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved
+        allowEmptyValue: true
+        schema:
+          type: string
+          default: '0'
+      - name: limit
+        in: query
+        description: Specifies the maximum number of items to be return in the response.
+        allowEmptyValue: true
+        schema:
+          maximum: 10000
+          type: string
+          default: '50'
+      - name: accountUuid
+        in: path
+        description: Account UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableV3ListAutomationWorkflowSummaryDTO'
+    put:
+      tags:
+      - Workflows
+      summary: Update Account-Level Workflow
+      operationId: updateAccountWorkflow
+      parameters:
+      - name: accountUuid
+        in: path
+        description: Account UUID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AutomationWorkflowUpdateRequestDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3AutomationWorkflowResponseDTO'
+    post:
+      tags:
+      - Workflows
+      summary: Create Account-Level Workflow
+      operationId: createAccountWorkflow
+      parameters:
+      - name: accountUuid
+        in: path
+        description: Account UUID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AutomationWorkflowUpdateRequestDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3AutomationWorkflowResponseDTO'
+    delete:
+      tags:
+      - Workflows
+      summary: Delete Account-Level Workflows (Batch)
+      operationId: deleteAccountWorkflowsV3
+      parameters:
+      - name: accountUuid
+        in: path
+        description: Account UUID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3AutomationWorkflowResponseDTO'
+  /api/v3.0/orgs/{orgUuid}/automation/workflows/{workflowUuid}/deactivate:
+    post:
+      tags:
+      - Workflows
+      summary: Deactivate Workflow
+      operationId: deactivateAutomationWorkflow
+      parameters:
+      - name: orgUuid
+        in: path
+        description: Org UUID (Administration > General)
+        required: true
+        schema:
+          type: string
+      - name: workflowUuid
+        in: path
+        description: Workflow UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3String'
+  /api/v3.0/orgs/{orgUuid}/automation/workflows/{workflowUuid}/activate:
+    post:
+      tags:
+      - Workflows
+      summary: Activate Workflow
+      operationId: activateAutomationWorkflow
+      parameters:
+      - name: orgUuid
+        in: path
+        description: Org UUID (Administration > General)
+        required: true
+        schema:
+          type: string
+      - name: workflowUuid
+        in: path
+        description: Workflow UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3String'
+  /api/v3.0/accounts/{accountUuid}/automation/workflows/{workflowUuid}/deactivate:
+    post:
+      tags:
+      - Workflows
+      summary: Deactivate Account-Level Workflow
+      operationId: deactivateAccountWorkflow
+      parameters:
+      - name: accountUuid
+        in: path
+        description: Account UUID
+        required: true
+        schema:
+          type: string
+      - name: workflowUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3String'
+  /api/v3.0/accounts/{accountUuid}/automation/workflows/{workflowUuid}/activate:
+    post:
+      tags:
+      - Workflows
+      summary: Activate Account-Level Workflow
+      operationId: activateAccountWorkflow
+      parameters:
+      - name: accountUuid
+        in: path
+        description: Account UUID
+        required: true
+        schema:
+          type: string
+      - name: workflowUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3String'
+  /api/v3.0/orgs/{orgUuid}/automation/workflows/{workflowUuid}:
+    get:
+      tags:
+      - Workflows
+      summary: Get Workflow
+      operationId: getAutomationWorkflow
+      parameters:
+      - name: orgUuid
+        in: path
+        description: Org UUID (Administration > General)
+        required: true
+        schema:
+          type: string
+      - name: workflowUuid
+        in: path
+        description: Workflow UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3AutomationWorkflowRequestDTO'
+    delete:
+      tags:
+      - Workflows
+      summary: Delete Workflow
+      operationId: deleteAutomationWorkflow
+      parameters:
+      - name: orgUuid
+        in: path
+        description: Org UUID (Administration > General)
+        required: true
+        schema:
+          type: string
+      - name: workflowUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3AutomationWorkflowResponseDTO'
+  /api/v3.0/orgs/{orgUuid}/automation/runs/{automationRunUuid}/workflows:
+    get:
+      tags:
+      - Workflows
+      summary: Get Automation Run Workflows
+      operationId: getAutomationRunWorkflowsV3
+      parameters:
+      - name: engine
+        in: query
+        description: Engine Type
+        required: true
+        schema:
+          type: string
+      - name: orgUuid
+        in: path
+        description: Org UUID (Administration > General)
+        required: true
+        schema:
+          type: string
+      - name: automationRunUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3ListSimpleWorkflowDTO'
+  /api/v3.0/orgs/{orgUuid}/automation/runs/{automationRunUuid}/summary:
+    get:
+      tags:
+      - Workflows
+      summary: Get Automation Run Summary
+      operationId: getAutomationRunSummaryV3
+      parameters:
+      - name: engine
+        in: query
+        description: Engine Type
+        required: true
+        schema:
+          type: string
+      - name: orgUuid
+        in: path
+        description: Org UUID (Administration > General)
+        required: true
+        schema:
+          type: string
+      - name: automationRunUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3AutomationRunSummaryDTO'
+  /api/v3.0/orgs/{orgUuid}/automation/recipients/users:
+    get:
+      tags:
+      - Workflows
+      summary: Get Workflow Recipient Users
+      description: Returns the organization's users, for picking Send Email recipients in the workflow editor
+      operationId: getWorkflowRecipientUsers
+      parameters:
+      - name: cursor
+        in: query
+        description: Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved
+        allowEmptyValue: true
+        schema:
+          type: string
+          default: '0'
+      - name: limit
+        in: query
+        description: Specifies the maximum number of items to be return in the response.
+        allowEmptyValue: true
+        schema:
+          maximum: 10000
+          type: string
+          default: '50'
+      - name: search
+        in: query
+        description: "Filter your search to return items whose property has a specific value.\nUse the syntax: **[property][operator][value]**\n+ **Property**: the name of the property of the item\n+ **Operator**:\n    + **equals (==)** - Returns true if the value exactly matches this one. If the value contains a * character, it behaves like a wildcard (similar to the LIKE operator).\nExample: entity==abc* — will return true for entities like \"abcd\" and \"abc_123\".\n    + **in (=in=)** - Returns true if the value matches any item in the comma-separated list.\nExample: entity=in=value1,value2 — will return true for entities which are either value1, or value2.\n    + **regex (=rgx=)** - Returns true if the regular expression resolves as true.\n        The regex is not case sensitive, and special characters must be escaped with a backslash.\n        Special characters include space, double quote (\"), '<', '>', '#', '%', '{', '}', vertical bar ('|'), backslash, '^'.\n        To pass an escaped character in a URL in Postman, encode it first.\n        E.g. to return all items whose value begins with **a** or **A**, use regex:^a\n+ **Value**: the value of the property.\n\nLogical operators AND (;) and OR (,) are supported in filters — param1=in=(val1,val2) and (param2==val3 or param3==val4), can also be written as — param1=in=(val1,val2);(param2==val3,param3==val4)\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ accountStatus: equals, in\n+ email: equals, regex\n+ UUID: equals\n+ name: equals, regex\n+ userType: equals, in\n+ roles: equals, in"
+        allowEmptyValue: true
+        schema:
+          type: string
+      - name: sort
+        in: query
+        description: 'Sort search results alphabetically on an item''s property by entering **sort=** followed by the property name.
+
+          E.g. enter **sort=email** to sort alphabetically by their email addresses from a-z ascending.To sort in descending order (z-a), add a minus sign (''-''). E.g. **sort=-email**.
+
+
+          You can sort by the following properties:
+
+          + email
+
+          + name
+
+          + userType'
+        allowEmptyValue: true
+        schema:
+          type: string
+      - name: orgUuid
+        in: path
+        description: Org UUID (Administration > General)
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableV3ListUserInfoDTOV3'
+  /api/v3.0/orgs/{orgUuid}/automation/recipients/groups:
+    get:
+      tags:
+      - Workflows
+      summary: Get Workflow Recipient Groups
+      description: Returns the organization's groups, for picking Send Email recipients in the workflow editor
+      operationId: getWorkflowRecipientGroups
+      parameters:
+      - name: cursor
+        in: query
+        description: Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved
+        allowEmptyValue: true
+        schema:
+          type: string
+          default: '0'
+      - name: limit
+        in: query
+        description: Specifies the maximum number of items to be return in the response.
+        allowEmptyValue: true
+        schema:
+          maximum: 10000
+          type: string
+          default: '50'
+      - name: search
+        in: query
+        description: "Filter your search to return items whose property has a specific value.\nUse the syntax: **[property][operator][value]**\n+ Property: the name of the property of the item\n+ Operation:\n    + **equals (==)** - Returns true if the value exactly matches this one. If the value contains a * character, it behaves like a wildcard (similar to the LIKE operator).\nExample: entity==abc* — will return true for entities like \"abcd\" and \"abc_123\".\n    + **regex (=rgx=)** - Returns true if the regular expression resolves as true.\n        The regex is not case sensitive, and special characters must be escaped with a backslash.\n        Special characters include space, double quote (\"), '<', '>', '#', '%', '{', '}', vertical bar ('|'), backslash, '^'.\n        To pass an escaped character in a URL in Postman, encode it first.\n        E.g. to return all items whose value begins with **a** or **A**, use regex:^a\n+ **Value**: the value of the property.\nLogical operators AND (;) and OR (,) are supported in filters — param1=in=(val1,val2) and (param2==val3 or param3==val4), can also be written as — param1=in=(val1,val2);(param2==val3,param3==val4)\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ name: equals, regex"
+        allowEmptyValue: true
+        schema:
+          type: string
+      - name: sort
+        in: query
+        description: 'Sort search results alphabetically on an item''s property by entering **sort=** followed by the property name.
+
+          E.g. enter **sort=email** to sort alphabetically by their email addresses from a-z ascending.To sort in descending order (z-a), add a minus sign (''-''). E.g. **sort=-email**.
+
+
+          You can sort by the following properties:
+
+          + name
+
+          + users'
+        allowEmptyValue: true
+        schema:
+          type: string
+      - name: orgUuid
+        in: path
+        description: Org UUID (Administration > General)
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableV3ListLightGroupSummaryDTOV3'
+  /api/v3.0/orgs/{orgUuid}/automation/configuration:
+    get:
+      tags:
+      - Workflows
+      summary: Get the Workflow Configuration Settings
+      operationId: getAutomationConfiguration
+      parameters:
+      - name: orgUuid
+        in: path
+        description: Org UUID (Administration > General)
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3AutomationConfigurationDTO'
+  /api/v3.0/accounts/{accountUuid}/automation/workflows/{workflowUuid}:
+    get:
+      tags:
+      - Workflows
+      summary: Get Account-Level Workflow
+      operationId: getAccountWorkflow
+      parameters:
+      - name: accountUuid
+        in: path
+        description: Account UUID
+        required: true
+        schema:
+          type: string
+      - name: workflowUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3AutomationWorkflowRequestDTO'
+    delete:
+      tags:
+      - Workflows
+      summary: Delete Account-Level Workflow
+      operationId: deleteAccountWorkflow
+      parameters:
+      - name: accountUuid
+        in: path
+        description: Account UUID
+        required: true
+        schema:
+          type: string
+      - name: workflowUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3AutomationWorkflowResponseDTO'
+components:
+  schemas:
+    AutomationConditionUpdatePublicDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+        leftOperatorName:
+          type: string
+        factProperty:
+          type: string
+        factComparatorName:
+          type: string
+        factValue:
+          type: array
+          items:
+            $ref: '#/components/schemas/LabelValueDTO'
+        enabled:
+          type: boolean
+        group:
+          type: string
+        displayName:
+          type: string
+    AutomationConfigurationDTO:
+      type: object
+      properties:
+        triggers:
+          type: array
+          items:
+            $ref: '#/components/schemas/AutomationConfigurationTriggerDTO'
+        availableComparatorsByOperandType:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              $ref: '#/components/schemas/AutomationConfigurationComparatorDTO'
+        logicalOperators:
+          type: array
+          items:
+            $ref: '#/components/schemas/AutomationConfigurationLogicalOperatorDTO'
+        scopeFields:
+          type: array
+          items:
+            $ref: '#/components/schemas/AutomationConfigurationTriggerFieldDTO'
+        additionalScopeFields:
+          type: array
+          items:
+            $ref: '#/components/schemas/AutomationConfigurationTriggerFieldDTO'
+        conditionGroupLimit:
+          type: integer
+          format: int32
+        scopeLimit:
+          type: integer
+          format: int32
+        conditionLimit:
+          type: integer
+          format: int32
+        actionLimit:
+          type: integer
+          format: int32
+        separator:
+          type: string
+        newWorkflowLevel:
+          type: string
+    AutomationActionDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+        actionType:
+          type: string
+        flavor:
+          type: string
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/AutomationActionValueJsonDTO'
+          - $ref: '#/components/schemas/ActionValueCreateViolationJsonDTO'
+          - $ref: '#/components/schemas/ActionValueEmailJsonDTO'
+          - $ref: '#/components/schemas/AutomationActionValueJsonDefaultDTO'
+          - $ref: '#/components/schemas/AutomationActionValueJsonTextDTO'
+        priority:
+          type: integer
+          format: int32
+        disabled:
+          type: string
+        exclusive:
+          type: boolean
+    DWRResponseV3AutomationWorkflowResponseDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          $ref: '#/components/schemas/AutomationWorkflowResponseDTO'
+    DWRResponsePageableV3ListLightGroupSummaryDTOV3:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            '
+          example:
+            totalItems: '422'
+            next: http://someUrl?cursor=3
+            cursor: 3
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          type: array
+          items:
+            $ref: '#/components/schemas/LightGroupSummaryDTOV3'
+    AutomationConfigurationTriggerFieldDTO:
+      type: object
+      properties:
+        displayName:
+          type: string
+        fieldType:
+          type: string
+        group:
+          type: string
+        exclusive:
+          type: boolean
+        options:
+          type: array
+          items:
+            $ref: '#/components/schemas/LabelValueDTO'
+        publicUniqueKey:
+          type: string
+        triggers:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScopeTriggersDTO'
+        exclusionId:
+          type: string
+        allowedWorkflowTypes:
+          type: array
+          items:
+            type: string
+            enum:
+            - SECURITY
+            - LEGAL
+            - OPERATIONAL
+    AutomationRunSummaryDTO:
+      type: object
+      properties:
+        eventUuid:
+          type: string
+        status:
+          type: string
+          enum:
+          - IN_PROGRESS
+          - DONE
+          - FAILED
+        hasViolations:
+          type: boolean
+        enforceFailedBuild:
+          type: boolean
+    ScopeTriggersDTO:
+      type: object
+      properties:
+        eventKey:
+          type: string
+        availableComparators:
+          type: array
+          items:
+            type: string
+    DWRResponsePageableV3ListUserInfoDTOV3:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            '
+          example:
+            totalItems: '422'
+            next: http://someUrl?cursor=3
+            cursor: 3
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserInfoDTOV3'
+    AutomationWorkflowSummaryDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+        createdAt:
+          type: string
+          format: date-time
+        owner:
+          type: string
+        ownerName:
+          type: string
+        ownerEmail:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        priority:
+          type: integer
+          format: int32
+        trigger:
+          $ref: '#/components/schemas/AutomationTriggerDTO'
+        enabled:
+          type: boolean
+        scopeConditionGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/AutomationConditionGroupDTO'
+        workflowLevel:
+          type: string
+        scope:
+          type: string
+        orgAdminCanActivate:
+          type: boolean
+        canEdit:
+          type: boolean
+        canDelete:
+          type: boolean
+        canClone:
+          type: boolean
+        workflowType:
+          type: string
+          enum:
+          - SECURITY
+          - LEGAL
+          - OPERATIONAL
+        hasJiraAction:
+          type: boolean
+        orgJiraConfigured:
+          type: boolean
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+    AutomationWorkflowRequestDTO:
+      type: object
+      properties:
+        workflow:
+          $ref: '#/components/schemas/AutomationWorkflowDTO'
+        trigger:
+          $ref: '#/components/schemas/AutomationTriggerDTO'
+        conditionsGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/AutomationConditionGroupDTO'
+        scopeConditionGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/AutomationConditionGroupDTO'
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/AutomationActionDTO'
+        canEdit:
+          type: boolean
+    AutomationConfigurationActionDTO:
+      type: object
+      properties:
+        actionType:
+          type: string
+        flavor:
+          type: string
+        displayName:
+          type: string
+        data:
+          type: string
+        options:
+          type: array
+          items:
+            $ref: '#/components/schemas/LabelValueDTO'
+        disabled:
+          type: string
+    SimpleWorkflowDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+        name:
+          type: string
+        matchedFindings:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProjectViolationBaseDetailsDTO'
+        conditionGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/SimpleConditionGroupDTO'
+    ProjectViolationBaseDetailsDTO:
+      type: object
+      properties:
+        findingId:
+          type: string
+        findingName:
+          type: string
+        engine:
+          type: string
+          enum:
+          - UNIFIED
+          - SCA
+          - SAST
+          - IAC
+          - IMG
+          - AI
+          - DAST
+        findingType:
+          type: string
+        elementUuid:
+          type: string
+        elementName:
+          type: string
+    SimpleConditionGroupDTO:
+      type: object
+      properties:
+        leftOperator:
+          type: string
+        conditions:
+          type: array
+          items:
+            $ref: '#/components/schemas/SimpleConditionDTO'
+    AutomationActionValueJsonTextDTO:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/AutomationActionValueJsonDTO'
+      - type: object
+        properties:
+          selectedValues:
+            type: string
+          context:
+            type: string
+    DWRResponseV3ListSimpleWorkflowDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          type: array
+          items:
+            $ref: '#/components/schemas/SimpleWorkflowDTO'
+    LabelValueDTO:
+      type: object
+      properties:
+        label:
+          type: string
+        value:
+          type: object
+        additionalValue:
+          type: object
+    UserInfoDTOV3:
+      required:
+      - uuid
+      type: object
+      properties:
+        uuid:
+          title: User UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: User Name
+          type: string
+          example: Jon Smith
+        email:
+          title: User Email
+          type: string
+          example: jon.smith@mail.com
+        userType:
+          title: Type Of User
+          type: string
+          example: REGULAR
+          enum:
+          - REGULAR
+          - SERVICE
+          - SCAN_SUMMARY_RECEIVER
+        accountStatus:
+          title: User Account Status
+          type: string
+          example: ACTIVE
+          enum:
+          - ACTIVE
+          - INVITED
+          - DISABLED
+    AutomationConditionGroupUpdatePublicDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+        leftOperatorName:
+          type: string
+        enabled:
+          type: boolean
+        conditions:
+          type: array
+          items:
+            $ref: '#/components/schemas/AutomationConditionUpdatePublicDTO'
+    AutomationWorkflowUpdateRequestDTO:
+      type: object
+      properties:
+        trigger:
+          $ref: '#/components/schemas/AutomationTriggerDTO'
+        workflow:
+          $ref: '#/components/schemas/AutomationWorkflowDTO'
+        scopeConditionGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/AutomationConditionGroupUpdatePublicDTO'
+        conditionsGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/AutomationConditionGroupUpdatePublicDTO'
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/AutomationActionDTO'
+        templateUuid:
+          type: string
+    DWRResponseV3String:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          type: string
+    AutomationActionValueJsonDefaultDTO:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/AutomationActionValueJsonDTO'
+      - type: object
+        properties:
+          selectedValues:
+            type: string
+          selectedLabelValueDTOs:
+            type: array
+            items:
+              $ref: '#/components/schemas/LabelValueDTO'
+          context:
+            type: string
+    AutomationConditionGroupDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+        leftOperatorName:
+          type: string
+        priority:
+          type: integer
+          format: int32
+        enabled:
+          type: boolean
+        conditions:
+          type: array
+          items:
+            $ref: '#/components/schemas/AutomationConditionDTO'
+    AutomationConfigurationComparatorDTO:
+      type: object
+      properties:
+        name:
+          type: string
+        displayName:
+          type: string
+        type:
+          type: string
+        operator:
+          type: string
+        inputFieldsCount:
+          type: integer
+          format: int32
+    AutomationWorkflowResponseDTO:
+      type: object
+      properties:
+        message:
+          type: string
+        workflows:
+          type: array
+          items:
+            $ref: '#/components/schemas/AutomationWorkflowRequestDTO'
+    AutomationConditionDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+        leftOperatorName:
+          type: string
+        factProperty:
+          type: string
+        factComparatorName:
+          type: string
+        factValue:
+          type: array
+          items:
+            $ref: '#/components/schemas/LabelValueDTO'
+        factValueString:
+          type: string
+        priority:
+          type: integer
+          format: int32
+        enabled:
+          type: boolean
+        group:
+          type: string
+        displayName:
+          type: string
+    DWRResponsePageableV3ListAutomationWorkflowSummaryDTO:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            '
+          example:
+            totalItems: '422'
+            next: http://someUrl?cursor=3
+            cursor: 3
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          type: array
+          items:
+            $ref: '#/components/schemas/AutomationWorkflowSummaryDTO'
+    LightGroupSummaryDTOV3:
+      type: object
+      properties:
+        uuid:
+          type: string
+        name:
+          type: string
+        users:
+          title: User Count
+          type: integer
+          description: The amount of users in that group
+          format: int32
+          example: 22
+    SimpleConditionDTO:
+      type: object
+      properties:
+        leftOperator:
+          type: string
+        group:
+          type: string
+        factProperty:
+          type: string
+        factComparator:
+          type: string
+        factValue:
+          type: string
+        displayName:
+          type: string
+    AutomationWorkflowDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+        owner:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        enabled:
+          type: boolean
+        workflowLevel:
+          type: string
+        workflowType:
+          type: string
+          enum:
+          - SECURITY
+          - LEGAL
+          - OPERATIONAL
+        scope:
+          type: string
+        orgAdminCanActivate:
+          type: boolean
+    ActionValueEmailJsonDTO:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/AutomationActionValueJsonDTO'
+      - type: object
+        properties:
+          selectedValues:
+            type: string
+          selectedLabelValueDTOs:
+            type: array
+            items:
+              $ref: '#/components/schemas/LabelValueDTO'
+          context:
+            type: string
+          newFindingOnly:
+            type: boolean
+          groups:
+            type: array
+            items:
+              type: string
+          deliveryFrequency:
+            type: string
+    AutomationActionValueJsonDTO:
+      type: object
+      properties:
+        valueType:
+          type: string
+      discriminator:
+        propertyName: valueType
+    ActionValueCreateViolationJsonDTO:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/AutomationActionValueJsonDTO'
+      - type: object
+        properties:
+          failPipeline:
+            type: boolean
+          risk:
+            type: integer
+            format: int32
+          slaRelativeDays:
+            type: integer
+            format: int32
+          updateExisting:
+            type: boolean
+    AutomationTriggerDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+        eventKey:
+          type: string
+        engineType:
+          type: string
+        scopeType:
+          type: string
+        scopeValue:
+          type: string
+        orgUuid:
+          type: string
+        appUuid:
+          type: string
+        projectUuid:
+          type: string
+        enabled:
+          type: boolean
+    AutomationConfigurationTriggerDTO:
+      type: object
+      properties:
+        eventKey:
+          type: string
+        eventDisplayName:
+          type: string
+        group:
+          type: string
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/AutomationConfigurationTriggerFieldDTO'
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/AutomationConfigurationActionDTO'
+        creatable:
+          type: boolean
+        supportedWorkflowTypes:
+          type: array
+          items:
+            type: string
+            enum:
+            - SECURITY
+            - LEGAL
+            - OPERATIONAL
+    DWRResponseV3AutomationRunSummaryDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          $ref: '#/components/schemas/AutomationRunSummaryDTO'
+    DWRResponseV3AutomationConfigurationDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          $ref: '#/components/schemas/AutomationConfigurationDTO'
+    DWRResponseV3AutomationWorkflowRequestDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          $ref: '#/components/schemas/AutomationWorkflowRequestDTO'
+    AutomationConfigurationLogicalOperatorDTO:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: JWT token Bearer
+      scheme: bearer
+      bearerFormat: JWT

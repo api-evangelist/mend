@@ -1,0 +1,411 @@
+openapi: 3.2.0
+info:
+  title: Mend Remediations API
+  description: 'Mend''s enhanced SCA API enables automation of workflows in a REST compliant format. The API features:
+
+    + Access for any user with Mend credentials, via a user key available in the user''s profile page in the Mend App.
+
+    + Improved security with a JWT token per organization, which expires every 10 minutes.
+
+    + Added scalability with support for pagination, filtering and sorting search results.
+
+    + Broader functionality available programmatically.
+
+    + New standard API documentation for easy navigation and search.
+
+
+    **Note:** To help you get started with the Mend SCA API 2.0, we recommend reviewing our onboarding guide -> Getting Started with Mend SCA API 2.0.
+
+    This resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend SCA API 2.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.'
+  version: 3.0.1
+servers:
+- url: https://api-saas.mend.io
+  description: Generated server url
+security:
+- bearer-key: []
+tags:
+- name: Remediations
+paths:
+  /api/v3.0/orgs/{orgUuid}/remediations/time-to-remediate:
+    get:
+      tags:
+      - Remediations
+      summary: Get average time to remediate
+      description: Returns the average time to remediate for the given projects that match at least one of the given identifiers.
+      operationId: getAverageTimeToRemediate
+      parameters:
+      - name: fromDate
+        in: query
+        description: Enter the start date for the search. The date format is yyyy-MM-dd
+        required: true
+        schema:
+          type: string
+      - name: toDate
+        in: query
+        description: Enter the end date for the search. The date format is yyyy-MM-dd
+        required: true
+        schema:
+          type: string
+      - name: search
+        in: query
+        description: "Filter your search to return items whose property has a specific value.\nUse the syntax: **[property][operator][value]**\n+ **Property**: the name of the property of the item\n+ **Operator**:\n    + **equals (==)** - Returns true if the value exactly matches this one. If the value contains a * character, it behaves like a wildcard (similar to the LIKE operator).\nExample: entity==abc* — will return true for entities like \"abcd\" and \"abc_123\".\n    + **in (=in=)** - Returns true if the value matches any item in the comma-separated list.\nExample: entity=in=value1,value2 — will return true for entities which are either value1, or value2.\n    + **between (=btw=)** - Returns true if the value falls within the specified range.\nExample: entity=btw=10,20 — will return true for values between 10 and 20.\n\n+ **Value**: the value of the property.\n\nLogical operators AND (;) and OR (,) are supported in filters — param1=in=(val1,val2) and (param2==val3 or param3==val4), can also be written as — param1=in=(val1,val2);(param2==val3,param3==val4)\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ labels: UUID Values: equals, in\n+ applications: UUID Values: equals, in\n+ projects: UUID Values: equals, in\n+ severities: UUID Values: equals, in\n+ engines: UUID Values: equals, in"
+        allowEmptyValue: true
+        schema:
+          type: string
+      - name: orgUuid
+        in: path
+        description: Org UUID (Administration > General)
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3AverageTimeToRemediateDTO'
+  /api/v3.0/orgs/{orgUuid}/remediations/summaries/severity:
+    get:
+      tags:
+      - Remediations
+      summary: Get Remediation Statistics By Severity
+      description: Returns the requested Remediation statistics grouped by severity for the given projects that match at least one of the given identifiers.
+      operationId: getRemediationsBySeverity
+      parameters:
+      - name: fromDate
+        in: query
+        description: Enter the start date for the search. The date format is yyyy-MM-dd
+        required: true
+        schema:
+          type: string
+      - name: toDate
+        in: query
+        description: Enter the end date for the search. The date format is yyyy-MM-dd
+        required: true
+        schema:
+          type: string
+      - name: search
+        in: query
+        description: "Filter your search to return items whose property has a specific value.\nUse the syntax: **[property][operator][value]**\n+ **Property**: the name of the property of the item\n+ **Operator**:\n    + **equals (==)** - Returns true if the value exactly matches this one. If the value contains a * character, it behaves like a wildcard (similar to the LIKE operator).\nExample: entity==abc* — will return true for entities like \"abcd\" and \"abc_123\".\n    + **in (=in=)** - Returns true if the value matches any item in the comma-separated list.\nExample: entity=in=value1,value2 — will return true for entities which are either value1, or value2.\n    + **between (=btw=)** - Returns true if the value falls within the specified range.\nExample: entity=btw=10,20 — will return true for values between 10 and 20.\n\n+ **Value**: the value of the property.\n\nLogical operators AND (;) and OR (,) are supported in filters — param1=in=(val1,val2) and (param2==val3 or param3==val4), can also be written as — param1=in=(val1,val2);(param2==val3,param3==val4)\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ labels: UUID Values: equals, in\n+ applications: UUID Values: equals, in\n+ projects: UUID Values: equals, in\n+ severities: UUID Values: equals, in\n+ engines: UUID Values: equals, in"
+        allowEmptyValue: true
+        schema:
+          type: string
+      - name: orgUuid
+        in: path
+        description: Org UUID (Administration > General)
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3ListRemediationSeverityCountDTO'
+  /api/v3.0/orgs/{orgUuid}/remediations/summaries:
+    get:
+      tags:
+      - Remediations
+      summary: Get Remediation Statistics
+      description: Returns the requested Remediation statistics for the given projects that match at least one of the given identifiers.
+      operationId: getRemediations
+      parameters:
+      - name: fromDate
+        in: query
+        description: Enter the start date for the search. The date format is yyyy-MM-dd
+        required: true
+        schema:
+          type: string
+      - name: toDate
+        in: query
+        description: Enter the end date for the search. The date format is yyyy-MM-dd
+        required: true
+        schema:
+          type: string
+      - name: search
+        in: query
+        description: "Filter your search to return items whose property has a specific value.\nUse the syntax: **[property][operator][value]**\n+ **Property**: the name of the property of the item\n+ **Operator**:\n    + **equals (==)** - Returns true if the value exactly matches this one. If the value contains a * character, it behaves like a wildcard (similar to the LIKE operator).\nExample: entity==abc* — will return true for entities like \"abcd\" and \"abc_123\".\n    + **in (=in=)** - Returns true if the value matches any item in the comma-separated list.\nExample: entity=in=value1,value2 — will return true for entities which are either value1, or value2.\n    + **between (=btw=)** - Returns true if the value falls within the specified range.\nExample: entity=btw=10,20 — will return true for values between 10 and 20.\n\n+ **Value**: the value of the property.\n\nLogical operators AND (;) and OR (,) are supported in filters — param1=in=(val1,val2) and (param2==val3 or param3==val4), can also be written as — param1=in=(val1,val2);(param2==val3,param3==val4)\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ labels: UUID Values: equals, in\n+ applications: UUID Values: equals, in\n+ projects: UUID Values: equals, in\n+ severities: UUID Values: equals, in\n+ engines: UUID Values: equals, in"
+        allowEmptyValue: true
+        schema:
+          type: string
+      - name: orgUuid
+        in: path
+        description: Org UUID (Administration > General)
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3ListRemediationCountDTO'
+  /api/v3.0/orgs/{orgUuid}/remediations/snapshots:
+    get:
+      tags:
+      - Remediations
+      summary: Get remediation snapshots
+      description: Returns the remediation duration buckets for the given projects that match at least one of the given identifiers.
+      operationId: getRemediationSnapshots
+      parameters:
+      - name: fromDate
+        in: query
+        description: Enter the start date for the search. The date format is yyyy-MM-dd
+        required: true
+        schema:
+          type: string
+      - name: toDate
+        in: query
+        description: Enter the end date for the search. The date format is yyyy-MM-dd
+        required: true
+        schema:
+          type: string
+      - name: search
+        in: query
+        description: "Filter your search to return items whose property has a specific value.\nUse the syntax: **[property][operator][value]**\n+ **Property**: the name of the property of the item\n+ **Operator**:\n    + **equals (==)** - Returns true if the value exactly matches this one. If the value contains a * character, it behaves like a wildcard (similar to the LIKE operator).\nExample: entity==abc* — will return true for entities like \"abcd\" and \"abc_123\".\n    + **in (=in=)** - Returns true if the value matches any item in the comma-separated list.\nExample: entity=in=value1,value2 — will return true for entities which are either value1, or value2.\n    + **between (=btw=)** - Returns true if the value falls within the specified range.\nExample: entity=btw=10,20 — will return true for values between 10 and 20.\n\n+ **Value**: the value of the property.\n\nLogical operators AND (;) and OR (,) are supported in filters — param1=in=(val1,val2) and (param2==val3 or param3==val4), can also be written as — param1=in=(val1,val2);(param2==val3,param3==val4)\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ labels: UUID Values: equals, in\n+ applications: UUID Values: equals, in\n+ projects: UUID Values: equals, in\n+ severities: UUID Values: equals, in\n+ engines: UUID Values: equals, in"
+        allowEmptyValue: true
+        schema:
+          type: string
+      - name: orgUuid
+        in: path
+        description: Org UUID (Administration > General)
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3ListRemediationSnapshotDTO'
+  /api/v3.0/orgs/{orgUuid}/remediations/duration-buckets:
+    get:
+      tags:
+      - Remediations
+      summary: Get remediation duration buckets
+      description: Returns the remediation duration buckets for the given projects that match at least one of the given identifiers.
+      operationId: getRemediationDurationBuckets
+      parameters:
+      - name: fromDate
+        in: query
+        description: Enter the start date for the search. The date format is yyyy-MM-dd
+        required: true
+        schema:
+          type: string
+      - name: toDate
+        in: query
+        description: Enter the end date for the search. The date format is yyyy-MM-dd
+        required: true
+        schema:
+          type: string
+      - name: search
+        in: query
+        description: "Filter your search to return items whose property has a specific value.\nUse the syntax: **[property][operator][value]**\n+ **Property**: the name of the property of the item\n+ **Operator**:\n    + **equals (==)** - Returns true if the value exactly matches this one. If the value contains a * character, it behaves like a wildcard (similar to the LIKE operator).\nExample: entity==abc* — will return true for entities like \"abcd\" and \"abc_123\".\n    + **in (=in=)** - Returns true if the value matches any item in the comma-separated list.\nExample: entity=in=value1,value2 — will return true for entities which are either value1, or value2.\n    + **between (=btw=)** - Returns true if the value falls within the specified range.\nExample: entity=btw=10,20 — will return true for values between 10 and 20.\n\n+ **Value**: the value of the property.\n\nLogical operators AND (;) and OR (,) are supported in filters — param1=in=(val1,val2) and (param2==val3 or param3==val4), can also be written as — param1=in=(val1,val2);(param2==val3,param3==val4)\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ labels: UUID Values: equals, in\n+ applications: UUID Values: equals, in\n+ projects: UUID Values: equals, in\n+ severities: UUID Values: equals, in\n+ engines: UUID Values: equals, in"
+        allowEmptyValue: true
+        schema:
+          type: string
+      - name: orgUuid
+        in: path
+        description: Org UUID (Administration > General)
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3ListRemediationDurationBucketDTO'
+components:
+  schemas:
+    RemediationSnapshotDTO:
+      type: object
+      properties:
+        date:
+          type: string
+        remediationReason:
+          type: string
+        backlog:
+          type: boolean
+        count:
+          type: integer
+          format: int32
+    DWRResponseV3AverageTimeToRemediateDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          $ref: '#/components/schemas/AverageTimeToRemediateDTO'
+    RemediationCountDTO:
+      type: object
+      properties:
+        date:
+          type: string
+        remediationReason:
+          type: string
+        count:
+          type: integer
+          format: int64
+    DWRResponseV3ListRemediationSnapshotDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          type: array
+          items:
+            $ref: '#/components/schemas/RemediationSnapshotDTO'
+    RemediationDurationBucketDTO:
+      type: object
+      properties:
+        date:
+          type: string
+        buckets:
+          type: array
+          items:
+            $ref: '#/components/schemas/RemediationDurationDateBucketDTO'
+    RemediationSeverityCountDTO:
+      type: object
+      properties:
+        date:
+          type: string
+        remediationReason:
+          type: string
+        severity:
+          type: string
+        count:
+          type: integer
+          format: int64
+    RemediationDurationDateBucketDTO:
+      type: object
+      properties:
+        bucket:
+          type: string
+        count:
+          type: integer
+          format: int64
+    DWRResponseV3ListRemediationDurationBucketDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          type: array
+          items:
+            $ref: '#/components/schemas/RemediationDurationBucketDTO'
+    DWRResponseV3ListRemediationSeverityCountDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          type: array
+          items:
+            $ref: '#/components/schemas/RemediationSeverityCountDTO'
+    AverageTimeToRemediateDTO:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+        avgOpenDuration:
+          type: integer
+          format: int64
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+    DWRResponseV3ListRemediationCountDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          type: array
+          items:
+            $ref: '#/components/schemas/RemediationCountDTO'
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: JWT token Bearer
+      scheme: bearer
+      bearerFormat: JWT

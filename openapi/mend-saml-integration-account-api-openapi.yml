@@ -1,0 +1,634 @@
+openapi: 3.2.0
+info:
+  title: Mend SAML Integration - Account API
+  description: 'Mend''s enhanced SCA API enables automation of workflows in a REST compliant format. The API features:
+
+    + Access for any user with Mend credentials, via a user key available in the user''s profile page in the Mend App.
+
+    + Improved security with a JWT token per organization, which expires every 10 minutes.
+
+    + Added scalability with support for pagination, filtering and sorting search results.
+
+    + Broader functionality available programmatically.
+
+    + New standard API documentation for easy navigation and search.
+
+
+    **Note:** To help you get started with the Mend SCA API 2.0, we recommend reviewing our onboarding guide -> Getting Started with Mend SCA API 2.0.
+
+    This resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend SCA API 2.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.'
+  version: 3.0.1
+servers:
+- url: https://api-saas.mend.io
+  description: Generated server url
+security:
+- bearer-key: []
+tags:
+- name: SAML Integration - Account
+paths:
+  /api/v3.0/accounts/{scopeUuid}/saml/settings:
+    get:
+      tags:
+      - SAML Integration - Account
+      summary: Get SAML Setting
+      description: Returns SAML Setting
+      operationId: getSAMLSettings_1
+      parameters:
+      - name: scopeUuid
+        in: path
+        description: Scope UUID (Account/Organization)
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3SAMLSettingDTO'
+    put:
+      tags:
+      - SAML Integration - Account
+      summary: Update SAML Setting
+      description: Returns SAML token
+      operationId: updateSAMLSettings_1
+      parameters:
+      - name: scopeUuid
+        in: path
+        description: Scope UUID (Account/Organization)
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SAMLSettingsRequestDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3SAMLSettingDTO'
+    post:
+      tags:
+      - SAML Integration - Account
+      summary: Create SAML Setting
+      description: Returns SAML token
+      operationId: createSAMLSettings_1
+      parameters:
+      - name: scopeUuid
+        in: path
+        description: Scope UUID (Account/Organization)
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SAMLSettingsRequestDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3SAMLSettingDTO'
+    delete:
+      tags:
+      - SAML Integration - Account
+      summary: Remove SAML Setting
+      description: Returns SAML token
+      operationId: removeSAMLSettings_1
+      parameters:
+      - name: scopeUuid
+        in: path
+        description: Scope UUID (Account/Organization)
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3String'
+  /api/v2.0/globalAccounts/{contextIdentifier}/saml/settings:
+    get:
+      tags:
+      - SAML Integration - Account
+      summary: Get SAML Setting
+      description: Returns SAML Setting
+      operationId: getSAMLSettings_3
+      parameters:
+      - name: contextIdentifier
+        in: path
+        description: entity UUID or ApiToken (organization, product or project).
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SAMLSettingDTO'
+    put:
+      tags:
+      - SAML Integration - Account
+      summary: Update SAML Setting
+      description: Returns SAML token
+      operationId: updateSAMLSettings_3
+      parameters:
+      - name: contextIdentifier
+        in: path
+        description: entity UUID or ApiToken (organization, product or project).
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SAMLSettingsRequestDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SAMLSettingDTO'
+    post:
+      tags:
+      - SAML Integration - Account
+      summary: Create SAML Setting
+      description: Returns SAML token
+      operationId: createSAMLSettings_3
+      parameters:
+      - name: contextIdentifier
+        in: path
+        description: entity UUID or ApiToken (organization, product or project).
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SAMLSettingsRequestDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SAMLSettingDTO'
+    delete:
+      tags:
+      - SAML Integration - Account
+      summary: Remove SAML Setting
+      description: Returns SAML token
+      operationId: removeSAMLSettings_3
+      parameters:
+      - name: contextIdentifier
+        in: path
+        description: entity UUID or ApiToken (organization, product or project).
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+  /api/v3.0/accounts/{scopeUuid}/saml/mappings:
+    get:
+      tags:
+      - SAML Integration - Account
+      summary: Get SAML Role to Groups Mapping
+      description: Returns SAML Role to Groups Mapping
+      operationId: getSamlRoleGroupsMapping_1
+      parameters:
+      - name: scopeUuid
+        in: path
+        description: Scope UUID (Account/Organization)
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3CollectionSamlRoleGroupsMappingDTO'
+  /api/v3.0/accounts/{scopeUuid}/saml/attributes:
+    get:
+      tags:
+      - SAML Integration - Account
+      summary: Get SAML Attribute Mapping
+      description: Returns SAML Attribute Mapping
+      operationId: getSamlAttributes_1
+      parameters:
+      - name: scopeUuid
+        in: path
+        description: Scope UUID (Account/Organization)
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3MapSamlAttributeKeyTypeString'
+  /api/v2.0/globalAccounts/{contextIdentifier}/saml/mappings:
+    get:
+      tags:
+      - SAML Integration - Account
+      summary: Get SAML Role to Groups Mapping
+      description: Returns SAML Role to Groups Mapping
+      operationId: getSamlRoleGroupsMapping_3
+      parameters:
+      - name: contextIdentifier
+        in: path
+        description: entity UUID or ApiToken (organization, product or project).
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SamlRoleGroupsMappingDTO'
+  /api/v2.0/globalAccounts/{contextIdentifier}/saml/attributes:
+    get:
+      tags:
+      - SAML Integration - Account
+      summary: Get SAML Attribute Mapping
+      description: Returns SAML Attribute Mapping
+      operationId: getSamlAttributes_3
+      parameters:
+      - name: contextIdentifier
+        in: path
+        description: entity UUID or ApiToken (organization, product or project).
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+components:
+  schemas:
+    SAMLSettingDTO:
+      type: object
+      properties:
+        id:
+          type: string
+        isActive:
+          type: boolean
+        metadataType:
+          type: string
+          enum:
+          - URL
+          - XML
+          - FILE
+        entityID:
+          type: string
+        replyUrl:
+          type: string
+        idpDomains:
+          type: array
+          items:
+            type: string
+        metadataLink:
+          type: string
+        allAttributeKeys:
+          type: object
+          additionalProperties:
+            type: string
+        roleGroupsMapping:
+          type: array
+          items:
+            $ref: '#/components/schemas/SamlRoleGroupsMappingDTO'
+        expiresAt:
+          type: string
+          format: date-time
+        enableIdpInitiatedLogin:
+          type: boolean
+        enforceSsoOnLogin:
+          type: boolean
+        justInTimeProvisioning:
+          type: boolean
+        signingPreview:
+          $ref: '#/components/schemas/SamlSigningPreview'
+    DWRResponseV3MapSamlAttributeKeyTypeString:
+      type: object
+      properties:
+        additionalData:
+          type: object
+          additionalProperties:
+            type: object
+        supportToken:
+          type: string
+        response:
+          type: object
+          additionalProperties:
+            type: string
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+    DWRResponseV3String:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          type: string
+    SAMLSettingsRequestDTO:
+      type: object
+      properties:
+        metadataType:
+          type: string
+          enum:
+          - URL
+          - XML
+          - FILE
+        metadataLink:
+          type: string
+        metadataInfo:
+          type: string
+        idpDomains:
+          type: array
+          items:
+            type: string
+        allAttributeKeys:
+          type: object
+          additionalProperties:
+            type: string
+        roleGroupsMapping:
+          type: array
+          items:
+            $ref: '#/components/schemas/SamlRoleGroupsMappingDTO'
+        enableIdpInitiatedLogin:
+          type: boolean
+        enforceSsoOnLogin:
+          type: boolean
+        justInTimeProvisioning:
+          type: boolean
+    DWRResponseV3SAMLSettingDTO:
+      type: object
+      properties:
+        additionalData:
+          type: object
+          additionalProperties:
+            type: object
+        supportToken:
+          type: string
+        response:
+          $ref: '#/components/schemas/SAMLSettingDTO'
+    SamlSigningPreview:
+      type: object
+      properties:
+        subject:
+          type: object
+          additionalProperties:
+            type: string
+        thumbprint:
+          type: string
+    GroupInfoDTO:
+      required:
+      - uuid
+      type: object
+      properties:
+        uuid:
+          title: Group Uuid
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Group Name
+          type: string
+          example: Group A
+        description:
+          title: Group Description
+          type: string
+          example: A description for a group
+        domainUUID:
+          title: Domain Uuid
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        domainName:
+          title: Domain Name
+          type: string
+          example: Domain A
+        globalAccountUUID:
+          title: Global Account Uuid
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        userUUIDs:
+          uniqueItems: true
+          type: array
+          items:
+            title: User Uuid
+            type: string
+            example: 123e4567-e89b-12d3-a456-426655440000
+    DWRResponseV3CollectionSamlRoleGroupsMappingDTO:
+      type: object
+      properties:
+        additionalData:
+          type: object
+          additionalProperties:
+            type: object
+        supportToken:
+          type: string
+        response:
+          type: array
+          items:
+            $ref: '#/components/schemas/SamlRoleGroupsMappingDTO'
+    SamlRoleGroupsMappingDTO:
+      type: object
+      properties:
+        roleName:
+          type: string
+        roleGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupInfoDTO'
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: JWT token Bearer
+      scheme: bearer
+      bearerFormat: JWT

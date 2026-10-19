@@ -1,8 +1,23 @@
 openapi: 3.2.0
 info:
   title: Mend Settings - In-House API
-  description: Mend's enhanced SCA API enables automation of workflows in a REST compliant format.
-  version: '2.0'
+  description: 'Mend''s enhanced SCA API enables automation of workflows in a REST compliant format. The API features:
+
+    + Access for any user with Mend credentials, via a user key available in the user''s profile page in the Mend App.
+
+    + Improved security with a JWT token per organization, which expires every 10 minutes.
+
+    + Added scalability with support for pagination, filtering and sorting search results.
+
+    + Broader functionality available programmatically.
+
+    + New standard API documentation for easy navigation and search.
+
+
+    **Note:** To help you get started with the Mend SCA API 2.0, we recommend reviewing our onboarding guide -> Getting Started with Mend SCA API 2.0.
+
+    This resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend SCA API 2.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.'
+  version: 3.0.1
 servers:
 - url: https://api-saas.mend.io
   description: Generated server url
@@ -38,24 +53,24 @@ paths:
               $ref: '#/components/schemas/UpdateInHouseRuleRequestDTO'
         required: true
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponseWarningInHouseRuleDTO'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseWarningInHouseRuleDTO'
     delete:
       tags:
       - Settings - In-House
@@ -76,24 +91,24 @@ paths:
         schema:
           type: string
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponseMessageDTO'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseMessageDTO'
   /api/v2.0/orgs/{orgToken}/settings/inHouse/rules:
     put:
       tags:
@@ -117,24 +132,24 @@ paths:
                 $ref: '#/components/schemas/UpdateInHouseRulesRequestDTO'
         required: true
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponseMessageDTO'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseMessageDTO'
     post:
       tags:
       - Settings - In-House
@@ -157,24 +172,24 @@ paths:
                 $ref: '#/components/schemas/CreateInHouseRuleRequestDTO'
         required: true
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponseWarningListInHouseRuleDTO'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseWarningListInHouseRuleDTO'
     delete:
       tags:
       - Settings - In-House
@@ -188,33 +203,25 @@ paths:
         required: true
         schema:
           type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: array
-              items:
-                $ref: '#/components/schemas/DeleteInHouseRuleRequestDTO'
-        required: true
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponseMessageDTO'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseMessageDTO'
   /api/v2.0/orgs/{orgToken}/settings/inHouse/apply:
     put:
       tags:
@@ -230,24 +237,24 @@ paths:
         schema:
           type: string
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponseMessageDTO'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseMessageDTO'
   /api/v2.0/orgs/{orgToken}/settings/inHouse:
     get:
       tags:
@@ -277,24 +284,24 @@ paths:
         schema:
           type: string
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponsePageableInHouseSettingsDTO'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableInHouseSettingsDTO'
     post:
       tags:
       - Settings - In-House
@@ -315,42 +322,26 @@ paths:
               $ref: '#/components/schemas/CreateInHouseRuleRequestDTO'
         required: true
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponseWarningInHouseRuleDTO'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseWarningInHouseRuleDTO'
 components:
   schemas:
-    DWRResponseBase:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-    InHouseSettingsDTO:
-      type: object
-      properties:
-        rules:
-          type: array
-          items:
-            $ref: '#/components/schemas/InHouseRuleDTO'
-        active:
-          type: boolean
     InHouseRuleDTO:
       required:
       - type
@@ -379,69 +370,6 @@ components:
           title: Created By
           type: string
           description: Jon.Snow
-        empty:
-          type: boolean
-    MessageDTO:
-      type: object
-      properties:
-        message:
-          title: message
-          type: string
-          example: Success!
-    DeleteInHouseRuleRequestDTO:
-      required:
-      - uuid
-      type: object
-      properties:
-        uuid:
-          title: InHouse Rule UUID
-          type: string
-          example: 123e4567-e89b-12d3-a456-426655440000
-        empty:
-          type: boolean
-    UpdateInHouseRuleRequestDTO:
-      type: object
-      properties:
-        type:
-          title: InHouse Rule Regex Type
-          type: string
-          example: NAME
-          enum:
-          - NAME
-          - LIBRARY_COORDINATES
-          - ARTIFACT_ID
-        regex:
-          title: InHouse Regex Rule
-          type: string
-          example: '*aa*'
-        description:
-          title: InHouse Description
-          type: string
-          example: description for InHouse rule
-        empty:
-          type: boolean
-    CreateInHouseRuleRequestDTO:
-      required:
-      - regex
-      - type
-      type: object
-      properties:
-        type:
-          title: InHouse Rule Regex Type
-          type: string
-          example: NAME
-          enum:
-          - NAME
-          - LIBRARY_COORDINATES
-          - ARTIFACT_ID
-        regex:
-          title: InHouse Regex Rule
-          type: string
-          example: '*aa*'
-        description:
-          title: InHouse Description
-          type: string
-          example: description for inHouse rule
         empty:
           type: boolean
     DWRResponseWarningListInHouseRuleDTO:
@@ -484,15 +412,36 @@ components:
         retVal:
           $ref: '#/components/schemas/InHouseSettingsDTO'
       description: Provides insights into endpoint-supported pagination information
-    DWRResponseMessageDTO:
+    UpdateInHouseRuleRequestDTO:
       type: object
       properties:
-        supportToken:
-          title: Support Token
+        type:
+          title: InHouse Rule Regex Type
           type: string
-          example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/MessageDTO'
+          example: NAME
+          enum:
+          - NAME
+          - LIBRARY_COORDINATES
+          - ARTIFACT_ID
+        regex:
+          title: InHouse Regex Rule
+          type: string
+          example: '*aa*'
+        description:
+          title: InHouse Description
+          type: string
+          example: description for InHouse rule
+        empty:
+          type: boolean
+    InHouseSettingsDTO:
+      type: object
+      properties:
+        rules:
+          type: array
+          items:
+            $ref: '#/components/schemas/InHouseRuleDTO'
+        active:
+          type: boolean
     DWRResponseWarningInHouseRuleDTO:
       title: Initiates the update process for an individual In-House library rule
       type: object
@@ -539,6 +488,53 @@ components:
           example: description for white list
         empty:
           type: boolean
+    CreateInHouseRuleRequestDTO:
+      required:
+      - regex
+      - type
+      type: object
+      properties:
+        type:
+          title: InHouse Rule Regex Type
+          type: string
+          example: NAME
+          enum:
+          - NAME
+          - LIBRARY_COORDINATES
+          - ARTIFACT_ID
+        regex:
+          title: InHouse Regex Rule
+          type: string
+          example: '*aa*'
+        description:
+          title: InHouse Description
+          type: string
+          example: description for inHouse rule
+        empty:
+          type: boolean
+    DWRResponseMessageDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/MessageDTO'
+    MessageDTO:
+      type: object
+      properties:
+        message:
+          title: message
+          type: string
+          example: Success!
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
   securitySchemes:
     bearer-key:
       type: http

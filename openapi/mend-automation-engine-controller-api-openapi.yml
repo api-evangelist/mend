@@ -1,0 +1,1010 @@
+openapi: 3.2.0
+info:
+  title: Mend Automation Engine Controller API
+  description: 'Mend''s enhanced SCA API enables automation of workflows in a REST compliant format. The API features:
+
+    + Access for any user with Mend credentials, via a user key available in the user''s profile page in the Mend App.
+
+    + Improved security with a JWT token per organization, which expires every 10 minutes.
+
+    + Added scalability with support for pagination, filtering and sorting search results.
+
+    + Broader functionality available programmatically.
+
+    + New standard API documentation for easy navigation and search.
+
+
+    **Note:** To help you get started with the Mend SCA API 2.0, we recommend reviewing our onboarding guide -> Getting Started with Mend SCA API 2.0.
+
+    This resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend SCA API 2.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.'
+  version: 3.0.1
+servers:
+- url: https://api-saas.mend.io
+  description: Generated server url
+security:
+- bearer-key: []
+tags:
+- name: automation-engine-controller
+paths:
+  /api/v2.0/orgs/{orgToken}/automation/workflows:
+    get:
+      tags:
+      - automation-engine-controller
+      operationId: getAutomationWorkflows
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseListAutomationWorkflowSummaryDTO'
+      summary: Get automation workflows
+      x-summary-source: derived
+    put:
+      tags:
+      - automation-engine-controller
+      operationId: updateAutomationWorkflow
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AutomationWorkflowUpdateRequestDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AutomationWorkflowResponseDTO'
+      summary: Update automation workflow
+      x-summary-source: derived
+    post:
+      tags:
+      - automation-engine-controller
+      operationId: createAutomationWorkflow_1
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AutomationWorkflowUpdateRequestDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AutomationWorkflowResponseDTO'
+      summary: Create automation workflow 1
+      x-summary-source: derived
+    delete:
+      tags:
+      - automation-engine-controller
+      operationId: deleteAutomationWorkflow_1
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AutomationWorkflowResponseDTO'
+      summary: Delete automation workflow 1
+      x-summary-source: derived
+  /api/v2.0/orgs/{orgToken}/automation/workflows/{workflowUuid}/deactivate:
+    post:
+      tags:
+      - automation-engine-controller
+      operationId: deactivateAutomationWorkflow_1
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      - name: workflowUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageDTO'
+      summary: Deactivate automation workflow 1
+      x-summary-source: derived
+  /api/v2.0/orgs/{orgToken}/automation/workflows/{workflowUuid}/activate:
+    post:
+      tags:
+      - automation-engine-controller
+      operationId: activateAutomationWorkflow_1
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      - name: workflowUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageDTO'
+      summary: Activate automation workflow 1
+      x-summary-source: derived
+  /api/v2.0/orgs/{orgToken}/automation/workflows/{workflowUuid}:
+    get:
+      tags:
+      - automation-engine-controller
+      operationId: getAutomationWorkflow_1
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      - name: workflowUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AutomationWorkflowRequestDTO'
+      summary: Get automation workflow 1
+      x-summary-source: derived
+  /api/v2.0/orgs/{orgToken}/automation/templates/{templateUuid}:
+    get:
+      tags:
+      - automation-engine-controller
+      operationId: getTemplate
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      - name: templateUuid
+        in: path
+        description: Template UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AutomationWorkflowTemplateDTO'
+      summary: Get template
+      x-summary-source: derived
+  /api/v2.0/orgs/{orgToken}/automation/templates:
+    get:
+      tags:
+      - automation-engine-controller
+      operationId: getTemplates
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseListAutomationWorkflowTemplateDTO'
+      summary: Get templates
+      x-summary-source: derived
+  /api/v2.0/orgs/{orgToken}/automation/configuration/cwe-types:
+    get:
+      tags:
+      - automation-engine-controller
+      operationId: getAutomationCWETypes
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      - name: scope
+        in: query
+        description: global for the CWE types every organization shares only, e.g. for an account-level workflow; without it, the organization's own CWE types are included. Any other value is refused.
+        required: false
+        schema:
+          type: string
+          enum:
+          - global
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CWETypesDTO'
+      summary: Get automation CWE types
+      x-summary-source: derived
+  /api/v2.0/orgs/{orgToken}/automation/configuration:
+    get:
+      tags:
+      - automation-engine-controller
+      operationId: getAutomationConfiguration_1
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AutomationConfigurationDTO'
+      summary: Get automation configuration 1
+      x-summary-source: derived
+components:
+  schemas:
+    AutomationConditionUpdatePublicDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+        leftOperatorName:
+          type: string
+        factProperty:
+          type: string
+        factComparatorName:
+          type: string
+        factValue:
+          type: array
+          items:
+            $ref: '#/components/schemas/LabelValueDTO'
+        enabled:
+          type: boolean
+        group:
+          type: string
+        displayName:
+          type: string
+    AutomationConfigurationDTO:
+      type: object
+      properties:
+        triggers:
+          type: array
+          items:
+            $ref: '#/components/schemas/AutomationConfigurationTriggerDTO'
+        availableComparatorsByOperandType:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              $ref: '#/components/schemas/AutomationConfigurationComparatorDTO'
+        logicalOperators:
+          type: array
+          items:
+            $ref: '#/components/schemas/AutomationConfigurationLogicalOperatorDTO'
+        scopeFields:
+          type: array
+          items:
+            $ref: '#/components/schemas/AutomationConfigurationTriggerFieldDTO'
+        additionalScopeFields:
+          type: array
+          items:
+            $ref: '#/components/schemas/AutomationConfigurationTriggerFieldDTO'
+        conditionGroupLimit:
+          type: integer
+          format: int32
+        scopeLimit:
+          type: integer
+          format: int32
+        conditionLimit:
+          type: integer
+          format: int32
+        actionLimit:
+          type: integer
+          format: int32
+        separator:
+          type: string
+        newWorkflowLevel:
+          type: string
+    AutomationActionDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+        actionType:
+          type: string
+        flavor:
+          type: string
+        value:
+          oneOf:
+          - $ref: '#/components/schemas/AutomationActionValueJsonDTO'
+          - $ref: '#/components/schemas/ActionValueCreateViolationJsonDTO'
+          - $ref: '#/components/schemas/ActionValueEmailJsonDTO'
+          - $ref: '#/components/schemas/AutomationActionValueJsonDefaultDTO'
+          - $ref: '#/components/schemas/AutomationActionValueJsonTextDTO'
+        priority:
+          type: integer
+          format: int32
+        disabled:
+          type: string
+        exclusive:
+          type: boolean
+    CWETypesDTO:
+      type: object
+      properties:
+        value:
+          type: string
+        title:
+          type: string
+    AutomationWorkflowTemplateExplanationDTO:
+      type: object
+      properties:
+        header:
+          type: string
+        fields:
+          type: array
+          items:
+            type: string
+        footer:
+          type: string
+    AutomationConfigurationTriggerFieldDTO:
+      type: object
+      properties:
+        displayName:
+          type: string
+        fieldType:
+          type: string
+        group:
+          type: string
+        exclusive:
+          type: boolean
+        options:
+          type: array
+          items:
+            $ref: '#/components/schemas/LabelValueDTO'
+        publicUniqueKey:
+          type: string
+        triggers:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScopeTriggersDTO'
+        exclusionId:
+          type: string
+        allowedWorkflowTypes:
+          type: array
+          items:
+            type: string
+            enum:
+            - SECURITY
+            - LEGAL
+            - OPERATIONAL
+    ScopeTriggersDTO:
+      type: object
+      properties:
+        eventKey:
+          type: string
+        availableComparators:
+          type: array
+          items:
+            type: string
+    MessageDTO:
+      type: object
+      properties:
+        message:
+          title: message
+          type: string
+          example: Success!
+    AutomationWorkflowSummaryDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+        createdAt:
+          type: string
+          format: date-time
+        owner:
+          type: string
+        ownerName:
+          type: string
+        ownerEmail:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        priority:
+          type: integer
+          format: int32
+        trigger:
+          $ref: '#/components/schemas/AutomationTriggerDTO'
+        enabled:
+          type: boolean
+        scopeConditionGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/AutomationConditionGroupDTO'
+        workflowLevel:
+          type: string
+        scope:
+          type: string
+        orgAdminCanActivate:
+          type: boolean
+        canEdit:
+          type: boolean
+        canDelete:
+          type: boolean
+        canClone:
+          type: boolean
+        workflowType:
+          type: string
+          enum:
+          - SECURITY
+          - LEGAL
+          - OPERATIONAL
+        hasJiraAction:
+          type: boolean
+        orgJiraConfigured:
+          type: boolean
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+    AutomationWorkflowRequestDTO:
+      type: object
+      properties:
+        workflow:
+          $ref: '#/components/schemas/AutomationWorkflowDTO'
+        trigger:
+          $ref: '#/components/schemas/AutomationTriggerDTO'
+        conditionsGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/AutomationConditionGroupDTO'
+        scopeConditionGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/AutomationConditionGroupDTO'
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/AutomationActionDTO'
+        canEdit:
+          type: boolean
+    AutomationConfigurationActionDTO:
+      type: object
+      properties:
+        actionType:
+          type: string
+        flavor:
+          type: string
+        displayName:
+          type: string
+        data:
+          type: string
+        options:
+          type: array
+          items:
+            $ref: '#/components/schemas/LabelValueDTO'
+        disabled:
+          type: string
+    AutomationActionValueJsonTextDTO:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/AutomationActionValueJsonDTO'
+      - type: object
+        properties:
+          selectedValues:
+            type: string
+          context:
+            type: string
+    LabelValueDTO:
+      type: object
+      properties:
+        label:
+          type: string
+        value:
+          type: object
+        additionalValue:
+          type: object
+    AutomationConditionGroupUpdatePublicDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+        leftOperatorName:
+          type: string
+        enabled:
+          type: boolean
+        conditions:
+          type: array
+          items:
+            $ref: '#/components/schemas/AutomationConditionUpdatePublicDTO'
+    AutomationWorkflowUpdateRequestDTO:
+      type: object
+      properties:
+        trigger:
+          $ref: '#/components/schemas/AutomationTriggerDTO'
+        workflow:
+          $ref: '#/components/schemas/AutomationWorkflowDTO'
+        scopeConditionGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/AutomationConditionGroupUpdatePublicDTO'
+        conditionsGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/AutomationConditionGroupUpdatePublicDTO'
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/AutomationActionDTO'
+        templateUuid:
+          type: string
+    AutomationActionValueJsonDefaultDTO:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/AutomationActionValueJsonDTO'
+      - type: object
+        properties:
+          selectedValues:
+            type: string
+          selectedLabelValueDTOs:
+            type: array
+            items:
+              $ref: '#/components/schemas/LabelValueDTO'
+          context:
+            type: string
+    AutomationConditionGroupDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+        leftOperatorName:
+          type: string
+        priority:
+          type: integer
+          format: int32
+        enabled:
+          type: boolean
+        conditions:
+          type: array
+          items:
+            $ref: '#/components/schemas/AutomationConditionDTO'
+    DWRResponseListAutomationWorkflowTemplateDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          type: array
+          items:
+            $ref: '#/components/schemas/AutomationWorkflowTemplateDTO'
+    AutomationConfigurationComparatorDTO:
+      type: object
+      properties:
+        name:
+          type: string
+        displayName:
+          type: string
+        type:
+          type: string
+        operator:
+          type: string
+        inputFieldsCount:
+          type: integer
+          format: int32
+    AutomationWorkflowResponseDTO:
+      type: object
+      properties:
+        message:
+          type: string
+        workflows:
+          type: array
+          items:
+            $ref: '#/components/schemas/AutomationWorkflowRequestDTO'
+    DWRResponseListAutomationWorkflowSummaryDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          type: array
+          items:
+            $ref: '#/components/schemas/AutomationWorkflowSummaryDTO'
+    AutomationWorkflowTemplateDTO:
+      type: object
+      properties:
+        workflow:
+          $ref: '#/components/schemas/AutomationWorkflowDTO'
+        trigger:
+          $ref: '#/components/schemas/AutomationTriggerDTO'
+        conditionsGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/AutomationConditionGroupDTO'
+        scopeConditionGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/AutomationConditionGroupDTO'
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/AutomationActionDTO'
+        canEdit:
+          type: boolean
+        uuid:
+          type: string
+        engineType:
+          type: string
+        category:
+          type: string
+        displayName:
+          type: string
+        tooltip:
+          type: string
+        explanation:
+          $ref: '#/components/schemas/AutomationWorkflowTemplateExplanationDTO'
+        isBlank:
+          type: boolean
+    AutomationConditionDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+        leftOperatorName:
+          type: string
+        factProperty:
+          type: string
+        factComparatorName:
+          type: string
+        factValue:
+          type: array
+          items:
+            $ref: '#/components/schemas/LabelValueDTO'
+        factValueString:
+          type: string
+        priority:
+          type: integer
+          format: int32
+        enabled:
+          type: boolean
+        group:
+          type: string
+        displayName:
+          type: string
+    AutomationWorkflowDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+        owner:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        enabled:
+          type: boolean
+        workflowLevel:
+          type: string
+        workflowType:
+          type: string
+          enum:
+          - SECURITY
+          - LEGAL
+          - OPERATIONAL
+        scope:
+          type: string
+        orgAdminCanActivate:
+          type: boolean
+    ActionValueEmailJsonDTO:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/AutomationActionValueJsonDTO'
+      - type: object
+        properties:
+          selectedValues:
+            type: string
+          selectedLabelValueDTOs:
+            type: array
+            items:
+              $ref: '#/components/schemas/LabelValueDTO'
+          context:
+            type: string
+          newFindingOnly:
+            type: boolean
+          groups:
+            type: array
+            items:
+              type: string
+          deliveryFrequency:
+            type: string
+    AutomationActionValueJsonDTO:
+      type: object
+      properties:
+        valueType:
+          type: string
+      discriminator:
+        propertyName: valueType
+    ActionValueCreateViolationJsonDTO:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/AutomationActionValueJsonDTO'
+      - type: object
+        properties:
+          failPipeline:
+            type: boolean
+          risk:
+            type: integer
+            format: int32
+          slaRelativeDays:
+            type: integer
+            format: int32
+          updateExisting:
+            type: boolean
+    AutomationTriggerDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+        eventKey:
+          type: string
+        engineType:
+          type: string
+        scopeType:
+          type: string
+        scopeValue:
+          type: string
+        orgUuid:
+          type: string
+        appUuid:
+          type: string
+        projectUuid:
+          type: string
+        enabled:
+          type: boolean
+    AutomationConfigurationTriggerDTO:
+      type: object
+      properties:
+        eventKey:
+          type: string
+        eventDisplayName:
+          type: string
+        group:
+          type: string
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/AutomationConfigurationTriggerFieldDTO'
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/AutomationConfigurationActionDTO'
+        creatable:
+          type: boolean
+        supportedWorkflowTypes:
+          type: array
+          items:
+            type: string
+            enum:
+            - SECURITY
+            - LEGAL
+            - OPERATIONAL
+    AutomationConfigurationLogicalOperatorDTO:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: JWT token Bearer
+      scheme: bearer
+      bearerFormat: JWT

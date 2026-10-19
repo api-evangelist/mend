@@ -1,16 +1,891 @@
 openapi: 3.2.0
 info:
   title: Mend Integrations API
-  description: Mend's enhanced API enables automation of workflows in a REST compliant format.
-  version: '3.0'
+  description: 'Mend''s enhanced SCA API enables automation of workflows in a REST compliant format. The API features:
+
+    + Access for any user with Mend credentials, via a user key available in the user''s profile page in the Mend App.
+
+    + Improved security with a JWT token per organization, which expires every 10 minutes.
+
+    + Added scalability with support for pagination, filtering and sorting search results.
+
+    + Broader functionality available programmatically.
+
+    + New standard API documentation for easy navigation and search.
+
+
+    **Note:** To help you get started with the Mend SCA API 2.0, we recommend reviewing our onboarding guide -> Getting Started with Mend SCA API 2.0.
+
+    This resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend SCA API 2.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.'
+  version: 3.0.1
 servers:
-- url: https://baseUrl
+- url: https://api-saas.mend.io
   description: Generated server url
 security:
 - bearer-key: []
 tags:
 - name: Integrations
 paths:
+  /api/v2.0/orgs/{orgToken}/integrations/wiz:
+    get:
+      tags:
+      - Integrations
+      summary: Get organizations Wiz integration
+      description: Get organizations Wiz integration encrypted credentials
+      operationId: getWizIntegration
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WizIntegrationRequestDTO'
+    post:
+      tags:
+      - Integrations
+      summary: Create Wiz Integration
+      description: Creates a Wiz integration
+      operationId: createWizIntegration
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WizIntegrationRequestDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WizIntegrationRequestDTO'
+  /api/v2.0/orgs/{orgToken}/integrations/servicenow:
+    post:
+      tags:
+      - Integrations
+      summary: Generate ServiceNow Integration Token
+      description: Creates a token to use with ServiceNow integration
+      operationId: createServicenowIntegration
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntegrationInfoDTO'
+  /api/v2.0/orgs/{orgToken}/integrations/port:
+    post:
+      tags:
+      - Integrations
+      summary: Generate Port.io Integration Token
+      description: Creates a token to use with Port.io integration
+      operationId: createPortIntegration
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntegrationInfoDTO'
+  /api/v2.0/orgs/{orgToken}/integrations/personalAdviseForIDE:
+    post:
+      tags:
+      - Integrations
+      summary: Generate Personal Advise For IDE Token
+      description: Creates a token to use with personal Advise for IDE integration
+      operationId: createAdviseForPersonalIDEIntegrationToken
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntegrationInfoDTO'
+  /api/v2.0/orgs/{orgToken}/integrations/mdc:
+    post:
+      tags:
+      - Integrations
+      summary: Generate MDC Integration Token
+      description: Creates a token to use with MDC integration
+      operationId: createMDCIntegration
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntegrationInfoDTO'
+  /api/v2.0/orgs/{orgToken}/integrations/issueTrackerIntegration:
+    post:
+      tags:
+      - Integrations
+      summary: Generate Issue Tracker Token
+      description: Creates a token to use with the Issue Tracker integration
+      operationId: createIssueTrackerIntegrationToken
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntegrationInfoDTO'
+  /api/v2.0/orgs/{orgToken}/integrations/invicti:
+    post:
+      tags:
+      - Integrations
+      summary: Generate Invicti Integration Token
+      description: Creates a token to use with Invicti integration
+      operationId: createInvictiIntegration
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntegrationInfoDTO'
+  /api/v2.0/orgs/{orgToken}/integrations/gitlabIntegration:
+    get:
+      tags:
+      - Integrations
+      summary: Get Gitlab Token
+      description: Returns the token used for Gitlab integration
+      operationId: getGitlabIntegrationToken
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GitlabActivationKeyResponseDTO'
+    post:
+      tags:
+      - Integrations
+      summary: Generate Gitlab Token
+      description: Creates a token to use with Gitlab integration
+      operationId: createGitlabIntegrationToken
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GitLabRequestDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GitlabActivationKeyResponseDTO'
+  /api/v2.0/orgs/{orgToken}/integrations/githubEnterprise:
+    get:
+      tags:
+      - Integrations
+      summary: Get Github Enterprise Token
+      description: Returns the token used for Github Enterprise integration
+      operationId: getGithubEnterpriseIntegrationData
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GithubEnterpriseActivationKeyResponseDTO'
+    post:
+      tags:
+      - Integrations
+      summary: Generate Github Enterprise token
+      description: Creates a token to use with Github enterprise integration
+      operationId: createGitHubEnterpriseIntegration
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GitHubEnterpriseRequestDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GithubEnterpriseActivationKeyResponseDTO'
+  /api/v2.0/orgs/{orgToken}/integrations/github:
+    post:
+      tags:
+      - Integrations
+      summary: Generate Github token
+      description: Creates a token to use with the Github integration
+      operationId: createGitHubIntegration
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntegrationInfoDTO'
+  /api/v2.0/orgs/{orgToken}/integrations/enforceUserLevelActivation:
+    post:
+      tags:
+      - Integrations
+      summary: Enforce User Level Activation
+      description: Switches the user to a personal license key instead of the global license key. Once performed, this change cannot be reverted. Learn more.
+      operationId: enforceUserLevelActivation
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /api/v2.0/orgs/{orgToken}/integrations/disableIntegration/{integrationType}:
+    post:
+      tags:
+      - Integrations
+      summary: Disable integration
+      description: Disables an integration made with a given integration type
+      operationId: removeIntegration
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      - name: integrationType
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /api/v2.0/orgs/{orgToken}/integrations/developerPlatform:
+    post:
+      tags:
+      - Integrations
+      summary: Generate Developer platform token
+      description: Creates a token to use with the Developer platform
+      operationId: createDeveloperPlatformIntegrationToken
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeveloperPlatformRequestDTO'
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntegrationInfoDTO'
+  /api/v2.0/orgs/{orgToken}/integrations/ci_cd_int:
+    post:
+      tags:
+      - Integrations
+      summary: Generate CI/CD Integration Token
+      description: Creates a token to use with the CI/CD integration
+      operationId: createAzureDevOpsIntegrationToken
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntegrationInfoDTO'
+  /api/v2.0/orgs/{orgToken}/integrations/bitbucketIntegration:
+    get:
+      tags:
+      - Integrations
+      summary: Get BitBucket Token
+      description: Returns the token used for BitBucket integration
+      operationId: getBitbucketIntegrationToken
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BitBucketActivationKeyResponseDTO'
+    post:
+      tags:
+      - Integrations
+      summary: Generate BitBucket Token
+      description: Creates a token to use with the BitBucket integration
+      operationId: createBitbucketIntegrationToken
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BitBucketRequestDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BitBucketActivationKeyResponseDTO'
+  /api/v2.0/orgs/{orgToken}/integrations/backstage:
+    post:
+      tags:
+      - Integrations
+      summary: Generate Backstage Integration Token
+      description: Creates a token to use with Backstage integration
+      operationId: createBackstageIntegration
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntegrationInfoDTO'
+  /api/v2.0/orgs/{orgToken}/integrations/azureRepos/sync:
+    post:
+      tags:
+      - Integrations
+      summary: Sync Azure repo integration projects
+      description: Sync azure devops integration projects
+      operationId: syncAzureReposIntegrationData
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureReposIntegrationDTO'
+  /api/v2.0/orgs/{orgToken}/integrations/azureRepos:
+    get:
+      tags:
+      - Integrations
+      summary: Get Azure repo integration info
+      description: Returns info about the integration
+      operationId: getAzureReposIntegrationData
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureReposIntegrationDTO'
+    post:
+      tags:
+      - Integrations
+      summary: Setup Azure repo integration
+      description: Stores the PAT and setup the integration
+      operationId: saveAzureReposIntegrationData
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AzureReposRequestDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureReposIntegrationDTO'
+  /api/v2.0/orgs/{orgToken}/integrations/aiGuardrails:
+    post:
+      tags:
+      - Integrations
+      summary: Generate Mend AI Guardrails Integration Token
+      description: Creates a token to use with Mend AI Guardrails integration
+      operationId: createAiGuardrailsIntegration
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntegrationInfoDTO'
+  /api/v2.0/orgs/{orgToken}/integrations/adviseForIDE:
+    post:
+      tags:
+      - Integrations
+      summary: Generate Advice For IDE Token
+      description: Creates a token to use with Advise for IDE integration
+      operationId: createAdviseForIDEIntegrationToken
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntegrationInfoDTO'
   /api/v3.0/orgs/{orgUuid}/integrations:
     get:
       tags:
@@ -19,40 +894,88 @@ paths:
       description: Returns all integrations for the given organization with optional filtering.
       operationId: getOrgIntegrations
       parameters:
+      - name: search
+        in: query
+        description: "Filter your search to return items whose property has a specific value.\nUse the syntax: **[property][operator][value]**\n+ **Property**: the name of the property of the item\n+ **Operator**:\n    + **equals (==)** - Returns true if the value exactly matches this one. If the value contains a * character, it behaves like a wildcard (similar to the LIKE operator).\nExample: entity==abc* — will return true for entities like \"abcd\" and \"abc_123\".\n    + **in (=in=)** - Returns true if the value matches any item in the comma-separated list.\nExample: entity=in=value1,value2 — will return true for entities which are either value1, or value2.\n\n+ **Value**: the value of the property.\nLogical operators AND (;) and OR (,) are supported in filters — param1=in=(val1,val2) and (param2==val3 or param3==val4), can also be written as — param1=in=(val1,val2);(param2==val3,param3==val4)\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ type: equals, in\n+ status: equals, in\n+ variant: equals, in\n"
+        allowEmptyValue: true
+        schema:
+          type: string
       - name: orgUuid
         in: path
         required: true
         schema:
           type: string
-        description: 'org UUID (from the Mend App: **Administration** General > **Organization UUID**).'
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponseV3ListIntegrationDTOV3'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3ListIntegrationDTOV3'
+  /api/v2.0/orgs/{orgToken}/integrations/isPersonalAdviseEnabled:
+    get:
+      tags:
+      - Integrations
+      summary: Check Personnel Advice Enabled
+      description: Checks whether a token for personal Advise for IDE Integration has been applied
+      operationId: checkPersonalAdviseEnabled
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
 components:
   schemas:
-    DWRResponseBase:
+    GitLabRequestDTO:
       type: object
       properties:
-        supportToken:
-          title: Support Token
+        serverUrl:
+          title: Git Lab Server URL
           type: string
-          example: 1171c60d
+          example: www.gitlabServer
+        webhookUrl:
+          title: Git Web Hook Server URL
+          type: string
+          example: www.gitlabServer
+        webhookSecret:
+          title: Git Web Hook Secret
+          type: string
+        accessToken:
+          title: Git Lab Access Token
+          type: string
     DWRResponseV3ListIntegrationDTOV3:
       type: object
       properties:
@@ -64,6 +987,90 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/IntegrationDTOV3'
+    GithubEnterpriseActivationKeyResponseDTO:
+      type: object
+      properties:
+        type:
+          title: Integration Type
+          type: string
+          example: Azure DevOps Integration
+        token:
+          type: string
+        otherIntegrationExists:
+          type: boolean
+        githubUrl:
+          type: string
+        githubApiUrl:
+          type: string
+        githubApplicationId:
+          type: string
+        githubWebhookSecret:
+          type: string
+    AzureReposIntegrationDTO:
+      type: object
+      properties:
+        personalAccessToken:
+          type: string
+        otherIntegrationExists:
+          type: boolean
+        integrationExists:
+          type: boolean
+        errorMessage:
+          type: string
+    BitBucketRequestDTO:
+      required:
+      - webhookUrl
+      type: object
+      properties:
+        serverUrl:
+          title: Bit Bucket Server URL
+          type: string
+          example: www.bitbucket.com
+        username:
+          title: Bit Bucket Username
+          type: string
+          example: Jon
+        accessToken:
+          title: Bit Bucket Access Token
+          type: string
+          example: jdfsakbvkdjsbvijsbviodubv
+        webhookUrl:
+          title: Bit Bucket Access Token
+          type: string
+          example: www.webhook.com
+    DeveloperPlatformRequestDTO:
+      type: object
+      properties:
+        scmName:
+          type: string
+    BitBucketActivationKeyResponseDTO:
+      type: object
+      properties:
+        type:
+          title: Integration Type
+          type: string
+          example: Azure DevOps Integration
+        token:
+          type: string
+        otherIntegrationExists:
+          type: boolean
+        serverUrl:
+          type: string
+        webhookUrl:
+          type: string
+        userName:
+          type: string
+    ApiResponse:
+      type: object
+      properties:
+        requestToken:
+          type: string
+        message:
+          type: string
+        warningMessages:
+          type: array
+          items:
+            type: string
     IntegrationDTOV3:
       type: object
       properties:
@@ -104,6 +1111,88 @@ components:
         lastUpdate:
           type: string
           format: date-time
+    GitlabActivationKeyResponseDTO:
+      type: object
+      properties:
+        type:
+          title: Integration Type
+          type: string
+          example: Azure DevOps Integration
+        token:
+          type: string
+        otherIntegrationExists:
+          type: boolean
+        serverUrl:
+          type: string
+        webhookUrl:
+          type: string
+        webhookSecret:
+          type: string
+    IntegrationInfoDTO:
+      type: object
+      properties:
+        type:
+          title: Integration Type
+          type: string
+          example: Azure DevOps Integration
+        token:
+          type: string
+    AzureReposRequestDTO:
+      type: object
+      properties:
+        personalAccessToken:
+          type: string
+    GitHubEnterpriseRequestDTO:
+      type: object
+      properties:
+        githubUrl:
+          type: string
+        githubApiUrl:
+          type: string
+        githubApplicationId:
+          type: string
+        githubWebhookSecret:
+          type: string
+        githubAppPrivateKey:
+          type: string
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+    WizIntegrationRequestDTO:
+      required:
+      - clientId
+      type: object
+      properties:
+        variant:
+          title: Wiz Environment
+          type: string
+          description: Wiz environment
+          example: WIZ_COMMERCIAL
+          enum:
+          - JIRA_CLOUD
+          - JIRA_CLOUD_SECURITY
+          - JIRA_DC
+          - WIZ_COMMERCIAL
+          - WIZ_GOV
+          - WIZ_COMM_ON_GOV
+          - WIZ_DEMO
+          - WIZ_COMMERCIAL
+          - WIZ_GOV
+          - WIZ_COMM_ON_GOV
+        clientId:
+          title: Wiz Client ID
+          type: string
+          description: Wiz client ID
+          example: wiz-client-123
+        clientSecret:
+          title: Wiz Client Secret
+          type: string
+          description: Wiz client secret
+          example: secret-key-123
   securitySchemes:
     bearer-key:
       type: http

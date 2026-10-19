@@ -1,8 +1,23 @@
 openapi: 3.2.0
 info:
   title: Mend Access Management - Organizations API
-  description: Mend's enhanced SCA API enables automation of workflows in a REST compliant format.
-  version: '2.0'
+  description: 'Mend''s enhanced SCA API enables automation of workflows in a REST compliant format. The API features:
+
+    + Access for any user with Mend credentials, via a user key available in the user''s profile page in the Mend App.
+
+    + Improved security with a JWT token per organization, which expires every 10 minutes.
+
+    + Added scalability with support for pagination, filtering and sorting search results.
+
+    + Broader functionality available programmatically.
+
+    + New standard API documentation for easy navigation and search.
+
+
+    **Note:** To help you get started with the Mend SCA API 2.0, we recommend reviewing our onboarding guide -> Getting Started with Mend SCA API 2.0.
+
+    This resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend SCA API 2.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.'
+  version: 3.0.1
 servers:
 - url: https://api-saas.mend.io
   description: Generated server url
@@ -19,30 +34,30 @@ paths:
       description: Returns a list of all organizations where the current user is a member.
       operationId: getUserDomains
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponseCollectionDomainDTO'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseCollectionDomainDTO'
   /api/v2.0/orgs/{orgToken}/changeOrganization/{otherOrgToken}:
     get:
       tags:
       - Access Management - Organizations
       summary: Change Organization
-      description: You can access a different organization by asking for a new JWT token for the new org. The previous JWT is still valid for the previous org until it expires. All JWT tokens are valid for 10 minutes.
+      description: You can access a different organization by asking for a new JWT token for the new org. The previous JWT is still valid for the previous org until it expires. All JWT tokens are valid for 30 minutes.
       operationId: changeDomain
       parameters:
       - name: orgToken
@@ -58,33 +73,35 @@ paths:
         schema:
           type: string
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponseSessionInfo'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseSessionInfo'
 components:
   schemas:
-    DWRResponseBase:
+    DWRResponseSessionInfo:
       type: object
       properties:
         supportToken:
           title: Support Token
           type: string
           example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/SessionInfo'
     SessionInfo:
       type: object
       properties:
@@ -120,15 +137,13 @@ components:
           title: Org Name
           type: string
           example: Organization A
-    DWRResponseSessionInfo:
+    DWRResponseBase:
       type: object
       properties:
         supportToken:
           title: Support Token
           type: string
           example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/SessionInfo'
     DWRResponseCollectionDomainDTO:
       type: object
       properties:

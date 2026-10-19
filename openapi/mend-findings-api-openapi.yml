@@ -1,0 +1,464 @@
+openapi: 3.2.0
+info:
+  title: Mend Findings API
+  description: 'Mend''s enhanced SCA API enables automation of workflows in a REST compliant format. The API features:
+
+    + Access for any user with Mend credentials, via a user key available in the user''s profile page in the Mend App.
+
+    + Improved security with a JWT token per organization, which expires every 10 minutes.
+
+    + Added scalability with support for pagination, filtering and sorting search results.
+
+    + Broader functionality available programmatically.
+
+    + New standard API documentation for easy navigation and search.
+
+
+    **Note:** To help you get started with the Mend SCA API 2.0, we recommend reviewing our onboarding guide -> Getting Started with Mend SCA API 2.0.
+
+    This resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend SCA API 2.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.'
+  version: 3.0.1
+servers:
+- url: https://api-saas.mend.io
+  description: Generated server url
+security:
+- bearer-key: []
+tags:
+- name: Findings
+paths:
+  /api/v3.0/projects/scan/filler:
+    post:
+      tags:
+      - Findings
+      summary: Migrate unified findings data from original scan events
+      operationId: fillProjectFindingsEvents
+      parameters:
+      - name: engines
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - SCA
+            - SAST
+            - UNIFIED
+            - IAC
+            - IMG
+            - DAST
+            - AI
+            - REDTEAM
+            - CN
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3MessageDTO'
+  /api/v3.0/orgs/scan/filler:
+    post:
+      tags:
+      - Findings
+      summary: Migrate unified findings data from original scan events
+      operationId: fillFindingsEvents
+      parameters:
+      - name: engines
+        in: query
+        description: List of engine scan types to include (optional)
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - SCA
+            - SAST
+            - UNIFIED
+            - IAC
+            - IMG
+            - DAST
+            - AI
+            - REDTEAM
+            - CN
+      - name: fromDate
+        in: query
+        description: Start date for filtering projects by lastActivityTime (optional). If only fromDate is provided, it will filter projects with lastActivityTime >= fromDate
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: toDate
+        in: query
+        description: End date for filtering projects by lastActivityTime (optional). If only toDate is provided, it will filter projects with lastActivityTime <= toDate. If both dates are provided, it will filter projects with lastActivityTime between these dates. If no dates are provided, it will include all projects
+        required: false
+        schema:
+          type: string
+          format: date-time
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              description: List of organization UUIDs
+              items:
+                type: string
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3MessageDTO'
+  /api/v3.0/projects/scan/filler/{projectUuid}/violations:
+    get:
+      tags:
+      - Findings
+      summary: Get project violations that were saved in the cloud in the migration process…
+      operationId: getProjectViolations
+      parameters:
+      - name: projectUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: size
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 1000
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableV3ListMigratedProjectViolationDTO'
+  /api/v3.0/orgs/{orgUuid}/snapshot-findings/daily:
+    get:
+      tags:
+      - Findings
+      summary: Get Daily Snapshot Findings
+      description: Returns the daily snapshot findings statistics for the given projects that match at least one of the given identifiers.
+      operationId: getDailySnapshotFindings
+      parameters:
+      - name: fromDate
+        in: query
+        description: Enter the start date for the search. The date format is yyyy-MM-dd
+        required: true
+        schema:
+          type: string
+      - name: toDate
+        in: query
+        description: Enter the end date for the search. The date format is yyyy-MM-dd
+        required: true
+        schema:
+          type: string
+      - name: search
+        in: query
+        description: "Filter your search to return items whose property has a specific value.\nUse the syntax: **[property][operator][value]**\n+ **Property**: the name of the property of the item\n+ **Operator**:\n    + **equals (==)** - Returns true if the value exactly matches this one. If the value contains a * character, it behaves like a wildcard (similar to the LIKE operator).\nExample: entity==abc* — will return true for entities like \"abcd\" and \"abc_123\".\n    + **in (=in=)** - Returns true if the value matches any item in the comma-separated list.\nExample: entity=in=value1,value2 — will return true for entities which are either value1, or value2.\n    + **between (=btw=)** - Returns true if the value falls within the specified range.\nExample: entity=btw=10,20 — will return true for values between 10 and 20.\n\n+ **Value**: the value of the property.\n\nLogical operators AND (;) and OR (,) are supported in filters — param1=in=(val1,val2) and (param2==val3 or param3==val4), can also be written as — param1=in=(val1,val2);(param2==val3,param3==val4)\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ labels: UUID Values: equals, in\n+ applications: UUID Values: equals, in\n+ projects: UUID Values: equals, in"
+        allowEmptyValue: true
+        schema:
+          type: string
+      - name: orgUuid
+        in: path
+        description: Org UUID (Administration > General)
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3ListDailySnapshotFindingsDTO'
+  /api/v3.0/orgs/scan/filler/{orgUuid}/violations:
+    get:
+      tags:
+      - Findings
+      summary: Get project violations that were saved in the cloud in the migration process…
+      operationId: getProjectViolations_2
+      parameters:
+      - name: orgUuid
+        in: path
+        description: Organization UUID
+        required: true
+        schema:
+          type: string
+      - name: page
+        in: query
+        description: Page number (0-based)
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: size
+        in: query
+        description: Page size
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 1000
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableV3ListMigratedProjectViolationDTO'
+components:
+  schemas:
+    SnapshotFindingsTotalsDTO:
+      type: object
+      properties:
+        criticalSeveritySCA:
+          type: integer
+          format: int32
+        highSeveritySCA:
+          type: integer
+          format: int32
+        mediumSeveritySCA:
+          type: integer
+          format: int32
+        lowSeveritySCA:
+          type: integer
+          format: int32
+        criticalSeveritySAST:
+          type: integer
+          format: int32
+        highSeveritySAST:
+          type: integer
+          format: int32
+        mediumSeveritySAST:
+          type: integer
+          format: int32
+        lowSeveritySAST:
+          type: integer
+          format: int32
+        criticalSeverityIMG:
+          type: integer
+          format: int32
+        highSeverityIMG:
+          type: integer
+          format: int32
+        mediumSeverityIMG:
+          type: integer
+          format: int32
+        lowSeverityIMG:
+          type: integer
+          format: int32
+        unknownSeverityIMG:
+          type: integer
+          format: int32
+    DailySnapshotFindingsDTO:
+      type: object
+      properties:
+        date:
+          type: string
+        totals:
+          $ref: '#/components/schemas/SnapshotFindingsTotalsDTO'
+    DWRResponsePageableV3ListMigratedProjectViolationDTO:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            '
+          example:
+            totalItems: '422'
+            next: http://someUrl?cursor=3
+            cursor: 3
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          type: array
+          items:
+            $ref: '#/components/schemas/MigratedProjectViolationDTO'
+    DWRResponseV3MessageDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          $ref: '#/components/schemas/MessageDTO'
+    MigratedProjectViolationDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        findingId:
+          type: string
+        uuid:
+          type: string
+        findingName:
+          type: string
+        orgId:
+          type: integer
+          format: int64
+        orgUuid:
+          type: string
+        projectId:
+          type: integer
+          format: int64
+        scanUuid:
+          type: string
+        engine:
+          type: string
+        findingType:
+          type: string
+        elementUuid:
+          type: string
+        elementName:
+          type: string
+        workflowUuid:
+          type: string
+        workflowName:
+          type: string
+        state:
+          type: string
+        suppressed:
+          type: integer
+          format: int32
+        reviewed:
+          type: integer
+          format: int32
+        risk:
+          type: integer
+          format: int32
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        findingRefId:
+          type: string
+        projectUuid:
+          type: string
+        sla:
+          type: string
+        manualRisk:
+          type: integer
+          format: int32
+        manualSla:
+          type: string
+    MessageDTO:
+      type: object
+      properties:
+        message:
+          title: message
+          type: string
+          example: Success!
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+    DWRResponseV3ListDailySnapshotFindingsDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          type: array
+          items:
+            $ref: '#/components/schemas/DailySnapshotFindingsDTO'
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: JWT token Bearer
+      scheme: bearer
+      bearerFormat: JWT

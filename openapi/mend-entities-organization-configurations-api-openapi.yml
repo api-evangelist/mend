@@ -1,0 +1,542 @@
+openapi: 3.2.0
+info:
+  title: Mend Entities - Organization Configurations API
+  description: 'Mend''s enhanced SCA API enables automation of workflows in a REST compliant format. The API features:
+
+    + Access for any user with Mend credentials, via a user key available in the user''s profile page in the Mend App.
+
+    + Improved security with a JWT token per organization, which expires every 10 minutes.
+
+    + Added scalability with support for pagination, filtering and sorting search results.
+
+    + Broader functionality available programmatically.
+
+    + New standard API documentation for easy navigation and search.
+
+
+    **Note:** To help you get started with the Mend SCA API 2.0, we recommend reviewing our onboarding guide -> Getting Started with Mend SCA API 2.0.
+
+    This resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend SCA API 2.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.'
+  version: 3.0.1
+servers:
+- url: https://api-saas.mend.io
+  description: Generated server url
+security:
+- bearer-key: []
+tags:
+- name: Entities - Organization Configurations
+paths:
+  /api/v3.0/orgs/{orgUuid}/configurations/{configUuid}:
+    put:
+      tags:
+      - Entities - Organization Configurations
+      summary: Rename configuration
+      description: Renames an existing configuration.
+      operationId: renameConfiguration
+      parameters:
+      - name: orgUuid
+        in: path
+        description: org UUID.
+        required: true
+        schema:
+          type: string
+      - name: configUuid
+        in: path
+        description: Configuration UUID
+        required: true
+        schema:
+          type: string
+      - name: namespace
+        in: query
+        description: Configuration Namespace
+        required: true
+        schema:
+          type: string
+          enum:
+          - Code
+          - AI
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DomainConfigurationRequestDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageDTO'
+    delete:
+      tags:
+      - Entities - Organization Configurations
+      summary: Remove configuration definition
+      description: Removes a configuration definition.
+      operationId: deleteConfiguration
+      parameters:
+      - name: orgUuid
+        in: path
+        description: org UUID.
+        required: true
+        schema:
+          type: string
+      - name: configUuid
+        in: path
+        description: Configuration UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageDTO'
+  /api/v3.0/orgs/{orgUuid}/configurations/{configUuid}/projects:
+    post:
+      tags:
+      - Entities - Organization Configurations
+      summary: Assign configuration to multiple projects
+      description: Assigns a configuration to multiple projects.
+      operationId: assignProjectConfigurations
+      parameters:
+      - name: orgUuid
+        in: path
+        description: org UUID.
+        required: true
+        schema:
+          type: string
+      - name: configUuid
+        in: path
+        description: Configuration UUID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EntityConfigurationRequestDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageDTO'
+  /api/v3.0/orgs/{orgUuid}/configurations/{configUuid}/applications:
+    post:
+      tags:
+      - Entities - Organization Configurations
+      summary: Assign configuration to multiple applications
+      description: Assigns a configuration to multiple applications.
+      operationId: assignApplicationConfigurations
+      parameters:
+      - name: orgUuid
+        in: path
+        description: org UUID.
+        required: true
+        schema:
+          type: string
+      - name: configUuid
+        in: path
+        description: Configuration UUID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EntityConfigurationRequestDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageDTO'
+  /api/v3.0/orgs/{orgUuid}/configurations/default:
+    get:
+      tags:
+      - Entities - Organization Configurations
+      summary: Get Organization default configuration
+      description: Returns default configuration
+      operationId: getDefaultConfiguration
+      parameters:
+      - name: orgUuid
+        in: path
+        description: org UUID.
+        required: true
+        schema:
+          type: string
+      - name: namespace
+        in: query
+        description: Configuration Namespace
+        required: true
+        schema:
+          type: string
+          enum:
+          - Code
+          - AI
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DomainConfigurationDTO'
+    post:
+      tags:
+      - Entities - Organization Configurations
+      summary: Change default configuration
+      description: Changes a default configuration.
+      operationId: changeDefaultConfiguration
+      parameters:
+      - name: orgUuid
+        in: path
+        description: org UUID.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateDefaultConfigurationRequestDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageDTO'
+  /api/v3.0/orgs/{orgUuid}/configurations:
+    get:
+      tags:
+      - Entities - Organization Configurations
+      summary: Get Organization configurations
+      description: Returns a list of all configurations accessible to the current user
+      operationId: getConfigurations
+      parameters:
+      - name: pageSize
+        in: query
+        allowEmptyValue: true
+        schema:
+          maximum: 10000
+          type: string
+          default: '50'
+      - name: page
+        in: query
+        allowEmptyValue: true
+        schema:
+          type: string
+          default: '0'
+      - name: orgUuid
+        in: path
+        description: org UUID.
+        required: true
+        schema:
+          type: string
+      - name: namespace
+        in: query
+        description: Configuration Namespace
+        required: true
+        schema:
+          type: string
+          enum:
+          - Code
+          - AI
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableV3CollectionDomainConfigurationDTO'
+    post:
+      tags:
+      - Entities - Organization Configurations
+      summary: Add configuration definition
+      description: Adds a new configuration definition.
+      operationId: createConfiguration
+      parameters:
+      - name: orgUuid
+        in: path
+        description: org UUID.
+        required: true
+        schema:
+          type: string
+      - name: namespace
+        in: query
+        description: Configuration Namespace
+        required: true
+        schema:
+          type: string
+          enum:
+          - Code
+          - AI
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DomainConfigurationRequestDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityDTO'
+  /api/v3.0/orgs/{orgUuid}/configurations/{configUuid}/default:
+    delete:
+      tags:
+      - Entities - Organization Configurations
+      summary: Unset default configuration
+      description: Unsets a default configuration.
+      operationId: unsetDefaultConfiguration
+      parameters:
+      - name: orgUuid
+        in: path
+        description: org UUID.
+        required: true
+        schema:
+          type: string
+      - name: configUuid
+        in: path
+        description: Configuration UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageDTO'
+components:
+  schemas:
+    EntityConfigurationRequestDTO:
+      required:
+      - entityTokens
+      type: object
+      properties:
+        entityTokens:
+          type: array
+          items:
+            title: Entity Token
+            type: string
+            description: 'Depending on the value of contextType, this can be:
+
+              + orgToken (org UUID by running Entities - Organization > Get User Organization) or Api Token (from the Mend SCA App: **Integrate** tab > **API Key**).
+
+              + productToken (product UUID (by running Entities - Organization > Get Organization Products) or Product Token (from the Mend SCA App: **Integrate** tab > **Product Token**.
+
+              + projectToken (project UUID by running Entities - Product > Get Product Projects) or project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+            example: 123e4567-e89b-12d3-a456-426655440000
+    UpdateDefaultConfigurationRequestDTO:
+      required:
+      - defaultUuid
+      type: object
+      properties:
+        currentUuid:
+          title: Current default configuration UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        defaultUuid:
+          title: New default configuration UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+    EntityDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+        name:
+          type: string
+    DomainConfigurationRequestDTO:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          title: Configuration Name
+          type: string
+          example: Configuration Name A
+    DWRResponsePageableV3CollectionDomainConfigurationDTO:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            '
+          example:
+            totalItems: '422'
+            next: http://someUrl?cursor=3
+            cursor: 3
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          type: array
+          items:
+            $ref: '#/components/schemas/DomainConfigurationDTO'
+    MessageDTO:
+      type: object
+      properties:
+        message:
+          title: message
+          type: string
+          example: Success!
+    DomainConfigurationDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+        namespace:
+          type: string
+        value:
+          type: string
+        displayName:
+          type: string
+        defaultConfig:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+        id:
+          type: integer
+          format: int64
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: JWT token Bearer
+      scheme: bearer
+      bearerFormat: JWT

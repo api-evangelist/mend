@@ -1,0 +1,319 @@
+openapi: 3.2.0
+info:
+  title: Mend Statistics - Project API
+  description: 'Mend''s enhanced SCA API enables automation of workflows in a REST compliant format. The API features:
+
+    + Access for any user with Mend credentials, via a user key available in the user''s profile page in the Mend App.
+
+    + Improved security with a JWT token per organization, which expires every 10 minutes.
+
+    + Added scalability with support for pagination, filtering and sorting search results.
+
+    + Broader functionality available programmatically.
+
+    + New standard API documentation for easy navigation and search.
+
+
+    **Note:** To help you get started with the Mend SCA API 2.0, we recommend reviewing our onboarding guide -> Getting Started with Mend SCA API 2.0.
+
+    This resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend SCA API 2.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.'
+  version: 3.0.1
+servers:
+- url: https://api-saas.mend.io
+  description: Generated server url
+security:
+- bearer-key: []
+tags:
+- name: Statistics - Project
+paths:
+  /api/v2.0/projects/{projectIdentifier}/statistics/overTime:
+    get:
+      tags:
+      - Statistics - Project
+      summary: Get Project Statistics Over Time
+      description: Returns the statistics over time for the given project
+      operationId: getProjectsStatisticsOverTime
+      parameters:
+      - name: projectIdentifier
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      - name: category
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - alerts
+          - licenseRisk
+          - licenseHistogram
+          - general
+          - vulnerabilityEffectiveness
+          - sourceLibraries
+          - policyViolations
+          - vulnerabilitySeverityLibraries
+          - outdatedLibraries
+          - policyViolatingLibraries
+          - libraryTypeHistogram
+          - approvalRequests
+          - sastVulnerabilitiesBySeverity
+          - sastVulnerabilitiesByType
+          - sastScan
+          - sastRiskFactors
+          - unifiedVulnerabilities
+          - scan
+          - scans
+          - scaSecurity
+          - llmSecurity
+          - imgSecurity
+          - imgScanComplete
+          - iacSecurity
+          - imgUsage
+          - dastSecurity
+          - aiSecurity
+          - workflowViolations
+          - scaWorkflowViolations
+          - sastWorkflowViolations
+          - imgWorkflowViolations
+          - aiWorkflowViolations
+          - scaViolatingWorkflows
+          - sastViolatingWorkflows
+          - imgViolatingWorkflows
+          - aiViolatingWorkflows
+          - scaViolatingFindings
+          - sastViolatingFindings
+          - imgViolatingFindings
+          - aiViolatingFindings
+          - scaFrameworks
+          - aiModels
+          - scaExploitableVulnerabilities
+          - scaMscFindings
+          - imgMscFindings
+          - aiRiskFactors
+          - containerRiskFactors
+          - scaCriticalSecurityEventFindings
+          - contextRiskFactors
+      - name: timeUnit
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - MONTH
+          - DAY
+          - WEEK
+          - HOUR
+      - name: from
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: to
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+                  additionalProperties:
+                    type: integer
+                    format: int64
+  /api/v2.0/projects/{projectIdentifier}/statistics/last:
+    get:
+      tags:
+      - Statistics - Project
+      summary: Get Project Statistics
+      description: Returns the last statistics for the given project and date
+      operationId: getLastProjectStatistics
+      parameters:
+      - name: projectIdentifier
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      - name: category
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - alerts
+          - licenseRisk
+          - licenseHistogram
+          - general
+          - vulnerabilityEffectiveness
+          - sourceLibraries
+          - policyViolations
+          - vulnerabilitySeverityLibraries
+          - outdatedLibraries
+          - policyViolatingLibraries
+          - libraryTypeHistogram
+          - approvalRequests
+          - sastVulnerabilitiesBySeverity
+          - sastVulnerabilitiesByType
+          - sastScan
+          - sastRiskFactors
+          - unifiedVulnerabilities
+          - scan
+          - scans
+          - scaSecurity
+          - llmSecurity
+          - imgSecurity
+          - imgScanComplete
+          - iacSecurity
+          - imgUsage
+          - dastSecurity
+          - aiSecurity
+          - workflowViolations
+          - scaWorkflowViolations
+          - sastWorkflowViolations
+          - imgWorkflowViolations
+          - aiWorkflowViolations
+          - scaViolatingWorkflows
+          - sastViolatingWorkflows
+          - imgViolatingWorkflows
+          - aiViolatingWorkflows
+          - scaViolatingFindings
+          - sastViolatingFindings
+          - imgViolatingFindings
+          - aiViolatingFindings
+          - scaFrameworks
+          - aiModels
+          - scaExploitableVulnerabilities
+          - scaMscFindings
+          - imgMscFindings
+          - aiRiskFactors
+          - containerRiskFactors
+          - scaCriticalSecurityEventFindings
+          - contextRiskFactors
+      - name: before
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LastStatisticsDTO'
+  /api/v2.0/projects/{projectIdentifier}/statistics:
+    get:
+      tags:
+      - Statistics - Project
+      summary: Get Project Statistics
+      description: Returns the requested statistics for the given project
+      operationId: getProjectsStatistics_2
+      parameters:
+      - name: projectIdentifier
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      - name: categories
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectStatisticsDTO'
+components:
+  schemas:
+    LastStatisticsDTO:
+      type: object
+      properties:
+        lastModified:
+          type: string
+          format: date-time
+        statistics:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int64
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+    ProjectStatisticsDTO:
+      type: object
+      properties:
+        project:
+          $ref: '#/components/schemas/EntityDTO'
+        statistics:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: integer
+              format: int64
+    EntityDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+        name:
+          type: string
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: JWT token Bearer
+      scheme: bearer
+      bearerFormat: JWT

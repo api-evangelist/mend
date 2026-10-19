@@ -1,0 +1,547 @@
+openapi: 3.2.0
+info:
+  title: Mend Allowlist IP API
+  description: 'Mend''s enhanced SCA API enables automation of workflows in a REST compliant format. The API features:
+
+    + Access for any user with Mend credentials, via a user key available in the user''s profile page in the Mend App.
+
+    + Improved security with a JWT token per organization, which expires every 10 minutes.
+
+    + Added scalability with support for pagination, filtering and sorting search results.
+
+    + Broader functionality available programmatically.
+
+    + New standard API documentation for easy navigation and search.
+
+
+    **Note:** To help you get started with the Mend SCA API 2.0, we recommend reviewing our onboarding guide -> Getting Started with Mend SCA API 2.0.
+
+    This resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend SCA API 2.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.'
+  version: 3.0.1
+servers:
+- url: https://api-saas.mend.io
+  description: Generated server url
+security:
+- bearer-key: []
+tags:
+- name: Allowlist IP
+paths:
+  /api/v3.0/orgs/{orgUuid}/allowlist/{uuid}/status:
+    put:
+      tags:
+      - Allowlist IP
+      summary: Update allowlist IP status
+      description: Update organization allowlist IP status
+      operationId: updateWhitelistIpStatus
+      parameters:
+      - name: orgUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: uuid
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AllowlistIpUpdateStatusRequestDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3AllowlistIpDTO'
+  /api/v3.0/orgs/{orgUuid}/allowlist/{uuid}:
+    put:
+      tags:
+      - Allowlist IP
+      summary: Update allowlist IP
+      description: Update organization allowlist IP
+      operationId: updateWhitelistIp
+      parameters:
+      - name: orgUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: uuid
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AllowlistIpUpdateRequestDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3AllowlistIpDTO'
+    delete:
+      tags:
+      - Allowlist IP
+      summary: Remove allowlist IP
+      description: Remove organization allowlist IP
+      operationId: removeWhitelistIp
+      parameters:
+      - name: orgUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: uuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3MessageDTO'
+  /api/v3.0/orgs/{orgUuid}/allowlist/toggle:
+    post:
+      tags:
+      - Allowlist IP
+      summary: Toggle ip allowlisting
+      description: Toggle organization ip allowlist
+      operationId: toggleWhitelistIp
+      parameters:
+      - name: orgUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ToggleAllowlistRequestDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3Boolean'
+  /api/v3.0/orgs/{orgUuid}/allowlist/check:
+    post:
+      tags:
+      - Allowlist IP
+      summary: Check if IP is Allowlisted
+      description: Check if the given IP is allowlisted for the organization
+      operationId: checkWhitelistIp
+      parameters:
+      - name: orgUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CheckAllowlistIpRequestDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3AllowlistIpDTO'
+  /api/v3.0/orgs/{orgUuid}/allowlist:
+    get:
+      tags:
+      - Allowlist IP
+      summary: Get allowlist IPs
+      description: Get organization allowlist IPs
+      operationId: getWhitelistIp
+      parameters:
+      - name: cursor
+        in: query
+        description: Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved
+        allowEmptyValue: true
+        schema:
+          type: string
+          default: '0'
+      - name: limit
+        in: query
+        description: Specifies the maximum number of items to be return in the response.
+        allowEmptyValue: true
+        schema:
+          maximum: 10000
+          type: string
+          default: '50'
+      - name: search
+        in: query
+        description: "Filter your search to return items whose property has a specific value.\nUse the syntax: **[property][operator][value]**\n+ **Property**: the name of the property of the item\n+ **Operator**:\n    + **equals (==)** - Returns true if the value exactly matches this one. If the value contains a * character, it behaves like a wildcard (similar to the LIKE operator).\nExample: entity==abc* — will return true for entities like \"abcd\" and \"abc_123\".\n    + **in (=in=)** - Returns true if the value matches any item in the comma-separated list.\nExample: entity=in=value1,value2 — will return true for entities which are either value1, or value2.\n    + **between (=btw=)** - Returns true if the value falls within the specified range.\nExample: entity=btw=10,20 — will return true for values between 10 and 20.\n    + **greaterThan (=gt=)** - Returns true if the value is greater than the specified parameter.\nExample: entity=gt=100 — will return true for values greater than 100.\n\n+ **Value**: the value of the property.\n\nLogical operators AND (;) and OR (,) are supported in filters — param1=in=(val1,val2) and (param2==val3 or param3==val4), can also be written as — param1=in=(val1,val2);(param2==val3,param3==val4)\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ ip: equals\n+ updatedBy: equals\n+ status: equals\n+ description: equals (use full values or the LIKE operator)"
+        allowEmptyValue: true
+        schema:
+          type: string
+      - name: orgUuid
+        in: path
+        description: Org UUID (Administration > General)
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableV3ListAllowlistIpDTO'
+    post:
+      tags:
+      - Allowlist IP
+      summary: Create allowlist IP
+      description: Create organization allowlist IP
+      operationId: createWhitelistIp
+      parameters:
+      - name: orgUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AllowlistIpRequestDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3AllowlistIpDTO'
+  /api/v3.0/internal/orgs/{orgUuid}/allowlist/toggle:
+    post:
+      tags:
+      - Allowlist IP
+      summary: Internal Toggle ip allowlisting
+      description: Internal toggle organization ip allowlist
+      operationId: toggleWhitelistIp_1
+      parameters:
+      - name: orgUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ToggleAllowlistRequestDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3Boolean'
+  /api/v3.0/internal/orgs/{orgUuid}/allowlist:
+    post:
+      tags:
+      - Allowlist IP
+      summary: Internal Create allowlist IP
+      description: Internal create organization allowlist IP
+      operationId: addWhitelistIp
+      parameters:
+      - name: orgUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AllowlistIpRequestDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3AllowlistIpDTO'
+  /api/v3.0/orgs/{orgUuid}/allowlist/status:
+    get:
+      tags:
+      - Allowlist IP
+      summary: Get allowlist IP status
+      description: Get organization allowlist IP status
+      operationId: getWhitelistIpStatus
+      parameters:
+      - name: orgUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3Boolean'
+components:
+  schemas:
+    DWRResponseV3Boolean:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          type: boolean
+    AllowlistIpUpdateRequestDTO:
+      type: object
+      properties:
+        ip:
+          type: string
+        description:
+          type: string
+    AllowlistIpRequestDTO:
+      type: object
+      properties:
+        ip:
+          type: string
+        description:
+          type: string
+        active:
+          type: boolean
+    AllowlistIpDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+        ip:
+          type: string
+        cidr:
+          type: string
+        description:
+          type: string
+        active:
+          type: boolean
+        updatedBy:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    DWRResponsePageableV3ListAllowlistIpDTO:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            '
+          example:
+            totalItems: '422'
+            next: http://someUrl?cursor=3
+            cursor: 3
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          type: array
+          items:
+            $ref: '#/components/schemas/AllowlistIpDTO'
+    DWRResponseV3AllowlistIpDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          $ref: '#/components/schemas/AllowlistIpDTO'
+    ToggleAllowlistRequestDTO:
+      type: object
+      properties:
+        includeLegacy:
+          type: boolean
+    DWRResponseV3MessageDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          $ref: '#/components/schemas/MessageDTO'
+    AllowlistIpUpdateStatusRequestDTO:
+      type: object
+      properties:
+        active:
+          type: boolean
+    CheckAllowlistIpRequestDTO:
+      type: object
+      properties:
+        ip:
+          type: string
+    MessageDTO:
+      type: object
+      properties:
+        message:
+          title: message
+          type: string
+          example: Success!
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: JWT token Bearer
+      scheme: bearer
+      bearerFormat: JWT

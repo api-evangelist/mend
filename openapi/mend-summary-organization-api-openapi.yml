@@ -1,8 +1,23 @@
 openapi: 3.2.0
 info:
   title: Mend Summary - Organization API
-  description: Mend's enhanced SCA API enables automation of workflows in a REST compliant format.
-  version: '2.0'
+  description: 'Mend''s enhanced SCA API enables automation of workflows in a REST compliant format. The API features:
+
+    + Access for any user with Mend credentials, via a user key available in the user''s profile page in the Mend App.
+
+    + Improved security with a JWT token per organization, which expires every 10 minutes.
+
+    + Added scalability with support for pagination, filtering and sorting search results.
+
+    + Broader functionality available programmatically.
+
+    + New standard API documentation for easy navigation and search.
+
+
+    **Note:** To help you get started with the Mend SCA API 2.0, we recommend reviewing our onboarding guide -> Getting Started with Mend SCA API 2.0.
+
+    This resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend SCA API 2.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.'
+  version: 3.0.1
 servers:
 - url: https://api-saas.mend.io
   description: Generated server url
@@ -11,6 +26,52 @@ security:
 tags:
 - name: Summary - Organization
 paths:
+  /api/v2.0/orgs/{orgToken}/summaries:
+    post:
+      tags:
+      - Summary - Organization
+      summary: Get Organization Statistics
+      description: Returns the requested statistics for the given organization
+      operationId: getOrganizationSummary
+      parameters:
+      - name: orgToken
+        in: path
+        description: entity UUID or ApiToken (organization, product or project).
+        required: true
+        schema:
+          type: string
+      - name: categories
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MultiContextRequestDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseDomainSummaryDTO'
   /api/v2.0/orgs/{orgToken}/summary/scanCountPerAgent:
     get:
       tags:
@@ -25,6 +86,8 @@ paths:
         in: query
         description: "Filter your search to return items whose property has a specific value.\nUse the syntax: **property:operation:value** where a colon (:) separates between property, operation and value.\n+ Property: the name of the property of the item\n+ Operation:\n    + **between** - true if the value is inside a range. Syntax: lowest value comma (,) highest value. E.g. between:2019-05-01,2019-06-01\n+ Value: the value of the property.\n\nThis endpoint supports filtering on this property:\n+ date:between:date1,date2. E.g. between:2019-05-10,2019-06-01. Difference between dates cannot be greater than 30 days\n"
         allowEmptyValue: true
+        schema:
+          type: string
       - name: orgToken
         in: path
         description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
@@ -32,24 +95,24 @@ paths:
         schema:
           type: string
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponseScanSummaryCountDTO'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseScanSummaryCountDTO'
   /api/v2.0/orgs/{orgToken}/summary/projects/vulnerableLibraryCount:
     get:
       tags:
@@ -77,6 +140,8 @@ paths:
         in: query
         description: "Filter your search to return items whose property has a specific value.\nUse the syntax: **property:operation:value** where a colon (:) separates between property, operation and value.\n+ Property: the name of the property of the item\n+ Operation:\n    + **equals** - true if the value is identical to this value.\n    + **like** - true if the property's value is contained within this value\n    + **regex** - true if this regular expression resolves as true.\n        The regex is not case sensitive, and special characters must be escaped with a backslash.\n        Special characters include space, double quote (\"), '<', '>', '#', '%', '{', '}', vertical bar ('|'), backslash, '^'.\n        To pass an escaped character in a URL in Postman, encode it first.\n        E.g. to return all items whose value begins with **a** or **A**, use regex:^a\n+ Value: the value of the property.\n\n\nTo combine multiple filters, separate each filter with a semicolon with no space. E.g.  property1:operation1:value1;property2:operation2:value2\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ vulnerabilityId:[equals]:value\n+ productName:[like | equals | regex]:value\n+ projectName:[like | equals | regex]:value\n"
         allowEmptyValue: true
+        schema:
+          type: string
       - name: orgToken
         in: path
         description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
@@ -84,24 +149,24 @@ paths:
         schema:
           type: string
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponsePageableCollectionVulnrerableLibrariesByProjectCountDTO'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableCollectionVulnrerableLibrariesByProjectCountDTO'
   /api/v2.0/orgs/{orgToken}/summary/projects/totalLibraryCount:
     get:
       tags:
@@ -132,24 +197,24 @@ paths:
         schema:
           type: string
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponsePageableCollectionLibraryCountByProjectDTO'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableCollectionLibraryCountByProjectDTO'
   /api/v2.0/orgs/{orgToken}/summary/projects/inHouseLibraries:
     get:
       tags:
@@ -180,24 +245,24 @@ paths:
         schema:
           type: string
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponsePageableDomainSummeryInHouseLibraryPerProjectDTO'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableDomainSummeryInHouseLibraryPerProjectDTO'
   /api/v2.0/orgs/{orgToken}/summary/products/vulnerableLibraryCount:
     get:
       tags:
@@ -225,6 +290,8 @@ paths:
         in: query
         description: "Filter your search to return items whose property has a specific value.\nUse the syntax: **property:operation:value** where a colon (:) separates between property, operation and value.\n+ Property: the name of the property of the item\n+ Operation:\n    + **equals** - true if the value is identical to this value.\n    + **like** - true if the property's value is contained within this value\n    + **regex** - true if this regular expression resolves as true.\n        The regex is not case sensitive, and special characters must be escaped with a backslash.\n        Special characters include space, double quote (\"), '<', '>', '#', '%', '{', '}', vertical bar ('|'), backslash, '^'.\n        To pass an escaped character in a URL in Postman, encode it first.\n        E.g. to return all items whose value begins with **a** or **A**, use regex:^a\n+ Value: the value of the property.\n\n\nTo combine multiple filters, separate each filter with a semicolon with no space. E.g.  property1:operation1:value1;property2:operation2:value2\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ vulnerabilityId:[equals]:value\n+ productName:[like | equals | regex]:value\n+ projectName:[like | equals | regex]:value\n"
         allowEmptyValue: true
+        schema:
+          type: string
       - name: orgToken
         in: path
         description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
@@ -232,24 +299,62 @@ paths:
         schema:
           type: string
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponsePageableCollectionVulnerableLibrariesCountDTO'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableCollectionVulnerableLibrariesCountDTO'
+  /api/v2.0/orgs/{orgToken}/summary/products/vulnerability/{CVE}:
+    get:
+      tags:
+      - Summary - Organization
+      summary: Get Organization affected product by vulnerability
+      description: Returns the affected products by vulnerability for a given organization.
+      operationId: getOrganizationAffectedProductsPerVulnerability
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      - name: CVE
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseAffectedProductsDto'
   /api/v2.0/orgs/{orgToken}/summary/products/totalLibraryCount:
     get:
       tags:
@@ -280,24 +385,24 @@ paths:
         schema:
           type: string
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponsePageableCollectionLibraryCountByProductDTO'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableCollectionLibraryCountByProductDTO'
   /api/v2.0/orgs/{orgToken}/summary/products/inHouseLibraries:
     get:
       tags:
@@ -328,24 +433,24 @@ paths:
         schema:
           type: string
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponsePageableDomainSummaryInHouseLibraryPerProductDTO'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableDomainSummaryInHouseLibraryPerProductDTO'
   /api/v2.0/orgs/{orgToken}/summary/libraryCountPerLicense:
     get:
       tags:
@@ -376,24 +481,24 @@ paths:
         schema:
           type: string
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponseLicenseCountDto'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseLicenseCountDto'
   /api/v2.0/orgs/{orgToken}/summary/libraryCountPerLanguage:
     get:
       tags:
@@ -409,24 +514,24 @@ paths:
         schema:
           type: string
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponseLibraryLanguageCountDto'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseLibraryLanguageCountDto'
   /api/v2.0/orgs/{orgToken}/summary/effective/vulnerabilityCountPerSeverity:
     get:
       tags:
@@ -447,24 +552,24 @@ paths:
         schema:
           type: boolean
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponseVulnerabilityAlertCountPerEffectiveUsageDTO'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseVulnerabilityAlertCountPerEffectiveUsageDTO'
   /api/v2.0/orgs/{orgToken}/summary/alertTypes:
     get:
       tags:
@@ -485,24 +590,24 @@ paths:
         schema:
           type: boolean
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponseDomainAlertTypeSummaryDTO'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseDomainAlertTypeSummaryDTO'
   /api/v2.0/orgs/{orgToken}/summary/alertCountPerSeverity:
     get:
       tags:
@@ -523,39 +628,1003 @@ paths:
         schema:
           type: boolean
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponseSecurityAlertPerVulnerabilityDTO'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseSecurityAlertPerVulnerabilityDTO'
+  /api/v2.0/orgs/{orgToken}/summaries/security:
+    get:
+      tags:
+      - Summary - Organization
+      summary: Get Organization Statistics
+      description: Returns the requested statistics for the given organization
+      operationId: getOrganizationTrendsOverTime
+      parameters:
+      - name: orgToken
+        in: path
+        description: entity UUID or ApiToken (organization, product or project).
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseListOrgSecurityStatisticDTO'
 components:
   schemas:
-    DomainSummeryInHouseLibraryPerProjectDTO:
+    DWRResponsePageableDomainSummaryInHouseLibraryPerProductDTO:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            + **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining.'
+          example:
+            totalItems: '422'
+            isLastPage: 'true'
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/DomainSummaryInHouseLibraryPerProductDTO'
+      description: Provides insights into endpoint-supported pagination information
+    SastOrgSecurityStatisticsDTO:
+      type: object
+      properties:
+        findingNewCritical:
+          type: integer
+          format: int32
+        findingNewHigh:
+          type: integer
+          format: int32
+        findingNewMedium:
+          type: integer
+          format: int32
+        findingNewLow:
+          type: integer
+          format: int32
+        findingBacklogCritical:
+          type: integer
+          format: int32
+        findingBacklogHigh:
+          type: integer
+          format: int32
+        findingBacklogMedium:
+          type: integer
+          format: int32
+        findingBacklogLow:
+          type: integer
+          format: int32
+        remediationNewCritical:
+          type: integer
+          format: int32
+        remediationNewHigh:
+          type: integer
+          format: int32
+        remediationNewMedium:
+          type: integer
+          format: int32
+        remediationNewLow:
+          type: integer
+          format: int32
+        remediationBacklogCritical:
+          type: integer
+          format: int32
+        remediationBacklogHigh:
+          type: integer
+          format: int32
+        remediationBacklogMedium:
+          type: integer
+          format: int32
+        remediationBacklogLow:
+          type: integer
+          format: int32
+        suppressionNewCritical:
+          type: integer
+          format: int32
+        suppressionNewHigh:
+          type: integer
+          format: int32
+        suppressionNewMedium:
+          type: integer
+          format: int32
+        suppressionNewLow:
+          type: integer
+          format: int32
+        suppressionBacklogCritical:
+          type: integer
+          format: int32
+        suppressionBacklogHigh:
+          type: integer
+          format: int32
+        suppressionBacklogMedium:
+          type: integer
+          format: int32
+        suppressionBacklogLow:
+          type: integer
+          format: int32
+    VulnerabilityAlertCountPerEffectiveUsageDTO:
+      type: object
+      properties:
+        red:
+          $ref: '#/components/schemas/SecurityAlertPerVulnerabilityDTO'
+        yellow:
+          $ref: '#/components/schemas/SecurityAlertPerVulnerabilityDTO'
+        green:
+          $ref: '#/components/schemas/SecurityAlertPerVulnerabilityDTO'
+        grey:
+          $ref: '#/components/schemas/SecurityAlertPerVulnerabilityDTO'
+    VulnerableLibrariesCountDTO:
+      type: object
+      properties:
+        uuid:
+          title: Entity Uuid
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        productName:
+          title: Product Name
+          type: string
+          example: Product A
+        projectCount:
+          title: Project Count
+          type: integer
+          format: int64
+          example: 10
+        vulnerableLibraries:
+          title: Number of vulnerable libraries
+          type: integer
+          format: int64
+          example: 10
+    DomainSummaryInHouseLibraryPerProductDTO:
       type: object
       properties:
         totalOrganizationCount:
           title: Total Count of In-House Libraries in the Organization
           type: integer
-          format: int32
+          format: int64
           example: 34
-        projects:
-          title: In-House Libraries per Project
+        products:
+          title: In-House Libraries per Product
           type: array
           items:
-            $ref: '#/components/schemas/LibraryInHouseCountPerProjectDTO'
+            $ref: '#/components/schemas/LibraryInHouseCountPerProductDTO'
+    ScaOrgSecurityStatisticsDTO:
+      type: object
+      properties:
+        findingNewCveVulnerabilityHigh:
+          type: integer
+          format: int32
+        findingNewCveVulnerabilityCritical:
+          type: integer
+          format: int32
+        findingNewCveVulnerabilityMedium:
+          type: integer
+          format: int32
+        findingNewCveVulnerabilityLow:
+          type: integer
+          format: int32
+        findingNewCveMscCritical:
+          type: integer
+          format: int32
+        findingNewCveMscHigh:
+          type: integer
+          format: int32
+        findingNewCveMscMedium:
+          type: integer
+          format: int32
+        findingNewCveMscLow:
+          type: integer
+          format: int32
+        findingNewLibraryVulnerabilityCritical:
+          type: integer
+          format: int32
+        findingNewLibraryVulnerabilityHigh:
+          type: integer
+          format: int32
+        findingNewLibraryVulnerabilityMedium:
+          type: integer
+          format: int32
+        findingNewLibraryVulnerabilityLow:
+          type: integer
+          format: int32
+        findingNewLibraryMscCritical:
+          type: integer
+          format: int32
+        findingNewLibraryMscHigh:
+          type: integer
+          format: int32
+        findingNewLibraryMscMedium:
+          type: integer
+          format: int32
+        findingNewLibraryMscLow:
+          type: integer
+          format: int32
+        findingNewRootVulnerabilityCritical:
+          type: integer
+          format: int32
+        findingNewRootVulnerabilityHigh:
+          type: integer
+          format: int32
+        findingNewRootVulnerabilityMedium:
+          type: integer
+          format: int32
+        findingNewRootVulnerabilityLow:
+          type: integer
+          format: int32
+        findingNewRootMscCritical:
+          type: integer
+          format: int32
+        findingNewRootMscHigh:
+          type: integer
+          format: int32
+        findingNewRootMscMedium:
+          type: integer
+          format: int32
+        findingNewRootMscLow:
+          type: integer
+          format: int32
+        findingBacklogCveVulnerabilityCritical:
+          type: integer
+          format: int32
+        findingBacklogCveVulnerabilityHigh:
+          type: integer
+          format: int32
+        findingBacklogCveVulnerabilityMedium:
+          type: integer
+          format: int32
+        findingBacklogCveVulnerabilityLow:
+          type: integer
+          format: int32
+        findingBacklogCveMscCritical:
+          type: integer
+          format: int32
+        findingBacklogCveMscHigh:
+          type: integer
+          format: int32
+        findingBacklogCveMscMedium:
+          type: integer
+          format: int32
+        findingBacklogCveMscLow:
+          type: integer
+          format: int32
+        findingBacklogLibraryVulnerabilityCritical:
+          type: integer
+          format: int32
+        findingBacklogLibraryVulnerabilityHigh:
+          type: integer
+          format: int32
+        findingBacklogLibraryVulnerabilityMedium:
+          type: integer
+          format: int32
+        findingBacklogLibraryVulnerabilityLow:
+          type: integer
+          format: int32
+        findingBacklogLibraryMscCritical:
+          type: integer
+          format: int32
+        findingBacklogLibraryMscHigh:
+          type: integer
+          format: int32
+        findingBacklogLibraryMscMedium:
+          type: integer
+          format: int32
+        findingBacklogLibraryMscLow:
+          type: integer
+          format: int32
+        findingBacklogRootVulnerabilityCritical:
+          type: integer
+          format: int32
+        findingBacklogRootVulnerabilityHigh:
+          type: integer
+          format: int32
+        findingBacklogRootVulnerabilityMedium:
+          type: integer
+          format: int32
+        findingBacklogRootVulnerabilityLow:
+          type: integer
+          format: int32
+        findingBacklogRootMscCritical:
+          type: integer
+          format: int32
+        findingBacklogRootMscHigh:
+          type: integer
+          format: int32
+        findingBacklogRootMscMedium:
+          type: integer
+          format: int32
+        findingBacklogRootMscLow:
+          type: integer
+          format: int32
+        remediationNewCveVulnerabilityCritical:
+          type: integer
+          format: int32
+        remediationNewCveVulnerabilityHigh:
+          type: integer
+          format: int32
+        remediationNewCveVulnerabilityMedium:
+          type: integer
+          format: int32
+        remediationNewCveVulnerabilityLow:
+          type: integer
+          format: int32
+        remediationNewCveMscCritical:
+          type: integer
+          format: int32
+        remediationNewCveMscHigh:
+          type: integer
+          format: int32
+        remediationNewCveMscMedium:
+          type: integer
+          format: int32
+        remediationNewCveMscLow:
+          type: integer
+          format: int32
+        remediationNewLibraryVulnerabilityCritical:
+          type: integer
+          format: int32
+        remediationNewLibraryVulnerabilityHigh:
+          type: integer
+          format: int32
+        remediationNewLibraryVulnerabilityMedium:
+          type: integer
+          format: int32
+        remediationNewLibraryVulnerabilityLow:
+          type: integer
+          format: int32
+        remediationNewLibraryMscCritical:
+          type: integer
+          format: int32
+        remediationNewLibraryMscHigh:
+          type: integer
+          format: int32
+        remediationNewLibraryMscMedium:
+          type: integer
+          format: int32
+        remediationNewLibraryMscLow:
+          type: integer
+          format: int32
+        remediationNewRootVulnerabilityCritical:
+          type: integer
+          format: int32
+        remediationNewRootVulnerabilityHigh:
+          type: integer
+          format: int32
+        remediationNewRootVulnerabilityMedium:
+          type: integer
+          format: int32
+        remediationNewRootVulnerabilityLow:
+          type: integer
+          format: int32
+        remediationNewRootMscCritical:
+          type: integer
+          format: int32
+        remediationNewRootMscHigh:
+          type: integer
+          format: int32
+        remediationNewRootMscMedium:
+          type: integer
+          format: int32
+        remediationNewRootMscLow:
+          type: integer
+          format: int32
+        remediationBacklogCveVulnerabilityCritical:
+          type: integer
+          format: int32
+        remediationBacklogCveVulnerabilityHigh:
+          type: integer
+          format: int32
+        remediationBacklogCveVulnerabilityMedium:
+          type: integer
+          format: int32
+        remediationBacklogCveVulnerabilityLow:
+          type: integer
+          format: int32
+        remediationBacklogCveMscCritical:
+          type: integer
+          format: int32
+        remediationBacklogCveMscHigh:
+          type: integer
+          format: int32
+        remediationBacklogCveMscMedium:
+          type: integer
+          format: int32
+        remediationBacklogCveMscLow:
+          type: integer
+          format: int32
+        remediationBacklogLibraryVulnerabilityCritical:
+          type: integer
+          format: int32
+        remediationBacklogLibraryVulnerabilityHigh:
+          type: integer
+          format: int32
+        remediationBacklogLibraryVulnerabilityMedium:
+          type: integer
+          format: int32
+        remediationBacklogLibraryVulnerabilityLow:
+          type: integer
+          format: int32
+        remediationBacklogLibraryMscCritical:
+          type: integer
+          format: int32
+        remediationBacklogLibraryMscHigh:
+          type: integer
+          format: int32
+        remediationBacklogLibraryMscMedium:
+          type: integer
+          format: int32
+        remediationBacklogLibraryMscLow:
+          type: integer
+          format: int32
+        remediationBacklogRootVulnerabilityCritical:
+          type: integer
+          format: int32
+        remediationBacklogRootVulnerabilityHigh:
+          type: integer
+          format: int32
+        remediationBacklogRootVulnerabilityMedium:
+          type: integer
+          format: int32
+        remediationBacklogRootVulnerabilityLow:
+          type: integer
+          format: int32
+        remediationBacklogRootMscCritical:
+          type: integer
+          format: int32
+        remediationBacklogRootMscHigh:
+          type: integer
+          format: int32
+        remediationBacklogRootMscMedium:
+          type: integer
+          format: int32
+        remediationBacklogRootMscLow:
+          type: integer
+          format: int32
+        suppressionNewCveVulnerabilityCritical:
+          type: integer
+          format: int32
+        suppressionNewCveVulnerabilityHigh:
+          type: integer
+          format: int32
+        suppressionNewCveVulnerabilityMedium:
+          type: integer
+          format: int32
+        suppressionNewCveVulnerabilityLow:
+          type: integer
+          format: int32
+        suppressionNewCveMscCritical:
+          type: integer
+          format: int32
+        suppressionNewCveMscHigh:
+          type: integer
+          format: int32
+        suppressionNewCveMscMedium:
+          type: integer
+          format: int32
+        suppressionNewCveMscLow:
+          type: integer
+          format: int32
+        suppressionNewLibraryVulnerabilityCritical:
+          type: integer
+          format: int32
+        suppressionNewLibraryVulnerabilityHigh:
+          type: integer
+          format: int32
+        suppressionNewLibraryVulnerabilityMedium:
+          type: integer
+          format: int32
+        suppressionNewLibraryVulnerabilityLow:
+          type: integer
+          format: int32
+        suppressionNewLibraryMscCritical:
+          type: integer
+          format: int32
+        suppressionNewLibraryMscHigh:
+          type: integer
+          format: int32
+        suppressionNewLibraryMscMedium:
+          type: integer
+          format: int32
+        suppressionNewLibraryMscLow:
+          type: integer
+          format: int32
+        suppressionNewRootVulnerabilityCritical:
+          type: integer
+          format: int32
+        suppressionNewRootVulnerabilityHigh:
+          type: integer
+          format: int32
+        suppressionNewRootVulnerabilityMedium:
+          type: integer
+          format: int32
+        suppressionNewRootVulnerabilityLow:
+          type: integer
+          format: int32
+        suppressionNewRootMscCritical:
+          type: integer
+          format: int32
+        suppressionNewRootMscHigh:
+          type: integer
+          format: int32
+        suppressionNewRootMscMedium:
+          type: integer
+          format: int32
+        suppressionNewRootMscLow:
+          type: integer
+          format: int32
+        suppressionBacklogCveVulnerabilityCritical:
+          type: integer
+          format: int32
+        suppressionBacklogCveVulnerabilityHigh:
+          type: integer
+          format: int32
+        suppressionBacklogCveVulnerabilityMedium:
+          type: integer
+          format: int32
+        suppressionBacklogCveVulnerabilityLow:
+          type: integer
+          format: int32
+        suppressionBacklogCveMscCritical:
+          type: integer
+          format: int32
+        suppressionBacklogCveMscHigh:
+          type: integer
+          format: int32
+        suppressionBacklogCveMscMedium:
+          type: integer
+          format: int32
+        suppressionBacklogCveMscLow:
+          type: integer
+          format: int32
+        suppressionBacklogLibraryVulnerabilityCritical:
+          type: integer
+          format: int32
+        suppressionBacklogLibraryVulnerabilityHigh:
+          type: integer
+          format: int32
+        suppressionBacklogLibraryVulnerabilityMedium:
+          type: integer
+          format: int32
+        suppressionBacklogLibraryVulnerabilityLow:
+          type: integer
+          format: int32
+        suppressionBacklogLibraryMscCritical:
+          type: integer
+          format: int32
+        suppressionBacklogLibraryMscHigh:
+          type: integer
+          format: int32
+        suppressionBacklogLibraryMscMedium:
+          type: integer
+          format: int32
+        suppressionBacklogLibraryMscLow:
+          type: integer
+          format: int32
+        suppressionBacklogRootVulnerabilityCritical:
+          type: integer
+          format: int32
+        suppressionBacklogRootVulnerabilityHigh:
+          type: integer
+          format: int32
+        suppressionBacklogRootVulnerabilityMedium:
+          type: integer
+          format: int32
+        suppressionBacklogRootVulnerabilityLow:
+          type: integer
+          format: int32
+        suppressionBacklogRootMscCritical:
+          type: integer
+          format: int32
+        suppressionBacklogRootMscHigh:
+          type: integer
+          format: int32
+        suppressionBacklogRootMscMedium:
+          type: integer
+          format: int32
+        suppressionBacklogRootMscLow:
+          type: integer
+          format: int32
+    DomainSummaryDTO:
+      type: object
+      properties:
+        uuid:
+          title: Org Uuid
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Org Name
+          type: string
+          example: Organization A
+        creationTime:
+          type: string
+          format: date-time
+        statistics:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: integer
+              format: int64
+    OrgSecurityStatisticDTO:
+      type: object
+      properties:
+        scaSecurity:
+          $ref: '#/components/schemas/ScaOrgSecurityStatisticsDTO'
+        sastSecurity:
+          $ref: '#/components/schemas/SastOrgSecurityStatisticsDTO'
+        imgSecurity:
+          $ref: '#/components/schemas/ImgOrgSecurityStatisticsDTO'
+        projects:
+          type: integer
+          format: int32
+        applications:
+          type: integer
+          format: int32
+        date:
+          type: string
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+    DWRResponseListOrgSecurityStatisticDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrgSecurityStatisticDTO'
+    DWRResponsePageableCollectionLibraryCountByProductDTO:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            + **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining.'
+          example:
+            totalItems: '422'
+            isLastPage: 'true'
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          type: array
+          items:
+            $ref: '#/components/schemas/LibraryCountByProductDTO'
+      description: Provides insights into endpoint-supported pagination information
+    ScanSummaryItemDTO:
+      type: object
+      properties:
+        name:
+          title: Agent Name
+          type: string
+          example: unified-agent
+        count:
+          title: Scan Count
+          type: integer
+          description: Number of scans by agent
+          format: int64
+          example: 10
+    DWRResponseLicenseCountDto:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/LicenseCountDto'
+    DWRResponsePageableCollectionVulnrerableLibrariesByProjectCountDTO:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            + **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining.'
+          example:
+            totalItems: '422'
+            isLastPage: 'true'
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          type: array
+          items:
+            $ref: '#/components/schemas/VulnrerableLibrariesByProjectCountDTO'
+      description: Provides insights into endpoint-supported pagination information
+    LicensePerDomainCountDto:
+      type: object
+      properties:
+        licenseUuid:
+          title: Library UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: License Name
+          type: string
+          example: MIT
+        spdxName:
+          title: License SPDX Name
+          type: string
+          example: MIT
+        numberOfLibraries:
+          title: License Count Per Domain
+          type: integer
+          format: int64
+          example: 100
+    LicenseCountDto:
+      type: object
+      properties:
+        totalLibraryCount:
+          type: integer
+          format: int32
+        licenses:
+          type: array
+          items:
+            $ref: '#/components/schemas/LicensePerDomainCountDto'
+    DWRResponsePageableDomainSummeryInHouseLibraryPerProjectDTO:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            + **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining.'
+          example:
+            totalItems: '422'
+            isLastPage: 'true'
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/DomainSummeryInHouseLibraryPerProjectDTO'
+      description: Provides insights into endpoint-supported pagination information
+    DWRResponseAffectedProductsDto:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/AffectedProductsDto'
+    ProductDTO:
+      type: object
+      properties:
+        uuid:
+          title: Product Uuid
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Product Name
+          type: string
+          example: Product A
+    AffectedProductsDto:
+      type: object
+      properties:
+        totalCount:
+          title: Total count of affected products by vulnerability
+          type: integer
+          format: int32
+          example: 10
+        products:
+          title: Affected products
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductDTO'
+    LibraryInHouseCountPerProductDTO:
+      title: In-House Libraries per Product
+      type: object
+      properties:
+        uuid:
+          title: Product UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Product Name
+          type: string
+          example: myProduct
+        inHouseLibraries:
+          title: Number of In-House Libraries in Product
+          type: integer
+          format: int32
+          example: 34
+        projectCount:
+          title: Number of Projects in Product
+          type: integer
+          format: int32
+          example: 34
+    DWRResponseScanSummaryCountDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/ScanSummaryCountDTO'
+    PolicyCountDTO:
+      type: object
+      properties:
+        violations:
+          title: Policy Violations Count
+          type: integer
+          format: int32
+          example: 5
+    LibraryInHouseCountPerProjectDTO:
+      title: In-House Libraries per Project
+      type: object
+      properties:
+        uuid:
+          title: Project UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Project Name
+          type: string
+          example: myProject
+        inHouseLibraries:
+          title: Number of In-House Libraries in Project
+          type: integer
+          format: int32
+          example: 34
+    DWRResponseDomainSummaryDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/DomainSummaryDTO'
+    SecurityAlertPerLibraryDTO:
+      type: object
+      properties:
+        total:
+          title: Total Library Alerts Count
+          type: integer
+          format: int32
+          example: 15
+        librariesWithCritical:
+          title: Critical Severity Library Alerts Count
+          type: integer
+          format: int32
+          example: 5
+        librariesWithHigh:
+          title: High Severity Library Alerts Count
+          type: integer
+          format: int32
+          example: 4
+        librariesWithMedium:
+          title: Medium Severity Library Alerts Count
+          type: integer
+          format: int32
+          example: 3
+        librariesWithLow:
+          title: Low Severity Library Alerts Count
+          type: integer
+          format: int32
+          example: 3
+    DWRResponseSecurityAlertPerVulnerabilityDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/SecurityAlertPerVulnerabilityDTO'
+    LibraryCountByProjectDTO:
+      type: object
+      properties:
+        uuid:
+          title: Project UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Project name
+          type: string
+          example: myProject
+        numberOfLibraries:
+          title: Number of libraries in project
+          type: integer
+          format: int32
+          example: 34
+    LibraryCountByProductDTO:
+      type: object
+      properties:
+        uuid:
+          title: Product UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Product name
+          type: string
+          example: myProduct
+        numberOfLibraries:
+          title: Number of libraries in product
+          type: integer
+          format: int32
+          example: 34
+    DWRResponsePageableCollectionVulnerableLibrariesCountDTO:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            + **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining.'
+          example:
+            totalItems: '422'
+            isLastPage: 'true'
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          type: array
+          items:
+            $ref: '#/components/schemas/VulnerableLibrariesCountDTO'
+      description: Provides insights into endpoint-supported pagination information
+    ScanSummaryCountDTO:
+      type: object
+      properties:
+        totalCount:
+          title: Total Scan Count
+          type: integer
+          description: Total number of all scans
+          format: int64
+          example: 20
+        agents:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScanSummaryItemDTO'
     SecurityAlertPerVulnerabilityDTO:
       type: object
       properties:
@@ -592,81 +1661,6 @@ components:
           type: integer
           format: int32
           example: 5
-    DWRResponsePageableCollectionVulnrerableLibrariesByProjectCountDTO:
-      type: object
-      properties:
-        additionalData:
-          title: Provides insights into endpoint-supported pagination information.
-          type: object
-          description: '+ **totalItems**: The total count of data points returned in an API response.
-
-            + **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining.'
-          example:
-            totalItems: '422'
-            isLastPage: 'true'
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          type: array
-          items:
-            $ref: '#/components/schemas/VulnrerableLibrariesByProjectCountDTO'
-      description: Provides insights into endpoint-supported pagination information
-    PolicyCountDTO:
-      type: object
-      properties:
-        violations:
-          title: Policy Violations Count
-          type: integer
-          format: int32
-          example: 5
-    LibraryCountByProjectDTO:
-      type: object
-      properties:
-        uuid:
-          title: Project UUID
-          type: string
-          example: 123e4567-e89b-12d3-a456-426655440000
-        name:
-          title: Project name
-          type: string
-          example: myProject
-        numberOfLibraries:
-          title: Number of libraries in project
-          type: integer
-          format: int32
-          example: 34
-    DWRResponseLibraryLanguageCountDto:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/LibraryLanguageCountDto'
-    VulnerableLibrariesCountDTO:
-      type: object
-      properties:
-        uuid:
-          title: Entity Uuid
-          type: string
-          example: 123e4567-e89b-12d3-a456-426655440000
-        productName:
-          title: Product Name
-          type: string
-          example: Product A
-        projectCount:
-          title: Project Count
-          type: integer
-          format: int64
-          example: 10
-        vulnerableLibraries:
-          title: Number of vulnerable libraries
-          type: integer
-          format: int64
-          example: 10
     DWRResponseVulnerabilityAlertCountPerEffectiveUsageDTO:
       type: object
       properties:
@@ -676,121 +1670,13 @@ components:
           example: 1171c60d
         retVal:
           $ref: '#/components/schemas/VulnerabilityAlertCountPerEffectiveUsageDTO'
-    LibraryInHouseCountPerProductDTO:
-      title: In-House Libraries per Product
+    LibraryLanguageCountDto:
       type: object
       properties:
-        uuid:
-          title: Product UUID
-          type: string
-          example: 123e4567-e89b-12d3-a456-426655440000
-        name:
-          title: Product Name
-          type: string
-          example: myProduct
-        inHouseLibraries:
-          title: Number of In-House Libraries in Product
-          type: integer
-          format: int32
-          example: 34
-        projectCount:
-          title: Number of Projects in Product
-          type: integer
-          format: int32
-          example: 34
-    SecurityAlertPerLibraryDTO:
-      type: object
-      properties:
-        total:
-          title: Total Library Alerts Count
-          type: integer
-          format: int32
-          example: 15
-        librariesWithCritical:
-          title: Critical Severity Library Alerts Count
-          type: integer
-          format: int32
-          example: 5
-        librariesWithHigh:
-          title: High Severity Library Alerts Count
-          type: integer
-          format: int32
-          example: 4
-        librariesWithMedium:
-          title: Medium Severity Library Alerts Count
-          type: integer
-          format: int32
-          example: 3
-        librariesWithLow:
-          title: Low Severity Library Alerts Count
-          type: integer
-          format: int32
-          example: 3
-    DWRResponseLicenseCountDto:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/LicenseCountDto'
-    DWRResponsePageableDomainSummeryInHouseLibraryPerProjectDTO:
-      type: object
-      properties:
-        additionalData:
-          title: Provides insights into endpoint-supported pagination information.
-          type: object
-          description: '+ **totalItems**: The total count of data points returned in an API response.
-
-            + **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining.'
-          example:
-            totalItems: '422'
-            isLastPage: 'true'
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/DomainSummeryInHouseLibraryPerProjectDTO'
-      description: Provides insights into endpoint-supported pagination information
-    LibraryLanguageTypeCountDto:
-      type: object
-      properties:
-        language:
-          title: Library Language
-          type: string
-          example: Java
-        count:
-          title: Total Count of Library language in User's Projects
-          type: integer
-          format: int64
-          example: 15
-    LibraryCountByProductDTO:
-      type: object
-      properties:
-        uuid:
-          title: Product UUID
-          type: string
-          example: 123e4567-e89b-12d3-a456-426655440000
-        name:
-          title: Product name
-          type: string
-          example: myProduct
-        numberOfLibraries:
-          title: Number of libraries in product
-          type: integer
-          format: int32
-          example: 34
-    DWRResponseDomainAlertTypeSummaryDTO:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/DomainAlertTypeSummaryDTO'
+        languages:
+          type: array
+          items:
+            $ref: '#/components/schemas/LibraryLanguageTypeCountDto'
     VulnrerableLibrariesByProjectCountDTO:
       type: object
       properties:
@@ -811,76 +1697,36 @@ components:
           type: integer
           format: int64
           example: 10
-    DWRResponseBase:
+    LibraryLanguageTypeCountDto:
       type: object
       properties:
-        supportToken:
-          title: Support Token
+        language:
+          title: Library Language
           type: string
-          example: 1171c60d
-    DWRResponsePageableCollectionLibraryCountByProductDTO:
-      type: object
-      properties:
-        additionalData:
-          title: Provides insights into endpoint-supported pagination information.
-          type: object
-          description: '+ **totalItems**: The total count of data points returned in an API response.
-
-            + **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining.'
-          example:
-            totalItems: '422'
-            isLastPage: 'true'
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          type: array
-          items:
-            $ref: '#/components/schemas/LibraryCountByProductDTO'
-      description: Provides insights into endpoint-supported pagination information
-    DWRResponseSecurityAlertPerVulnerabilityDTO:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/SecurityAlertPerVulnerabilityDTO'
-    LicensePerDomainCountDto:
-      type: object
-      properties:
-        licenseUuid:
-          title: Library UUID
-          type: string
-          example: 123e4567-e89b-12d3-a456-426655440000
-        name:
-          title: License Name
-          type: string
-          example: MIT
-        spdxName:
-          title: License SPDX Name
-          type: string
-          example: MIT
-        numberOfLibraries:
-          title: License Count Per Domain
-          type: integer
-          format: int64
-          example: 100
-    ScanSummaryItemDTO:
-      type: object
-      properties:
-        name:
-          title: Agent Name
-          type: string
-          example: unified-agent
+          example: Java
         count:
-          title: Scan Count
+          title: Total Count of Library language in User's Projects
           type: integer
-          description: Number of scans by agent
           format: int64
-          example: 10
+          example: 15
+    DWRResponseDomainAlertTypeSummaryDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/DomainAlertTypeSummaryDTO'
+    DWRResponseLibraryLanguageCountDto:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/LibraryLanguageCountDto'
     DWRResponsePageableCollectionLibraryCountByProjectDTO:
       type: object
       properties:
@@ -902,117 +1748,35 @@ components:
           items:
             $ref: '#/components/schemas/LibraryCountByProjectDTO'
       description: Provides insights into endpoint-supported pagination information
-    VulnerabilityAlertCountPerEffectiveUsageDTO:
+    MultiContextRequestDTO:
       type: object
       properties:
-        red:
-          $ref: '#/components/schemas/SecurityAlertPerVulnerabilityDTO'
-        yellow:
-          $ref: '#/components/schemas/SecurityAlertPerVulnerabilityDTO'
-        green:
-          $ref: '#/components/schemas/SecurityAlertPerVulnerabilityDTO'
-        grey:
-          $ref: '#/components/schemas/SecurityAlertPerVulnerabilityDTO'
-    LibraryInHouseCountPerProjectDTO:
-      title: In-House Libraries per Project
-      type: object
-      properties:
-        uuid:
-          title: Project UUID
-          type: string
-          example: 123e4567-e89b-12d3-a456-426655440000
-        name:
-          title: Project Name
-          type: string
-          example: myProject
-        inHouseLibraries:
-          title: Number of In-House Libraries in Project
-          type: integer
-          format: int32
-          example: 34
-    LibraryLanguageCountDto:
-      type: object
-      properties:
-        languages:
+        projectIdentifiers:
           type: array
           items:
-            $ref: '#/components/schemas/LibraryLanguageTypeCountDto'
-    DomainSummaryInHouseLibraryPerProductDTO:
+            title: Project Identifiers
+            type: string
+            example: 123e4567-e89b-12d3-a456-426655440000
+        productIdentifiers:
+          type: array
+          items:
+            title: Product Identifier
+            type: string
+            example: 123e4567-e89b-12d3-a456-426655440000
+      description: If projectIdentifiers and productIdentifiers are empty, action will apply to the whole organization
+    DomainSummeryInHouseLibraryPerProjectDTO:
       type: object
       properties:
         totalOrganizationCount:
           title: Total Count of In-House Libraries in the Organization
           type: integer
-          format: int64
-          example: 34
-        products:
-          title: In-House Libraries per Product
-          type: array
-          items:
-            $ref: '#/components/schemas/LibraryInHouseCountPerProductDTO'
-    LicenseCountDto:
-      type: object
-      properties:
-        totalLibraryCount:
-          type: integer
           format: int32
-        licenses:
+          example: 34
+        projects:
+          title: In-House Libraries per Project
           type: array
           items:
-            $ref: '#/components/schemas/LicensePerDomainCountDto'
-    DWRResponsePageableDomainSummaryInHouseLibraryPerProductDTO:
-      type: object
-      properties:
-        additionalData:
-          title: Provides insights into endpoint-supported pagination information.
-          type: object
-          description: '+ **totalItems**: The total count of data points returned in an API response.
-
-            + **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining.'
-          example:
-            totalItems: '422'
-            isLastPage: 'true'
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/DomainSummaryInHouseLibraryPerProductDTO'
-      description: Provides insights into endpoint-supported pagination information
-    DWRResponsePageableCollectionVulnerableLibrariesCountDTO:
-      type: object
-      properties:
-        additionalData:
-          title: Provides insights into endpoint-supported pagination information.
-          type: object
-          description: '+ **totalItems**: The total count of data points returned in an API response.
-
-            + **isLastPage**: Defines whether the current page represents the conclusion of the API response. When “true”, this signifies you are viewing the last page of the API response. When “false”, this indicates there are further pages remaining.'
-          example:
-            totalItems: '422'
-            isLastPage: 'true'
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          type: array
-          items:
-            $ref: '#/components/schemas/VulnerableLibrariesCountDTO'
-      description: Provides insights into endpoint-supported pagination information
-    ScanSummaryCountDTO:
-      type: object
-      properties:
-        totalCount:
-          title: Total Scan Count
-          type: integer
-          description: Total number of all scans
-          format: int64
-          example: 20
-        agents:
-          type: array
-          items:
-            $ref: '#/components/schemas/ScanSummaryItemDTO'
+            $ref: '#/components/schemas/LibraryInHouseCountPerProjectDTO'
     DomainAlertTypeSummaryDTO:
       type: object
       properties:
@@ -1024,15 +1788,81 @@ components:
           $ref: '#/components/schemas/SecurityAlertPerLibraryDTO'
         securityPerVulnerability:
           $ref: '#/components/schemas/SecurityAlertPerVulnerabilityDTO'
-    DWRResponseScanSummaryCountDTO:
+    ImgOrgSecurityStatisticsDTO:
       type: object
       properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/ScanSummaryCountDTO'
+        findingNewCritical:
+          type: integer
+          format: int32
+        findingNewHigh:
+          type: integer
+          format: int32
+        findingNewMedium:
+          type: integer
+          format: int32
+        findingNewLow:
+          type: integer
+          format: int32
+        findingBacklogCritical:
+          type: integer
+          format: int32
+        findingBacklogHigh:
+          type: integer
+          format: int32
+        findingBacklogMedium:
+          type: integer
+          format: int32
+        findingBacklogLow:
+          type: integer
+          format: int32
+        remediationNewCritical:
+          type: integer
+          format: int32
+        remediationNewHigh:
+          type: integer
+          format: int32
+        remediationNewMedium:
+          type: integer
+          format: int32
+        remediationNewLow:
+          type: integer
+          format: int32
+        remediationBacklogCritical:
+          type: integer
+          format: int32
+        remediationBacklogHigh:
+          type: integer
+          format: int32
+        remediationBacklogMedium:
+          type: integer
+          format: int32
+        remediationBacklogLow:
+          type: integer
+          format: int32
+        suppressionNewCritical:
+          type: integer
+          format: int32
+        suppressionNewHigh:
+          type: integer
+          format: int32
+        suppressionNewMedium:
+          type: integer
+          format: int32
+        suppressionNewLow:
+          type: integer
+          format: int32
+        suppressionBacklogCritical:
+          type: integer
+          format: int32
+        suppressionBacklogHigh:
+          type: integer
+          format: int32
+        suppressionBacklogMedium:
+          type: integer
+          format: int32
+        suppressionBacklogLow:
+          type: integer
+          format: int32
   securitySchemes:
     bearer-key:
       type: http

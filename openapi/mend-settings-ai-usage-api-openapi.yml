@@ -1,0 +1,509 @@
+openapi: 3.2.0
+info:
+  title: Mend Settings - AI Usage API
+  description: 'Mend''s enhanced SCA API enables automation of workflows in a REST compliant format. The API features:
+
+    + Access for any user with Mend credentials, via a user key available in the user''s profile page in the Mend App.
+
+    + Improved security with a JWT token per organization, which expires every 10 minutes.
+
+    + Added scalability with support for pagination, filtering and sorting search results.
+
+    + Broader functionality available programmatically.
+
+    + New standard API documentation for easy navigation and search.
+
+
+    **Note:** To help you get started with the Mend SCA API 2.0, we recommend reviewing our onboarding guide -> Getting Started with Mend SCA API 2.0.
+
+    This resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend SCA API 2.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.'
+  version: 3.0.1
+servers:
+- url: https://api-saas.mend.io
+  description: Generated server url
+security:
+- bearer-key: []
+tags:
+- name: Settings - AI Usage
+paths:
+  /api/v2.0/orgs/{orgToken}/settings/aiUsage/projectClassification:
+    get:
+      tags:
+      - Settings - AI Usage
+      summary: Get Organization AI Usage for project classification configuration
+      description: Returns an organization's AI Usage for project classification configuration
+      operationId: getAIUsageProjectClassificationSettings
+      parameters:
+      - name: orgToken
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectClassificationDTO'
+    put:
+      tags:
+      - Settings - AI Usage
+      summary: Update Organization AI Usage for project classification
+      description: Updates an organization's AI Usage for project classification
+      operationId: updateAIUsageProjectClassificationSettings
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectClassificationDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseMessageDTO'
+  /api/v2.0/orgs/{orgToken}/settings/aiUsage/codeScanCustomization:
+    get:
+      tags:
+      - Settings - AI Usage
+      summary: Get Organization AI Usage for code scan customization configuration
+      description: Returns an organization's AI Usage for code scan customization configuration
+      operationId: getAIUsageCodeScanCustomizationSettings
+      parameters:
+      - name: orgToken
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CodeScanCustomizationDTO'
+    put:
+      tags:
+      - Settings - AI Usage
+      summary: Update Organization AI Usage for code scan customization
+      description: Updates an organization's AI Usage for code scan customization
+      operationId: updateAIUsageCodeScanCustomizationSettings
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CodeScanCustomizationDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseMessageDTO'
+  /api/v2.0/orgs/{orgToken}/settings/aiUsage/codeRemediation:
+    get:
+      tags:
+      - Settings - AI Usage
+      summary: Get Organization AI Usage for code remediations configuration
+      description: Returns an organization's AI Usage for code remediations configuration
+      operationId: getOrgAIUsageCodeRemediation
+      parameters:
+      - name: orgToken
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AIUsageDTO'
+    put:
+      tags:
+      - Settings - AI Usage
+      summary: Update Organization AI Usage for code remediations
+      description: Updates an organization's AI Usage for code remediations
+      operationId: updateOrgAIUsageCodeRemediation
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AIUsageDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseMessageDTO'
+  /api/v2.0/orgs/{orgToken}/settings/aiUsage/codeFindingsTriage:
+    get:
+      tags:
+      - Settings - AI Usage
+      summary: Get Organization AI Usage for code findings triage configuration
+      description: Returns an organization's AI Usage for code findings triage configuration
+      operationId: getAIUsageCodeFindingsTriageSettings
+      parameters:
+      - name: orgToken
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CodeFindingsTriageDTO'
+    put:
+      tags:
+      - Settings - AI Usage
+      summary: Update Organization AI Usage for code findings triage
+      description: Updates an organization's AI Usage for code findings triage
+      operationId: updateAIUsageCodeFindingsTriageSettings
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CodeFindingsTriageDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseMessageDTO'
+  /api/v2.0/orgs/{orgToken}/settings/aiUsage/assistant:
+    get:
+      tags:
+      - Settings - AI Usage
+      summary: Get Organization Mend Intelligent Agent configuration
+      description: Returns whether the Mend Intelligent Agent is enabled for an organization
+      operationId: getPlatformAiAssistantSettings
+      parameters:
+      - name: orgToken
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlatformAiAssistantDTO'
+    put:
+      tags:
+      - Settings - AI Usage
+      summary: Update Organization Mend Intelligent Agent configuration
+      description: Enables or disables the Mend Intelligent Agent for an organization
+      operationId: updatePlatformAiAssistantSettings
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlatformAiAssistantDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseMessageDTO'
+  /api/v2.0/orgs/{orgToken}/settings/aiUsage/agenticDetectionEngine:
+    get:
+      tags:
+      - Settings - AI Usage
+      summary: Get Organization Agentic Detection Engine configuration
+      description: Returns an organization's Agentic Detection Engine configuration
+      operationId: getAgenticDetectionEngineSettings
+      parameters:
+      - name: orgToken
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgenticDetectionEngineDTO'
+    put:
+      tags:
+      - Settings - AI Usage
+      summary: Update Organization Agentic Detection Engine
+      description: Updates an organization's Agentic Detection Engine
+      operationId: updateAgenticDetectionEngineSettings
+      parameters:
+      - name: orgToken
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgenticDetectionEngineDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseMessageDTO'
+components:
+  schemas:
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+    CodeFindingsTriageDTO:
+      type: object
+      properties:
+        aiCodeFindingsTriageConsent:
+          type: boolean
+    AgenticDetectionEngineDTO:
+      type: object
+      properties:
+        agenticDetectionEngineConsent:
+          type: boolean
+    PlatformAiAssistantDTO:
+      type: object
+      properties:
+        platformAiAssistantConsent:
+          type: boolean
+    ProjectClassificationDTO:
+      type: object
+      properties:
+        projectClassificationConsent:
+          type: boolean
+    DWRResponseMessageDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/MessageDTO'
+    MessageDTO:
+      type: object
+      properties:
+        message:
+          title: message
+          type: string
+          example: Success!
+    CodeScanCustomizationDTO:
+      type: object
+      properties:
+        codeScanCustomizationEnabled:
+          type: boolean
+    AIUsageDTO:
+      type: object
+      properties:
+        aiUsageEnabled:
+          type: boolean
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: JWT token Bearer
+      scheme: bearer
+      bearerFormat: JWT

@@ -1,0 +1,147 @@
+openapi: 3.2.0
+info:
+  title: Mend NLP API
+  description: 'Mend''s enhanced SCA API enables automation of workflows in a REST compliant format. The API features:
+
+    + Access for any user with Mend credentials, via a user key available in the user''s profile page in the Mend App.
+
+    + Improved security with a JWT token per organization, which expires every 10 minutes.
+
+    + Added scalability with support for pagination, filtering and sorting search results.
+
+    + Broader functionality available programmatically.
+
+    + New standard API documentation for easy navigation and search.
+
+
+    **Note:** To help you get started with the Mend SCA API 2.0, we recommend reviewing our onboarding guide -> Getting Started with Mend SCA API 2.0.
+
+    This resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend SCA API 2.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.'
+  version: 3.0.1
+servers:
+- url: https://api-saas.mend.io
+  description: Generated server url
+security:
+- bearer-key: []
+tags:
+- name: NLP
+paths:
+  /api/v2.0/nlp/filters:
+    post:
+      tags:
+      - NLP
+      summary: Process NLP Filters
+      description: Processes natural language text to extract filters and sort criteria for vulnerability queries
+      operationId: processNlpFilters
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NlpFiltersRequestDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseNlpFiltersResponseDTO'
+components:
+  schemas:
+    NlpFilterDTO:
+      type: object
+      properties:
+        field:
+          type: string
+        filterType:
+          type: string
+        value:
+          type: array
+          items:
+            type: string
+    NlpSortDTO:
+      type: object
+      properties:
+        name:
+          type: string
+        order:
+          type: string
+    NlpFiltersRequestDTO:
+      type: object
+      properties:
+        text:
+          type: string
+        pageName:
+          type: string
+        availableFilters:
+          type: array
+          items:
+            $ref: '#/components/schemas/AvailableFilterDTO'
+        availableSort:
+          type: array
+          items:
+            $ref: '#/components/schemas/AvailableSortDTO'
+      description: NLP filters request containing text, pageName and available filters/sort options
+    DWRResponseNlpFiltersResponseDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/NlpFiltersResponseDTO'
+    AvailableFilterDTO:
+      type: object
+      properties:
+        field:
+          type: string
+        filterType:
+          type: string
+        description:
+          type: string
+        values:
+          type: array
+          items:
+            type: string
+    NlpFiltersResponseDTO:
+      type: object
+      properties:
+        filters:
+          type: array
+          items:
+            $ref: '#/components/schemas/NlpFilterDTO'
+        sort:
+          $ref: '#/components/schemas/NlpSortDTO'
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+    AvailableSortDTO:
+      type: object
+      properties:
+        field:
+          type: string
+        description:
+          type: string
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: JWT token Bearer
+      scheme: bearer
+      bearerFormat: JWT

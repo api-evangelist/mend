@@ -1,0 +1,388 @@
+openapi: 3.2.0
+info:
+  title: Mend Issues - Project API
+  description: 'Mend''s enhanced SCA API enables automation of workflows in a REST compliant format. The API features:
+
+    + Access for any user with Mend credentials, via a user key available in the user''s profile page in the Mend App.
+
+    + Improved security with a JWT token per organization, which expires every 10 minutes.
+
+    + Added scalability with support for pagination, filtering and sorting search results.
+
+    + Broader functionality available programmatically.
+
+    + New standard API documentation for easy navigation and search.
+
+
+    **Note:** To help you get started with the Mend SCA API 2.0, we recommend reviewing our onboarding guide -> Getting Started with Mend SCA API 2.0.
+
+    This resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend SCA API 2.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.'
+  version: 3.0.1
+servers:
+- url: https://api-saas.mend.io
+  description: Generated server url
+security:
+- bearer-key: []
+tags:
+- name: Issues - Project
+paths:
+  /api/v2.0/projects/{projectToken}/sca/issues:
+    post:
+      tags:
+      - Issues - Project
+      summary: Generate SCA JIRA Issue Data
+      description: Generates data for SCA JIRA issue
+      operationId: generateSCAIssueData
+      parameters:
+      - name: projectToken
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RootLibraryJiraIssueDataDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrackedIssueDTO'
+  /api/v2.0/projects/{projectToken}/issues/validate:
+    post:
+      tags:
+      - Issues - Project
+      summary: Validate JIRA Issue Data
+      description: Validate data for JIRA issue
+      operationId: validateIssueExistence
+      parameters:
+      - name: projectToken
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JiraIssueIssueIDDataDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrackedIssueDTO'
+  /api/v2.0/projects/{projectToken}/issues/generateAsync:
+    post:
+      tags:
+      - Issues - Project
+      summary: Generate Async Issue request
+      description: Create a JIRA DC issue
+      operationId: createIssue
+      parameters:
+      - name: projectToken
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageDTO'
+  /api/v2.0/projects/{projectToken}/issues/generate:
+    post:
+      tags:
+      - Issues - Project
+      summary: Generate JIRA Issue Data
+      description: Generates data for JIRA issue
+      operationId: generateIssueData
+      parameters:
+      - name: projectToken
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JiraIssueDataDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrackedIssueDTO'
+  /api/v2.0/projects/{projectToken}/issues:
+    get:
+      tags:
+      - Issues - Project
+      summary: Get Project Policy issue between dates
+      description: Returns a all policy issues in a given project between dates
+      operationId: getPolicyIssue
+      parameters:
+      - name: projectToken
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      - name: solution
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: from
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: to
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content: {}
+components:
+  schemas:
+    JiraIssueCustomFieldDTO:
+      type: object
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+        hidden:
+          type: boolean
+    EntityDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+        name:
+          type: string
+    RootLibraryJiraIssueDataDTO:
+      type: object
+      properties:
+        issueId:
+          type: string
+        title:
+          type: string
+        rootLibraryUuid:
+          type: string
+        rootNodeId:
+          type: integer
+          format: int64
+        domainName:
+          type: string
+        productName:
+          type: string
+        workflowName:
+          type: string
+        comment:
+          type: string
+        projectUuid:
+          type: string
+        customFields:
+          type: array
+          items:
+            $ref: '#/components/schemas/JiraIssueCustomFieldDTO'
+        automated:
+          type: boolean
+    JiraIssueDataDTO:
+      type: object
+      properties:
+        issueId:
+          type: string
+        projectUuid:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        solution:
+          type: string
+          enum:
+          - SCA
+          - SAST
+          - CN
+          - IMG
+          - IAC
+          - AI
+          - DAST
+        workflowName:
+          type: string
+        ticketType:
+          type: string
+          enum:
+          - SECURITY
+          - LEGAL
+        issueKey:
+          type: string
+        dcTitle:
+          type: string
+        dcDescription:
+          type: string
+        customFields:
+          type: array
+          items:
+            $ref: '#/components/schemas/JiraIssueCustomFieldDTO'
+        automated:
+          type: boolean
+    JiraIssueIssueIDDataDTO:
+      type: object
+      properties:
+        issueId:
+          type: string
+    MessageDTO:
+      type: object
+      properties:
+        message:
+          title: message
+          type: string
+          example: Success!
+    TrackedIssueDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+        issueId:
+          type: string
+        origin:
+          type: string
+        issueKey:
+          type: string
+        account:
+          $ref: '#/components/schemas/EntityDTO'
+        domain:
+          $ref: '#/components/schemas/EntityDTO'
+        application:
+          $ref: '#/components/schemas/EntityDTO'
+        project:
+          $ref: '#/components/schemas/EntityDTO'
+        status:
+          type: string
+          enum:
+          - PENDING
+          - IN_PROGRESS
+          - SUCCESS
+          - FAILED
+          - DELETED
+        issueStatus:
+          type: string
+        failureReason:
+          type: string
+        errorMessage:
+          type: string
+        publicLink:
+          type: string
+        creationDate:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        createdBy:
+          $ref: '#/components/schemas/EntityDTO'
+        ticketType:
+          type: string
+          enum:
+          - SECURITY
+          - LEGAL
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: JWT token Bearer
+      scheme: bearer
+      bearerFormat: JWT

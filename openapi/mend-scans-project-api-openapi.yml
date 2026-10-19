@@ -1,0 +1,1211 @@
+openapi: 3.2.0
+info:
+  title: Mend Scans - Project API
+  description: 'Mend''s enhanced SCA API enables automation of workflows in a REST compliant format. The API features:
+
+    + Access for any user with Mend credentials, via a user key available in the user''s profile page in the Mend App.
+
+    + Improved security with a JWT token per organization, which expires every 10 minutes.
+
+    + Added scalability with support for pagination, filtering and sorting search results.
+
+    + Broader functionality available programmatically.
+
+    + New standard API documentation for easy navigation and search.
+
+
+    **Note:** To help you get started with the Mend SCA API 2.0, we recommend reviewing our onboarding guide -> Getting Started with Mend SCA API 2.0.
+
+    This resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend SCA API 2.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.'
+  version: 3.0.1
+servers:
+- url: https://api-saas.mend.io
+  description: Generated server url
+security:
+- bearer-key: []
+tags:
+- name: Scans - Project
+paths:
+  /api/v2.0/projects/{projectIdentifier}/scans/{scanIdentifier}:
+    get:
+      tags:
+      - Scans - Project
+      operationId: getScan_2
+      parameters:
+      - name: projectIdentifier
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      - name: scanIdentifier
+        in: path
+        description: Scan Identifier
+        required: true
+        schema:
+          type: string
+      - name: checkUfDbStatus
+        in: query
+        description: When true, the returned scan status is reconciled against the scan's ingestion status in the Unified Findings DB. Omit it to get the scan status as stored.
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ScanDTO'
+      summary: Get scan 2
+      x-summary-source: derived
+    put:
+      tags:
+      - Scans - Project
+      operationId: updateScan_1
+      parameters:
+      - name: projectIdentifier
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      - name: scanIdentifier
+        in: path
+        description: Scan Identifier
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateScanRequestDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ScanDTO'
+      summary: Update scan 1
+      x-summary-source: derived
+  /api/v2.0/projects/{projectIdentifier}/scans/{scanIdentifier}/tags:
+    get:
+      tags:
+      - Scans - Project
+      operationId: getTags_1
+      parameters:
+      - name: projectIdentifier
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      - name: scanIdentifier
+        in: path
+        description: Scan Identifier
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseListScanTagDTO'
+      summary: Get tags 1
+      x-summary-source: derived
+    put:
+      tags:
+      - Scans - Project
+      operationId: addTagOverride_1
+      parameters:
+      - name: projectIdentifier
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      - name: scanIdentifier
+        in: path
+        description: Scan Identifier
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScanTagRequestDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ScanTagDTO'
+      summary: Add tag override 1
+      x-summary-source: derived
+    post:
+      tags:
+      - Scans - Project
+      operationId: addTag_1
+      parameters:
+      - name: projectIdentifier
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      - name: scanIdentifier
+        in: path
+        description: Scan Identifier
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScanTagRequestDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ScanTagDTO'
+      summary: Add tag 1
+      x-summary-source: derived
+    delete:
+      tags:
+      - Scans - Project
+      operationId: removeTag_1
+      parameters:
+      - name: projectIdentifier
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      - name: scanIdentifier
+        in: path
+        description: Scan Identifier
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScanTagRequestDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/MessageDTO'
+      summary: Remove tag 1
+      x-summary-source: derived
+  /api/v2.0/projects/{projectIdentifier}/scans:
+    post:
+      tags:
+      - Scans - Project
+      operationId: createScan_2
+      parameters:
+      - name: projectIdentifier
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateScanRequestDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ScanDTO'
+      summary: Create scan 2
+      x-summary-source: derived
+  /api/v2.0/projects/{projectIdentifier}/scans/{scanIdentifier}/violations:
+    get:
+      tags:
+      - Scans - Project
+      operationId: getScanViolations
+      parameters:
+      - name: projectIdentifier
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      - name: scanIdentifier
+        in: path
+        description: Scan Identifier
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseListScanViolationDTO'
+      summary: Get scan violations
+      x-summary-source: derived
+  /api/v2.0/projects/{projectIdentifier}/scans/{scanIdentifier}/violations/raw:
+    get:
+      tags:
+      - Scans - Project
+      operationId: getScanViolationsRaw
+      parameters:
+      - name: projectIdentifier
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      - name: scanIdentifier
+        in: path
+        description: Scan Identifier
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseListScanViolationRawDTO'
+      summary: Get scan violations raw
+      x-summary-source: derived
+  /api/v2.0/projects/{projectIdentifier}/scans/{scanIdentifier}/summary:
+    get:
+      tags:
+      - Scans - Project
+      operationId: getSummary_1
+      parameters:
+      - name: projectIdentifier
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      - name: scanIdentifier
+        in: path
+        description: Scan Identifier
+        required: true
+        schema:
+          type: string
+      - name: scanType
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - SCA
+          - SAST
+          - UNIFIED
+          - IAC
+          - IMG
+          - DAST
+          - AI
+          - REDTEAM
+          - CN
+      - name: checkUfDbStatus
+        in: query
+        description: When true, the returned scan status is reconciled against the scan's ingestion status in the Unified Findings DB. Omit it to get the scan status as stored.
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseScanSummaryDTO'
+      summary: Get summary 1
+      x-summary-source: derived
+  /api/v2.0/projects/{projectIdentifier}/scans/{scanIdentifier}/automation/workflows:
+    get:
+      tags:
+      - Scans - Project
+      operationId: getAutomationRunWorkflows
+      parameters:
+      - name: projectIdentifier
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      - name: scanIdentifier
+        in: path
+        description: Scan Identifier
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseListSimpleWorkflowDTO'
+      summary: Get automation run workflows
+      x-summary-source: derived
+  /api/v2.0/projects/{projectIdentifier}/scans/{scanIdentifier}/automation/workflows/{workflowUuid}/hits:
+    get:
+      tags:
+      - Scans - Project
+      operationId: getAutomationRunHits
+      parameters:
+      - name: projectIdentifier
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      - name: scanIdentifier
+        in: path
+        description: Scan Identifier
+        required: true
+        schema:
+          type: string
+      - name: workflowUuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/StreamingResponseBody'
+      summary: Get automation run hits
+      x-summary-source: derived
+  /api/v2.0/projects/{projectIdentifier}/scans/{scanIdentifier}/automation/violations:
+    get:
+      tags:
+      - Scans - Project
+      operationId: getAutomationScanViolations_2
+      parameters:
+      - name: projectIdentifier
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      - name: scanIdentifier
+        in: path
+        description: Scan Identifier
+        required: true
+        schema:
+          type: string
+      - name: isAggregated
+        in: query
+        description: Is Aggregated Result for Scan Violations
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseMatchedFindingInfoWrapper'
+      summary: Get automation scan violations 2
+      x-summary-source: derived
+  /api/v2.0/projects/{projectIdentifier}/scans/last:
+    get:
+      tags:
+      - Scans - Project
+      operationId: getScan_3
+      parameters:
+      - name: projectIdentifier
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ScanDTO'
+      summary: Get scan 3
+      x-summary-source: derived
+components:
+  schemas:
+    ScanViolationRawDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+        name:
+          type: string
+        findingId:
+          type: string
+        findingType:
+          type: string
+        findingName:
+          type: string
+        elementUuid:
+          type: string
+        elementName:
+          type: string
+        risk:
+          type: integer
+          format: int32
+        sla:
+          type: string
+        workflowUuid:
+          type: string
+        workflowName:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+    ProgressDTO:
+      required:
+      - currentStage
+      - overallPercentage
+      type: object
+      properties:
+        overallPercentage:
+          maximum: 100
+          minimum: 0
+          type: integer
+          format: int32
+        currentStage:
+          maxLength: 255
+          minLength: 0
+          type: string
+    CreateScanRequestDTO:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - SCA
+          - SAST
+          - UNIFIED
+          - IAC
+          - IMG
+          - DAST
+          - AI
+          - REDTEAM
+          - CN
+        scanName:
+          type: string
+        configurationName:
+          type: string
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScanTagDTO'
+        reference:
+          type: string
+        agentInfo:
+          $ref: '#/components/schemas/ScanAgentInfo'
+        isUpdateProject:
+          type: boolean
+        isVisible:
+          type: boolean
+    MatchedFindingInfo:
+      type: object
+      properties:
+        findingId:
+          type: string
+        findingName:
+          type: string
+        findingType:
+          type: string
+        elementUuid:
+          type: string
+        elementName:
+          type: string
+        workflowUuid:
+          type: string
+        workflowName:
+          type: string
+        refId:
+          type: string
+        risk:
+          type: integer
+          format: int32
+        slaRelativeDays:
+          type: integer
+          format: int32
+        updateExisting:
+          type: boolean
+        violationType:
+          type: string
+          enum:
+          - SECURITY
+          - LEGAL
+        findingExtraData:
+          type: object
+          additionalProperties:
+            type: object
+        uniqueKey:
+          type: string
+    MessageDTO:
+      type: object
+      properties:
+        message:
+          title: message
+          type: string
+          example: Success!
+    ScanTagDTO:
+      type: object
+      properties:
+        key:
+          title: Scan Tag Key
+          type: string
+          example: commit
+        value:
+          title: Scan Tag Value
+          type: string
+          example: 123abc
+        displayName:
+          title: Scan Tag Display Name
+          type: string
+          example: commit:123abc
+        createdAt:
+          title: Scan Tag Creation Date
+          type: string
+          format: date-time
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+    ScanDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+          enum:
+          - SCA
+          - SAST
+          - UNIFIED
+          - IAC
+          - IMG
+          - DAST
+          - AI
+          - REDTEAM
+          - CN
+        status:
+          type: string
+          enum:
+          - PLACE_HOLDER_01
+          - PLACE_HOLDER_02
+          - PLACE_HOLDER_03
+          - RUNNING
+          - PLACE_HOLDER_04
+          - PLACE_HOLDER_05
+          - PLACE_HOLDER_06
+          - PARTIAL
+          - PROCESSING
+          - PLACE_HOLDER_07
+          - PLACE_HOLDER_08
+          - PLACE_HOLDER_09
+          - FINISHED
+          - PLACE_HOLDER_10
+          - PLACE_HOLDER_11
+          - PLACE_HOLDER_12
+          - FAILED
+        aeStatus:
+          type: string
+          enum:
+          - FAILED
+          - PROCESSED
+          - PARTIAL
+          - IGNORED
+        ufDbStatus:
+          type: string
+          enum:
+          - FAILED
+          - STORED
+        projectId:
+          type: integer
+          format: int32
+        productId:
+          type: integer
+          format: int32
+        domainId:
+          type: integer
+          format: int32
+        projectUuid:
+          type: string
+        processUuid:
+          type: string
+        hasViolations:
+          type: boolean
+        startTime:
+          type: string
+          format: date-time
+        endTime:
+          type: string
+          format: date-time
+        lastModified:
+          type: string
+          format: date-time
+        configurationName:
+          type: string
+        enforceFailedBuild:
+          type: boolean
+        reference:
+          type: string
+        triggeredBy:
+          type: string
+        agentInfo:
+          $ref: '#/components/schemas/ScanAgentInfo'
+        workflowUuids:
+          type: array
+          items:
+            type: string
+        workflowNames:
+          type: array
+          items:
+            type: string
+        supportToken:
+          type: string
+        progress:
+          $ref: '#/components/schemas/ProgressDTO'
+    DWRResponseMatchedFindingInfoWrapper:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/MatchedFindingInfoWrapper'
+    SimpleWorkflowDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+        name:
+          type: string
+        matchedFindings:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProjectViolationBaseDetailsDTO'
+        conditionGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/SimpleConditionGroupDTO'
+    ProjectViolationBaseDetailsDTO:
+      type: object
+      properties:
+        findingId:
+          type: string
+        findingName:
+          type: string
+        engine:
+          type: string
+          enum:
+          - UNIFIED
+          - SCA
+          - SAST
+          - IAC
+          - IMG
+          - AI
+          - DAST
+        findingType:
+          type: string
+        elementUuid:
+          type: string
+        elementName:
+          type: string
+    SimpleConditionGroupDTO:
+      type: object
+      properties:
+        leftOperator:
+          type: string
+        conditions:
+          type: array
+          items:
+            $ref: '#/components/schemas/SimpleConditionDTO'
+    DWRResponseScanSummaryDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/ScanSummaryDTO'
+    UpdateScanRequestDTO:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - PLACE_HOLDER_01
+          - PLACE_HOLDER_02
+          - PLACE_HOLDER_03
+          - RUNNING
+          - PLACE_HOLDER_04
+          - PLACE_HOLDER_05
+          - PLACE_HOLDER_06
+          - PARTIAL
+          - PROCESSING
+          - PLACE_HOLDER_07
+          - PLACE_HOLDER_08
+          - PLACE_HOLDER_09
+          - FINISHED
+          - PLACE_HOLDER_10
+          - PLACE_HOLDER_11
+          - PLACE_HOLDER_12
+          - FAILED
+        isUpdateProject:
+          type: boolean
+        isVisible:
+          type: boolean
+        progress:
+          $ref: '#/components/schemas/ProgressDTO'
+    DWRResponseListSimpleWorkflowDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          type: array
+          items:
+            $ref: '#/components/schemas/SimpleWorkflowDTO'
+    StreamingResponseBody:
+      type: object
+    ScanSummaryDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+        name:
+          type: string
+        processUuid:
+          type: string
+        scanTime:
+          type: string
+          format: date-time
+        scanStatus:
+          type: string
+        scanType:
+          type: string
+        scanDuration:
+          type: string
+        configurationName:
+          type: string
+        reference:
+          type: string
+        triggeredBy:
+          type: string
+        agentName:
+          type: string
+        agentVersion:
+          type: string
+        supportToken:
+          type: string
+        projectName:
+          type: string
+        projectUuid:
+          type: string
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScanTagDTO'
+        path:
+          type: string
+        productUuid:
+          type: string
+        workflowUuids:
+          type: array
+          items:
+            type: string
+        workflowNames:
+          type: array
+          items:
+            type: string
+        statistics:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: integer
+              format: int64
+    DWRResponseListScanViolationDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScanViolationDTO'
+    DWRResponseListScanViolationRawDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScanViolationRawDTO'
+    ScanAgentInfo:
+      type: object
+      properties:
+        agentName:
+          type: string
+        agentVersion:
+          type: string
+        errorMessage:
+          type: string
+    SimpleConditionDTO:
+      type: object
+      properties:
+        leftOperator:
+          type: string
+        group:
+          type: string
+        factProperty:
+          type: string
+        factComparator:
+          type: string
+        factValue:
+          type: string
+        displayName:
+          type: string
+    DWRResponseListScanTagDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScanTagDTO'
+    MatchedFindingInfoWrapper:
+      type: object
+      properties:
+        matchedFindings:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatchedFindingInfo'
+        matchedFindingsAggregated:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatchedFindingAggregatedInfo'
+    WorkflowData:
+      type: object
+      properties:
+        workflowUuid:
+          type: string
+        workflowName:
+          type: string
+        entityUuid:
+          type: string
+    ScanTagRequestDTO:
+      required:
+      - key
+      - value
+      type: object
+      properties:
+        key:
+          title: Tag Key
+          type: string
+          example: Tag Key A
+        value:
+          title: Tag Value
+          type: string
+          example: Tag Value A
+    ScanViolationDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+        name:
+          type: string
+        findingType:
+          type: string
+        elementUuid:
+          type: string
+        elementName:
+          type: string
+        risk:
+          type: string
+          description: 'Risk of the violation. Can be one of: LOW, MEDIUM, HIGH, CRITICAL'
+          example: HIGH
+          enum:
+          - LOW
+          - MEDIUM
+          - HIGH
+          - CRITICAL
+        sla:
+          type: string
+        workflowData:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkflowData'
+        createdAt:
+          type: string
+          format: date-time
+        violationType:
+          type: string
+    WorkflowBaseDetails:
+      type: object
+      properties:
+        uuid:
+          type: string
+        name:
+          type: string
+    MatchedFindingAggregatedInfo:
+      type: object
+      properties:
+        findingId:
+          type: string
+        findingName:
+          type: string
+        engine:
+          type: string
+          enum:
+          - UNIFIED
+          - SCA
+          - SAST
+          - IAC
+          - IMG
+          - AI
+          - DAST
+        findingType:
+          type: string
+        elementUuid:
+          type: string
+        elementName:
+          type: string
+        findingsCount:
+          type: integer
+          format: int32
+        workflows:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkflowBaseDetails'
+        risk:
+          type: integer
+          format: int32
+        slaRelativeDays:
+          type: integer
+          format: int32
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: JWT token Bearer
+      scheme: bearer
+      bearerFormat: JWT

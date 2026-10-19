@@ -1,73 +1,124 @@
 openapi: 3.2.0
 info:
   title: Mend Administration - Groups API
-  description: Mend's enhanced API enables automation of workflows in a REST compliant format.
-  version: '3.0'
+  description: 'Mend''s enhanced SCA API enables automation of workflows in a REST compliant format. The API features:
+
+    + Access for any user with Mend credentials, via a user key available in the user''s profile page in the Mend App.
+
+    + Improved security with a JWT token per organization, which expires every 10 minutes.
+
+    + Added scalability with support for pagination, filtering and sorting search results.
+
+    + Broader functionality available programmatically.
+
+    + New standard API documentation for easy navigation and search.
+
+
+    **Note:** To help you get started with the Mend SCA API 2.0, we recommend reviewing our onboarding guide -> Getting Started with Mend SCA API 2.0.
+
+    This resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend SCA API 2.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.'
+  version: 3.0.1
 servers:
-- url: https://baseUrl
+- url: https://api-saas.mend.io
   description: Generated server url
 security:
 - bearer-key: []
 tags:
 - name: Administration - Groups
 paths:
-  /api/v3.0/orgs/{orgUuid}/groups:
+  /api/v3.0/orgs/{orgUuid}/groups/{groupUuid}/roles:
     get:
       tags:
       - Administration - Groups
-      summary: Get All Organization Groups
-      description: Returns a list of all groups within an organization
-      operationId: getAllOrganizationGroups
+      summary: Get Group Roles
+      description: Returns the list of roles associated with a given group
+      operationId: getGroupRoles
       parameters:
       - name: cursor
         in: query
-        description: Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved.
+        description: Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved
         allowEmptyValue: true
         schema:
           type: string
+          default: '0'
       - name: limit
         in: query
-        description: Specifies the maximum number of items to be returned in the response.
+        description: Specifies the maximum number of items to be return in the response.
         allowEmptyValue: true
         schema:
           maximum: 10000
           type: string
           default: '50'
+      - name: search
+        in: query
+        description: "Filter your search to return items whose property has a specific value.\nUse the syntax: **[property][operator][value]**\n+ **Property**: the name of the property of the item\n+ **Operator**:\n    + **equals (==)** - Returns true if the value exactly matches this one. If the value contains a * character, it behaves like a wildcard (similar to the LIKE operator).\nExample: entity==abc* — will return true for entities like \"abcd\" and \"abc_123\".\n    + **regex (=rgx=)** - Returns true if the regular expression resolves as true.\n        The regex is not case sensitive, and special characters must be escaped with a backslash.\n        Special characters include space, double quote (\"), '<', '>', '#', '%', '{', '}', vertical bar ('|'), backslash, '^'.\n        To pass an escaped character in a URL in Postman, encode it first.\n        E.g. to return all items whose value begins with **a** or **A**, use regex:^a\n+ **Value**: the value of the property.\nLogical operators AND (;) and OR (,) are supported in filters — param1=in=(val1,val2) and (param2==val3 or param3==val4), can also be written as — param1=in=(val1,val2);(param2==val3,param3==val4)\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ contextName: equals, regex\n+ contextType: equals, regex\n+ role: equals, regex"
+        allowEmptyValue: true
+        schema:
+          type: string
+      - name: sort
+        in: query
+        description: 'Sort search results alphabetically on an item''s property by entering **sort=** followed by the property name.
+
+          E.g. enter **sort=email** to sort alphabetically by their email addresses from a-z ascending.To sort in descending order (z-a), add a minus sign (''-''). E.g. **sort=-email**.
+
+
+          You can sort by the following properties:
+
+          + contextName
+
+          + contextType
+
+          + role'
+        allowEmptyValue: true
+        schema:
+          type: string
       - name: orgUuid
         in: path
-        description: 'org UUID (from the Mend App: **Administration** General > **Organization UUID**).'
+        description: Org UUID (Administration > General)
+        required: true
+        schema:
+          type: string
+      - name: groupUuid
+        in: path
+        description: The group UUID
         required: true
         schema:
           type: string
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponsePageableV3ListGroupSummaryDTOV3'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
-    post:
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableV3ListMultipleGroupRolesPerContextDTOV3'
+    put:
       tags:
       - Administration - Groups
-      summary: Create Group
-      description: Creates a new group for an organization
-      operationId: createGroup
+      summary: Remove Group Roles
+      description: Deletes a role from a group
+      operationId: removeGroupRoles
       parameters:
       - name: orgUuid
         in: path
-        description: 'org UUID (from the Mend App: **Administration** General > **Organization UUID**).'
+        description: Org UUID (Administration > General)
+        required: true
+        schema:
+          type: string
+      - name: groupUuid
+        in: path
+        description: Group UUID (Administration > Groups)
         required: true
         schema:
           type: string
@@ -75,74 +126,71 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateGroupRequestDTO'
+              $ref: '#/components/schemas/GroupRoleRequestDTOV3'
         required: true
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponseV3GroupDTO'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
-  /api/v3.0/orgs/{orgUuid}/groups/roleDefinitions:
-    get:
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3MessageDTO'
+    post:
       tags:
       - Administration - Groups
-      summary: Get All Organization Groups with Role Definitions
-      description: Returns a list of all groups within an organization with their role definitions
-      operationId: getAllOrganizationGroupsWithRoleDefinitions
+      summary: Add Group Roles
+      description: Creates a new group role for an organization
+      operationId: addGroupRoles
       parameters:
-      - name: cursor
-        in: query
-        description: Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved.
-        allowEmptyValue: true
-        schema:
-          type: string
-      - name: limit
-        in: query
-        description: Specifies the maximum number of items to be returned in the response.
-        allowEmptyValue: true
-        schema:
-          maximum: 10000
-          type: string
-          default: '50'
       - name: orgUuid
         in: path
-        description: 'org UUID (from the Mend App: **Administration** General > **Organization UUID**).'
+        description: Org UUID (Administration > General)
         required: true
         schema:
           type: string
+      - name: groupUuid
+        in: path
+        description: Group UUID (Administration > Groups)
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupRoleRequestDTOV3'
+        required: true
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponsePageableV3ListGroupWithRoleDefinitionsSummaryDTOV3'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3GroupRoleDTOV3'
   /api/v3.0/orgs/{orgUuid}/groups/{groupUuid}:
     get:
       tags:
@@ -153,7 +201,7 @@ paths:
       parameters:
       - name: orgUuid
         in: path
-        description: 'org UUID (from the Mend App: **Administration** General > **Organization UUID**).'
+        description: Org UUID (Administration > General)
         required: true
         schema:
           type: string
@@ -164,24 +212,24 @@ paths:
         schema:
           type: string
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponseV3GroupDTO'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3GroupDTO'
     put:
       tags:
       - Administration - Groups
@@ -191,7 +239,7 @@ paths:
       parameters:
       - name: orgUuid
         in: path
-        description: 'org UUID (from the Mend App: **Administration** General > **Organization UUID**).'
+        description: Org UUID (Administration > General)
         required: true
         schema:
           type: string
@@ -208,24 +256,24 @@ paths:
               $ref: '#/components/schemas/UpdateGroupRequestDTO'
         required: true
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponseV3GroupDTO'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3GroupDTO'
     delete:
       tags:
       - Administration - Groups
@@ -235,7 +283,7 @@ paths:
       parameters:
       - name: orgUuid
         in: path
-        description: 'org UUID (from the Mend App: **Administration** General > **Organization UUID**).'
+        description: Org UUID (Administration > General)
         required: true
         schema:
           type: string
@@ -246,165 +294,24 @@ paths:
         schema:
           type: string
       responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
         '200':
           description: OK
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/DWRResponseV3MessageDTO'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
-        '403':
-          description: Forbidden
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
-  /api/v3.0/orgs/{orgUuid}/groups/{groupUuid}/roles:
-    get:
-      tags:
-      - Administration - Groups
-      summary: Get Group Roles
-      description: Returns the list of roles associated with a given group
-      operationId: getGroupRoles
-      parameters:
-      - name: cursor
-        in: query
-        description: Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved.
-        allowEmptyValue: true
-        schema:
-          type: string
-      - name: limit
-        in: query
-        description: Specifies the maximum number of items to be returned in the response.
-        allowEmptyValue: true
-        schema:
-          maximum: 10000
-          type: string
-          default: '50'
-      - name: orgUuid
-        in: path
-        description: 'org UUID (from the Mend App: **Administration** General > **Organization UUID**).'
-        required: true
-        schema:
-          type: string
-      - name: groupUuid
-        in: path
-        description: The group UUID
-        required: true
-        schema:
-          type: string
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponsePageableV3ListMultipleGroupRolesPerContextDTOV3'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
-        '403':
-          description: Forbidden
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
-    put:
-      tags:
-      - Administration - Groups
-      summary: Remove Group Roles
-      description: Deletes a role from a group
-      operationId: removeGroupRoles
-      parameters:
-      - name: orgUuid
-        in: path
-        description: 'org UUID (from the Mend App: **Administration** General > **Organization UUID**).'
-        required: true
-        schema:
-          type: string
-      - name: groupUuid
-        in: path
-        description: Group UUID (Administration > Groups)
-        required: true
-        schema:
-          type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/GroupRoleRequestDTOV3'
-        required: true
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponseV3MessageDTO'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
-        '403':
-          description: Forbidden
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
-    post:
-      tags:
-      - Administration - Groups
-      summary: Add Group Roles
-      description: Creates a new group role for an organization
-      operationId: addGroupRoles
-      parameters:
-      - name: orgUuid
-        in: path
-        description: 'org UUID (from the Mend App: **Administration** General > **Organization UUID**).'
-        required: true
-        schema:
-          type: string
-      - name: groupUuid
-        in: path
-        description: Group UUID (Administration > Groups)
-        required: true
-        schema:
-          type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/GroupRoleRequestDTOV3'
-        required: true
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponseV3GroupRoleDTOV3'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
-        '403':
-          description: Forbidden
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
   /api/v3.0/orgs/{orgUuid}/groups/{groupUuid}/users:
     get:
       tags:
@@ -415,21 +322,45 @@ paths:
       parameters:
       - name: cursor
         in: query
-        description: Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved.
+        description: Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved
         allowEmptyValue: true
         schema:
           type: string
+          default: '0'
       - name: limit
         in: query
-        description: Specifies the maximum number of items to be returned in the response.
+        description: Specifies the maximum number of items to be return in the response.
         allowEmptyValue: true
         schema:
           maximum: 10000
           type: string
           default: '50'
+      - name: search
+        in: query
+        description: "Filter your search to return items whose property has a specific value.\nUse the syntax: **[property][operator][value]**\n+ **Property**: the name of the property of the item\n+ **Operator**:\n    + **equals (==)** - Returns true if the value exactly matches this one. If the value contains a * character, it behaves like a wildcard (similar to the LIKE operator).\nExample: entity==abc* — will return true for entities like \"abcd\" and \"abc_123\".\n    + **in (=in=)** - Returns true if the value matches any item in the comma-separated list.\nExample: entity=in=value1,value2 — will return true for entities which are either value1, or value2.\n    + **regex (=rgx=)** - Returns true if the regular expression resolves as true.\n        The regex is not case sensitive, and special characters must be escaped with a backslash.\n        Special characters include space, double quote (\"), '<', '>', '#', '%', '{', '}', vertical bar ('|'), backslash, '^'.\n        To pass an escaped character in a URL in Postman, encode it first.\n        E.g. to return all items whose value begins with **a** or **A**, use regex:^a\n+ **Value**: the value of the property.\n\nLogical operators AND (;) and OR (,) are supported in filters — param1=in=(val1,val2) and (param2==val3 or param3==val4), can also be written as — param1=in=(val1,val2);(param2==val3,param3==val4)\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ accountStatus: equals, in\n+ email: equals, regex\n+ UUID: equals\n+ name: equals, regex\n+ userType: equals, in\n+ roles: equals, in"
+        allowEmptyValue: true
+        schema:
+          type: string
+      - name: sort
+        in: query
+        description: 'Sort search results alphabetically on an item''s property by entering **sort=** followed by the property name.
+
+          E.g. enter **sort=email** to sort alphabetically by their email addresses from a-z ascending.To sort in descending order (z-a), add a minus sign (''-''). E.g. **sort=-email**.
+
+
+          You can sort by the following properties:
+
+          + email
+
+          + name
+
+          + userType'
+        allowEmptyValue: true
+        schema:
+          type: string
       - name: orgUuid
         in: path
-        description: 'org UUID (from the Mend App: **Administration** General > **Organization UUID**).'
+        description: Org UUID (Administration > General)
         required: true
         schema:
           type: string
@@ -440,24 +371,24 @@ paths:
         schema:
           type: string
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponsePageableV3ListUserInfoDTO'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableV3ListUserInfoDTO'
     post:
       tags:
       - Administration - Groups
@@ -467,7 +398,7 @@ paths:
       parameters:
       - name: orgUuid
         in: path
-        description: 'org UUID (from the Mend App: **Administration** General > **Organization UUID**).'
+        description: Org UUID (Administration > General)
         required: true
         schema:
           type: string
@@ -484,24 +415,447 @@ paths:
               $ref: '#/components/schemas/UserEmailsRequestDTO'
         required: true
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponseV3MessageDTO'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3MessageDTO'
+  /api/v3.0/orgs/{orgUuid}/groups/{groupUuid}/roleDefinitions:
+    get:
+      tags:
+      - Administration - Groups
+      summary: Get Group Role Definitions grouped by Scope
+      description: Returns all roles assigned to the specified group, grouped by scope.
+      operationId: getGroupRoleDefinitionsByScope
+      parameters:
+      - name: cursor
+        in: query
+        description: Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved
+        allowEmptyValue: true
+        schema:
+          type: string
+          default: '0'
+      - name: limit
+        in: query
+        description: Specifies the maximum number of items to be return in the response.
+        allowEmptyValue: true
+        schema:
+          maximum: 10000
+          type: string
+          default: '50'
+      - name: search
+        in: query
+        description: "Filter your search to return items whose property has a specific value.\nUse the syntax: **[property][operator][value]**\n+ **Property**: the name of the property of the item\n+ **Operator**:\n    + **equals (==)** - Returns true if the value exactly matches this one. If the value contains a * character, it behaves like a wildcard (similar to the LIKE operator).\nExample: entity==abc* — will return true for entities like \"abcd\" and \"abc_123\".\n    + **regex (=rgx=)** - Returns true if the regular expression resolves as true.\n        The regex is not case sensitive, and special characters must be escaped with a backslash.\n        Special characters include space, double quote (\"), '<', '>', '#', '%', '{', '}', vertical bar ('|'), backslash, '^'.\n        To pass an escaped character in a URL in Postman, encode it first.\n        E.g. to return all items whose value begins with **a** or **A**, use regex:^a\n+ **Value**: the value of the property.\nLogical operators AND (;) and OR (,) are supported in filters — param1=in=(val1,val2) and (param2==val3 or param3==val4), can also be written as — param1=in=(val1,val2);(param2==val3,param3==val4)\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ contextName: equals, regex\n+ contextType: equals, regex\n+ role: equals, regex"
+        allowEmptyValue: true
+        schema:
+          type: string
+      - name: sort
+        in: query
+        description: 'Sort search results alphabetically on an item''s property by entering **sort=** followed by the property name.
+
+          E.g. enter **sort=email** to sort alphabetically by their email addresses from a-z ascending.To sort in descending order (z-a), add a minus sign (''-''). E.g. **sort=-email**.
+
+
+          You can sort by the following properties:
+
+          + contextName
+
+          + contextType
+
+          + role'
+        allowEmptyValue: true
+        schema:
+          type: string
+      - name: orgUuid
+        in: path
+        description: Org UUID (Administration > General)
+        required: true
+        schema:
+          type: string
+      - name: groupUuid
+        in: path
+        description: The group UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableV3ListGroupScopeMultiRoleDefinitionDTOV3'
+    post:
+      tags:
+      - Administration - Groups
+      summary: Add Group Role Definitions
+      description: Creates a new group role for an organization
+      operationId: addGroupRoleDefinitions
+      parameters:
+      - name: orgUuid
+        in: path
+        description: Org UUID (Administration > General)
+        required: true
+        schema:
+          type: string
+      - name: groupUuid
+        in: path
+        description: Group UUID (Administration > Groups)
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupRoleDefinitionRequestDTOV3'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3GroupScopeRoleDefinitionDTOV3'
+    delete:
+      tags:
+      - Administration - Groups
+      summary: Remove Group Role Definitions
+      description: Deletes a role from a group
+      operationId: deleteGroupRoleDefinition
+      parameters:
+      - name: orgUuid
+        in: path
+        description: Org UUID (Administration > General)
+        required: true
+        schema:
+          type: string
+      - name: groupUuid
+        in: path
+        description: The group UUID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupRoleDefinitionRequestDTOV3'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3MessageDTO'
+  /api/v3.0/orgs/{orgUuid}/groups:
+    get:
+      tags:
+      - Administration - Groups
+      summary: Get All Organization Groups
+      description: Returns a list of all groups within an organization
+      operationId: getAllOrganizationGroups
+      parameters:
+      - name: cursor
+        in: query
+        description: Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved
+        allowEmptyValue: true
+        schema:
+          type: string
+          default: '0'
+      - name: limit
+        in: query
+        description: Specifies the maximum number of items to be return in the response.
+        allowEmptyValue: true
+        schema:
+          maximum: 10000
+          type: string
+          default: '50'
+      - name: search
+        in: query
+        description: "Filter your search to return items whose property has a specific value.\nUse the syntax: **[property][operator][value]**\n+ Property: the name of the property of the item\n+ Operation:\n    + **equals (==)** - Returns true if the value exactly matches this one. If the value contains a * character, it behaves like a wildcard (similar to the LIKE operator).\nExample: entity==abc* — will return true for entities like \"abcd\" and \"abc_123\".\n    + **in (=in=)** - Returns true if the value matches any item in the comma-separated list.\nExample: entity=in=value1,value2 — will return true for entities which are either value1, or value2.\n    + **regex (=rgx=)** - Returns true if the regular expression resolves as true.\n        The regex is not case sensitive, and special characters must be escaped with a backslash.\n        Special characters include space, double quote (\"), '<', '>', '#', '%', '{', '}', vertical bar ('|'), backslash, '^'.\n        To pass an escaped character in a URL in Postman, encode it first.\n        E.g. to return all items whose value begins with **a** or **A**, use regex:^a\n+ **Value**: the value of the property.\nLogical operators AND (;) and OR (,) are supported in filters — param1=in=(val1,val2) and (param2==val3 or param3==val4), can also be written as — param1=in=(val1,val2);(param2==val3,param3==val4)\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ contextType: equals\n+ name: equals, regex\n+ product: in\n+ role: in"
+        allowEmptyValue: true
+        schema:
+          type: string
+      - name: sort
+        in: query
+        description: 'Sort search results alphabetically on an item''s property by entering **sort=** followed by the property name.
+
+          E.g. enter **sort=email** to sort alphabetically by their email addresses from a-z ascending.To sort in descending order (z-a), add a minus sign (''-''). E.g. **sort=-email**.
+
+
+          You can sort by the following properties:
+
+          + accountStatus
+
+          + contextType
+
+          + name
+
+          + product
+
+          + role
+
+          + users'
+        allowEmptyValue: true
+        schema:
+          type: string
+      - name: orgUuid
+        in: path
+        description: Org UUID (Administration > General)
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableV3ListGroupSummaryDTOV3'
+    post:
+      tags:
+      - Administration - Groups
+      summary: Create Group
+      description: Creates a new group for an organization
+      operationId: createGroup
+      parameters:
+      - name: orgUuid
+        in: path
+        description: Org UUID (Administration > General)
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateGroupRequestDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3GroupDTO'
+  /api/v3.0/orgs/{orgUuid}/groups/{groupUuid}/roleAssignments/byRole:
+    get:
+      tags:
+      - Administration - Groups
+      summary: Get Group Role Definitions assignments by role
+      description: Returns one row per role assigned to the group with aggregated org and application scope counts
+      operationId: getGroupRoleAssignmentsByRole
+      parameters:
+      - name: cursor
+        in: query
+        description: Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved
+        allowEmptyValue: true
+        schema:
+          type: string
+          default: '0'
+      - name: limit
+        in: query
+        description: Specifies the maximum number of items to be return in the response.
+        allowEmptyValue: true
+        schema:
+          maximum: 10000
+          type: string
+          default: '50'
+      - name: search
+        in: query
+        description: 'Supported filters: name, type'
+        allowEmptyValue: true
+        schema:
+          type: string
+      - name: sort
+        in: query
+        description: 'Supported sort: roleDefinitionName'
+        allowEmptyValue: true
+        schema:
+          type: string
+      - name: orgUuid
+        in: path
+        description: Org UUID (Administration > General)
+        required: true
+        schema:
+          type: string
+      - name: groupUuid
+        in: path
+        description: Group UUID (Administration > Groups)
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableV3ListGroupRoleAssignmentByRoleDefinitionDTOV3'
+  /api/v3.0/orgs/{orgUuid}/groups/roleDefinitions:
+    get:
+      tags:
+      - Administration - Groups
+      summary: Get All Organization Groups with Role Definitions
+      description: Returns a list of all groups within an organization with their role definitions
+      operationId: getAllOrganizationGroupsWithRoleDefinitions
+      parameters:
+      - name: cursor
+        in: query
+        description: Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved
+        allowEmptyValue: true
+        schema:
+          type: string
+          default: '0'
+      - name: limit
+        in: query
+        description: Specifies the maximum number of items to be return in the response.
+        allowEmptyValue: true
+        schema:
+          maximum: 10000
+          type: string
+          default: '50'
+      - name: search
+        in: query
+        description: "Filter your search to return items whose property has a specific value.\nUse the syntax: **[property][operator][value]**\n+ Property: the name of the property of the item\n+ Operation:\n    + **equals (==)** - Returns true if the value exactly matches this one. If the value contains a * character, it behaves like a wildcard (similar to the LIKE operator).\nExample: entity==abc* — will return true for entities like \"abcd\" and \"abc_123\".\n    + **in (=in=)** - Returns true if the value matches any item in the comma-separated list.\nExample: entity=in=value1,value2 — will return true for entities which are either value1, or value2.\n    + **regex (=rgx=)** - Returns true if the regular expression resolves as true.\n        The regex is not case sensitive, and special characters must be escaped with a backslash.\n        Special characters include space, double quote (\"), '<', '>', '#', '%', '{', '}', vertical bar ('|'), backslash, '^'.\n        To pass an escaped character in a URL in Postman, encode it first.\n        E.g. to return all items whose value begins with **a** or **A**, use regex:^a\n+ **Value**: the value of the property.\nLogical operators AND (;) and OR (,) are supported in filters — param1=in=(val1,val2) and (param2==val3 or param3==val4), can also be written as — param1=in=(val1,val2);(param2==val3,param3==val4)\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ contextType: equals\n+ name: equals, regex\n+ product: in\n+ role: in"
+        allowEmptyValue: true
+        schema:
+          type: string
+      - name: sort
+        in: query
+        description: 'Sort search results alphabetically on an item''s property by entering **sort=** followed by the property name.
+
+          E.g. enter **sort=email** to sort alphabetically by their email addresses from a-z ascending.To sort in descending order (z-a), add a minus sign (''-''). E.g. **sort=-email**.
+
+
+          You can sort by the following properties:
+
+          + accountStatus
+
+          + contextType
+
+          + name
+
+          + product
+
+          + role
+
+          + users'
+        allowEmptyValue: true
+        schema:
+          type: string
+      - name: orgUuid
+        in: path
+        description: Org UUID (Administration > General)
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableV3ListGroupWithRoleDefinitionsSummaryDTOV3'
   /api/v3.0/orgs/{orgUuid}/groups/{groupUuid}/users/{userUuid}:
     delete:
       tags:
@@ -512,7 +866,7 @@ paths:
       parameters:
       - name: orgUuid
         in: path
-        description: 'org UUID (from the Mend App: **Administration** General > **Organization UUID**).'
+        description: Org UUID (Administration > General)
         required: true
         schema:
           type: string
@@ -529,129 +883,26 @@ paths:
         schema:
           type: string
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponseV3MessageDTO'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3MessageDTO'
 components:
   schemas:
-    GroupScopeMultiRoleDefinitionDTOV3:
-      type: object
-      properties:
-        scopeUuid:
-          type: string
-        scopeName:
-          type: string
-        scopeType:
-          type: string
-          enum:
-          - organization
-          - application
-          - project
-          - account
-          - unsupported
-        roleDefinitions:
-          type: array
-          items:
-            $ref: '#/components/schemas/RoleDefinitionDTOV3'
-    GroupRoleDTOV3:
-      type: object
-      properties:
-        scopeUuid:
-          type: string
-          example: 123e4567-e89b-12d3-a456-426655440000
-        scopeName:
-          title: Context Name
-          type: string
-          example: My Project
-        scopeType:
-          type: string
-          description: Type of entity the role will be associated with
-          example: organization
-          enum:
-          - organization
-          - application
-          - project
-          - account
-          - unsupported
-        role:
-          type: string
-          enum:
-          - ADMIN
-          - SCAN_MANAGER
-          - SECURITY_ANALYST
-          - MEMBER
-    MessageDTO:
-      type: object
-      properties:
-        message:
-          title: message
-          type: string
-          example: Success!
-    GroupSummaryDTOV3:
-      type: object
-      properties:
-        uuid:
-          title: Group UUID
-          type: string
-          example: 123e4567-e89b-12d3-a456-426655440000
-        name:
-          title: Group Name
-          type: string
-          example: Group A
-        description:
-          title: Group Description
-          type: string
-          example: Group description
-        users:
-          title: User Count
-          type: integer
-          description: The amount of users in that group
-          format: int32
-          example: 22
-        affectedApplications:
-          title: Affected Applications
-          type: integer
-          format: int32
-          example: 5
-        roles:
-          type: array
-          items:
-            $ref: '#/components/schemas/GroupRoleDTOV3'
-    DWRResponseV3GroupRoleDTOV3:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        response:
-          $ref: '#/components/schemas/GroupRoleDTOV3'
-    UserEmailsRequestDTO:
-      required:
-      - userEmails
-      type: object
-      properties:
-        userEmails:
-          uniqueItems: true
-          type: array
-          items:
-            type: string
-            example: jon.smith@mail.com
     GroupDTO:
       type: object
       properties:
@@ -672,20 +923,27 @@ components:
           type: integer
           format: int32
           example: 22
-    CreateGroupRequestDTO:
-      required:
-      - description
-      - name
+    DWRResponsePageableV3ListMultipleGroupRolesPerContextDTOV3:
       type: object
       properties:
-        name:
-          title: Group Name
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            '
+          example:
+            totalItems: '422'
+            next: http://someUrl?cursor=3
+            cursor: 3
+        supportToken:
+          title: Support Token
           type: string
-          example: Group A
-        description:
-          title: Group Description
-          type: string
-          example: Group description
+          example: 1171c60d
+        response:
+          type: array
+          items:
+            $ref: '#/components/schemas/MultipleGroupRolesPerContextDTOV3'
     GroupWithRoleDefinitionsSummaryDTOV3:
       type: object
       properties:
@@ -716,7 +974,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/GroupScopeMultiRoleDefinitionDTOV3'
-    DWRResponsePageableV3ListMultipleGroupRolesPerContextDTOV3:
+    DWRResponsePageableV3ListGroupSummaryDTOV3:
       type: object
       properties:
         additionalData:
@@ -736,7 +994,180 @@ components:
         response:
           type: array
           items:
-            $ref: '#/components/schemas/MultipleGroupRolesPerContextDTOV3'
+            $ref: '#/components/schemas/GroupSummaryDTOV3'
+    DWRResponsePageableV3ListUserInfoDTO:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            '
+          example:
+            totalItems: '422'
+            next: http://someUrl?cursor=3
+            cursor: 3
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserInfoDTO'
+    DWRResponsePageableV3ListGroupRoleAssignmentByRoleDefinitionDTOV3:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            '
+          example:
+            totalItems: '422'
+            next: http://someUrl?cursor=3
+            cursor: 3
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupRoleAssignmentByRoleDefinitionDTOV3'
+    CreateGroupRequestDTO:
+      required:
+      - description
+      - name
+      type: object
+      properties:
+        name:
+          title: Group Name
+          type: string
+          example: Group A
+        description:
+          title: Group Description
+          type: string
+          example: Group description
+    MessageDTO:
+      type: object
+      properties:
+        message:
+          title: message
+          type: string
+          example: Success!
+    GroupRoleAssignmentByRoleDefinitionDTOV3:
+      type: object
+      properties:
+        roleDefinition:
+          $ref: '#/components/schemas/RoleDefinitionDTOV3'
+        orgCount:
+          type: integer
+          format: int32
+        appCount:
+          type: integer
+          format: int32
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+    DWRResponsePageableV3ListGroupScopeMultiRoleDefinitionDTOV3:
+      type: object
+      properties:
+        additionalData:
+          title: Provides insights into endpoint-supported pagination information.
+          type: object
+          description: '+ **totalItems**: The total count of data points returned in an API response.
+
+            '
+          example:
+            totalItems: '422'
+            next: http://someUrl?cursor=3
+            cursor: 3
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupScopeMultiRoleDefinitionDTOV3'
+    GroupSummaryDTOV3:
+      type: object
+      properties:
+        uuid:
+          title: Group UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Group Name
+          type: string
+          example: Group A
+        description:
+          title: Group Description
+          type: string
+          example: Group description
+        users:
+          title: User Count
+          type: integer
+          description: The amount of users in that group
+          format: int32
+          example: 22
+        affectedApplications:
+          title: Affected Applications
+          type: integer
+          format: int32
+          example: 5
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupRoleDTOV3'
+    DWRResponseV3GroupScopeRoleDefinitionDTOV3:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          $ref: '#/components/schemas/GroupScopeRoleDefinitionDTOV3'
+    DWRResponseV3MessageDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          $ref: '#/components/schemas/MessageDTO'
+    UserEmailsRequestDTO:
+      required:
+      - userEmails
+      type: object
+      properties:
+        userEmails:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+            example: jon.smith@mail.com
+    UpdateGroupRequestDTO:
+      type: object
+      properties:
+        name:
+          title: Group Name
+          type: string
+          example: Group A
+        description:
+          title: Group Description
+          type: string
+          example: Group description
+      description: DTO for updating an existing group
     RoleDefinitionDTOV3:
       type: object
       properties:
@@ -770,14 +1201,7 @@ components:
           type: array
           items:
             type: string
-    DWRResponseBase:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-    DWRResponsePageableV3ListGroupSummaryDTOV3:
+    DWRResponsePageableV3ListGroupWithRoleDefinitionsSummaryDTOV3:
       type: object
       properties:
         additionalData:
@@ -797,50 +1221,26 @@ components:
         response:
           type: array
           items:
-            $ref: '#/components/schemas/GroupSummaryDTOV3'
-    UserInfoDTO:
-      required:
-      - uuid
+            $ref: '#/components/schemas/GroupWithRoleDefinitionsSummaryDTOV3'
+    GroupScopeMultiRoleDefinitionDTOV3:
       type: object
       properties:
-        uuid:
-          title: User UUID
+        scopeUuid:
           type: string
-          example: 123e4567-e89b-12d3-a456-426655440000
-        name:
-          title: User Name
+        scopeName:
           type: string
-          example: Jon Smith
-        email:
-          title: User Email
-          type: string
-          example: jon.smith@mail.com
-        userType:
-          title: Type Of User
-          type: string
-          example: REGULAR
-          enum:
-          - REGULAR
-          - SERVICE
-          - SCAN_SUMMARY_RECEIVER
-        accountStatus:
+        scopeType:
           type: string
           enum:
-          - ACTIVE
-          - INACTIVE
-          - LOCKOUT
-    UpdateGroupRequestDTO:
-      type: object
-      properties:
-        name:
-          title: Group Name
-          type: string
-          example: Group A
-        description:
-          title: Group Description
-          type: string
-          example: Group description
-      description: DTO for updating an existing group
+          - organization
+          - application
+          - project
+          - account
+          - unsupported
+        roleDefinitions:
+          type: array
+          items:
+            $ref: '#/components/schemas/RoleDefinitionDTOV3'
     MultipleGroupRolesPerContextDTOV3:
       required:
       - scopeType
@@ -875,27 +1275,6 @@ components:
             - SCAN_MANAGER
             - SECURITY_ANALYST
             - MEMBER
-    DWRResponsePageableV3ListGroupWithRoleDefinitionsSummaryDTOV3:
-      type: object
-      properties:
-        additionalData:
-          title: Provides insights into endpoint-supported pagination information.
-          type: object
-          description: '+ **totalItems**: The total count of data points returned in an API response.
-
-            '
-          example:
-            totalItems: '422'
-            next: http://someUrl?cursor=3
-            cursor: 3
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-        response:
-          type: array
-          items:
-            $ref: '#/components/schemas/GroupWithRoleDefinitionsSummaryDTOV3'
     DWRResponseV3GroupDTO:
       type: object
       properties:
@@ -905,7 +1284,24 @@ components:
           example: 1171c60d
         response:
           $ref: '#/components/schemas/GroupDTO'
-    DWRResponseV3MessageDTO:
+    GroupScopeRoleDefinitionDTOV3:
+      type: object
+      properties:
+        scopeUuid:
+          type: string
+        scopeName:
+          type: string
+        scopeType:
+          type: string
+          enum:
+          - organization
+          - application
+          - project
+          - account
+          - unsupported
+        roleDefinition:
+          $ref: '#/components/schemas/RoleDefinitionDTOV3'
+    DWRResponseV3GroupRoleDTOV3:
       type: object
       properties:
         supportToken:
@@ -913,7 +1309,62 @@ components:
           type: string
           example: 1171c60d
         response:
-          $ref: '#/components/schemas/MessageDTO'
+          $ref: '#/components/schemas/GroupRoleDTOV3'
+    UserInfoDTO:
+      required:
+      - uuid
+      type: object
+      properties:
+        uuid:
+          title: User UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: User Name
+          type: string
+          example: Jon Smith
+        email:
+          title: User Email
+          type: string
+          example: jon.smith@mail.com
+        userType:
+          title: Type Of User
+          type: string
+          example: REGULAR
+          enum:
+          - REGULAR
+          - SERVICE
+          - SCAN_SUMMARY_RECEIVER
+        accountStatus:
+          type: string
+          enum:
+          - ACTIVE
+          - INACTIVE
+          - LOCKOUT
+    GroupRoleDefinitionRequestDTOV3:
+      required:
+      - roleDefinitionUuid
+      - scopeType
+      - scopeUuid
+      type: object
+      properties:
+        scopeType:
+          type: string
+          example: organization
+          enum:
+          - organization
+          - application
+          - project
+          - account
+          - unsupported
+          - organization
+          - application
+        scopeUuid:
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        roleDefinitionUuid:
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
     GroupRoleRequestDTOV3:
       required:
       - scopeType
@@ -939,27 +1390,33 @@ components:
           - SCAN_MANAGER
           - SECURITY_ANALYST
           - MEMBER
-    DWRResponsePageableV3ListUserInfoDTO:
+    GroupRoleDTOV3:
       type: object
       properties:
-        additionalData:
-          title: Provides insights into endpoint-supported pagination information.
-          type: object
-          description: '+ **totalItems**: The total count of data points returned in an API response.
-
-            '
-          example:
-            totalItems: '422'
-            next: http://someUrl?cursor=3
-            cursor: 3
-        supportToken:
-          title: Support Token
+        scopeUuid:
           type: string
-          example: 1171c60d
-        response:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserInfoDTO'
+          example: 123e4567-e89b-12d3-a456-426655440000
+        scopeName:
+          title: Context Name
+          type: string
+          example: My Project
+        scopeType:
+          type: string
+          description: Type of entity the role will be associated with
+          example: organization
+          enum:
+          - organization
+          - application
+          - project
+          - account
+          - unsupported
+        role:
+          type: string
+          enum:
+          - ADMIN
+          - SCAN_MANAGER
+          - SECURITY_ANALYST
+          - MEMBER
   securitySchemes:
     bearer-key:
       type: http

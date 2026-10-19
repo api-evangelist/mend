@@ -1,0 +1,333 @@
+openapi: 3.2.0
+info:
+  title: Mend Entities - Project Configurations API
+  description: 'Mend''s enhanced SCA API enables automation of workflows in a REST compliant format. The API features:
+
+    + Access for any user with Mend credentials, via a user key available in the user''s profile page in the Mend App.
+
+    + Improved security with a JWT token per organization, which expires every 10 minutes.
+
+    + Added scalability with support for pagination, filtering and sorting search results.
+
+    + Broader functionality available programmatically.
+
+    + New standard API documentation for easy navigation and search.
+
+
+    **Note:** To help you get started with the Mend SCA API 2.0, we recommend reviewing our onboarding guide -> Getting Started with Mend SCA API 2.0.
+
+    This resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend SCA API 2.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.'
+  version: 3.0.1
+servers:
+- url: https://api-saas.mend.io
+  description: Generated server url
+security:
+- bearer-key: []
+tags:
+- name: Entities - Project Configurations
+paths:
+  /api/v2.0/projects/{projectIdentifier}/configurations/code/{configUuid}:
+    post:
+      tags:
+      - Entities - Project Configurations
+      summary: Assign configuration to project
+      description: Assigns configuration to project.
+      operationId: assignProjectConfiguration
+      parameters:
+      - name: projectIdentifier
+        in: path
+        description: project UUID.
+        required: true
+        schema:
+          type: string
+      - name: configUuid
+        in: path
+        description: Configuration UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageDTO'
+  /api/v3.0/projects/{projectUuid}/configurations:
+    get:
+      tags:
+      - Entities - Project Configurations
+      summary: Get configuration of project
+      description: Get configuration of a project
+      operationId: getProjectConfiguration
+      parameters:
+      - name: projectUuid
+        in: path
+        description: project UUID.
+        required: true
+        schema:
+          type: string
+      - name: namespace
+        in: query
+        description: Configuration Namespace
+        required: true
+        schema:
+          type: string
+          enum:
+          - Code
+          - AI
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfigurationDTO'
+    delete:
+      tags:
+      - Entities - Project Configurations
+      summary: Remove configuration from project
+      description: Removes configuration from a project
+      operationId: unassignProjectConfiguration
+      parameters:
+      - name: projectUuid
+        in: path
+        description: project UUID.
+        required: true
+        schema:
+          type: string
+      - name: namespace
+        in: query
+        description: Configuration Namespace
+        required: true
+        schema:
+          type: string
+          enum:
+          - Code
+          - AI
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageDTO'
+  /api/v2.0/projects/{projectIdentifier}/configurations/code:
+    get:
+      tags:
+      - Entities - Project Configurations
+      operationId: getProjectConfiguration_1
+      parameters:
+      - name: projectIdentifier
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfigurationDTO'
+      summary: Get project configuration 1
+      x-summary-source: derived
+    delete:
+      tags:
+      - Entities - Project Configurations
+      summary: Remove Code configuration from project
+      description: Removes Code configuration from a project
+      operationId: unassignProjectConfiguration_1
+      parameters:
+      - name: projectIdentifier
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageDTO'
+  /api/v2.0/projects/{projectIdentifier}/configurations:
+    get:
+      tags:
+      - Entities - Project Configurations
+      operationId: getProjectConfiguration_2
+      parameters:
+      - name: projectIdentifier
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      - name: namespace
+        in: query
+        description: Configuration Namespace
+        required: true
+        schema:
+          type: string
+          enum:
+          - Code
+          - AI
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfigurationDTO'
+      summary: Get project configuration 2
+      x-summary-source: derived
+    delete:
+      tags:
+      - Entities - Project Configurations
+      summary: Remove Code configuration from project
+      description: Removes Code configuration from a project
+      operationId: unassignProjectConfiguration_2
+      parameters:
+      - name: projectIdentifier
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      - name: namespace
+        in: query
+        description: Configuration Namespace
+        required: true
+        schema:
+          type: string
+          enum:
+          - Code
+          - AI
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageDTO'
+components:
+  schemas:
+    ConfigurationDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+        namespace:
+          type: string
+        value:
+          type: string
+        displayName:
+          type: string
+        contextType:
+          type: string
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+    MessageDTO:
+      type: object
+      properties:
+        message:
+          title: message
+          type: string
+          example: Success!
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: JWT token Bearer
+      scheme: bearer
+      bearerFormat: JWT

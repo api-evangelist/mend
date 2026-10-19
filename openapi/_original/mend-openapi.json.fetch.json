@@ -1,0 +1,12 @@
+{
+ "url": "https://api-saas.mend.io/v3/api-docs",
+ "final": "https://api-saas.mend.io/v3/api-docs",
+ "status": 200,
+ "content_type": "application/json",
+ "bytes": 1342728,
+ "sha256": "99f16d569192678e88ff726e02c183d2bf53a92a297417c66908e6f41f1335ce",
+ "fetched_at": "2026-10-19",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "byte-identical",
+ "note": "re-archived: the provider's current document replaced a stale archive (roadmap#793); the old files are in openapi/_superseded/2026-10-19-stale"
+}

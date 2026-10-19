@@ -1,8 +1,23 @@
 openapi: 3.2.0
 info:
   title: Mend Domain Controller API
-  description: Mend's enhanced SCA API enables automation of workflows in a REST compliant format.
-  version: '2.0'
+  description: 'Mend''s enhanced SCA API enables automation of workflows in a REST compliant format. The API features:
+
+    + Access for any user with Mend credentials, via a user key available in the user''s profile page in the Mend App.
+
+    + Improved security with a JWT token per organization, which expires every 10 minutes.
+
+    + Added scalability with support for pagination, filtering and sorting search results.
+
+    + Broader functionality available programmatically.
+
+    + New standard API documentation for easy navigation and search.
+
+
+    **Note:** To help you get started with the Mend SCA API 2.0, we recommend reviewing our onboarding guide -> Getting Started with Mend SCA API 2.0.
+
+    This resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend SCA API 2.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.'
+  version: 3.0.1
 servers:
 - url: https://api-saas.mend.io
   description: Generated server url
@@ -11,41 +26,156 @@ security:
 tags:
 - name: domain-controller
 paths:
-  /api/v2.0/orgs/managed-domains:
+  /api/v2.0/orgs/{orgToken}/projects/{projectToken}/scan-summary-receivers-users:
     get:
       tags:
       - domain-controller
-      summary: Get User Managed Domains
-      description: Returns a list of all organizations where the current user is a domain or application admin.
-      operationId: getUserManagedDomains
+      summary: Get all scan summary receiver users (users with SCAN_SUMMARY_RECEIVER type)…
+      description: Returns the project scan summary receiver users
+      operationId: getProjectScanSummaryReceiverUsers
+      parameters:
+      - name: projectToken
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      - name: orgToken
+        in: path
+        required: true
+        schema:
+          type: string
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponseCollectionDomainDTO'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseListLiteUserInfo'
+  /api/v2.0/orgs/{orgToken}/projects/{projectToken}/non-admin-email-recipients:
+    get:
+      tags:
+      - domain-controller
+      summary: Get Project Non admin (regular user) users emails that allowed to view the…
+      description: Returns the project scan summary non admin email recipients
+      operationId: getProjectScanSummaryEmailRecipients
+      parameters:
+      - name: projectToken
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      - name: orgToken
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseListLiteUserInfo'
+  /api/v2.0/orgs/{orgToken}/projects/{projectToken}/admins:
+    get:
+      tags:
+      - domain-controller
+      summary: Get Project Admins
+      description: Returns the project admins
+      operationId: getProjectAdmins
+      parameters:
+      - name: projectToken
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      - name: orgToken
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseListLiteUserInfo'
+  /api/v2.0/orgs/managed-domains:
+    get:
+      tags:
+      - domain-controller
+      summary: Get User Managed Domains
+      description: Returns a list of all organizations where the current user is a domain or application admin. When orgAdminOnly=true, returns only organizations where the user is an org (domain) admin, excluding app-admin-only orgs.
+      operationId: getUserManagedDomains
+      parameters:
+      - name: orgAdminOnly
+        in: query
+        description: When true, returns only organizations where the user is an org (domain) admin, excluding app-admin-only orgs
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseCollectionDomainDTO'
 components:
   schemas:
-    DWRResponseBase:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
     DomainDTO:
       title: OrgDTO
       type: object
@@ -58,6 +188,40 @@ components:
           title: Org Name
           type: string
           example: Organization A
+    DWRResponseListLiteUserInfo:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          type: array
+          items:
+            $ref: '#/components/schemas/LiteUserInfo'
+    LiteUserInfo:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        email:
+          type: string
+        userType:
+          type: string
+          enum:
+          - REGULAR
+          - SERVICE
+          - SCAN_SUMMARY_RECEIVER
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
     DWRResponseCollectionDomainDTO:
       type: object
       properties:

@@ -1,0 +1,167 @@
+openapi: 3.2.0
+info:
+  title: Mend Integrations - Domain API
+  description: 'Mend''s enhanced SCA API enables automation of workflows in a REST compliant format. The API features:
+
+    + Access for any user with Mend credentials, via a user key available in the user''s profile page in the Mend App.
+
+    + Improved security with a JWT token per organization, which expires every 10 minutes.
+
+    + Added scalability with support for pagination, filtering and sorting search results.
+
+    + Broader functionality available programmatically.
+
+    + New standard API documentation for easy navigation and search.
+
+
+    **Note:** To help you get started with the Mend SCA API 2.0, we recommend reviewing our onboarding guide -> Getting Started with Mend SCA API 2.0.
+
+    This resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend SCA API 2.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.'
+  version: 3.0.1
+servers:
+- url: https://api-saas.mend.io
+  description: Generated server url
+security:
+- bearer-key: []
+tags:
+- name: Integrations - Domain
+paths:
+  /api/v2.0/orgs/{orgIdentifier}/integrations:
+    get:
+      tags:
+      - Integrations - Domain
+      summary: Get Organization Integrations
+      description: Returns a list of all integrations for a given organization
+      operationId: getDomainIntegrationRecords
+      parameters:
+      - name: orgIdentifier
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/IntegrationDTO'
+    post:
+      tags:
+      - Integrations - Domain
+      summary: Create/Update Organization Integration
+      description: Create or update an integration for a given organization
+      operationId: createUpdateIntegrationRecord
+      parameters:
+      - name: orgIdentifier
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IntegrationRequestDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntegrationDTO'
+components:
+  schemas:
+    IntegrationDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+        status:
+          type: string
+          enum:
+          - ACTIVE
+          - SUSPENDED
+          - DELETED
+        type:
+          type: string
+          enum:
+          - JIRA
+          - GITHUB
+          - INVICTI
+          - WIZ
+        variant:
+          type: string
+          enum:
+          - JIRA_CLOUD
+          - JIRA_CLOUD_SECURITY
+          - JIRA_DC
+          - WIZ_COMMERCIAL
+          - WIZ_GOV
+          - WIZ_COMM_ON_GOV
+          - WIZ_DEMO
+        extraData:
+          type: object
+        createdBy:
+          type: string
+        creationDate:
+          type: string
+          format: date-time
+        lastUpdate:
+          type: string
+          format: date-time
+    IntegrationRequestDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+        type:
+          type: string
+        status:
+          type: string
+        variant:
+          type: string
+        extraData:
+          type: object
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: JWT token Bearer
+      scheme: bearer
+      bearerFormat: JWT

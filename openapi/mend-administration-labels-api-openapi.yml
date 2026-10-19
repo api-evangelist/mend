@@ -1,101 +1,31 @@
 openapi: 3.2.0
 info:
   title: Mend Administration - Labels API
-  description: Mend's enhanced API enables automation of workflows in a REST compliant format.
-  version: '3.0'
+  description: 'Mend''s enhanced SCA API enables automation of workflows in a REST compliant format. The API features:
+
+    + Access for any user with Mend credentials, via a user key available in the user''s profile page in the Mend App.
+
+    + Improved security with a JWT token per organization, which expires every 10 minutes.
+
+    + Added scalability with support for pagination, filtering and sorting search results.
+
+    + Broader functionality available programmatically.
+
+    + New standard API documentation for easy navigation and search.
+
+
+    **Note:** To help you get started with the Mend SCA API 2.0, we recommend reviewing our onboarding guide -> Getting Started with Mend SCA API 2.0.
+
+    This resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend SCA API 2.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.'
+  version: 3.0.1
 servers:
-- url: https://baseUrl
+- url: https://api-saas.mend.io
   description: Generated server url
 security:
 - bearer-key: []
 tags:
 - name: Administration - Labels
 paths:
-  /api/v3.0/orgs/{orgUuid}/labels:
-    get:
-      tags:
-      - Administration - Labels
-      summary: Get All Organization Labels
-      description: Returns a list of all labels in an organization (paginated)
-      operationId: getLabels
-      parameters:
-      - name: cursor
-        in: query
-        description: Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved.
-        allowEmptyValue: true
-        schema:
-          type: string
-      - name: limit
-        in: query
-        description: Specifies the maximum number of items to be returned in the response.
-        allowEmptyValue: true
-        schema:
-          maximum: 10000
-          type: string
-          default: '50'
-      - name: orgUuid
-        in: path
-        description: 'org UUID (from the Mend App: **Administration** General > **Organization UUID**).'
-        required: true
-        schema:
-          type: string
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponsePageableV3ListOrganizationLabelDTOV3'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
-        '403':
-          description: Forbidden
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
-    post:
-      tags:
-      - Administration - Labels
-      summary: Add Label Definition
-      description: Adds a new label definition
-      operationId: createLabel
-      parameters:
-      - name: orgUuid
-        in: path
-        description: 'org UUID (from the Mend App: **Administration** General > **Organization UUID**).'
-        required: true
-        schema:
-          type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/OrganizationLabelRequestDTO'
-        required: true
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponseV3MessageDTO'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
-        '403':
-          description: Forbidden
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
   /api/v3.0/orgs/{orgUuid}/labels/{labelUuid}:
     put:
       tags:
@@ -106,7 +36,7 @@ paths:
       parameters:
       - name: orgUuid
         in: path
-        description: 'org UUID (from the Mend App: **Administration** General > **Organization UUID**).'
+        description: Org UUID (Administration > General)
         required: true
         schema:
           type: string
@@ -123,24 +53,24 @@ paths:
               $ref: '#/components/schemas/DomainLabelRequestDTO'
         required: true
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponseV3MessageDTO'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3MessageDTO'
     delete:
       tags:
       - Administration - Labels
@@ -150,7 +80,7 @@ paths:
       parameters:
       - name: orgUuid
         in: path
-        description: 'org UUID (from the Mend App: **Administration** General > **Organization UUID**).'
+        description: Org UUID (Administration > General)
         required: true
         schema:
           type: string
@@ -161,65 +91,132 @@ paths:
         schema:
           type: string
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponseV3MessageDTO'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3MessageDTO'
+  /api/v3.0/orgs/{orgUuid}/labels:
+    get:
+      tags:
+      - Administration - Labels
+      summary: Get All Organization Labels
+      description: Returns a list of all labels in an organization (paginated)
+      operationId: getLabels
+      parameters:
+      - name: cursor
+        in: query
+        description: Parameter indicates the starting point for retrieving results, the first call doesn't include a cursor parameter in the request, the API response includes the first set of results along with a cursor pointing to the last item retrieved
+        allowEmptyValue: true
+        schema:
+          type: string
+          default: '0'
+      - name: limit
+        in: query
+        description: Specifies the maximum number of items to be return in the response.
+        allowEmptyValue: true
+        schema:
+          maximum: 10000
+          type: string
+          default: '50'
+      - name: search
+        in: query
+        description: "Filter your search to return items whose property has a specific value.\nUse the syntax: **[property][operator][value]**\n+ **Property**: the name of the property of the item\n+ **Operator**:\n    + **equals (==)** - Returns true if the value exactly matches this one. If the value contains a * character, it behaves like a wildcard (similar to the LIKE operator).\nExample: entity==abc* — will return true for entities like \"abcd\" and \"abc_123\".\n    + **in (=in=)** - Returns true if the value matches any item in the comma-separated list.\nExample: entity=in=value1,value2 — will return true for entities which are either value1, or value2.\n    + **between (=btw=)** - Returns true if the value falls within the specified range.\nExample: entity=btw=10,20 — will return true for values between 10 and 20.\n\n+ **Value**: the value of the property.\nLogical operators AND (;) and OR (,) are supported in filters — param1=in=(val1,val2) and (param2==val3 or param3==val4), can also be written as — param1=in=(val1,val2);(param2==val3,param3==val4)\n\nThis endpoint supports filtering on the following properties and its supported operators:\n+ labels: equals, in\n+ createdBy: equals\n+ createdAt: between"
+        allowEmptyValue: true
+        schema:
+          type: string
+      - name: orgUuid
+        in: path
+        description: Org UUID (Administration > General)
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponsePageableV3ListOrganizationLabelDTOV3'
+    post:
+      tags:
+      - Administration - Labels
+      summary: Add Label Definition
+      description: Adds a new label definition
+      operationId: createLabel
+      parameters:
+      - name: orgUuid
+        in: path
+        description: Org UUID (Administration > General)
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrganizationLabelRequestDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3MessageDTO'
 components:
   schemas:
-    DWRResponseBase:
+    OrganizationLabelRequestDTO:
+      required:
+      - namespace
+      - value
       type: object
       properties:
-        supportToken:
-          title: Support Token
-          type: string
-          example: 1171c60d
-    MessageDTO:
-      type: object
-      properties:
-        message:
-          title: message
-          type: string
-          example: Success!
-    OrganizationLabelDTOV3:
-      type: object
-      properties:
-        uuid:
-          type: string
         namespace:
+          title: Label Namespace
           type: string
+          example: Label Namespace A
         value:
+          title: Label Value
           type: string
-        createdAt:
-          type: string
-          format: date-time
-        createdBy:
-          type: string
-        system:
-          type: boolean
-        applications:
-          type: integer
-          format: int64
-        projects:
-          type: integer
-          format: int64
-        id:
-          type: integer
-          format: int64
+          example: Label Value A
     DomainLabelRequestDTO:
       required:
       - namespace
@@ -255,20 +252,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/OrganizationLabelDTOV3'
-    OrganizationLabelRequestDTO:
-      required:
-      - namespace
-      - value
-      type: object
-      properties:
-        namespace:
-          title: Label Namespace
-          type: string
-          example: Label Namespace A
-        value:
-          title: Label Value
-          type: string
-          example: Label Value A
     DWRResponseV3MessageDTO:
       type: object
       properties:
@@ -278,6 +261,45 @@ components:
           example: 1171c60d
         response:
           $ref: '#/components/schemas/MessageDTO'
+    MessageDTO:
+      type: object
+      properties:
+        message:
+          title: message
+          type: string
+          example: Success!
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+    OrganizationLabelDTOV3:
+      type: object
+      properties:
+        uuid:
+          type: string
+        namespace:
+          type: string
+        value:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+        system:
+          type: boolean
+        applications:
+          type: integer
+          format: int64
+        projects:
+          type: integer
+          format: int64
+        id:
+          type: integer
+          format: int64
   securitySchemes:
     bearer-key:
       type: http

@@ -1,11 +1,24 @@
 openapi: 3.2.0
 info:
   title: Mend Access Management API
-  version: '1.0'
-  description: 'Operations tagged Access Management across 2 of this provider''s published API definitions: mend-platform-openapi-original.json, mend-sca-openapi-original.json. Each path carries the servers of the definition it was published in.'
+  description: 'Mend''s enhanced SCA API enables automation of workflows in a REST compliant format. The API features:
+
+    + Access for any user with Mend credentials, via a user key available in the user''s profile page in the Mend App.
+
+    + Improved security with a JWT token per organization, which expires every 10 minutes.
+
+    + Added scalability with support for pagination, filtering and sorting search results.
+
+    + Broader functionality available programmatically.
+
+    + New standard API documentation for easy navigation and search.
+
+
+    **Note:** To help you get started with the Mend SCA API 2.0, we recommend reviewing our onboarding guide -> Getting Started with Mend SCA API 2.0.
+
+    This resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend SCA API 2.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.'
+  version: 3.0.1
 servers:
-- url: https://baseUrl
-  description: Generated server url
 - url: https://api-saas.mend.io
   description: Generated server url
 security:
@@ -13,43 +26,70 @@ security:
 tags:
 - name: Access Management
 paths:
-  /api/v3.0/login:
+  /api/v3.0/logout:
     post:
       tags:
       - Access Management
-      summary: Login
-      description: 'Sign in a user with email and user key, returning a JWT token which is valid for 30 minutes.
-
-        If you omit the organization, it defaults to the last one you signed in to.'
-      operationId: login
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/LoginModelDTOV3'
+      summary: Logout (revokes the refresh token)
+      operationId: logout
+      parameters:
+      - name: wss-refresh-token
+        in: header
+        description: Refresh token
         required: true
+        schema:
+          type: string
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponseV3LoginResponseDTO'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
-    servers:
-    - url: https://baseUrl
-      description: Generated server url
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+  /api/v3.0/login/auth0:
+    post:
+      tags:
+      - Access Management
+      summary: Auth0 Login
+      description: Provides login method using user and password
+      operationId: loginAuth0
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginModel'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3LoginResponseDTO'
   /api/v3.0/login/accessToken:
     post:
       tags:
@@ -69,113 +109,169 @@ paths:
         required: false
         schema:
           type: string
-        description: 'org UUID (from the Mend App: **Administration** General > **Organization UUID**).'
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/AccessTokenRequestDTO'
       responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
         '200':
           description: OK
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/DWRResponseV3AccessTokenResponseDTO'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
+  /api/v3.0/login:
+    post:
+      tags:
+      - Access Management
+      summary: Login
+      description: 'Sign in a user with email and user key, returning a JWT token which is valid for 30 minutes.
+
+        If you omit the organization, it defaults to the last one you signed in to.'
+      operationId: login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginModelDTOV3'
+        required: true
+      responses:
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
-    servers:
-    - url: https://baseUrl
-      description: Generated server url
-  /api/v3.0/logout:
-    post:
-      tags:
-      - Access Management
-      summary: Logout (revokes the refresh token)
-      operationId: logout
-      parameters:
-      - name: wss-refresh-token
-        in: header
-        description: Refresh token
-        required: true
-        schema:
-          type: string
-      responses:
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
         '200':
           description: OK
           content:
             application/json:
               schema:
-                type: string
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
+                $ref: '#/components/schemas/DWRResponseV3LoginResponseDTO'
+  /api/v2.0/login/openId:
+    post:
+      tags:
+      - Access Management
+      summary: Auth 0 Login
+      description: Provide login method using user and password
+      operationId: loginByAuth0Token
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginModel'
+        required: true
+      responses:
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
-    servers:
-    - url: https://baseUrl
-      description: Generated server url
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionInfo'
+  /api/v2.0/login/auth0:
+    post:
+      tags:
+      - Access Management
+      summary: Auth 0 Login
+      description: Provide login method using user and password
+      operationId: loginAuth0_1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginModel'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionInfo'
   /api/v2.0/login/accessToken:
     post:
       tags:
       - Access Management
       summary: Refresh Access Token
       description: Generate a new access token using the provided refresh token.
-      operationId: postApiV20LoginAccessToken
+      operationId: refreshAccessToken_1
       parameters:
       - name: wss-refresh-token
         in: header
         description: Enter the refreshToken received from the login response.
+        schema:
+          type: string
       responses:
-        '201':
-          description: Created
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/SessionInfo'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
-      x-operation-id-source: normalized
-      x-operation-id-original: refreshAccessToken
-    servers:
-    - url: https://api-saas.mend.io
-      description: Generated server url
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionInfo'
   /api/v2.0/login:
     post:
       tags:
       - Access Management
       summary: Login
-      description: 'Sign in a user with email and user key, returning a JWT token which is valid for 10 minutes.
+      description: 'Sign in a user with email and user key, returning a JWT token which is valid for 30 minutes.
 
         If you omit the organization, it defaults to the last one you signed in to.'
-      operationId: postApiV20Login
+      operationId: login_1
       requestBody:
         content:
           application/json:
@@ -183,29 +279,49 @@ paths:
               $ref: '#/components/schemas/LoginModelDTO'
         required: true
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DWRResponseSessionInfo'
-        '400':
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DWRResponseBase'
         '403':
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/DWRResponseBase'
-      x-operation-id-source: normalized
-      x-operation-id-original: login
-    servers:
-    - url: https://api-saas.mend.io
-      description: Generated server url
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseSessionInfo'
+  /api/v2.0/refreshToken:
+    delete:
+      tags:
+      - Access Management
+      summary: Revoke refresh token
+      operationId: revokeRefreshToken
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
 components:
   schemas:
     DWRResponseBase:
@@ -215,30 +331,36 @@ components:
           title: Support Token
           type: string
           example: 1171c60d
-    LoginResponseDTO:
+    DWRResponseSessionInfo:
       type: object
       properties:
-        userUuid:
+        supportToken:
+          title: Support Token
           type: string
-        userName:
-          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/SessionInfo'
+    LoginModelDTO:
+      required:
+      - email
+      - userKey
+      type: object
+      properties:
         email:
+          title: Email
           type: string
-        refreshToken:
+          example: jon.smith@mail.com
+        orgToken:
+          title: Org Token
           type: string
-        jwtTTL:
-          type: integer
-          format: int64
-        systemAccess:
-          type: boolean
-        serviceSystemAccess:
-          type: boolean
-        sessionStartTime:
-          type: integer
-          format: int64
-        systemAccessStartTime:
-          type: integer
-          format: int64
+          description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: Integrate tab > API Key).'
+          example: 123e4567-e89b-12d3-a456-426655440000
+        userKey:
+          title: User Key
+          type: string
+          description: Equivalent to a personal access token. Avoid pasting as plain text where it might be compromised. For a service user (recommended), you can find the user key in the Mend SCA App in **Admin > Users**. [Learn more](https://docs.mend.io/bundle/mend_maintenance/page/managing_service_users.html). For local testing purposes, you could also use one of your own personal user keys from your user profile page in the Mend SCA App.
+          example: '***********'
+      description: Login Model that provides user name and password for the Login process.
     LoginModelDTOV3:
       required:
       - email
@@ -255,21 +377,29 @@ components:
           description: Equivalent to a personal access token. Avoid pasting as plain text where it might be compromised. For a service user (recommended), you can find the user key in the Mend SCA App in **Admin > Users**. [Learn more](https://docs.mend.io/bundle/mend_maintenance/page/managing_service_users.html). For local testing purposes, you could also use one of your own personal user keys from your user profile page in the Mend SCA App.
           example: '***********'
       description: Login Model that provides user name and password for the Login process.
-    AccessTokenRequestDTO:
+    SessionInfo:
       type: object
       properties:
-        accessToken:
+        correlationId:
           type: string
-      description: Previous Access Token
-    DWRResponseV3AccessTokenResponseDTO:
-      type: object
-      properties:
-        supportToken:
-          title: Support Token
+        userUuid:
           type: string
-          example: 1171c60d
-        response:
-          $ref: '#/components/schemas/AccessTokenResponseDTO'
+        userName:
+          type: string
+        email:
+          type: string
+        refreshToken:
+          type: string
+        jwtToken:
+          type: string
+        orgName:
+          title: Organization Name
+          type: string
+          example: Organization A
+        orgUuid:
+          title: Organization Uuid
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
     AccessTokenResponseDTO:
       type: object
       properties:
@@ -304,6 +434,30 @@ components:
         systemAccessStartTime:
           type: integer
           format: int64
+    LoginResponseDTO:
+      type: object
+      properties:
+        userUuid:
+          type: string
+        userName:
+          type: string
+        email:
+          type: string
+        refreshToken:
+          type: string
+        jwtTTL:
+          type: integer
+          format: int64
+        systemAccess:
+          type: boolean
+        serviceSystemAccess:
+          type: boolean
+        sessionStartTime:
+          type: integer
+          format: int64
+        systemAccessStartTime:
+          type: integer
+          format: int64
     DWRResponseV3LoginResponseDTO:
       type: object
       properties:
@@ -313,65 +467,34 @@ components:
           example: 1171c60d
         response:
           $ref: '#/components/schemas/LoginResponseDTO'
-    DWRResponseSessionInfo:
+    LoginModel:
+      type: object
+      properties:
+        code:
+          type: string
+        redirectUrl:
+          type: string
+        openIdToken:
+          type: string
+      description: Login Model that provides user name and password for the Login process.
+    DWRResponseV3AccessTokenResponseDTO:
       type: object
       properties:
         supportToken:
           title: Support Token
           type: string
           example: 1171c60d
-        retVal:
-          $ref: '#/components/schemas/SessionInfo'
-    LoginModelDTO:
-      required:
-      - email
-      - userKey
+        response:
+          $ref: '#/components/schemas/AccessTokenResponseDTO'
+    AccessTokenRequestDTO:
       type: object
       properties:
-        email:
-          title: Email
+        accessToken:
           type: string
-          example: jon.smith@mail.com
-        orgToken:
-          title: Org Token
-          type: string
-          description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: Integrate tab > API Key).'
-          example: 123e4567-e89b-12d3-a456-426655440000
-        userKey:
-          title: User Key
-          type: string
-          description: Equivalent to a personal access token. Avoid pasting as plain text where it might be compromised. For a service user (recommended), you can find the user key in the Mend SCA App in **Admin > Users**. [Learn more](https://docs.mend.io/bundle/mend_maintenance/page/managing_service_users.html). For local testing purposes, you could also use one of your own personal user keys from your user profile page in the Mend SCA App.
-          example: '***********'
-      description: Login Model that provides user name and password for the Login process.
-    SessionInfo:
-      type: object
-      properties:
-        correlationId:
-          type: string
-        userUuid:
-          type: string
-        userName:
-          type: string
-        email:
-          type: string
-        refreshToken:
-          type: string
-        jwtToken:
-          type: string
-        orgName:
-          title: Organization Name
-          type: string
-          example: Organization A
-        orgUuid:
-          title: Organization Uuid
-          type: string
-          example: 123e4567-e89b-12d3-a456-426655440000
+      description: Previous Access Token
   securitySchemes:
     bearer-key:
       type: http
       description: JWT token Bearer
       scheme: bearer
       bearerFormat: JWT
-x-refined-from:
-- mend-platform-openapi-original.json
-- mend-sca-openapi-original.json

@@ -1,0 +1,265 @@
+openapi: 3.2.0
+info:
+  title: Mend Statistics - Organization API
+  description: 'Mend''s enhanced SCA API enables automation of workflows in a REST compliant format. The API features:
+
+    + Access for any user with Mend credentials, via a user key available in the user''s profile page in the Mend App.
+
+    + Improved security with a JWT token per organization, which expires every 10 minutes.
+
+    + Added scalability with support for pagination, filtering and sorting search results.
+
+    + Broader functionality available programmatically.
+
+    + New standard API documentation for easy navigation and search.
+
+
+    **Note:** To help you get started with the Mend SCA API 2.0, we recommend reviewing our onboarding guide -> Getting Started with Mend SCA API 2.0.
+
+    This resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend SCA API 2.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.'
+  version: 3.0.1
+servers:
+- url: https://api-saas.mend.io
+  description: Generated server url
+security:
+- bearer-key: []
+tags:
+- name: Statistics - Organization
+paths:
+  /api/v2.0/orgs/{contextIdentifier}/statistics/average:
+    post:
+      tags:
+      - Statistics - Organization
+      summary: Get Average Statistics
+      description: Returns average statistics for the provided contexts
+      operationId: getAverageStatistics_1
+      parameters:
+      - name: contextIdentifier
+        in: path
+        description: entity UUID or ApiToken (organization, product or project).
+        required: true
+        schema:
+          type: string
+      - name: categories
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AverageStatisticsRequestDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AverageStatisticsDTO'
+  /api/v2.0/orgs/{contextIdentifier}/statistics:
+    post:
+      tags:
+      - Statistics - Organization
+      summary: Get Project Statistics
+      description: Returns the requested statistics for the given projects
+      operationId: getProjectsStatistics_1
+      parameters:
+      - name: contextIdentifier
+        in: path
+        description: entity UUID or ApiToken (organization, product or project).
+        required: true
+        schema:
+          type: string
+      - name: categories
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StatisticsRequestDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProjectStatisticsDTO'
+  /api/v2.0/orgs/{contextIdentifier}/statistics/delay:
+    get:
+      tags:
+      - Statistics - Organization
+      summary: Check Statistics Delay
+      description: Returns information about potential delays in statistics shown in the UI due to inactive projects
+      operationId: checkStatisticsDelay
+      parameters:
+      - name: contextIdentifier
+        in: path
+        description: 'org UUID (by running Entities - Organization > Get User Organizations) or API Key (from the Mend SCA App: **Integrate** tab > **API Key**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseStatisticsDelayDTO'
+components:
+  schemas:
+    AverageStatisticsDTO:
+      type: object
+      properties:
+        statistics:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: integer
+              format: int64
+        mode:
+          type: string
+          enum:
+          - EXACT
+          - APPROXIMATE
+        projectsCalculated:
+          type: integer
+          format: int32
+    AverageStatisticsRequestDTO:
+      type: object
+      properties:
+        projectsUuids:
+          type: array
+          items:
+            type: string
+        productsUuids:
+          type: array
+          items:
+            type: string
+    StatisticsRequestDTO:
+      required:
+      - projectIdentifiers
+      type: object
+      properties:
+        projectIdentifiers:
+          type: array
+          items:
+            title: Project Identifiers
+            type: string
+            example: 123e4567-e89b-12d3-a456-426655440000
+    EntityDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+        name:
+          type: string
+    InactiveProjectDTOV2:
+      type: object
+      properties:
+        projectUuid:
+          type: string
+        applicationUuid:
+          type: string
+        projectName:
+          type: string
+        applicationName:
+          type: string
+        deactivationTime:
+          type: string
+          format: date-time
+      description: List of inactive projects that are causing the delay
+    DWRResponseStatisticsDelayDTO:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        retVal:
+          $ref: '#/components/schemas/StatisticsDelayDTO'
+    ProjectStatisticsDTO:
+      type: object
+      properties:
+        project:
+          $ref: '#/components/schemas/EntityDTO'
+        statistics:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: integer
+              format: int64
+    StatisticsDelayDTO:
+      type: object
+      properties:
+        inactiveProjectsCount:
+          type: integer
+          description: Number of inactive projects that are causing the delay
+          format: int32
+        inactiveProjects:
+          type: array
+          description: List of inactive projects that are causing the delay
+          items:
+            $ref: '#/components/schemas/InactiveProjectDTOV2'
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: JWT token Bearer
+      scheme: bearer
+      bearerFormat: JWT

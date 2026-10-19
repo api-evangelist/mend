@@ -1,0 +1,2741 @@
+openapi: 3.2.0
+info:
+  title: Mend SAST Findings - Project API
+  description: 'Mend''s enhanced SCA API enables automation of workflows in a REST compliant format. The API features:
+
+    + Access for any user with Mend credentials, via a user key available in the user''s profile page in the Mend App.
+
+    + Improved security with a JWT token per organization, which expires every 10 minutes.
+
+    + Added scalability with support for pagination, filtering and sorting search results.
+
+    + Broader functionality available programmatically.
+
+    + New standard API documentation for easy navigation and search.
+
+
+    **Note:** To help you get started with the Mend SCA API 2.0, we recommend reviewing our onboarding guide -> Getting Started with Mend SCA API 2.0.
+
+    This resource covers initial setup, authentication instructions, and helpful tips to help you successfully begin working with the Mend SCA API 2.0. If you have a dedicated instance of Mend, contact your Mend representative to access this API on your instance.'
+  version: 3.0.1
+servers:
+- url: https://api-saas.mend.io
+  description: Generated server url
+security:
+- bearer-key: []
+tags:
+- name: SAST Findings - Project
+paths:
+  /api/v2.0/sast/projects/{projectIdentifier}/application:
+    get:
+      tags:
+      - SAST Findings - Project
+      summary: Get Project SAST Application
+      description: This API request returns the SAST application of a given project
+      operationId: getProjectApplication
+      parameters:
+      - name: projectIdentifier
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SastApplicationDTO'
+    put:
+      tags:
+      - SAST Findings - Project
+      summary: Put Project SAST Application
+      description: Updates application object
+      operationId: putProjectApplication
+      parameters:
+      - name: projectIdentifier
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SastApplicationDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+  /api/v2.0/sast/projects/{projectIdentifier}/userConfig:
+    get:
+      tags:
+      - SAST Findings - Project
+      summary: Get SAST Project level User Configuration
+      description: This API request returns project level type-specific user configuration
+      operationId: getProjectUserConfig
+      parameters:
+      - name: projectIdentifier
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      - name: type
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+    post:
+      tags:
+      - SAST Findings - Project
+      summary: Create or update SAST Project level User Configuration
+      description: This API request creates or updates project level type-specific user configuration
+      operationId: createOrUpdateProjectUserConfig
+      parameters:
+      - name: projectIdentifier
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      - name: type
+        in: query
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              description: User Configuration object
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+    delete:
+      tags:
+      - SAST Findings - Project
+      summary: Delete SAST Project level User Configuration
+      description: This API request deletes project level type-specific user configuration
+      operationId: deleteProjectUserConfig
+      parameters:
+      - name: projectIdentifier
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      - name: type
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+  /api/v2.0/sast/projects/{projectIdentifier}/scans/{scanIdentifier}/results:
+    post:
+      tags:
+      - SAST Findings - Project
+      summary: Get Scan SAST SSRM results
+      description: This API request returns all the SAST SSRM results associated with the scan
+      operationId: getScanSastResultsSSRM
+      parameters:
+      - name: projectIdentifier
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      - name: scanIdentifier
+        in: path
+        description: Scan UUID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+              description: SSRM
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiSastFindingsSSRMDTO'
+  /api/v2.0/sast/projects/{projectIdentifier}/scans/{scanIdentifier}/findings/export:
+    post:
+      tags:
+      - SAST Findings - Project
+      summary: SAST Scan Findings as CSV
+      description: This API request returns the SAST Scan Findings as CSV formatted data
+      operationId: postSastScanFindingsExport
+      parameters:
+      - name: projectIdentifier
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      - name: scanIdentifier
+        in: path
+        description: Scan UUID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+              description: body
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+  /api/v2.0/sast/projects/{projectIdentifier}/results:
+    get:
+      tags:
+      - SAST Findings - Project
+      summary: Get Project SAST Grouped Findings Results
+      description: This API request returns all the SAST grouped findings associated with the project
+      operationId: getProjectSastGroupFindings
+      parameters:
+      - name: projectIdentifier
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ApiSastGroupedFindingDTO'
+    post:
+      tags:
+      - SAST Findings - Project
+      summary: Get Project SAST SSRM results
+      description: This API request returns all the SAST SSRM results associated with the project
+      operationId: getProjectSastResultsSSRM
+      parameters:
+      - name: projectIdentifier
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+              description: SSRM
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiSastFindingsSSRMDTO'
+  /api/v2.0/sast/projects/{projectIdentifier}/findings/{findingUuid}/remediations/{remediationId}/feedback:
+    post:
+      tags:
+      - SAST Findings - Project
+      summary: Submit finding remediation feedback
+      description: Submit user feedback on the remediation of a given SAST finding
+      operationId: postRemediationFeedback
+      parameters:
+      - name: projectIdentifier
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      - name: findingUuid
+        in: path
+        description: SAST Finding UUID
+        required: true
+        schema:
+          type: string
+      - name: remediationId
+        in: path
+        description: SAST Remediation ID
+        required: true
+        schema:
+          type: string
+      - name: origin
+        in: query
+        required: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              description: feedbackObject
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+  /api/v2.0/sast/projects/{projectIdentifier}/findings/export:
+    post:
+      tags:
+      - SAST Findings - Project
+      summary: SAST Project Findings as CSV
+      description: This API request returns the SAST Project Findings as CSV formatted data
+      operationId: postSastProjectFindingsExport
+      parameters:
+      - name: projectIdentifier
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+              description: body
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+  /api/v2.0/sast/projects/{projectIdentifier}/findings/bulk/issues:
+    post:
+      tags:
+      - SAST Findings - Project
+      summary: Issue Bulk Action for Project findings
+      description: Submits the issue in bulk for Project findings
+      operationId: applyProjectBulkFindingsIssue
+      parameters:
+      - name: projectIdentifier
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SastBulkSubmitIssuePlatformDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+  /api/v2.0/sast/projects/{projectIdentifier}/findings/bulk/comments:
+    post:
+      tags:
+      - SAST Findings - Project
+      summary: Comment Bulk Action for SAST VIEW
+      description: Send Comments Action in bulk for SAST VIEW
+      operationId: applyBulkFindingsComments
+      parameters:
+      - name: projectIdentifier
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SastBulkPostFindingCommentDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+  /api/v2.0/sast/projects/{projectIdentifier}/findings/bulk:
+    patch:
+      tags:
+      - SAST Findings - Project
+      summary: Bulk Action for SAST VIEW
+      description: Send Action in bulk for SAST VIEW
+      operationId: applyBulkFindingsAction
+      parameters:
+      - name: projectIdentifier
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SastBulkPatchFindingDTO'
+        required: true
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+  /api/v2.0/sast/projects/{projectIdentifier}/vulnerabilities/{vulnerabilityUuid}/flowtrace:
+    get:
+      tags:
+      - SAST Findings - Project
+      summary: Get Project SAST Vulnerability Flow Trace
+      description: This API request returns the flow trace of a given SAST vulnerability
+      operationId: getProjectSastVulnerabilityFlowTrace
+      parameters:
+      - name: projectIdentifier
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      - name: vulnerabilityUuid
+        in: path
+        description: SAST Vulnerability UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SastFlowTraceDTO'
+  /api/v2.0/sast/projects/{projectIdentifier}/scans/{scanIdentifier}/findings/{findingUuid}/traces:
+    get:
+      tags:
+      - SAST Findings - Project
+      summary: Get Project SAST Scan Finding Flow Trace
+      description: This API request returns the flow trace of a given scan and SAST finding
+      operationId: getProjectSastScanTraces
+      parameters:
+      - name: projectIdentifier
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      - name: scanIdentifier
+        in: path
+        description: Scan UUID
+        required: true
+        schema:
+          type: string
+      - name: findingUuid
+        in: path
+        description: SAST Finding UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SastFindingFlowTracesDTO'
+  /api/v2.0/sast/projects/{projectIdentifier}/scans/{scanIdentifier}/findings/{findingUuid}/gptRemediation:
+    get:
+      tags:
+      - SAST Findings - Project
+      summary: Get Project SAST Finding Remediations
+      description: This API request returns all the remediations of a given SAST finding
+      operationId: getSastScanGPTRemediation
+      parameters:
+      - name: projectIdentifier
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      - name: scanIdentifier
+        in: path
+        description: Scan UUID
+        required: true
+        schema:
+          type: string
+      - name: findingUuid
+        in: path
+        description: SAST Finding UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SastGPTRemediationDTO'
+  /api/v2.0/sast/projects/{projectIdentifier}/scans/{scanIdentifier}/findings/{findingUuid}:
+    get:
+      tags:
+      - SAST Findings - Project
+      summary: Get Project SAST Scan Finding
+      description: This API request returns a details of a given scan and SAST finding
+      operationId: getSastScanFinding
+      parameters:
+      - name: projectIdentifier
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      - name: scanIdentifier
+        in: path
+        description: Scan UUID
+        required: true
+        schema:
+          type: string
+      - name: findingUuid
+        in: path
+        description: SAST Finding UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SastFindingV3DTO'
+  /api/v2.0/sast/projects/{projectIdentifier}/scans/{scanIdentifier}/filters:
+    get:
+      tags:
+      - SAST Findings - Project
+      summary: Get Scan SAST SSRM filters
+      description: This API request returns all the SAST SSRM filters associated with the scan
+      operationId: getScanSastFiltersSSRM
+      parameters:
+      - name: projectIdentifier
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      - name: scanIdentifier
+        in: path
+        description: Scan UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SastScanFiltersSSRMDTO'
+  /api/v2.0/sast/projects/{projectIdentifier}/scans/{scanIdentifier}/config:
+    get:
+      tags:
+      - SAST Findings - Project
+      summary: Get Scan SAST Config
+      description: This API request returns the SAST Config of a given scan
+      operationId: getScanSastConfig
+      parameters:
+      - name: projectIdentifier
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      - name: scanIdentifier
+        in: path
+        description: Scan UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SastScanParametersDTO'
+  /api/v2.0/sast/projects/{projectIdentifier}/scans/{scanIdentifier}/activity:
+    get:
+      tags:
+      - SAST Findings - Project
+      summary: Get Scan SAST Activity
+      description: This API request returns the SAST Activity of a given scan
+      operationId: getScanSastActivity
+      parameters:
+      - name: projectIdentifier
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      - name: scanIdentifier
+        in: path
+        description: Scan UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SastScanActivityDTO'
+  /api/v2.0/sast/projects/{projectIdentifier}/findings/{findingUuid}/traces:
+    get:
+      tags:
+      - SAST Findings - Project
+      summary: Get Project SAST Finding Flow Trace
+      description: This API request returns the flow trace of a given SAST finding
+      operationId: getProjectSastTraces
+      parameters:
+      - name: projectIdentifier
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      - name: findingUuid
+        in: path
+        description: SAST Finding UUID
+        required: true
+        schema:
+          type: string
+      - name: origin
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SastFindingFlowTracesDTO'
+  /api/v2.0/sast/projects/{projectIdentifier}/findings/{findingUuid}/remediations:
+    get:
+      tags:
+      - SAST Findings - Project
+      summary: Get Project SAST Finding Remediations
+      description: This API request returns all the remediations of a given SAST finding
+      operationId: getSastFindingRemediations
+      parameters:
+      - name: projectIdentifier
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      - name: findingUuid
+        in: path
+        description: SAST Finding UUID
+        required: true
+        schema:
+          type: string
+      - name: origin
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SastRemediationDTO'
+  /api/v2.0/sast/projects/{projectIdentifier}/findings/{findingUuid}/light:
+    get:
+      tags:
+      - SAST Findings - Project
+      summary: Get Project SAST Finding Light
+      description: This API request returns light representation of a given SAST finding
+      operationId: getProjectFindingLight
+      parameters:
+      - name: projectIdentifier
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      - name: findingUuid
+        in: path
+        description: SAST Finding UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiSastFindingLightDTO'
+  /api/v2.0/sast/projects/{projectIdentifier}/findings/{findingUuid}/gptRemediation:
+    get:
+      tags:
+      - SAST Findings - Project
+      summary: Get Project SAST Finding Remediations
+      description: This API request returns all the remediations of a given SAST finding
+      operationId: getSastProjectGPTRemediation
+      parameters:
+      - name: projectIdentifier
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      - name: findingUuid
+        in: path
+        description: SAST Finding UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SastGPTRemediationDTO'
+  /api/v2.0/sast/projects/{projectIdentifier}/findings/{findingUuid}/data-flows:
+    get:
+      tags:
+      - SAST Findings - Project
+      summary: Get Project SAST Vulnerability Data Flows
+      description: This API request returns the data flows of a given SAST finding
+      operationId: getProjectSastDataFlows
+      parameters:
+      - name: projectIdentifier
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      - name: findingUuid
+        in: path
+        description: SAST Finding UUID
+        required: true
+        schema:
+          type: string
+      - name: origin
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SastDataFlowDTO'
+  /api/v2.0/sast/projects/{projectIdentifier}/findings/{findingUuid}:
+    get:
+      tags:
+      - SAST Findings - Project
+      summary: Get Project SAST Finding
+      description: This API request returns a details of a given SAST finding
+      operationId: getSastFinding
+      parameters:
+      - name: projectIdentifier
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      - name: findingUuid
+        in: path
+        description: SAST Finding UUID
+        required: true
+        schema:
+          type: string
+      - name: origin
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SastFindingV3DTO'
+  /api/v2.0/sast/projects/{projectIdentifier}/findings:
+    get:
+      tags:
+      - SAST Findings - Project
+      summary: Get Project SAST Findings
+      description: This API request returns all the SAST findings associated with the project
+      operationId: getProjectSastFindings
+      parameters:
+      - name: projectIdentifier
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ApiSastFindingDTO'
+  /api/v2.0/sast/projects/{projectIdentifier}/filters:
+    get:
+      tags:
+      - SAST Findings - Project
+      summary: Get Project SAST SSRM filters
+      description: This API request returns all the SAST SSRM filters associated with the project
+      operationId: getProjectSastFiltersSSRM
+      parameters:
+      - name: projectIdentifier
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SastScanFiltersSSRMDTO'
+  /api/v2.0/sast/projects/{projectIdentifier}/activity:
+    get:
+      tags:
+      - SAST Findings - Project
+      summary: Get Scan SAST last scan Activity
+      description: This API request returns the SAST last scan Activity of a given project
+      operationId: getProjectSastActivity
+      parameters:
+      - name: projectIdentifier
+        in: path
+        description: 'project UUID (by running Entities - Product > Get Product Projects) or Project Token (from the Mend SCA App: **Integrate** tab > **Project Token**).'
+        required: true
+        schema:
+          type: string
+      responses:
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SastScanActivityDTO'
+components:
+  schemas:
+    SastVulnerabilityTypeDTO_Misra:
+      type: object
+      properties:
+        index:
+          type: string
+        title:
+          type: string
+        guideline:
+          type: string
+    SastVulnerabilityTypeDefinitionDTO:
+      type: object
+      properties:
+        capec:
+          $ref: '#/components/schemas/SastVulnerabilityTypeDTO_Capec'
+        cwe:
+          $ref: '#/components/schemas/SastVulnerabilityTypeDTO_Cwe'
+        description:
+          type: string
+        engineId:
+          type: integer
+          format: int32
+        hipaa:
+          $ref: '#/components/schemas/SastVulnerabilityTypeDTO_Hipaa'
+        hitrust:
+          $ref: '#/components/schemas/SastVulnerabilityTypeDTO_Hitrust'
+        id:
+          type: integer
+          format: int32
+        language:
+          type: string
+        name:
+          type: string
+        nist:
+          $ref: '#/components/schemas/SastVulnerabilityTypeDTO_Nist'
+        order:
+          type: integer
+          format: int32
+        owasp:
+          $ref: '#/components/schemas/SastVulnerabilityTypeDTO_Owasp'
+        owasp2021:
+          $ref: '#/components/schemas/SastVulnerabilityTypeDTO_Owasp2021'
+        owasp2025:
+          $ref: '#/components/schemas/SastVulnerabilityTypeDTO_Owasp2025'
+        pcidss:
+          $ref: '#/components/schemas/SastVulnerabilityTypeDTO_Pcidss'
+        pcidss40:
+          $ref: '#/components/schemas/SastVulnerabilityTypeDTO_Pcidss40'
+        misra:
+          $ref: '#/components/schemas/SastVulnerabilityTypeDTO_Misra'
+        recommendations:
+          type: array
+          items:
+            type: string
+        references:
+          type: array
+          items:
+            type: string
+        sansTop25:
+          $ref: '#/components/schemas/SastVulnerabilityTypeDTO_SansTop25'
+        sarif:
+          type: string
+        severity:
+          type: string
+        severityRating:
+          type: number
+          format: float
+    SastScanActivityDTO:
+      type: object
+      properties:
+        id:
+          type: string
+        orgId:
+          type: string
+        activity:
+          type: array
+          items:
+            type: string
+    SastRiskFactorEndpointDTO:
+      type: object
+      properties:
+        method:
+          type: string
+        endpoint:
+          type: string
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+    SastFindingFlowTracesDTO:
+      type: object
+      properties:
+        dataFlows:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              $ref: '#/components/schemas/SastItemDTO'
+        scm:
+          $ref: '#/components/schemas/SastScmDTO'
+        sharedStep:
+          $ref: '#/components/schemas/SastItemDTO'
+    RemediationSuggestionSummaryDTO:
+      type: object
+      properties:
+        total:
+          type: integer
+          format: int32
+        critical:
+          type: integer
+          format: int32
+        high:
+          type: integer
+          format: int32
+        medium:
+          type: integer
+          format: int32
+        low:
+          type: integer
+          format: int32
+    SastDataFlowDTO:
+      type: object
+      properties:
+        ageRating:
+          type: number
+        confidenceRating:
+          type: number
+        filter:
+          $ref: '#/components/schemas/SastFilterDTO'
+        functionCalls:
+          type: array
+          items:
+            $ref: '#/components/schemas/SastCallStackItemDTO'
+        id:
+          type: string
+        inputFlow:
+          type: array
+          items:
+            $ref: '#/components/schemas/SastCallStackItemDTO'
+        inputSource:
+          type: string
+        isNew:
+          type: boolean
+        rating:
+          type: number
+        riskFactors:
+          $ref: '#/components/schemas/DataFlowRiskFactorsDTO'
+        sink:
+          type: string
+        sinkCall:
+          type: string
+        sinkFile:
+          type: string
+        sinkLine:
+          type: integer
+          format: int32
+        sinkSnippet:
+          type: string
+    SastStoredAzureIssueDTO:
+      type: object
+      properties:
+        project:
+          type: string
+        workItemId:
+          type: integer
+          format: int32
+    SastStoredJiraPlatformIssueDTO:
+      type: object
+      properties:
+        internalStatus:
+          type: string
+        issueStatus:
+          type: string
+        issueKey:
+          type: string
+        publicLink:
+          type: string
+        createdTime:
+          type: string
+        createdBy:
+          type: string
+        createdByName:
+          type: string
+    SastVulnerabilityTypeDTO_Capec:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        url:
+          type: string
+    SastTargetDTO:
+      type: object
+      properties:
+        path:
+          type: string
+        source:
+          type: string
+        type:
+          type: string
+    SastDateCountDTO:
+      type: object
+      properties:
+        counts:
+          $ref: '#/components/schemas/SastScanCountDTO'
+        date:
+          type: string
+    SastCommentDTO:
+      type: object
+      properties:
+        body:
+          type: string
+        createdBy:
+          type: string
+        createdTime:
+          type: string
+    SastPostFindingCommentDTO:
+      type: object
+      properties:
+        body:
+          type: string
+    SastQuantumSafeRiskFactorsDTO:
+      type: object
+      properties:
+        quantumUnsafe:
+          type: boolean
+        cryptoMisuse:
+          type: boolean
+        brokenCryptography:
+          type: boolean
+        unknownCryptography:
+          type: boolean
+    SastGPTRemediationDTO:
+      type: object
+      properties:
+        codeFixes:
+          type: array
+          items:
+            type: string
+        explanation:
+          type: string
+    SastFilterDTO:
+      type: object
+      properties:
+        filterTypes:
+          type: array
+          items:
+            $ref: '#/components/schemas/SastFilterTypeDTO'
+        filtered:
+          type: boolean
+    SastPatchFindingDTO:
+      type: object
+      properties:
+        customSeverity:
+          type: string
+        reviewed:
+          type: boolean
+        suppressed:
+          type: boolean
+        suppressionReason:
+          type: string
+    SastScanFiltersSSRMDTO:
+      type: object
+      properties:
+        capecTitle:
+          type: array
+          items:
+            type: string
+        hipaaTitle:
+          type: array
+          items:
+            type: string
+        hitrustTitle:
+          type: array
+          items:
+            type: string
+        language:
+          type: array
+          items:
+            type: string
+        nist80053Title:
+          type: array
+          items:
+            type: string
+        owasp2017Title:
+          type: array
+          items:
+            type: string
+        owasp2021Title:
+          type: array
+          items:
+            type: string
+        owasp2025Title:
+          type: array
+          items:
+            type: string
+        pcidssTitle:
+          type: array
+          items:
+            type: string
+        pcidss40Title:
+          type: array
+          items:
+            type: string
+        sansTop25Title:
+          type: array
+          items:
+            type: string
+        misraTitle:
+          type: array
+          items:
+            type: string
+        severity:
+          type: array
+          items:
+            type: string
+        type:
+          type: array
+          items:
+            type: string
+        jiraIssueStatus:
+          type: array
+          items:
+            type: string
+        riskFactors:
+          type: array
+          items:
+            type: string
+        hasRemediation:
+          type: array
+          items:
+            type: string
+        driver:
+          type: array
+          items:
+            type: string
+        detector:
+          type: array
+          items:
+            type: string
+    SastVulnerabilityTypeDTO_Owasp2021:
+      type: object
+      properties:
+        index:
+          type: string
+        title:
+          type: string
+        url:
+          type: string
+    SastSharedStepDTO:
+      type: object
+      properties:
+        endLine:
+          type: integer
+          format: int32
+        file:
+          type: string
+        line:
+          type: integer
+          format: int32
+        name:
+          type: string
+        snippet:
+          type: string
+        startLine:
+          type: integer
+          format: int32
+    SastFilterTypeDTO:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        name:
+          type: string
+    SastVulnerabilityTypeShortV2DTO:
+      type: object
+      properties:
+        engineId:
+          type: integer
+          format: int32
+        id:
+          type: integer
+          format: int32
+        language:
+          type: string
+        name:
+          type: string
+    SastApplicationMetricsDTO:
+      type: object
+      properties:
+        dateCounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/SastDateCountDTO'
+        fixedVulnerabilities:
+          type: integer
+          format: int32
+        latestLanguages:
+          type: array
+          items:
+            type: string
+        latestScanId:
+          type: string
+        latestStats:
+          $ref: '#/components/schemas/SastApplicationStatsDTO'
+        newHigh:
+          type: integer
+          format: int32
+        newLow:
+          type: integer
+          format: int32
+        newMedium:
+          type: integer
+          format: int32
+        newVulnerabilities:
+          type: integer
+          format: int32
+        totalScans:
+          type: integer
+          format: int32
+    SastVulnerabilityTypeDTO_Owasp2025:
+      type: object
+      properties:
+        index:
+          type: string
+        title:
+          type: string
+    SastFindingV3DTO:
+      type: object
+      properties:
+        ageRating:
+          type: number
+        almIssues:
+          $ref: '#/components/schemas/SastAlmIssuesDTO'
+        baseline:
+          type: boolean
+        comments:
+          type: array
+          items:
+            $ref: '#/components/schemas/SastCommentDTO'
+        confidenceRating:
+          type: number
+        createdTime:
+          type: string
+        dataFlows:
+          type: array
+          items:
+            $ref: '#/components/schemas/SastDataFlowDTO'
+        description:
+          type: string
+        hasRemediation:
+          type: boolean
+        id:
+          type: string
+        globalId:
+          type: string
+        isNew:
+          type: boolean
+        rating:
+          type: number
+        reviewed:
+          type: boolean
+        severity:
+          type: string
+        severityRating:
+          type: number
+        sharedStep:
+          $ref: '#/components/schemas/SastSharedStepDTO'
+        suppressed:
+          type: boolean
+        suppressedBy:
+          type: string
+        suppressionMessage:
+          type: string
+        suppressionTime:
+          type: string
+        type:
+          $ref: '#/components/schemas/SastVulnerabilityTypeDefinitionDTO'
+        workflowViolations:
+          type: array
+          items:
+            $ref: '#/components/schemas/SastWorkflowViolationDTO'
+        riskFactors:
+          $ref: '#/components/schemas/SastRiskFactorsDTO'
+        correlatedDastFindingUuids:
+          type: array
+          items:
+            type: string
+        suppressionRequested:
+          type: boolean
+        suppressionApproved:
+          type: boolean
+        suppressionRejected:
+          type: boolean
+        suppressionRequestedInfo:
+          type: boolean
+        repoMetadata:
+          $ref: '#/components/schemas/SastRepoMetadataDTO'
+    SastCustomRuleDTO:
+      type: object
+      properties:
+        description:
+          type: string
+        functionName:
+          type: string
+        parameterCount:
+          type: integer
+          format: int32
+        vulnParamIndex:
+          type: integer
+          format: int32
+        vulnTypeIndex:
+          type: integer
+          format: int32
+    SastGenerateIssueDTO:
+      type: object
+      properties:
+        projectUuid:
+          type: string
+        itemType:
+          type: string
+        comment:
+          type: string
+        user:
+          type: string
+        workflowName:
+          type: string
+        withDetails:
+          type: boolean
+        automated:
+          type: boolean
+    SastFindingSSRMDTO:
+      type: object
+      properties:
+        appUuid:
+          type: string
+        capecTitle:
+          type: string
+        childCount:
+          type: integer
+          format: int32
+        createdTime:
+          type: string
+        dataFlows:
+          type: integer
+          format: int32
+        file:
+          type: string
+        hasRemediation:
+          type: boolean
+        hipaaTitle:
+          type: string
+        hitrustTitle:
+          type: string
+        language:
+          type: string
+        line:
+          type: integer
+          format: int32
+        nist80053Title:
+          type: string
+        owasp2017Title:
+          type: string
+        owasp2021Title:
+          type: string
+        owasp2025Title:
+          type: string
+        path:
+          type: string
+        pcidssTitle:
+          type: string
+        pcidss40Title:
+          type: string
+        misraTitle:
+          type: string
+        productUuid:
+          type: string
+        rating:
+          $ref: '#/components/schemas/SastFindingRatingDTO'
+        reviewed:
+          type: boolean
+        sansTop25Title:
+          type: string
+        scanUuid:
+          type: string
+        severity:
+          type: string
+        sink:
+          type: string
+        snapshotUuid:
+          type: string
+        suppressed:
+          type: boolean
+        suppressionMessage:
+          type: string
+        suppressionTime:
+          type: string
+        suppressedBy:
+          type: string
+        type:
+          type: string
+        uuid:
+          type: string
+        jiraIssuePlatformStatus:
+          type: string
+        jiraIssue:
+          $ref: '#/components/schemas/SastJiraIssueDetailsDTO'
+        workflowViolationsCount:
+          type: integer
+          format: int32
+        workflowViolations:
+          type: array
+          items:
+            $ref: '#/components/schemas/SastWorkflowViolationDTO'
+        cwe:
+          type: integer
+          format: int32
+        riskFactors:
+          $ref: '#/components/schemas/SastRiskFactorsLightDTO'
+        driver:
+          type: string
+        suppressionRequested:
+          type: boolean
+        suppressionApproved:
+          type: boolean
+        suppressionRejected:
+          type: boolean
+        detector:
+          type: string
+        suppressionRequestedInfo:
+          type: boolean
+        repoMetadata:
+          $ref: '#/components/schemas/SastRepoMetadataDTO'
+    SastRemediatedFileDTO:
+      type: object
+      properties:
+        originalContent:
+          type: string
+        path:
+          type: string
+        remediatedContent:
+          type: string
+    SastVulnerabilityTypeDTO_Pcidss:
+      type: object
+      properties:
+        section:
+          type: string
+        title:
+          type: string
+    SastScmDTO:
+      type: object
+      properties:
+        branch:
+          type: string
+        commitId:
+          type: string
+        type:
+          type: string
+    LowProbabilitySummaryDTO:
+      type: object
+      properties:
+        total:
+          type: integer
+          format: int32
+        critical:
+          type: integer
+          format: int32
+        high:
+          type: integer
+          format: int32
+        medium:
+          type: integer
+          format: int32
+        low:
+          type: integer
+          format: int32
+    SastScanParametersDTO:
+      type: object
+      properties:
+        almTrigger:
+          type: string
+        emailTrigger:
+          type: string
+        engineParams:
+          type: array
+          items:
+            $ref: '#/components/schemas/SastParametersDTO'
+        engines:
+          type: array
+          items:
+            type: integer
+            format: int32
+        exclusions:
+          type: array
+          items:
+            type: string
+        ignoreStoredFP:
+          type: boolean
+        incremental:
+          type: boolean
+        slackTrigger:
+          type: string
+        target:
+          $ref: '#/components/schemas/SastTargetDTO'
+        autoIncludeNewCwes:
+          type: boolean
+    SastItemDTO:
+      type: object
+      properties:
+        description:
+          type: string
+        file:
+          type: string
+        line:
+          type: integer
+          format: int32
+        scmLink:
+          type: string
+        snippet:
+          type: string
+        startLine:
+          type: integer
+          format: int32
+    SastBulkPatchFindingDTO:
+      type: object
+      properties:
+        findings:
+          type: array
+          items:
+            type: string
+        patchOperation:
+          $ref: '#/components/schemas/SastPatchFindingDTO'
+      description: SAST Bulk Patch Finding DTO
+    SastScanCountDTO:
+      type: object
+      properties:
+        capec:
+          type: integer
+          format: int32
+        high:
+          type: integer
+          format: int32
+        hipaa:
+          type: integer
+          format: int32
+        hitrust:
+          type: integer
+          format: int32
+        locPerIssue:
+          type: integer
+          format: int32
+        low:
+          type: integer
+          format: int32
+        medium:
+          type: integer
+          format: int32
+        nist:
+          type: integer
+          format: int32
+        owasp:
+          type: integer
+          format: int32
+        owasp2021:
+          type: integer
+          format: int32
+        owasp2025:
+          type: integer
+          format: int32
+        pcidss:
+          type: integer
+          format: int32
+        pcidss40:
+          type: integer
+          format: int32
+        misra:
+          type: integer
+          format: int32
+        riskScore:
+          type: number
+          format: float
+        sansTop25:
+          type: integer
+          format: int32
+        totalRemediations:
+          type: integer
+          format: int32
+        totalVulnerabilities:
+          type: integer
+          format: int32
+        vulnTypeCount:
+          type: integer
+          format: int32
+    SastVulnerabilityTypeDTO_Hitrust:
+      type: object
+      properties:
+        control:
+          type: string
+        title:
+          type: string
+    SastBulkSubmitIssuePlatformDTO:
+      type: object
+      properties:
+        findings:
+          type: array
+          items:
+            type: string
+        alm:
+          type: string
+        issue:
+          $ref: '#/components/schemas/SastGenerateIssueDTO'
+      description: Issue object
+    SastSummaryDTO:
+      type: object
+      properties:
+        total:
+          type: integer
+          format: int32
+        critical:
+          type: integer
+          format: int32
+        high:
+          type: integer
+          format: int32
+        medium:
+          type: integer
+          format: int32
+        low:
+          type: integer
+          format: int32
+        lowProbability:
+          $ref: '#/components/schemas/LowProbabilitySummaryDTO'
+        withRemediationSuggestion:
+          $ref: '#/components/schemas/RemediationSuggestionSummaryDTO'
+    SastApplicationDTO:
+      type: object
+      properties:
+        appScoreAvg:
+          type: number
+          format: float
+        basePath:
+          type: string
+        createdBy:
+          type: string
+        createdTime:
+          type: string
+        groupVisibility:
+          type: array
+          items:
+            type: string
+        id:
+          type: string
+        lastScanTime:
+          type: string
+        lastScanStatus:
+          type: string
+        lastScanMessage:
+          type: string
+        metrics:
+          $ref: '#/components/schemas/SastApplicationMetricsDTO'
+        name:
+          type: string
+        orgId:
+          type: string
+        parameters:
+          $ref: '#/components/schemas/SastScanParametersDTO'
+        policyId:
+          type: string
+        retention:
+          type: integer
+          format: int32
+        riskScore:
+          type: number
+          format: float
+      description: SAST Application object
+    SastVulnerabilityTypeDTO_Cwe:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        url:
+          type: string
+    SastStoredJiraIssueDTO:
+      type: object
+      properties:
+        issueId:
+          type: string
+        project:
+          type: string
+    SastVulnerabilityTypeDTO_Hipaa:
+      type: object
+      properties:
+        control:
+          type: string
+        title:
+          type: string
+    SastRemediationDTO:
+      type: object
+      properties:
+        id:
+          type: string
+        remediatedDataFlowIds:
+          type: array
+          items:
+            type: string
+        message:
+          type: string
+        remediatedFiles:
+          type: array
+          items:
+            $ref: '#/components/schemas/SastRemediatedFileDTO'
+        remediationFeedback:
+          type: array
+          items:
+            $ref: '#/components/schemas/SastRemediationFeedbackDTO'
+        remediationError:
+          type: boolean
+    SastTraceDTO:
+      type: object
+      properties:
+        file:
+          type: string
+        line:
+          type: string
+        name:
+          type: string
+        snippet:
+          type: string
+        startLine:
+          type: integer
+          format: int32
+        description:
+          type: string
+        scmLink:
+          type: string
+    SastJiraIssueDetailsDTO:
+      type: object
+      properties:
+        internalStatus:
+          type: string
+        issueStatus:
+          type: string
+        issueKey:
+          type: string
+        publicLink:
+          type: string
+        createdBy:
+          type: string
+        createdTime:
+          type: string
+        createdByName:
+          type: string
+        errorMessage:
+          type: string
+    SastVulnerabilityDTO:
+      type: object
+      properties:
+        ageRating:
+          type: number
+          format: float
+        azureIssue:
+          $ref: '#/components/schemas/SastStoredAzureIssueDTO'
+        baselineFinding:
+          type: boolean
+        comments:
+          type: array
+          items:
+            $ref: '#/components/schemas/SastCommentDTO'
+        confidence:
+          type: integer
+          format: int32
+        createdTime:
+          type: string
+        description:
+          type: string
+        expiration:
+          type: string
+        falsepositive:
+          type: boolean
+        filter:
+          $ref: '#/components/schemas/SastFilterDTO'
+        functionCalls:
+          type: array
+          items:
+            $ref: '#/components/schemas/SastCallStackItemDTO'
+        hasRemediation:
+          type: boolean
+        id:
+          type: string
+        inputFlow:
+          type: array
+          items:
+            $ref: '#/components/schemas/SastCallStackItemDTO'
+        inputSource:
+          type: string
+        jiraIssue:
+          $ref: '#/components/schemas/SastStoredJiraIssueDTO'
+        language:
+          type: string
+        markedForDeletion:
+          type: boolean
+        orgId:
+          type: string
+        prUrl:
+          type: string
+        rating:
+          type: number
+          format: float
+        reviewed:
+          type: boolean
+        risk:
+          type: string
+        scanId:
+          type: string
+        severityRating:
+          type: number
+          format: float
+        signature:
+          type: string
+        sink:
+          type: string
+        sinkCall:
+          type: string
+        sinkFile:
+          type: string
+        suppressMessage:
+          type: string
+        type:
+          $ref: '#/components/schemas/SastVulnerabilityTypeShortDTO'
+    SastFindingRatingDTO:
+      type: object
+      properties:
+        age:
+          type: number
+        confidence:
+          type: number
+        overall:
+          type: number
+        severity:
+          type: number
+    SastVulnerabilityTypeDTO_SansTop25:
+      type: object
+      properties:
+        rank:
+          type: string
+        title:
+          type: string
+    SastWorkflowViolationDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+        name:
+          type: string
+    SastRiskFactorsLightDTO:
+      type: object
+      properties:
+        probability:
+          type: string
+        endpointsCount:
+          type: integer
+          format: int32
+        isExploitable:
+          type: boolean
+        quantumUnsafe:
+          type: boolean
+        cryptoMisuse:
+          type: boolean
+        brokenCryptography:
+          type: boolean
+        unknownCryptography:
+          type: boolean
+    SastVulnerabilityTypeDTO_Owasp:
+      type: object
+      properties:
+        index:
+          type: string
+        title:
+          type: string
+        url:
+          type: string
+    SastSeverityLevelDTO:
+      type: object
+      properties:
+        severity:
+          type: string
+        vulnTypeId:
+          type: integer
+          format: int32
+    SastAlmIssuesDTO:
+      type: object
+      properties:
+        azure:
+          $ref: '#/components/schemas/SastStoredAzureIssueDTO'
+        jira:
+          $ref: '#/components/schemas/SastStoredJiraIssueDTO'
+        jiraPlatform:
+          $ref: '#/components/schemas/SastStoredJiraPlatformIssueDTO'
+    SastFlowTraceDTO:
+      type: object
+      properties:
+        scm:
+          $ref: '#/components/schemas/SastFlowTraceScmDTO'
+        trace:
+          type: array
+          items:
+            $ref: '#/components/schemas/SastTraceDTO'
+    SastVulnerabilityTypeDTO_Nist:
+      type: object
+      properties:
+        control:
+          type: string
+        priority:
+          type: string
+        title:
+          type: string
+        url:
+          type: string
+    SastCustomFilterDTO:
+      type: object
+      properties:
+        filterId:
+          type: string
+        functionName:
+          type: string
+        paramIndex:
+          type: integer
+          format: int32
+        parameterCount:
+          type: integer
+          format: int32
+        vulnTypeIndex:
+          type: integer
+          format: int32
+    SastApplicationStatsDTO:
+      type: object
+      properties:
+        duration:
+          type: string
+        testedFiles:
+          type: integer
+          format: int32
+        testedLines:
+          type: integer
+          format: int32
+        totalDataFlows:
+          type: integer
+          format: int32
+        totalFiles:
+          type: integer
+          format: int32
+        totalLines:
+          type: integer
+          format: int32
+        totalRemediations:
+          type: integer
+          format: int32
+        totalVulnerabilities:
+          type: integer
+          format: int32
+    ProjectDTO:
+      type: object
+      properties:
+        uuid:
+          title: Project UUID
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+        name:
+          title: Project Name
+          type: string
+          example: My Project
+        path:
+          title: Product Name
+          type: string
+          example: My Product
+        productName:
+          title: Product Name
+          type: string
+          example: My Product
+        productUuid:
+          title: Product Uuid
+          type: string
+          example: 123e4567-e89b-12d3-a456-426655440000
+    SastCallStackItemDTO:
+      type: object
+      properties:
+        endLine:
+          type: integer
+          format: int32
+        file:
+          type: string
+        line:
+          type: integer
+          format: int32
+        name:
+          type: string
+        snippet:
+          type: string
+        startLine:
+          type: integer
+          format: int32
+    SastFlowTraceScmDTO:
+      type: object
+      properties:
+        type:
+          type: string
+        commitId:
+          type: string
+        branch:
+          type: string
+    ApiSastGroupedFindingDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+        name:
+          type: string
+        id:
+          type: integer
+          format: int64
+        type:
+          $ref: '#/components/schemas/SastVulnerabilityTypeDefinitionDTO'
+        vulnerability:
+          $ref: '#/components/schemas/SastFindingDTO'
+        project:
+          $ref: '#/components/schemas/ProjectDTO'
+    SastVulnerabilityTypeDTO:
+      type: object
+      properties:
+        capec:
+          $ref: '#/components/schemas/SastVulnerabilityTypeDTO_Capec'
+        cwe:
+          $ref: '#/components/schemas/SastVulnerabilityTypeDTO_Cwe'
+        description:
+          type: string
+        hipaa:
+          $ref: '#/components/schemas/SastVulnerabilityTypeDTO_Hipaa'
+        hitrust:
+          $ref: '#/components/schemas/SastVulnerabilityTypeDTO_Hitrust'
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        nist:
+          $ref: '#/components/schemas/SastVulnerabilityTypeDTO_Nist'
+        order:
+          type: integer
+          format: int32
+        owasp:
+          $ref: '#/components/schemas/SastVulnerabilityTypeDTO_Owasp'
+        owasp2021:
+          $ref: '#/components/schemas/SastVulnerabilityTypeDTO_Owasp2021'
+        owasp2025:
+          $ref: '#/components/schemas/SastVulnerabilityTypeDTO_Owasp2025'
+        pcidss:
+          $ref: '#/components/schemas/SastVulnerabilityTypeDTO_Pcidss'
+        pcidss40:
+          $ref: '#/components/schemas/SastVulnerabilityTypeDTO_Pcidss40'
+        misra:
+          $ref: '#/components/schemas/SastVulnerabilityTypeDTO_Misra'
+        recommendation:
+          type: array
+          items:
+            type: string
+        references:
+          type: array
+          items:
+            type: string
+        risk:
+          type: string
+        sansTop25:
+          $ref: '#/components/schemas/SastVulnerabilityTypeDTO_SansTop25'
+        sarif:
+          type: string
+        severityRating:
+          type: number
+          format: float
+        commonId:
+          type: string
+    SastVulnerabilityTypeDTO_Pcidss40:
+      type: object
+      properties:
+        section:
+          type: string
+        title:
+          type: string
+        type:
+          type: string
+    ApiSastFindingLightDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+        name:
+          type: string
+        vulnerability:
+          $ref: '#/components/schemas/SastFindingSSRMDTO'
+        project:
+          $ref: '#/components/schemas/ProjectDTO'
+    SastRiskFactorsDTO:
+      type: object
+      properties:
+        probability:
+          type: string
+        hasEndpoints:
+          type: boolean
+        endpoints:
+          type: array
+          items:
+            $ref: '#/components/schemas/SastRiskFactorEndpointDTO'
+        isExploitable:
+          type: boolean
+        quantumSafe:
+          $ref: '#/components/schemas/SastQuantumSafeRiskFactorsDTO'
+    DataFlowRiskFactorsDTO:
+      type: object
+      properties:
+        probability:
+          type: string
+    SastParametersDTO:
+      type: object
+      properties:
+        customFilters:
+          type: array
+          items:
+            $ref: '#/components/schemas/SastCustomFilterDTO'
+        customRules:
+          type: array
+          items:
+            $ref: '#/components/schemas/SastCustomRuleDTO'
+        depth:
+          $ref: '#/components/schemas/SastScanDepthDTO'
+        engineId:
+          type: integer
+          format: int32
+        excludedVulnTypes:
+          type: array
+          items:
+            type: integer
+            format: int32
+        severityLevels:
+          type: array
+          items:
+            $ref: '#/components/schemas/SastSeverityLevelDTO'
+        trackedInputs:
+          type: array
+          items:
+            type: string
+        scanProfile:
+          type: string
+        enableLowProbabilities:
+          type: boolean
+    SastBulkPostFindingCommentDTO:
+      type: object
+      properties:
+        comment:
+          $ref: '#/components/schemas/SastPostFindingCommentDTO'
+        findings:
+          type: array
+          items:
+            type: string
+      description: SAST Bulk Post Finding Comment DTO
+    SastRepoMetadataDTO:
+      type: object
+      properties:
+        issueId:
+          type: string
+    SastVulnerabilityTypeShortDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+    ApiSastFindingsSSRMDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+        name:
+          type: string
+        rows:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiSastFindingLightDTO'
+        rowCount:
+          type: integer
+          format: int64
+        filteredRowCount:
+          type: integer
+          format: int64
+        totalRowCount:
+          type: integer
+          format: int64
+    SastRemediationFeedbackDTO:
+      type: object
+      properties:
+        id:
+          type: string
+        positive:
+          type: boolean
+        message:
+          type: string
+        createdBy:
+          type: string
+        createdOn:
+          type: string
+    SastFindingDTO:
+      type: object
+      properties:
+        ageRating:
+          type: number
+        almIssues:
+          $ref: '#/components/schemas/SastAlmIssuesDTO'
+        baseline:
+          type: boolean
+        comments:
+          type: array
+          items:
+            $ref: '#/components/schemas/SastCommentDTO'
+        confidenceRating:
+          type: number
+        createdTime:
+          type: string
+        dataFlows:
+          type: array
+          items:
+            $ref: '#/components/schemas/SastSummaryDTO'
+        description:
+          type: string
+        hasRemediation:
+          type: boolean
+        id:
+          type: string
+        isNew:
+          type: boolean
+        rating:
+          type: number
+        reviewed:
+          type: boolean
+        severity:
+          type: string
+        severityRating:
+          type: number
+        sharedStep:
+          $ref: '#/components/schemas/SastSharedStepDTO'
+        suppressed:
+          type: boolean
+        suppressionMessage:
+          type: string
+        type:
+          $ref: '#/components/schemas/SastVulnerabilityTypeShortV2DTO'
+    ApiSastFindingDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+        name:
+          type: string
+        id:
+          type: integer
+          format: int64
+        type:
+          $ref: '#/components/schemas/SastVulnerabilityTypeDTO'
+        vulnerability:
+          $ref: '#/components/schemas/SastVulnerabilityDTO'
+        project:
+          $ref: '#/components/schemas/ProjectDTO'
+    SastScanDepthDTO:
+      type: object
+      properties:
+        maxFunctionDepth:
+          type: integer
+          format: int32
+        maxVariableTrack:
+          type: integer
+          format: int32
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: JWT token Bearer
+      scheme: bearer
+      bearerFormat: JWT

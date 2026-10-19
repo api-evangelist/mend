@@ -1,0 +1,112 @@
+openapi: 3.2.0
+info:
+  title: Mend Integrations API
+  description: Mend's enhanced API enables automation of workflows in a REST compliant format.
+  version: '3.0'
+servers:
+- url: https://baseUrl
+  description: Generated server url
+security:
+- bearer-key: []
+tags:
+- name: Integrations
+paths:
+  /api/v3.0/orgs/{orgUuid}/integrations:
+    get:
+      tags:
+      - Integrations
+      summary: Get All Integrations
+      description: Returns all integrations for the given organization with optional filtering.
+      operationId: getOrgIntegrations
+      parameters:
+      - name: orgUuid
+        in: path
+        required: true
+        schema:
+          type: string
+        description: 'org UUID (from the Mend App: **Administration** General > **Organization UUID**).'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DWRResponseV3ListIntegrationDTOV3'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DWRResponseBase'
+components:
+  schemas:
+    DWRResponseBase:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+    DWRResponseV3ListIntegrationDTOV3:
+      type: object
+      properties:
+        supportToken:
+          title: Support Token
+          type: string
+          example: 1171c60d
+        response:
+          type: array
+          items:
+            $ref: '#/components/schemas/IntegrationDTOV3'
+    IntegrationDTOV3:
+      type: object
+      properties:
+        uuid:
+          type: string
+        orgUuid:
+          type: string
+        status:
+          type: string
+          enum:
+          - ACTIVE
+          - SUSPENDED
+          - DELETED
+        type:
+          type: string
+          enum:
+          - JIRA
+          - GITHUB
+          - INVICTI
+          - WIZ
+        variant:
+          type: string
+          enum:
+          - JIRA_CLOUD
+          - JIRA_CLOUD_SECURITY
+          - JIRA_DC
+          - WIZ_COMMERCIAL
+          - WIZ_GOV
+          - WIZ_COMM_ON_GOV
+          - WIZ_DEMO
+        extraData:
+          type: object
+        createdBy:
+          type: string
+        creationDate:
+          type: string
+          format: date-time
+        lastUpdate:
+          type: string
+          format: date-time
+  securitySchemes:
+    bearer-key:
+      type: http
+      description: JWT token Bearer
+      scheme: bearer
+      bearerFormat: JWT
