@@ -98,3 +98,16 @@
     detected: '2026-10-20'
   status: not-a-workflow
   arazzo: null
+- slug: mend-backstage-own
+  label: Backstage (own)
+  partner: backstage
+  partner_name: Backstage (own)
+  category: Security
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://github.com/backstage/backstage/tree/d72327203d5d0812bee2eace8688fa5ab22867be/microsite/data/plugins/mend.yaml
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
