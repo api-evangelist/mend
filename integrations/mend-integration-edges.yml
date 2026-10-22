@@ -16,6 +16,7 @@ checked:
 - https://pypi.org/pypi
 - https://registry.npmjs.org
 - backstage/integrations/backstage-integration-edges.yml
+- artifact-hub/integrations/artifact-hub-integration-edges.yml
 marketplace_apps: []
 edges:
 - partner_name: Atlassian Marketplace
@@ -148,6 +149,27 @@ edges:
   detected: '2026-10-22'
   detected_by: mirror-platform-listings.py
   category: Security
+- partner_name: Artifact Hub (artifact-hub)
+  partner: artifact-hub
+  partner_match: mirror
+  mirror_match: domain+name-among-holders
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: artifact-hub
+  evidence: https://artifacthub.io/packages/search?repo=mend-renovate
+  mirror_of: artifact-hub/integrations/artifact-hub-integration-edges.yml
+  apps:
+  - mend-renovate-ce
+  - mend-renovate-enterprise-edition
+  - whitesource-renovate
+  listing_count: 1
+  detected: '2026-10-22'
+  detected_by: mirror-platform-listings.py
+  category: Artifact Hub listing (Helm chart)
+  badges:
+  - 'Verified publisher (Artifact Hub verified publisher: repository ownership proven)'
 source:
 - https://marketplace.atlassian.com/
 - https://marketplace.visualstudio.com/vscode
