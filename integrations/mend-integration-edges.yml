@@ -1,20 +1,20 @@
 generated: '2026-10-14'
 method: searched
 checked:
-- https://cdn.winget.microsoft.com/cache
 - https://cyclonedx.org/tool-center/
+- https://marketplace.atlassian.com/
+- https://marketplace.visualstudio.com/vscode
+- https://plugins.jetbrains.com/
+- https://raw.githubusercontent.com/ossf/ossf-landscape/0c5085851606608158f3adb796e5c22265ee174d/landscape.yml
+- https://spdx.dev/use/spdx-tools/
+- https://www.openchainproject.org/community-of-conformance
+- https://cdn.winget.microsoft.com/cache
 - https://formulae.brew.sh/api/cask.json
 - https://formulae.brew.sh/api/formula.json
 - https://github.com/ScoopInstaller/Extras
 - https://github.com/ScoopInstaller/Main
-- https://marketplace.atlassian.com/
-- https://marketplace.visualstudio.com/vscode
-- https://plugins.jetbrains.com/
 - https://pypi.org/pypi
-- https://raw.githubusercontent.com/ossf/ossf-landscape/0c5085851606608158f3adb796e5c22265ee174d/landscape.yml
 - https://registry.npmjs.org
-- https://spdx.dev/use/spdx-tools/
-- https://www.openchainproject.org/community-of-conformance
 marketplace_apps: []
 edges:
 - partner_name: Atlassian Marketplace

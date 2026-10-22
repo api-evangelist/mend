@@ -67,3 +67,34 @@
     detected: '2026-10-18'
   status: not-a-workflow
   arazzo: null
+- slug: mend-homebrew
+  label: Homebrew
+  partner: homebrew
+  partner_name: Homebrew
+  category: official CLI (Homebrew)
+  type: register
+  channel: package-registry
+  evidence: https://formulae.brew.sh/cask/mend
+  source: edge
+  relationship: distribution-channel
+  contract_reference:
+    register: Homebrew (public package index)
+    spec_file: null
+    packages:
+    - name: mend
+      kind: cask
+      version: 26.9.2-hf1
+      released: null
+      lapsed: false
+      page: https://formulae.brew.sh/cask/mend
+      cli: cask binary artifact
+      repo_leg: domain:mend.io
+      publisher_leg: artifact-domain:mend.io
+      matched_by: domain+name-among-holders
+    current: true
+    signal_note: 'the provider''s own command-line tool on a package manager: distribution, not an integration;
+      lapsed = no release in 24 months or deprecated / disabled by the manager'
+    detected_by: sweep-official-clis.py
+    detected: '2026-10-20'
+  status: not-a-workflow
+  arazzo: null
